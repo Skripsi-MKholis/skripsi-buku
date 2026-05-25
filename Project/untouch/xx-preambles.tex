@@ -87,8 +87,18 @@
     bottom=3cm,        % Margin bawah
 }
 
+% Pengaturan header dan footer
+\usepackage{fancyhdr}
+\setlength{\headheight}{14.5pt}
+\fancyhf{}
+\rhead{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+
 % Paket untuk notasi matematika
 \usepackage{amsmath}
+\usepackage{amssymb}
 
 % Pengaturan nomor pada persamaan matematika sesuai bab
 %\renewcommand{\theequation}{\arabic{chapter}.\arabic{equation}}

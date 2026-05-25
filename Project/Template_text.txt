@@ -1,1070 +1,328 @@
-SISTEM KLASIFIKASI KELAYAKAN COOLING WATER PADA UNIT PEMBANGKIT LISTRIK MENGGUNAKAN ALGORITMA RANDOM FOREST
- (STUDI KASUS: PT PLN NUSANTARA POWER UP ARUN)
-SKRIPSI
-Diajukan Sebagai Salah Satu Syarat Untuk Menyelesaikan 
-Pendidikan Jenjang Sarjana Terapan
- Pada Politeknik Negeri Lhokseumawe
-
-
+PROPOSAL SKRIPSI
+RANCANG BANGUN APLIKASI POINT OF SALE
+DENGAN FITUR PREDIKSI PENJUALAN HARIAN
+MENGGUNAKAN METODE
+LONG SHORT-TERM MEMORY (LSTM)
 Oleh:
-SUCI WILDANI RIZKA
-
-NIM: 2022573010047
-Program Studi: Teknik Informatika
-Jurusan: Teknologi Informasi dan Komputer
-
-
-KEMENTERIAN PENDIDIKAN TINGGI, SAINS, DAN TEKNOLOGI
+Muhammad Kholis
+NIM. 2022573010098
+PROGRAM STUDI TEKNIK INFORMATIKA
+JURUSAN TEKNOLOGI INFORMASI DAN KOMPUTER
 POLITEKNIK NEGERI LHOKSEUMAWE
 2026
-PENGESAHAN PEMBIMBING
-
-Skripsi yang berjudul Sistem Klasifikasi Kelayakan Cooling Water Pada Unit Pembangkit Listrik Menggunakan Algoritma Random Forest (Studi Kasus: PT PLN Nusantara Power UP Arun), disusun oleh Suci Wildani Rizka, NIM 2022573010047, Program Studi Teknik Informatika, Jurusan Teknologi Informasi dan Komputer Politeknik Negeri Lhokseumawe, telah memenuhi syarat untuk dipertanggungjawabkan dihadapan dewan penguji.
 
 
---- [TABLE START] ---
- | Buketrata, 29 Juli 2025
-Pembimbing I, | Pembimbing II,
- | 
- | 
- | 
- | 
-Salahuddin, S.T., M.Cs | Mahdi, S.T., M.Cs
-NIP. 19740424 200212 1 001 | NIP. 19700802 199303 1 001
---- [TABLE END] ---
+# LEMBAR PENGESAHAN PROPOSAL SKRIPSI
 
-
-
+Judul Skripsi		: RANCANG BANGUN APLIKASI POINT OF SALE
+DENGAN FITUR PREDIKSI PENJUALAN HARIAN MENGGUNAKAN METODE LONG SHORT-TERM MEMORY (LSTM).
+Nama Mahasiswa	: Muhammad Kholis
+NIM			: 2022573010098
+Program Studi		: Teknik Informatika
+Menyetujui,
+Pembimbing I
+Zulfan Khairil Simbolon, S.T., M.Eng.
+NIP. 1969090 2199303 1 004
+Pembimbing II
+Azhar, S.T., M.T.
+NIP. 1964083 0199003 1 005
 Mengetahui,
+Ka. Prodi Teknik Informatika
+M. Khadafi, ST., M.T
+NIP. 19750718 200212 1 004
 
 
---- [TABLE START] ---
-Ketua Jurusan | Ketua Program Studi
-Teknologi Informasi dan Komputer, | Teknik Informatika,
- | 
- | 
- | 
- | 
-Salahuddin, S.T., M.Cs | M. Khadafi, S.T., M.T
-NIP. 19740424 200212 1 001 | NIP. 19750718 200212 1 004
---- [TABLE END] ---
+# DAFTAR ISI
 
 
 
+# DAFTAR GAMBAR
 
-PENGESAHAN PENGUJI
+Gambar 3.1 Alur Penelitian 	18
+Gambar 3.2 Use Case Diagram	19
+Gambar 3.3 Activity Diagram Input Data Transaksi 	34
+Gambar 3.4 Activity Diagram Proses Prediksi Penjualan 	21
+Gambar 3.5 Activity Diagram Prediksi Penjualan	22
+Gambar 3.6 Rancangan Alur Algoritma LSTM	25
 
-Skripsi yang berjudul Sistem Klasifikasi Kelayakan Cooling Water Pada Unit Pembangkit Listrik Menggunakan Algoritma Random Forest (Studi Kasus: PT PLN Nusantara Power UP Arun), disusun oleh Suci Wildani Rizka, NIM 2022573010047, Program Studi Teknik Informatika, Jurusan Teknologi Informasi dan Komputer Politeknik Negeri Lhokseumawe,  telah dipertanggungjawabkan di depan dewan penguji dan dinyatakan lulus pada tanggal 05 Agustus 2026.
-Komisi Sidang, 
 
---- [TABLE START] ---
-Suci Wil | …………………………
-NIP. | (Ketua Sidang)
- | 
- | 
-Suci | …………………………
-NIP. | (Sekretaris Sidang)
- | 
- | 
-Dr. Rahmad Hidayat, S.Kom., M.Cs | …………………………
-NIP. 19830420 201212 1 003 | (Penguji I)
- | 
- | 
-Muhammad Rizka, S.S.T., M.Kom | …………………………
-NIP. 19881009 201504 1 001 | (Penguji II)
- | 
- | 
-Bismillah Baik | …………………………
-NIP. | (Penguji III)
---- [TABLE END] ---
+# DAFTAR TABEL
 
-Mengetahui,
+Tabel 2.1 State of the Art 	14
+Tabel 3.1 Definisi Aktor 	19
+Tabel 3.2 Definisi Use Case 	19
 
---- [TABLE START] ---
-Ketua Jurusan | Ketua Program Studi
-Teknologi Informasi dan Komputer, | Teknik Informatika,
- | 
- | 
- | 
-Salahuddin, S.T., M.Cs | M. Khadafi, S.T., M.T
-NIP. 19740424 200212 1 001 | NIP. 19750718 200212 1 004
---- [TABLE END] ---
 
-HALAMAN PERNYATAAN
+# RINGKASAN
 
-Dengan ini saya menyatakan bahwa dalam skripsi ini tidak terdapat karya yang pernah diajukan untuk mendapatkan gelar kesarjanaan di suatu Perguruan Tinggi, dan sepanjang pengetahuan saya juga tidak terdapat karya atau pendapat yang pernah ditulis orang lain, kecuali yang secara tertulis diacu dalam naskah dan disebut dalam daftar pustaka.
+Penelitian ini bertujuan merancang dan membangun aplikasi Point of Sale (POS) berbasis mobile yang dilengkapi fitur prediksi penjualan harian menggunakan metode Long Short-Term Memory (LSTM) untuk membantu pelaku UMKM dalam pengambilan keputusan berbasis data. Sistem dikembangkan menggunakan Flutter sebagai frontend dan Python pada sisi server untuk proses pelatihan serta prediksi model. Data yang digunakan berupa transaksi penjualan harian yang diolah sebagai data deret waktu (time series). Kinerja model dievaluasi menggunakan metrik MAE, RMSE, dan MAPE untuk mengukur tingkat akurasi prediksi. Hasil penelitian diharapkan menghasilkan sistem POS yang tidak hanya mencatat transaksi, tetapi juga mampu memberikan informasi prediksi penjualan guna mendukung perencanaan stok dan strategi usaha secara lebih efektif.
+Kata Kunci: Point of Sale (POS), Prediksi Penjualan Harian, Long Short-Term Memory (LSTM), Time Series, Machine Learning, UMKM.
 
 
+# BAB I
 
---- [TABLE START] ---
-Lhokseumawe, 28 Mei 2026
 
 
+# PENDAHULUAN
 
 
-Suci Wildani Rizka
-NIM. 2022573010047
---- [TABLE END] ---
 
+# 1.1	Latar Belakang Masalah
 
+Perkembangan teknologi informasi dan komunikasi telah mendorong terjadinya transformasi digital di berbagai sektor bisnis, termasuk dalam pengelolaan transaksi dan operasional penjualan pada usaha mikro, kecil, dan menengah (UMKM). Pemanfaatan sistem Point of Sale (POS) berbasis aplikasi menjadi salah satu solusi yang banyak digunakan untuk membantu pelaku usaha dalam mencatat transaksi, mengelola stok barang, serta menyusun laporan penjualan secara lebih terstruktur dan efisien. Seiring dengan meningkatnya kebutuhan akan pengambilan keputusan yang cepat dan berbasis data, sistem POS tidak lagi hanya berfungsi sebagai alat pencatatan transaksi, tetapi juga dituntut untuk mampu menyediakan informasi analitis yang mendukung strategi bisnis.
+Pada praktiknya, sebagian besar aplikasi Point of Sale yang digunakan oleh UMKM masih bersifat deskriptif, yaitu hanya menampilkan data historis penjualan tanpa adanya kemampuan analisis prediktif. Pelaku usaha umumnya harus melakukan perhitungan dan estimasi penjualan secara manual berdasarkan pengalaman atau intuisi, yang berpotensi menimbulkan kesalahan dalam perencanaan stok, penentuan target penjualan, dan pengelolaan arus kas. Ketidakmampuan sistem dalam memprediksi penjualan harian secara akurat dapat menyebabkan berbagai permasalahan, seperti kelebihan stok, kekurangan stok, serta tidak optimalnya strategi penjualan yang diterapkan.
+Perkembangan teknologi kecerdasan buatan, khususnya dalam bidang machine learning dan deep learning, membuka peluang untuk menghadirkan fitur prediksi penjualan yang lebih akurat dan adaptif terhadap pola data historis. Salah satu metode deep learning yang banyak digunakan dalam analisis data runtun waktu (time series) adalah Long Short-Term Memory (LSTM). Metode LSTM memiliki keunggulan dalam mempelajari pola jangka pendek dan jangka panjang pada data penjualan harian, sehingga mampu menghasilkan prediksi yang lebih baik dibandingkan metode statistik konvensional.
+Penerapan metode Long Short-Term Memory (LSTM) dalam sistem Point of Sale diharapkan dapat membantu pelaku usaha dalam memprediksi penjualan harian berdasarkan data transaksi sebelumnya. Dengan adanya fitur prediksi penjualan, sistem POS tidak hanya berperan sebagai alat pencatatan transaksi, tetapi juga sebagai sistem pendukung keputusan yang dapat memberikan gambaran tren penjualan di masa mendatang. Informasi prediksi tersebut dapat dimanfaatkan untuk perencanaan stok barang, pengaturan strategi promosi, serta pengelolaan keuangan usaha secara lebih efektif dan efisien.
+Berdasarkan permasalahan tersebut, maka diperlukan suatu penelitian yang merancang dan membangun aplikasi Point of Sale dengan fitur prediksi penjualan harian menggunakan metode Long Short-Term Memory (LSTM). Penelitian ini diharapkan dapat menghasilkan sebuah aplikasi POS yang mampu memberikan nilai tambah bagi pengguna melalui pemanfaatan teknologi kecerdasan buatan, serta menjadi referensi bagi pengembangan sistem Point of Sale berbasis machine learning di masa mendatang.
 
 
+# 1.2	Rumusan Masalah
 
-
-
-
-
-
-
-
-
-
-KATA PENGANTAR
-Segala puji beserta syukur senantiasa penulis panjatkan kepada Allah SWT yang telah memberikan rahmat dan petunjuk-Nya kepada penulis sehingga dapat menyelesaikan skripsi yang berjudul “Sistem Klasifikasi Kelayakan Cooling Water Pada Unit Pembangkit Listrik Menggunakan Algoritma Random Forest (Studi Kasus: PT PLN Nusantara Power UP Arun)”. Shalawat beserta salam kepada baginda Rasulullah Muhammad SAW, keluarga, dan para sahabat yang telah berjasa dalam memperjuangkan islam dan ilmu pengetahuan. Skripsi ini disusun sebagai salah satu syarat untuk menyelesaikan pendidikan Sarjana Terapan Program Studi Teknik Informatika, Jurusan Teknologi Informasi dan Komputer, Politeknik Negeri Lhokseumawe. 
-Dalam Penyusunan skripsi ini penulis banyak mendapatkan dukungan, perhatian, dorongan, bimbingan dan berbagai bantuan dari banyak pihak terutama para dosen pembimbing. Dengan demikian, segala hormat dan kerendahan hati penulis ini menyampaikan rasa terima kasih yang tidak terhingga terutama kepada:
-Allah SWT, atas segala rahmat, karunia, dan hidayah-Nya yang telah diberikan sehingga penulis dapat menyelesaikan skripsi ini.
-Kedua orang tua tercinta serta keluarga yang senantiasa memberikan doa, dukungan, kasih sayang, dan pengorbanan tanpa henti kepada penulis, sehingga penulis dapat menyelesaikan pendidikan dan penyusunan skripsi ini dengan lancar.
-Bapak Ir. Rizal Syahyadi, S.T., M.Eng.Sc., IPM., ASEAN Eng., APEC Eng. selaku Direktur Politeknik Negeri Lhokseumawe.
-Bapak Salahuddin, S.T., M.Cs selaku Ketua Jurusan Teknologi Informasi dan Komputer, Bapak Fachri Yanuar Rudi F, M.T selaku Sekretaris Jurusan Teknologi Informasi dan Komputer, dan Bapak M. Khadafi, S.T., M.T selaku Ketua Program Studi Teknik Informatika atas segala bimbingan dan perhatian selama masa perkuliahan.
-Bapak Salahuddin, S.T., M.Cs selaku Pembimbing utama dan Bapak Mahdi, S.T., M.Cs selaku pembimbing pendamping yang telah membantu, membimbing, dan mengarahkan penulis dalam proses penyelesaian Skripsi ini.
-Para dosen dan tenaga pengajar Program Studi Teknik Informatika yang telah memberikan ilmu, wawasan, serta pengalaman berharga kepada penulis selama masa perkuliahan, sehingga menjadi bekal yang sangat berarti dalam proses penyelesaian studi.
-Seluruh teman-teman, khususnya teman-teman terdekat, yang selalu menemani dan memberikan dukungan selama masa perkuliahan hingga penyusunan skripsi ini. Terima kasih atas kebersamaan, perhatian, dan semangat yang tidak pernah berhenti diberikan kepada penulis. Meskipun tidak dapat disebutkan satu per satu, penulis sangat menghargai setiap bantuan dan dukungan yang telah diberikan.
-Kepada diri sendiri, penulis mengucapkan terima kasih atas segala usaha, kesabaran, dan kekuatan dalam melewati setiap proses yang tidak mudah. Di tengah keraguan dan kelelahan, penulis tetap berusaha bertahan dan melangkah hingga tahap akhir. Skripsi ini menjadi bukti dari perjalanan panjang yang dilalui serta hasil dari usaha dan doa yang terus diupayakan
-Penulis menyadari bahwa skripsi ini masih jauh dari sempurna dan memiliki berbagai keterbatasan. Oleh karena itu, penulis sangat mengharapkan kritik dan saran yang bersifat membangun demi perbaikan di masa yang akan datang. Semoga segala bantuan dan kebaikan yang telah diberikan mendapatkan balasan yang terbaik.
-
-
---- [TABLE START] ---
-Lhokseumawe, 28 Mei 2026
-
-
-
-
-Suci Wildani Rizka
-NIM. 2022573010047
---- [TABLE END] ---
-
-
-
-ABSTRAK
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-ABSTRACT
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-DAFTAR ISI
-
-
-
-
-
-
-
-
-
-
-
-
-DAFTAR GAMBAR
-Gambar 3. 1 Alur Penelitian29
-Gambar 3. 2 Arsitektur Sistem32
-Gambar 3. 3 Use Case Diagram34
-Gambar 3. 4 Activity Diagram Input Data36
-Gambar 3. 5 Activity Diagram Proses Klasifikasi Random Forest37
-Gambar 3. 6 Activity Diagram Penyajian Hasil Klasifikasi38
-Gambar 3. 7 Rancangan Penerapan Algoritma Random Forest39
-Gambar 3. 8 Mekanisme Kerja Algoritma Random Forest42
-Gambar 3. 9 Skema Training Random Forest untuk Klasifikasi Cooling Water44
-
-
-DAFTAR TABEL
-Tabel 2. 1 State Of The Art5
-Tabel 3. 1 Data Paramater Cooling Water27
-Tabel 3. 2 Standar Nilai Parameter Kualitas Cooling Water28
-Tabel 3. 3 Deskripsi Aktor32
-Tabel 3. 4 Deskripsi Use Case33
-
-
-
-RINGKASAN
-Kualitas cooling water pada unit pembangkit listrik berperan penting dalam menjaga kestabilan suhu mesin serta menjamin keberlangsungan operasional pembangkitan. Penentuan kelayakan cooling water umumnya dilakukan dengan membandingkan setiap parameter kualitas terhadap standar yang ditetapkan pabrikan mesin. Namun, proses evaluasi manual menjadi kurang efisien ketika data bersifat multivariat dan terus bertambah. Kondisi tersebut menimbulkan kebutuhan akan sistem berbasis data yang mampu mengklasifikasikan kelayakan cooling water secara lebih cepat, objektif, dan konsisten. Penelitian ini bertujuan untuk merancang dan membangun sistem klasifikasi kelayakan cooling water menggunakan algoritma Random Forest pada PT PLN Nusantara Power Up Arun. Data yang digunakan merupakan data sekunder hasil pemantauan parameter pH, konduktivitas, nitrit, besi (Fe), sulfat, dan kekeruhan yang mengacu pada standar resmi Wärtsilä. Model dievaluasi menggunakan confusion matrix serta metrik accuracy, precision, recall, dan F1-score Hasil penelitian ini diharapkan menghasilkan sistem pendukung keputusan yang dapat meningkatkan efektivitas pengelolaan kualitas cooling water, meminimalkan potensi kesalahan evaluasi manual, serta mendukung operasional pembangkit listrik secara lebih optimal.
-Kata Kunci: Cooling Water, Klasifikasi, Machine Learning, Pembangkit Listrik, Random Forest
-
-
-
-
-
-
-
-
-
-BAB I 
-PENDAHULUAN
-Latar Belakang Masalah
-Energi listrik merupakan salah satu kebutuhan paling mendasar yang mendukung aktivitas masyarakat maupun pertumbuhan industri di Indonesia. Salah satu faktor kunci dalam menjamin ketersediaan energi listrik secara berkelanjutan adalah keandalan sistem pembangkit listrik itu sendiri. Dalam operasionalnya, pembangkit listrik mengandalkan berbagai sistem pendukung yang bekerja secara terintegrasi, salah satunya adalah sistem pendingin (cooling system). Sistem ini berfungsi menjaga suhu peralatan utama agar selalu berada dalam rentang operasional yang aman. Air, sebagai komponen utama dalam sistem pendingin tersebut, merupakan sumber daya yang tidak hanya vital bagi kehidupan, tetapi juga memegang peran penting dalam berbagai aktivitas industri. Namun, penggunaan air dalam skala industri yang besar berpotensi menghasilkan limbah cair yang dapat berdampak negatif terhadap lingkungan apabila tidak dikelola dengan baik [1].
-Air yang digunakan sebagai media pendingin dalam industri dikenal dengan istilah cooling water (air pendingin). Sistem cooling water umumnya beroperasi secara sirkulatif dalam jangka panjang, yang secara alami akan menyebabkan peningkatan konsentrasi zat terlarut dan kontaminan di dalamnya. Jika dibiarkan, kondisi ini dapat memicu terjadinya korosi, pembentukan kerak (scaling), hingga penurunan kinerja sistem secara keseluruhan. Untuk mencegah hal tersebut, sebagian air dalam sistem pendingin perlu dibuang secara berkala melalui proses yang disebut blowdown. Kelayakan cooling water sendiri dinilai berdasarkan sejumlah parameter, antara lain derajat keasaman (pH), konduktivitas, kandungan nitrit, besi (Fe), sulfat, dan kekeruhan [2].
-Pada unit pembangkit listrik, termasuk PT PLN Nusantara Power Unit Pembangkitan Arun yang mengoperasikan 19 unit engine, pemantauan kualitas cooling water dilakukan secara rutin setiap 500 jam operasi mesin atau kurang lebih satu kali dalam sebulan untuk setiap unit mesin. Dengan jumlah unit yang relatif banyak, proses pemantauan menghasilkan data parameter kualitas air dalam jumlah besar yang harus dievaluasi secara berkala untuk masing-masing engine. Pemantauan juga dapat dilakukan lebih awal apabila terdeteksi kondisi yang tidak normal. Hasil pemantauan ini kemudian dibandingkan dengan nilai standar yang telah ditetapkan perusahaan berdasarkan dokumen resmi pabrikan mesin, sebagai acuan untuk memastikan cooling water tetap berada dalam kondisi yang aman selama proses pembangkitan berlangsung. Apabila salah satu parameter melampaui batas yang ditentukan, maka cooling water tersebut dinyatakan tidak layak pakai dan harus dikeluarkan melalui proses blowdown.
-Permasalahannya, proses penilaian kelayakan tersebut hingga saat ini masih dilakukan secara manual, yakni dengan membandingkan nilai setiap parameter satu per satu terhadap batas standar yang berlaku. Cara ini tentu menjadi kurang efisien ketika data yang harus dievaluasi jumlahnya besar dan melibatkan banyak parameter sekaligus. Di samping itu, penilaian manual juga rentan terhadap inkonsistensi, terutama ketika nilai suatu parameter berada di ambang batas standar. Kondisi inilah yang mendorong perlunya pendekatan yang lebih sistematis, cepat, dan objektif dalam mengevaluasi kualitas cooling water berbasis data historis.
-Beberapa penelitian terdahulu menunjukkan bahwa machine learning efektif dalam analisis kualitas air. Salah satu penelitian menggunakan berbagai metode seperti TCN, LSTM, dan SVM untuk memprediksi kualitas air blowdown, dengan model TCN menghasilkan nilai koefisien determinasi (R²) hingga 0,911 [3]. Selain itu, pendekatan machine learning juga telah diterapkan untuk mengestimasi laju korosi pada sistem cooling water industri dan menunjukkan bahwa model berbasis pembelajaran mampu memberikan hasil yang lebih akurat dibandingkan metode konvensionall [4]. Di sisi lain, penelitian terkait klasifikasi kualitas air masih banyak diterapkan pada air minum, air tanah, dan perairan umum menggunakan algoritma seperti Random Forest [5][6][7]. Lebih lanjut, kajian lain mengonfirmasi bahwa machine learning memiliki potensi yang besar untuk diterapkan dalam sistem pemantauan dan pengelolaan kualitas air di berbagai konteks industri [8].
-Meski demikian, penelitian yang secara spesifik membahas klasifikasi kelayakan cooling water pada unit pembangkit listrik masih terbatas. Sebagian besar penelitian sebelumnya berfokus pada prediksi parameter kualitas air atau estimasi kondisi sistem, bukan pada penentuan keputusan operasional dalam bentuk klasifikasi layak atau tidak layak. Padahal, karakteristik cooling water pada sistem pembangkit memiliki pola yang berbeda karena dipengaruhi oleh kondisi operasional mesin.
-Berdasarkan permasalahan tersebut, penelitian ini mengusulkan penerapan algoritma Random Forest untuk mengklasifikasikan kelayakan cooling water ke dalam dua kategori, yaitu layak pakai dan tidak layak pakai, berdasarkan data historis pemantauan di PT PLN Nusantara Power Up Arun. Sistem yang dibangun diharapkan dapat menjadi solusi berbasis informatika yang mampu membantu proses pengambilan keputusan operasional secara lebih objektif, konsisten, dan efisien dalam pengelolaan kelayakan cooling water pada unit pembangkit listrik. 
-Rumusan Masalah
 Berdasarkan latar belakang yang telah diuraikan, maka rumusan masalah dalam penelitian ini adalah sebagai berikut:
-Bagaimana merancang dan membangun sistem klasifikasi kelayakan cooling water berbasis machine learning yang dapat dioperasikan sesuai standar PT PLN Nusantara Power Up Arun?
-Bagaimana implementasi algoritma Random Forest dalam mengklasifikasikan kelayakan cooling water berdasarkan data historis parameter kualitas air?
-Bagaimana tingkat kinerja model Random Forest berdasarkan evaluasi menggunakan confusion matrix serta metrik accuracy, precision, recall, dan F1-score?
-
-
-Tujuan Penelitian
-Tujuan dari penelitian ini adalah sebagai berikut:
-Merancang dan membangun sistem klasifikasi kelayakan cooling water berbasis machine learning yang sesuai dengan standar operasional PT PLN Nusantara Power Up Arun.
-Mengimplementasikan algoritma Random Forest dalam proses klasifikasi kelayakan cooling water berdasarkan data historis parameter kualitas air.
-Mengevaluasi kinerja model Random Forest menggunakan confusion matrix serta metrik accuracy, precision, recall, dan F1-score.
-Batasan Masalah
-Untuk menghindari meluasnya pembahasan, penelitian ini dibatasi pada hal-hal berikut:
-Penelitian ini menggunakan data hasil pengukuran parameter kualitas cooling water yang diperoleh dari PT PLN Nusantara Power UP Arun.
-Parameter yang dianalisis dibatasi pada pH, konduktivitas (specific conductivity), kadar nitrit (Nitrite), kandungan besi (Fe), sulfat (Sulfate), dan tingkat kekeruhan (Turbidity).
-Penelitian ini difokuskan pada perancangan dan pembangunan sistem klasifikasi berbasis machine learning, dan tidak membahas proses pengolahan atau perlakuan terhadap sifat fisik maupun kandungan kimia cooling water secara nyata.
-Manfaat Penelitian
-Penelitian ini diharapkan dapat memberikan manfaat sebagai berikut:
-Membantu PT PLN Nusantara Power Up Arun dalam melakukan klasifikasi kelayakan cooling water secara lebih cepat, objektif, dan konsisten, sehingga mengurangi ketergantungan pada proses evaluasi manual.
-Mendukung pengambilan keputusan operasional terkait kelayakan cooling water berdasarkan data historis dan standar operasional yang berlaku, sehingga proses pengendalian kualitas seperti blowdown dapat dilakukan secara lebih tepat waktu dan tepat sasaran.
-Memberikan kontribusi akademis dalam penerapan algoritma Random Forest untuk klasifikasi kualitas cooling water pada sistem pendingin industri pembangkit listrik.
-Menjadi referensi bagi penelitian selanjutnya dalam pengembangan sistem pemantauan dan klasifikasi kualitas cooling water berbasis machine learning.
-Sistematika Penulisan
-Sistematika penulisan dalam penelitian ini disusun untuk memberikan gambaran secara menyeluruh mengenai alur pembahasan yang dilakukan. Penulisan skripsi ini dibagi ke dalam lima bab utama yang saling berkaitan, dengan rincian sebagai berikut:
-BAB I PENDAHULUAN
-Bab ini menguraikan gambaran umum penelitian yang meliputi latar belakang masalah, rumusan masalah, tujuan penelitian, batasan masalah, manfaat penelitian, serta sistematika penulisan. Bab ini menjadi dasar dalam memahami alasan dan arah penelitian yang dilakukan.
-BAB II TINJAUN PUSTAKA
-Bab ini berisi landasan teori dan kajian literatur yang relevan dengan penelitian. Teori yang disajikan mencakup konsep cooling water, kualitas air, parameter kualitas air, serta metode machine learning khususnya algoritma Random Forest. Selain itu, pada bab ini juga disajikan penelitian terdahulu (State of the Art) yang menjadi acuan dalam mengidentifikasi posisi dan kebaruan penelitian.
-
-
-BAB III METODELOGI PENELITIAN
-Bab ini menjelaskan tahapan penelitian yang dilakukan, mulai dari pengumpulan data, pengolahan data, hingga penerapan metode yang digunakan. Selain itu, dijelaskan pula perancangan sistem yang meliputi alur proses klasifikasi, pemodelan menggunakan algoritma Random Forest, serta skenario pengujian yang digunakan dalam penelitian.
-BAB IV HASIL DAN PEMBAHASAN
-Bab ini menyajikan hasil implementasi sistem yang telah dirancang, serta analisis terhadap hasil pengujian model. Pembahasan meliputi evaluasi performa model klasifikasi, interpretasi hasil prediksi, serta analisis terhadap parameter yang mempengaruhi kelayakan cooling water.
-BAB V PENUTUP
-Bab ini berisi kesimpulan yang diperoleh dari hasil penelitian serta saran yang dapat diberikan untuk pengembangan penelitian selanjutnya.
-
-
-BAB II 
-TINJAUAN PUSTAKA
-2.1       State Of The Art
-Penelitian terkait klasifikasi kualitas air telah mengalami perkembangan signifikan dengan pemanfaatan metode machine learning, khususnya algoritma Random Forest yang dikenal mampu menangani data nonlinier dan kompleks secara efektif. Berbagai penelitian telah dilakukan dengan fokus pada klasifikasi kualitas air berbasis parameter fisik dan kimia, baik untuk keperluan konsumsi, lingkungan, maupun sistem pengolahan air.
-Secara umum, penelitian terdahulu dapat dikelompokkan ke dalam tiga kategori utama. Pertama, penelitian yang berfokus pada klasifikasi kualitas air konsumsi dan air lingkungan, seperti air minum, air sumur, dan air permukaan, yang bertujuan untuk menentukan kelayakan berdasarkan standar kesehatan. Kedua, penelitian yang mengarah pada prediksi parameter kualitas air atau Water Quality Index (WQI) menggunakan pendekatan regresi berbasis machine learning. Ketiga, penelitian yang mulai berkembang dalam konteks air industri, khususnya pada sistem cooling water, yang digunakan dalam operasional pembangkit listrik dan proses industri.
-Meskipun demikian, penelitian pada konteks cooling water industri masih relatif terbatas dan umumnya berfokus pada prediksi parameter kualitas air atau estimasi kondisi sistem, seperti laju korosi dan performa sistem pendingin, bukan pada klasifikasi kelayakan operasional secara langsung. Padahal, dalam praktik industri, diperlukan sistem yang mampu mengklasifikasikan kondisi air secara cepat dan akurat untuk mendukung pengambilan keputusan operasional. Ringkasan penelitian terdahulu tersebut disajikan dalam bentuk tabel State of the Art yang dapat dilihat pada Tabel 2.1.
-
-
-
-Tabel 2. 1 State Of The Art
-
---- [TABLE START] ---
-No | Penulis, Tahun dan Judul Artikel | Metode yang digunakan | Hasil yang diperoleh | Perbandingan Penelitian
- |  |  |  | Persamaan | Perbedaan
-1 | Gusti Agung Diah Sri Ari Ningsih & Cokorda Pramartha (2024). Klasifikasi Kualitas Air Layak Minum menggunakan Random Forest dan GridSearchCV [9] | Random Forest dengan optimasi hyperparameter menggunakan GridSearchCV. | Hyperparameter tuning meningkatkan accuracy, precision, recall, dan F1-score. Model RF terbukti stabil dan menghasilkan prediksi berkualitas pada dataset air minum. | Sama-sama menggunakan Random Forest untuk klasifikasi kualitas air dengan evaluasi metrik accuracy, precision, recall, dan F1-score. | Parameter berbeda (air konsumsi umum vs. cooling water industri); penelitian sebelumnya berfokus pada optimasi model, penelitian ini pada klasifikasi kelayakan operasional.
-2 | Wan, Y., Tian, X., He, H., Tong, P., Gao, R., Ji, X., Li, S., Luo, S., Li, W., & Chen, Z. (2025). Prediction of Typical Power Plant Circulating Cooling Tower Blowdown Water Quality Based on Explicable Integrated Machine Learning. [3] | TCN, LSTM, CNN, XGBoost, dan SVM. | Model TCN memiliki performa terbaik dengan R² maksimum 0,911 dan RMSE minimum 0,158, unggul dibandingkan LSTM, CNN, XGBoost, dan SVM. | Sama-sama menerapkan machine learning pada data operasional cooling water pembangkit listrik. | Penelitian sebelumnya menggunakan deep learning dengan pendekatan regresi; penelitian ini menggunakan Random Forest dengan klasifikasi biner.
-3 | Ruiz, D., Casas, A., Escobar, C. A., Perez, A., & Gonzalez, V. (2024). Advanced Machine Learning Techniques for Corrosion Rate Estimation and Prediction in Industrial Cooling Water Pipelines. [4] | XGBoost dan Deep Neural Network (DNN). | Model DNN paling sesuai sebagai virtual sensor estimasi laju korosi dengan MAPE (11±4)%, mengungguli metode statistik konvensional. | Sama-sama menggunakan machine learning berbasis data kualitas air dalam konteks cooling water industri. | Penelitian sebelumnya memprediksi laju korosi secara kuantitatif (regresi); penelitian ini mengklasifikasikan kelayakan air secara biner.
-4 | Hridoy, M. A. A. M., Acharjee, M. R., Shawkat, A. I., Masood, A., Bordin, C., Baki, A. O., & Mamun, M. A. A. (2024). Advanced Machine Learning Models for Accurate Water Quality Classification and WQI Prediction: Implications for Aquatic Disease Risk Management. [10] | Random Forest, SVM, XGBoost, dan LightGBM. | Model ensemble Random Forest memberikan akurasi tinggi dalam klasifikasi kualitas air dan prediksi WQI, serta mengidentifikasi hubungan nonlinier antar parameter. | Sama-sama menerapkan Random Forest untuk klasifikasi kualitas air berbasis parameter fisik dan kimia. | Penelitian sebelumnya menggabungkan klasifikasi multi-kelas dan prediksi WQI; penelitian ini menggunakan klasifikasi biner untuk kebutuhan operasional industri.
-5 | Chen, W., Xu, D., Pan, B., Zhao, Y., & Song, Y. (2024). Machine Learning-Based Water Quality Classification Assessment. [11] | Random Forest, SVM, Decision Tree, dan KNN. | Random Forest menghasilkan akurasi tertinggi menggunakan 15 parameter kualitas air dengan label klasifikasi "Safe" dan "Unsafe". | Sama-sama melakukan klasifikasi kualitas air berbasis parameter fisik dan kimia dengan machine learning. | Penelitian sebelumnya mengklasifikasikan kualitas air tanah umum dari dataset publik; penelitian ini mengklasifikasikan cooling water industri berdasarkan standar operasional Wärtsilä.
-6 | Mutoffar, M. M., Rahmawati, D., & Hidayat, A. (2022). Klasifikasi Kualitas Air Sumur Menggunakan Algoritma Random Forest. [5] | Algoritma Random Forest. | Model Random Forest menghasilkan presisi 0,823 dan sensitivitas 0,83 dalam mengklasifikasikan kualitas air sumur. | Sama-sama menggunakan Random Forest untuk klasifikasi kualitas air berbasis parameter fisik dan kimia. | Penelitian sebelumnya berfokus pada air sumur untuk konsumsi rumah tangga; penelitian ini berfokus pada cooling water industri berdasarkan standar teknis pabrikan mesin.
-7 | Firmansyah, A. F., Basuki R., & M. M. Al Haromainy (2025). Optimization of the Random Forest Algorithm Using Random Search for Potable Water Quality Classification. [12] | Random Forest dengan optimasi hyperparameter menggunakan Random Search. | Optimasi Random Search meningkatkan akurasi klasifikasi air minum dari 84,12% menjadi 84,38%, meski waktu komputasi meningkat. | Sama-sama menggunakan Random Forest untuk klasifikasi kualitas air. | Penelitian sebelumnya menekankan optimasi hyperparameter; penelitian ini menggunakan Random Forest tanpa optimasi dan berfokus pada implementasi operasional industri.
-8 | Veronica Distefano, Monica Palma, Sandra De Iaco (2024). Multiclass random forest model to classify wastewater treatment imbalanced data. [13] | Random Forest, MDA, dengan teknik resampling (ROS, ADASYN, Under Sampling, Hybrid). | Random Forest dengan ADASYN menghasilkan balanced accuracy tertinggi dalam mengklasifikasikan sumber emisi bau pada fasilitas pengolahan limbah. | Sama-sama menggunakan Random Forest untuk klasifikasi data imbalanced dengan evaluasi metrik yang menyeluruh. | Penelitian sebelumnya berfokus pada klasifikasi emisi bau fasilitas pengolahan limbah; penelitian ini berfokus pada klasifikasi kelayakan cooling water pembangkit listrik.
---- [TABLE END] ---
-
-
-Berdasarkan kajian terhadap penelitian terdahulu pada Tabel 2.1, dapat disimpulkan bahwa sebagian besar penelitian masih berfokus pada klasifikasi dan prediksi kualitas air konsumsi seperti air minum, air permukaan, dan air tanah menggunakan algoritma Random Forest berbasis dataset umum. Beberapa penelitian telah mulai mengkaji penerapan machine learning pada sistem cooling water industri, namun umumnya masih menggunakan pendekatan prediksi parameter kualitas air dan belum secara spesifik mengklasifikasikan kelayakan operasional air.
-Oleh karena itu, penelitian yang membahas klasifikasi kelayakan cooling water dalam kategori Layak dan Tidak Layak berbasis data operasional nyata masih terbatas. Penelitian ini hadir untuk mengisi celah tersebut dengan mengusulkan sistem klasifikasi menggunakan algoritma Random Forest berdasarkan data historis dari PT PLN Nusantara Power UP Arun dengan mengacu pada standar teknis operasional pabrikan mesin sebagai dasar pelabelan data.
-2.2       Cooling Water
-Cooling water merupakan air yang digunakan sebagai media pendingin dalam sistem industri dan pembangkit listrik untuk menyerap dan memindahkan panas dari peralatan atau mesin selama proses operasi berlangsung. Pada pembangkit listrik, sistem pendingin memiliki peranan penting dalam menjaga kestabilan temperatur komponen seperti turbin, kondensor, heat exchanger, serta sistem bantu lainnya agar tetap berada dalam batas aman operasional. Apabila suhu tidak dikendalikan dengan baik, maka dapat terjadi overheating yang berpotensi menurunkan efisiensi sistem dan mempercepat kerusakan peralatan [14].
-Dalam sistem pembangkit modern, cooling water umumnya digunakan dalam sistem sirkulasi tertutup maupun semi-terbuka (recirculating cooling system), di mana air digunakan berulang kali selama kualitasnya masih memenuhi standar operasional. Namun, proses sirkulasi yang terus-menerus menyebabkan terjadinya akumulasi zat terlarut, partikel, serta mikroorganisme yang dapat memengaruhi kualitas air pendingin. Salah satu permasalahan utama dalam sistem cooling water adalah terbentuknya biofilm pada permukaan pipa dan heat exchanger akibat pertumbuhan mikroorganisme. Biofilm dapat menghambat proses perpindahan panas dan meningkatkan risiko terjadinya korosi yang dipicu oleh aktivitas mikroba (microbially induced corrosion) [15]. Kondisi ini dapat menurunkan efisiensi sistem pendingin serta meningkatkan biaya perawatan dan risiko gangguan operasional.
-Selain faktor biologis, kualitas cooling water juga dipengaruhi oleh parameter fisik dan kimia seperti derajat keasaman (pH), konduktivitas listrik, total zat terlarut (Total Dissolved Solids/TDS), serta kandungan ion tertentu seperti klorida, sulfat, dan besi. Nilai pH yang terlalu rendah dapat mempercepat proses korosi, sedangkan pH yang terlalu tinggi berpotensi menyebabkan pembentukan kerak (scaling) pada permukaan perpindahan panas. Konsentrasi zat terlarut dan garam mineral yang tinggi juga berkontribusi terhadap pembentukan deposit mineral yang dapat mengurangi efisiensi perpindahan panas [16][17]. Selain itu, perubahan komposisi kimia air pendingin dipengaruhi oleh kondisi operasi sistem, termasuk suhu, laju sirkulasi, serta proses blowdown yang dilakukan untuk mengendalikan konsentrasi zat terlarut dalam sistem [18].
-Akumulasi zat terlarut dan pertumbuhan mikroorganisme yang tidak terkendali dapat menyebabkan fouling, scaling, dan korosi pada komponen sistem pendingin [15]. Ketiga fenomena tersebut berdampak langsung pada penurunan performa sistem, peningkatan konsumsi energi, serta potensi kerusakan dini pada peralatan pembangkit. Oleh karena itu, pemantauan kualitas cooling water secara berkala menjadi langkah penting untuk menjaga keandalan dan efisiensi sistem. Dalam konteks penelitian ini, parameter kualitas cooling water dijadikan sebagai variabel utama yang dianalisis untuk menentukan klasifikasi kelayakan air pendingin secara objektif menggunakan pendekatan machine learning.
-2.3       Parameter Kualitas Cooling Water 
-Parameter kualitas cooling water merupakan indikator penting dalam menilai kondisi dan kelayakan air untuk mendukung operasional sistem pendingin pada unit pembangkit listrik. Kualitas air pendingin yang tidak terkontrol dapat menyebabkan berbagai permasalahan serius seperti korosi dan scaling, yang berdampak pada berkurangnya efisiensi perpindahan panas, meningkatnya frekuensi shutdown peralatan, serta berkurangnya usia pipa dan komponen sistem [19][20]. Oleh karena itu, pemantauan parameter kualitas air perlu dilakukan secara berkala guna menjaga stabilitas sistem dan memperpanjang umur peralatan. Secara umum, parameter kualitas cooling water dapat dikelompokkan menjadi tiga kategori, yaitu parameter fisik, kimia, dan biologis.
-2.3.1Parameter Fisik
-Parameter fisik berkaitan dengan karakteristik tampak dan sifat fisik air yang secara langsung memengaruhi proses perpindahan panas dalam sistem pendingin.
-Suhu Air : memengaruhi laju perpindahan panas dan efisiensi pendinginan secara keseluruhan. Peningkatan suhu air pendingin dapat menurunkan kemampuan air dalam menyerap panas sehingga berdampak pada penurunan performa sistem [20].
-Turbidity / Kekeruhan : menunjukkan jumlah partikel tersuspensi yang terdapat dalam air. Nilai kekeruhan yang tinggi berpotensi menyebabkan fouling pada permukaan pipa dan heat exchanger, sehingga dapat menghambat proses perpindahan panas secara signifikan [21].
-Warna dan Bau : Perubahan warna dan bau pada air pendingin dapat menjadi indikator awal adanya kontaminasi organik atau meningkatnya aktivitas mikroorganisme di dalam sistem pendingin [21].
-2.3.2Parameter Kimia
-Parameter kimia berkaitan dengan komposisi zat terlarut dalam air yang dapat memengaruhi stabilitas kimia air serta potensi terjadinya korosi maupun pembentukan kerak (scaling).
-pH : yaitu derajat keasaman air pendingin, keseimbangan pH yang tidak terjaga dapat menyebabkan kerusakan yang luas dan korosi pada komponen sistem pendingin. Nilai pH yang terlalu rendah mengindikasikan kondisi air yang bersifat asam sehingga mempercepat proses korosi, sedangkan pH yang terlalu tinggi dapat memicu pembentukan kerak mineral pada permukaan sistem [22].
-Total Dissolved Solids (TDS) : TDS menunjukkan jumlah total zat padat terlarut dalam air, di mana konsentrasi TDS yang tinggi dapat meningkatkan risiko terbentuknya deposit mineral yang mengganggu efisiensi perpindahan panas pada sistem pendingin [21].
-Konduktivitas Listrik : Konduktivitas listrik menggambarkan kemampuan air dalam menghantarkan arus listrik akibat keberadaan ion terlarut. Nilai konduktivitas yang tinggi mengindikasikan konsentrasi mineral yang lebih besar dan berkorelasi dengan meningkatnya risiko korosi serta pembentukan kerak [21][22].
-Ion Tertentu : Beberapa ion memiliki pengaruh signifikan terhadap kondisi sistem pendingin. Nitrit umumnya digunakan sebagai inhibitor korosi dalam sistem cooling water tertutup karena dapat membentuk lapisan pelindung pada permukaan logam, namun apabila kadarnya tidak terkontrol dapat menimbulkan ketidakseimbangan kimia dalam sistem [20]. Peningkatan kandungan besi (Fe) sering kali menjadi indikator terjadinya proses korosi pada sistem pendingin [22]. Sementara itu, ion sulfat dapat berkontribusi terhadap pembentukan endapan seperti kalsium sulfat yang berpotensi menyebabkan scaling dan mengganggu kinerja sistem [19][23].
-2.3.3Parameter Biologis
-Parameter biologis berkaitan dengan aktivitas mikroorganisme yang dapat berkembang di dalam sistem pendingin.
-Mikroorganisme/Biofilm : Pertumbuhan mikroorganisme pada permukaan sistem pendingin dapat membentuk lapisan biofilm yang berkontribusi terhadap terjadinya microbially induced corrosion (MIC). Mekanisme ini dapat mempercepat kerusakan material melalui reaksi kimia dan produksi zat korosif oleh mikroorganisme [20].
-Kontaminan Organik : Senyawa organik dalam air dapat menjadi sumber nutrisi bagi mikroorganisme sehingga mempercepat pertumbuhan dan pembentukan biofilm dalam sistem pendingin [21][20].
-Berdasarkan berbagai parameter kualitas cooling water yang telah diuraikan, penelitian ini memfokuskan pada enam parameter utama, yaitu pH, Specific Conductivity (SC), Nitrite, Fe, Sulfate, dan Turbidity sebagai variabel input dalam proses klasifikasi. Pemilihan keenam parameter tersebut didasarkan pada ketersediaan data hasil pengujian laboratorium serta relevansinya terhadap potensi korosi, scaling, dan fouling pada sistem operasional. Parameter-parameter tersebut selanjutnya digunakan sebagai variabel input dalam model klasifikasi berbasis algoritma Random Forest untuk menentukan status kelayakan cooling water secara otomatis.
-2.4       Machine Learning (ML) 
-Machine Learning (ML) merupakan salah satu cabang utama dalam bidang Artificial Intelligence (AI) yang berfokus pada pengembangan metode komputasional yang memungkinkan sistem untuk belajar dari data dan meningkatkan performanya secara otomatis melalui pengalaman [24]. Berbeda dengan pendekatan pemrograman konvensional yang mengandalkan aturan-aturan eksplisit yang dirancang oleh manusia (rule-based system), ML menggunakan pendekatan berbasis data (data-driven approach), di mana pola dan aturan keputusan diekstraksi langsung dari data melalui proses pembelajaran algoritmik [25].
-Secara konseptual, ML bekerja dengan membangun suatu model matematis berdasarkan dataset historis. Model tersebut merepresentasikan hubungan antara variabel masukan (fitur) dan variabel keluaran (target). Melalui proses pelatihan (training), model akan menyesuaikan parameter internalnya untuk meminimalkan kesalahan prediksi terhadap data latih. Hasil dari proses ini adalah suatu fungsi atau struktur keputusan yang mampu digunakan untuk melakukan inferensi terhadap data baru yang belum pernah diproses sebelumnya [26].
-Tujuan fundamental dari ML bukan sekadar memperoleh akurasi tinggi pada data latih, melainkan menghasilkan model yang memiliki kemampuan generalisasi yang baik. Generalisasi merujuk pada kemampuan model dalam mempertahankan performa prediksi ketika dihadapkan pada data baru di luar sampel pelatihan. Tantangan utama dalam ML adalah menyeimbangkan kompleksitas model agar tidak terjadi overfitting (model terlalu menyesuaikan diri dengan data latih) maupun underfitting (model terlalu sederhana sehingga gagal menangkap pola penting dalam data) [26].
-Seiring perkembangannya, ML telah banyak diterapkan di berbagai bidang, mulai dari sistem klasifikasi medis, prediksi kondisi industri, deteksi anomali, sistem rekomendasi, hingga pengenalan citra dan suara, serta analisis data dalam skala besar. Hal ini menunjukkan bahwa ML memiliki fleksibilitas yang tinggi sehingga menjadikannya salah satu pendekatan yang efektif dalam menangani permasalahan kompleks yang sulit diselesaikan hanya dengan mengandalkan aturan deterministik tradisional [24][25].
-2.4.1Paradigma dan Jenis-Jenis Machine Learning 
-Berdasarkan mekanisme pembelajaran dan karakteristik data yang digunakan, ML secara umum diklasifikasikan ke dalam tiga paradigma utama, yaitu supervised learning, unsupervised learning, dan reinforcement learning [24][25].
-Supervised Learning 
-Supervised Learning merupakan paradigma pembelajaran terawasi di mana model dilatih menggunakan dataset yang telah memiliki label atau nilai target yang diketahui. Dalam pendekatan ini, setiap data masukan memiliki pasangan keluaran yang benar, sehingga proses pembelajaran bertujuan untuk membangun fungsi pemetaan dari ruang fitur ke ruang target [25].
-Secara matematis, supervised learning berupaya mempelajari suatu fungsi , di mana merepresentasikan vektor fitur masukan dan y merupakan variabel target yang ingin diprediksi. Dalam proses pelatihannya, model dioptimalkan untuk meminimalkan fungsi kerugian (loss function) yang mengukur seberapa besar selisih antara nilai prediksi yang dihasilkan model dengan nilai aktual yang sebenarnya [26].
-Supervised learning umumnya dibagi menjadi dua jenis permasalahan utama, yaitu:
-Klasifikasi, ketika variabel target bersifat kategoris atau diskrit (misalnya: layak/tidak layak, positif/negatif)
-Regresi, ketika variabel target berupa nilai kontinu (misalnya: nilai numerik).
-Pendekatan ini banyak digunakan dalam penelitian berbasis prediksi dan klasifikasi status, karena memungkinkan model belajar dari pola historis untuk menentukan keputusan pada data baru secara sistematis.
-Unsupervised learning
-Unsupervised learning merupakan paradigma pembelajaran tanpa label, di mana dataset tidak memiliki variabel target yang telah ditentukan. Tujuan utama pendekatan ini adalah mengidentifikasi struktur, pola, atau hubungan tersembunyi di dalam data secara mandiri [24].
-Berbeda dengan supervised learning yang berorientasi pada prediksi, unsupervised learning lebih berfokus pada eksplorasi data (data exploration). Teknik yang umum digunakan meliputi:
-Clustering, untuk mengelompokkan data berdasarkan kemiripan karakteristik,
-Dimensionality reduction, untuk menyederhanakan struktur data dengan tetap mempertahankan informasi penting,
-Anomaly detection, untuk mengidentifikasi data yang menyimpang dari pola umum [25].
-Pendekatan ini sering digunakan sebagai tahap awal analisis untuk memahami distribusi dan karakteristik dataset sebelum dilakukan pemodelan prediktif lanjutan.
- Reinforcement learning
-Reinforcement learning merupakan salah satu paradigma dalam ML di mana sebuah agen belajar melalui interaksi langsung dengan lingkungannya. Dalam proses ini, agen akan menerima umpan balik berupa reward (penghargaan) atau punishment (hukuman) dari setiap tindakan yang dilakukannya, kemudian secara bertahap menyesuaikan strateginya agar dapat memaksimalkan total reward kumulatif yang diperoleh dalam jangka panjang. Pendekatan ini banyak diterapkan pada permasalahan yang bersifat sekuensial, seperti pengendalian robot, optimasi sistem, serta pengembangan agen permainan cerdas [24][25].
-2.4.2Tahapan Penerapan Machine Learning
-Penerapan ML dalam suatu sistem umumnya mengikuti alur kerja yang terstruktur dan sistematis, yang terdiri atas beberapa tahapan utama yang saling berkaitan.
-Tahap pertama adalah pengumpulan data, yaitu proses memperoleh dataset yang relevan dan representatif sesuai dengan permasalahan yang diteliti. Pada tahap ini, kualitas maupun kuantitas data menjadi faktor yang sangat menentukan baik atau tidaknya performa model yang akan dikembangkan nantinya [25].
-Tahap kedua adalah preprocessing data, yang bertujuan untuk mempersiapkan data sebelum masuk ke tahap pemodelan. Pada tahap ini, data terlebih dahulu dibersihkan dari nilai yang hilang maupun data yang tidak konsisten, kemudian dilakukan penyeragaman skala nilai agar setiap fitur berada dalam rentang yang sebanding, serta dilakukan pemilihan fitur-fitur yang paling relevan agar model yang dihasilkan lebih baik dan efisien [25].
-Tahap ketiga adalah training, yaitu proses melatih model menggunakan data latih agar model dapat mempelajari pola hubungan antara fitur masukan dan variabel target. Pada tahap ini, model akan terus belajar dari data yang diberikan dan memperbaiki prediksinya secara berulang sampai menghasilkan tingkat kesalahan yang sekecil mungkin [26].
-Tahap keempat adalah testing, yaitu proses menguji model menggunakan data yang tidak ikut digunakan saat pelatihan. Tujuan dari pemisahan data latih dan data uji ini adalah untuk melihat seberapa baik model dapat bekerja pada data baru yang belum pernah dilihat sebelumnya, sekaligus untuk menghindari kondisi di mana model hanya hafal data latihnya saja namun gagal saat dihadapkan pada data yang berbeda (overfitting) [25][26].
-Tahap terakhir adalah evaluasi performa, yaitu pengukuran kinerja model menggunakan metrik yang sesuai dengan jenis permasalahan, seperti accuracy, precision, recall, dan F1-score pada kasus klasifikasi [27].
-2.5       Sistem Klasifikasi (Classification)
-Sistem klasifikasi merupakan metode dalam machine learning yang digunakan untuk mengelompokkan data ke dalam kelas atau kategori tertentu berdasarkan atribut atau karakteristik yang dimilikinya. Sistem ini termasuk dalam supervised learning, yaitu pendekatan pembelajaran mesin di mana model dilatih menggunakan data berlabel untuk mempelajari hubungan antara fitur input dan kelas keluaran, sehingga dapat memprediksi kelas data baru secara akurat [28]. Proses klasifikasi umumnya terdiri dari dua tahap utama, yakni pembelajaran (training) dan pengujian (testing). Pada tahap pembelajaran, model mempelajari pola hubungan antara atribut masukan dan label kelas pada data latih. Sedangkan pada tahap pengujian, kemampuan model dalam mengklasifikasikan data yang belum pernah dilihat dievaluasi menggunakan metrik performa seperti akurasi, presisi, recall, F1score, dan confusion matrix, yang digunakan untuk menilai sejauh mana prediksi model sesuai dengan kelas sebenarnya [29]. 
-Sistem klasifikasi dapat diterapkan pada berbagai jenis data, baik numerik maupun kategorikal, serta dapat menangani masalah klasifikasi dua kelas (binary classification) maupun lebih dari dua kelas (multiclass classification). Penerapan sistem klasifikasi dalam konteks kualitas air memungkinkan data berupa parameter fisik dan kimia dipetakan ke dalam kelas tertentu, sehingga menjadi alat bantu dalam pengambilan keputusan operasional secara objektif dan efisien [30].
-
-2.6       Evaluasi Performa Model Klasifikasi
-Evaluasi performa model klasifikasi merupakan aspek krusial dalam pengembangan sistem ML, karena menentukan sejauh mana model yang dibangun mampu melakukan klasifikasi secara akurat dan dapat diandalkan. Beberapa metrik evaluasi yang umum digunakan antara lain akurasi, precision, recall, F1-score, dan confusion matrix. Dalam permasalahan klasifikasi, proses evaluasi umumnya didasarkan pada confusion matrix.
-Confusion matrix merupakan tabel ringkasan yang membandingkan prediksi model dengan nilai aktual data uji, menghasilkan empat komponen utama yaitu True Positive (TP), True Negative (TN), False Positive (FP), dan False Negative (FN). Keempat komponen tersebut menjadi dasar dalam perhitungan berbagai metrik evaluasi performa [11]. Beberapa metrik yang umum digunakan dalam evaluasi model klasifikasi adalah sebagai berikut:
-Accuracy
-Accuracy mengukur proporsi total prediksi yang benar terhadap keseluruhan jumlah data pengujian. Secara matematis dirumuskan sebagai:
-     ………………………… (2.1)
-Meskipun memberikan gambaran umum mengenai performa keseluruhan model, accuracy dapat menjadi kurang representatif pada dataset yang tidak seimbang (imbalanced dataset), karena model yang dominan memprediksi kelas mayoritas tetap dapat menghasilkan nilai accuracy yang tinggi [11].
-Precision 
-Precision mengukur seberapa tepat model ketika memprediksi kelas positif, yaitu berfokus pada kesalahan tipe False Positive.
-     ……………….………. (2.2)
-Semakin tinggi precision maka semakin sedikit data negatif yang salah diklasifikasikan sebagai positif. [11].
-Recall (Sensitivity / True Positive Rate)
-Recall mengukur kemampuan model dalam menangkap seluruh data positif, yaitu berfokus pada kesalahan tipe False Negative, semakin tinggi recall maka semakin sedikit data positif yang terlewat.
-     ………………………………… (2.3)
-Recall menjadi metrik yang penting ketika kesalahan false negative membawa konsekuensi yang signifikan [11].
-F1-score 
-F1-score merupakan rata-rata harmonik antara precision dan recall yang digunakan untuk menyeimbangkan kedua metrik tersebut secara proporsional:
-  …………………………. (2.4)
-Metrik ini sangat berguna pada kondisi ketidakseimbangan kelas karena mempertimbangkan keseimbangan antara ketepatan dan sensitivitas model secara simultan [11].
-Secara keseluruhan, penggunaan confusion matrix bersama metrik accuracy, precision, recall, dan F1-score memberikan evaluasi yang lebih komprehensif dan objektif terhadap kualitas performa model klasifikasi.
-2.7       Algoritma Random Forest
-Algoritma Random Forest merupakan salah satu algoritma machine learning yang termasuk ke dalam kategori supervised learning, karena proses pembelajarannya menggunakan data latih yang telah memiliki label kelas. Algoritma ini banyak digunakan pada permasalahan klasifikasi dan regresi karena mampu menangani data berdimensi tinggi serta memiliki performa yang stabil pada dataset yang kompleks [31][32]. Konsep Random Forest pertama kali diperkenalkan oleh Leo Breiman sebagai metode penggabungan sejumlah pohon keputusan untuk meningkatkan akurasi prediksi model [32].
-Random Forest bekerja dengan membangun banyak pohon keputusan (decision tree) secara terpisah menggunakan data dan fitur yang dipilih secara acak. Setiap pohon akan menghasilkan prediksi, kemudian hasil akhir ditentukan berdasarkan keputusan mayoritas (majority voting) untuk kasus klasifikasi, atau nilai rata-rata untuk kasus regresi. Pendekatan ini dikenal sebagai ensemble learning dan bertujuan untuk mengurangi risiko overfitting yang sering terjadi pada penggunaan pohon keputusan tunggal [32].
-Penggunaan banyak pohon keputusan dengan karakteristik yang berbeda membuat Random Forest memiliki tingkat generalisasi yang lebih baik. Breiman menjelaskan bahwa akurasi Random Forest dipengaruhi oleh kekuatan masing-masing pohon (tree strength) dan tingkat korelasi antar pohon [32]. Semakin rendah korelasi antar pohon dan semakin kuat prediksi tiap pohon, maka semakin baik kinerja model secara keseluruhan.
-Secara umum, Random Forest dibangun melalui dua mekanisme utama, yaitu bootstrap sampling dan random feature selection. Bootstrap sampling digunakan untuk menghasilkan subset data latih yang berbeda pada setiap pohon melalui pengambilan sampel secara acak dengan pengembalian. Selain itu, pada setiap node pohon, hanya sebagian fitur yang dipilih secara acak untuk menentukan pemisahan terbaik [31][32]. Kombinasi kedua mekanisme ini meningkatkan keragaman pohon dan mengurangi korelasi antar model, sehingga menghasilkan performa yang lebih stabil.
-Ilustrasi pembentukan sejumlah pohon keputusan dalam algoritma Random Forest ditunjukkan pada Gambar 2.1. Pada gambar tersebut terlihat bahwa setiap pohon dibangun dari subset data yang berbeda dan menghasilkan prediksi masing-masing, yang kemudian digabungkan untuk menghasilkan keputusan akhir [31].
-
-Gambar 2. 1 Mekanisme Kerja Algoritma Random Forest
-Berdasarkan Gambar 2.1, proses kerja Random Forest dapat dipahami secara bertahap. Tahap pertama dimulai dari dataset yang terdiri atas fitur dan label kelas. Dalam konteks penelitian ini, fitur merepresentasikan parameter kualitas cooling water, sedangkan label kelas menunjukkan status kelayakan air, yaitu Layak atau Tidak Layak.
-Selanjutnya dataset tersebut dibagi menjadi beberapa subset menggunakan bootstrap sampling. Pada gambar terlihat adanya beberapa “Bootstrap Sample” yang menunjukkan bahwa setiap pohon dilatih menggunakan data yang berbeda.
-Setiap subset data kemudian digunakan untuk membangun satu decision tree secara independen. Karena data dan fitur yang digunakan berbeda, struktur pohon yang dihasilkan juga berbeda. Hal ini terlihat pada gambar di mana Decision Tree 1 dan Decision Tree 2 memiliki percabangan yang tidak sama.
-Setiap decision tree menghasilkan prediksi kelas secara mandiri, misalnya kelas A atau kelas B. Tahap akhir adalah proses agregasi hasil melalui majority voting. Pada ilustrasi, sebagian besar pohon memberikan prediksi kelas A, sehingga sistem menetapkan hasil akhir sebagai Class A.
-Dengan demikian, Random Forest bekerja seperti sebuah sistem pengambilan keputusan kolektif, di mana keputusan akhir ditentukan berdasarkan suara mayoritas dari seluruh pohon keputusan. Dalam proses pembentukan pohon keputusan, kriteria pemisahan data pada Random Forest umumnya menggunakan Gini Index atau Entropy untuk menentukan pemisahan terbaik:
-Gini Index : Gini Index merupakan ukuran ketidakmurnian suatu node dan dirumuskan sebagai berikut:
- ………………………………………………(2.5)
-Keterangan:
-= node
-= jumlah kelas
-= proporsi data pada kelas ke-i dalam node tersebut
-Semakin kecil nilai Gini, semakin baik pemisahan yang dilakukan.
-
-Entropy : Entropy mengukur tingkat ketidakpastian dalam suatu node dan dirumuskan sebagai berikut:
- ……………………………………(2.6)
-Keterangan:
-= proporsi kelas ke-i
-Logaritma menggunakan basis 2
-Nilai entropy yang lebih kecil menunjukkan node yang lebih homogen.
-dimana pi​ merupakan proporsi data pada kelas ke-, dan adalah jumlah kelas dalam suatu node. Nilai Gini Index yang lebih kecil menunjukkan tingkat ketidakmurnian data yang lebih rendah, sehingga pemisahan data dianggap semakin baik.
-Selain menghasilkan prediksi, Random Forest juga mampu memberikan informasi mengenai tingkat kepentingan fitur (feature importance) [33]. Informasi ini menunjukkan kontribusi masing-masing fitur terhadap proses pengambilan keputusan model, sehingga dapat membantu dalam memahami faktor-faktor dominan yang memengaruhi hasil klasifikasi atau prediksi.
-Untuk kasus klasifikasi, prediksi akhir Random Forest diperoleh dengan mekanisme majority voting:
-
-……….………………………...(2.7)
-
-Keterangan:
-= prediksi akhir
-= prediksi dari pohon ke-t
-mode = kelas yang paling banyak muncul
-Adapun langkah-langkah algoritma Random Forest secara umum adalah sebagai berikut: 
-Menentukan jumlah pohon keputusan (number of trees) yang akan dibangun.
-Melakukan bootstrap sampling untuk membentuk data latih pada setiap pohon keputusan.
-Membangun pohon keputusan dengan memilih subset fitur secara acak pada setiap node.
-Menentukan pemisahan data terbaik menggunakan kriteria Gini Index atau Entropy.
-Mengulangi proses hingga seluruh pohon keputusan terbentuk.
-Menentukan hasil prediksi akhir menggunakan majority voting untuk klasifikasi atau nilai rata-rata untuk regresi. 
-
-
-
-
-
-
-
-
-
-BAB III 
-METODOLOGI PENELITIAN
-Alur Penelitian
-Alur penelitian digunakan untuk menggambarkan tahapan-tahapan yang dilakukan dalam penelitian ini secara umum, mulai dari tahap awal hingga tahap akhir penelitian. Diagram alur penelitian yang digunakan dalam penelitian ini ditunjukkan pada Gambar 3.1.
-
-Gambar 3. 1 Alur Penelitian
-Adapun penjelasan mengenai langkah-langkah alur penelitian adalah sebagai berikut:
-Identifikasi Masalah
-Penelitian diawali dengan proses identifikasi permasalahan terkait penentuan kelayakan cooling water pada sistem operasional di PT PLN Nusantara Power UP Arun. Permasalahan difokuskan pada bagaimana menentukan status kelayakan air pendingin berdasarkan parameter kualitas air yang tersedia secara lebih sistematis dan terotomatisasi.
-
-Studi Literatur
-Tahap studi literatur dilakukan untuk memperoleh landasan teori yang relevan, meliputi konsep kualitas cooling water, standar parameter berdasarkan manual Wärtsilä, konsep klasifikasi dalam machine learning, serta prinsip kerja algoritma Random Forest sebagai metode yang digunakan dalam penelitian.
-
-
-Perumusan Metodologi
-Pada tahap ini dirancang metode penelitian yang akan digunakan, meliputi teknik pelabelan data, strategi praproses, metode pembagian data, pembangunan model klasifikasi, serta teknik evaluasi performa model.
-
-Pengumpulan Data
-Data dikumpulkan dari laporan pemantauan kualitas cooling water periode tahun 2025. Data diperoleh dalam format spreadsheet yang memuat parameter pH, SC, Nitrite, Fe, Sulfate, dan Turbidity. Total data yang diperoleh sebanyak 217 entri data. Data tersebut merupakan hasil pengujian laboratorium yang dilakukan secara berkala berdasarkan unit engine dan running hour tertentu.
-
-Pelabelan Data (Rule-Based)
-Proses pelabelan dilakukan secara rule-based berdasarkan rentang standar minimum dan maksimum setiap parameter yang mengacu pada dokumen resmi Wärtsilä. Tahap ini bertujuan untuk menghasilkan dataset terlabel (Layak dan Tidak Layak) sebagai dasar penerapan metode supervised learning.
-
-Praproses Data
-Tahap praproses meliputi pemeriksaan kelengkapan data, penghapusan data duplikat apabila ditemukan, penanganan nilai hilang menggunakan metode yang sesuai, konversi tipe data numerik, serta pengecekan outlier untuk memastikan kualitas data sebelum dilakukan pemodelan.
-
-Pembagian Data (Stratified 70:30)
-Dataset dibagi menjadi data pelatihan (training data) dan data pengujian (testing data) dengan rasio 70:30 menggunakan teknik stratified sampling. Teknik ini digunakan untuk menjaga proporsi distribusi kelas pada kedua subset data sehingga evaluasi model menjadi lebih representatif.
-Pembangunan Model (Random Forest)
-Model klasifikasi dibangun menggunakan algoritma Random Forest berdasarkan data pelatihan. Algoritma ini membentuk sejumlah pohon keputusan (decision tree) dan menggabungkan hasil prediksi melalui mekanisme majority voting untuk menentukan kelas akhir.
-
-Evaluasi dan Analisis Hasil Model
-Kinerja model dievaluasi menggunakan confusion matrix serta metrik accuracy, precision, recall, dan F1-score untuk mengukur tingkat performa klasifikasi. Selanjutnya dilakukan analisis terhadap hasil model, termasuk identifikasi parameter kualitas air yang memiliki kontribusi dominan dalam proses klasifikasi berdasarkan nilai feature importance yang dihasilkan oleh algoritma Random Forest. Tahap ini bertujuan untuk menilai keandalan model sekaligus memberikan interpretasi terhadap faktor-faktor yang memengaruhi penentuan kelayakan cooling water.
-
-Penarikan Kesimpulan
-Tahap akhir penelitian berupa penarikan kesimpulan berdasarkan hasil analisis yang telah dilakukan serta penyusunan rekomendasi untuk pengembangan penelitian selanjutnya.
-Analisis Kebutuhan Sistem
-Analisis kebutuhan sistem merupakan tahapan untuk mengidentifikasi seluruh kebutuhan yang diperlukan dalam pembangunan sistem, baik kebutuhan fungsional, non-fungsional, maupun kebutuhan data. Tahap ini dilakukan agar sistem yang dikembangkan sesuai dengan kebutuhan pengguna serta tujuan penelitian.
-
-
-Analisis Kebutuhan Fungsional
-Analisis kebutuhan fungsional bertujuan untuk menjelaskan aktivitas apa saja yang terdapat dalam sistem dan interaksi yang digunakan oleh setiap pengguna. Analisis kebutuhan fungsional pada sistem ini meliputi:
-Kebutuhan Fungsional Admin
-Admin dapat melakukan login untuk mengakses sistem. 
-Admin dapat mengelola akun pengguna (Operator), meliputi menambah, mengubah, menghapus, dan melakukan reset password akun melalui menu kelola user.
-Admin dapat melihat seluruh data hasil klasifikasi kelayakan cooling water yang tersimpan dalam sistem. 
-Admin dapat mengakses dan mencetak laporan (report) laporan hasil klasifikasi berdasarkan periode waktu atau unit mesin untuk keperluan dokumentasi operasional. 
-Admin dapat melihat informasi evaluasi performa model klasifikasi, meliputi accuracy, precision, recall, F1-score, confusion matrix, dan feature importance.
-
-Kebutuhan Fungsional Operator (User)
-Operator dapat melakukan login untuk mengakses sistem. 
-Operator dapat menginputkan data parameter kualitas cooling water melalui form pada halaman web, meliputi pH, Specific Conductivity (SC), Nitrite, Fe (Besi), Sulfate, dan Turbidity. 
-Operator dapat menjalankan proses klasifikasi kelayakan cooling water menggunakan model Random Forest yang tersedia pada sistem. 
-Operator dapat melihat hasil klasifikasi berupa status "Layak" atau "Tidak Layak" setelah proses klasifikasi selesai dijalankan. 
-Operator dapat menyimpan hasil klasifikasi ke dalam sistem sebagai data yang akan digunakan dalam pembuatan laporan oleh Admin.
-Analisis Kebutuhan Non-Fungsional
-Kebutuhan non-fungsional mencakup kebutuhan perangkat keras dan perangkat lunak yang diperlukan dalam pembangunan sistem berbasis web.
-
-Kebutuhan Kualitas Sistem
-Keamanan (Security)
-Sistem harus mampu menjaga keamanan data pengguna melalui mekanisme autentikasi login dan pembatasan hak akses.
-Kinerja (Performance)
-Sistem harus mampu melakukan proses klasifikasi dengan waktu respon yang cepat.
-Keandalan (Reliability)
-Sistem harus dapat berjalan secara stabil tanpa sering mengalami error.
-Kemudahan Penggunaan (Usability)
-Sistem dirancang agar mudah digunakan oleh user.
-Kompatibilitas
-Sistem dapat berjalan pada berbagai browser seperti Google Chrome dan Microsoft Edge dan Mozilla Firefox.
-Perangkat Keras (Hardware)
-Berikut adalah spesifikasi perangkat keras yang digunakan dapat dilihat pada Tabel 3.1 berikut:
-Tabel 3. 1 Spesifikasi Perangkat Keras (Hardware)
-
---- [TABLE START] ---
-No | Komponen | Spesifikasi | Keterangan
-1 | Laptop | ASUS VivoBook Go E1404FA | Alat yang digunakan dalam pengembangan sistem.
-2 | Processor | AMD Ryzen 5 / Intel Core i5 setara | Menjalankan proses pengembangan sistem dan klasifikasi data.
-3 | RAM | 8 GB | Mendukung multitasking saat menjalankan Laragon, VS Code, Python, dan browser
-4 | Storage | 512 GB SSD | Menyimpan source code, dataset, database, dan file laporan.
-5 | Koneksi Jaringan | WiFi / LAN / Internet | Digunakan untuk akses referensi, library, dan pengujian sistem berbasis web.
---- [TABLE END] ---
-
-Perangkat Lunak (Software)
-Berikut adalah spesifikasi perangkat keras yang digunakan dapat dilihat pada Tabel 3.2 berikut:
-Tabel 3. 2 Spesifikasi Perangkat Lunak (Software)
-
---- [TABLE START] ---
-No | Komponen | Spesifikasi | Keterangan
-1 | Sistem Operasi | Windows 11 | Sistem operasi utama yang digunakan dalam pengembangan sistem.
-2 | Visual Studio Code | Versi 1.117.0 | Editor kode program untuk pengembangan website dan machine learning.
-3 | Laragon | Versi 5.0.0 | Server lokal untuk menjalankan PHP, Apache, dan database.
-4 | Python | Versi 3.10 | Bahasa pemrograman untuk implementasi model Random Forest.
-5 | Flask | Versi terbaru | Framework backend/API untuk menghubungkan model machine learning dengan website.
-6 | MySQL / MariaDB | Versi 8.0.30 | Database untuk menyimpan data pengguna dan hasil klasifikasi.
-7 | Google Chrome / Microsoft Edge | Versi 147.0.7727.117 | Browser untuk pengujian dan penggunaan sistem.
-8 | Draw.io / Figma | Online | Tools perancangan diagram sistem dan desain antarmuka.
---- [TABLE END] ---
-
-
-Perancangan Sistem
-Perancangan sistem pada penelitian ini menggunakan Unified Modeling Language (UML) untuk memodelkan alur proses dan interaksi antara pengguna dan sistem melalui Use Case Diagram dan Activity Diagram. Untuk memberikan gambaran menyeluruh mengenai struktur dan hubungan antar komponen, disertakan pula arsitektur sistem sebagai representasi konseptual dari cara kerja sistem secara keseluruhan.
-Arsitektur Sistem
-Arsitektur sistem pada penelitian ini menggambarkan keseluruhan alur kerja sistem dalam mengolah data hingga menghasilkan keputusan klasifikasi kelayakan cooling water. Secara umum, sistem terdiri atas tiga komponen utama yang saling terintegrasi, yaitu input, proses, dan output, sebagaimana ditunjukkan pada Gambar 3.2.
-
-Gambar 3. 2 Arsitektur Sistem
-Input
-Proses dimulai dari dataset parameter cooling water yang berasal dari hasil pengujian laboratorium. Dataset ini memuat enam variabel utama, yaitu pH, specific conductance (SC), nitrite, Fe, sulfate, dan turbidity, yang digunakan sebagai fitur dalam proses klasifikasi untuk menentukan status kelayakan cooling water.
-Proses
-Tahap proses merupakan inti dari sistem yang mencakup serangkaian langkah terstruktur dalam membangun model klasifikasi kelayakan cooling water berbasis machine learning, yang terdiri dari tahapan sebagai berikut:
-Langkah 1 : Rules-Based Labeling. 
-Data awal yang digunakan belum memiliki label kelas, sehingga dilakukan pelabelan secara otomatis menggunakan pendekatan berbasis aturan. Aturan yang digunakan mengacu pada standar operasional yang menetapkan batas minimum dan maksimum setiap parameter. Data diklasifikasikan sebagai "Layak" apabila seluruh parameter berada dalam rentang yang ditentukan, dan "Tidak Layak" apabila terdapat parameter yang berada di luar batas. Hasil dari tahap ini berupa dataset berlabel yang digunakan sebagai dasar pembelajaran model.
-
-Langkah 2 : Preprocessing Data.
-Dataset berlabel selanjutnya diproses untuk meningkatkan kualitas data. Tahapan ini meliputi penanganan missing value, penghapusan data duplikat, serta penyesuaian tipe data ke dalam format numerik. Proses ini bertujuan memastikan data dalam kondisi bersih dan siap digunakan dalam pemodelan.
-
-Langkah 3 : Stratified Train-Test Split (70:30).
-Dataset kemudian dibagi menjadi 70% data latih dan 30% data uji menggunakan teknik stratified sampling untuk menjaga keseimbangan distribusi kelas. Data uji tidak digunakan dalam proses pelatihan dan hanya digunakan pada tahap evaluasi akhir.
-
-Langkah 4 : Stratified 5-Fold Cross Validation.
-Pada tahap ini, data latih dibagi menjadi lima bagian. Dalam setiap iterasi, empat bagian digunakan untuk pelatihan dan satu bagian untuk validasi. Proses ini dilakukan sebanyak lima kali untuk memperoleh estimasi performa model yang lebih stabil.
-
-Langkah 5 : Pelatihan Model Random Forest.
-Model dilatih menggunakan algoritma Random Forest pada setiap iterasi cross validation. Algoritma ini membangun sejumlah pohon keputusan secara paralel dan menggabungkan hasilnya untuk meningkatkan akurasi dan kestabilan model.
-
-Langkah 6 : Evaluasi Internal Model
-Setiap hasil pelatihan dievaluasi menggunakan metrik accuracy, precision, recall, dan F1-score. Nilai dari seluruh iterasi kemudian dirata-ratakan untuk menggambarkan performa model selama proses pelatihan.
-
-Langkah 7: Pelatihan Model Final 
-Setelah diperoleh performa yang memadai, model dilatih kembali menggunakan seluruh data latih untuk menghasilkan model final yang lebih optimal.
-
-Langkah 8: Evaluasi Model pada Data Uji 
-Model final diuji menggunakan data uji untuk memperoleh performa akhir. Evaluasi dilakukan menggunakan confusion matrix serta metrik accuracy, precision, recall, dan F1-score.
-
-Langkah 9: Analisis Model 
-Model dianalisis menggunakan feature importance untuk mengetahui kontribusi masing-masing parameter terhadap hasil klasifikasi.
-
-Langkah 10: Implementasi Model 
-Model final disimpan dan diintegrasikan ke dalam sistem sehingga dapat digunakan untuk melakukan klasifikasi terhadap data baru.
-Output
-Sistem menghasilkan keluaran berupa hasil klasifikasi kelayakan cooling water berdasarkan data yang diproses oleh model. Hasil klasifikasi ditampilkan dalam dua kategori, yaitu "Layak" dan "Tidak Layak". Selain itu, sistem juga menghasilkan informasi performa model yang ditunjukkan melalui nilai accuracy, precision, recall, dan F1-score, serta confusion matrix sebagai representasi evaluasi model. Sistem juga menyajikan hasil analisis berupa feature importance yang menunjukkan tingkat pengaruh masing-masing parameter terhadap keputusan klasifikasi.
-Use Case Diagram
-Rancangan sistem dalam penelitian ini melibatkan dua aktor utama, yaitu Admin dan Operator. Representasi interaksi antara aktor dengan sistem digambarkan melalui Use Case Diagram pada gambar 3.3
-
-Gambar 3. 3 Use Case Diagram
-Gambar 3.3 menampilkan Use Case Diagram dari sistem klasifikasi kualitas cooling water yang akan dibangun pada penelitian ini. Diagram tersebut menggambarkan hubungan antara aktor dengan fungsi-fungsi yang tersedia dalam sistem. Adapun penjelasan mengenai aktor dan use case pada diagram dijabarkan sebagai berikut.
-3.3.2.1Deskripsi Aktor
-Sistem memiliki satu aktor utama, yaitu Admin, dengan hak akses dan tanggung jawab seperti pada tabel 3.3 berikut:
-Tabel 3. 3 Deskripsi Aktor
-
---- [TABLE START] ---
-No | Aktor | Deskripsi
-1 | Admin | Aktor memiliki akses penuh terhadap seluruh fitur sistem, termasuk mengelola data, menambahkan user, menjalankan klasifikasi, menyimpan hasil, dan menghasilkan laporan.
-2 | User (Operator) | Aktor yang bertugas melakukan input data kualitas cooling water, menjalankan proses klasifikasi, melihat hasil klasifikasi, serta menyimpan hasil klasifikasi ke dalam sistem.
---- [TABLE END] ---
-
-3.3.2.2Deskripsi Use Case
-Deskripsi use case yang menggambarkan interaksi antara aktor Admin dan User dengan sistem klasifikasi kualitas cooling water dalam menjalankan setiap fungsi sistem dapat dilihat pada Tabel 3.4.
-Tabel 3. 4 Deskripsi Use Case
-
---- [TABLE START] ---
-No | Use Case | Deskripsi
-1 | Login | Proses yang dilakukan oleh Admin dan User untuk mengakses sistem sesuai dengan hak akses masing-masing.
-2 | Input Data Kualitas Cooling Water | User melakukan input data ke dalam sistem untuk keperluan klasifikasi. Data yang diinput akan diproses oleh sistem sebagai dasar dalam penentuan hasil klasifikasi.
-3 | Menjalankan Klasifikasi | User menjalankan proses klasifikasi, dimana sistem mengolah data menggunakan model klasifikasi untuk menghasilkan keputusan kelayakan.
-4 | Melihat Hasil Klasifikasi | User dapat melihat hasil klasifikasi yang telah dihasilkan oleh sistem.
-5 | Menyimpan Hasil Klasifikasi | User menyimpan hasil klasifikasi ke dalam sistem sebagai data keluaran yang terdokumentasi.
-6 | Generate (mencetak) Laporan | Admin menghasilkan laporan berdasarkan hasil klasifikasi yang telah disimpan. Laporan dapat ditampilkan oleh sistem dan dicetak untuk keperluan dokumentasi.
-7 | Manajemen User | Manajemen User | Admin mengelola data user, seperti menambah, mengubah, dan menghapus akun user dalam sistem. | Admin mengelola data user, seperti menambah, mengubah, dan menghapus akun user dalam sistem.
-Manajemen User
-Admin mengelola data user, seperti menambah, mengubah, dan menghapus akun user dalam sistem.
-8 | Logout | Proses yang dilakukan oleh Admin dan User untuk keluar dari sistem, sehingga sesi penggunaan berakhir dan akses terhadap sistem ditutup.
---- [TABLE END] ---
-
-Activity Diagram
-Activity Diagram merupakan bagian dari Unified Modeling Language (UML) yang digunakan untuk menggambarkan alur aktivitas dalam suatu sistem secara logis dan sistematis. Pada penelitian ini, activity diagram digunakan untuk menjelaskan alur kerja sistem klasifikasi kualitas cooling water menggunakan algoritma Random Forest, mulai dari proses input data hingga penyajian hasil klasifikasi kepada user.
-Activity Diagram Login 
-Untuk menggambarkan proses masuk pengguna ke dalam sistem, maka dirancang activity diagram login seperti yang ditunjukkan pada Gambar 3.4 berikut.
-
-Gambar 3. 4 Activity Diagram Login
-Pada Gambar 3.4 ditunjukkan alur proses login pengguna ke dalam sistem. Pengguna terlebih dahulu memasukkan username dan password pada halaman login. Selanjutnya sistem melakukan verifikasi data dengan informasi akun yang tersimpan pada basis data. Jika data sesuai, maka pengguna akan diarahkan ke halaman utama sesuai hak aksesnya. Namun, apabila data tidak sesuai, sistem akan menampilkan pesan kesalahan dan meminta pengguna melakukan login kembali.
-Activity Diagram Input Data dan Klasifikasi
-Berikut diagram yang menggambarkan alur proses pengisian data kualitas cooling water yang dilakukan oleh user dan sistem.
-
-Gambar 3. 5 Activity Diagram Input Data dan Klasifikasi
-Gambar 3.5 menunjukkan alur proses input data kualitas cooling water yang dimulai ketika user memilih menu input data pada sistem. Selanjutnya, sistem menampilkan form input yang berisi parameter kualitas cooling water, yaitu pH, Specific Conductivity (SC), Nitrite, Fe (Besi), Sulfate, dan Turbidity. User kemudian mengisi nilai setiap parameter sesuai hasil pengukuran yang diperoleh, lalu menekan tombol submit untuk mengirimkan data ke sistem.
-Setelah data diterima, sistem melakukan proses validasi untuk memastikan bahwa seluruh data telah terisi lengkap dan sesuai format yang ditentukan. Apabila data tidak valid, sistem akan menampilkan pesan kesalahan dan user diminta untuk memperbaiki data yang diinputkan. Namun, apabila data valid, sistem akan menyimpan data ke dalam basis data, kemudian meneruskan data tersebut ke proses klasifikasi menggunakan algoritma Random Forest.
-
-
-Activity Diagram Proses Klasifikasi Menggunakan Random Forest
-Activity Diagram proses klasifikasi menggunakan Random Forest ditunjukkan pada gambar 3.6. Diagram ini menggambarkan alur kerja sistem dalam mengolah data input hingga menghasilkan keputusan klasifikasi kelayakan cooling water. 
-
-Gambar 3. 6 Activity Diagram Proses Klasifikasi Random Forest
-Proses dimulai ketika sistem menerima data input parameter yang telah dikirimkan dari proses sebelumnya. Data yang diproses merupakan data yang telah melalui tahap validasi pada proses input. Selanjutnya, sistem memuat model Random Forest yang tersimpan dalam basis data.
-
-Setelah model berhasil dimuat, sistem menjalankan proses prediksi pada setiap decision tree yang terdapat dalam model tersebut. Hasil prediksi dari masing-masing tree kemudian digabungkan menggunakan metode majority voting untuk menentukan hasil klasifikasi akhir.
-Setelah hasil klasifikasi diperoleh, sistem menyimpan hasil tersebut ke dalam basis data. Tahap terakhir, sistem menampilkan hasil klasifikasi kepada pengguna, sehingga proses klasifikasi dinyatakan selesai.
-Activity Diagram Generate Laporan
-Sistem menyediakan fitur pembuatan laporan guna mendukung kebutuhan dokumentasi serta evaluasi hasil klasifikasi cooling water. Untuk menggambarkan proses tersebut, activity diagram generate laporan ditunjukkan pada Gambar 3.7 berikut.
-
-Gambar 3. 7 Activity Diagram Generate Laporan
-Gambar 3.7 menunjukkan alur proses generate laporan yang dimulai ketika admin memilih menu laporan pada sistem. Selanjutnya, admin menentukan filter laporan berdasarkan periode waktu atau unit mesin. Setelah tombol generate diklik, sistem mengambil data hasil klasifikasi dari basis data dan menyusunnya ke dalam format laporan yang sesuai. Setelah proses selesai, sistem menampilkan laporan kepada admin sehingga laporan dapat dicetak atau diunduh sesuai kebutuhan.
-Activity Diagram Manajemen User
-Sistem juga menyediakan fitur manajemen user oleh admin untuk mengelola data akun pengguna yang memiliki hak akses ke dalam sistem. Untuk menggambarkan proses tersebut, activity diagram manajemen user ditunjukkan pada Gambar 3.8 berikut.
-
-Gambar 3. 8 Activity Diagram Manajemen User
-Gambar 3.8 menunjukkan alur proses manajemen user yang dimulai ketika admin memilih menu manajemen user pada sistem. Selanjutnya, sistem menampilkan daftar akun pengguna yang terdaftar. Admin kemudian dapat memilih aksi yang akan dilakukan, seperti menambah user, mengedit data user, menghapus user, atau melakukan reset password. Apabila admin memilih tambah user, sistem akan menampilkan form penambahan user dan menyimpan data yang diinputkan ke dalam basis data. Jika admin memilih edit user, sistem akan menampilkan form edit dan memperbarui data sesuai perubahan yang dilakukan. Untuk aksi hapus user, sistem akan menampilkan konfirmasi terlebih dahulu, kemudian menghapus data user dari basis data. Sedangkan pada proses reset password, sistem mengatur ulang password pengguna menjadi password default dan menyimpan perubahan tersebut. Setelah proses selesai, sistem menampilkan notifikasi sebagai informasi bahwa aksi yang dilakukan telah berhasil, sehingga proses manajemen user dinyatakan selesai.
-Activity Diagram Logout
-Fitur logout disediakan oleh sistem untuk mengakhiri sesi penggunaan serta menjaga keamanan akses pengguna terhadap sistem. Gambaran alur proses tersebut ditunjukkan pada Gambar 3.9 berikut.
-
-Gambar 3. 9 Activity Diagram Logout
-Pada Gambar 3.9 proses logout diawali ketika pengguna menekan tombol logout pada sistem. Selanjutnya, sistem menerima permintaan logout dan menghapus sesi pengguna yang sedang aktif. Setelah proses logout berhasil dilakukan, sistem akan mengarahkan pengguna kembali ke halaman login. Proses berakhir saat halaman login ditampilkan sebagai tanda bahwa pengguna telah berhasil keluar dari sistem.
-Perancangan Database
-Pada sistem klasifikasi kelayakan cooling water berbasis web ini, terdapat beberapa tabel basis data yang dirancang untuk menampung dan mengelola seluruh data yang dibutuhkan dalam proses klasifikasi menggunakan algoritma Random Forest. Masing-masing tabel memiliki fungsi tersendiri yang saling terintegrasi satu sama lain. Penjelasan mengenai setiap tabel tersebut diuraikan sebagai berikut.
-Tabel tb_user
-Tabel tb_user digunakan untuk menyimpan data akun pengguna yang memiliki akses terhadap sistem. Di dalamnya tersimpan informasi seperti nama, username, password, serta tingkat hak akses (level) yang menentukan peran setiap pengguna di dalam sistem. Tabel ini menjadi acuan pada saat proses autentikasi login maupun pengelolaan akun pengguna melalui halaman Kelola User. Struktur dari tabel tb_user dapat dilihat pada Tabel 3.5.
-
---- [TABLE START] ---
-Name | Type | Key
-id | Int (10) | Primary Key
-nama | Varchar (100) | 
-username | Varchar (100) | 
-password | Varchar (50) | 
-level | Int (10) | 
---- [TABLE END] ---
-
-
-Tabel Input Data
-Tabel tb_input berfungsi sebagai tempat penyimpanan data parameter kualitas cooling water yang dimasukkan melalui halaman Input Data. Parameter yang tersimpan mencakup nilai pH, specific conductance (sc), kadar nitrit, kadar besi (fe), kadar sulfat, dan kekeruhan (turbidity). Data pada tabel ini nantinya diproses oleh model Random Forest untuk menghasilkan hasil klasifikasi. Struktur dari tabel tb_input dapat dilihat pada Tabel 3.6.
-
---- [TABLE START] ---
-Name | Type | Key
-id | Int (11) | Primary Key
-id_user | Int (10) | Foreign Key
-tanggal_waktu | Datetime | 
-unit | Varchar (50) | 
-engine | Varchar (50) | 
-rh | Float | 
-ph | Float | 
-sc | Float | 
-nitrite | Float | 
-fe | Float | 
-sulfate | Float | 
-turbidity | Float | 
---- [TABLE END] ---
-
-
-Tabel Hasil Klasifikasi
-Tabel tb_hasil dirancang untuk menyimpan keluaran dari proses klasifikasi yang telah dijalankan oleh sistem. Setiap kali sistem melakukan klasifikasi terhadap data input, hasilnya akan dicatat secara otomatis ke dalam tabel ini. Data tersebut selanjutnya ditampilkan kembali pada halaman Hasil Klasifikasi serta dimanfaatkan sebagai data historis pada halaman Report. Struktur dari tabel tb_hasil dapat dilihat pada Tabel 3.7.
-
---- [TABLE START] ---
-Name | Type | Key
-id | Int (11) | Primary Key
-id_input | Int (11) | Foreign Key
-id_user | Int (10) | Foreign Key
-tanggal | Datetime | 
-hasil | Varchar (50) | 
-keterangan | Text | 
---- [TABLE END] ---
-
-
-Perancangan Antarmuka Pengguna (User Interface)
-Perancangan antarmuka pengguna pada sistem ini bertujuan untuk menyediakan tampilan yang memudahkan pengguna dalam mengoperasikan sistem klasifikasi yang dikembangkan. Antarmuka yang dirancang diharapkan mampu mendukung pengguna dalam melakukan proses pengolahan dan analisis data kualitas cooling water secara efektif. Adapun bentuk antarmuka pengguna yang diterapkan dalam sistem klasifikasi kelayakan cooling water menggunakan algoritma Random Forest adalah sebagai berikut.
-Perancangan Halaman Login
-Halaman login merupakan halaman awal yang digunakan pengguna untuk masuk ke dalam sistem, seperti yang ditunjukkan pada Gambar 3.10. Pada halaman ini, pengguna diminta untuk memasukkan username dan password sebagai proses verifikasi. Tersedia tombol Login yang berfungsi untuk memproses data yang dimasukkan. Apabila data sesuai, pengguna akan diarahkan ke halaman dashboard, sedangkan jika data tidak sesuai, sistem akan menampilkan pesan kesalahan. Halaman ini bertujuan untuk menjaga keamanan data serta memastikan bahwa hanya pengguna yang terdaftar yang dapat mengakses sistem.
-
-Gambar 3. 10 UI/UX Halaman Login
-Perancangan Halaman Dashboard
-Setelah berhasil login, pengguna akan diarahkan ke halaman dashboard sebagai tampilan utama sistem. Tampilan halaman dashboard ditunjukkan pada Gambar 3.11. Pada halaman ini ditampilkan ringkasan data dalam bentuk empat card, yaitu Total Klasifikasi, Status Layak, Status Tidak Layak, dan jumlah pengguna terdaftar. Selain itu, tersedia dua visualisasi data berupa grafik, yaitu grafik Status Cooling Water per Bulan yang menampilkan tren kondisi air pendingin, serta diagram persentase status kelayakan yang menunjukkan perbandingan hasil klasifikasi. Informasi tambahan mengenai sistem juga disajikan pada bagian “Tentang”.
-
-Gambar 3. 11 UI/UX Halaman Dashboard
-Perancangan Halaman Input Data
-Proses penginputan data dilakukan melalui halaman input data yang ditunjukkan pada Gambar 3.12. Pada halaman ini tersedia form yang digunakan untuk memasukkan parameter kualitas cooling water sebelum dilakukan klasifikasi. Form terdiri dari dua bagian utama, yaitu data identitas dan parameter teknis. Data identitas meliputi Tanggal, Unit, Engine, dan Running Hour, sedangkan parameter teknis terdiri dari pH, Specific Conductivity (SC), Nitrite, Fe (Besi), Sulfate, dan Turbidity. Setelah seluruh data diisi, pengguna dapat menekan tombol klasifikasi untuk memproses data, atau tombol batal untuk membatalkan pengisian.
-
-Gambar 3. 12 UI/UX Halaman Input Data
-Perancangan Halaman Hasil Klasifikasi
-Hasil dari proses klasifikasi ditampilkan pada halaman hasil klasifikasi yang ditunjukkan pada Gambar 3.13. Pada bagian atas terdapat tombol “Kembali ke Input” yang berfungsi untuk memudahkan pengguna kembali ke halaman sebelumnya. Halaman ini menampilkan status kelayakan berupa “Layak” atau “Tidak Layak”, serta bagian analisis parameter yang menjelaskan kondisi masing-masing parameter berdasarkan data yang telah diinputkan.
-
-Gambar 3. 13 UI/UX Halaman Hasil Klasifikasi
-Perancangan Halaman Report (Historical Data)
-Riwayat hasil klasifikasi dapat diakses melalui halaman laporan yang ditunjukkan pada Gambar 3.14. Pada halaman ini disediakan fitur Export Report untuk mengunduh laporan, serta fitur pencarian dan filter berdasarkan tanggal guna mempermudah pencarian data. Seluruh data ditampilkan dalam bentuk tabel yang memuat informasi lengkap dari setiap proses klasifikasi yang telah dilakukan.
-
-
-Gambar 3. 14 UI/UX Halaman Report
-Perancangan Halaman Kelola User
-Pengelolaan akun pengguna dilakukan melalui halaman kelola user yang ditunjukkan pada Gambar 3.15. Halaman ini hanya dapat diakses oleh Admin dan digunakan untuk mengatur data pengguna sistem. Data pengguna ditampilkan dalam bentuk tabel yang berisi kolom No, Nama, Username, Level, dan Aksi. Selain itu, tersedia tombol Tambah User untuk menambahkan akun baru, serta fitur pada kolom aksi untuk melakukan edit, hapus, dan pengelolaan data pengguna lainnya.
-
-Gambar 3. 15 UI/UX Halaman Manejeman User
-Data dan Pengumpulan Data
-Data diperoleh dari hasil pemantauan kualitas cooling water pada 19 unit mesin spesifikasi Wärtsilä 20V34SG dengan kapasitas 9,73 MW per unit yang beroperasi di PT PLN Nusantara Power UP Arun. Standar kualitas cooling water yang digunakan sebagai acuan kelayakan mengacu pada dokumen resmi pabrikan Wärtsilä. Data yang digunakan merupakan data dalam periode bla tahun terakhir. Data ini bersumber dari catatan operasional serta hasil pengujian laboratorium yang dilakukan secara rutin berdasarkan unit engine dan running hour tertentu.
-Parameter kualitas cooling water yang dianalisis meliputi pH, konduktivitas (specific conductivity), kadar nitrit (nitrite), kandungan besi (Fe), sulfat (sulfate), dan tingkat kekeruhan (turbidity). Batas nilai minimum dan maksimum setiap parameter mengacu pada dokumen resmi yang diterbitkan oleh Wärtsilä Corporation berjudul Raw Water Quality and Validated Cooling Water Additives and Treatment Systems. Dokumen tersebut dijadikan acuan utama dalam menentukan kelayakan cooling water sesuai dengan spesifikasi operasional mesin.
-Data yang telah terkumpul kemudian melalui tahap preprocessing, yaitu pemeriksaan kelengkapan data, penanganan nilai hilang (missing value), serta penyesuaian format agar siap digunakan dalam proses analisis. Dataset yang telah bersih selanjutnya digunakan untuk membangun dan menguji model klasifikasi menggunakan algoritma Random Forest. Sebagian contoh data penelitian disajikan pada Tabel 3.5.
-Tabel 3. 5 Contoh Data Paramater Cooling Water
-
---- [TABLE START] ---
-pH | SC | Nitrite | Fe | Sulfate | Turbidity | Target
-9.48 | 1852 | 1058 | 0.87 | 32 | 28 | Layak
-9.37 | 1843 | 1188 | 1.05 | 36 | 29 | Tidak Layak
-10.58 | 4845 | 1073 | 0.89 | 42 | 27 | Layak
-8.86 | 4273 | 1523 | 0.68 | 25 | 24 | Tidak Layak
---- [TABLE END] ---
-
-Variabel target dalam penelitian ini adalah status kelayakan cooling water, yaitu Layak dan Tidak Layak. Penentuan label ini dilakukan dengan cara membandingkan nilai setiap parameter terhadap standar kualitas yang telah ditetapkan, sebagaimana ditunjukkan pada Tabel 3.6.
-Tabel 3. 6 Standar Nilai Parameter Kualitas Cooling Water
-
---- [TABLE START] ---
-Parameter | Satuan | Standar Nilai
- |  | MIN | MAX
-pH | - | 8 | 11
-SC | µS/cm | 0 | 6000
-Nitrite | mg/L | 500 | 1500
-Fe | mg/L | 0 | 1
-Sulfate | mg/L | 0 | 100
-Turbidity | NTU | 0 | 30
---- [TABLE END] ---
-
-Data dikategorikan sebagai Layak apabila seluruh parameter memenuhi rentang standar yang telah ditentukan. Sebaliknya, apabila terdapat satu atau lebih parameter yang nilainya berada di luar rentang standar tersebut, maka data dikategorikan sebagai Tidak Layak.
-Rancangan Metode dan Variabel Penelitian
-Perancangan Penerapan Algoritma Random Forest
-Berikut merupakan perancangan penerapan algoritma Random Forest pada sistem klasifikasi kelayakan cooling water. Diagram alur proses ditampilkan pada Gambar 3.16.
-
-Gambar 3. 16 Rancangan Penerapan Algoritma Random Forest
-Gambar 3.16 menunjukkan tahapan proses penerapan algoritma Random Forest yang dilakukan secara sistematis mulai dari pengolahan data hingga implementasi model. Adapun tahapan-tahapan tersebut dijelaskan sebagai berikut:
-Input Data (Dataset Mentah)
-Pada tahap ini digunakan dataset mentah yang diperoleh dari hasil pengumpulan data kualitas cooling water. Data tersebut mencakup parameter pH, Specific Conductivity (SC), Nitrite, Fe (Besi), Sulfate, dan Turbidity sebagai variabel yang digunakan dalam proses klasifikasi.
-Pelabelan Data (Rules-Based)
-Data yang telah terkumpul kemudian diberi label menggunakan metode rule-based labeling. Proses pelabelan dilakukan dengan mengacu pada standar baku mutu cooling water yang telah ditetapkan. Setiap data dikategorikan ke dalam salah satu dari dua kelas, yaitu "Layak" atau "Tidak Layak", berdasarkan batas ambang nilai yang telah ditentukan untuk masing-masing parameter.
-Preprocessing Data
-Setelah data memiliki label, dilakukan tahap preprocessing untuk memastikan data yang akan digunakan dalam pemodelan sudah bersih dan siap diproses. Tahap ini mencakup pengecekan nilai yang hilang (missing value), validasi format data, serta pembersihan data apabila ditemukan ketidaksesuaian.
-Pembagian Data (Stratified Train-Test Split 70:30)
-Dataset yang telah diproses kemudian dibagi menjadi data training sebesar 70% dan data testing sebesar 30% menggunakan metode stratified split. Pembagian ini bertujuan untuk menjaga proporsi kelas tetap seimbang pada kedua subset data. Dan Hasil pembagian data menghasilkan dua subset, yaitu data training yang digunakan dalam proses pelatihan model, serta data testing yang digunakan untuk evaluasi akhir model.
-Cross Validation (5-Fold)
-Pada data training diterapkan metode 5-fold cross validation, di mana data dibagi menjadi lima bagian (fold). Proses pelatihan dan validasi dilakukan secara bergantian untuk memperoleh evaluasi model yang lebih stabil. 
-Pelatihan Model Random Forest
-Model Random Forest dilatih menggunakan data training pada setiap fold. Proses ini bertujuan untuk membangun model yang mampu mengenali pola dari data secara optimal.
-
-Evaluasi Model (per Fold)
-Setiap model yang dihasilkan pada masing-masing fold kemudian dievaluasi untuk mengukur performa model dalam melakukan klasifikasi.
-Rata-Rata Evaluasi
-Hasil evaluasi dari masing-masing fold kemudian dirata-ratakan untuk mendapatkan gambaran performa model yang lebih stabil dan dapat diandalkan.
-Pelatihan Model Final (Training Set)
-Setelah diperoleh rata-rata evaluasi dari cross validation, model dilatih kembali menggunakan seluruh data latih untuk menghasilkan model final.
-Evaluasi Model Pada Data Testing
-Model final kemudian diuji menggunakan data testing yang sebelumnya tidak digunakan dalam proses pelatihan. Evaluasi dilakukan menggunakan confusion matrix serta metrik performa seperti accuracy, precision, recall, dan F1-score ntuk mengukur seberapa baik model dalam mengklasifikasikan kualitas cooling water.
-Implementasi Model
-Model yang telah melalui tahap evaluasi selanjutnya diimplementasikan untuk melakukan klasifikasi terhadap data cooling water baru guna menentukan status kelayakan.
-Mekanisme Kerja Algoritma Random Forest
-Berikut merupakan flowchart yang menjelaskan mekanisme kerja algoritma Random Forest mulai dari proses pembentukan model hingga tahap penggunaan model pada data testing. Diagram tersebut ditampilkan pada Gambar 3.17, sedangkan ilustrasi skema proses pelatihan Random Forest pada penelitian ini ditampilkan pada Gambar 3.18.
-
-Gambar 3. 17 Mekanisme Kerja Algoritma Random Forest
-Berdasarkan Gambar 3.17, tahapan kerja algoritma Random Forest dijelaskan sebagai berikut:
-Data Training
-Proses dimulai dengan memasukkan data latih yang telah melalui tahap pelabelan, preprocessing, dan pembagian data. Data latih ini merupakan 70% dari keseluruhan data yang digunakan sebagai dasar dalam pembentukan model Random Forest. Proses diawali dengan penggunaan data training yang telah diperoleh dari tahap sebelumnya sebagai dasar dalam pembentukan model Random Forest.
-
-
-Menentukan Hyperparameter Model
-Pada tahap ini dilakukan penentuan hyperparameter yang digunakan dalam pembangunan model, seperti jumlah pohon (n_estimators), class_weight, dan random_state. Hyperparameter ini memengaruhi kompleksitas serta performa model.
-Bootstrap Sampling
-Algoritma Random Forest melakukan pengambilan sampel secara acak dengan pengembalian (bootstrap sampling) dari data training. Setiap pohon keputusan dibangun menggunakan sampel data yang berbeda-beda, sehingga menghasilkan variasi antar pohon.
-Pembentukan Decision Tree
-Setiap sampel data yang telah diambil kemudian digunakan untuk membangun satu decision tree. Pada setiap node, algoritma memilih subset fitur secara acak untuk menentukan pemisahan terbaik. Pemilihan subset fitur secara acak ini bertujuan untuk meningkatkan keberagaman antar pohon dan mengurangi risiko overfitting.
-Pengecekan Jumlah Pohon
-Proses pembentukan decision tree dilakukan secara berulang hingga jumlah pohon yang telah ditentukan sebelumnya terpenuhi. Jika jumlah pohon belum tercapai, maka proses kembali ke tahap bootstrap sampling dan pembentukan pohon berikutnya
-Model Random Forest Terbentuk
-Setelah seluruh pohon keputusan terbentuk sesuai dengan jumlah yang ditentukan, maka model Random Forest siap digunakan untuk melakukan proses prediksi.
-Input Data Testing
-Pada tahap ini digunakan data testing yang berasal dari proses pembagian data sebelumnya untuk dilakukan proses prediksi menggunakan model yang telah terbentuk.
-Prediksi oleh Setiap Tree
-Setiap decision tree dalam model Random Forest menghasilkan prediksi secara independen berdasarkan struktur pohon masing-masing.
-Majority Voting
-Hasil prediksi dari seluruh pohon kemudian digabungkan menggunakan metode majority voting, yaitu dengan menentukan kelas yang memiliki jumlah suara terbanyak sebagai hasil akhir.
-Hasil Klasifikasi Akhir
-Output akhir dari proses ini berupa hasil klasifikasi kualitas cooling water ke dalam kategori “Layak” atau “Tidak Layak”.
-Untuk memberikan gambaran yang lebih konkret mengenai implementasi algoritma Random Forest dalam penelitian ini, ditampilkan skema proses training model berdasarkan data kualitas cooling water yang digunakan. Skema tersebut merepresentasikan pembentukan salah satu decision tree hasil proses bootstrap sampling hingga menghasilkan keputusan klasifikasi pada leaf node.
-
-Gambar 3. 18 Skema Training Random Forest untuk Klasifikasi Cooling Water
-Pada proses tersebut, data latih dipisahkan berdasarkan fitur yang terpilih sebagai root node dan dibagi secara bertahap menggunakan subset fitur acak hingga mencapai leaf node yang menentukan kelas berdasarkan mayoritas data. Ilustrasi ini hanya merepresentasikan satu pohon keputusan, sedangkan dalam implementasi sebenarnya pembentukan pohon dilakukan berulang sesuai nilai n_estimators hingga terbentuk model Random Forest secara keseluruhan.
-Variabel Penelitian
-Penelitian ini menggunakan dua jenis variabel, yaitu variabel bebas dan variabel terikat, yang digunakan dalam proses klasifikasi kualitas penggunaan cooling water menggunakan algoritma Random Forest.
-Variabel Bebas
-Variabel bebas dalam penelitian ini adalah parameter kualitas cooling water yang digunakan sebagai fitur masukan pada algoritma Random Forest. Variabel-variabel tersebut diperoleh dari hasil pengujian kualitas air cooling water di PT. PLN Nusantara Power Up Arun, yang meliputi:
-pH Air : Menunjukkan tingkat keasaman atau kebasaan cooling water yang dapat memengaruhi potensi korosi pada sistem pendingin.
-Konduktivitas (Specific Conductivity) : Menunjukkan kemampuan air dalam menghantarkan arus listrik, yang erat kaitannya dengan konsentrasi ion terlarut di dalam air.
-Kadar Nitrit (Nitrite) : Menunjukkan kandungan senyawa nitrit dalam air yang dapat memicu terjadinya korosi apabila nilainya melebihi batas standar yang telah ditetapkan.
-Kandungan Besi (Fe) : Menunjukkan kadar logam besi yang terdapat dalam air, yang apabila berlebihan dapat menyebabkan terbentuknya endapan dan menurunkan kinerja sistem pendingin.
-Sulfat (Sulfate) : Menunjukkan kandungan sulfat dalam cooling water yang dapat berpengaruh terhadap pembentukan kerak dan mempercepat proses korosi pada sistem.
-Kekeruhan (Turbidity): Menunjukkan tingkat kejernihan air yang mencerminkan seberapa banyak partikel tersuspensi yang terdapat di dalam cooling water.
-
-Variabel Terikat
-Variabel terikat dalam penelitian ini adalah hasil klasifikasi kualitas cooling water yang dihasilkan oleh algoritma Random Forest berdasarkan nilai dari setiap parameter kualitas air yang dianalisis.
-Kelayakan Penggunaan Cooling Water : Variabel ini menunjukkan status kelayakan cooling water yang diklasifikasikan ke dalam dua kelas, yaitu Layak atau Tidak Layak.
-Teknik Pengujian
-
-
-
-Rancangan Pengujian Evaluasi Model Klasifikasi
-Pengujian performa model klasifikasi dilakukan dengan metode confusion matrix untuk menilai kemampuan algoritma Random Forest dalam mengklasifikasikan kelayakan cooling water ke dalam dua kelas, yaitu Layak dan Tidak Layak. Proses evaluasi menggunakan data uji yang telah dipisahkan dari data latih.
-
---- [TABLE START] ---
-Jenis Data | Persentase | Keterangan
-Data Latih | 70% | Digunakan untuk melatih model Random Forest
-Data Uji | 30% | Digunakan untuk menguji performa model
---- [TABLE END] ---
-
-Pembagian dataset dilakukan menggunakan metode stratified sampling agar proporsi masing-masing kelas tetap seimbang. Jumlah keseluruhan dataset yang digunakan dalam penelitian ini sebanyak … data. 
-Tahapan Pengujian
-Dataset dibagi menjadi data latih dan data uji. 
-Model Random Forest dilatih menggunakan data latih. 
-Model melakukan prediksi terhadap data uji. 
-Hasil prediksi dibandingkan dengan label aktual. 
-Dibentuk confusion matrix. 
-Dihitung nilai accuracy, precision, recall, dan F1-score.
-Bentuk Confusion Matriks:
-
---- [TABLE START] ---
-Aktual/Prediksi | Layak | Tidak Layak
-Layak | True Positive (TP) | False Negative (FN)
-Tidak Layak | False Positive (FP) | True Negative (TN)
---- [TABLE END] ---
-
-Ket:
-TP: Data Layak diprediksi Layak
-TN: Data Tidak Layak diprediksi Tidak Layak 
-FP: Data Tidak Layak diprediksi Layak      
-FN: Data Layak diprediksi Tidak Layak
-Rumus perhitungan accuracy, precision, recall, dan F1-score telah dijelaskan pada Subbab 2.6 serta ditunjukkan pada Persamaan (2.1) sampai dengan Persamaan (2.4).
-Rancangan Analisis Pengujian Black Box
-Pengujian black box dilakukan untuk menguji fungsi-fungsi sistem berdasarkan kebutuhan pengguna tanpa memperhatikan struktur internal kode program. Pengujian ini berfokus pada kesesuaian antara input, proses, dan output yang dihasilkan sistem. Pada penelitian ini, pengujian black box diterapkan pada fitur login, input data parameter cooling water, proses klasifikasi, pembuatan laporan, pengelolaan pengguna, dan logout. 
-Skenario Pengujian pada Login
-Pengujian pada fitur login bertujuan untuk memastikan sistem mampu memvalidasi username dan password sesuai data yang tersimpan.
-
-
-Tabel 3. 7 Skenario Login
-
---- [TABLE START] ---
-No | Pengujian | Test Case | Hasil yang Diharapkan
-1 | Memasukkan username dan password yang benar. | Username: suci@gmail.comPassword: suci123 | Login berhasil dan pengguna diarahkan ke dashboard.
-2 | Memasukkan username benar dan password salah. | Username: suci@gmail.comPassword: admin | Login gagal dan sistem menampilkan pesan error.
-3 | Memasukkan username salah dan password benar. | Username: admin@gmail.comPassword: suci123 | Login gagal dan sistem menampilkan pesan error.
-4 | Memasukkan username dan password salah | Username: admin@gmail.comPassword: 12345 | Login gagal dan sistem menampilkan pesan error.
---- [TABLE END] ---
-
-
-Skenario Pengujian Input Data
-Pengujian fitur input data bertujuan untuk memastikan sistem dapat menerima, memvalidasi, dan menyimpan data parameter kualitas cooling water dengan benar.
-Tabel 3. 8 Skenario Input Data
-
---- [TABLE START] ---
-No | Pengujian | Test Case | Hasil yang Diharapkan
-1 | Memasukkan data parameter sesuai tipe data. | pH: 7SC : 500Nitrite: 0.5Fe: 0.2Sulfate: 100Turbidity: 5 | Data berhasil disimpan ke database.
-2 | Memasukkan data tidak sesuai tipe data | pH: abcSC : xNitrite: -Fe: 0.2Sulfate: 100Turbidity: 5 | Data gagal disimpan dan sistem menampilkan pesan error.
-3 | Tidak mengisi data | Kosong | Data gagal disimpan dan sistem menampilkan pesan error.
---- [TABLE END] ---
-
-
-Skenario Pengujian Klasifikasi
-Pengujian fitur klasifikasi bertujuan untuk memastikan sistem mampu memproses data masukan dan menampilkan hasil klasifikasi dengan benar.
-Tabel 3. 9  Skenario Klasifikasi
-
---- [TABLE START] ---
-No | Pengujian | Test Case | Hasil yang Diharapkan
-1 | Input data valid untuk klasifikasi. | pH: 7SC: 500Nitrite: 0.5Fe: 0.2Sulfate: 100Turbidity: 5 | Data diproses dan sistem menampilkan hasil klasifikasi.
-2 | Input data tidak lengkap. | pH: abcSC : xNitrite: -Fe: 0.2Sulfate: Turbidity: | Sistem menampilkan pesan error dan klasifikasi tidak dilakukan.
---- [TABLE END] ---
-
-Skenario Pengujian Generate Laporan
-Pengujian fitur laporan bertujuan untuk memastikan sistem dapat menampilkan data laporan berdasarkan filter yang dipilih.
-Tabel 3. 10  Skenario Generate Laporan
-
---- [TABLE START] ---
-No | Pengujian | Test Case | Hasil yang Diharapkan
-1 | Memilih filter dan generate laporan | Periode: Januari 2025 atau per unit yang dibutuhkan. | Laporan berhasil ditampilkan sesuai filter.
-2 | Tidak memilih filter. | (kosong) | Sistem menampilkan seluruh data laporan
---- [TABLE END] ---
-
-Skenario Pengujian Manajemen User
-Pengujian fitur kelola user bertujuan untuk memastikan admin dapat mengelola data pengguna dengan baik.
-
-
-Tabel 3. 11 Skenario Manajemen User
-
---- [TABLE START] ---
-No | Pengujian | Test Case | Hasil yang Diharapkan
-1 | Menambah user baru | Username: user@gmail.comPassword: 12345 | Data user berhasil ditambahkan.
-2 | Edit data user. | Ubah username/password | Data berhasil diperbarui.
-3 | Hapus user (konfirmasi ya). | Klik hapus → konfirmasi. | Data berhasil dihapus.
-4 | Hapus user (konfirmasi tidak) | Klik hapus → batal. | Data tidak jadi dihapus.
-5 | Reset password default. | Klik reset password. | Password berhasil direset
---- [TABLE END] ---
-
-Skenario Pengujian Logout
-Pengujian fitur logout bertujuan untuk memastikan sistem dapat mengakhiri sesi pengguna dan mengarahkan kembali ke halaman login.
-Tabel 3. 12  Skenario Logout
-
---- [TABLE START] ---
-No | Pengujian | Test Case | Hasil yang Diharapkan
-1 | Menekan Tombol Logout | Klik tombol logout | Logout berhasil dan pengguna diarahkan ke halaman login
---- [TABLE END] ---
-
-
-Rancangan Analisis Pengujian White Box
-Pengujian white box dilakukan untuk menguji alur logika internal sistem klasifikasi kualitas cooling water yang dibangun menggunakan algoritma Random Forest. Pengujian ini bertujuan memastikan setiap proses dalam sistem berjalan sesuai rancangan program. Fokus pengujian meliputi validasi data input, pemanggilan model Random Forest, proses klasifikasi, serta penyimpanan hasil ke basis data.
-Metode yang digunakan adalah path testing, yaitu teknik pengujian dengan menelusuri jalur proses utama dalam program, mulai dari data dimasukkan hingga hasil klasifikasi ditampilkan kepada pengguna. Melalui pengujian ini, diharapkan sistem dapat berjalan secara stabil, konsisten, dan menghasilkan output klasifikasi sesuai yang dirancang.
-Skenario Pengujian Proses Klasifikasi Random Forest
-Pada tahap ini, dilakukan pengujian terhadap fungsi klasifikasi untuk memastikan bahwa setiap alur logika dalam proses Random Forest berjalan dengan baik dan bebas dari kesalahan.
-Secara umum, alur proses klasifikasi dalam sistem meliputi:
-Sistem menerima data input parameter
-Sistem melakukan validasi data
-Sistem memuat model Random Forest
-Sistem melakukan proses prediksi pada setiap decision tree
-Sistem menggabungkan hasil prediksi menggunakan majority voting
-Sistem menyimpan hasil klasifikasi ke basis data
-Sistem menampilkan hasil klasifikasi kepada pengguna
-Tabel 3. 13  Skenario Proses Klasifikasi
-
---- [TABLE START] ---
-No | Pengujian | Test Case | Hasil yang Diharapkan
-1 | Jalur normal (data valid). | Input valid → load model → prediksi → voting → simpan → tampilkan hasil | Sistem berjalan normal, hasil klasifikasi ditampilkan.
-2 | Data tidak valid. | Input tidak lengkap → validasi gagal | Sistem menampilkan pesan error dan proses klasifikasi tidak dilanjutkan.
-3 | Gagal load model. | Input valid → model tidak ditemukan | Sistem menampilkan error dan proses dihentikan.
-4 | Proses prediksi berjalan. | Model berhasil dimuat → semua tree diproses | Tidak terjadi error selama iterasi Random Forest.
-5 | Penyimpanan hasil. | Hasil klasifikasi diperoleh → simpan ke database | Data berhasil tersimpan.
---- [TABLE END] ---
-
-
-jhb
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-BAB IV 
-HASIL DAN PEMBAHASAN
-4.1Hasil Tampilan User Interface 
-Untuk memberikan gambaran yang lebih jelas mengenai alur pelaksanaan penelitian, jadwal kegiatan penelitian disajikan pada tabel berikut:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-BAB V 
-PENUTUP
-5.1Simpulan 
-5.2Saran
-
-
-
-DAFTAR PUSTAKA
-[1]M. Y. D. Alazaiza, T. M. Alzghoul, M. B. Ramu, S. S. A. Amr, M. F. M. Abushammala, and D. E. Nassani, “Global perspectives on industrial wastewater management: A bibliometric analysis of research output,” J. Hazard. Mater. Adv., vol. 17, no. November 2024, p. 100567, 2025, doi: 10.1016/j.hazadv.2024.100567.
-[2]N. I. F. Nisa, N. Fanani, and V. Maritha, “Evaluasi Kualitas Air pada Sistem Pendinginan PT. XYZSurabaya: Studi Kasus Cooling Water,” J. Chem. Process Eng., vol. 8, pp. 140–150, 2023.
-[3]Y. Wan et al., “Prediction of Typical Power Plant Circulating Cooling Tower Blowdown Water Quality Based on Explicable Integrated Machine Learning,” Processes, vol. 13, no. 6, pp. 1–14, 2025, doi: 10.3390/pr13061917.
-[4]D. Ruiz, A. Casas, C. A. Escobar, A. Perez, and V. Gonzalez, “Advanced Machine Learning Techniques for Corrosion Rate Estimation and Prediction in Industrial Cooling Water Pipelines,” Sensors, vol. 24, no. 11, 2024, doi: 10.3390/s24113564.
-[5]M. M. Mutoffar and A. Fadillah, “Klasifikasi Kualitas Air Sumur Menggunakan Algoritma Random Forest,” Naratif  J. Nas. Riset, Apl. dan Tek. Inform., vol. 4, no. 2, pp. 138–146, 2022, doi: 10.53580/naratif.v4i2.160.
-[6]N. Maulidah, M. Maulidah, R. Supriyadi, H. Nalatissifa, S. Diantika, and A. Fauzi, “PREDIKSI KUALITAS AIR MENGGUNAKAN METODE RANDOM FOREST, DECISION TREE, DAN GRADIENT BOOSTING,” J. Khatulistiwa Inform., vol. 12, no. 1, pp. 1–6, 2024, doi: 10.31294/khatulistiwa.v12i1.10267.
-[7]K. Abdi, A. Warjaya, I. Muthmainnah, and P. H. Pahutar, “Penerapan Algoritma Random Forest dalam Prediksi Kelayakan Air Minum,” vol. 3, no. 2, pp. 81–88, 2023.
-[8]M. Lowe, R. Qin, and X. Mao, “A Review on Machine Learning, Artificial Intelligence, and Smart Technology in Water Treatment and Monitoring,” Water (Switzerland), vol. 14, no. 9, pp. 1–28, 2022, doi: 10.3390/w14091384.
-[9]G. A. D. Sri Ari Ningsih and C. Pramartha, “Klasifikasi Kualitas Air Layak Minum menggunakan Algoritma Random Forest Classifier dan GridsearchCV,” JELIKU (Jurnal Elektron. Ilmu Komput. Udayana), vol. 13, no. 1, p. 217, 2024, doi: 10.24843/jlk.2024.v13.i01.p22.
-[10]M. A. A. M. Hridoy et al., “Advanced machine learning models for accurate water quality classification and WQI prediction: Implications for aquatic disease risk management,” Sci. Total Environ., vol. 1008, no. August, p. 180965, 2025, doi: 10.1016/j.scitotenv.2025.180965.
-[11]W. Chen, D. Xu, B. Pan, Y. Zhao, and Y. Song, “Machine Learning-Based Water Quality Classification Assessment,” Water (Switzerland), vol. 16, no. 20, 2024, doi: 10.3390/w16202951.
-[12]A. F. Firmansyah, B. Rahmat, M. Muharrom, and A. Haromainy, “Journal of Artificial Intelligence and Engineering Applications Optimization of the Random Forest Algorithm Using Random Search for Potabl`e Water Quality Classification,” vol. 5, no. 1, pp. 2808–4519, 2025, [Online]. Available: https://ioinformatic.org/
-[13]V. Distefano, M. Palma, and S. De Iaco, “Multi-class random forest model to classify wastewater treatment imbalanced data,” Socioecon. Plann. Sci., vol. 95, no. May, p. 102021, 2024, doi: 10.1016/j.seps.2024.102021.
-[14]Y. Lan, M. Qiu, and Z. Xu, “Application of Electrochemical Technology in Circulating Cooling Water Treatment for Thermal Power Plants,” vol. 10, no. 3, 2025.
-[15]F. Di Pippo, L. Di Gregorio, R. Congestri, V. Tandoi, and S. Rossetti, “Biofilm growth and control in cooling water industrial systems,” FEMS Microbiol. Ecol., vol. 94, no. 5, pp. 1–13, 2018, doi: 10.1093/femsec/fiy044.
-[16]P. Kuznietsov, “Evaluation of the scaling and corrosive potential of the cooling water supply system of a nuclear power plant based on the physicochemical control dataset,” Data Br., vol. 54, p. 110347, 2024, doi: 10.1016/j.dib.2024.110347.
-[17]O. Biedunkova, P. Kuznietsov, and V. Gandziura, “Behaviour of dissolved inorganic salts in the cooling water of a nuclear power plant open recirculation system and formation of water discharge,” R. Soc. Open Sci., vol. 11, no. 8, 2024, doi: 10.1098/rsos.240492.
-[18]P. Suganya, G. Swaminathan, B. Anoop, G. V. R. R. S. G. Siva Prasad, and J. Nagarajan, “Assessing the factors affecting the water chemistry parameters in the auxiliary water system of a nuclear power plant,” SN Appl. Sci., vol. 2, no. 11, pp. 1–13, 2020, doi: 10.1007/s42452-020-03693-z.
-[19]B. Stojanović, J. Đuković, and M. Drobnjak, “Assessment preferences cooling water to the corrosion or making incrustation in TPP,” Zast. Mater., vol. 58, no. 2, pp. 243–248, 2017, doi: 10.5937/zasmat1702243s.
-[20]M. Hsieh et al., “Corrosion Control When Using Secondary Treated Municipal Wastewater as Alternative Makeup Water for Cooling Tower Systems,” Water Environ. Res., vol. 82, no. 12, pp. 2346–2356, 2010, doi: 10.2175/106143010x12681059117094.
-[21]M. Singh and D. Rashmi Yadav, “Physico-Chemical Parameters for Water Quality Check: A Comprehensive Review,” IJRAR22D2538 Int. J. Res. Anal. Rev., vol. 9, no. 4, pp. 287–293, 2022, [Online]. Available: www.ijrar.org
-[22]A. Royani, S. Prifiharni, G. Priyotomo, J. Triwardono, and Sundjono, “Corrosion of carbon steel in synthetic freshwater for water distribution systems,” IOP Conf. Ser. Earth Environ. Sci., vol. 399, no. 1, 2019, doi: 10.1088/1755-1315/399/1/012089.
-[23]E. Hoseinzadeh, A. Yusefzadeh, N. Rahimi, and H. Khorsandi, “Evaluation of Corrosion and Scaling Potential of a Water Treatment Plant. Arch Hyg Sci 2013;2(2):41-47,” Arch. Hyg. Sci., vol. 2, no. 2, pp. 41–47, 2013, [Online]. Available: http://jhygiene.muq.ac.ir
-[24]R. I. Mukhamediev et al., “Review of Artificial Intelligence and Machine Learning Technologies: Classification, Restrictions, Opportunities and Challenges,” Mathematics, vol. 10, no. 15, pp. 1–25, 2022, doi: 10.3390/math10152552.
-[25]S. Tufail, H. Riggs, M. Tariq, and A. I. Sarwat, “Advancements and Challenges in Machine Learning: A Comprehensive Review of Models, Libraries, Applications, and Algorithms,” Electron., vol. 12, no. 8, 2023, doi: 10.3390/electronics12081789.
-[26]E. Barbierato and A. Gatti, “The Challenges of Machine Learning: A Critical Review,” Electron., vol. 13, no. 2, 2024, doi: 10.3390/electronics13020416.
-[27]O. Rainio, J. Teuho, and R. Klén, “Evaluation metrics and statistical tests for machine learning,” Sci. Rep., vol. 14, no. 1, pp. 1–14, 2024, doi: 10.1038/s41598-024-56706-x.
-[28]R. S. Nurhalizah, R. Ardianto, and P. Purwono, “Analisis Supervised dan Unsupervised Learning pada Machine Learning: Systematic Literature Review,” J. Ilmu Komput. dan Inform., vol. 4, no. 1, pp. 61–72, 2024, doi: 10.54082/jiki.168.
-[29]E. Helmud, E. Helmud, F. Fitriyani, and P. Romadiana, “Classification Comparison Performance of Supervised Machine Learning Random Forest and Decision Tree Algorithms Using Confusion Matrix,” J. Sisfokom (Sistem Inf. dan Komputer), vol. 13, no. 1, pp. 92–97, 2024, doi: 10.32736/sisfokom.v13i1.1985.
-[30]Stacyana Jesika, Suci Ramadhani, and Yohanna Permata Putri, “Implementasi Model Machine Learning dalam Mengklasifikasi Kualitas Air,” J. Ilm. Dan Karya Mhs., vol. 1, no. 6, pp. 382–396, 2023, doi: 10.54066/jikma.v1i6.1162.
-[31]E. Y. Boateng, J. Otoo, and D. A. Abaye, “Basic Tenets of Classification Algorithms K-Nearest-Neighbor, Support Vector Machine, Random Forest and Neural Network: A Review,” J. Data Anal. Inf. Process., vol. 08, no. 04, pp. 341–357, 2020, doi: 10.4236/jdaip.2020.84020.
-[32]A. Liaw and M. Wiener, “The Newsletter of the R Project: Classification and Regression by randomForest,” R J., vol. 2, no. 3, pp. 18–22, 2002.
-[33]E. Raczko and B. Zagajewski, “Comparison of support vector machine , random forest and neural network classifiers for tree species classification on airborne hyperspectral APEX images,” Eur. J. Remote Sens., vol. 50, no. 1, 2017, doi: 10.1080/22797254.2017.1299557.
-
-
-
-
-
-LAMPIRAN
-Lampiran 1. Dataset Mentah Kualitas Cooling Water
+Bagaimana merancang dan membangun aplikasi Point of Sale (POS) dengan fitur prediksi penjualan harian berbasis mobile yang dapat digunakan oleh pelaku usaha secara efektif?
+Bagaimana menerapkan metode Long Short-Term Memory (LSTM) pada aplikasi Point of Sale untuk memprediksi penjualan harian berdasarkan data transaksi historis?
+Bagaimana tingkat akurasi hasil prediksi penjualan harian yang dihasilkan oleh metode Long Short-Term Memory (LSTM) berdasarkan evaluasi menggunakan metrik kesalahan prediksi?
 
+
+# 1.3	Tujuan Penelitian
+
+Berdasarkan latar belakang yang telah diuraikan, maka tujuan dalam penelitian ini adalah sebagai berikut:
+Merancang dan membangun aplikasi Point of Sale (POS) berbasis mobile yang dilengkapi dengan fitur prediksi penjualan harian sebagai alat bantu pengelolaan dan analisis penjualan.
+Mengimplementasikan metode Long Short-Term Memory (LSTM) pada aplikasi Point of Sale untuk memprediksi penjualan harian berdasarkan data transaksi historis.
+Memanfaatkan data transaksi penjualan harian, seperti jumlah transaksi, total penjualan, dan jumlah produk terjual, sebagai data latih utama dalam model prediksi penjualan berbasis metode LSTM.
+Mengevaluasi kinerja dan tingkat akurasi metode Long Short-Term Memory (LSTM) dalam menghasilkan prediksi penjualan harian menggunakan metrik evaluasi kesalahan prediksi.
+
+
+# 1.4	Batasan Masalah
+
+Untuk menghindari meluasnya materi pembahasan tugas akhir ini, maka pembahasan akan dibatasi mencakup hal – hal berikut:
+Aplikasi dikembangkan menggunakan framework Flutter dan difokuskan untuk sistem operasi Android, mengingat dominasi pasar Android pada segmen UMKM lokal.
+Studi kasus dilakukan pada UMKM skala mikro di wilayah Kota Langsa.
+Algoritma yang digunakan adalah Long Short-Term Memory (LSTM) Univariate atau Multivariate terbatas. Prediksi dilakukan untuk rentang waktu harian.
+Sistem mencakup pencatatan penjualan kasir, manajemen stok sederhana, dan laporan penjualan harian. Fitur pembayaran digital (e-wallet integration) tidak dibahas secara mendalam pada versi ini.
+Proses pelatihan model (training) dan prediksi dilakukan di sisi Server/Cloud (menggunakan Python), aplikasi mobile hanya bertugas mengirim data transaksi dan menerima hasil prediksi via REST API.
+1.5	Manfaat Penelitian
+Manfaat yang diharapkan dari penelitian ini adalah sebagai berikut:
+Bagi Pelaku UMKM di Kota Langsa: Memberikan aplikasi Point of Sale (POS) berbasis mobile yang dapat digunakan untuk pencatatan transaksi penjualan dan pengelolaan stok secara digital, serta menyediakan fitur prediksi penjualan harian berbasis algoritma Long Short-Term Memory (LSTM) sebagai alat bantu dalam pengambilan keputusan restock dan pengelolaan persediaan barang.
+Bagi Akademisi: Menjadi referensi dan bahan kajian dalam pengembangan penelitian di bidang sistem informasi dan machine learning, khususnya penerapan metode Long Short-Term Memory (LSTM) untuk prediksi penjualan harian pada sistem Point of Sale (POS) berbasis mobile di lingkungan UMKM.
+Bagi Peneliti: Menambah pengetahuan dan pengalaman dalam merancang dan membangun aplikasi POS berbasis mobile menggunakan framework Flutter serta mengimplementasikan algoritma Long Short-Term Memory (LSTM) untuk menyelesaikan permasalahan prediksi penjualan harian berbasis data transaksi UMKM pada studi kasus nyata.
+
+
+# BAB II
+
+
+
+# TINJAUAN PUSTAKA
+
+
+
+# 2.1	State of the Art
+
+Pembuatan penelitian ini menggunakan referensi dari beberapa jurnal yang berkaitan dan berhubungan. Bentuk referensi ditampilkan melalui tabel ringkasan penelitian sebelumnya atau State of the Art yang dapat dilihat pada tabel 2.1 berikut.
+Tabel 2.1 State of the Art
+
+
+# 2.2	Tinjauan Teoritis
+
+
+
+# Point of Sale (POS)
+
+Point of Sale (POS) merupakan sistem informasi yang digunakan untuk memproses dan mencatat transaksi penjualan pada titik terjadinya transaksi antara penjual dan pelanggan [6]. Sistem POS modern telah berkembang dari sekadar mesin kasir elektronik menjadi sistem berbasis komputer atau aplikasi yang terintegrasi dengan basis data dan jaringan internet. Melalui sistem POS, setiap transaksi penjualan akan tercatat secara otomatis dan tersimpan dalam database, sehingga meminimalkan kesalahan pencatatan manual serta meningkatkan kecepatan pelayanan. Selain itu, sistem POS juga umumnya dilengkapi dengan fitur manajemen inventaris yang mampu memperbarui jumlah stok secara otomatis setelah terjadi transaksi, sehingga membantu pelaku usaha dalam mengontrol persediaan barang.
+Keunggulan utama sistem POS terletak pada kemampuannya menghasilkan data historis penjualan yang terstruktur dan terdokumentasi dengan baik. Data historis ini menjadi fondasi penting dalam proses analisis bisnis, termasuk analisis tren penjualan, identifikasi produk terlaris, serta peramalan permintaan di masa mendatang. Dengan demikian, sistem POS tidak hanya berperan sebagai alat operasional, tetapi juga sebagai sumber data strategis bagi pengembangan sistem analitik yang lebih canggih.
+
+
+# Konsep Peramalan (Forecasting)
+
+Peramalan atau forecasting adalah proses estimasi nilai di masa depan berdasarkan pola data historis dan analisis faktor-faktor yang memengaruhinya [7]. Dalam konteks bisnis ritel, peramalan penjualan memiliki peran yang sangat penting karena berkaitan langsung dengan perencanaan stok, pengadaan barang, pengelolaan modal, dan strategi pemasaran. Kesalahan dalam peramalan dapat menyebabkan terjadinya kelebihan stok (overstock) yang meningkatkan biaya penyimpanan, maupun kekurangan stok (stockout) yang berpotensi mengurangi pendapatan dan kepuasan pelanggan.
+Metode peramalan dapat dibedakan menjadi metode kualitatif dan kuantitatif. Metode kuantitatif umumnya memanfaatkan data historis numerik dan teknik statistik seperti Moving Average, Exponential Smoothing, serta ARIMA. Namun, seiring berkembangnya teknologi komputasi, pendekatan berbasis machine learning dan deep learning mulai banyak digunakan karena mampu memodelkan hubungan non-linear yang kompleks serta menangani data dalam jumlah besar [8]. Pendekatan ini dinilai lebih adaptif terhadap perubahan pola penjualan yang dinamis dibandingkan metode statistik tradisional.
+
+
+# Data Deret Waktu (Time Series)
+
+Data deret waktu (time series) merupakan data yang dikumpulkan secara berurutan berdasarkan interval waktu tertentu, seperti harian, mingguan, atau bulanan [9]. Data penjualan harian termasuk dalam kategori ini karena memiliki dimensi waktu yang berurutan dan saling bergantung. Karakteristik utama data time series meliputi tren jangka panjang, pola musiman yang berulang, fluktuasi siklis yang dipengaruhi kondisi ekonomi, serta komponen acak yang tidak dapat diprediksi secara langsung.
+Dalam analisis time series, penting untuk memahami bahwa nilai pada suatu waktu tertentu dipengaruhi oleh nilai pada waktu sebelumnya. Oleh karena itu, model yang digunakan dalam peramalan harus mampu menangkap ketergantungan temporal tersebut. Pada kasus penjualan harian, misalnya, jumlah penjualan pada hari ini dapat dipengaruhi oleh pola penjualan pada hari-hari sebelumnya, termasuk faktor musiman seperti akhir pekan atau periode promosi tertentu. Pemahaman terhadap karakteristik ini menjadi dasar dalam pemilihan metode LSTM sebagai model prediksi.
+
+
+# Machine Learning dalam Prediksi Penjualan
+
+Machine Learning merupakan cabang dari kecerdasan buatan yang memungkinkan sistem belajar dari data untuk mengenali pola dan menghasilkan prediksi tanpa diprogram secara eksplisit [10]. Dalam prediksi penjualan, pendekatan supervised learning digunakan karena tersedia data historis yang berisi pasangan input dan output yang telah diketahui nilainya. Model akan dilatih menggunakan data tersebut untuk mempelajari pola hubungan antara waktu dan nilai penjualan.
+Metode machine learning konvensional seperti regresi linier atau Random Forest dapat digunakan untuk memprediksi penjualan, namun metode tersebut memiliki keterbatasan dalam menangani data sekuensial yang memiliki ketergantungan jangka panjang. Oleh karena itu, pendekatan berbasis jaringan saraf tiruan, khususnya Recurrent Neural Network (RNN), dikembangkan untuk mengatasi keterbatasan tersebut dengan memanfaatkan struktur jaringan yang mampu memproses data berurutan.
+
+
+# Recurrent Neural Network (RNN)
+
+Recurrent Neural Network (RNN) merupakan arsitektur jaringan saraf tiruan yang dirancang untuk memproses data sekuensial dengan mempertahankan informasi dari langkah waktu sebelumnya [11]. RNN memiliki mekanisme umpan balik (feedback loop) yang memungkinkan output pada waktu sebelumnya menjadi input tambahan pada waktu berikutnya. Struktur ini memungkinkan model memahami konteks temporal dalam data deret waktu.
+Meskipun RNN mampu memodelkan data sekuensial, arsitektur ini memiliki kelemahan berupa permasalahan vanishing gradient, yaitu kondisi di mana gradien menjadi sangat kecil sehingga jaringan kesulitan mempelajari hubungan jangka panjang. Permasalahan ini menyebabkan performa RNN menurun ketika digunakan untuk memodelkan data dengan dependensi waktu yang panjang, seperti data penjualan harian dalam periode yang cukup lama
+
+
+# Long Short-Term Memory (LSTM)
+
+Long Short-Term Memory (LSTM) merupakan salah satu varian dari Recurrent Neural Network (RNN) yang dirancang untuk mengatasi permasalahan vanishing gradient pada pemodelan data sekuensial jangka panjang [13]. LSTM diperkenalkan oleh Sepp Hochreiter dan Jürgen Schmidhuber pada tahun 1997 sebagai arsitektur jaringan saraf yang mampu mempertahankan informasi dalam rentang waktu yang lebih panjang dibandingkan RNN konvensional. Keunggulan utama LSTM terletak pada keberadaan mekanisme gating (gerbang) yang mengatur aliran informasi masuk, disimpan, dan dikeluarkan dari sel memori (cell state). Struktur ini memungkinkan model untuk memilih informasi mana yang relevan untuk dipertahankan atau dilupakan, sehingga sangat efektif dalam berbagai tugas seperti peramalan deret waktu, pengenalan suara, dan pemrosesan bahasa alami [14].
+Secara arsitektural, satu unit LSTM terdiri atas tiga gerbang utama, yaitu forget gate, input gate, dan output gate, serta satu komponen cell state yang berfungsi sebagai memori jangka panjang. Pada setiap langkah waktu ke-t, LSTM menerima input 𝑥𝑡, status tersembunyi sebelumnya ℎ𝑡−1, dan status sel sebelumnya 𝐶𝑡−1. Proses komputasi dilakukan secara bertahap melalui fungsi aktivasi sigmoid dan tanh untuk mengontrol pembaruan memori. Pendekatan ini memungkinkan LSTM menjaga stabilitas gradien selama proses pelatihan menggunakan algoritma backpropagation through time (BPTT). Dengan demikian, LSTM mampu menangkap dependensi temporal yang kompleks dalam data sekuensial.
+Secara matematis, mekanisme kerja LSTM dapat dirumuskan sebagai berikut
+Forget Gate
+Gerbang ini menentukan informasi mana dari status sel sebelumnya yang akan dipertahankan atau dihapus.
+Di mana:
+adalah nilai forget gate pada waktu ke-t
+adalah matriks bobot forget gate
+adalah bias
+adalah fungsi aktivasi sigmoid
+Input Gate
+Gerbang ini menentukan informasi baru yang akan disimpan dalam cell state.
+Kandidat nilai memori baru dihitung dengan:
+Di mana:
+adalah nilai input gate
+adalah kandidat pembaruan memori
+Pembaruan Cell State
+Di mana:
+adalah cell state baru
+adalah cell state sebelumnya
+Output Gate
+Status tersembunyi diperoleh melalui:
+Di mana:
+adalah nilai output gate
+adalah hidden state pada waktu ke-t
+Melalui kombinasi mekanisme gerbang tersebut, LSTM mampu mempertahankan informasi penting dalam jangka panjang sekaligus mengurangi pengaruh informasi yang tidak relevan. Secara empiris, arsitektur ini menunjukkan performa yang unggul dalam berbagai studi komparatif terhadap RNN standar, khususnya pada data dengan pola temporal kompleks dan non-linear [14].
+
+
+# Evaluasi Kinerja Model
+
+Evaluasi kinerja model prediksi bertujuan untuk mengukur tingkat kesalahan antara nilai aktual dan nilai hasil prediksi yang dihasilkan oleh model [14]. Dalam penelitian ini, evaluasi dilakukan menggunakan metrik kuantitatif yang umum digunakan pada data time series, yaitu Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), dan Mean Absolute Percentage Error (MAPE). MAE mengukur rata-rata selisih absolut antara nilai aktual dan prediksi, sedangkan RMSE memberikan penalti lebih besar terhadap kesalahan yang signifikan karena menggunakan kuadrat dari selisih tersebut. MAPE digunakan untuk mengukur kesalahan dalam bentuk persentase sehingga lebih mudah diinterpretasikan dalam konteks bisnis.
+Proses evaluasi ini penting untuk memastikan bahwa model LSTM yang diintegrasikan dalam aplikasi POS memiliki tingkat akurasi yang memadai dan dapat diandalkan dalam mendukung pengambilan keputusan operasional
+
+
+# BAB III
+
+
+
+# METODOLOGI PENELITIAN
+
+
+
+# Alur Penelitian
+
+Alur penelitian ini dirancang secara sistematis untuk membangun sebuah sistem Point of Sale (POS) berbasis mobile yang dilengkapi dengan fitur prediksi penjualan harian menggunakan metode Long Short-Term Memory (LSTM). Tahapan penelitian ini merepresentasikan kerangka kerja pengembangan sistem yang dimulai dari tahap analisis kebutuhan, perancangan, implementasi aplikasi, hingga proses pemodelan dan evaluasi sistem secara menyeluruh.
+Sebagaimana diilustrasikan pada Gambar 3.1, alur penelitian terbagi menjadi dua fase utama yang saling berkaitan, yaitu Fase Pengembangan dan Implementasi Sistem POS serta Fase Pengembangan Model Prediksi Penjualan.
+Gambar 3.1 Alur Penelitian
+Pada Fase Pengembangan dan Implementasi Sistem POS, penelitian diawali dengan analisis kebutuhan melalui observasi dan identifikasi permasalahan pada mitra UMKM. Selanjutnya dilakukan perancangan sistem meliputi arsitektur aplikasi, desain basis data, serta perancangan UML dan antarmuka pengguna. Setelah tahap perancangan selesai, sistem POS dikembangkan menggunakan Flutter sebagai frontend, Supabase sebagai basis data, dan backend Python untuk pengolahan data. Aplikasi yang telah dibangun kemudian diimplementasikan pada mitra UMKM untuk digunakan dalam kegiatan transaksi harian. Dari tahap implementasi ini diperoleh data transaksi penjualan aktual yang tersimpan secara otomatis di dalam basis data sistem.
+Pada Fase Pengembangan Model Prediksi Penjualan, data transaksi yang telah terkumpul selama periode tertentu selanjutnya melalui tahap pra-pemrosesan (data preparation), seperti pembersihan data, agregasi harian, normalisasi, serta pembentukan data runtun waktu (time series). Dataset kemudian dibagi menjadi data latih dan data uji untuk proses pemodelan. Model LSTM dilatih menggunakan data latih untuk mempelajari pola penjualan jangka pendek maupun jangka panjang. Setelah proses pelatihan selesai, model diuji menggunakan data uji untuk mengukur tingkat akurasi prediksi dengan metrik evaluasi yang sesuai.
+Model prediksi yang telah teruji kemudian diintegrasikan kembali ke dalam sistem POS sehingga aplikasi tidak hanya berfungsi sebagai alat pencatatan transaksi, tetapi juga mampu menampilkan hasil prediksi penjualan harian kepada pengguna. Tahap akhir penelitian dilakukan melalui pengujian fungsional sistem menggunakan metode black box serta evaluasi performa model untuk memastikan sistem berjalan sesuai dengan kebutuhan dan tujuan penelitian.
+
+
+# Data Dan Pengumpulan Data
+
+Data diperoleh dari hasil rekapan transaksi penjualan harian UMKM yang diekspor dari aplikasi Point of Sale (POS) yang digunakan pada objek penelitian. Aplikasi POS tersebut digunakan oleh pelaku UMKM skala mikro di wilayah Kota Langsa sebagai media pencatatan transaksi penjualan secara digital. Dataset yang dihasilkan pada sistem POS mencakup informasi tanggal transaksi, jumlah transaksi, total nilai penjualan harian, serta jumlah produk terjual yang memiliki keterkaitan langsung dengan aktivitas penjualan harian. Data transaksi pada sistem POS dikelola oleh pemilik atau pengelola UMKM, sehingga diperlukan koordinasi dengan pihak UMKM terkait untuk memperoleh data yang sesuai dengan kebutuhan penelitian.
+
+
+# Rancangan Sistem
+
+Perancangan sistem dalam penelitian ini dilakukan menggunakan Unified Modeling Language (UML), yang bertujuan untuk memberikan gambaran dan ilustrasi sistem secara jelas dan terstruktur. Pemodelan sistem ini direpresentasikan melalui perancangan Use Case Diagram, Activity Diagram, serta User Interface guna menggambarkan alur proses dan interaksi pengguna dengan sistem.
+
+
+# Use Case Diagram
+
+Rancangan sistem pada penelitian ini melibatkan tiga aktor utama, yaitu Admin (Pemilik UMKM), Kasir, dan Pelanggan. Use Case Diagram digunakan untuk menggambarkan fungsi-fungsi yang dapat dilakukan oleh masing-masing aktor dalam sistem Point of Sale (POS) yang dilengkapi dengan fitur prediksi penjualan harian. Adapun rancangan use case pada penelitian ini diilustrasikan pada Gambar 3.2.
+Gambar 3.2 Use Case Diagram
+Gambar 3.2 menggambarkan use case diagram pada aplikasi Point of Sale (POS) dengan fitur prediksi penjualan harian menggunakan metode LSTM. Penjelasan mengenai aktor dan use case pada sistem tersebut dijelaskan sebagai berikut:
+Definisi Aktor
+Definisi aktor pada sistem Point of Sale diilustrasikan pada Tabel 3.1 berikut:
+Tabel 3. 1 Definisi Aktor
+Definisi Use Case
+Definisi use case pada sistem Point of Sale diilustrasikan pada Tabel 3.2 berikut:
+Tabel 3.2 Definisi Use Case
+
+
+# Activity Diagram
+
+Activity Diagram merupakan gambaran visual dalam bentuk diagram yang digunakan untuk menggambarkan serangkaian aktivitas atau proses yang terjadi di dalam sistem. Diagram ini memudahkan dalam menjelaskan logika prosedural, proses bisnis, serta alur kerja sistem Point of Sale (POS) yang dilengkapi dengan fitur prediksi penjualan harian. Adapun Activity Diagram pada sistem ini dijelaskan sebagai berikut.
+Activity Diagram Input Data Transaksi
+Gambar 3.3 Activity Diagram Input Data Transaksi
+Gambar 3.3 menggambarkan Activity Diagram input data transaksi penjualan. Proses dimulai ketika kasir melakukan pencatatan transaksi penjualan melalui aplikasi POS. Setelah proses input transaksi selesai, data transaksi penjualan akan disimpan ke dalam database sistem dan digunakan sebagai data historis penjualan.
+Activity Diagram Proses Prediksi Penjualan
+Gambar 3.4 Activity Diagram Proses Prediksi Penjualan
+Gambar 3.4 menggambarkan Activity Diagram proses prediksi penjualan harian. Proses dimulai ketika admin menekan tombol prediksi pada aplikasi POS. Sistem kemudian mengakses data transaksi penjualan yang telah tersimpan sebelumnya, selanjutnya data tersebut diproses menggunakan model Long Short-Term Memory (LSTM) untuk menghasilkan prediksi penjualan harian. Hasil prediksi kemudian ditampilkan pada aplikasi POS.
+Activity Diagram Menampilkan Hasil Prediksi Penjualan
+Gambar 3.5 Activity Diagram Prediksi Penjualan
+Gambar 3.5 menggambarkan Activity Diagram menampilkan hasil prediksi penjualan harian. Proses dimulai setelah sistem berhasil menghasilkan nilai prediksi. Sistem kemudian menampilkan informasi hasil prediksi penjualan harian kepada admin dalam bentuk visual atau data numerik melalui aplikasi POS untuk mendukung pengambilan keputusan.
+Activity Diagram Laporan Penjualan
+Gambar 3.5 Activity Diagram Laporan Penjualan
+Gambar 3.5 menggambarkan Activity Diagram laporan penjualan. Proses dimulai ketika admin memilih menu laporan penjualan. Sistem akan mengakses data transaksi penjualan yang tersimpan pada database, kemudian menampilkan laporan penjualan harian serta menyediakan opsi untuk menyimpan atau mengekspor laporan dalam bentuk file, seperti CSV.
+
+
+# Metode dan Variabel Penelitian
+
+
+
+# Metode Penelitian
+
+Penelitian ini menggunakan metode data mining dan machine learning berbasis algoritma Long Short-Term Memory (LSTM) untuk melakukan prediksi penjualan harian pada sistem Point of Sale (POS). Metode ini digunakan karena LSTM mampu mempelajari pola data runtun waktu (time series) dan menangkap dependensi jangka pendek maupun jangka panjang pada data penjualan. Tahapan metode penelitian yang digunakan terdiri dari beberapa langkah terstruktur sebagai berikut:
+Business Understanding
+Tahap ini bertujuan untuk memahami kebutuhan dan tujuan penelitian dalam konteks prediksi penjualan harian UMKM. Permasalahan yang didefinisikan adalah bagaimana memanfaatkan data transaksi penjualan historis untuk menghasilkan prediksi penjualan harian yang akurat guna membantu pelaku UMKM dalam pengambilan keputusan operasional.
+Data Understanding
+Pada tahap ini dilakukan identifikasi dan pemahaman terhadap data yang digunakan, yaitu data transaksi penjualan harian yang diperoleh dari sistem POS. Data yang dianalisis meliputi tanggal transaksi, jumlah transaksi, total nilai penjualan harian, dan jumlah produk terjual. Data dieksplorasi untuk memahami pola penjualan, tren, dan fluktuasi yang terjadi.
+Data Preparation
+Tahap ini meliputi proses pra-pemrosesan data, seperti pembersihan data dari nilai kosong (missing value), penyelarasan format tanggal, serta normalisasi data numerik menggunakan metode Min-Max Scaling. Tahap ini bertujuan untuk memastikan data siap digunakan dan meningkatkan performa pelatihan model LSTM.
+Modeling
+Pada tahap ini dilakukan perancangan dan pelatihan model prediksi menggunakan algoritma LSTM. Data penjualan harian disusun dalam bentuk dataset time series dengan teknik windowing, kemudian digunakan sebagai input model untuk memprediksi nilai penjualan pada periode berikutnya.
+Evaluation
+Tahap evaluasi dilakukan untuk mengukur kinerja model prediksi penjualan harian. Hasil prediksi dibandingkan dengan data aktual menggunakan metrik evaluasi seperti Mean Absolute Error (MAE), Root Mean Square Error (RMSE), dan Mean Absolute Percentage Error (MAPE).
+Deployment
+Tahap ini merupakan implementasi model LSTM yang telah dilatih ke dalam sistem POS berbasis mobile. Model prediksi dijalankan pada sisi server dan diintegrasikan dengan aplikasi POS sehingga hasil prediksi penjualan harian dapat ditampilkan kepada pengguna.
+
+
+# Rancangan Algoritma Long Short-Term Memory (LSTM)
+
+Desain metode Long Short-Term Memory (LSTM) berfungsi untuk memberikan gambaran mengenai alur kerja algoritma yang digunakan dalam proses prediksi penjualan harian pada sistem Point of Sale (POS). Desain metode ini dapat dilihat pada Gambar 3.X yang menunjukkan tahapan proses pengolahan data transaksi hingga menghasilkan nilai prediksi penjualan harian.
+Gambar 3.6 Rancangan Alur Algoritma LSTM
+Gambar 3.6 menggambarkan alur kerja model LSTM yang dimulai dari input data transaksi penjualan harian hingga proses evaluasi model. Adapun langkah-langkah proses algoritma dalam penelitian ini dijelaskan sebagai berikut:
+Proses penelitian diawali dengan input data berupa dataset transaksi penjualan harian yang diperoleh dari aplikasi POS yang telah diimplementasikan pada mitra UMKM.
+Data yang digunakan kemudian melalui tahap pra-pemrosesan (preprocessing), meliputi pembersihan data (data cleaning), penyelarasan format tanggal, serta normalisasi data menggunakan metode Min-Max Scaling agar sesuai untuk pemodelan time series.
+Selanjutnya, data disusun dalam bentuk runtun waktu (time series) melalui proses windowing (time step) untuk membentuk pola historis yang akan digunakan sebagai input model.
+Dataset kemudian dibagi menjadi data training dan data testing menggunakan metode split data berbasis waktu (time-based split) untuk menjaga urutan temporal data.
+Data training digunakan pada tahap pemodelan menggunakan algoritma LSTM yang terdiri dari input layer, hidden layer LSTM, dan dense layer sebagai output untuk membangun model prediksi penjualan harian.
+Model yang telah dibangun selanjutnya diuji menggunakan data testing untuk menghasilkan nilai prediksi penjualan.
+Tahap terakhir adalah evaluasi model menggunakan metrik MAE, RMSE, dan MAPE untuk menilai tingkat akurasi prediksi yang dihasilkan.
+Apabila hasil evaluasi belum memenuhi kriteria yang diharapkan, dilakukan proses tuning parameter seperti jumlah epoch, batch size, jumlah neuron LSTM, atau learning rate untuk meningkatkan performa model.
+
+
+# Teknik Pengujian
+
+Perancangan pengujian pada penelitian ini menggunakan metode black box testing, yaitu metode pengujian perangkat lunak yang berfokus pada pengujian fungsional sistem dengan mengamati kesesuaian antara data masukan (input) dan keluaran (output) yang dihasilkan. Pengujian ini dilakukan tanpa memperhatikan struktur internal kode program.
+Pengujian diterapkan pada beberapa fitur utama sistem, meliputi fitur login, pengelolaan data, prediksi penjualan, pengeditan data, penghapusan data, pembuatan laporan, serta logout, guna memastikan setiap fungsi berjalan sesuai dengan kebutuhan dan spesifikasi yang telah ditetapkan.
+
+
+# Hasil yang Diharapkan
+
+Hasil yang diharapkan dari penelitian ini meliputi beberapa aspek sebagai berikut:
+Sistem Point of Sale (POS) yang dikembangkan mampu membantu pelaku UMKM dalam melakukan pengelolaan transaksi penjualan, data produk, dan laporan penjualan secara efisien dan terintegrasi.
+Implementasi metode Long Short-Term Memory (LSTM) pada sistem dapat berjalan dengan baik dan akurat dalam melakukan prediksi penjualan harian, sehingga dapat digunakan sebagai dasar pengambilan keputusan usaha.
+Sistem yang dibangun mampu menyajikan informasi prediksi dan laporan penjualan dalam bentuk yang mudah dipahami oleh pengguna, khususnya pelaku UMKM.
+Hasil penelitian ini diharapkan dapat dipublikasikan dalam jurnal ilmiah sebagai kontribusi dalam pengembangan sistem informasi dan penerapan machine learning pada UMKM.
+Penelitian ini menghasilkan laporan tugas akhir sebagai salah satu syarat penyelesaian studi pada Program Studi terkait.
+
+
+# JADWAL KEGIATAN PENELITIAN
+
+Berikut ini merupakan jadwal kegiatan penelitian yang dilaksanakan mulai dari bulan Januari sampai dengan Juni, yang ditampilkan pada Tabel 3.5:
+
+
+# RENCANA ANGGARAN PENELITIAN
+
+Rencana Anggaran yang digunakan dalam penelitian “RANCANG BANGUN APLIKASI POINT OF SALE DENGAN FITUR PREDIKSI PENJUALAN HARIAN MENGGUNAKAN METODE LONG SHORT-TERM MEMORY (LSTM)” dapat dilihat pada tabel 5 berikut:
+
+
+# DAFTAR PUSTAKA
+
+L. Breiman, “Random Forests,” Machine Learning, vol. 45, no. 1, pp. 5–32, Oct. 2001, doi: https://doi.org/10.1023/A:1010933404324.
+M. Belgiu and L. Drăguţ, “Random Forest in Remote Sensing: A Review of Applications and Future Directions,” ISPRS Journal of Photogrammetry and Remote Sensing, vol. 114, pp. 24–31, Apr. 2016, doi: https://doi.org/10.1016/j.isprsjprs.2016.01.011.
+T. K. Sinha and S. S. Kumar, “Predictive Modeling of Soil Quality for Crop Suitability using Random Forest,” Journal of King Saud University - Computer and Information Sciences, vol. 34, no. 4, pp. 1245–1255, 2022, doi: https://doi.org/10.1016/j.jksuci.2020.06.002.
+K. H. S. S. Sundar et al., “A Recommendation System for Crop Selection Based on Soil and Environmental Factors,” Applied Soft Computing, vol. 112, p. 107792, 2021, doi: https://doi.org/10.1016/j.asoc.2021.107792.
+M. S. Amin et al., “Implementation of Machine Learning for Crop Recommendation System,” International Journal of Advanced Computer Science and Applications, vol. 13, no. 6, pp. 321–329, 2022, doi: https://doi.org/10.14569/IJACSA.2022.0130640.
+R. A. Pramunendar et al., “The Selection of Variety Crops in Horticulture Based on Soil and Weather Factors Using Random Forest,” Journal of Computer Science, vol. 16, no. 1, pp. 50–60, 2020, doi: https://doi.org/10.3844/jcssp.2020.50.60.
+M. S. Saini, S. Saini, and R. Singh, “A Systematic Review on Machine Learning Techniques for Crop Yield Prediction and Crop Selection,” International Journal of Computer Applications, vol. 182, no. 50, pp. 40–46, 2019, doi: https://doi.org/10.5120/ijca2019918731.
+G. Shinde et al., “Smart Agriculture: Crop Selection and Yield Prediction using Machine Learning,” International Journal of Computer Applications, vol. 175, no. 18, pp. 41–45, 2020, doi: https://doi.org/10.5120/ijca2020920401.
+R. Katarya et al., “A Review of Intelligent Agriculture Based on Machine Learning Techniques,” International Journal of Information Systems and Social Change, vol. 12, no. 2, pp. 1–15, 2021, doi: https://doi.org/10.4018/IJISSC.2021040101.
+A. Shrestha and A. Mahmood, “Review of Deep Learning Algorithms and Architectures,” IEEE Access, vol. 7, pp. 53040–53065, 2019, doi: https://doi.org/10.1109/ACCESS.2019.2912200.
+S. Hochreiter and J. Schmidhuber, “Long Short-Term Memory,” Neural Computation, vol. 9, no. 8, pp. 1735–1780, 1997, doi: https://doi.org/10.1162/neco.1997.9.8.1735.
+I. Goodfellow, Y. Bengio, and A. Courville, Deep Learning. Cambridge, MA, USA: MIT Press, 2016.

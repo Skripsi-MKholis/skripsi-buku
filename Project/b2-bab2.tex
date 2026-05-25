@@ -1,11 +1,7 @@
 \chapter[TINJAUAN PUSTAKA]{\\ TINJAUAN PUSTAKA}
 
 \section{State Of The Art}
-Penelitian terkait klasifikasi kualitas air telah mengalami perkembangan signifikan dengan pemanfaatan metode \textit{machine learning}, khususnya algoritma \textit{Random Forest} yang dikenal mampu menangani data nonlinier dan kompleks secara efektif. Berbagai penelitian telah dilakukan dengan fokus pada klasifikasi kualitas air berbasis parameter fisik dan kimia, baik untuk keperluan konsumsi, lingkungan, maupun sistem pengolahan air.
-
-Secara umum, penelitian terdahulu dapat dikelompokkan ke dalam tiga kategori utama. Pertama, penelitian yang berfokus pada klasifikasi kualitas air konsumsi dan air lingkungan, seperti air minum, air sumur, dan air permukaan, yang bertujuan untuk menentukan kelayakan berdasarkan standar kesehatan. Kedua, penelitian yang mengarah pada prediksi parameter kualitas air atau \textit{Water Quality Index} (WQI) menggunakan pendekatan regresi berbasis \textit{machine learning}. Ketiga, penelitian yang mulai berkembang dalam konteks air industri, khususnya pada sistem \textit{cooling water}, yang digunakan dalam operasional pembangkit listrik dan proses industri.
-
-Meskipun demikian, penelitian pada konteks \textit{cooling water} industri masih relatif terbatas dan umumnya berfokus pada prediksi parameter kualitas air atau estimasi kondisi sistem, seperti laju korosi dan performa sistem pendingin, bukan pada klasifikasi kelayakan operasional secara langsung. Padahal, dalam praktik industri, diperlukan sistem yang mampu mengklasifikasikan kondisi air secara cepat dan akurat untuk mendukung pengambilan keputusan operasional. Ringkasan penelitian terdahulu tersebut disajikan dalam bentuk tabel \textit{State of the Art} pada Tabel \ref{tab:sota}.
+Pembuatan penelitian ini menggunakan referensi dari beberapa jurnal yang berkaitan dan berhubungan. Bentuk referensi ditampilkan melalui tabel ringkasan penelitian sebelumnya atau \textit{State of the Art} yang dapat dilihat pada Tabel \ref{tab:sota} berikut.
 
 \begin{table}[htbp]
     \centering
@@ -16,197 +12,112 @@ Meskipun demikian, penelitian pada konteks \textit{cooling water} industri masih
         \hline
         \textbf{No} & \textbf{Penulis, Tahun \& Judul} & \textbf{Metode} & \textbf{Hasil} & \textbf{Persamaan} & \textbf{Perbedaan} \\
         \hline
-        1 & Ningsih \& Pramartha (2024) \cite{Ningsih2024} & Random Forest \& GridSearchCV & Tuning hyperparameter meningkatkan akurasi model & Sama-sama klasifikasi kualitas air & Dataset air minum vs. cooling water \\
+        1 & Darmanto \& Barus (2024) \cite{Darmanto2024} & Random Forest & Model mampu meningkatkan akurasi prediksi serta membantu perusahaan dalam perencanaan stok. & Sama-sama menggunakan data transaksi penjualan sebagai dasar peramalan. & Menggunakan Random Forest untuk klasifikasi/regresi vs. LSTM untuk runtun waktu. \\
         \hline
-        2 & Wan et al. (2025) \cite{Wan2025} & TCN, LSTM, CNN, XGBoost, SVM & TCN terbaik dengan $R^2$ = 0,911 & Penerapan ML pada cooling water & Pendekatan regresi vs. klasifikasi \\
+        2 & Prasetyo \textit{et al.} (2023) \cite{Prasetyo2023} & LSTM & LSTM mampu menangkap pola tren dan musiman secara lebih baik dibanding regresi linier. & Sama-sama menggunakan metode LSTM untuk peramalan penjualan berbasis data historis. & Hanya fokus pada pengembangan model prediksi vs. integrasi model ke aplikasi POS. \\
         \hline
-        3 & Ruiz et al. (2024) \cite{Ruiz2024} & XGBoost \& DNN & DNN terbaik untuk estimasi laju korosi & Data operasional cooling water & Prediksi laju korosi vs. kelayakan \\
+        3 & Ramadhan \textit{et al.} (2022) \cite{Ramadhan2022} & LSTM dan GRU & LSTM memiliki performa lebih stabil dalam menghadapi fluktuasi permintaan jangka panjang. & Memanfaatkan pendekatan deep learning untuk memodelkan data deret waktu yang kompleks. & Hanya fokus pada analisis model vs. rancang bangun aplikasi POS terintegrasi. \\
         \hline
-        4 & Hridoy et al. (2024) \cite{Hridoy2025} & Random Forest, SVM, XGBoost, LightGBM & Random Forest memberikan akurasi tertinggi & Klasifikasi air berbasis parameter fisik/kimia & Klasifikasi multi-kelas vs. biner \\
-        \hline
-        5 & Chen et al. (2024) \cite{Chen2024} & Random Forest, SVM, Decision Tree, KNN & Random Forest berkinerja paling unggul & Klasifikasi status layak/tidak layak & Dataset air tanah vs. cooling water \\
-        \hline
-        6 & Mutoffar et al. (2022) \cite{Mutoffar2022} & Random Forest & Akurasi presisi 0,823 dan sensitivitas 0,83 & Random Forest untuk kualitas air & Air sumur rumah tangga vs. industri \\
-        \hline
-        7 & Firmansyah et al. (2025) \cite{Firmansyah2025} & Random Forest \& Random Search & Optimasi sedikit meningkatkan akurasi & Random Forest untuk kualitas air & Fokus optimasi hyperparameter vs. operasional \\
-        \hline
-        8 & Distefano et al. (2024) \cite{Distefano2024} & Random Forest \& ADASYN/resampling & ADASYN meningkatkan performa data imbalanced & Random Forest pada data tidak seimbang & Air limbah emisi bau vs. cooling water \\
+        4 & Wijaya \& Putri (2022) \cite{Wijaya2022} & - & Sistem POS berbasis web mengurangi kesalahan manual dan mempercepat pelayanan. & Mengembangkan aplikasi POS untuk membantu pengelolaan transaksi dan laporan. & Belum memiliki fitur prediksi penjualan vs. memiliki fitur prediksi LSTM. \\
         \hline
     \end{tabularx}
 \end{table}
 
-Berdasarkan kajian terhadap penelitian terdahulu pada Tabel \ref{tab:sota}, dapat disimpulkan bahwa sebagian besar penelitian masih berfokus pada klasifikasi dan prediksi kualitas air konsumsi seperti air minum, air permukaan, dan air tanah menggunakan algoritma \textit{Random Forest} berbasis dataset umum. Beberapa penelitian telah mulai mengkaji penerapan \textit{machine learning} pada sistem \textit{cooling water} industri, namun umumnya masih menggunakan pendekatan prediksi parameter kualitas air dan belum secara spesifik mengklasifikasikan kelayakan operasional air.
+\section{Tinjauan Teoritis}
 
-Oleh karena itu, penelitian yang membahas klasifikasi kelayakan \textit{cooling water} dalam kategori Layak dan Tidak Layak berbasis data operasional nyata masih terbatas. Penelitian ini hadir untuk mengisi celah tersebut dengan mengusulkan sistem klasifikasi menggunakan algoritma \textit{Random Forest} berdasarkan data historis dari PT PLN Nusantara Power UP Arun dengan mengacu pada standar teknis operasional pabrikan mesin sebagai dasar pelabelan data.
+\subsection{Point of Sale (POS)}
+\textit{Point of Sale} (POS) merupakan sistem informasi yang digunakan untuk memproses dan mencatat transaksi penjualan pada titik terjadinya transaksi antara penjual dan pelanggan \cite{Wijaya2022}. Sistem POS modern telah berkembang dari sekadar mesin kasir elektronik menjadi sistem berbasis komputer atau aplikasi yang terintegrasi dengan basis data dan jaringan internet. Melalui sistem POS, setiap transaksi penjualan akan tercatat secara otomatis dan tersimpan dalam database, sehingga meminimalkan kesalahan pencatatan manual serta meningkatkan kecepatan pelayanan. Selain itu, sistem POS juga umumnya dilengkapi dengan fitur manajemen inventaris yang mampu memperbarui jumlah stok secara otomatis setelah terjadi transaksi, sehingga membantu pelaku usaha dalam mengontrol persediaan barang.
 
-\section{Cooling Water}
-\textit{Cooling water} merupakan air yang digunakan sebagai media pendingin dalam sistem industri dan pembangkit listrik untuk menyerap dan memindahkan panas dari peralatan atau mesin selama proses operasi berlangsung. Pada pembangkit listrik, sistem pendingin memiliki peranan penting dalam menjaga kestabilan temperatur komponen seperti turbin, kondensor, \textit{heat exchanger}, serta sistem bantu lainnya agar tetap berada dalam batas aman operasional. Apabila suhu tidak dikendalikan dengan baik, maka dapat terjadi \textit{overheating} yang berpotensi menurunkan efisiensi sistem dan mempercepat kerusakan peralatan \cite{Lan2025}.
+Keunggulan utama sistem POS terletak pada kemampuannya menghasilkan data historis penjualan yang terstruktur dan terdokumentasi dengan baik. Data historis ini menjadi fondasi penting dalam proses analisis bisnis, termasuk analisis tren penjualan, identifikasi produk terlaris, serta peramalan permintaan di masa mendatang. Dengan demikian, sistem POS tidak hanya berperan sebagai alat operasional, tetapi juga sebagai sumber data strategis bagi pengembangan sistem analitik yang lebih canggih.
 
-Dalam sistem pembangkit modern, \textit{cooling water} umumnya digunakan dalam sistem sirkulasi tertutup maupun semi-terbuka (\textit{recirculating cooling system}), di mana air digunakan berulang kali selama kualitasnya masih memenuhi standar operasional. Namun, proses sirkulasi yang terus-menerus menyebabkan terjadinya akumulasi zat terlarut, partikel, serta mikroorganisme yang dapat memengaruhi kualitas air pendingin. Salah satu permasalahan utama dalam sistem \textit{cooling water} adalah terbentuknya biofilm pada permukaan pipa dan \textit{heat exchanger} akibat pertumbuhan mikroorganisme. Biofilm dapat menghambat proses perpindahan panas dan meningkatkan risiko terjadinya korosi yang dipicu oleh aktivitas mikroba (\textit{microbially induced corrosion}) \cite{DiPippo2018}. Kondisi ini dapat menurunkan efisiensi sistem pendingin serta meningkatkan biaya perawatan dan risiko gangguan operasional.
+\subsection{Konsep Peramalan (Forecasting)}
+Peramalan atau \textit{forecasting} adalah proses estimasi nilai di masa depan berdasarkan pola data historis dan analisis faktor-faktor yang memengaruhinya \cite{Prasetyo2023}. Dalam konteks bisnis ritel, peramalan penjualan memiliki peran yang sangat penting karena berkaitan langsung dengan perencanaan stok, pengadaan barang, pengelolaan modal, dan strategi pemasaran. Kesalahan dalam peramalan dapat menyebabkan terjadinya kelebihan stok (\textit{overstock}) yang meningkatkan biaya penyimpanan, maupun kekurangan stok (\textit{stockout}) yang berpotensi mengurangi pendapatan dan kepuasan pelanggan.
 
-Selain faktor biologis, kualitas \textit{cooling water} juga dipengaruhi oleh parameter fisik dan kimia seperti derajat keasaman (pH), konduktivitas listrik, total zat terlarut (\textit{Total Dissolved Solids}/TDS), serta kandungan ion tertentu seperti klorida, sulfat, dan besi. Nilai pH yang terlalu rendah dapat mempercepat proses korosi, sedangkan pH yang terlalu tinggi berpotensi menyebabkan pembentukan kerak (\textit{scaling}) pada permukaan perpindahan panas. Konsentrasi zat terlarut dan garam mineral yang tinggi juga berkontribusi terhadap pembentukan deposit mineral yang dapat mengurangi efisiensi perpindahan panas \cite{Kuznietsov2024, Biedunkova2024}. Selain itu, perubahan komposisi kimia air pendingin dipengaruhi oleh kondisi operasi sistem, termasuk suhu, laju sirkulasi, serta proses \textit{blowdown} yang dilakukan untuk mengendalikan konsentrasi zat terlarut dalam sistem \cite{Suganya2020}.
+Metode peramalan dapat dibedakan menjadi metode kualitatif dan kuantitatif. Metode kuantitatif umumnya memanfaatkan data historis numerik dan teknik statistik seperti \textit{Moving Average}, \textit{Exponential Smoothing}, serta \textit{ARIMA}. Namun, seiring berkembangnya teknologi komputasi, pendekatan berbasis \textit{machine learning} dan \textit{deep learning} mulai banyak digunakan karena mampu memodelkan hubungan non-linear yang kompleks serta menangani data dalam jumlah besar \cite{Ramadhan2022}. Pendekatan ini dinilai lebih adaptif terhadap perubahan pola penjualan yang dinamis dibandingkan metode statistik tradisional.
 
-Akumulasi zat terlarut dan pertumbuhan mikroorganisme yang tidak terkendali dapat menyebabkan \textit{fouling}, \textit{scaling}, dan korosi pada komponen sistem pendingin \cite{DiPippo2018}. Ketiga fenomena tersebut berdampak langsung pada penurunan performa sistem, peningkatan konsumsi energi, serta potensi kerusakan dini pada peralatan pembangkit. Oleh karena itu, pemantauan kualitas \textit{cooling water} secara berkala menjadi langkah penting untuk menjaga keandalan dan efisiensi sistem. Dalam konteks penelitian ini, parameter kualitas \textit{cooling water} dijadikan sebagai variabel utama yang dianalisis untuk menentukan klasifikasi kelayakan air pendingin secara objektif menggunakan pendekatan \textit{machine learning}.
+\subsection{Data Deret Waktu (Time Series)}
+Data deret waktu (\textit{time series}) merupakan data yang dikumpulkan secara berurutan berdasarkan interval waktu tertentu, seperti harian, mingguan, atau bulanan \cite{Prasetyo2023}. Data penjualan harian termasuk dalam kategori ini karena memiliki dimensi waktu yang berurutan dan saling bergantung. Karakteristik utama data \textit{time series} meliputi tren jangka panjang, pola musiman yang berulang, fluktuasi siklis yang dipengaruhi kondisi ekonomi, serta komponen acak yang tidak dapat diprediksi secara langsung.
 
-\section{Parameter Kualitas Cooling Water}
-Parameter kualitas \textit{cooling water} merupakan indikator penting dalam menilai kondisi dan kelayakan air untuk mendukung operasional sistem pendingin pada unit pembangkit listrik. Kualitas air pendingin yang tidak terkontrol dapat menyebabkan berbagai permasalahan serius seperti korosi dan \textit{scaling}, yang berdampak pada berkurangnya efisiensi perpindahan panas, meningkatnya frekuensi \textit{shutdown} peralatan, serta berkurangnya usia pipa dan komponen sistem \cite{Stojanovic2017, Hsieh2010}. Oleh karena itu, pemantauan parameter kualitas air perlu dilakukan secara berkala guna menjaga stabilitas sistem dan memperpanjang umur peralatan. Secara umum, parameter kualitas \textit{cooling water} dapat dikelompokkan menjadi tiga kategori, yaitu parameter fisik, kimia, dan biologis.
+Dalam analisis \textit{time series}, penting untuk memahami bahwa nilai pada suatu waktu tertentu dipengaruhi oleh nilai pada waktu sebelumnya. Oleh karena itu, model yang digunakan dalam peramalan harus mampu menangkap ketergantungan temporal tersebut. Pada kasus penjualan harian, misalnya, jumlah penjualan pada hari ini dapat dipengaruhi oleh pola penjualan pada hari-hari sebelumnya, termasuk faktor musiman seperti akhir pekan atau periode promosi tertentu. Pemahaman terhadap karakteristik ini menjadi dasar dalam pemilihan metode LSTM sebagai model prediksi.
 
-\subsection{Parameter Fisik}
-Parameter fisik berkaitan dengan karakteristik tampak dan sifat fisik air yang secara langsung memengaruhi proses perpindahan panas dalam sistem pendingin.
-\begin{enumerate}
-    \item \textbf{Suhu Air}: memengaruhi laju perpindahan panas dan efisiensi pendinginan secara keseluruhan. Peningkatan suhu air pendingin dapat menurunkan kemampuan air dalam menyerap panas sehingga berdampak pada penurunan performa sistem \cite{Hsieh2010}.
-    \item \textbf{Turbidity (Kekeruhan)}: menunjukkan jumlah partikel tersuspensi yang terdapat dalam air. Nilai kekeruhan yang tinggi berpotensi menyebabkan \textit{fouling} pada permukaan pipa dan \textit{heat exchanger}, sehingga dapat menghambat proses perpindahan panas secara signifikan \cite{Singh2022}.
-    \item \textbf{Warna dan Bau}: Perubahan warna dan bau pada air pendingin dapat menjadi indikator awal adanya kontaminasi organik atau meningkatnya aktivitas mikroorganisme di dalam sistem pendingin \cite{Singh2022}.
-\end{enumerate}
+\subsection{Machine Learning dalam Prediksi Penjualan}
+\textit{Machine Learning} merupakan cabang dari kecerdasan buatan yang memungkinkan sistem belajar dari data untuk mengenali pola dan menghasilkan prediksi tanpa diprogram secara eksplisit \cite{Goodfellow2016}. Dalam prediksi penjualan, pendekatan \textit{supervised learning} digunakan karena tersedia data historis yang berisi pasangan input dan output yang telah diketahui nilainya. Model akan dilatih menggunakan data tersebut untuk mempelajari pola hubungan antara waktu dan nilai penjualan.
 
-\subsection{Parameter Kimia}
-Parameter kimia berkaitan dengan komposisi zat terlarut dalam air yang dapat memengaruhi stabilitas kimia air serta potensi terjadinya korosi maupun pembentukan kerak (\textit{scaling}).
-\begin{enumerate}
-    \item \textbf{pH}: derajat keasaman air pendingin. Keseimbangan pH yang tidak terjaga dapat menyebabkan kerusakan yang luas dan korosi pada komponen sistem pendingin. Nilai pH yang terlalu rendah mengindikasikan kondisi air yang bersifat asam sehingga mempercepat proses korosi, sedangkan pH yang terlalu tinggi dapat memicu pembentukan kerak mineral pada permukaan sistem \cite{Royani2019}.
-    \item \textbf{Total Dissolved Solids (TDS)}: TDS menunjukkan jumlah total zat padat terlarut dalam air, di mana konsentrasi TDS yang tinggi dapat meningkatkan risiko terbentuknya deposit mineral yang mengganggu efisiensi perpindahan panas pada sistem pendingin \cite{Singh2022}.
-    \item \textbf{Konduktivitas Listrik}: menggambarkan kemampuan air dalam menghantarkan arus listrik akibat keberadaan ion terlarut. Nilai konduktivitas yang tinggi mengindikasikan konsentrasi mineral yang lebih besar dan berkorelasi dengan meningkatnya risiko korosi serta pembentukan kerak \cite{Singh2022, Royani2019}.
-    \item \textbf{Ion Tertentu}: Beberapa ion memiliki pengaruh signifikan terhadap kondisi sistem pendingin. Nitrit umumnya digunakan sebagai inhibitor korosi dalam sistem \textit{cooling water} tertutup karena dapat membentuk lapisan pelindung pada permukaan logam, namun apabila kadarnya tidak terkontrol dapat menimbulkan ketidakseimbangan kimia dalam sistem \cite{Hsieh2010}. Peningkatan kandungan besi (Fe) sering kali menjadi indikator terjadinya proses korosi pada sistem pendingin \cite{Royani2019}. Sementara itu, ion sulfat dapat berkontribusi terhadap pembentukan endapan seperti kalsium sulfat yang berpotensi menyebabkan \textit{scaling} dan mengganggu kinerja sistem \cite{Stojanovic2017, Hoseinzadeh2013}.
-\end{enumerate}
+Metode \textit{machine learning} konvensional seperti regresi linier atau \textit{Random Forest} dapat digunakan untuk memprediksi penjualan, namun metode tersebut memiliki keterbatasan dalam menangani data sekuensial yang memiliki ketergantungan jangka panjang. Oleh karena itu, pendekatan berbasis jaringan saraf tiruan, khususnya \textit{Recurrent Neural Network} (RNN), dikembangkan untuk mengatasi keterbatasan tersebut dengan memanfaatkan struktur jaringan yang mampu memproses data berurutan.
 
-\subsection{Parameter Biologis}
-Parameter biologis berkaitan dengan aktivitas mikroorganisme yang dapat berkembang di dalam sistem pendingin.
-\begin{enumerate}
-    \item \textbf{Mikroorganisme / Biofilm}: Pertumbuhan mikroorganisme pada permukaan sistem pendingin dapat membentuk lapisan biofilm yang berkontribusi terhadap terjadinya \textit{microbially induced corrosion} (MIC). Mekanisme ini dapat mempercepat kerusakan material melalui reaksi kimia dan produksi zat korosif oleh mikroorganisme \cite{Hsieh2010}.
-    \item \textbf{Kontaminan Organik}: Senyawa organik dalam air dapat menjadi sumber nutrisi bagi mikroorganisme sehingga mempercepat pertumbuhan dan pembentukan biofilm dalam sistem pendingin \cite{Singh2022, Hsieh2010}.
-\end{enumerate}
+\subsection{Recurrent Neural Network (RNN)}
+\textit{Recurrent Neural Network} (RNN) merupakan arsitektur jaringan saraf tiruan yang dirancang untuk memproses data sekuensial dengan mempertahankan informasi dari langkah waktu sebelumnya \cite{Goodfellow2016}. RNN memiliki mekanisme umpan balik (\textit{feedback loop}) yang memungkinkan output pada waktu sebelumnya menjadi input tambahan pada waktu berikutnya. Struktur ini memungkinkan model memahami konteks temporal dalam data deret waktu.
 
-Berdasarkan berbagai parameter kualitas \textit{cooling water} yang telah diuraikan, penelitian ini memfokuskan pada enam parameter utama, yaitu pH, Specific Conductivity (SC), Nitrite, Fe, Sulfate, dan Turbidity sebagai variabel input dalam proses klasifikasi. Pemilihan keenam parameter tersebut didasarkan pada ketersediaan data hasil pengujian laboratorium serta relevansinya terhadap potensi korosi, \textit{scaling}, dan \textit{fouling} pada sistem operasional. Parameter-parameter tersebut selanjutnya digunakan sebagai variabel input dalam model klasifikasi berbasis algoritma \textit{Random Forest} untuk menentukan status kelayakan \textit{cooling water} secara otomatis.
+Meskipun RNN mampu memodelkan data sekuensial, arsitektur ini memiliki kelemahan berupa permasalahan \textit{vanishing gradient}, yaitu kondisi di mana gradien menjadi sangat kecil sehingga jaringan kesulitan mempelajari hubungan jangka panjang. Permasalahan ini menyebabkan performa RNN menurun ketika digunakan untuk memodelkan data dengan dependensi waktu yang panjang, seperti data penjualan harian dalam periode yang cukup lama.
 
-\section{Machine Learning (ML)}
-\textit{Machine Learning} (ML) merupakan salah satu cabang utama dalam bidang \textit{Artificial Intelligence} (AI) yang berfokus pada pengembangan metode komputasional yang memungkinkan sistem untuk belajar dari data dan meningkatkan performanya secara otomatis melalui pengalaman \cite{Mukhamediev2022}. Berbeda dengan pendekatan pemrograman konvensional yang mengandalkan aturan-aturan eksplisit yang dirancang oleh manusia (\textit{rule-based system}), ML menggunakan pendekatan berbasis data (\textit{data-driven approach}), di mana pola dan aturan keputusan diekstraksi langsung dari data melalui proses pembelajaran algoritmik \cite{Tufail2023}.
+\subsection{Long Short-Term Memory (LSTM)}
+\textit{Long Short-Term Memory} (LSTM) merupakan salah satu varian dari \textit{Recurrent Neural Network} (RNN) yang dirancang untuk mengatasi permasalahan \textit{vanishing gradient} pada pemodelan data sekuensial jangka panjang \cite{Hochreiter1997}. LSTM diperkenalkan oleh Sepp Hochreiter dan Jürgen Schmidhuber pada tahun 1997 sebagai arsitektur jaringan saraf yang mampu mempertahankan informasi dalam rentang waktu yang lebih panjang dibandingkan RNN konvensional. Keunggulan utama LSTM terletak pada keberadaan mekanisme \textit{gating} (gerbang) yang mengatur aliran informasi masuk, disimpan, dan dikeluarkan dari sel memori (\textit{cell state}). Struktur ini memungkinkan model untuk memilih informasi mana yang relevan untuk dipertahankan atau dilupakan, sehingga sangat efektif dalam berbagai tugas seperti peramalan deret waktu, pengenalan suara, dan pemrosesan bahasa alami \cite{Goodfellow2016}.
 
-Secara konseptual, ML bekerja dengan membangun suatu model matematis berdasarkan dataset historis. Model tersebut merepresentasikan hubungan antara variabel masukan (fitur) dan variabel keluaran (target). Melalui proses pelatihan (\textit{training}), model akan menyesuaikan parameter internalnya untuk meminimalkan kesalahan prediksi terhadap data latih. Hasil dari proses ini adalah suatu fungsi atau struktur keputusan yang mampu digunakan untuk melakukan inferensi terhadap data baru yang belum pernah diproses sebelumnya \cite{Barbierato2024}.
+Secara arsitektural, satu unit LSTM terdiri atas tiga gerbang utama, yaitu \textit{forget gate}, \textit{input gate}, dan \textit{output gate}, serta satu komponen \textit{cell state} yang berfungsi sebagai memori jangka panjang. Pada setiap langkah waktu ke-$t$, LSTM menerima input $x_t$, status tersembunyi sebelumnya $h_{t-1}$, dan status sel sebelumnya $C_{t-1}$. Proses komputasi dilakukan secara bertahap melalui fungsi aktivasi sigmoid dan tanh untuk mengontrol pembaruan memori. Pendekatan ini memungkinkan LSTM menjaga stabilitas gradien selama proses pelatihan menggunakan algoritma \textit{backpropagation through time} (BPTT). Dengan demikian, LSTM mampu menangkap dependensi temporal yang kompleks dalam data sekuensial.
 
-Tujuan fundamental dari ML bukan sekadar memperoleh akurasi tinggi pada data latih, melainkan menghasilkan model yang memiliki kemampuan generalisasi yang baik. Generalisasi merujuk pada kemampuan model dalam mempertahankan performa prediksi ketika dihadapkan pada data baru di luar sampel pelatihan. Tantangan utama dalam ML adalah menyeimbangkan kompleksitas model agar tidak terjadi \textit{overfitting} (model terlalu menyesuaikan diri dengan data latih) maupun \textit{underfitting} (model terlalu sederhana sehingga gagal menangkap pola penting dalam data) \cite{Barbierato2024}.
-
-Seiring perkembangannya, ML telah banyak diterapkan di berbagai bidang, mulai dari sistem klasifikasi medis, prediksi kondisi industri, deteksi anomali, sistem rekomendasi, hingga pengenalan citra dan suara, serta analisis data dalam skala besar. Hal ini menunjukkan bahwa ML memiliki fleksibilitas yang tinggi sehingga menjadikannya salah satu pendekatan yang efektif dalam menangani permasalahan kompleks yang sulit diselesaikan hanya dengan mengandalkan aturan deterministik tradisional \cite{Mukhamediev2022, Tufail2023}.
-
-\subsection{Paradigma dan Jenis-Jenis Machine Learning}
-Berdasarkan mekanisme pembelajaran dan karakteristik data yang digunakan, ML secara umum diklasifikasikan ke dalam tiga paradigma utama, yaitu \textit{supervised learning}, \textit{unsupervised learning}, dan \textit{reinforcement learning} \cite{Mukhamediev2022, Tufail2023}.
-\begin{enumerate}
-    \item \textbf{Supervised Learning}: paradigma pembelajaran terawasi di mana model dilatih menggunakan dataset yang telah memiliki label atau nilai target yang diketahui. Dalam pendekatan ini, setiap data masukan memiliki pasangan keluaran yang benar, sehingga proses pembelajaran bertujuan untuk membangun fungsi pemetaan dari ruang fitur ke ruang target \cite{Tufail2023}. Secara matematis, supervised learning berupaya mempelajari suatu fungsi $f(x) = y$, di mana $x$ merepresentasikan fitur masukan dan $y$ merupakan variabel target. Dalam pelatihannya, model dioptimalkan untuk meminimalkan fungsi kerugian (\textit{loss function}) yang mengukur seberapa besar selisih antara nilai prediksi dengan nilai aktual \cite{Barbierato2024}. Supervised learning umumnya dibagi menjadi dua jenis permasalahan utama: klasifikasi (variabel target diskrit) dan regresi (variabel target kontinu).
-    \item \textbf{Unsupervised Learning}: paradigma pembelajaran tanpa label, di mana dataset tidak memiliki variabel target yang telah ditentukan. Tujuan utama pendekatan ini adalah mengidentifikasi struktur, pola, atau hubungan tersembunyi di dalam data secara mandiri \cite{Mukhamediev2022}. Teknik yang umum digunakan meliputi \textit{clustering}, \textit{dimensionality reduction}, dan \textit{anomaly detection} \cite{Tufail2023}.
-    \item \textbf{Reinforcement Learning}: paradigma di mana sebuah agen belajar melalui interaksi langsung dengan lingkungannya dengan menerima umpan balik berupa \textit{reward} (penghargaan) atau \textit{punishment} (hukuman) dari setiap tindakan yang dilakukannya untuk memaksimalkan reward kumulatif \cite{Mukhamediev2022, Tufail2023}.
-\end{enumerate}
-
-\subsection{Tahapan Penerapan Machine Learning}
-Penerapan ML dalam suatu sistem umumnya mengikuti alur kerja yang terstruktur dan sistematis, yang terdiri atas beberapa tahapan utama yang saling berkaitan:
-\begin{enumerate}
-    \item \textbf{Pengumpulan Data}: proses memperoleh dataset yang relevan dan representatif. Kualitas maupun kuantitas data sangat menentukan performa model \cite{Tufail2023}.
-    \item \textbf{Preprocessing Data}: bertujuan untuk mempersiapkan data sebelum pemodelan, meliputi pembersihan data dari \textit{missing values}, duplikasi, penyeragaman skala, dan seleksi fitur \cite{Tufail2023}.
-    \item \textbf{Training}: proses melatih model menggunakan data latih agar model dapat mempelajari pola hubungan fitur masukan dan variabel target \cite{Barbierato2024}.
-    \item \textbf{Testing}: proses menguji model menggunakan data yang tidak digunakan saat pelatihan untuk mengevaluasi kemampuan generalisasi model dan menghindari \textit{overfitting} \cite{Tufail2023, Barbierato2024}.
-    \item \textbf{Evaluasi Performa}: pengukuran kinerja model menggunakan metrik seperti \textit{accuracy}, \textit{precision}, \textit{recall}, dan \textit{F1-score} pada kasus klasifikasi \cite{Rainio2024}.
-\end{enumerate}
-
-\section{Sistem Klasifikasi (Classification)}
-Sistem klasifikasi merupakan metode dalam \textit{machine learning} yang digunakan untuk mengelompokkan data ke dalam kelas atau kategori tertentu berdasarkan atribut atau karakteristik yang dimilikinya. Sistem ini termasuk dalam \textit{supervised learning}, yaitu pendekatan pembelajaran mesin di mana model dilatih menggunakan data berlabel untuk mempelajari hubungan antara fitur input dan kelas keluaran \cite{Nurhalizah2024}. 
-
-Proses klasifikasi umumnya terdiri dari dua tahap utama, yakni pembelajaran (\textit{training}) dan pengujian (\textit{testing}). Pada tahap pembelajaran, model mempelajari pola hubungan antara atribut masukan dan label kelas pada data latih. Sedangkan pada tahap pengujian, kemampuan model dalam mengklasifikasikan data yang belum pernah dilihat dievaluasi menggunakan metrik performa seperti akurasi, presisi, \textit{recall}, \textit{F1-score}, dan \textit{confusion matrix} \cite{Helmud2024}. Penerapan sistem klasifikasi dalam konteks kualitas air memungkinkan data berupa parameter fisik dan kimia dipetakan ke dalam kelas tertentu, sehingga menjadi alat bantu dalam pengambilan keputusan operasional secara objektif dan efisien \cite{Jesika2023}.
-
-\section{Evaluasi Performa Model Klasifikasi}
-Evaluasi performa model klasifikasi merupakan aspek krusial dalam pengembangan sistem ML, karena menentukan sejauh mana model yang dibangun mampu melakukan klasifikasi secara akurat dan dapat diandalkan. Beberapa metrik evaluasi yang umum digunakan didasarkan pada \textit{confusion matrix}. \textit{Confusion matrix} membandingkan prediksi model dengan nilai aktual data uji, menghasilkan empat komponen utama yaitu \textit{True Positive} (TP), \textit{True Negative} (TN), \textit{False Positive} (FP), dan \textit{False Negative} (FN) \cite{Chen2024}.
+Secara matematis, mekanisme kerja LSTM dapat dirumuskan sebagai berikut:
 
 \begin{enumerate}
-    \item \textbf{Accuracy}: mengukur proporsi total prediksi yang benar terhadap keseluruhan jumlah data pengujian. Secara matematis dirumuskan sebagai:
+    \item \textbf{Forget Gate} \\
+    Gerbang ini menentukan informasi mana dari status sel sebelumnya yang akan dipertahankan atau dihapus.
     \begin{equation}
-    \label{eq:accuracy}
-    \text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{FP} + \text{FN}}
+        f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)
     \end{equation}
-    Meskipun memberikan gambaran umum mengenai performa keseluruhan model, \textit{accuracy} dapat menjadi kurang representatif pada dataset yang tidak seimbang (\textit{imbalanced dataset}) \cite{Chen2024}.
-    \item \textbf{Precision}: mengukur seberapa tepat model ketika memprediksi kelas positif, yaitu berfokus pada kesalahan tipe \textit{False Positive}:
+    Di mana $f_t$ adalah nilai \textit{forget gate} pada waktu ke-$t$, $W_f$ adalah matriks bobot \textit{forget gate}, $b_f$ adalah bias, dan $\sigma$ adalah fungsi aktivasi sigmoid.
+
+    \item \textbf{Input Gate} \\
+    Gerbang ini menentukan informasi baru yang akan disimpan dalam \textit{cell state}.
     \begin{equation}
-    \label{eq:precision}
-    \text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}}
+        i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)
     \end{equation}
-    Semakin tinggi \textit{precision} maka semakin sedikit data negatif yang salah diklasifikasikan sebagai positif \cite{Chen2024}.
-    \item \textbf{Recall (Sensitivity)}: mengukur kemampuan model dalam menangkap seluruh data positif, yaitu berfokus pada kesalahan tipe \textit{False Negative}:
+    Kandidat nilai memori baru dihitung dengan:
     \begin{equation}
-    \label{eq:recall}
-    \text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}
+        \tilde{C}_t = \tanh(W_c \cdot [h_{t-1}, x_t] + b_c)
     \end{equation}
-    Semakin tinggi \textit{recall} maka semakin sedikit data positif yang terlewat \cite{Chen2024}.
-    \item \textbf{F1-score}: rata-rata harmonik antara \textit{precision} dan \textit{recall} yang digunakan untuk menyeimbangkan kedua metrik tersebut secara proporsional:
+    Di mana $i_t$ adalah nilai \textit{input gate}, dan $\tilde{C}_t$ adalah kandidat pembaruan memori.
+
+    \item \textbf{Pembaruan Cell State} \\
+    Pembaruan \textit{cell state} lama menjadi \textit{cell state} baru dihitung dengan mengombinasikan \textit{forget gate} dan \textit{input gate}:
     \begin{equation}
-    \label{eq:f1score}
-    \text{F1-score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+        C_t = f_t * C_{t-1} + i_t * \tilde{C}_t
     \end{equation}
-    Metrik ini sangat berguna pada kondisi ketidakseimbangan kelas \cite{Chen2024}.
+    Di mana $C_t$ adalah \textit{cell state} baru, dan $C_{t-1}$ adalah \textit{cell state} sebelumnya.
+
+    \item \textbf{Output Gate} \\
+    Gerbang ini menentukan status tersembunyi (\textit{hidden state}) berikutnya yang akan ditransmisikan:
+    \begin{equation}
+        o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)
+    \end{equation}
+    Status tersembunyi $h_t$ diperoleh melalui:
+    \begin{equation}
+        h_t = o_t * \tanh(C_t)
+    \end{equation}
+    Di mana $o_t$ adalah nilai \textit{output gate}, dan $h_t$ adalah \textit{hidden state} pada waktu ke-$t$.
 \end{enumerate}
 
-\section{Algoritma Random Forest}
-Algoritma \textit{Random Forest} merupakan salah satu algoritma \textit{machine learning} yang termasuk ke dalam kategori \textit{supervised learning}, karena proses pembelajarannya menggunakan data latih yang telah memiliki label kelas. Algoritma ini banyak digunakan pada permasalahan klasifikasi dan regresi karena mampu menangani data berdimensi tinggi serta memiliki performa yang stabil pada dataset yang kompleks \cite{Boateng2020, Liaw2002}. Konsep \textit{Random Forest} pertama kali diperkenalkan oleh Leo Breiman sebagai metode penggabungan sejumlah pohon keputusan untuk meningkatkan akurasi prediksi model \cite{Liaw2002}.
+Melalui kombinasi mekanisme gerbang tersebut, LSTM mampu mempertahankan informasi penting dalam jangka panjang sekaligus mengurangi pengaruh informasi yang tidak relevan. Secara empiris, arsitektur ini menunjukkan performa yang unggul dalam berbagai studi komparatif terhadap RNN standar, khususnya pada data dengan pola temporal kompleks dan non-linear \cite{Goodfellow2016}.
 
-\textit{Random Forest} bekerja dengan membangun banyak pohon keputusan (\textit{decision tree}) secara terpisah menggunakan data dan fitur yang dipilih secara acak. Setiap pohon akan menghasilkan prediksi, kemudian hasil akhir ditentukan berdasarkan keputusan mayoritas (\textit{majority voting}) untuk kasus klasifikasi, atau nilai rata-rata untuk kasus regresi. Pendekatan ini dikenal sebagai \textit{ensemble learning} dan bertujuan untuk mengurangi risiko \textit{overfitting} yang sering terjadi pada penggunaan pohon keputusan tunggal \cite{Liaw2002}.
-
-Penggunaan banyak pohon keputusan dengan karakteristik yang berbeda membuat \textit{Random Forest} memiliki tingkat generalisasi yang lebih baik. Breiman menjelaskan bahwa akurasi \textit{Random Forest} dipengaruhi oleh kekuatan masing-masing pohon (\textit{tree strength}) dan tingkat korelasi antar pohon \cite{Liaw2002}. Semakin rendah korelasi antar pohon dan semakin kuat prediksi tiap pohon, maka semakin baik kinerja model secara keseluruhan.
-
-Secara umum, \textit{Random Forest} dibangun melalui dua mekanisme utama, yaitu \textit{bootstrap sampling} dan \textit{random feature selection}. \textit{Bootstrap sampling} digunakan untuk menghasilkan subset data latih yang berbeda pada setiap pohon melalui pengambilan sampel secara acak dengan pengembalian. Selain itu, pada setiap node pohon, hanya sebagian fitur yang dipilih secara acak untuk menentukan pemisahan terbaik \cite{Boateng2020, Liaw2002}. Kombinasi kedua mekanisme ini meningkatkan keragaman pohon dan mengurangi korelasi antar model.
-
-Mekanisme kerja algoritma \textit{Random Forest} ditunjukkan pada Gambar \ref{fig:mekanisme-rf}. Setiap pohon dibangun dari subset data yang berbeda dan menghasilkan prediksi masing-masing, yang kemudian digabungkan untuk menghasilkan keputusan akhir \cite{Boateng2020}.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.85\textwidth]{image2.png}
-    \caption{Mekanisme Kerja Algoritma Random Forest}
-    \label{fig:mekanisme-rf}
-\end{figure}
-
-Berdasarkan Gambar \ref{fig:mekanisme-rf}, proses kerja \textit{Random Forest} dapat dipahami secara bertahap. Tahap pertama dimulai dari dataset yang terdiri atas fitur dan label kelas. Dalam konteks penelitian ini, fitur merepresentasikan parameter kualitas \textit{cooling water}, sedangkan label kelas menunjukkan status kelayakan air, yaitu Layak atau Tidak Layak. Selanjutnya dataset tersebut dibagi menjadi beberapa subset menggunakan \textit{bootstrap sampling}. Setiap subset data kemudian digunakan untuk membangun satu \textit{decision tree} secara independen. Setiap \textit{decision tree} menghasilkan prediksi kelas secara mandiri. Tahap akhir adalah proses agregasi hasil melalui \textit{majority voting} untuk menetapkan hasil prediksi akhir.
-
-Dalam proses pembentukan pohon keputusan, kriteria pemisahan data pada \textit{Random Forest} umumnya menggunakan Gini Index atau Entropy untuk menentukan pemisahan terbaik:
+\subsection{Evaluasi Kinerja Model}
+Evaluasi kinerja model prediksi bertujuan untuk mengukur tingkat kesalahan antara nilai aktual dan nilai hasil prediksi yang dihasilkan oleh model \cite{Prasetyo2023}. Dalam penelitian ini, evaluasi dilakukan menggunakan metrik kuantitatif yang umum digunakan pada data \textit{time series}, yaitu \textit{Mean Absolute Error} (MAE), \textit{Root Mean Squared Error} (RMSE), dan \textit{Mean Absolute Percentage Error} (MAPE).
 
 \begin{enumerate}
-    \item \textbf{Gini Index}: ukuran ketidakmurnian suatu node dan dirumuskan sebagai berikut:
+    \item \textbf{Mean Absolute Error (MAE)} \\
+    MAE mengukur rata-rata selisih absolut antara nilai aktual dan prediksi.
     \begin{equation}
-    \label{eq:gini}
-    \text{Gini}(N) = 1 - \sum_{i=1}^{C} (p_i)^2
+        \text{MAE} = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|
     \end{equation}
-    Keterangan:
-    \begin{itemize}
-        \item $N$ = node
-        \item $C$ = jumlah kelas
-        \item $p_i$ = proporsi data pada kelas ke-$i$ dalam node tersebut
-    \end{itemize}
-    Semakin kecil nilai Gini, semakin baik pemisahan yang dilakukan.
-    \item \textbf{Entropy}: mengukur tingkat ketidakpastian dalam suatu node dan dirumuskan sebagai berikut:
+    
+    \item \textbf{Root Mean Squared Error (RMSE)} \\
+    RMSE memberikan penalti lebih besar terhadap kesalahan yang signifikan karena menggunakan kuadrat dari selisih tersebut.
     \begin{equation}
-    \label{eq:entropy}
-    \text{Entropy}(N) = - \sum_{i=1}^{C} p_i \log_2 (p_i)
+        \text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
     \end{equation}
-    Keterangan:
-    \begin{itemize}
-        \item $p_i$ = proporsi kelas ke-$i$
-        \item Logaritma menggunakan basis 2
-    \end{itemize}
-    Nilai entropy yang lebih kecil menunjukkan node yang lebih homogen.
+
+    \item \textbf{Mean Absolute Percentage Error (MAPE)} \\
+    MAPE digunakan untuk mengukur kesalahan dalam bentuk persentase sehingga lebih mudah diinterpretasikan dalam konteks bisnis.
+    \begin{equation}
+        \text{MAPE} = \frac{100\%}{n} \sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right|
+    \end{equation}
 \end{enumerate}
 
-Selain menghasilkan prediksi, \textit{Random Forest} juga mampu memberikan informasi mengenai tingkat kepentingan fitur (\textit{feature importance}) \cite{Raczko2017}. Informasi ini menunjukkan kontribusi masing-masing fitur terhadap proses pengambilan keputusan model.
-
-Untuk kasus klasifikasi, prediksi akhir \textit{Random Forest} diperoleh dengan mekanisme \textit{majority voting}:
-\begin{equation}
-\label{eq:majority}
-Y = \text{mode}\{T_1(x), T_2(x), \dots, T_B(x)\}
-\end{equation}
-Keterangan:
-\begin{itemize}
-    \item $Y$ = prediksi akhir
-    \item $T_t(x)$ = prediksi dari pohon ke-$t$
-    \item $\text{mode}$ = kelas yang paling banyak muncul
-\end{itemize}
-
-Adapun langkah-langkah algoritma \textit{Random Forest} secara umum adalah sebagai berikut:
-\begin{enumerate}
-    \item Menentukan jumlah pohon keputusan (\textit{number of trees}) yang akan dibangun.
-    \item Melakukan \textit{bootstrap sampling} untuk membentuk data latih pada setiap pohon keputusan.
-    \item Membangun pohon keputusan dengan memilih subset fitur secara acak pada setiap node.
-    \item Menentukan pemisahan data terbaik menggunakan kriteria Gini Index atau Entropy.
-    \item Mengulangi proses hingga seluruh pohon keputusan terbentuk.
-    \item Menentukan hasil prediksi akhir menggunakan \textit{majority voting} untuk klasifikasi atau nilai rata-rata untuk regresi.
-\end{enumerate}
+Proses evaluasi ini penting untuk memastikan bahwa model LSTM yang diintegrasikan dalam aplikasi POS memiliki tingkat akurasi yang memadai dan dapat diandalkan dalam mendukung pengambilan keputusan operasional.

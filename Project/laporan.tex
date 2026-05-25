@@ -9,8 +9,8 @@
 \input{untouch/xx-preambles}
 \input{a1-database.hyphenate}
 
-%\newcommand{\Jenis}{Proposal} %Pilih salah satu antara Proposal atau Laporan
 \newcommand{\Jenis}{Laporan} %Pilih salah satu antara Proposal atau Laporan
+%\newcommand{\Jenis}{Proposal} %Pilih salah satu antara Proposal atau Laporan
 
 \begin{document}
 \ifthenelse{\equal{\Jenis}{Proposal}}{
@@ -24,6 +24,7 @@
 	\end{spacing}
 
 	\pagenumbering{arabic}
+	\pagestyle{fancy}
 
 	\begin{spacing}{1.5}
 		\include{b1-bab1}
@@ -37,25 +38,22 @@
 	\pagenumbering{roman}
 	\include{untouch/xx-sampuldalam-laporan}
 
-	\begin{spacing}{1.2}
-		\include{a2-abstrak}
-		\include{a3-abstract}
-	\end{spacing}
+	\include{untouch/xx-persetujuan-ujian}
+	\include{untouch/xx-pengesahan}
 
 	\begin{spacing}{1.5}
 		\include{untouch/xx-pernyataan}
 	\end{spacing}
 
-	\include{untouch/xx-persetujuan-ujian}
-	\include{untouch/xx-pengesahan}
-
 	\begin{spacing}{1.2}
-		\include{a4-persembahan}
 		\include{a5-katapengantar}
+		\include{a2-abstrak}
+		\include{a3-abstract}
 		\include{untouch/xx-daftar}
 	\end{spacing}
 
 	\pagenumbering{arabic}
+	\pagestyle{fancy}
 
 	\begin{spacing}{1.5}
 		\include{b1-bab1}
