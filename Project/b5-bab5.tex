@@ -1,42 +1,24 @@
 %==================================================================
 % Ini adalah bab 5
-% Silahkan edit sesuai kebutuhan, baik menambah atau mengurangi \section, \subsection
 %==================================================================
 
 \chapter[KESIMPULAN DAN SARAN]{\\ KESIMPULAN DAN SARAN}
 
 \section{Kesimpulan}
-Bagian kesimpulan menyajikan ringkasan dari temuan dan hasil yang diperoleh selama pelaksanaan proyek. Kesimpulan ini menjawab tujuan proyek dan masalah yang telah diidentifikasi di awal laporan, serta mengonfirmasi pencapaian yang telah diraih berdasarkan hasil implementasi dan pengujian. Kesimpulan harus ditarik secara objektif, didasarkan pada data dan hasil yang telah diperoleh, serta tidak memasukkan opini atau asumsi yang tidak didukung oleh hasil pengujian.
-
-Kesimpulan harus dibuat dengan singkat dan jelas, mencakup poin-poin utama yang berhasil dicapai dalam proyek, seperti:
-\begin{packed_item}
-    \item Capaian utama yang menunjukkan bahwa proyek berhasil memenuhi spesifikasi yang ditetapkan
-    \item Efektivitas sistem dalam menjalankan fungsinya berdasarkan hasil pengujian
-    \item Kesesuaian hasil proyek dengan teori dan standar yang telah diuraikan sebelumnya
-\end{packed_item}
-
-Selain itu, kesimpulan juga membahas keterkaitan dengan hasil-hasil penelitian atau proyek serupa yang telah dilakukan sebelumnya, untuk menunjukkan kontribusi dan relevansi dari proyek ini dalam konteks yang lebih luas. Bagian ini juga bisa mencakup hal-hal baru yang ditemukan selama proyek yang dapat memberikan kontribusi positif dalam pengembangan teknologi atau aplikasi di masa mendatang.
-
-Secara keseluruhan, kesimpulan harus memberikan gambaran yang menyeluruh mengenai efektivitas, pencapaian, dan kontribusi proyek terhadap bidang yang diteliti, sekaligus merangkum seluruh hasil dengan ringkas namun komprehensif.
+Berdasarkan hasil perancangan, implementasi, dan pengujian sistem klasifikasi kelayakan air pendingin (\textit{cooling water}) pada mesin generator W{\"a}rtsil{\"a} 20V34SG menggunakan algoritma \textit{Random Forest}, dapat ditarik beberapa kesimpulan utama sebagai berikut:
+\begin{packed_enum}
+    \item Sistem klasifikasi berbasis web telah berhasil dibangun dan diimplementasikan menggunakan \textit{framework} Flask untuk backend, HTML/CSS/JS untuk frontend, dan MySQL sebagai pengelola basis data. Sistem ini memudahkan Operator dalam memantau kelayakan air pendingin secara terintegrasi serta mendigitalisasi pencatatan data riwayat pengujian laboratorium.
+    \item Penerapan algoritma \textit{Random Forest} terbukti sangat efektif untuk mengklasifikasikan status kelayakan air pendingin menjadi kategori ``Layak'' atau ``Tidak Layak''. Dari pengujian model final pada data uji (\textit{testing set}), diperoleh tingkat akurasi mencapai \textbf{98,48\%}, presisi sebesar \textbf{100,00\%}, recall sebesar \textbf{97,56\%}, dan F1-score sebesar \textbf{98,77\%}.
+    \item Hasil pengujian menunjukkan nilai \textit{False Positive} sebesar \textbf{0,00\%}, yang berarti sistem tidak pernah salah mengklasifikasikan air pendingin yang sebenarnya ``Tidak Layak'' diprediksi sebagai ``Layak''. Hal ini sangat penting untuk mencegah penggunaan air pendingin yang tidak memenuhi syarat mutu standar pada mesin generator W{\"a}rtsil{\"a}, sehingga dapat meminimalkan risiko pembentukan kerak (\textit{scaling}) dan korosi pada pipa pendingin mesin pembangkit.
+    \item Analisis \textit{Feature Importance} menunjukkan bahwa parameter \textbf{Nitrite} ($NO_2$) merupakan fitur yang paling berpengaruh dalam penentuan keputusan kelayakan air dengan tingkat kepentingan sebesar \textbf{35,0\%}, diikuti oleh \textbf{Specific Conductivity} (\textbf{20,0\%}), dan \textbf{pH} (\textbf{18,0\%}). Hal ini sejalan dengan teori teknik kimia di mana nitrit bertindak sebagai korosi inhibitor utama dalam sistem air pendingin tertutup.
+    \item Hasil pengujian fungsionalitas menggunakan metode \textit{Black Box} menunjukkan bahwa seluruh fungsi utama sistem (seperti autentikasi login, input parameter, proses prediksi, penyaringan laporan, ekspor data excel, dan kelola user) berjalan dengan sukses dan sesuai harapan tanpa adanya kegagalan program. Pengujian \textit{White Box} juga mengonfirmasi keandalan alur logika program dalam menangani pengecualian (\textit{exception handling}) saat terjadi kendala pada file model atau koneksi basis data.
+\end{packed_enum}
 
 \section{Saran}
-Bagian saran menyajikan rekomendasi untuk pengembangan lebih lanjut yang dapat dilakukan berdasarkan temuan dan hasil yang diperoleh dalam proyek ini. Saran diberikan untuk membantu pembaca memahami langkah-langkah tambahan atau perbaikan yang dapat dilakukan untuk menyempurnakan proyek ini atau untuk membuka peluang penelitian atau pengembangan lebih lanjut.
-
-Saran yang diberikan sebaiknya mencakup hal-hal berikut:
+Beberapa saran yang dapat diajukan untuk pengembangan dan penyempurnaan sistem ini di masa mendatang adalah sebagai berikut:
 \begin{packed_item}
-    \item Pengembangan lanjutan pada sistem atau perangkat, seperti peningkatan teknologi atau penambahan fitur yang belum sempat diimplementasikan dalam proyek ini.
-    \item Pengujian lebih lanjut di berbagai kondisi atau lingkungan yang berbeda, untuk memastikan sistem mampu beradaptasi dalam berbagai situasi dan meningkatkan keandalannya.
-    \item Penelitian tambahan untuk menggali aspek-aspek yang belum sepenuhnya terjawab dalam proyek ini atau untuk memvalidasi hasil yang telah diperoleh.
-    \item Pengembangan aplikasi sistem yang lebih luas di bidang lain yang relevan, agar hasil proyek ini dapat memberikan manfaat yang lebih besar di luar bidang awal yang menjadi fokus.
+    \item \textbf{Penambahan Jumlah Dataset}: Disarankan untuk terus menambah dan memperbarui entri data hasil laboratorium air pendingin secara berkala agar variasi data semakin kaya, sehingga dapat terus melatih kembali (\textit{retraining}) model \textit{Random Forest} guna meningkatkan akurasi generalisasi dan nilai \textit{recall} hingga mencapai nilai mutlak 100\%.
+    \item \textbf{Integrasi Sensor IoT Terdistribusi}: Pengembangan sistem dapat diarahkan pada integrasi dengan sensor \textit{Internet of Things} (IoT) secara \textit{real-time} (seperti sensor pH, temperatur, dan konduktivitas air) untuk mengotomatisasi pengambilan sampel parameter secara langsung dari saluran pipa air pendingin tanpa perlu melakukan input data manual.
+    \item \textbf{Sistem Peringatan Dini (Alert System)}: Menambahkan fitur notifikasi otomatis melalui email atau SMS/WhatsApp API yang langsung dikirimkan ke Admin atau Kepala Divisi Pemeliharaan apabila hasil klasifikasi bernilai ``Tidak Layak'', sehingga tindakan korektif (seperti \textit{blowdown} atau penambahan zat inhibitor) dapat segera dilaksanakan sebelum timbul kerusakan mesin.
+    \item \textbf{Eksperimen dengan Metode Ensemble Lain}: Melakukan penelitian komparatif menggunakan algoritma \textit{ensemble} lainnya seperti XGBoost, CatBoost, atau optimasi \textit{hyperparameter tuning} menggunakan metode \textit{Genetic Algorithm} (GA) untuk memperbandingkan performa efisiensi komputasi dan akurasi model klasifikasi.
 \end{packed_item}
-
-Selain itu, saran juga dapat mencakup rekomendasi untuk mengatasi keterbatasan yang ditemui selama proyek, seperti:
-\begin{packed_item}
-    \item Penyempurnaan metode atau pendekatan yang digunakan, jika ditemukan kelemahan dalam tahap implementasi atau pengujian
-    \item Peningkatan perangkat keras atau perangkat lunak untuk meningkatkan performa sistem secara keseluruhan
-    \item Pemanfaatan teknologi atau metode baru yang relevan untuk memperbaiki atau menambah kapabilitas sistem
-\end{packed_item}
-
-Saran harus dibahas dalam konteks tujuan proyek dan masalah yang diidentifikasi, serta didasarkan pada hasil yang diperoleh. Rekomendasi juga perlu realistis dan dapat diimplementasikan dalam kondisi praktis, agar memberikan panduan yang bermanfaat bagi pengembangan lebih lanjut atau implementasi yang lebih luas.
-
-Secara keseluruhan, saran ini bertujuan untuk memberikan arah bagi pengembangan proyek atau penelitian selanjutnya, sekaligus menunjukkan bagaimana hasil dari proyek ini dapat dioptimalkan dan memberikan kontribusi yang lebih besar dalam bidang yang terkait.

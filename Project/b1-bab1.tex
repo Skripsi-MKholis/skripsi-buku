@@ -1,27 +1,67 @@
-%==================================================================
-% Ini adalah bab 1
-% Silahkan edit sesuai kebutuhan, baik menambah atau mengurangi \section, \subsection
-%==================================================================
-
 \chapter[PENDAHULUAN]{\\ PENDAHULUAN}
 
-\section{Latar Belakang}
-Bagian ini menjelaskan alasan dan motivasi di balik pengembangan proyek ini. Proyek ini diinisiasi untuk mengatasi kebutuhan atau permasalahan tertentu yang timbul dalam bidang teknologi, industri, atau aplikasi sehari-hari. Melalui identifikasi kebutuhan ini, diperoleh wawasan tentang bagaimana proyek dapat memberikan solusi yang efektif dan efisien. Latar belakang ini juga menguraikan pentingnya topik proyek dalam perkembangan teknologi terkini, serta bagaimana penerapan teknologi atau metode yang diusulkan dapat membawa nilai tambah. Selain itu, bagian ini memberikan gambaran singkat mengenai situasi atau tren teknologi saat ini yang mempengaruhi pengembangan proyek.
+\section{Latar Belakang Masalah}
+Energi listrik merupakan salah satu kebutuhan paling mendasar yang mendukung aktivitas masyarakat maupun pertumbuhan industri di Indonesia. Salah satu faktor kunci dalam menjamin ketersediaan energi listrik secara berkelanjutan adalah keandalan sistem pembangkit listrik itu sendiri. Dalam operasionalnya, pembangkit listrik mengandalkan berbagai sistem pendukung yang bekerja secara terintegrasi, salah satunya adalah sistem pendingin (\textit{cooling system}). Sistem ini berfungsi menjaga suhu peralatan utama agar selalu berada dalam rentang operasional yang aman. Air, sebagai komponen utama dalam sistem pendingin tersebut, merupakan sumber daya yang tidak hanya vital bagi kehidupan, tetapi juga memegang peran penting dalam berbagai aktivitas industri. Namun, penggunaan air dalam skala industri yang besar berpotensi menghasilkan limbah cair yang dapat berdampak negatif terhadap lingkungan apabila tidak dikelola dengan baik \cite{Alazaiza2025}.
+
+Air yang digunakan sebagai media pendingin dalam industri dikenal dengan istilah \textit{cooling water} (air pendingin). Sistem \textit{cooling water} umumnya beroperasi secara sirkulatif dalam jangka panjang, yang secara alami akan menyebabkan peningkatan konsentrasi zat terlarut dan kontaminan di dalamnya. Jika dibiarkan, kondisi ini dapat memicu terjadinya korosi, pembentukan kerak (\textit{scaling}), hingga penurunan kinerja sistem secara keseluruhan. Untuk mencegah hal tersebut, sebagian air dalam sistem pendingin perlu dibuang secara berkala melalui proses yang disebut \textit{blowdown}. Kelayakan \textit{cooling water} sendiri dinilai berdasarkan sejumlah parameter, antara lain derajat keasaman (pH), konduktivitas, kandungan nitrit, besi (Fe), sulfat, dan kekeruhan \cite{Nisa2023}.
+
+Pada unit pembangkit listrik, termasuk PT PLN Nusantara Power Unit Pembangkitan Arun yang mengoperasikan 19 unit engine, pemantauan kualitas \textit{cooling water} dilakukan secara rutin setiap 500 jam operasi mesin atau kurang lebih satu kali dalam sebulan untuk setiap unit mesin. Dengan jumlah unit yang relatif banyak, proses pemantauan menghasilkan data parameter kualitas air dalam jumlah besar yang harus di evaluasi secara berkala untuk masing-masing engine. Pemantauan juga dapat dilakukan lebih awal apabila terdeteksi kondisi yang tidak normal. Hasil pemantauan ini kemudian dibandingkan dengan nilai standar yang telah ditetapkan perusahaan berdasarkan dokumen resmi pabrikan mesin, sebagai acuan untuk memastikan \textit{cooling water} tetap berada dalam kondisi yang aman selama proses pembangkitan berlangsung. Apabila salah satu parameter melampaui batas yang ditentukan, maka \textit{cooling water} tersebut dinyatakan tidak layak pakai dan harus dikeluarkan melalui proses \textit{blowdown}.
+
+Permasalahannya, proses penilaian kelayakan tersebut hingga saat ini masih dilakukan secara manual, yakni dengan membandingkan nilai setiap parameter satu per satu terhadap batas standar yang berlaku. Cara ini tentu menjadi kurang efisien ketika data yang harus dievaluasi jumlahnya besar dan melibatkan banyak parameter sekaligus. Di samping itu, penilaian manual juga rentan terhadap inkonsistensi, terutama ketika nilai suatu parameter berada di ambang batas standar. Kondisi inilah yang mendorong perlunya pendekatan yang lebih sistematis, cepat, dan objektif dalam mengevaluasi kualitas \textit{cooling water} berbasis data historis.
+
+Beberapa penelitian terdahulu menunjukkan bahwa \textit{machine learning} efektif dalam analisis kualitas air. Salah satu penelitian menggunakan berbagai metode seperti TCN, LSTM, dan SVM untuk memprediksi kualitas air \textit{blowdown}, dengan model TCN menghasilkan nilai koefisien determinasi ($R^2$) hingga 0,911 \cite{Wan2025}. Selain itu, pendekatan \textit{machine learning} juga telah diterapkan untuk mengestimasi laju korosi pada sistem \textit{cooling water} industri dan menunjukkan bahwa model berbasis pembelajaran mampu memberikan hasil yang lebih akurat dibandingkan metode konvensional \cite{Ruiz2024}. Di sisi lain, penelitian terkait klasifikasi kualitas air masih banyak diterapkan pada air minum, air tanah, dan perairan umum menggunakan algoritma seperti \textit{Random Forest} \cite{Mutoffar2022, Maulidah2024, Abdi2023}. Lebih lanjut, kajian lain mengonfirmasi bahwa \textit{machine learning} memiliki potensi yang besar untuk diterapkan dalam sistem pemantauan dan pengelolaan kualitas air di berbagai konteks industri \cite{Lowe2022}.
+
+Meski demikian, penelitian yang secara spesifik membahas klasifikasi kelayakan \textit{cooling water} pada unit pembangkit listrik masih terbatas. Sebagian besar penelitian sebelumnya berfokus pada prediksi parameter kualitas air atau estimasi kondisi sistem, bukan pada penentuan keputusan operasional dalam bentuk klasifikasi layak atau tidak layak. Padahal, karakteristik \textit{cooling water} pada sistem pembangkit memiliki pola yang berbeda karena dipengaruhi oleh kondisi operasional mesin.
+
+Berdasarkan permasalahan tersebut, penelitian ini mengusulkan penerapan algoritma \textit{Random Forest} untuk mengklasifikasikan kelayakan \textit{cooling water} ke dalam dua kategori, yaitu layak pakai dan tidak layak pakai, berdasarkan data historis pemantauan di PT PLN Nusantara Power UP Arun. Sistem yang dibangun diharapkan dapat menjadi solusi berbasis informatika yang mampu membantu proses pengambilan keputusan operasional secara lebih objektif, konsisten, dan efisien dalam pengelolaan kelayakan \textit{cooling water} pada unit pembangkit listrik.
 
 \section{Rumusan Masalah}
-Rumusan masalah adalah langkah penting yang merangkum permasalahan spesifik atau kebutuhan yang menjadi dasar pengembangan proyek. Pada bagian ini, dijelaskan permasalahan utama yang dihadapi, seperti keterbatasan pada sistem atau perangkat yang sudah ada, atau kebutuhan baru yang belum terpenuhi oleh teknologi saat ini. Identifikasi masalah juga mencakup tantangan teknis, fungsional, atau ekonomi yang menjadi penghambat dan bagaimana proyek ini diharapkan dapat menjawab permasalahan tersebut. Fokusnya adalah memberikan pemahaman yang jelas mengenai alasan pentingnya mengembangkan proyek ini sebagai solusi yang dibutuhkan.
+Berdasarkan latar belakang yang telah diuraikan, maka rumusan masalah dalam penelitian ini adalah sebagai berikut:
+\begin{enumerate}
+    \item Bagaimana merancang dan membangun sistem klasifikasi kelayakan \textit{cooling water} berbasis \textit{machine learning} yang dapat dioperasikan sesuai standar PT PLN Nusantara Power UP Arun?
+    \item Bagaimana implementasi algoritma \textit{Random Forest} dalam mengklasifikasikan kelayakan \textit{cooling water} berdasarkan data historis parameter kualitas air?
+    \item Bagaimana tingkat kinerja model \textit{Random Forest} berdasarkan evaluasi menggunakan \textit{confusion matrix} serta metrik \textit{accuracy}, \textit{precision}, \textit{recall}, dan \textit{F1-score}?
+\end{enumerate}
 
-\section{Tujuan Proyek}
-Tujuan proyek menyatakan secara spesifik hasil atau capaian yang diinginkan dari pengembangan proyek ini. Bagian ini dirancang untuk memastikan bahwa proyek memiliki sasaran yang jelas dan terukur. Tujuan tersebut dirumuskan berdasarkan masalah yang telah diidentifikasi dan mencakup pencapaian tertentu, seperti peningkatan kinerja sistem, efisiensi, atau kemudahan penggunaan yang diharapkan. Selain itu, tujuan proyek dapat berupa pengembangan prototipe, penerapan teknologi tertentu, atau pencapaian fungsionalitas baru yang belum ada. Penjabaran tujuan yang jelas membantu menjaga fokus proyek dan memberikan arah yang tepat dalam setiap tahapan pengembangan.
+\section{Tujuan Penelitian}
+Tujuan dari penelitian ini adalah sebagai berikut:
+\begin{enumerate}
+    \item Merancang dan membangun sistem klasifikasi kelayakan \textit{cooling water} berbasis \textit{machine learning} yang sesuai dengan standar operasional PT PLN Nusantara Power UP Arun.
+    \item Mengimplementasikan algoritma \textit{Random Forest} dalam proses klasifikasi kelayakan \textit{cooling water} berdasarkan data historis parameter kualitas air.
+    \item Mengevaluasi kinerja model \textit{Random Forest} menggunakan \textit{confusion matrix} serta metrik \textit{accuracy}, \textit{precision}, \textit{recall}, dan \textit{F1-score}.
+\end{enumerate}
 
-\section{Manfaat Proyek}
-Manfaat proyek menguraikan dampak positif yang diharapkan dari hasil proyek ini bagi pengguna, industri, atau masyarakat secara umum. Manfaat ini mencakup berbagai aspek, seperti kontribusi terhadap peningkatan produktivitas, pengurangan biaya, peningkatan kualitas, atau kemudahan dalam penggunaan teknologi. Selain manfaat langsung, proyek ini juga diharapkan memiliki dampak jangka panjang yang bermanfaat, seperti mendorong inovasi di bidang terkait atau membuka peluang baru untuk pengembangan lebih lanjut. Dengan menjelaskan manfaat proyek, pembaca dapat memahami nilai tambah yang dihadirkan oleh proyek ini.
+\section{Batasan Masalah}
+Untuk menghindari meluasnya pembahasan, penelitian ini dibatasi pada hal-hal berikut:
+\begin{enumerate}
+    \item Penelitian ini menggunakan data hasil pengukuran parameter kualitas \textit{cooling water} yang diperoleh dari PT PLN Nusantara Power UP Arun.
+    \item Parameter yang dianalisis dibatasi pada pH, konduktivitas (\textit{specific conductivity}), kadar nitrit (\textit{Nitrite}), kandungan besi (Fe), sulfat (\textit{Sulfate}), dan tingkat kekeruhan (\textit{Turbidity}).
+    \item Penelitian ini difokuskan pada perancangan dan pembangunan sistem klasifikasi berbasis \textit{machine learning}, dan tidak membahas proses pengolahan atau perlakuan terhadap sifat fisik maupun kandungan kimia \textit{cooling water} secara nyata.
+\end{enumerate}
 
-\section{Batasan Proyek}
-Batasan proyek mengidentifikasi cakupan dan batasan ruang lingkup pengembangan sistem atau perangkat yang dirancang. Bagian ini mencakup aspek-aspek yang akan menjadi fokus utama dalam pengembangan serta aspek yang akan dikecualikan dari lingkup proyek. Penjelasan batasan ini penting agar proyek tetap terarah dan tidak meluas ke aspek-aspek yang berada di luar tujuan awal. Batasan proyek juga mencakup keterbatasan teknis, waktu, atau sumber daya yang mempengaruhi desain dan implementasi sistem. Dengan menetapkan batasan, proyek ini dapat lebih terfokus dan efisien dalam pencapaiannya.
-
-\section{Keaslian Gagasan}
-Keaslian gagasan bertujuan untuk menekankan inovasi atau kontribusi unik yang ditawarkan oleh proyek ini. Bagian ini menjelaskan bagaimana proyek ini menawarkan pendekatan yang berbeda atau peningkatan dibandingkan dengan metode atau perangkat yang sudah ada. Keaslian gagasan dapat diperlihatkan melalui perbandingan dengan proyek atau produk serupa, menunjukkan perbedaan signifikan atau keunggulan yang dihadirkan oleh solusi yang diusulkan. Misalnya, peningkatan kinerja, efisiensi, atau kemudahan penggunaan yang dihasilkan dari metode atau pendekatan baru. Selain itu, bagian ini juga bisa mencakup penggunaan teknologi atau desain yang belum banyak diterapkan dalam konteks yang sama. Penekanan pada keaslian gagasan membantu menunjukkan bahwa proyek ini tidak hanya mengikuti pola yang sudah ada, tetapi juga menghadirkan sesuatu yang baru dan relevan.
+\section{Manfaat Penelitian}
+Penelitian ini diharapkan dapat memberikan manfaat sebagai berikut:
+\begin{enumerate}
+    \item Membantu PT PLN Nusantara Power UP Arun dalam melakukan klasifikasi kelayakan \textit{cooling water} secara lebih cepat, objektif, dan konsisten, sehingga mengurangi ketergantungan pada proses evaluasi manual.
+    \item Mendukung pengambilan keputusan operasional terkait kelayakan \textit{cooling water} berdasarkan data historis dan standar operasional yang berlaku, sehingga proses pengendalian kualitas seperti \textit{blowdown} dapat dilakukan secara lebih tepat waktu dan tepat sasaran.
+    \item Memberikan kontribusi akademis dalam penerapan algoritma \textit{Random Forest} untuk klasifikasi kualitas \textit{cooling water} pada sistem pendingin industri pembangkit listrik.
+    \item Menjadi referensi bagi penelitian selanjutnya dalam pengembangan sistem pemantauan dan klasifikasi kualitas \textit{cooling water} berbasis \textit{machine learning}.
+\end{enumerate}
 
 \section{Sistematika Penulisan}
-Sistematika penulisan memberikan panduan mengenai struktur dari keseluruhan laporan proyek ini, sehingga memudahkan pembaca dalam memahami alur isi laporan dari setiap bab. Bagian ini menjelaskan isi dari setiap bab secara singkat, mulai dari latar belakang hingga kesimpulan dan rekomendasi. Misalnya, BAB I membahas pendahuluan dan dasar pengembangan proyek, BAB II menguraikan tinjauan pustaka dan landasan teori, dan seterusnya. Dengan memberikan sistematika penulisan, pembaca dapat memahami bagaimana laporan ini disusun secara keseluruhan dan bagaimana setiap bab saling berkaitan dalam mencapai tujuan akhir proyek.
+Sistematika penulisan dalam penelitian ini disusun untuk memberikan gambaran secara menyeluruh mengenai alur pembahasan yang dilakukan. Penulisan skripsi ini dibagi ke dalam lima bab utama yang saling berkaitan, dengan rincian sebagai berikut:
+
+\noindent\textbf{BAB I PENDAHULUAN}\\
+Bab ini menguraikan gambaran umum penelitian yang meliputi latar belakang masalah, rumusan masalah, tujuan penelitian, batasan masalah, manfaat penelitian, serta sistematika penulisan. Bab ini menjadi dasar dalam memahami alasan dan arah penelitian yang dilakukan.
+
+\noindent\textbf{BAB II TINJAUAN PUSTAKA}\\
+Bab ini berisi landasan teori dan kajian literatur yang relevan dengan penelitian. Teori yang disajikan mencakup konsep \textit{cooling water}, kualitas air, parameter kualitas air, serta metode \textit{machine learning} khususnya algoritma \textit{Random Forest}. Selain itu, pada bab ini juga disajikan penelitian terdahulu (\textit{State of the Art}) yang menjadi acuan dalam mengidentifikasi posisi dan kebaruan penelitian.
+
+\noindent\textbf{BAB III METODOLOGI PENELITIAN}\\
+Bab ini menjelaskan tahapan penelitian yang dilakukan, mulai dari pengumpulan data, pengolahan data, hingga penerapan metode yang digunakan. Selain itu, dijelaskan pula perancangan sistem yang meliputi alur proses klasifikasi, pemodelan menggunakan algoritma \textit{Random Forest}, serta skenario pengujian yang digunakan dalam penelitian.
+
+\noindent\textbf{BAB IV HASIL DAN PEMBAHASAN}\\
+Bab ini menyajikan hasil implementasi sistem yang telah dirancang, serta analisis terhadap hasil pengujian model. Pembahasan meliputi evaluasi performa model klasifikasi, interpretasi hasil prediksi, serta analisis terhadap parameter yang mempengaruhi kelayakan \textit{cooling water}.
+
+\noindent\textbf{BAB V PENUTUP}\\
+Bab ini berisi kesimpulan yang diperoleh dari hasil penelitian serta saran yang dapat diberikan untuk pengembangan penelitian selanjutnya.

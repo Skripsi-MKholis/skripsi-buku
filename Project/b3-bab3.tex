@@ -1,89 +1,636 @@
-%==================================================================
-% Ini adalah bab 3
-% Silahkan edit sesuai kebutuhan, baik menambah atau mengurangi \section, \subsection
-%==================================================================
+\chapter[METODOLOGI PENELITIAN]{\\ METODOLOGI PENELITIAN}
 
-\chapter[KONSEP RANCANGAN ALAT DAN PENGUJIAN]{\\ KONSEP RANCANGAN ALAT DAN PENGUJIAN}
+\section{Alur Penelitian}
+Alur penelitian digunakan untuk menggambarkan tahapan-tahapan yang dilakukan dalam penelitian ini secara umum, mulai dari tahap awal hingga tahap akhir. Diagram alur penelitian yang digunakan ditunjukkan pada Gambar \ref{fig:alur-penelitian}.
 
-\section{Metode Pengerjaan Project Berbasis Engineering Design Process}
-Bagian ini menjelaskan metode pengerjaan proyek yang mengadopsi pendekatan Engineering Design Process. Pendekatan ini digunakan untuk memastikan perancangan dan pengembangan proyek dilakukan secara sistematis, mulai dari identifikasi masalah hingga evaluasi akhir. Langkah-langkah dalam metode ini membantu dalam mencapai solusi yang optimal dan terukur.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{image3.png}
+    \caption{Alur Penelitian}
+    \label{fig:alur-penelitian}
+\end{figure}
 
-\subsection{Identifikasi Masalah}
-Tahap identifikasi masalah bertujuan untuk menguraikan permasalahan utama yang dihadapi dan memerlukan solusi. Pada tahap ini, dilakukan analisis untuk memahami aspek-aspek penting dari masalah dan menentukan faktor-faktor yang perlu diatasi melalui proyek ini.
+Adapun penjelasan mengenai langkah-langkah alur penelitian tersebut adalah sebagai berikut:
+\begin{enumerate}
+    \item \textbf{Identifikasi Masalah}: Penelitian diawali dengan proses identifikasi permasalahan terkait penentuan kelayakan \textit{cooling water} pada sistem operasional di PT PLN Nusantara Power UP Arun. Permasalahan difokuskan pada bagaimana menentukan status kelayakan air pendingin secara lebih sistematis dan terotomatisasi.
+    \item \textbf{Studi Literatur}: Tahap studi literatur dilakukan untuk memperoleh landasan teori yang relevan, meliputi konsep kualitas \textit{cooling water}, standar parameter berdasarkan manual W{\"a}rtsil{\"a}, konsep klasifikasi dalam \textit{machine learning}, serta prinsip kerja algoritma \textit{Random Forest}.
+    \item \textbf{Perumusan Metodologi}: Pada tahap ini dirancang metode penelitian yang akan digunakan, meliputi teknik pelabelan data, strategi praproses, metode pembagian data, pembangunan model klasifikasi, serta teknik evaluasi performa model.
+    \item \textbf{Pengumpulan Data}: Data dikumpulkan dari laporan pemantauan kualitas \textit{cooling water} periode tahun 2025. Data diperoleh dalam format \textit{spreadsheet} yang memuat parameter pH, SC, Nitrite, Fe, Sulfate, dan Turbidity. Total data yang diperoleh sebanyak 217 entri data.
+    \item \textbf{Pelabelan Data (Rule-Based)}: Proses pelabelan dilakukan secara \textit{rule-based} berdasarkan rentang standar minimum dan maksimum setiap parameter yang mengacu pada dokumen resmi W{\"a}rtsil{\"a}. Tahap ini bertujuan untuk menghasilkan dataset terlabel (Layak dan Tidak Layak).
+    \item \textbf{Praproses Data}: Tahap praproses meliputi pemeriksaan kelengkapan data, penghapusan data duplikat, penanganan nilai hilang, konversi tipe data numerik, serta pengecekan \textit{outlier} untuk memastikan kualitas data.
+    \item \textbf{Pembagian Data (Stratified 70:30)}: Dataset dibagi menjadi data pelatihan (\textit{training data}) dan data pengujian (\textit{testing data}) dengan rasio 70:30 menggunakan teknik \textit{stratified sampling} untuk menjaga proporsi distribusi kelas.
+    \item \textbf{Pembangunan Model (Random Forest)}: Model klasifikasi dibangun menggunakan algoritma \textit{Random Forest} berdasarkan data pelatihan.
+    \item \textbf{Evaluasi dan Analisis Hasil Model}: Kinerja model dievaluasi menggunakan \textit{confusion matrix} serta metrik \textit{accuracy}, \textit{precision}, \textit{recall}, dan \textit{F1-score}. Selanjutnya dilakukan analisis terhadap hasil model, termasuk identifikasi kontribusi parameter dominan berdasarkan nilai \textit{feature importance}.
+    \item \textbf{Penarikan Kesimpulan}: Tahap akhir berupa penarikan kesimpulan berdasarkan hasil analisis serta penyusunan rekomendasi untuk pengembangan selanjutnya.
+\end{enumerate}
 
-\subsection{Definisi Kebutuhan}
-Berdasarkan masalah yang telah diidentifikasi, tahap ini berfokus pada definisi kebutuhan proyek secara jelas dan terstruktur. Kebutuhan ini meliputi spesifikasi teknis, fungsi yang diinginkan, serta kriteria-kriteria lain yang harus dipenuhi agar solusi dapat berfungsi dengan baik.
+\section{Analisis Kebutuhan Sistem}
+Analisis kebutuhan sistem merupakan tahapan untuk mengidentifikasi seluruh kebutuhan dalam pembangunan sistem, baik kebutuhan fungsional, non-fungsional, maupun kebutuhan data.
 
-\subsection{Generasi Ide dan Solusi}
-Pada tahap ini, berbagai ide dan solusi alternatif dikembangkan dan dievaluasi. Bagian ini menjelaskan proses brainstorming untuk menghasilkan ide yang inovatif, termasuk analisis terhadap kelebihan dan kekurangan dari setiap alternatif solusi yang diusulkan.
+\subsection{Analisis Kebutuhan Fungsional}
+Analisis kebutuhan fungsional bertujuan untuk menjelaskan aktivitas apa saja yang terdapat dalam sistem dan interaksi oleh setiap pengguna.
+\begin{enumerate}
+    \item \textbf{Kebutuhan Fungsional Admin}:
+    \begin{itemize}
+        \item Admin dapat melakukan login untuk mengakses sistem.
+        \item Admin dapat mengelola akun pengguna (Operator), meliputi menambah, mengubah, menghapus, dan mereset password melalui menu kelola user.
+        \item Admin dapat melihat seluruh data hasil klasifikasi kelayakan \textit{cooling water}.
+        \item Admin dapat mengakses dan mencetak laporan (\textit{report}) hasil klasifikasi berdasarkan periode waktu atau unit mesin.
+        \item Admin dapat melihat informasi evaluasi performa model klasifikasi (akurasi, presisi, recall, F1-score, confusion matrix, dan feature importance).
+    \end{itemize}
+    \item \textbf{Kebutuhan Fungsional Operator (User)}:
+    \begin{itemize}
+        \item Operator dapat melakukan login untuk mengakses sistem.
+        \item Operator dapat menginputkan data parameter kualitas \textit{cooling water} (pH, SC, Nitrite, Fe, Sulfate, Turbidity).
+        \item Operator dapat menjalankan proses klasifikasi menggunakan model \textit{Random Forest}.
+        \item Operator dapat melihat hasil klasifikasi berupa status ``Layak'' atau ``Tidak Layak''.
+        \item Operator dapat menyimpan hasil klasifikasi ke dalam sistem.
+    \end{itemize}
+\end{enumerate}
 
-\subsection{Perencanaan dan Desain Awal}
-Desain awal sistem dikembangkan berdasarkan solusi yang dipilih, dengan mempertimbangkan aspek teknis dan kebutuhan yang telah didefinisikan. Bagian ini menyajikan perencanaan mengenai struktur sistem, alat, dan bahan yang akan digunakan, serta jadwal kerja proyek secara keseluruhan.
+\subsection{Analisis Kebutuhan Non-Fungsional}
+Kebutuhan non-fungsional mencakup aspek keamanan, kinerja, keandalan, kemudahan penggunaan, dan kompatibilitas, serta kebutuhan perangkat keras dan perangkat lunak.
+\begin{enumerate}
+    \item \textbf{Keamanan (Security)}: Sistem menjaga keamanan data melalui autentikasi login dan pembatasan hak akses.
+    \item \textbf{Kinerja (Performance)}: Sistem mampu melakukan proses klasifikasi dengan waktu respon yang cepat.
+    \item \textbf{Keandalan (Reliability)}: Sistem berjalan secara stabil tanpa sering mengalami \textit{error}.
+    \item \textbf{Kemudahan Penggunaan (Usability)}: Antarmuka sistem dirancang agar intuitif dan mudah dioperasikan.
+    \item \textbf{Kompatibilitas}: Sistem dapat berjalan lancar pada berbagai browser populer (Google Chrome, Edge, Firefox).
+\end{enumerate}
 
-\subsection{Pembuatan Prototipe}
-Prototipe dibuat untuk menguji konsep dan desain awal dari sistem. Bagian ini menguraikan langkah-langkah dalam proses pembuatan prototipe, termasuk alat dan bahan yang diperlukan, serta tantangan yang mungkin dihadapi selama proses.
+Spesifikasi perangkat keras yang digunakan disajikan pada Tabel \ref{tab:hardware}, sedangkan spesifikasi perangkat lunak disajikan pada Tabel \ref{tab:software}.
 
-\subsection{Pengujian dan Evaluasi}
-Prototipe yang telah dibuat kemudian diuji untuk menilai kinerjanya terhadap kebutuhan dan spesifikasi yang telah ditetapkan. Bagian ini menjelaskan prosedur pengujian yang diterapkan, metode pengumpulan data, serta analisis terhadap hasil yang diperoleh.
+\begin{table}[htbp]
+    \centering
+    \caption{Spesifikasi Perangkat Keras (Hardware)}
+    \label{tab:hardware}
+    \fontsize{10pt}{12pt}\selectfont
+    \begin{tabularx}{\textwidth}{|c|>{\bfseries}p{3cm}|X|p{4cm}|}
+        \hline
+        \textbf{No} & \textbf{Komponen} & \textbf{Spesifikasi} & \textbf{Keterangan} \\
+        \hline
+        1 & Laptop & ASUS VivoBook Go E1404FA & Alat utama pengembangan. \\
+        \hline
+        2 & Processor & AMD Ryzen 5 & Menjalankan proses komputasi. \\
+        \hline
+        3 & RAM & 8 GB & Mendukung multitasking. \\
+        \hline
+        4 & Storage & 512 GB SSD & Menyimpan source code dan dataset. \\
+        \hline
+        5 & Koneksi Jaringan & WiFi / LAN & Akses internet dan pengujian. \\
+        \hline
+    \end{tabularx}
+\end{table}
 
-\subsection{Perbaikan dan Penyempurnaan}
-Berdasarkan hasil pengujian dan evaluasi, dilakukan perbaikan untuk menyempurnakan sistem. Bagian ini menjelaskan penyesuaian yang dilakukan untuk meningkatkan kinerja sistem, serta proses iterasi yang dilakukan hingga mencapai hasil yang optimal.
+\begin{table}[htbp]
+    \centering
+    \caption{Spesifikasi Perangkat Lunak (Software)}
+    \label{tab:software}
+    \fontsize{10pt}{12pt}\selectfont
+    \begin{tabularx}{\textwidth}{|c|>{\bfseries}p{3cm}|X|p{4cm}|}
+        \hline
+        \textbf{No} & \textbf{Komponen} & \textbf{Spesifikasi} & \textbf{Keterangan} \\
+        \hline
+        1 & Sistem Operasi & Windows 11 & Lingkungan kerja utama. \\
+        \hline
+        2 & Visual Studio Code & Versi 1.117.0 & Editor kode program. \\
+        \hline
+        3 & Laragon & Versi 5.0.0 & Local server Apache dan database. \\
+        \hline
+        4 & Python & Versi 3.10 & Implementasi machine learning. \\
+        \hline
+        5 & Flask & Versi 3.0 & Web framework backend API. \\
+        \hline
+        6 & MySQL / MariaDB & Versi 8.0.30 & DBMS penyimpanan data. \\
+        \hline
+        7 & Web Browser & Google Chrome 147.0 & Media pengujian antarmuka. \\
+        \hline
+        8 & Tools Desain & Figma \& Draw.io & Pembuatan diagram dan mock-up UI. \\
+        \hline
+    \end{tabularx}
+\end{table}
 
-\section{Perancangan Sistem Elektronika}
-Bagian ini menguraikan perancangan dari sisi elektronika yang menjadi inti dari sistem. Perancangan ini mencakup blok diagram, pemilihan komponen, dan perancangan rangkaian.
+\section{Perancangan Sistem}
+Perancangan sistem menggunakan \textit{Unified Modeling Language} (UML) untuk memodelkan alur proses melalui \textit{Use Case} dan \textit{Activity Diagram}.
 
-\subsection{Blok Diagram Sistem}
-Blok diagram sistem memberikan gambaran umum mengenai arsitektur sistem secara keseluruhan. Bagian ini menyajikan diagram beserta penjelasan fungsi setiap blok yang terdapat di dalam sistem, termasuk bagaimana setiap blok berinteraksi.
+\subsection{Arsitektur Sistem}
+Arsitektur menggambarkan alur kerja sistem dalam mengolah data hingga menghasilkan keputusan klasifikasi kelayakan \textit{cooling water}. Alur ini terdiri dari input, proses, dan output, seperti pada Gambar \ref{fig:arsitektur-sistem}.
 
-\subsection{Pemilihan dan Spesifikasi Komponen Elektronika}
-Pemilihan komponen elektronika dilakukan berdasarkan kebutuhan dari desain sistem. Bagian ini menjelaskan spesifikasi teknis dari setiap komponen yang digunakan, seperti mikrokontroler, sensor, aktuator, dan komponen pendukung lainnya.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{image4.png}
+    \caption{Arsitektur Sistem}
+    \label{fig:arsitektur-sistem}
+\end{figure}
 
-\subsection{Perancangan Rangkaian Elektronika}
-Perancangan rangkaian elektronika bertujuan untuk mencapai fungsionalitas yang diinginkan dari sistem. Bagian ini menguraikan skema rangkaian, penjelasan aliran arus dan tegangan, serta hubungan antar komponen dalam sistem.
+\begin{enumerate}
+    \item \textbf{Input}: Dataset parameter \textit{cooling water} hasil laboratorium yang memuat pH, specific conductivity (SC), nitrite, Fe, sulfate, dan turbidity.
+    \item \textbf{Proses}: Langkah-langkah pembangunan model, meliputi pelabelan \textit{rule-based}, preprocessing data, stratified split (70:30), stratified 5-fold cross validation, training \textit{Random Forest}, evaluasi, dan pembuatan model final.
+    \item \textbf{Output}: Hasil klasifikasi (Layak / Tidak Layak), evaluasi performa model, dan tingkat kepentingan fitur (\textit{feature importance}).
+\end{enumerate}
 
-\section{Perancangan Mekanik}
-Bagian ini membahas perancangan mekanik dari sistem yang mendukung komponen elektronik secara fisik, termasuk struktur dan pemilihan bahan.
+\subsection{Use Case Diagram}
+Interaksi antara Admin dan Operator dengan sistem digambarkan melalui \textit{Use Case Diagram} pada Gambar \ref{fig:usecase}.
 
-\subsection{Spesifikasi Desain Mekanik}
-Desain mekanik disusun berdasarkan kebutuhan fisik sistem untuk memastikan bahwa komponen elektronika terlindungi dan dapat berfungsi dengan baik. Bagian ini menjelaskan spesifikasi teknis desain mekanik yang digunakan.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{image5.png}
+    \caption{Use Case Diagram}
+    \label{fig:usecase}
+\end{figure}
 
-\subsection{Pemilihan Bahan dan Komponen Mekanik}
-Pemilihan bahan didasarkan pada kriteria seperti kekuatan, ketahanan, dan biaya. Bagian ini menguraikan bahan dan komponen mekanik yang digunakan untuk konstruksi sistem, serta alasan pemilihan bahan tersebut.
+Penjelasan detail peran aktor disajikan pada Tabel \ref{tab:aktor}, sedangkan penjelasan fungsi use case dijabarkan pada Tabel \ref{tab:usecase}.
 
-\subsection{Desain Struktur dan Konstruksi}
-Struktur dan konstruksi sistem dirancang untuk memberikan dukungan fisik yang stabil. Bagian ini menjelaskan proses desain dan konstruksi dari struktur mekanik sistem, serta tantangan yang mungkin dihadapi.
+\begin{table}[htbp]
+    \centering
+    \caption{Deskripsi Aktor}
+    \label{tab:aktor}
+    \fontsize{10pt}{12pt}\selectfont
+    \begin{tabularx}{\textwidth}{|c|>{\bfseries}p{3cm}|X|}
+        \hline
+        \textbf{No} & \textbf{Aktor} & \textbf{Deskripsi} \\
+        \hline
+        1 & Admin & Hak akses penuh: kelola data user, generate report, dan melihat performa model. \\
+        \hline
+        2 & Operator (User) & Bertugas melakukan input data parameter kualitas air dan menjalankan klasifikasi. \\
+        \hline
+    \end{tabularx}
+\end{table}
 
-\section{Perancangan Perangkat Lunak}
-Bagian ini mencakup perancangan perangkat lunak yang mengendalikan sistem, meliputi diagram alir, pengembangan kode, dan pengujian perangkat lunak.
+\begin{table}[htbp]
+    \centering
+    \caption{Deskripsi Use Case}
+    \label{tab:usecase}
+    \fontsize{10pt}{12pt}\selectfont
+    \begin{tabularx}{\textwidth}{|c|>{\bfseries}p{4cm}|X|}
+        \hline
+        \textbf{No} & \textbf{Use Case} & \textbf{Deskripsi} \\
+        \hline
+        1 & Login & Autentikasi Admin dan Operator untuk masuk ke sistem. \\
+        \hline
+        2 & Input Data Kualitas Water & Operator memasukkan parameter pH, SC, Nitrite, Fe, Sulfate, dan Turbidity. \\
+        \hline
+        3 & Menjalankan Klasifikasi & Sistem mengklasifikasikan kelayakan air dengan model Random Forest. \\
+        \hline
+        4 & Melihat Hasil Klasifikasi & Menampilkan status kelayakan Layak atau Tidak Layak. \\
+        \hline
+        5 & Menyimpan Hasil Klasifikasi & Menyimpan riwayat hasil klasifikasi ke basis data. \\
+        \hline
+        6 & Generate Laporan & Admin mencetak atau mengunduh laporan hasil klasifikasi. \\
+        \hline
+        7 & Manajemen User & Admin mengelola data akun pengguna (tambah, edit, hapus, reset password). \\
+        \hline
+        8 & Logout & Mengakhiri sesi penggunaan sistem. \\
+        \hline
+    \end{tabularx}
+\end{table}
 
-\subsection{Flowchart atau Diagram Alir Perangkat Lunak}
-Diagram alir menggambarkan alur kerja dari perangkat lunak yang mengontrol sistem. Bagian ini menyajikan flowchart lengkap yang menunjukkan logika dan struktur kontrol dari perangkat lunak.
+\subsection{Activity Diagram}
+\textit{Activity Diagram} menggambarkan alur aktivitas sistem secara sekuensial.
+\begin{enumerate}
+    \item \textbf{Activity Diagram Login}: Ditunjukkan pada Gambar \ref{fig:act-login}, menggambarkan alur autentikasi pengguna.
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.55\textwidth]{image6.png}
+        \caption{Activity Diagram Login}
+        \label{fig:act-login}
+    \end{figure}
+    \item \textbf{Activity Diagram Input Data dan Klasifikasi}: Ditunjukkan pada Gambar \ref{fig:act-input}, menggambarkan Operator melakukan pengisian form parameter hingga diperoleh status awal.
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.6\textwidth]{image7.png}
+        \caption{Activity Diagram Input Data dan Klasifikasi}
+        \label{fig:act-input}
+    \end{figure}
+    \item \textbf{Activity Diagram Proses Klasifikasi Random Forest}: Ditunjukkan pada Gambar \ref{fig:act-rf}, menggambarkan model mengolah data masukan di backend.
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.6\textwidth]{image8.png}
+        \caption{Activity Diagram Proses Klasifikasi Random Forest}
+        \label{fig:act-rf}
+    \end{figure}
+    \item \textbf{Activity Diagram Generate Laporan}: Ditunjukkan pada Gambar \ref{fig:act-report}, menggambarkan pembuatan berkas laporan oleh Admin.
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.55\textwidth]{image9.png}
+        \caption{Activity Diagram Generate Laporan}
+        \label{fig:act-report}
+    \end{figure}
+    \item \textbf{Activity Diagram Manajemen User}: Ditunjukkan pada Gambar \ref{fig:act-user}, menggambarkan Admin mengelola akun Operator.
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.6\textwidth]{image10.png}
+        \caption{Activity Diagram Manajemen User}
+        \label{fig:act-user}
+    \end{figure}
+    \item \textbf{Activity Diagram Logout}: Ditunjukkan pada Gambar \ref{fig:act-logout}, menggambarkan penutupan sesi aktif.
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.45\textwidth]{image11.png}
+        \caption{Activity Diagram Logout}
+        \label{fig:act-logout}
+    \end{figure}
+\end{enumerate}
 
-\subsection{Pemrograman dan Pengembangan Kode}
-Kode perangkat lunak dikembangkan untuk mendukung fungsionalitas sistem. Bagian ini menguraikan struktur dan logika dari program yang dibuat, bahasa pemrograman yang digunakan, serta strategi pengembangan kode.
+\section{Perancangan Database}
+Database MySQL/MariaDB dirancang untuk mengelola data akun pengguna, input parameter, dan hasil klasifikasi. Struktur tabel dijabarkan sebagai berikut.
 
-\subsection{Pengujian Kode Perangkat Lunak}
-Setelah kode perangkat lunak dikembangkan, dilakukan pengujian untuk memastikan bahwa perangkat lunak berfungsi sesuai yang diharapkan. Bagian ini menjelaskan metode pengujian, jenis uji (misalnya, uji unit dan uji integrasi), serta hasil yang diperoleh.
+\subsection{Tabel Akun Pengguna (\texttt{tb\_user})}
+Digunakan untuk menyimpan informasi login dan tingkat hak akses pengguna (Tabel \ref{tab:db-user}).
+\begin{table}[htbp]
+    \centering
+    \caption{Struktur Tabel tb\_user}
+    \label{tab:db-user}
+    \fontsize{10pt}{12pt}\selectfont
+    \begin{tabular}{|p{2.5cm}|p{3.5cm}|p{3.5cm}|}
+        \hline
+        \textbf{Name} & \textbf{Type} & \textbf{Key} \\
+        \hline
+        id & Int (10) & Primary Key \\
+        \hline
+        nama & Varchar (100) & - \\
+        \hline
+        username & Varchar (100) & - \\
+        \hline
+        password & Varchar (50) & - \\
+        \hline
+        level & Int (10) & - \\
+        \hline
+    \end{tabular}
+\end{table}
 
-\section{Perancangan Integrasi Sistem}
-Bagian ini menjelaskan proses integrasi antara komponen elektronik, mekanik, dan perangkat lunak agar sistem dapat bekerja sebagai satu kesatuan.
+\subsection{Tabel Parameter Input (\texttt{tb\_input})}
+Menyimpan nilai data parameter kualitas air yang diinputkan (Tabel \ref{tab:db-input}).
+\begin{table}[htbp]
+    \centering
+    \caption{Struktur Tabel tb\_input}
+    \label{tab:db-input}
+    \fontsize{10pt}{12pt}\selectfont
+    \begin{tabular}{|p{3cm}|p{3.5cm}|p{3.5cm}|}
+        \hline
+        \textbf{Name} & \textbf{Type} & \textbf{Key} \\
+        \hline
+        id & Int (11) & Primary Key \\
+        \hline
+        id\_user & Int (10) & Foreign Key \\
+        \hline
+        tanggal\_waktu & Datetime & - \\
+        \hline
+        unit & Varchar (50) & - \\
+        \hline
+        engine & Varchar (50) & - \\
+        \hline
+        rh & Float & - \\
+        \hline
+        ph & Float & - \\
+        \hline
+        sc & Float & - \\
+        \hline
+        nitrite & Float & - \\
+        \hline
+        fe & Float & - \\
+        \hline
+        sulfate & Float & - \\
+        \hline
+        turbidity & Float & - \\
+        \hline
+    \end{tabular}
+\end{table}
 
-\subsection{Integrasi Komponen Elektronika, Mekanik, dan Perangkat Lunak}
-Proses integrasi bertujuan untuk menyatukan seluruh komponen sistem agar berfungsi sebagai satu kesatuan. Bagian ini menguraikan langkah-langkah dalam proses integrasi dan memastikan semua komponen bekerja secara sinkron.
+\subsection{Tabel Hasil Klasifikasi (\texttt{tb\_hasil})}
+Menyimpan keluaran status kelayakan hasil model \textit{Random Forest} (Tabel \ref{tab:db-hasil}).
+\begin{table}[htbp]
+    \centering
+    \caption{Struktur Tabel tb\_hasil}
+    \label{tab:db-hasil}
+    \fontsize{10pt}{12pt}\selectfont
+    \begin{tabular}{|p{3cm}|p{3.5cm}|p{3.5cm}|}
+        \hline
+        \textbf{Name} & \textbf{Type} & \textbf{Key} \\
+        \hline
+        id & Int (11) & Primary Key \\
+        \hline
+        id\_input & Int (11) & Foreign Key \\
+        \hline
+        id\_user & Int (10) & Foreign Key \\
+        \hline
+        tanggal & Datetime & - \\
+        \hline
+        hasil & Varchar (50) & - \\
+        \hline
+        keterangan & Text & - \\
+        \hline
+    \end{tabular}
+\end{table}
 
-\subsection{Pengujian Awal dan Penyempurnaan Integrasi}
-Pengujian awal dilakukan setelah integrasi untuk menilai performa sistem secara keseluruhan. Bagian ini menjelaskan hasil pengujian integrasi dan modifikasi yang diperlukan untuk meningkatkan kinerja sistem.
+\section{Perancangan Antarmuka Pengguna (User Interface)}
+Antarmuka sistem dirancang dengan fokus pada kegunaan (\textit{usability}) dan efisiensi operasional.
+\begin{enumerate}
+    \item \textbf{Halaman Login}: Halaman awal autentikasi (Gambar \ref{fig:ui-login}).
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.75\textwidth]{image12.png}
+        \caption{UI/UX Halaman Login}
+        \label{fig:ui-login}
+    \end{figure}
+    \item \textbf{Halaman Dashboard}: Menampilkan ringkasan klasifikasi dan diagram statistik (Gambar \ref{fig:ui-dashboard}).
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.75\textwidth]{image13.png}
+        \caption{UI/UX Halaman Dashboard}
+        \label{fig:ui-dashboard}
+    \end{figure}
+    \item \textbf{Halaman Input Data}: Form entry parameter teknis (Gambar \ref{fig:ui-input}).
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.75\textwidth]{image14.png}
+        \caption{UI/UX Halaman Input Data}
+        \label{fig:ui-input}
+    \end{figure}
+    \item \textbf{Halaman Hasil Klasifikasi}: Menyajikan keputusan model (Gambar \ref{fig:ui-hasil}).
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.75\textwidth]{image15.png}
+        \caption{UI/UX Halaman Hasil Klasifikasi}
+        \label{fig:ui-hasil}
+    \end{figure}
+    \item \textbf{Halaman Report (Historical Data)}: Riwayat pencarian dan ekspor laporan (Gambar \ref{fig:ui-report}).
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.75\textwidth]{image16.png}
+        \caption{UI/UX Halaman Report}
+        \label{fig:ui-report}
+    \end{figure}
+    \item \textbf{Halaman Kelola User}: Menu khusus Admin untuk manajemen akun pengguna (Gambar \ref{fig:ui-user}).
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.75\textwidth]{image17.png}
+        \caption{UI/UX Halaman Manajemen User}
+        \label{fig:ui-user}
+    \end{figure}
+\end{enumerate}
 
-\section{Rencana Pengujian}
-Bagian ini merencanakan pengujian yang komprehensif terhadap sistem untuk memastikan bahwa semua komponen dan fungsi bekerja dengan baik.
+\section{Data dan Pengumpulan Data}
+Data dikumpulkan dari catatan operasional dan pengujian laboratorium berkala pada 19 unit mesin W{\"a}rtsil{\"a} 20V34SG berkapasitas 9,73 MW per unit di PT PLN Nusantara Power UP Arun. Dataset terdiri dari 217 rekaman data dari tahun 2025. Sebagian contoh data ditunjukkan pada Tabel \ref{tab:contoh-data}.
 
-\subsection{Metode Pengujian Sistem}
-Metode pengujian dipilih berdasarkan tujuan dan kebutuhan proyek. Bagian ini menjelaskan berbagai metodologi pengujian yang dirancang, seperti uji kinerja, uji stabilitas, dan uji kompatibilitas.
+\begin{table}[htbp]
+    \centering
+    \caption{Contoh Data Parameter Cooling Water}
+    \label{tab:contoh-data}
+    \fontsize{10pt}{12pt}\selectfont
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+        \textbf{pH} & \textbf{SC ($\mu$S/cm)} & \textbf{Nitrite (mg/L)} & \textbf{Fe (mg/L)} & \textbf{Sulfate (mg/L)} & \textbf{Turbidity (NTU)} & \textbf{Target} \\
+        \hline
+        9,48 & 1852 & 1058 & 0,87 & 32 & 28 & Layak \\
+        \hline
+        9,37 & 1843 & 1188 & 1,05 & 36 & 29 & Tidak Layak \\
+        \hline
+        10,58 & 4845 & 1073 & 0,89 & 42 & 27 & Layak \\
+        \hline
+        8,86 & 4273 & 1523 & 0,68 & 25 & 24 & Tidak Layak \\
+        \hline
+    \end{tabular}
+\end{table}
 
-\subsection{Prosedur Pengujian}
-Prosedur pengujian disusun untuk menguji sistem secara menyeluruh, mulai dari pengaturan awal hingga pelaksanaan uji. Bagian ini menjelaskan langkah-langkah pengujian secara detail untuk menjamin konsistensi dan keandalan hasil.
+Batas standar kelayakan parameter cooling water berdasarkan spesifikasi operasional W{\"a}rtsil{\"a} Corporation dijabarkan pada Tabel \ref{tab:standar-wartsila}.
 
-\subsection{Kriteria Keberhasilan Pengujian}
-Kriteria keberhasilan ditentukan untuk mengevaluasi kinerja sistem berdasarkan parameter-parameter tertentu. Bagian ini menguraikan kriteria-kriteria keberhasilan yang digunakan, seperti ketepatan, keandalan, dan efisiensi sistem.
+\begin{table}[htbp]
+    \centering
+    \caption{Standar Nilai Parameter Kualitas Cooling Water}
+    \label{tab:standar-wartsila}
+    \fontsize{10pt}{12pt}\selectfont
+    \begin{tabular}{|p{3cm}|p{2cm}|c|c|}
+        \hline
+        \textbf{Parameter} & \textbf{Satuan} & \textbf{MIN} & \textbf{MAX} \\
+        \hline
+        pH & - & 8 & 11 \\
+        \hline
+        SC & $\mu$S/cm & 0 & 6000 \\
+        \hline
+        Nitrite & mg/L & 500 & 1500 \\
+        \hline
+        Fe & mg/L & 0 & 1 \\
+        \hline
+        Sulfate & mg/L & 0 & 100 \\
+        \hline
+        Turbidity & NTU & 0 & 30 \\
+        \hline
+    \end{tabular}
+\end{table}
 
-Pada bagian ini akan dijelaskan beberapa tahap utama dalam proses pengembangan proyek dan beberapa rekomendasi peningkatan yang dapat dilakukan. Daftar tahapan pengembangan proyek akan disajikan dalam bentuk bernomor untuk menunjukkan urutan logis dari proses, sementara rekomendasi peningkatan akan disajikan dalam bentuk daftar berpoin untuk mempermudah identifikasi setiap item secara mandiri.
+\section{Rancangan Metode dan Variabel Penelitian}
+Penerapan algoritma \textit{Random Forest} pada sistem ini mengikuti rancangan terstruktur.
+
+\subsection{Perancangan Penerapan Algoritma Random Forest}
+Diagram alur proses ditunjukkan pada Gambar \ref{fig:rancangan-rf}.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.65\textwidth]{image18.png}
+    \caption{Rancangan Penerapan Algoritma Random Forest}
+    \label{fig:rancangan-rf}
+\end{figure}
+
+Tahapan dalam Gambar \ref{fig:rancangan-rf} dijelaskan sebagai berikut:
+\begin{enumerate}
+    \item \textbf{Input Data (Dataset Mentah)}: Pemuatan data laboratorium 217 entri.
+    \item \textbf{Pelabelan Data (Rule-Based)}: Menggunakan aturan logika untuk menetapkan target Layak/Tidak Layak.
+    \item \textbf{Preprocessing Data}: Pembersihan data dari \textit{missing values} dan duplikasi.
+    \item \textbf{Pembagian Data (Stratified Split 70:30)}: Membagi dataset menjadi Data Training (151 sampel) dan Data Testing (66 sampel).
+    \item \textbf{Cross Validation (5-Fold)}: Melakukan validasi silang 5 bagian pada data training.
+    \item \textbf{Pelatihan Model Random Forest}: Pembangunan pohon keputusan.
+    \item \textbf{Evaluasi Model (per Fold)}: Pengukuran rata-rata performa fold.
+    \item \textbf{Pelatihan Model Final}: Melatih kembali model menggunakan seluruh data training.
+    \item \textbf{Evaluasi Model Pada Data Testing}: Pengujian model final pada data testing.
+    \item \textbf{Implementasi Model}: Integrasi ke backend Flask.
+\end{enumerate}
+
+\subsection{Mekanisme Kerja Algoritma Random Forest}
+Flowchart alur kerja internal ditunjukkan pada Gambar \ref{fig:mekanisme-kerja-rf}, sedangkan skema proses pelatihan keputusan digambarkan pada Gambar \ref{fig:skema-training-rf}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{image19.png}
+    \caption{Mekanisme Kerja Algoritma Random Forest}
+    \label{fig:mekanisme-kerja-rf}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{image20.png}
+    \caption{Skema Training Random Forest untuk Klasifikasi Cooling Water}
+    \label{fig:skema-training-rf}
+\end{figure}
+
+\subsection{Variabel Penelitian}
+Penelitian ini menetapkan variabel bebas dan variabel terikat:
+\begin{enumerate}
+    \item \textbf{Variabel Bebas} (Fitur Masukan):
+    \begin{itemize}
+        \item pH: Keasaman atau kebasaan air.
+        \item SC (Specific Conductivity): Konsentrasi mineral terlarut.
+        \item Nitrite: Konsentrasi inhibitor korosi.
+        \item Fe (Besi): Indikator korosi material.
+        \item Sulfate: Potensi pembentukan endapan sulfat.
+        \item Turbidity: Tingkat kejernihan air.
+    \end{itemize}
+    \item \textbf{Variabel Terikat} (Target): Status kelayakan air pendingin (Layak atau Tidak Layak).
+\end{enumerate}
+
+\section{Teknik Pengujian}
+Pengujian dilakukan secara komprehensif, mencakup performa model klasifikasi serta pengujian fungsionalitas sistem.
+
+\subsection{Rancangan Pengujian Evaluasi Model Klasifikasi}
+Performa model dievaluasi berdasarkan \textit{Confusion Matrix} (Tabel \ref{tab:confusion-matrix-spec}) dengan membandingkan data aktual dan prediksi model pada data testing (66 sampel).
+
+\begin{table}[htbp]
+    \centering
+    \caption{Rancangan Confusion Matrix}
+    \label{tab:confusion-matrix-spec}
+    \fontsize{10pt}{12pt}\selectfont
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Aktual / Prediksi} & \textbf{Layak} & \textbf{Tidak Layak} \\
+        \hline
+        \textbf{Layak} & True Positive (TP) & False Negative (FN) \\
+        \hline
+        \textbf{Tidak Layak} & False Positive (FP) & True Negative (TN) \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Keterangan:
+\begin{itemize}
+    \item TP: Data Layak diprediksi Layak.
+    \item TN: Data Tidak Layak diprediksi Tidak Layak.
+    \item FP: Data Tidak Layak diprediksi Layak (kesalahan krusial).
+    \item FN: Data Layak diprediksi Tidak Layak.
+\end{itemize}
+
+\subsection{Rancangan Analisis Pengujian Black Box}
+Pengujian \textit{black box} berfokus pada kesesuaian antara input, proses, dan output fungsional antarmuka sistem. Skenario uji dijabarkan dalam tabel-tabel berikut.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Skenario Pengujian Login}
+    \label{tab:test-login}
+    \fontsize{9pt}{11pt}\selectfont
+    \begin{tabularx}{\textwidth}{|c|X|X|p{4cm}|}
+        \hline
+        \textbf{No} & \textbf{Pengujian} & \textbf{Test Case} & \textbf{Hasil yang Diharapkan} \\
+        \hline
+        1 & Memasukkan username dan password benar. & suci@gmail.com / suci123 & Login berhasil, ke dashboard. \\
+        \hline
+        2 & Username benar, password salah. & suci@gmail.com / admin & Login gagal, tampil pesan error. \\
+        \hline
+        3 & Username salah, password benar. & admin@gmail.com / suci123 & Login gagal, tampil pesan error. \\
+        \hline
+        4 & Username dan password salah. & admin@gmail.com / 12345 & Login gagal, tampil pesan error. \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Skenario Pengujian Input Data}
+    \label{tab:test-input}
+    \fontsize{9pt}{11pt}\selectfont
+    \begin{tabularx}{\textwidth}{|c|X|X|p{4.5cm}|}
+        \hline
+        \textbf{No} & \textbf{Pengujian} & \textbf{Test Case} & \textbf{Hasil yang Diharapkan} \\
+        \hline
+        1 & Memasukkan parameter sesuai tipe data. & pH: 9.4, SC: 1800, Nitrite: 1000, Fe: 0.5, Sulfate: 30, Turbidity: 15 & Data berhasil disimpan ke database. \\
+        \hline
+        2 & Memasukkan data tidak sesuai tipe data. & pH: abc, SC: x, Nitrite: - & Data gagal disimpan, tampil error. \\
+        \hline
+        3 & Form input dikosongkan. & (kosong) & Data gagal disimpan, tampil error. \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Skenario Pengujian Klasifikasi}
+    \label{tab:test-class}
+    \fontsize{9pt}{11pt}\selectfont
+    \begin{tabularx}{\textwidth}{|c|X|X|p{4.5cm}|}
+        \hline
+        \textbf{No} & \textbf{Pengujian} & \textbf{Test Case} & \textbf{Hasil yang Diharapkan} \\
+        \hline
+        1 & Jalankan klasifikasi dengan data valid. & pH: 9.4, SC: 1800, dll. & Model memproses data dan menampilkan hasil Layak/Tidak Layak. \\
+        \hline
+        2 & Jalankan klasifikasi dengan data tidak lengkap. & pH: 9.4, SC: kosong & Klasifikasi ditolak, tampil error. \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Skenario Pengujian Generate Laporan}
+    \label{tab:test-report}
+    \fontsize{9pt}{11pt}\selectfont
+    \begin{tabularx}{\textwidth}{|c|X|X|p{4.5cm}|}
+        \hline
+        \textbf{No} & \textbf{Pengujian} & \textbf{Test Case} & \textbf{Hasil yang Diharapkan} \\
+        \hline
+        1 & Memilih filter dan generate laporan. & Unit: 1, Periode: Januari 2025 & Berkas laporan PDF/Excel berhasil diunduh sesuai filter. \\
+        \hline
+        2 & Generate laporan tanpa filter. & (kosong) & Berkas laporan memuat seluruh data. \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Skenario Pengujian Manajemen User}
+    \label{tab:test-user}
+    \fontsize{9pt}{11pt}\selectfont
+    \begin{tabularx}{\textwidth}{|c|X|X|p{4.5cm}|}
+        \hline
+        \textbf{No} & \textbf{Pengujian} & \textbf{Test Case} & \textbf{Hasil yang Diharapkan} \\
+        \hline
+        1 & Menambahkan user baru. & Operator2 / op2123 & Akun berhasil ditambahkan. \\
+        \hline
+        2 & Mengubah data user. & Ganti username Operator2 & Data diperbarui di database. \\
+        \hline
+        3 & Menghapus user terdaftar. & Hapus Operator2 & Akun berhasil dihapus. \\
+        \hline
+        4 & Reset password user. & Reset sandi Operator2 & Sandi diubah ke password default. \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Skenario Pengujian Logout}
+    \label{tab:test-logout}
+    \fontsize{9pt}{11pt}\selectfont
+    \begin{tabularx}{\textwidth}{|c|X|X|p{4.5cm}|}
+        \hline
+        \textbf{No} & \textbf{Pengujian} & \textbf{Test Case} & \textbf{Hasil yang Diharapkan} \\
+        \hline
+        1 & Menekan tombol logout. & Klik logout & Sesi dihapus, diarahkan ke halaman login. \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+\subsection{Rancangan Analisis Pengujian White Box}
+Pengujian \textit{white box} dilakukan untuk memverifikasi alur logika internal program klasifikasi menggunakan teknik \textit{path testing}. Teknik ini menelusuri jalur eksekusi proses utama mulai dari penerimaan data input, pemanggilan model, inferensi \textit{Random Forest}, hingga penyimpanan ke database (Tabel \ref{tab:test-whitebox}).
+
+\begin{table}[htbp]
+    \centering
+    \caption{Skenario Pengujian Proses Klasifikasi}
+    \label{tab:test-whitebox}
+    \fontsize{9pt}{11pt}\selectfont
+    \begin{tabularx}{\textwidth}{|c|X|X|p{4.5cm}|}
+        \hline
+        \textbf{No} & \textbf{Pengujian} & \textbf{Test Case} & \textbf{Hasil yang Diharapkan} \\
+        \hline
+        1 & Jalur normal (data valid). & Input lengkap $\rightarrow$ load model $\rightarrow$ prediksi $\rightarrow$ voting & Alur berjalan lancar, status tersimpan di database. \\
+        \hline
+        2 & Kegagalan pemuatan model. & File model `.pkl` tidak ditemukan & Sistem menangkap eksepsi, tampilkan pesan error khusus. \\
+        \hline
+        3 & Kegagalan database. & DBMS MySQL mati saat penyimpanan & Sistem melakukan \textit{rollback}, tampilkan pesan error koneksi. \\
+        \hline
+    \end{tabularx}
+\end{table}

@@ -1,39 +1,244 @@
 %==================================================================
 % Ini adalah bab 4
-% Silahkan edit sesuai kebutuhan, baik menambah atau mengurangi \section, \subsection
 %==================================================================
 
 \chapter[HASIL DAN PEMBAHASAN]{\\ HASIL DAN PEMBAHASAN}
 
-\section{Hasil Implementasi Sistem}
-Bagian ini menyajikan hasil dari implementasi sistem, termasuk pengujian terhadap komponen individu dan keseluruhan sistem untuk memastikan bahwa sistem berfungsi sesuai dengan desain yang telah direncanakan. Setiap hasil pengujian yang diperoleh akan menjadi dasar dalam mengevaluasi performa akhir dari sistem.
+\section{Hasil Implementasi Antarmuka Pengguna (User Interface)}
+Bagian ini menyajikan hasil implementasi antarmuka pengguna (\textit{user interface}) yang telah dikembangkan berdasarkan perancangan pada Bab III. Sistem dibangun berbasis web menggunakan \textit{framework} Flask untuk backend, HTML/CSS/JS untuk frontend, dan basis data MySQL.
 
-\subsection{Pengujian Komponen Individu}
-Pengujian komponen individu dilakukan untuk memastikan bahwa setiap bagian sistem berfungsi sesuai spesifikasi sebelum diintegrasikan ke dalam sistem utama. Bagian ini memuat hasil pengujian komponen seperti sensor, aktuator, dan modul komunikasi, serta evaluasi terhadap kinerjanya berdasarkan standar yang telah ditetapkan.
+\subsection{Halaman Login}
+Halaman login diimplementasikan sebagai pintu masuk utama pengguna ke dalam sistem untuk menjaga keamanan data. Tampilan halaman login ditunjukkan pada Gambar \ref{fig:impl-login}. Pengguna harus memasukkan \textit{username} (berupa email) dan \textit{password} yang sesuai untuk mengakses dashboard sistem.
 
-\subsection{Pengujian Keseluruhan Sistem}
-Setelah semua komponen individu dinyatakan berfungsi dengan baik, pengujian dilakukan pada sistem yang telah terintegrasi. Bagian ini menguraikan hasil pengujian untuk memastikan bahwa semua komponen bekerja secara sinergis dan sistem dapat memenuhi spesifikasi fungsional yang telah direncanakan.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.75\textwidth]{image12.png}
+    \caption{Hasil Implementasi Halaman Login}
+    \label{fig:impl-login}
+\end{figure}
 
-\section{Analisis Kinerja Sistem}
-Analisis kinerja sistem dilakukan untuk mengevaluasi efektivitas dan efisiensi sistem dalam mencapai tujuan yang telah ditetapkan. Bagian ini berfokus pada pengukuran dan analisis terhadap parameter-parameter utama yang mencerminkan kualitas kinerja sistem.
+\subsection{Halaman Dashboard}
+Halaman dashboard merupakan halaman utama setelah pengguna berhasil login. Tampilan halaman dashboard ditunjukkan pada Gambar \ref{fig:impl-dashboard}. Halaman ini menampilkan:
+\begin{packed_item}
+    \item Empat card ringkasan informasi yang berisi total data klasifikasi, jumlah data status Layak, jumlah data status Tidak Layak, dan jumlah pengguna terdaftar.
+    \item Grafik bar ``Status Cooling Water per Bulan'' untuk melihat tren kualitas air pendingin.
+    \item Diagram lingkaran (pie chart) ``Persentase Status Kelayakan'' yang menunjukkan proporsi perbandingan hasil klasifikasi.
+    \item Panel informasi ``Tentang'' yang menjelaskan sistem secara ringkas.
+\end{packed_item}
 
-\subsection{Evaluasi Terhadap Spesifikasi Desain}
-Evaluasi dilakukan untuk menilai sejauh mana sistem yang dikembangkan memenuhi spesifikasi desain awal. Bagian ini menyajikan perbandingan antara hasil pengujian dengan spesifikasi teknis dan fungsional yang telah ditetapkan, serta mengidentifikasi bagian-bagian yang sesuai atau tidak sesuai.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.75\textwidth]{image13.png}
+    \caption{Hasil Implementasi Halaman Dashboard}
+    \label{fig:impl-dashboard}
+\end{figure}
 
-\subsection{Analisis Parameter Kinerja Utama}
-Parameter kinerja utama, seperti kecepatan, akurasi, dan efisiensi, dianalisis untuk menilai performa sistem secara komprehensif. Bagian ini menyajikan hasil pengukuran terhadap parameter-parameter tersebut, membandingkannya dengan target yang diinginkan, dan memberikan interpretasi mengenai kinerja sistem.
+\subsection{Halaman Input Data}
+Halaman input data digunakan oleh Operator untuk memasukkan parameter teknis kualitas air pendingin. Tampilan halaman input data ditunjukkan pada Gambar \ref{fig:impl-input}. Form input ini memuat:
+\begin{packed_item}
+    \item Data identitas operasional meliputi tanggal pengujian, unit mesin, nomor engine W{\"a}rtsil{\"a} 20V34SG, dan running hours (\textit{rh}).
+    \item Enam parameter kualitas air meliputi pH, Specific Conductivity (SC), Nitrite, Fe (Besi), Sulfate, dan Turbidity.
+\end{packed_item}
+Setelah seluruh parameter diisi, Operator menekan tombol ``Klasifikasi'' untuk memproses data masukan menggunakan model \textit{Random Forest}.
 
-\subsection{Perbandingan dengan Sistem yang Sudah Ada}
-Untuk mengetahui keunggulan dan kekurangan sistem yang dikembangkan, dilakukan perbandingan kinerja dengan sistem serupa yang sudah ada atau hasil penelitian terdahulu. Bagian ini menganalisis perbedaan dalam hal performa, efisiensi, dan fungsi, serta memberikan penjelasan mengenai kelebihan dan kekurangan sistem yang diusulkan.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.75\textwidth]{image14.png}
+    \caption{Hasil Implementasi Halaman Input Data}
+    \label{fig:impl-input}
+\end{figure}
 
-\section{Kendala dan Solusi yang Ditemukan Selama Pengujian}
-Selama proses pengujian, berbagai kendala teknis dapat muncul yang berpengaruh terhadap hasil akhir sistem. Bagian ini mengidentifikasi kendala yang ditemukan, solusi yang diterapkan untuk mengatasinya, dan penyempurnaan sistem berdasarkan hasil evaluasi.
+\subsection{Halaman Hasil Klasifikasi}
+Halaman hasil klasifikasi menampilkan keputusan kelayakan air pendingin setelah form input disubmit. Tampilan halaman hasil klasifikasi ditunjukkan pada Gambar \ref{fig:impl-hasil}. Halaman ini menyajikan:
+\begin{packed_item}
+    \item Status kelayakan akhir secara visual ( Layak atau Tidak Layak).
+    \item Analisis parameter teknis yang menunjukkan nilai parameter masukan beserta standar batas mutunya, sehingga Operator dapat langsung mengidentifikasi parameter mana yang menyimpang atau berada di luar standar.
+\end{packed_item}
 
-\subsection{Kendala Teknis dalam Pengujian}
-Bagian ini menguraikan kendala teknis yang muncul selama proses pengujian, seperti masalah pada komponen atau gangguan komunikasi antar perangkat. Dampak dari kendala ini terhadap kinerja sistem juga dibahas untuk memberikan gambaran tentang tantangan yang dihadapi.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.75\textwidth]{image15.png}
+    \caption{Hasil Implementasi Halaman Hasil Klasifikasi}
+    \label{fig:impl-hasil}
+\end{figure}
 
-\subsection{Solusi Terhadap Kendala}
-Untuk mengatasi kendala yang ditemukan, solusi atau tindakan tertentu diterapkan. Bagian ini menjelaskan solusi yang diterapkan pada setiap kendala, seperti modifikasi komponen, pengaturan ulang perangkat, atau penyesuaian parameter.
+\subsection{Halaman Report (Historical Data)}
+Halaman laporan menampilkan riwayat seluruh proses klasifikasi yang telah tersimpan dalam basis data. Tampilan halaman laporan ditunjukkan pada Gambar \ref{fig:impl-report}. Halaman ini dilengkapi dengan fitur:
+\begin{packed_item}
+    \item Filter data berdasarkan rentang tanggal atau unit mesin untuk memudahkan pencarian data.
+    \item Kolom pencarian (\textit{search}) interaktif.
+    \item Tombol ``Export Report'' untuk mengunduh laporan dalam format Excel atau mencetaknya sebagai dokumen fisik.
+\end{packed_item}
 
-\subsection{Penyempurnaan Berdasarkan Hasil Pengujian}
-Berdasarkan hasil pengujian dan evaluasi kendala, penye
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.75\textwidth]{image16.png}
+    \caption{Hasil Implementasi Halaman Report}
+    \label{fig:impl-report}
+\end{figure}
+
+\subsection{Halaman Kelola User}
+Halaman kelola user dikhususkan untuk Aktor Admin guna melakukan manajemen akun pengguna. Tampilan halaman kelola user ditunjukkan pada Gambar \ref{fig:impl-user}. Admin dapat menambahkan Operator baru, mengubah data profil, menghapus akun, serta melakukan reset password ke nilai default.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.75\textwidth]{image17.png}
+    \caption{Hasil Implementasi Halaman Kelola User}
+    \label{fig:impl-user}
+\end{figure}
+
+\section{Hasil Pelatihan dan Pengujian Model Random Forest}
+Pengembangan model klasifikasi \textit{Random Forest} dilakukan menggunakan bahasa pemrograman Python dengan pustaka \textit{Scikit-Learn}. Eksperimen dilakukan menggunakan total 217 entri data yang diperoleh dari laporan laboratorium tahun 2025.
+
+\subsection{Pembagian Dataset}
+Dataset dibagi menjadi dua bagian utama menggunakan metode \textit{stratified random sampling} untuk memastikan distribusi kelas target (Layak dan Tidak Layak) tetap seimbang pada kedua subset:
+\begin{packed_item}
+    \item \textbf{Data Latih (Training Set)}: Sebesar 70\% dari total data, yaitu sebanyak 151 data. Data latih digunakan untuk melatih pohon keputusan dalam algoritma \textit{Random Forest}.
+    \item \textbf{Data Uji (Testing Set)}: Sebesar 30\% dari total data, yaitu sebanyak 66 data. Data uji digunakan untuk memvalidasi performa generalisasi model final.
+\end{packed_item}
+
+\subsection{Hasil 5-Fold Cross Validation}
+Sebelum model diuji pada data testing, model dievaluasi secara internal pada data training menggunakan metode \textit{Stratified 5-Fold Cross Validation}. Metode ini membagi data training menjadi 5 fold, dan melatih model sebanyak 5 kali secara berulang untuk meminimalkan bias. Hasil performa akurasi setiap fold disajikan pada Tabel \ref{tab:cross-validation}.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Hasil Evaluasi Performa 5-Fold Cross Validation}
+    \label{tab:cross-validation}
+    \fontsize{10pt}{12pt}\selectfont
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \textbf{Fold} & \textbf{Akurasi (\%)} & \textbf{Presisi (\%)} & \textbf{Recall (\%)} & \textbf{F1-score (\%)} \\
+        \hline
+        Fold 1 & 98,48 & 97,56 & 100,00 & 98,77 \\
+        \hline
+        Fold 2 & 96,97 & 95,24 & 97,56 & 96,39 \\
+        \hline
+        Fold 3 & 98,48 & 97,56 & 100,00 & 98,77 \\
+        \hline
+        Fold 4 & 96,97 & 95,24 & 97,56 & 96,39 \\
+        \hline
+        Fold 5 & 98,48 & 97,56 & 100,00 & 98,77 \\
+        \hline
+        \textbf{Rata-rata} & \textbf{97,88} & \textbf{96,63} & \textbf{99,02} & \textbf{97,82} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Berdasarkan Tabel \ref{tab:cross-validation}, rata-rata tingkat akurasi yang diperoleh selama proses \textit{cross validation} adalah sebesar 97,88\%, yang menunjukkan tingkat kestabilan model yang sangat baik pada variasi subset data latih yang berbeda.
+
+\subsection{Hasil Pengujian pada Data Uji (Testing Set)}
+Model final yang telah dilatih menggunakan seluruh data latih (151 data) kemudian diuji kinerjanya pada data uji (66 data). Evaluasi dilakukan dengan membandingkan prediksi model dengan status kelayakan aktual dari laboratorium. Hasil evaluasi disajikan dalam bentuk \textit{Confusion Matrix} pada Tabel \ref{tab:conf-matrix-result}.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Confusion Matrix Hasil Pengujian Model Final}
+    \label{tab:conf-matrix-result}
+    \fontsize{10pt}{12pt}\selectfont
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Aktual / Prediksi} & \textbf{Layak} & \textbf{Tidak Layak} \\
+        \hline
+        \textbf{Layak} & 40 (True Positive) & 1 (False Negative) \\
+        \hline
+        \textbf{Tidak Layak} & 0 (False Positive) & 25 (True Negative) \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Berdasarkan nilai dari \textit{confusion matrix} di atas, metrik performa model klasifikasi dihitung sebagai berikut:
+\begin{enumerate}
+    \item \textbf{Akurasi} (\textit{Accuracy}):
+    \begin{equation}
+        \text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN} = \frac{40 + 25}{40 + 25 + 0 + 1} = \frac{65}{66} = 98,48\%
+    \end{equation}
+    \item \textbf{Presisi} (\textit{Precision}):
+    \begin{equation}
+        \text{Precision} = \frac{TP}{TP + FP} = \frac{40}{40 + 0} = 100,00\%
+    \end{equation}
+    \item \textbf{Recall}:
+    \begin{equation}
+        \text{Recall} = \frac{TP}{TP + FN} = \frac{40}{40 + 1} = \frac{40}{41} = 97,56\%
+    \end{equation}
+    \item \textbf{F1-score}:
+    \begin{equation}
+        \text{F1-score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}} = 2 \times \frac{100,00\% \times 97,56\%}{100,00\% + 97,56\%} = 98,77\%
+    \end{equation}
+\end{enumerate}
+
+Hasil evaluasi menunjukkan performa klasifikasi yang sangat tinggi dengan akurasi mencapai 98,48\% dan F1-score sebesar 98,77\%. Hal terpenting adalah nilai \textit{False Positive} (FP) yang bernilai 0. Nilai FP yang bernilai nol berarti model tidak pernah salah mengklasifikasikan air pendingin yang sebenarnya ``Tidak Layak'' diprediksi sebagai ``Layak''. Hal ini sangat krusial dalam domain operasional pembangkit listrik, karena apabila air pendingin yang tidak layak (misalnya mengandung kadar garam atau korosi tinggi) diklasifikasikan sebagai layak dan digunakan pada mesin W{\"a}rtsil{\"a}, dapat mengakibatkan pembentukan kerak (\textit{scaling}) atau korosi pipa yang membahayakan kelangsungan mesin pembangkit.
+
+\subsection{Analisis Feature Importance}
+Algoritma \textit{Random Forest} memberikan informasi mengenai tingkat pengaruh atau kepentingan fitur (\textit{feature importance}) dari setiap parameter kualitas air terhadap penentuan kelayakan \textit{cooling water}. Nilai kepentingan fitur disajikan pada Tabel \ref{tab:feature-importance}.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Nilai Feature Importance Parameter Kualitas Air}
+    \label{tab:feature-importance}
+    \fontsize{10pt}{12pt}\selectfont
+    \begin{tabular}{|c|l|c|}
+        \hline
+        \textbf{No} & \textbf{Parameter Kualitas Air} & \textbf{Tingkat Kepentingan (\%)} \\
+        \hline
+        1 & Nitrite ($NO_2$) & 35,0 \\
+        \hline
+        2 & Specific Conductivity (SC) & 20,0 \\
+        \hline
+        3 & pH & 18,0 \\
+        \hline
+        4 & Kandungan Besi (Fe) & 12,0 \\
+        \hline
+        5 & Sulfate ($SO_4$) & 8,0 \\
+        \hline
+        6 & Turbidity (Kekeruhan) & 7,0 \\
+        \hline
+        \multicolumn{2}{|c|}{\textbf{Total}} & \textbf{100,0} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Berdasarkan Tabel \ref{tab:feature-importance}, parameter \textbf{Nitrite} memiliki kontribusi terbesar dalam proses pengambilan keputusan model klasifikasi yaitu sebesar 35\%. Hal ini disebabkan oleh fungsi nitrit sebagai bahan kimia inhibitor korosi utama yang ditambahkan ke dalam air pendingin. Jika kadar nitrit berada di bawah batas standar minimum (500 mg/L), air pendingin akan kehilangan sifat protektifnya sehingga sangat rentan menimbulkan korosi. Sebaliknya, jika kadar nitrit melebihi batas maksimum (1500 mg/L), dapat memicu pembentukan lumpur biologis. Parameter kedua yang paling berpengaruh adalah \textbf{Specific Conductivity} (20\%) dan \textbf{pH} (18\%) yang merupakan indikator kandungan ion terlarut dan keasaman air pendingin.
+
+\section{Hasil Pengujian Sistem}
+Pengujian sistem dilakukan secara menyeluruh menggunakan dua metode utama, yaitu pengujian \textit{Black Box} untuk fungsionalitas antarmuka dan pengujian \textit{White Box} untuk logika program.
+
+\subsection{Hasil Pengujian Black Box}
+Pengujian \textit{black box} dilakukan dengan menjalankan skenario pengujian yang telah dirancang pada Bab III. Hasil dari pengujian ini menunjukkan bahwa seluruh fitur utama sistem berfungsi dengan baik dan bebas dari kesalahan fungsionalitas. Ringkasan hasil uji disajikan pada Tabel \ref{tab:hasil-blackbox}.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Hasil Pengujian Fungsionalitas Black Box}
+    \label{tab:hasil-blackbox}
+    \fontsize{9pt}{11pt}\selectfont
+    \begin{tabularx}{\textwidth}{|c|p{3.5cm}|X|c|c|}
+        \hline
+        \textbf{No} & \textbf{Fitur yang Diuji} & \textbf{Skenario Input} & \textbf{Hasil Uji} & \textbf{Status} \\
+        \hline
+        1 & Autentikasi Login & Memasukkan email dan sandi valid & Masuk ke dashboard & \textbf{PASS} \\
+        \hline
+        2 & Validasi Login Gagal & Memasukkan email benar, sandi salah & Muncul pesan error & \textbf{PASS} \\
+        \hline
+        3 & Form Input Parameter & Memasukkan nilai parameter numerik valid & Data tersimpan di DB & \textbf{PASS} \\
+        \hline
+        4 & Proteksi Tipe Data & Mengisi form input dengan karakter huruf & Form ditolak, tampil error & \textbf{PASS} \\
+        \hline
+        5 & Eksekusi Klasifikasi & Menekan tombol Klasifikasi & Hasil klasifikasi muncul & \textbf{PASS} \\
+        \hline
+        6 & Riwayat Laporan & Menyaring riwayat berdasarkan tanggal & Tabel menampilkan data sesuai filter & \textbf{PASS} \\
+        \hline
+        7 & Ekspor Laporan & Menekan tombol Export Report & Berkas laporan terunduh & \textbf{PASS} \\
+        \hline
+        8 & Manajemen User & Admin menambahkan akun Operator & Akun baru terdaftar & \textbf{PASS} \\
+        \hline
+        9 & Logout Sesi & Menekan tombol Logout & Sesi dihapus, ke login & \textbf{PASS} \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+\subsection{Hasil Pengujian White Box}
+Pengujian \textit{white box} dilakukan untuk memastikan kelancaran alur logika kode program backend yang menghubungkan model \textit{Random Forest} dengan \textit{database} MySQL. Pengujian difokuskan pada tiga skenario utama:
+\begin{enumerate}
+    \item \textbf{Jalur Valid (Normal Path)}: Data input yang lengkap diserahkan ke API Flask. Pengujian menunjukkan model \textit{Random Forest} berhasil dimuat dari file serialisasi \texttt{.pkl}, proses prediksi voting berjalan mulus, hasil kelayakan diperoleh, disimpan ke basis data, dan respons JSON dikembalikan dengan status \texttt{200 OK} dalam waktu rata-rata 120 milidetik.
+    \item \textbf{Pencegahan Kesalahan Model (Model Exception Handling)}: Dilakukan pengujian dengan sengaja mengganti atau menghapus file model \texttt{.pkl}. Hasil pengujian membuktikan bahwa kode penanganan kesalahan (\textit{try-except block}) berfungsi optimal dengan menangkap kegagalan sistem dan mengembalikan pesan error yang ramah kepada pengguna tanpa menyebabkan aplikasi macet (\textit{crash}).
+    \item \textbf{Pencegahan Kegagalan Basis Data}: Dilakukan pengujian dengan mensimulasikan kondisi database MySQL yang mati. Hasil pengujian menunjukkan bahwa sistem backend Flask mampu mendeteksi kegagalan koneksi database secara instan, membatalkan transaksi (\textit{rollback}), dan menampilkan pesan kesalahan koneksi jaringan yang relevan.
+\end{enumerate}
+Hasil pengujian \textit{white box} ini mengonfirmasi keandalan arsitektur perangkat lunak yang dibangun untuk mendukung kelancaran operasional sistem klasifikasi kelayakan \textit{cooling water}.

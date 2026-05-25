@@ -1,64 +1,62 @@
-%==================================================================
-% Ini adalah halaman persetujuan
-%==================================================================
-
-%% DILARANG EDIT BAGIAN INI
 \newpage
-
-% Macro to resize both name and NIP if name would wrap to two lines
-\newcommand{\smartsignature}[2]{%
-    % Test if name fits in one line at normal size
-    \setbox0=\hbox{#1}%
-    \ifdim\wd0>0.47\textwidth
-        % Name is too wide, use smaller font for both name and NIP
-        {\small #1\\[0.3em]#2}%
-    \else
-        % Name fits, use normal size for both
-        {#1\\[0.3em]#2}%
-    \fi
-}
-
-\addcontentsline{toc}{chapter}{LEMBAR PERSETUJUAN UJIAN}
+\addcontentsline{toc}{chapter}{LEMBAR PERSETUJUAN}
 \begin{center}
     \begin{doublespace}
-        \textbf{\large \MakeUppercase{lembar persetujuan}}
+        \textbf{\large LEMBAR PENGESAHAN PEMBIMBING}
     \end{doublespace}
+    \vspace{1cm}
 \end{center}
 
-\begin{center}
-    {\tipe} dengan Judul
-\end{center}
+\noindent Skripsi yang berjudul \textbf{\judulid}, disusun oleh \textbf{\penulis}, NIM \textbf{\nim}, Program Studi \textbf{\prodi}, \textbf{\fakultas} \textbf{\universitas}, telah memenuhi syarat untuk dipertanggungjawabkan dihadapan dewan penguji.
 
-\begin{center}
-    \begin{doublespace}
-        \textbf{\large \MakeUppercase {\judulid}}
-    \end{doublespace}
-\end{center}
+\vspace{1.5cm}
 
-\begin{center}
-    Disusun oleh:\\
-    \textbf{\penulis}\\
-    \textbf{NIM \nim}\\[1.5cm]
-
-    telah memenuhi syarat dan disetujui oleh Dosen Pembimbing untuk dilaksanakan Ujian {\tipe} bagi yang bersangkutan.\\[0.75cm]
-\end{center}
-
-\vspace{0.75cm}
-\noindent\begin{minipage}[t]{0.47\textwidth}
+\noindent\begin{minipage}[t]{0.48\textwidth}
     \centering
-    \vspace{1.5em}
-    Mengetahui,\\
-    Koordinator Program Studi,\\[2.5cm]
-    
-    \smartsignature{\koorprodi}{NIP. \NIPkoorprodi}
-\end{minipage}%
-\hfill%
-\begin{minipage}[t]{0.47\textwidth}
+    % spacing
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
     \centering
-    Wates, \tglpersetujuan\\[1em]
-    Disetujui,\\
-    Dosen Pembimbing TA,\\[2.5cm]
-    
-    \smartsignature{\pembimbing}{NIP. \NIPpembimbing}
-\end{minipage}%
-%% DILARANG EDIT BAGIAN INI
+    Buketrata, \tglpersetujuan
+\end{minipage}
+
+\vspace{0.5cm}
+
+\noindent\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    Pembimbing I,\\[2cm]
+    \textbf{\pembimbingI}\\
+    NIP. \NIPpembimbingI
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    Pembimbing II,\\[2cm]
+    \textbf{\pembimbingII}\\
+    NIP. \NIPpembimbingII
+\end{minipage}
+
+\vspace{2cm}
+
+\begin{center}
+    Mengetahui,
+\end{center}
+
+\vspace{0.5cm}
+
+\noindent\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    Ketua Jurusan\\
+    \fakultas,\\[2cm]
+    \textbf{\kajur}\\
+    NIP. \NIPkajur
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    Ketua Program Studi\\
+    \prodi,\\[2cm]
+    \textbf{\koorprodi}\\
+    NIP. \NIPkoorprodi
+\end{minipage}
