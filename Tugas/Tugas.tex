@@ -1,0 +1,283 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[indonesian]{babel}
+\usepackage[none]{hyphenat}
+\usepackage{microtype}
+\emergencystretch=3em
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    left=3cm,
+    right=3cm,
+    top=3cm,
+    bottom=3cm
+}
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{pslatex}
+\usepackage{indentfirst}
+\setlength{\parindent}{1cm}
+
+% Warna full hitam untuk dokumen formal
+\definecolor{primary}{HTML}{000000} 
+\definecolor{secondary}{HTML}{000000} 
+\definecolor{accent}{HTML}{000000} 
+\definecolor{lightgray}{HTML}{FFFFFF} 
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=black,      
+    urlcolor=black,
+    pdftitle={Tugas Midtest Manajemen Proyek TI - Muhammad Kholis},
+    pdfauthor={Muhammad Kholis},
+    pdfsubject={Manajemen Proyek Teknologi Informasi},
+}
+
+% Format Judul Seksi
+\titleformat{\section}{\color{black}\normalfont\large\bfseries}{\thesection.}{1em}{}
+\titleformat{\subsection}{\color{black}\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
+
+% Pengaturan List
+\setlist{nosep, leftmargin=*}
+\setlist[enumerate]{label=\alph*., ref=\alph*}
+
+% Tanpa Header dan Footer (Hanya nomor halaman di bawah tengah)
+\pagestyle{plain}
+
+\begin{document}
+
+
+% --- IDENTITAS MAHASISWA ---
+\begin{table}[h!]
+    \centering
+    \fontsize{11pt}{13pt}\selectfont
+    \begin{tabular}{p{4cm}cp{10cm}}
+        \textbf{Nama Mahasiswa} & : & Muhammad Kholis \\
+        \textbf{NIM} & : & 2022573010098 \\
+        \textbf{Program Studi} & : & D4 Teknik Informatika \\
+        \textbf{Mata Kuliah} & : & Manajemen Proyek Teknologi Informasi \\
+        \textbf{Dosen Pengampu} & : & Mulyadi, S.T., M.Eng \\
+        \textbf{Judul Skripsi} & : & \parbox[t]{10cm}{\textbf{Rancang Bangun Aplikasi Point of Sale dengan Fitur Prediksi Penjualan Harian Menggunakan Metode Long Short-Term Memory (LSTM)}}
+    \end{tabular}
+\end{table}
+
+\vspace{0.4cm}
+
+\section{Analisis Judul Skripsi sebagai Proyek TI}
+
+Penelitian skripsi dengan judul \textit{``Rancang Bangun Aplikasi Point of Sale dengan Fitur Prediksi Penjualan Harian Menggunakan Metode Long Short-Term Memory (LSTM)''} dikategorikan sebagai sebuah proyek Teknologi Informasi (TI). Hal ini didasarkan pada analisis terhadap komponen latar belakang, tujuan, luaran, pengguna, serta karakteristik proyek berikut ini:
+
+\subsection{Latar Belakang Masalah}
+Proyek teknologi informasi ini didorong oleh permasalahan pada sistem \textit{Point of Sale} (POS) yang saat ini banyak digunakan oleh pelaku Usaha Mikro, Kecil, dan Menengah (UMKM). Masalah utama yang ingin diselesaikan adalah sistem POS saat ini umumnya hanya berfokus pada fungsi pencatatan transaksi dan penyajian laporan, namun belum dilengkapi dengan fitur analisis data untuk memprediksi penjualan di masa mendatang.
+
+Sistem manual atau perkiraan konvensional dalam menentukan jumlah persediaan menjadi kurang efisien karena ketidakpastian permintaan pasar sering menyebabkan ketidakseimbangan antara jumlah stok barang dan kebutuhan. Jika stok terlalu sedikit, pelaku usaha akan kehilangan peluang penjualan, sedangkan stok yang berlebihan akan menimbulkan risiko kerugian karena barang tidak terjual. Oleh karena itu, proyek ini berupaya menyelesaikan masalah tersebut dengan membuat sistem yang tidak hanya mencatat transaksi, tetapi juga mampu memprediksi penjualan harian secara otomatis.
+
+\subsection{Tujuan Sistem}
+Berdasarkan Bab 1, tujuan utama dari pengembangan sistem dalam proyek ini adalah:
+\begin{enumerate}[label=\arabic*)]
+    \item \textbf{Membangun sistem transaksi operasional:} Merancang dan membangun aplikasi \textit{Point of Sale} (POS) berbasis \textit{mobile} untuk mempermudah pengelolaan data produk dan transaksi penjualan secara efektif.
+    \item \textbf{Menghasilkan analisis prediktif:} Menerapkan algoritma kecerdasan buatan, yaitu \textit{Long Short-Term Memory} (LSTM), pada aplikasi POS tersebut agar mampu memproses data historis penjualan dan memberikan hasil prediksi penjualan harian.
+\end{enumerate}
+
+\subsection{Hasil Yang Diharapkan}
+Berdasarkan batasan masalah dan manfaat penelitian di Bab 1, \textit{output} utama yang akan dihasilkan oleh sistem ini meliputi:
+\begin{enumerate}[label=\arabic*)]
+    \item \textbf{Aplikasi POS berbasis mobile} yang memiliki kelengkapan fitur pengelolaan data produk, fitur pencatatan transaksi, dan database untuk menyimpan data penjualan historis.
+    \item \textbf{Informasi prediksi penjualan harian}, yaitu sebuah \textit{output} berupa angka atau data estimasi jumlah penjualan per hari yang diproses secara otomatis oleh metode LSTM.
+    \item \textbf{Dasar perencanaan bisnis}, di mana \textit{output} sistem diharapkan dapat menjadi acuan atau landasan bagi pengambil keputusan dalam merencanakan stok barang agar tidak terjadi kelebihan atau kekurangan persediaan.
+\end{enumerate}
+
+\subsection{Pengguna Sistem}
+Pihak yang dituju untuk menggunakan dan mendapatkan manfaat langsung dari sistem ini menurut penjabaran di Bab 1 adalah:
+\begin{enumerate}[label=\arabic*)]
+    \item \textbf{Pemilik Usaha (Pelaku UMKM):} Menggunakan sistem untuk mengelola transaksi bisnisnya secara terstruktur serta mengakses informasi prediksi penjualan harian untuk pengambilan keputusan operasional strategis (terutama persediaan stok).
+    \item \textbf{Pengguna Sistem/Operator (Kasir):} Pihak yang secara langsung menggunakan aplikasi \textit{mobile} tersebut sehari-hari untuk mempermudah pencatatan transaksi penjualan.
+\end{enumerate}
+
+\subsection{Karakteristik Proyek}
+Skripsi ini memenuhi syarat untuk dikategorikan sebagai proyek TI karena memiliki ketiga unsur berikut:
+\begin{enumerate}[label=\arabic*)]
+    \item \textbf{\textit{Temporary} (Sementara):} Proyek ini dibatasi oleh ruang lingkup penyelesaian yang spesifik dan memiliki batasan agar pengerjaannya tidak meluas, yang dirumuskan dalam bagian ``Batasan Masalah''. Contohnya, sistem dibatasi pada prediksi harian saja (tidak mingguan/bulanan), dan fokus pada implementasi model tanpa membandingkan dengan algoritma lain. Selain itu, pengerjaannya juga memiliki jadwal waktu yang berbatas, bukan aktivitas operasional rutin yang tanpa batas akhir.
+    \item \textbf{\textit{Unique} (Unik):} Meskipun model LSTM sudah sering digunakan, penciptaan sistem ini bersifat unik. Di dalam Bab 1 ditegaskan bahwa mayoritas penelitian sebelumnya hanya membuat model prediksi yang terpisah. Mengintegrasikan LSTM secara langsung ke dalam sebuah aplikasi POS berbasis \textit{mobile} adalah sebuah langkah spesifik dan unik yang ditawarkan proyek ini.
+    \item \textbf{\textit{Deliverable} (Keluaran/Produk Nyata):} Proyek ini menghasilkan sebuah produk \textit{deliverable} yang nyata dan fungsional, yaitu berwujud aplikasi perangkat lunak (\textit{Point of Sale} berbasis \textit{mobile}) yang sudah siap dan dilengkapi dengan fitur \textit{machine learning} prediksi penjualan di dalamnya.
+\end{enumerate}
+
+\pagebreak
+
+\section{Analisis Triple Constraint}
+
+Keberhasilan proyek ini dikendalikan oleh batasan segitiga (\textit{Triple Constraint}), yaitu \textbf{Scope (Ruang Lingkup)}, \textbf{Time (Waktu)}, dan \textbf{Cost (Biaya)}.
+
+\subsection{Scope (Ruang Lingkup)}
+Ruang lingkup proyek ini mendefinisikan apa saja yang akan dikerjakan (fitur) dan apa yang menjadi batasan (tidak dikerjakan) berdasarkan penjabaran di Bab 1 dan rancangan sistem.
+
+\begin{enumerate}[label=\arabic*)]
+    \item \textbf{Fitur yang termasuk dalam sistem:}
+    \begin{itemize}
+        \item \textbf{Aplikasi POS berbasis Mobile:} Sistem menggunakan \textit{framework} Flutter sebagai antarmuka pengguna pada perangkat seluler.
+        \item \textbf{Manajemen Data dan Transaksi:} Fitur pengelolaan data produk, pencatatan transaksi penjualan, dan penyimpanan riwayat data penjualan.
+        \item \textbf{Algoritma Prediksi (LSTM):} Penerapan algoritma \textit{Long Short-Term Memory} (LSTM) yang dilatih menggunakan data historis untuk menangkap pola deret waktu (\textit{time series}).
+        \item \textbf{Integrasi Cloud dan Server:} Penggunaan layanan Supabase sebagai basis data \textit{cloud}/backend, serta penggunaan \textit{Virtual Private Server} (VPS) secara terpisah untuk menjalankan komputasi pelatihan model LSTM agar tidak membebani aplikasi \textit{mobile}.
+        \item \textbf{Penyajian Hasil/Dashboard:} Fitur yang dapat menampilkan informasi dan hasil prediksi penjualan harian kepada admin/pemilik usaha.
+    \end{itemize}
+    
+    \item \textbf{Batasan (Apa yang TIDAK termasuk dalam sistem):}
+    \begin{itemize}
+        \item \textbf{Batas Waktu Prediksi:} Sistem hanya dibatasi untuk menghasilkan \textit{output} prediksi penjualan harian, dan secara eksplisit tidak mencakup prediksi mingguan atau bulanan.
+        \item \textbf{Batas Komparasi Algoritma:} Proyek ini berfokus tunggal pada implementasi metode LSTM dan tidak melakukan perbandingan kinerja dengan metode prediksi atau algoritma \textit{machine learning} lainnya.
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Time (Waktu)}
+Estimasi waktu pengerjaan proyek ini direncanakan selama \textbf{6 bulan} (dari bulan Januari hingga Juni). Berdasarkan Jadwal Kegiatan Penelitian di dokumen, estimasi waktu didistribusikan sebagai berikut:
+\begin{table}[h!]
+    \centering
+    \fontsize{11pt}{14pt}\selectfont
+    \begin{tabularx}{0.8\textwidth}{|c|X|}
+        \hline
+        \textbf{Bulan} & \textbf{Kegiatan} \\
+        \hline
+        1 & Pengumpulan Data dan Penyusunan Laporan \\
+        \hline
+        2 & Perancangan Kebutuhan \\
+        \hline
+        3 & Perancangan Sistem \\
+        \hline
+        4 & Rancang Bangun Sistem \\
+        \hline
+        5 & Pengujian Sistem \\
+        \hline
+        6 & Revisi/Perbaikan Sistem dan Penyusunan Laporan \\
+        \hline
+    \end{tabularx}
+\end{table}
+\textit{*Catatan: Terdapat penyesuaian operasional di mana persiapan administrasi dan survei awal dimulai pada bulan Januari 2026, sedangkan pelaksanaan teknis penelitian terhitung aktif mulai Bulan 1 (Februari 2026) hingga Bulan 6 (Juli 2026) sebagaimana divisualisasikan pada Gantt Chart.}
+
+\subsection{Cost (Biaya)}
+Estimasi Biaya ini berfokus pada kebutuhan operasional dan administrasi penelitian yang dibutuhkan selama masa proyek:
+\begin{table}[htbp]
+    \centering
+    \caption{Rincian Estimasi Biaya Proyek Skripsi}
+    \label{tab:biaya_mk}
+    \fontsize{10pt}{13pt}\selectfont
+    \begin{tabularx}{\textwidth}{|c|X|r|}
+        \hline
+        \textbf{No} & \textbf{Komponen Biaya} & \textbf{Biaya} \\
+        \hline
+        1 & VPS KVM 2 Niagahoster (12 Bulan @ Rp 155.900) & Rp 2.400.000,00 \\
+        \hline
+        2 & Domain .com 1 Tahun & Rp 209.900,00 \\
+        \hline
+        3 & Kertas A4 (1 Dus) & Rp 310.000,00 \\
+        \hline
+        4 & Tinta printer (2 Paket @ Rp 205.000) & Rp 410.000,00 \\
+        \hline
+        5 & Transportasi (6 Bulan @ Rp 100.000) & Rp 600.000,00 \\
+        \hline
+        6 & Cetak buku (2 Buah @ Rp 100.000) & Rp 200.000,00 \\
+        \hline
+        \multicolumn{2}{|r|}{\textbf{Total Estimasi Biaya}} & \textbf{Rp 4.129.900,00} \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+
+
+\section{Timeline Penelitian (Gantt Chart Sederhana)}
+
+Berikut adalah visualisasi timeline penelitian skripsi dalam bentuk Gantt Chart sederhana, yang melingkupi pengerjaan selama 6 bulan terhitung dari \textbf{Bulan 1 (Februari)} sampai dengan \textbf{Bulan 6 (Juli)}:
+
+\begin{table}[htbp]
+    \centering
+    \caption{Gantt Chart Timeline Pelaksanaan Proyek Skripsi}
+    \label{tab:gantt_mk}
+    \fontsize{10pt}{14pt}\selectfont
+    \begin{tabularx}{\textwidth}{|c|X|*6{>{\centering\arraybackslash}p{1.2cm}|}}
+        \hline
+        \textbf{No} & \textbf{Kegiatan} & \textbf{B1} & \textbf{B2} & \textbf{B3} & \textbf{B4} & \textbf{B5} & \textbf{B6} \\
+         & & \textbf{(Feb)} & \textbf{(Mar)} & \textbf{(Apr)} & \textbf{(Mei)} & \textbf{(Jun)} & \textbf{(Jul)} \\
+        \hline
+        1 & Pengumpulan Data & $\checkmark$ & & & & & \\
+        \hline
+        2 & Perancangan Kebutuhan & $\checkmark$ & $\checkmark$ & & & & \\
+        \hline
+        3 & Perancangan Sistem & & $\checkmark$ & $\checkmark$ & & & \\
+        \hline
+        4 & Rancang Bangun Sistem & & & $\checkmark$ & $\checkmark$ & $\checkmark$ & \\
+        \hline
+        5 & Pengujian Sistem & & & & & $\checkmark$ & $\checkmark$ \\
+        \hline
+        6 & Revisi/Perbaikan Sistem & & & & & & $\checkmark$ \\
+        \hline
+        7 & Penyusunan Laporan & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+\section{Pemilihan Metode Pengembangan Sistem}
+
+Metode pengembangan sistem yang digunakan dalam proyek ini adalah \textbf{Metode Waterfall}.
+
+\subsection{Mengapa Metode Tersebut Dipilih}
+Metode Waterfall dipilih karena alur penelitian dan pengembangan sistem dalam skripsi ini bersifat \textbf{sangat terstruktur, linier, dan sekuensial (berurutan)}. Dalam proyek ini, batasan masalah sudah didefinisikan dengan sangat jelas di awal (seperti hanya memprediksi penjualan harian dan berfokus pada metode LSTM). 
+
+Selain itu, karena ini adalah proyek akademik dengan jadwal waktu yang kaku selama 6 bulan, pendekatan Waterfall yang mensyaratkan satu tahap selesai sebelum tahap berikutnya dimulai sangat cocok untuk memastikan proyek berjalan sesuai rencana jadwal tanpa banyak perubahan di tengah jalan.
+
+\subsection{Tahapan Metode (Waterfall)}
+Berdasarkan ``Alur Penelitian'' dan ``Metode Penelitian'' di Bab 3, tahapan Waterfall diterapkan sebagai berikut:
+
+\begin{enumerate}[label=\arabic*)]
+    \item \textbf{Analisis (\textit{Requirements Analysis}):}
+    Tahap ini mencakup \textit{Business Understanding} dan \textit{Data Understanding}. Peneliti melakukan observasi, wawancara, dan dokumentasi data historis penjualan dari UMKM dan dataset tambahan dari kantin UGM. Tujuannya adalah mendefinisikan masalah, yaitu kebutuhan UMKM terhadap prediksi penjualan harian untuk manajemen stok.
+    
+    \item \textbf{Desain (\textit{System Design}):}
+    Berdasarkan analisis, dilakukan perancangan arsitektur sistem (menggunakan Flutter, Supabase, dan \textit{Virtual Private Server}), pembuatan \textit{Use Case Diagram} untuk mendefinisikan interaksi aktor (Admin, Kasir, Pelanggan), serta merancang alur kerja (desain algoritma) dari metode LSTM.
+    
+    \item \textbf{Implementasi (\textit{Implementation}):}
+    Tahap pembuatan sistem secara nyata. Ini mencakup \textit{Data Preparation} (pembersihan data, normalisasi dengan \textit{Min-Max Scaling}, dan pembentukan \textit{time series/windowing}), penulisan kode aplikasi antarmuka POS, hingga proses \textit{Modeling} (pelatihan/\textit{training} model LSTM) menggunakan data latih di server VPS.
+    
+    \item \textbf{Testing (\textit{Pengujian/Evaluation}):}
+    Tahap pengujian dibagi menjadi dua. Pertama, pengujian fungsionalitas aplikasi POS menggunakan metode \textit{Black Box Testing} untuk memastikan fitur kelola produk dan transaksi berjalan tanpa cacat. Kedua, evaluasi kinerja/akurasi model prediksi LSTM menggunakan metrik \textit{Mean Absolute Error} (MAE), \textit{Root Mean Squared Error} (RMSE), dan \textit{Mean Absolute Percentage Error} (MAPE). Jika tidak akurat, dilakukan \textit{tuning parameter}.
+    
+    \item \textbf{Deployment (\textit{Implementasi Akhir}):}
+    Tahap terakhir di mana model LSTM yang telah dilatih dan teruji diintegrasikan (\textit{deployment}) ke dalam aplikasi POS berbasis \textit{mobile}. Sistem akhir kemudian siap digunakan oleh mitra UMKM untuk kegiatan pencatatan transaksi sehari-hari sekaligus menampilkan \textit{output} prediksi penjualan.
+\end{enumerate}
+
+\subsection{Kesesuaian Dengan Judul Skripsi}
+Metode Waterfall sangat sesuai dengan proyek Aplikasi POS dan Prediksi LSTM karena adanya ketergantungan data yang mutlak antartahap. Dalam \textit{machine learning} (seperti LSTM), Anda tidak bisa membangun dan melatih model prediksi (tahap Implementasi) sebelum data historis penjualan terkumpul dan dibersihkan (tahap Analisis). 
+
+Begitu pula, aplikasi antarmuka pengguna tidak bisa diuji kesesuaiannya (Testing) secara holistik jika \textit{backend} prediksi belum diintegrasikan. Proses linear Waterfall memastikan bahwa kerangka data \textit{time series} sudah siap sebelum arsitektur LSTM dieksekusi, sehingga sangat selaras dengan kebutuhan proyek data sains yang terintegrasi dengan pengembangan perangkat lunak tradisional seperti ini.
+
+\pagebreak
+
+\section{Analisis Risiko Awal Proyek}
+
+Untuk meminimalkan potensi kegagalan operasional dan teknis pada proyek ini, dilakukan analisis risiko awal proyek sebagai berikut:
+
+\begin{table}[htbp]
+    \centering
+    \caption{Tabel Analisis Risiko Awal Proyek}
+    \label{tab:risiko_mk}
+    \fontsize{10pt}{13pt}\selectfont
+    \begin{tabularx}{\textwidth}{|c|p{4cm}|p{4cm}|X|}
+        \hline
+        \textbf{No} & \textbf{Risiko} & \textbf{Dampak} & \textbf{Solusi} \\
+        \hline
+        1 & Data transaksi kotor atau kosong & Model LSTM gagal mengenali pola, sehingga prediksi tidak akurat. & Lakukan pra-pemrosesan data (\textit{cleaning} dan normalisasi \textit{Min-Max Scaling}). \\
+        \hline
+        2 & Akurasi prediksi LSTM rendah & Pemilik usaha salah menentukan jumlah stok barang. & Lakukan \textit{tuning parameter} algoritma jika hasil evaluasi metrik tidak sesuai. \\
+        \hline
+        3 & Komputasi model memberatkan sistem & Aplikasi kasir (\textit{mobile}) menjadi lambat saat digunakan. & Pisahkan proses pelatihan model LSTM agar berjalan di \textit{Virtual Private Server} (VPS). \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+\end{document}
