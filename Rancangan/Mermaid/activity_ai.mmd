@@ -1,0 +1,50 @@
+flowchart TD
+    Start([● Mulai]) --> OpenAIReport[Owner Buka Layar Smart Analytics]
+    OpenAIReport --> CheckLock{Status Layar Terkunci / isLocked=true?}
+    
+    CheckLock -- Ya --> ShowLockedModal[Tampilkan Modal AI Pro & Syarat Persetujuan Latihan]
+    ShowLockedModal --> AskConsent{Owner Tekan Setuju & Latih AI?}
+    AskConsent -- Batal --> ReturnToReports[Kembali ke Layar Laporan]
+    ReturnToReports --> EndBatal([● Selesai])
+    
+    AskConsent -- Ya --> CheckMinTx{Ada Minimal 20 Histori Transaksi Riil?}
+    
+    %% Minimum transaksi check
+    CheckMinTx -- Tidak --> ShowWarningMinTx[Tampilkan Peringatan: Data Kurang untuk Analisis AI]
+    ShowWarningMinTx --> ShowSimulateButton[Tampilkan Opsi: Tambah Transaksi Simulasi +5]
+    ShowSimulateButton --> AddSimulateTx[Tambah Transaksi Contoh ke Isar DB]
+    AddSimulateTx --> CheckMinTx
+    
+    CheckMinTx -- Ya --> LockScreenProgress[Sistem Kunci Layar & Tampilkan Animasi Progress Kalibrasi]
+    
+    %% AI Pipeline
+    CheckLock -- Tidak --> LockScreenProgress
+    LockScreenProgress --> FetchSalesSummary[Sistem Tarik Ringkasan Penjualan dari Isar DB]
+    FetchSalesSummary --> MaskPIIData[Sistem Hapus Informasi Pribadi / PII Scrubbing Nama Pelanggan]
+    MaskPIIData --> FetchWeather[Sistem Tarik Data Cuaca Terkini via OpenWeather API]
+    
+    FetchWeather --> ForkAI[Forking Logika Evaluasi]
+    
+    ForkAI --> PushSummaryToCloud[Unggah Payload Agregat Terenkripsi ke Supabase Edge Function]
+    ForkAI --> LocalAggregation[Lakukan Agregasi Tren Lokal]
+    
+    PushSummaryToCloud --> CallGeminiAPI[Edge Function Panggil API Google Gemini Pro]
+    CallGeminiAPI --> GenerateRecommendations[Gemini Hasilkan Insight Peramalan Omzet & Smart Pricing]
+    GenerateRecommendations --> ReturnResponse[Kirim Hasil Respons JSON ke Aplikasi Flutter]
+    
+    LocalAggregation & ReturnResponse --> JoinAI[Join & Gabungkan Data Insight]
+    
+    JoinAI --> CacheInsight[Simpan Ringkasan AI di Model AiInsightLocal Isar DB]
+    CacheInsight --> RenderBentoDashboard[Buka Blur Layar & Gambar Bento-Grid Grafik Smart Analytics]
+    
+    RenderBentoDashboard --> EndSukses([● Selesai - AI Berhasil Diaktifkan])
+
+    %% Styles
+    style Start fill:#000,stroke:#333,color:#fff
+    style EndBatal fill:#000,stroke:#333,color:#fff
+    style EndSukses fill:#000,stroke:#333,color:#fff
+    style CheckLock fill:#fff8e7,stroke:#ffb700,stroke-width:2px
+    style AskConsent fill:#fff8e7,stroke:#ffb700,stroke-width:2px
+    style CheckMinTx fill:#fff8e7,stroke:#ffb700,stroke-width:2px
+    style MaskPIIData fill:#e2f0d9,stroke:#385723,stroke-width:2px
+    style CallGeminiAPI fill:#e8f8f5,stroke:#1abc9c,stroke-width:2px

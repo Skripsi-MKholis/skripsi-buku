@@ -1,0 +1,126 @@
+erDiagram
+    STORES ||--o{ STORE_MEMBERS : "has"
+    STORES ||--o{ CATEGORIES : "defines"
+    STORES ||--o{ PRODUCTS : "stocks"
+    STORES ||--o{ TABLES : "manages"
+    STORES ||--o{ VOUCHERS : "creates"
+    STORES ||--o{ TRANSACTIONS : "records"
+    STORES ||--o{ STOCK_HISTORIES : "tracks"
+    STORES ||--o{ NOTIFICATIONS : "broadcasts"
+    
+    CATEGORIES ||--o{ PRODUCTS : "classifies"
+    TABLES ||--o{ TRANSACTIONS : "assigns"
+    
+    PRODUCTS ||--o{ TRANSACTION_ITEMS : "included_in"
+    PRODUCTS ||--o{ STOCK_HISTORIES : "logs_change"
+    
+    TRANSACTIONS ||--o{ TRANSACTION_ITEMS : "contains"
+    
+    STORES {
+        uuid id PK
+        varchar name
+        text address
+        varchar phone
+        text logo_url
+        jsonb settings
+        timestamptz created_at
+    }
+
+    STORE_MEMBERS {
+        uuid id PK
+        uuid store_id FK
+        uuid user_id FK
+        varchar role "owner, karyawan"
+        varchar status "active, suspended"
+        timestamptz created_at
+    }
+
+    CATEGORIES {
+        uuid id PK
+        uuid store_id FK
+        varchar name
+        boolean is_synced "Local Only"
+        boolean is_deleted "Local Only"
+        timestamptz created_at
+    }
+
+    PRODUCTS {
+        uuid id PK
+        uuid store_id FK
+        uuid category_id FK
+        varchar name
+        numeric price
+        integer stock_quantity
+        varchar sku
+        text image_url
+        boolean is_synced "Local Only"
+        boolean is_deleted "Local Only"
+        timestamptz created_at
+    }
+
+    TABLES {
+        uuid id PK
+        uuid store_id FK
+        varchar name
+        integer capacity
+        varchar status "available, occupied, cleaning, reserved"
+        timestamptz created_at
+    }
+
+    VOUCHERS {
+        uuid id PK
+        uuid store_id FK
+        varchar code
+        numeric discount_value
+        varchar discount_type "percentage, fixed"
+        numeric min_transaction
+        boolean is_active
+        timestamptz created_at
+    }
+
+    TRANSACTIONS {
+        uuid id PK
+        uuid store_id FK
+        uuid cashier_id FK
+        uuid table_id FK "nullable"
+        numeric total_amount
+        numeric discount_total
+        varchar payment_method "Tunai, QRIS, Debit"
+        numeric cash_paid
+        numeric change_amount
+        varchar status "Berhasil, Dibatalkan, Void"
+        jsonb voucher_info
+        boolean is_synced "Local Only"
+        timestamptz created_at
+    }
+
+    TRANSACTION_ITEMS {
+        uuid id PK
+        uuid transaction_id FK
+        uuid product_id FK
+        varchar product_name
+        numeric unit_price
+        integer quantity
+        numeric subtotal
+    }
+
+    STOCK_HISTORIES {
+        uuid id PK
+        uuid store_id FK
+        uuid product_id FK
+        integer change_quantity
+        varchar type "in, out, adjustment, sale"
+        varchar reason
+        boolean is_synced "Local Only"
+        timestamptz created_at
+    }
+
+    NOTIFICATIONS {
+        uuid id PK
+        uuid store_id FK
+        varchar title
+        text message
+        varchar type "danger, warning, promo, info, success"
+        boolean is_read
+        timestamptz created_at
+    }

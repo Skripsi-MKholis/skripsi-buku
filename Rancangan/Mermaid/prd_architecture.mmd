@@ -1,0 +1,49 @@
+graph TD
+    subgraph Client_Side [Perangkat Mobile - Flutter Client]
+        App[Flutter Core Application]
+        Theme[Shadcn UI & Vibrant Lime Theme]
+        Isar[Local Database: Isar DB]
+        Print[Printer Service: Thermal Bluetooth/USB]
+        Scanner[Mobile Barcode Scanner]
+    end
+
+    subgraph Firebase_Cloud [Firebase Services]
+        FCM[Firebase Cloud Messaging]
+        FA[Firebase Analytics]
+    end
+
+    subgraph Supabase_Backend [Supabase Cloud Infrastructure]
+        Auth[Supabase Auth & OAuth Google]
+        DB[(Supabase PostgreSQL)]
+        Storage[Supabase Storage: Logo & Avatar]
+        EF[Supabase Edge Functions: ai-analytics]
+    end
+
+    subgraph External_APIs [External Services]
+        Gemini[Google Gemini Pro API]
+        Weather[OpenWeatherMap API]
+    end
+
+    %% Hubungan Alur Data %%
+    App -->|1. Tulis & Baca Instan| Isar
+    App -->|2. Event Tracking| FA
+    App -->|3. Cetak Struk| Print
+    App -->|4. Scan SKU/Barcode| Scanner
+    
+    %% Sinkronisasi & Auth %%
+    App -->|5. Autentikasi User| Auth
+    App -->|6. Sync Data Background| DB
+    App -->|7. Upload Media| Storage
+    
+    %% Notifikasi Push %%
+    DB -->|8. Trigger Event| FCM
+    FCM -->|9. Push Notification| App
+    
+    %% AI Smart Analytics %%
+    App -->|10. Request Analisis| EF
+    EF -->|11. Query Data Historis| DB
+    EF -->|12. Fetch Cuaca Terkini| Weather
+    EF -->|13. Prompting Context| Gemini
+    Gemini -->|14. JSON Insights| EF
+    EF -->|15. Save Response Cache| DB
+    EF -->|16. Send Format JSON| App

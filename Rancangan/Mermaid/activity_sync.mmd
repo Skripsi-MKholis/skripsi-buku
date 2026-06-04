@@ -1,0 +1,46 @@
+flowchart TD
+    Start([● Trigger Sync: Koneksi Pulih / Manual]) --> InitSync[Aktifkan SyncNotifier Provider]
+    InitSync --> CheckNetwork{Koneksi Internet Aktif?}
+    
+    CheckNetwork -- Tidak --> ShowOfflineToast[Tampilkan Status Offline & Batalkan Sinkronisasi]
+    ShowOfflineToast --> EndOffline([● Selesai - Mode Luring Tetap Aktif])
+    
+    CheckNetwork -- Ya --> CheckUnsyncedCategories{Ada Kategori Unsynced/isSynced=false?}
+    
+    %% Kategori Loop
+    CheckUnsyncedCategories -- Ya --> PushCategories[Upload Kategori Baru/Ubah ke Supabase via Upsert]
+    PushCategories --> MarkCategoriesSynced[Setel isSynced=true & Hapus local flag isDeleted]
+    MarkCategoriesSynced --> CheckUnsyncedProducts
+    CheckUnsyncedCategories -- Tidak --> CheckUnsyncedProducts{Ada Produk Unsynced/isSynced=false?}
+    
+    %% Produk Loop
+    CheckUnsyncedProducts -- Ya --> PushProducts[Upload Produk & Mutasi Stok ke Supabase]
+    PushProducts --> MarkProductsSynced[Setel Produk isSynced=true di Isar DB]
+    MarkProductsSynced --> CheckUnsyncedTx
+    CheckUnsyncedProducts -- Tidak --> CheckUnsyncedTx{Ada Transaksi Unsynced?}
+    
+    %% Transaksi Loop
+    CheckUnsyncedTx -- Ya --> ProcessTransactions[Ambil Daftar Nota Transaksi & Item Terkait dari Isar]
+    ProcessTransactions --> BatchUploadTx[Batch Upload ke Tabel transactions & transaction_items Supabase]
+    BatchUploadTx --> MarkTxSynced[Setel isSynced=true pada Transaksi Lokal di Isar]
+    MarkTxSynced --> CheckDeletedItems
+    CheckUnsyncedTx -- Tidak --> CheckDeletedItems{Ada Data Ditandai isDeleted=true?}
+    
+    %% Hapus Bersih
+    CheckDeletedItems -- Ya --> SyncDeleteCloud[Kirim Perintah Hapus Permanen ke Supabase]
+    SyncDeleteCloud --> CleanLocalDb[Hapus Baris Terkait dari Isar DB Lokal]
+    CleanLocalDb --> ShowSuccessToast
+    CheckDeletedItems -- Tidak --> ShowSuccessToast[Tampilkan Toast: Data Berhasil Disinkronkan]
+    
+    ShowSuccessToast --> EndOnline([● Selesai - Sinkronisasi Cloud Sukses])
+
+    %% Styles
+    style Start fill:#000,stroke:#333,color:#fff
+    style EndOffline fill:#000,stroke:#333,color:#fff
+    style EndOnline fill:#000,stroke:#333,color:#fff
+    style CheckNetwork fill:#fff8e7,stroke:#ffb700,stroke-width:2px
+    style CheckUnsyncedCategories fill:#fff8e7,stroke:#ffb700,stroke-width:2px
+    style CheckUnsyncedProducts fill:#fff8e7,stroke:#ffb700,stroke-width:2px
+    style CheckUnsyncedTx fill:#fff8e7,stroke:#ffb700,stroke-width:2px
+    style CheckDeletedItems fill:#fff8e7,stroke:#ffb700,stroke-width:2px
+    style CleanLocalDb fill:#fce4d6,stroke:#c65911,stroke-width:2px

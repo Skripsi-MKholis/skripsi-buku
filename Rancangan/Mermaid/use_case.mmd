@@ -1,0 +1,76 @@
+flowchart LR
+    %% Definition of Actors
+    subgraph Aktor_Sistem [Aktor Sistem]
+        Owner["Owner (Pemilik)"]
+        Kasir["Kasir (Staf)"]
+    end
+
+    %% Definition of System Boundary
+    subgraph System_Boundary [Batas Sistem Parzello POS]
+        %% Autentikasi
+        UC_Login(["Login Akun"])
+        UC_Register(["Registrasi Toko Baru"])
+        
+        %% POS & Transaksi
+        UC_Checkout(["Melakukan Checkout Transaksi"])
+        UC_Discount(["Menerapkan Voucher/Diskon"])
+        UC_SplitBill(["Melakukan Split Bill"])
+        UC_PrintReceipt(["Mencetak Struk Belanja"])
+        UC_TableMon(["Memonitor Status Meja"])
+        
+        %% Katalog & Stok
+        UC_ManageCatalog(["Mengelola Katalog Produk"])
+        UC_ManageCategory(["Mengelola Kategori"])
+        UC_AuditStock(["Mengaudit Riwayat Stok"])
+        
+        %% Laporan & AI
+        UC_Dashboard(["Melihat Dashboard Penjualan"])
+        UC_AIAnalytics(["Melihat AI Smart Analytics"])
+        UC_BroadcastNotif(["Kirim Broadcast Notifikasi"])
+        UC_SyncLocal(["Sinkronisasi Data Offline-First"])
+        
+        %% Administrasi
+        UC_ManageStaff(["Mengelola Anggota Karyawan"])
+        UC_StoreConfig(["Mengatur Profil Toko"])
+    end
+
+    %% Associations for Kasir
+    Kasir --> UC_Login
+    Kasir --> UC_Checkout
+    Kasir --> UC_TableMon
+    Kasir --> UC_Dashboard
+    Kasir --> UC_SyncLocal
+
+    %% Associations for Owner
+    Owner --> UC_Register
+    Owner --> UC_Login
+    Owner --> UC_Checkout
+    Owner --> UC_TableMon
+    Owner --> UC_ManageCatalog
+    Owner --> UC_ManageCategory
+    Owner --> UC_AuditStock
+    Owner --> UC_Dashboard
+    Owner --> UC_AIAnalytics
+    Owner --> UC_BroadcastNotif
+    Owner --> UC_ManageStaff
+    Owner --> UC_StoreConfig
+    Owner --> UC_SyncLocal
+
+    %% Relationships <<include>> & <<extend>>
+    UC_Checkout -.->|"<<include>>"| UC_Login
+    UC_Checkout -.->|"<<extend>>"| UC_Discount
+    UC_Checkout -.->|"<<extend>>"| UC_SplitBill
+    UC_Checkout -.->|"<<include>>"| UC_PrintReceipt
+    
+    UC_ManageCatalog -.->|"<<include>>"| UC_Login
+    UC_AIAnalytics -.->|"<<include>>"| UC_Login
+    UC_ManageStaff -.->|"<<include>>"| UC_Login
+
+    %% Style Customization
+    style Owner fill:#9AE600,stroke:#000,stroke-width:2px,color:#000
+    style Kasir fill:#9AE600,stroke:#000,stroke-width:2px,color:#000
+    style System_Boundary fill:#fdfdfd,stroke:#9AE600,stroke-width:3px,stroke-dasharray: 5 5
+    
+    style UC_Checkout fill:#eef,stroke:#0005,stroke-width:1px
+    style UC_AIAnalytics fill:#fef,stroke:#0005,stroke-width:1px
+    style UC_SyncLocal fill:#efe,stroke:#0005,stroke-width:1px
