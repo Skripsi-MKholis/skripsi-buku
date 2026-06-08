@@ -1,7 +1,7 @@
 \chapter[METODOLOGI PENELITIAN]{\\ METODOLOGI PENELITIAN}
 
 \section{Alur Penelitian}
-Alur penelitian ini dirancang secara sistematis untuk membangun sebuah sistem \textit{Point of Sale} (POS) berbasis \textit{mobile} yang dilengkapi dengan fitur prediksi penjualan harian menggunakan metode \textit{Long Short-Term Memory} (LSTM). Tahapan penelitian ini merepresentasikan kerangka kerja pengembangan sistem yang dimulai dari tahap analisis kebutuhan, perancangan, implementasi aplikasi, hingga proses pemodelan dan evaluasi sistem secara menyeluruh.
+Alur penelitian ini dirancang secara sistematis untuk membangun sebuah sistem \textit{Point of Sale} (POS) berbasis \textit{mobile} yang dinamakan \textbf{Parzello POS Mobile (ZelloPOS)}. Aplikasi ini dilengkapi dengan fitur prediksi penjualan harian menggunakan metode \textit{Long Short-Term Memory} (LSTM) yang terintegrasi. Tahapan penelitian ini merepresentasikan kerangka kerja pengembangan sistem yang dimulai dari tahap analisis kebutuhan, perancangan, implementasi aplikasi, hingga proses pemodelan dan evaluasi sistem secara menyeluruh.
 
 Sebagaimana diilustrasikan pada Gambar \ref{fig:alur-penelitian}, alur penelitian terbagi menjadi dua fase utama yang saling berkaitan, yaitu Fase Pengembangan dan Implementasi Sistem POS serta Fase Pengembangan Model Prediksi Penjualan.
 
@@ -12,20 +12,20 @@ Sebagaimana diilustrasikan pada Gambar \ref{fig:alur-penelitian}, alur penelitia
     \label{fig:alur-penelitian}
 \end{figure}
 
-Pada Fase Pengembangan dan Implementasi Sistem POS, penelitian diawali dengan analisis kebutuhan melalui observasi dan identifikasi permasalahan pada mitra UMKM. Selanjutnya dilakukan perancangan sistem meliputi arsitektur aplikasi, desain basis data, serta perancangan UML dan antarmuka pengguna. Setelah tahap perancangan selesai, sistem POS dikembangkan menggunakan Flutter sebagai \textit{frontend}, Supabase sebagai basis data, dan backend Python untuk pengolahan data. Aplikasi yang telah dibangun kemudian diimplementasikan pada mitra UMKM untuk digunakan dalam kegiatan transaksi harian. Dari tahap implementasi ini diperoleh data transaksi penjualan aktual yang tersimpan secara otomatis di dalam basis data sistem.
+Pada Fase Pengembangan dan Implementasi Sistem POS, penelitian diawali dengan analisis kebutuhan melalui observasi dan identifikasi permasalahan pada mitra UMKM. Selanjutnya dilakukan perancangan sistem meliputi arsitektur aplikasi, desain basis data, serta perancangan UML dan antarmuka pengguna. Setelah tahap perancangan selesai, aplikasi Parzello POS Mobile dikembangkan menggunakan Flutter sebagai \textit{frontend}, Isar DB sebagai penyimpanan data lokal (\textit{local storage}) untuk mendukung kemampuan \textit{offline-first}, dan cloud Supabase sebagai \textit{backend} dan basis data utama. Aplikasi yang telah dibangun kemudian diimplementasikan pada mitra UMKM untuk digunakan dalam kegiatan transaksi harian. Dari tahap implementasi ini diperoleh data transaksi penjualan aktual yang tersimpan secara otomatis di dalam basis data lokal Isar DB dan disinkronisasikan secara otomatis ke database cloud Supabase.
 
 Pada Fase Pengembangan Model Prediksi Penjualan, data transaksi yang telah terkumpul selama periode tertentu selanjutnya melalui tahap pra-pemrosesan (\textit{data preparation}), seperti pembersihan data, agregasi harian, normalisasi, serta pembentukan data runtun waktu (\textit{time series}). Dataset kemudian dibagi menjadi data latih dan data uji untuk proses pemodelan. Model LSTM dilatih menggunakan data latih untuk mempelajari pola penjualan jangka pendek maupun jangka panjang. Setelah proses pelatihan selesai, model diuji menggunakan data uji untuk mengukur tingkat akurasi prediksi dengan metrik evaluasi yang sesuai.
 
-Model prediksi yang telah teruji kemudian diintegrasikan kembali ke dalam sistem POS sehingga aplikasi tidak hanya berfungsi sebagai alat pencatatan transaksi, tetapi juga mampu menampilkan hasil prediksi penjualan harian kepada pengguna. Tahap akhir penelitian dilakukan melalui pengujian fungsional sistem menggunakan metode \textit{black box} serta evaluasi performa model untuk memastikan sistem berjalan sesuai dengan kebutuhan dan tujuan penelitian.
+Model prediksi yang telah teruji kemudian diintegrasikan kembali ke dalam sistem POS sehingga aplikasi tidak hanya berfungsi sebagai alat pencatatan transaksi offline-first, tetapi juga mampu menampilkan hasil prediksi penjualan harian kepada pengguna. Tahap akhir penelitian dilakukan melalui pengujian fungsional sistem menggunakan metode \textit{black box} serta evaluasi performa model untuk memastikan sistem berjalan sesuai dengan kebutuhan dan tujuan penelitian.
 
 \section{Data dan Pengumpulan Data}
-Data diperoleh dari hasil rekapan transaksi penjualan harian UMKM yang diekspor dari aplikasi \textit{Point of Sale} (POS) yang digunakan pada objek penelitian. Aplikasi POS tersebut digunakan oleh pelaku UMKM skala mikro di wilayah Kota Langsa sebagai media pencatatan transaksi penjualan secara digital. Dataset yang dihasilkan pada sistem POS mencakup informasi tanggal transaksi, jumlah transaksi, total nilai penjualan harian, serta jumlah produk terjual yang memiliki keterkaitan langsung dengan aktivitas penjualan harian. Data transaksi pada sistem POS dikelola oleh pemilik atau pengelola UMKM, sehingga diperlukan koordinasi dengan pihak UMKM terkait untuk memperoleh data yang sesuai dengan kebutuhan penelitian.
+Data diperoleh dari hasil rekapan transaksi penjualan harian UMKM yang diekspor dari aplikasi \textit{Point of Sale} (POS) Parzello POS Mobile yang digunakan pada objek penelitian. Aplikasi POS tersebut digunakan oleh pelaku UMKM skala mikro di wilayah Kota Langsa sebagai media pencatatan transaksi penjualan secara digital. Dataset yang dihasilkan pada sistem POS mencakup informasi tanggal transaksi, jumlah transaksi, total nilai penjualan harian, serta jumlah produk terjual yang memiliki keterkaitan langsung dengan aktivitas penjualan harian. Data transaksi pada sistem POS dikelola oleh pemilik (\textit{owner}) atau pengelola UMKM, sehingga diperlukan koordinasi dengan pihak UMKM terkait untuk memperoleh data yang sesuai dengan kebutuhan penelitian.
 
 \section{Rancangan Sistem}
-Perancangan sistem dalam penelitian ini dilakukan menggunakan \textit{Unified Modeling Language} (UML), yang bertujuan untuk memberikan gambaran dan ilustrasi sistem secara jelas dan terstruktur. Pemodelan sistem ini direpresentasikan melalui perancangan \textit{Use Case Diagram}, \textit{Activity Diagram}, serta \textit{User Interface} guna menggambarkan alur proses dan interaksi pengguna dengan sistem.
+Perancangan sistem dalam penelitian ini dilakukan menggunakan \textit{Unified Modeling Language} (UML) dan \textit{Entity Relationship Diagram} (ERD), yang bertujuan untuk memberikan gambaran dan ilustrasi sistem secara jelas dan terstruktur. Pemodelan sistem ini direpresentasikan melalui perancangan \textit{Use Case Diagram}, \textit{Activity Diagram}, \textit{Entity Relationship Diagram} (ERD), serta \textit{User Interface} guna menggambarkan alur proses, struktur penyimpanan data, dan interaksi pengguna dengan sistem.
 
 \subsection{Use Case Diagram}
-Rancangan sistem pada penelitian ini melibatkan tiga aktor utama, yaitu Admin (Pemilik UMKM), Kasir, dan Pelanggan. \textit{Use Case Diagram} digunakan untuk menggambarkan fungsi-fungsi yang dapat dilakukan oleh masing-masing aktor dalam sistem \textit{Point of Sale} (POS) yang dilengkapi dengan fitur prediksi penjualan harian. Adapun rancangan \textit{use case} pada penelitian ini diilustrasikan pada Gambar \ref{fig:usecase}.
+Rancangan sistem pada aplikasi Parzello POS Mobile melibatkan tiga aktor utama, yaitu Owner (Pemilik Toko), Karyawan/Kasir, dan Pelanggan (Customer). \textit{Use Case Diagram} digunakan untuk menggambarkan fungsi-fungsi yang dapat dilakukan oleh masing-masing aktor dalam sistem \textit{Point of Sale} (POS) yang dilengkapi dengan fitur prediksi penjualan harian. Adapun rancangan \textit{use case} pada penelitian ini diilustrasikan pada Gambar \ref{fig:usecase}.
 
 \begin{figure}[htbp]
     \centering
@@ -34,96 +34,168 @@ Rancangan sistem pada penelitian ini melibatkan tiga aktor utama, yaitu Admin (P
     \label{fig:usecase}
 \end{figure}
 
-Gambar \ref{fig:usecase} menggambarkan \textit{use case diagram} pada aplikasi \textit{Point of Sale} (POS) dengan fitur prediksi penjualan harian menggunakan metode LSTM. Penjelasan mengenai peran aktor pada sistem Point of Sale diilustrasikan pada Tabel \ref{tab:aktor} berikut:
+Gambar \ref{fig:usecase} menggambarkan \textit{use case diagram} pada aplikasi Parzello POS Mobile. Penjelasan mengenai peran aktor pada sistem Point of Sale diilustrasikan pada Tabel \ref{tab:aktor} berikut:
 
 \begin{table}[htbp]
     \centering
     \caption{Definisi Aktor}
     \label{tab:aktor}
     \fontsize{10pt}{12pt}\selectfont
-    \begin{tabularx}{\textwidth}{|c|>{\bfseries}p{3cm}|X|}
+    \begin{tabularx}{\textwidth}{|c|>{\bfseries}p{3.5cm}|X|}
         \hline
         \textbf{No} & \textbf{Aktor} & \textbf{Deskripsi} \\
         \hline
-        1 & Admin & Admin memiliki hak akses penuh terhadap sistem, termasuk pengelolaan data produk, data transaksi, melihat laporan, serta melihat hasil prediksi penjualan harian. \\
+        1 & Owner (Pemilik Toko) & Pengguna dengan hak akses tertinggi (\textit{super-user}) yang mengontrol seluruh konfigurasi toko, manajemen katalog produk, data karyawan, laporan keuangan, audit stok, serta fitur AI Smart Analytics. \\
         \hline
-        2 & Kasir & Kasir bertugas melakukan pencatatan transaksi penjualan harian melalui aplikasi POS. \\
+        2 & Karyawan / Kasir & Staf operasional harian toko yang memiliki akses terbatas pada pelayanan transaksi POS, pencetakan struk belanja, pemantauan status meja, penginputan mutasi stok barang, dan melihat ringkasan omzet harian terbatas. \\
         \hline
-        3 & Pelanggan & Pelanggan berperan sebagai pihak yang melakukan transaksi pembelian dan menerima bukti transaksi dari sistem POS. \\
+        3 & Pelanggan (Customer) & Aktor eksternal (diusulkan pada pengembangan masa depan) yang dapat memesan menu mandiri melalui pemindaian QR Code meja restoran dan melakukan pembayaran elektronik. \\
         \hline
     \end{tabularx}
 \end{table}
 
-Sedangkan penjelasan fungsi \textit{use case} dijabarkan pada Tabel \ref{tab:usecase} berikut:
+Sedangkan penjelasan fungsionalitas dari masing-masing \textit{use case} dijabarkan pada Tabel \ref{tab:usecase} berikut yang disusun menggunakan \textit{longtable} karena melibatkan fungsionalitas sistem yang komprehensif:
+
+\begin{center}
+\fontsize{10pt}{12pt}\selectfont
+\begin{longtable}{|c|>{\bfseries}p{3.5cm}|>{\bfseries}p{2.5cm}|p{6cm}|}
+\caption{Definisi Use Case} \label{tab:usecase} \\
+\hline
+\textbf{No} & \textbf{Use Case} & \textbf{Aktor Utama} & \textbf{Deskripsi Singkat} \\
+\hline
+\endfirsthead
+\multicolumn{4}{c}{{\bfseries \tablename\ \thetable{} -- Lanjutan dari halaman sebelumnya}} \\
+\hline
+\textbf{No} & \textbf{Use Case} & \textbf{Aktor Utama} & \textbf{Deskripsi Singkat} \\
+\hline
+\endhead
+\hline
+\multicolumn{4}{|r|}{{Berlanjut ke halaman berikutnya}} \\
+\hline
+\endfoot
+\hline
+\endlastfoot
+1 & UC-01 Registrasi Toko Baru & Owner & Mendaftarkan akun toko baru saat inisialisasi awal sistem. \\
+\hline
+2 & UC-02 Login Akun & Owner, Kasir & Autentikasi pengguna menggunakan email dan kata sandi. \\
+\hline
+3 & UC-03 Melakukan Checkout & Owner, Kasir & Memasukkan pesanan ke keranjang dan memproses transaksi bayar. \\
+\hline
+4 & UC-04 Menerapkan Voucher & Owner, Kasir & Memasukkan kode promosi voucher belanja untuk memotong tagihan. \\
+\hline
+5 & UC-05 Melakukan Split Bill & Owner, Kasir & Memecah pembayaran satu nota belanja menjadi beberapa bill. \\
+\hline
+6 & UC-06 Mencetak Struk Belanja & Owner, Kasir & Mencetak struk transaksi fisik melalui printer thermal Bluetooth. \\
+\hline
+7 & UC-07 Memonitor Status Meja & Owner, Kasir & Memantau keterisian meja kasir secara visual. \\
+\hline
+8 & UC-08 Mengelola Katalog & Owner & Menambah, menyunting, dan menghapus produk atau stok barang. \\
+\hline
+9 & UC-09 Mengelola Kategori & Owner & Mengatur pengelompokan menu katalog produk toko. \\
+\hline
+10 & UC-10 Mengaudit Riwayat Stok & Owner & Melihat log keluar-masuk mutasi barang untuk mencegah fraud. \\
+\hline
+11 & UC-11 Melihat Dashboard & Owner, Kasir & Memantau performa keuangan (Kasir dibatasi khusus hari ini). \\
+\hline
+12 & UC-12 Melihat AI Analytics & Owner & Melihat proyeksi omzet cerdas berbasis Gemini AI atau LSTM. \\
+\hline
+13 & UC-13 Kirim Broadcast Notif & Owner & Mengirim pesan push pemberitahuan real-time ke semua kasir. \\
+\hline
+14 & UC-14 Sinkronisasi Data & Owner, Kasir & Menyinkronkan antrean transaksi offline lokal ke cloud Supabase. \\
+\hline
+15 & UC-15 Mengelola Karyawan & Owner & Mendaftarkan, menangguhkan, atau mengubah peran staf kasir. \\
+\hline
+16 & UC-16 Mengatur Profil Toko & Owner & Mengubah identitas nama toko, alamat, dan logo outlet. \\
+\hline
+\end{longtable}
+\end{center}
+
+\subsection{Activity Diagram}
+\textit{Activity Diagram} merupakan gambaran visual dalam bentuk diagram yang digunakan untuk menggambarkan serangkaian aktivitas atau proses yang terjadi di dalam sistem. Diagram ini memudahkan dalam menjelaskan logika prosedural, proses bisnis, serta alur kerja sistem Parzello POS Mobile yang dilengkapi dengan fitur prediksi penjualan harian. Adapun \textit{Activity Diagram} pada sistem ini dijelaskan sebagai berikut.
+
+\begin{enumerate}
+    \item \textbf{Activity Diagram Alur Kerja Transaksi Kasir (POS Checkout)} \\
+    Gambar \ref{fig:act-checkout} menggambarkan alur kerja kasir atau \textit{owner} dalam memproses transaksi belanja pelanggan di kasir, termasuk opsi penerapan kupon/voucher diskon dan pemisahan tagihan (\textit{split bill}) sebelum data disimpan di penyimpanan lokal Isar DB.
+    
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.65\textwidth,height=0.45\textheight,keepaspectratio]{activity_checkout.png}
+        \caption{Activity Diagram Alur Kerja Transaksi Kasir}
+        \label{fig:act-checkout}
+    \end{figure}
+
+    \item \textbf{Activity Diagram Sinkronisasi Latar Belakang (Offline-First Sync Engine)} \\
+    Gambar \ref{fig:act-sync} menggambarkan logika sinkronisasi data dari \textit{local database} (Isar DB) ke cloud database (Supabase) secara otomatis saat status konektivitas terdeteksi \textit{online}. Alur data dilakukan berdasarkan ketergantungan relasi tabel (kategori, produk, transaksi, riwayat stok) untuk menjaga konsistensi.
+    
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.65\textwidth,height=0.45\textheight,keepaspectratio]{activity_sync.png}
+        \caption{Activity Diagram Sinkronisasi Latar Belakang}
+        \label{fig:act-sync}
+    \end{figure}
+
+    \item \textbf{Activity Diagram Proses Kalibrasi AI Smart Analytics} \\
+    Gambar \ref{fig:act-ai} menggambarkan alur kerja pemrosesan data historis transaksi lokal, melakukan penapisan data pribadi pelanggan (\textit{PII scrubbing}), mengunggah data teragregasi dan terenkripsi ke \textit{Edge Function}, dan memicu model peramalan penjualan untuk menampilkan visualisasi analitik omzet serta rekomendasi promosi.
+    
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.65\textwidth,height=0.45\textheight,keepaspectratio]{activity_ai.png}
+        \caption{Activity Diagram Kalibrasi AI Smart Analytics}
+        \label{fig:act-ai}
+    \end{figure}
+\end{enumerate}
+
+\subsection{Entity Relationship Diagram (ERD)}
+Perancangan basis data dalam penelitian ini dirancang dengan pendekatan hibrida untuk mendukung arsitektur \textit{offline-first}. Skema basis data relasional pada cloud \textit{Supabase PostgreSQL} disinkronisasikan ke dalam penyimpanan lokal perangkat menggunakan \textit{Isar Database} sebagai \textit{local cache}. Hubungan relasional antar-tabel serta kamus data dirinci untuk menjaga integritas dan performa sistem. Rancangan ERD sistem Parzello POS Mobile diilustrasikan pada Gambar \ref{fig:erd}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth,height=0.45\textheight,keepaspectratio]{erd.png}
+    \caption{Entity Relationship Diagram (ERD)}
+    \label{fig:erd}
+\end{figure}
+
+Penjelasan mengenai fungsi dan kegunaan dari masing-masing entitas dalam database Parzello POS Mobile diilustrasikan pada Tabel \ref{tab:db-tables} berikut:
 
 \begin{table}[htbp]
     \centering
-    \caption{Definisi Use Case}
-    \label{tab:usecase}
+    \caption{Daftar Tabel Database Parzello POS}
+    \label{tab:db-tables}
     \fontsize{10pt}{12pt}\selectfont
-    \begin{tabularx}{\textwidth}{|c|>{\bfseries}p{4cm}|X|}
+    \begin{tabularx}{\textwidth}{|c|>{\bfseries}p{3.5cm}|X|}
         \hline
-        \textbf{No} & \textbf{Use Case} & \textbf{Deskripsi} \\
+        \textbf{No} & \textbf{Nama Tabel} & \textbf{Fungsi / Deskripsi} \\
         \hline
-        1 & Input Data Transaksi & Proses pencatatan transaksi penjualan harian oleh kasir pada aplikasi POS. \\
+        1 & stores & Menyimpan informasi identitas dasar outlet/toko merchant. \\
         \hline
-        2 & Kelola Data Produk & Proses admin dalam menambah, mengubah, dan menghapus data produk yang dijual. \\
+        2 & store\_members & Menyimpan hubungan hak akses anggota staf terhadap toko (RBAC). \\
         \hline
-        3 & Proses Prediksi Penjualan & Proses sistem dalam mengolah data transaksi penjualan menggunakan metode LSTM untuk menghasilkan prediksi penjualan harian. \\
+        3 & categories & Kategori pengelompokan produk makanan/barang dagangan. \\
         \hline
-        4 & Menampilkan Hasil Prediksi & Proses sistem menampilkan hasil prediksi penjualan harian kepada admin melalui aplikasi POS. \\
+        4 & products & Katalog produk barang atau makanan/minuman yang dijual. \\
         \hline
-        5 & Laporan Penjualan & Proses sistem menghasilkan laporan transaksi penjualan dan hasil prediksi dalam bentuk data yang dapat ditampilkan atau diekspor. \\
+        5 & tables & Tata letak meja operasional restoran (untuk F\&B dine-in). \\
         \hline
-        6 & Transaksi Pembelian & Proses interaksi antara kasir dan pelanggan dalam melakukan transaksi pembelian menggunakan sistem POS. \\
+        6 & vouchers & Kupon promosi diskon transaksi belanja. \\
+        \hline
+        7 & transactions & Nota transaksi penjualan kasir (induk dari struk). \\
+        \hline
+        8 & transaction\_items & Rincian baris menu/produk yang dibeli dalam transaksi. \\
+        \hline
+        9 & stock\_histories & Kartu log riwayat audit perubahan inventaris produk. \\
+        \hline
+        10 & notifications & Log notifikasi pusat pesan (in-app dan push alert). \\
         \hline
     \end{tabularx}
 \end{table}
 
-\subsection{Activity Diagram}
-\textit{Activity Diagram} merupakan gambaran visual dalam bentuk diagram yang digunakan untuk menggambarkan serangkaian aktivitas atau proses yang terjadi di dalam sistem. Diagram ini memudahkan dalam menjelaskan logika prosedural, proses bisnis, serta alur kerja sistem \textit{Point of Sale} (POS) yang dilengkapi dengan fitur prediksi penjualan harian. Adapun \textit{Activity Diagram} pada sistem ini dijelaskan sebagai berikut.
-
+Untuk menjaga konsistensi dan integritas data ketika terjadi penghapusan data, basis data dikonfigurasi dengan aturan relasi sebagai berikut:
 \begin{enumerate}
-    \item \textbf{Activity Diagram Input Data Transaksi} \\
-    Gambar \ref{fig:act-input} menggambarkan \textit{Activity Diagram} input data transaksi penjualan. Proses dimulai ketika kasir melakukan pencatatan transaksi penjualan melalui aplikasi POS. Setelah proses input transaksi selesai, data transaksi penjualan akan disimpan ke dalam database sistem dan digunakan sebagai data historis penjualan.
-    
-    \begin{figure}[htbp]
-        \centering
-        \includegraphics[width=0.6\textwidth]{kholis_image3.png}
-        \caption{Activity Diagram Input Data Transaksi}
-        \label{fig:act-input}
-    \end{figure}
-
-    \item \textbf{Activity Diagram Proses Prediksi Penjualan} \\
-    Gambar \ref{fig:act-predict} menggambarkan \textit{Activity Diagram} proses prediksi penjualan harian. Proses dimulai ketika admin menekan tombol prediksi pada aplikasi POS. Sistem kemudian mengakses data transaksi penjualan yang telah tersimpan sebelumnya, selanjutnya data tersebut diproses menggunakan model \textit{Long Short-Term Memory} (LSTM) untuk menghasilkan prediksi penjualan harian. Hasil prediksi kemudian ditampilkan pada aplikasi POS.
-    
-    \begin{figure}[htbp]
-        \centering
-        \includegraphics[width=0.6\textwidth]{kholis_image4.png}
-        \caption{Activity Diagram Proses Prediksi Penjualan}
-        \label{fig:act-predict}
-    \end{figure}
-
-    \item \textbf{Activity Diagram Menampilkan Hasil Prediksi Penjualan} \\
-    Gambar \ref{fig:act-display} menggambarkan \textit{Activity Diagram} menampilkan hasil prediksi penjualan harian. Proses dimulai setelah sistem berhasil menghasilkan nilai prediksi. Sistem kemudian menampilkan informasi hasil prediksi penjualan harian kepada admin dalam bentuk visual atau data numerik melalui aplikasi POS untuk mendukung pengambilan keputusan.
-    
-    \begin{figure}[htbp]
-        \centering
-        \includegraphics[width=0.6\textwidth]{kholis_image5.png}
-        \caption{Activity Diagram Menampilkan Hasil Prediksi Penjualan}
-        \label{fig:act-display}
-    \end{figure}
-
-    \item \textbf{Activity Diagram Laporan Penjualan} \\
-    Gambar \ref{fig:act-report} menggambarkan \textit{Activity Diagram} laporan penjualan. Proses dimulai ketika admin memilih menu laporan penjualan. Sistem akan mengakses data transaksi penjualan yang tersimpan pada database, kemudian menampilkan laporan penjualan harian serta menyediakan opsi untuk menyimpan atau mengekspor laporan dalam bentuk file, seperti CSV.
-    
-    \begin{figure}[htbp]
-        \centering
-        \includegraphics[width=0.6\textwidth]{kholis_image6.png}
-        \caption{Activity Diagram Laporan Penjualan}
-        \label{fig:act-report}
-    \end{figure}
+    \item \textbf{ON DELETE CASCADE (Hapus Berantai)}: Diterapkan pada relasi \textit{stores} ke \textit{store\_members}, \textit{stores} ke \textit{categories} dan \textit{products}, serta \textit{transactions} ke \textit{transaction\_items}. Jika data induk dihapus, seluruh data anak yang terikat akan terhapus secara otomatis.
+    \item \textbf{ON DELETE SET NULL (Setel Kosong)}: Diterapkan pada relasi \textit{categories} ke \textit{products}. Jika kategori dihapus, produk yang terikat tidak ikut terhapus, melainkan nilai \textit{category\_id} disetel menjadi \textit{NULL} ("Tanpa Kategori").
+    \item \textbf{RESTRICT (Dilarang Hapus)}: Diterapkan pada relasi \textit{products} ke \textit{transaction\_items}. Produk yang sudah memiliki riwayat penjualan di dalam transaksi dilarang dihapus untuk menjaga kevalidan laporan keuangan historis. Untuk menghapus katalog aktif, kasir menggunakan flag soft delete \textit{is\_deleted = true}.
 \end{enumerate}
+
 
 \section{Metode dan Variabel Penelitian}
 
