@@ -1,4 +1,5 @@
-\documentclass[12pt, a4paper]{article}
+% !TEX program = pdflatex
+\documentclass[12pt, a4paper, onecolumn, oneside]{report}
 
 %%=============================================================
 %% PACKAGES
@@ -7,6 +8,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{setspace}
+\usepackage[raggedrightboxes]{ragged2e}
 \usepackage{graphicx}
 \graphicspath{{../Project/gambar/}{gambar/}}
 \usepackage{float}
@@ -22,10 +24,13 @@
 \usepackage{enumitem}
 \usepackage{longtable}
 \usepackage{booktabs}
-\usepackage{titlesec}
-\usepackage{caption}
+\usepackage[font=small, format=plain, labelfont=bf, up, textfont=up]{caption}
+\usepackage{subcaption}
 \usepackage{geometry}
 \usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{ifthen}
 \usepackage[hidelinks]{hyperref}
 
 %%=============================================================
@@ -34,13 +39,10 @@
 \geometry{a4paper, left=4cm, top=4cm, right=3cm, bottom=3cm}
 
 \setlength{\headheight}{14.5pt}
-\pagestyle{fancy}
 \fancyhf{}
 \rhead{\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
-
-\setstretch{1.5}
 
 \tolerance=1
 \emergencystretch=\maxdimen
@@ -48,20 +50,53 @@
 \hbadness=10000
 
 %%=============================================================
-%% SECTION FORMAT
+%% TOC FORMAT
 %%=============================================================
-\setlist{nosep}
+\cftsetpnumwidth{1.5em}
+\cftsetrmarg{2em}
+\setlength{\cftsecnumwidth}{1.5em}
+\setlength{\cftsubsecnumwidth}{1.5em}
+\renewcommand{\cftchapdotsep}{\cftdotsep}
+\setlength{\cftbeforechapskip}{3pt}
+\renewcommand\cftchappresnum{BAB }
+\renewcommand\cftchapaftersnum{}
+\newlength\mylen
+\settowidth\mylen{\bfseries BAB 1 :\ }
+\cftsetindents{chap}{0pt}{\mylen}
 
-\renewcommand{\thesection}{\Alph{section}.\hspace{0.18cm}}
-\renewcommand{\thesubsection}{\arabic{subsection}.}
-
+%%=============================================================
+%% CHAPTER & SECTION FORMAT
+%%=============================================================
+\titleformat{\chapter}{\doublespacing\fontsize{14pt}{16pt}\bfseries}%
+    {\MakeUppercase{\chaptertitlename\ \Roman{chapter}}\filcenter}{0.15cm}{\centering\uppercase}
 \titleformat{\section}{\fontsize{12}{14}\bfseries}{\thesection}{0.4cm}{}
 \titleformat{\subsection}{\fontsize{12}{14}\bfseries}{\thesubsection}{0.675cm}{}
-\titlespacing*{\section}{0pt}{10pt}{0pt}
-\titlespacing*{\subsection}{0pt}{10pt}{0pt}
+\titlespacing*{\chapter}{0pt}{-1cm}{20pt}
+\titlespacing*{\section}{0pt}{10pt}{0cm}
+\titlespacing*{\subsection}{0pt}{10pt}{0cm}
 
-\captionsetup[figure]{labelsep=space, labelfont=bf, format=plain}
-\captionsetup[table]{labelsep=space, labelfont=bf, format=plain}
+\captionsetup[figure]{labelsep=space}
+\captionsetup[table]{labelsep=space}
+\renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}}
+\renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}
+
+%%=============================================================
+%% LIST FORMAT
+%%=============================================================
+\setlist{nosep}
+\newenvironment{packed_enum}{
+    \begin{enumerate}[leftmargin=1.5\parindent]
+        \setlength{\itemsep}{0pt}
+        \setlength{\parskip}{0pt}
+        \setlength{\parsep}{0pt}
+        }{\end{enumerate}}
+
+\newenvironment{packed_item}{
+    \begin{itemize}[leftmargin=1.375\parindent]
+        \setlength{\itemsep}{0pt}
+        \setlength{\parskip}{0pt}
+        \setlength{\parsep}{0pt}
+        }{\end{itemize}}
 
 %%=============================================================
 %% GANTT CHART HELPERS
@@ -69,6 +104,15 @@
 \definecolor{jadwal}{gray}{0.65}
 \newcommand{\G}{\cellcolor{jadwal}}
 \newcolumntype{W}{>{\centering\arraybackslash}m{0.36cm}}
+
+%%=============================================================
+%% EQUATION NUMBERING
+%%=============================================================
+\makeatletter
+\renewcommand{\theequation}{\arabic{chapter}.\arabic{equation}}
+\renewcommand{\@eqnnum}{\theequation}
+\def\tagform@#1{\maketag@@@{#1}}
+\makeatother
 
 %%=============================================================
 %% DOCUMENT
@@ -80,7 +124,7 @@
 %%-------------------------------------------------------------
 \begin{titlepage}
 \thispagestyle{empty}
-\setstretch{1.0}
+\begin{spacing}{1.0}
 \begin{center}
 
 {\fontsize{14}{16}\selectfont\bfseries PROPOSAL PENELITIAN SKRIPSI}
@@ -111,6 +155,7 @@ POLITEKNIK NEGERI LHOKSEUMAWE\\[4pt]
 TAHUN 2026}
 
 \end{center}
+\end{spacing}
 \end{titlepage}
 
 %%-------------------------------------------------------------
@@ -118,7 +163,7 @@ TAHUN 2026}
 %%-------------------------------------------------------------
 \newpage
 \thispagestyle{empty}
-\setstretch{1.5}
+\begin{spacing}{1.5}
 
 \begin{center}
 {\fontsize{14}{16}\selectfont\bfseries HALAMAN PERSETUJUAN}
@@ -166,74 +211,118 @@ Ketua Jurusan Teknologi Informasi \& Komputer
 \noindent\textbf{Salahuddin, S.T., M.Cs.}\\
 NIP. 197404242002121001
 
+\end{spacing}
+
 %%-------------------------------------------------------------
-%% ISI PROPOSAL
+%% DAFTAR ISI, DAFTAR GAMBAR, DAFTAR TABEL
 %%-------------------------------------------------------------
+\newpage
+\pagenumbering{roman}
+\setcounter{page}{1}
+\pagestyle{fancy}
+
+\renewcommand{\contentsname}{DAFTAR ISI}
+\renewcommand{\listfigurename}{DAFTAR GAMBAR}
+\renewcommand{\listtablename}{DAFTAR TABEL}
+
+\begin{spacing}{1.2}
+
+\phantomsection
+\addcontentsline{toc}{chapter}{DAFTAR ISI}
+\tableofcontents
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{DAFTAR GAMBAR}
+\listoffigures
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{DAFTAR TABEL}
+\listoftables
+
+\end{spacing}
+
+%%=============================================================
+%% BAB I - PENDAHULUAN
+%%=============================================================
 \newpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
+\pagestyle{fancy}
 
-%%-------------------------------------------------------------
+\begin{spacing}{1.5}
+
+\chapter[PENDAHULUAN]{\\ PENDAHULUAN}
+
 \section{Latar Belakang Masalah}
+Perkembangan teknologi informasi dan komunikasi telah mendorong terjadinya transformasi digital di berbagai sektor bisnis, termasuk dalam pengelolaan transaksi dan operasional penjualan pada usaha mikro, kecil, dan menengah (UMKM). Pemanfaatan sistem \textit{Point of Sale} (POS) berbasis aplikasi menjadi salah satu solusi yang banyak digunakan untuk membantu pelaku usaha dalam mencatat transaksi, mengelola stok barang, serta menyusun laporan penjualan secara lebih terstruktur dan efisien. Seiring dengan meningkatnya kebutuhan akan pengambilan keputusan yang cepat dan berbasis data, sistem POS tidak lagi hanya berfungsi sebagai alat pencatatan transaksi, tetapi juga dituntut untuk mampu menyediakan informasi analitis yang mendukung strategi bisnis.
 
-Fenomena digitalisasi di Indonesia telah mengalami akselerasi yang signifikan dalam lima tahun terakhir, namun adopsi teknologi di tingkat UMKM lokal sering kali terbentur pada kompleksitas penggunaan dan biaya infrastruktur yang tinggi. Di Kota Lhokseumawe, program pembinaan pemerintah melalui Dinas Perdagangan, Koperasi, dan UKM telah berupaya meningkatkan kapasitas manajerial pelaku usaha, namun efektivitasnya sering kali terhambat oleh kurangnya alat bantu yang mampu memberikan data secara \textit{real-time} untuk pengambilan keputusan strategis. Pencatatan transaksi manual yang masih mendominasi menyebabkan data sejarah penjualan tidak terorganisir dengan baik, sehingga sulit untuk mengidentifikasi pola musiman atau tren permintaan konsumen.
+Pada praktiknya, sebagian besar aplikasi \textit{Point of Sale} yang digunakan oleh UMKM masih bersifat deskriptif, yaitu hanya menampilkan data historis penjualan tanpa adanya kemampuan analisis prediktif. Pelaku usaha umumnya harus melakukan perhitungan dan estimasi penjualan secara manual berdasarkan pengalaman atau intuisi, yang berpotensi menimbulkan kesalahan dalam perencanaan stok, penentuan target penjualan, dan pengelolaan arus kas. Ketidakmampuan sistem dalam memprediksi penjualan harian secara akurat dapat menyebabkan berbagai permasalahan, seperti kelebihan stok, kekurangan stok, serta tidak optimalnya strategi penjualan yang diterapkan.
 
-Sifat data penjualan ritel yang merupakan deret waktu (\textit{time series}) mengandung kompleksitas non-linier yang dipengaruhi oleh berbagai faktor eksternal seperti hari libur, hari gajian, hingga fluktuasi cuaca. Model statistik tradisional seperti ARIMA sering kali gagal menangkap hubungan jangka panjang dalam data yang sangat fluktuatif ini. Oleh karena itu, penerapan algoritma \textit{deep learning} seperti LSTM menjadi relevan karena arsitekturnya yang mampu mempertahankan memori jangka panjang melalui mekanisme gerbang (\textit{gates}) yang kompleks. Pemanfaatan VPS untuk komputasi berat model LSTM di belakang layar memastikan bahwa aplikasi \textit{mobile} tetap ringan dan responsif saat digunakan di perangkat dengan spesifikasi terbatas.
+Perkembangan teknologi kecerdasan buatan, khususnya dalam bidang \textit{machine learning} dan \textit{deep learning}, membuka peluang untuk menghadirkan fitur prediksi penjualan yang lebih akurat dan adaptif terhadap pola data historis. Salah satu metode \textit{deep learning} yang banyak digunakan dalam analisis data runtun waktu (\textit{time series}) adalah \textit{Long Short-Term Memory} (LSTM). Metode LSTM memiliki keunggulan dalam mempelajari pola jangka pendek dan jangka panjang pada data penjualan harian, sehingga mampu menghasilkan prediksi yang lebih baik dibandingkan metode statistik konvensional.
 
-Pentingnya penelitian ini juga didorong oleh tren industri 4.0 yang menuntut efisiensi operasional melalui pendekatan \textit{data-driven decision making}. Dengan adanya fitur prediksi, pelaku UMKM dapat melakukan optimasi stok secara otomatis, mengurangi risiko pemborosan modal, dan meningkatkan efisiensi rantai pasok secara keseluruhan. Fokus pada UMKM di Lhokseumawe memberikan dimensi studi kasus yang spesifik, memungkinkan pengembangan solusi yang kontekstual dengan kebutuhan lokal namun tetap berbasis pada standar teknologi global.
+Penerapan metode \textit{Long Short-Term Memory} (LSTM) dalam sistem \textit{Point of Sale} diharapkan dapat membantu pelaku usaha dalam memprediksi penjualan harian berdasarkan data transaksi sebelumnya. Dengan adanya fitur prediksi penjualan, sistem POS tidak hanya berperan sebagai alat pencatatan transaksi, tetapi juga sebagai sistem pendukung keputusan yang dapat memberikan gambaran tren penjualan di masa mendatang. Informasi prediksi tersebut dapat dimanfaatkan untuk perencanaan stok barang, pengaturan strategi promosi, serta pengelolaan keuangan usaha secara lebih efektif dan efisien.
 
-%%-------------------------------------------------------------
+Berdasarkan permasalahan tersebut, maka diperlukan suatu penelitian yang merancang dan membangun aplikasi \textit{Point of Sale} dengan fitur prediksi penjualan harian menggunakan metode \textit{Long Short-Term Memory} (LSTM). Penelitian ini diharapkan dapat menghasilkan sebuah aplikasi POS yang mampu memberikan nilai tambah bagi pengguna melalui pemanfaatan teknologi kecerdasan buatan, serta menjadi referensi bagi pengembangan sistem \textit{Point of Sale} berbasis \textit{machine learning} di masa mendatang.
+
 \section{Rumusan Masalah}
-
-Berdasarkan uraian latar belakang di atas, identifikasi masalah yang akan dikaji dalam penelitian ini dirumuskan sebagai berikut:
-\begin{enumerate}[leftmargin=1.5\parindent]
-    \item Bagaimana merancang arsitektur aplikasi \textit{Point of Sale} berbasis \textit{mobile} menggunakan \textit{framework} Flutter yang mampu mengintegrasikan operasional kasir dengan modul prediksi penjualan secara \textit{real-time}?
-    \item Bagaimana mekanisme sinkronisasi data antara aplikasi \textit{mobile}, basis data Supabase, dan model LSTM yang dijalankan pada \textit{Virtual Private Server} untuk memastikan akurasi data pelatihan?
-    \item Berapa tingkat efektivitas dan akurasi model LSTM dalam memprediksi volume penjualan harian pada UMKM di Lhokseumawe jika diukur dengan metrik \textit{Mean Absolute Percentage Error} (MAPE) dan \textit{Root Mean Squared Error} (RMSE)?
-    \item Sejauh mana aplikasi POS ini dapat membantu meminimalisir kesalahan manajemen stok barang bagi pemilik usaha melalui fitur estimasi stok otomatis?
+Berdasarkan latar belakang yang telah diuraikan, maka rumusan masalah dalam penelitian ini adalah sebagai berikut:
+\begin{enumerate}
+    \item Bagaimana merancang dan membangun aplikasi \textit{Point of Sale} (POS) dengan fitur prediksi penjualan harian berbasis \textit{mobile} yang dapat digunakan oleh pelaku usaha secara efektif?
+    \item Bagaimana menerapkan metode \textit{Long Short-Term Memory} (LSTM) pada aplikasi \textit{Point of Sale} untuk memprediksi penjualan harian berdasarkan data transaksi historis?
+    \item Bagaimana tingkat akurasi hasil prediksi penjualan harian yang dihasilkan oleh metode \textit{Long Short-Term Memory} (LSTM) berdasarkan evaluasi menggunakan metrik kesalahan prediksi?
 \end{enumerate}
 
-%%-------------------------------------------------------------
-\section{Batasan Masalah}
-
-Penelitian ini dibatasi oleh beberapa parameter utama untuk memastikan fokus dan kedalaman hasil:
-\begin{enumerate}[leftmargin=1.5\parindent]
-    \item Aplikasi dikembangkan khusus untuk platform Android menggunakan bahasa pemrograman Dart dan \textit{framework} Flutter.
-    \item Basis data yang digunakan adalah Supabase dengan skema relasional untuk menyimpan data produk, transaksi, dan akun pengguna.
-    \item Implementasi algoritma prediksi terbatas pada metode LSTM tanpa melakukan perbandingan mendalam dengan arsitektur lain seperti GRU atau Bi-LSTM dalam tahap produksi.
-    \item Data uji yang digunakan bersumber dari data transaksi riil UMKM mitra di Lhokseumawe dengan periode minimal satu tahun atau setidaknya mencakup siklus musiman tahunan.
-    \item Variabel input untuk prediksi hanya mencakup data historis volume penjualan tanpa menyertakan variabel eksternal seperti suhu, berita ekonomi, atau tren media sosial.
-\end{enumerate}
-
-%%-------------------------------------------------------------
 \section{Tujuan Penelitian}
-
-Kegiatan penelitian ini bertujuan untuk:
-\begin{enumerate}[leftmargin=1.5\parindent]
-    \item Membangun aplikasi POS \textit{mobile} yang fungsional untuk memudahkan UMKM dalam mencatat penjualan, pembelian, dan inventaris secara terpusat.
-    \item Mengembangkan model \textit{deep learning} LSTM yang mampu mengekstraksi pola penjualan dari data historis transaksi UMKM lokal.
-    \item Mengintegrasikan model prediksi ke dalam dasbor aplikasi \textit{mobile} sehingga pemilik usaha mendapatkan rekomendasi jumlah pengadaan stok secara visual.
-    \item Mengevaluasi performa sistem dari sisi kegunaan (\textit{usability}) dan akurasi komputasi untuk memastikan solusi dapat diandalkan dalam lingkungan bisnis nyata.
+Berdasarkan rumusan masalah yang telah diuraikan, maka tujuan dalam penelitian ini adalah sebagai berikut:
+\begin{enumerate}
+    \item Merancang dan membangun aplikasi \textit{Point of Sale} (POS) berbasis \textit{mobile} yang dilengkapi dengan fitur prediksi penjualan harian sebagai alat bantu pengelolaan dan analisis penjualan.
+    \item Mengimplementasikan metode \textit{Long Short-Term Memory} (LSTM) pada aplikasi \textit{Point of Sale} untuk memprediksi penjualan harian berdasarkan data transaksi historis.
+    \item Memanfaatkan data transaksi penjualan harian, seperti jumlah transaksi, total penjualan, dan jumlah produk terjual, sebagai data latih utama dalam model prediksi penjualan berbasis metode LSTM.
+    \item Mengevaluasi kinerja dan tingkat akurasi metode \textit{Long Short-Term Memory} (LSTM) dalam menghasilkan prediksi penjualan harian menggunakan metrik evaluasi kesalahan prediksi.
 \end{enumerate}
 
-%%-------------------------------------------------------------
+\section{Batasan Masalah}
+Untuk menghindari meluasnya materi pembahasan, maka penelitian ini dibatasi pada hal-hal berikut:
+\begin{enumerate}
+    \item Aplikasi dikembangkan menggunakan \textit{framework} Flutter dan difokuskan untuk sistem operasi Android, mengingat dominasi pasar Android pada segmen UMKM lokal.
+    \item Basis data yang digunakan adalah Supabase dengan skema relasional untuk menyimpan data produk, transaksi, dan akun pengguna.
+    \item Algoritma yang digunakan adalah \textit{Long Short-Term Memory} (LSTM) dengan model \textit{univariate} atau \textit{multivariate} terbatas, dan prediksi dilakukan untuk rentang waktu harian.
+    \item Data uji bersumber dari data transaksi riil UMKM mitra di Lhokseumawe dengan periode minimal satu tahun atau setidaknya mencakup siklus musiman tahunan.
+    \item Proses pelatihan model dan prediksi dilakukan di sisi \textit{server/cloud} menggunakan bahasa Python, sedangkan aplikasi \textit{mobile} bertugas mengirim data transaksi dan menerima hasil prediksi melalui \textit{REST API}.
+\end{enumerate}
+
 \section{Manfaat Penelitian}
-
-Hasil penelitian ini diharapkan memberikan manfaat yang luas pada berbagai pemangku kepentingan:
-\begin{enumerate}[leftmargin=1.5\parindent]
-    \item \textbf{Bagi Pelaku UMKM:} Memberikan alat bantu teknologi yang terjangkau untuk meningkatkan produktivitas, mengurangi risiko stok kosong, dan meningkatkan kualitas layanan kepada konsumen.
-    \item \textbf{Bagi Peneliti:} Memperkaya khazanah keilmuan mengenai aplikasi praktis kecerdasan buatan pada perangkat \textit{mobile} dan memberikan data empiris mengenai perilaku konsumsi masyarakat di wilayah Aceh.
-    \item \textbf{Bagi Institusi (Politeknik Negeri Lhokseumawe):} Menjadi bukti kontribusi nyata akademisi dalam menyelesaikan permasalahan ekonomi lokal melalui inovasi teknologi informatika.
+Manfaat yang diharapkan dari penelitian ini adalah sebagai berikut:
+\begin{enumerate}
+    \item \textbf{Bagi Pelaku UMKM}: Memberikan aplikasi \textit{Point of Sale} (POS) berbasis \textit{mobile} yang dapat digunakan untuk pencatatan transaksi penjualan dan pengelolaan stok secara digital, serta menyediakan fitur prediksi penjualan harian berbasis algoritma LSTM sebagai alat bantu dalam pengambilan keputusan \textit{restock} dan pengelolaan persediaan barang.
+    \item \textbf{Bagi Akademisi}: Menjadi referensi dan bahan kajian dalam pengembangan penelitian di bidang sistem informasi dan \textit{machine learning}, khususnya penerapan metode LSTM untuk prediksi penjualan harian pada sistem POS berbasis \textit{mobile} di lingkungan UMKM.
+    \item \textbf{Bagi Peneliti}: Menambah pengetahuan dan pengalaman dalam merancang dan membangun aplikasi POS berbasis \textit{mobile} menggunakan \textit{framework} Flutter serta mengimplementasikan algoritma LSTM untuk menyelesaikan permasalahan prediksi penjualan harian berbasis data transaksi UMKM pada studi kasus nyata.
 \end{enumerate}
 
-%%-------------------------------------------------------------
-\section{Tinjauan Pustaka}
+\section{Sistematika Penulisan}
+Sistematika penulisan proposal penelitian skripsi ini disusun untuk memberikan gambaran secara menyeluruh mengenai alur pembahasan yang dilakukan. Sistematika penulisan dibagi menjadi tiga bab utama yang saling berkaitan, dengan rincian sebagai berikut:
+
+\noindent\textbf{BAB I PENDAHULUAN}\\
+Bab ini menguraikan gambaran umum penelitian yang meliputi latar belakang masalah, rumusan masalah, tujuan penelitian, batasan masalah, manfaat penelitian, serta sistematika penulisan. Bab ini menjadi dasar dalam memahami alasan dan arah penelitian yang dilakukan.
+
+\noindent\textbf{BAB II TINJAUAN PUSTAKA}\\
+Bab ini berisi kajian literatur dan landasan teori yang relevan dengan penelitian. Kajian mencakup perbandingan metode peramalan penjualan dan implementasi sistem POS berbasis \textit{mobile}. Landasan teori menyajikan konsep peramalan, arsitektur LSTM, \textit{framework} Flutter, bahasa Dart, serta layanan Supabase yang digunakan sebagai infrastruktur sistem.
+
+\noindent\textbf{BAB III METODOLOGI PENELITIAN}\\
+Bab ini menjelaskan tahapan metodologi penelitian yang dilakukan, meliputi jenis dan pendekatan penelitian, teknik pengumpulan data, teknik analisis data, alur penelitian, rancangan sistem menggunakan UML, teknik pengujian, hasil yang diharapkan, rincian biaya, serta rencana jadwal pelaksanaan penelitian.
+
+%%=============================================================
+%% BAB II - TINJAUAN PUSTAKA
+%%=============================================================
+\chapter[TINJAUAN PUSTAKA]{\\ TINJAUAN PUSTAKA}
 
 Kajian literatur dalam penelitian ini mencakup perbandingan antara berbagai metode peramalan penjualan dan implementasi sistem informasi manajemen ritel. Perkembangan teknologi jaringan saraf tiruan telah membawa perubahan besar dalam efisiensi peramalan bisnis.
 
-\subsection{Perbandingan Metode Peramalan Penjualan}
+\section{Perbandingan Metode Peramalan Penjualan}
 
-Berbagai penelitian terdahulu menunjukkan keunggulan metode \textit{deep learning} dibandingkan model statistik klasik. Dalam studi peramalan penjualan produk aerosol, ditemukan bahwa LSTM memberikan performa terbaik dengan nilai MAPE sebesar 10,76\%, mengungguli ARIMA (11,23\%) dan GRU (11,47\%) dalam menangkap tren jangka panjang. Hal ini diperkuat oleh penelitian pada koperasi sekolah di Malang yang mencapai akurasi 88,19\% melalui arsitektur LSTM hibrida untuk produk makanan yang memiliki volatilitas tinggi.
+Berbagai penelitian terdahulu menunjukkan keunggulan metode \textit{deep learning} dibandingkan model statistik klasik. Dalam studi peramalan penjualan produk aerosol, ditemukan bahwa LSTM memberikan performa terbaik dengan nilai MAPE sebesar 10,76\%, mengungguli ARIMA (11,23\%) dan GRU (11,47\%) dalam menangkap tren jangka panjang. Hal ini diperkuat oleh penelitian pada koperasi sekolah di Malang yang mencapai akurasi 88,19\% melalui arsitektur LSTM hibrida untuk produk makanan yang memiliki volatilitas tinggi. Perbandingan ketiga metode peramalan tersebut dirangkum pada Tabel \ref{tab:perbandingan}.
 
 \begin{table}[H]
 \setstretch{1.2}
@@ -257,27 +346,22 @@ Kebutuhan Memori & Tinggi & Rendah & Sedang \\
 
 Penelitian lain di bidang peramalan penjualan laptop mengategorikan produk berdasarkan rentang harga dan menemukan bahwa LSTM sangat akurat untuk kategori harga menengah (\textit{mid-end}) dengan skor R-squared mencapai 0,9890. Keberhasilan ini mengindikasikan bahwa perilaku konsumen pada segmen tertentu lebih mudah dipelajari oleh algoritma jika dataset memiliki kerapatan informasi yang cukup.
 
-\subsection{Implementasi Sistem POS \textit{Mobile}}
+\section{Implementasi Sistem POS \textit{Mobile}}
 
 Pengembangan aplikasi POS berbasis Android telah banyak dieksplorasi menggunakan berbagai teknologi. Penggunaan Firebase sebagai basis data \textit{real-time} sering menjadi pilihan utama bagi pengembang karena kemudahan sinkronisasi, namun penelitian terbaru mulai beralih ke Supabase atau integrasi API khusus untuk fleksibilitas manajemen data yang lebih besar. \textit{Framework} Flutter terbukti efektif dalam membangun antarmuka yang responsif dan memudahkan integrasi fitur-fitur modern seperti pembayaran QRIS.
 
 Sistem POS yang dirancang untuk UMKM memerlukan pendekatan yang berbeda dibandingkan sistem ritel besar. Fokus utama harus terletak pada kesederhanaan alur kerja kasir dan kecepatan proses transaksi. Penelitian oleh Rangga Gelar Guntara (2022) menekankan bahwa penggunaan \textit{cloud computing} pada aplikasi POS \textit{mobile} secara signifikan meningkatkan fleksibilitas pemilik usaha dalam memantau bisnis dari mana saja secara \textit{real-time}.
 
-%%-------------------------------------------------------------
-\section{Landasan Teori}
-
-Landasan teori menyediakan kerangka konseptual yang mendasari pengembangan sistem, mulai dari teori peramalan hingga arsitektur teknis perangkat lunak.
-
-\subsection{Teori Peramalan (\textit{Forecasting})}
+\section{Teori Peramalan (\textit{Forecasting})}
 
 Peramalan penjualan merupakan proyeksi teknis dari permintaan pelanggan potensial untuk periode waktu tertentu berdasarkan asumsi-asumsi yang ditetapkan. Menurut Heizer dan Render, peramalan yang akurat sangat krusial dalam manajemen operasi karena mempengaruhi keputusan strategis di bidang pemasaran, keuangan, dan sumber daya manusia. Terdapat empat prinsip utama dalam peramalan: peramalan jarang sekali sempurna, peramalan jangka pendek biasanya lebih akurat daripada jangka panjang, peramalan agregat lebih akurat daripada peramalan item individu, dan pemilihan metode harus disesuaikan dengan pola data (horizontal, tren, musiman, atau siklis).
 
 Metode kuantitatif dalam peramalan mengandalkan model matematika untuk memproyeksikan data masa lalu ke masa depan. Dalam konteks ritel, tantangan utama adalah menangani variasi musiman, yaitu fluktuasi yang berulang dalam jangka waktu kurang dari satu tahun, seperti lonjakan penjualan menjelang hari raya atau awal bulan.
 
-\subsection{Arsitektur \textit{Long Short-Term Memory} (LSTM)}
+\section{Arsitektur \textit{Long Short-Term Memory} (LSTM)}
 
 LSTM adalah jenis khusus dari \textit{Recurrent Neural Network} (RNN) yang memiliki kemampuan untuk mempelajari ketergantungan jangka panjang dalam urutan data. Arsitektur LSTM dirancang untuk mengatasi masalah \textit{vanishing gradient} yang menghambat RNN standar dalam memproses informasi yang terpisah jauh dalam satu urutan. Komponen inti dari unit LSTM adalah \textit{cell state} (keadaan sel) yang bertindak sebagai jalur informasi utama, serta tiga gerbang fungsional:
-\begin{enumerate}[leftmargin=1.5\parindent]
+\begin{enumerate}
     \item \textbf{\textit{Forget Gate}:} Menggunakan fungsi aktivasi sigmoid untuk menentukan bagian informasi dari status sel sebelumnya yang harus dibuang.
     \item \textbf{\textit{Input Gate}:} Memutuskan informasi baru mana yang akan diperbarui ke dalam status sel melalui kombinasi fungsi sigmoid dan tanh.
     \item \textbf{\textit{Output Gate}:} Menentukan bagian dari status sel yang akan dikeluarkan sebagai \textit{hidden state} untuk langkah waktu berikutnya.
@@ -290,43 +374,45 @@ Persamaan matematis sederhana untuk pembaruan status sel $C_t$ dapat dinyatakan 
 
 \noindent Di mana $f_t$ adalah \textit{output} dari \textit{forget gate}, $i_t$ adalah \textit{output} dari \textit{input gate}, dan $\tilde{C}_t$ adalah kandidat nilai baru.
 
-\subsection{\textit{Framework} Flutter dan Bahasa Dart}
+\section{\textit{Framework} Flutter dan Bahasa Dart}
 
 Flutter menggunakan mesin grafis Skia untuk merender antarmuka pengguna secara langsung, yang menghasilkan performa tinggi mendekati aplikasi \textit{native}. Bahasa pemrograman Dart yang menyertai Flutter mendukung fitur \textit{Just-In-Time} (JIT) untuk pengembangan cepat dan \textit{Ahead-Of-Time} (AOT) untuk rilis produksi yang efisien. Arsitektur \textit{widget} pada Flutter memungkinkan pengembang untuk membangun komponen antarmuka yang modular dan dapat digunakan kembali, sangat cocok untuk aplikasi POS yang memiliki banyak elemen interaktif.
 
-\subsection{Layanan Supabase dan Integrasi \textit{Cloud}}
+\section{Layanan Supabase dan Integrasi \textit{Cloud}}
 
 Supabase menyediakan lapisan infrastruktur yang matang di atas basis data PostgreSQL, mencakup fitur \textit{real-time subscriptions} yang memungkinkan aplikasi \textit{mobile} menerima pembaruan data secara instan tanpa perlu melakukan \textit{polling} ke server. Penggunaan Supabase dalam penelitian ini memfasilitasi penyimpanan data transaksi dalam jumlah besar yang nantinya akan ditarik oleh modul Python di VPS untuk proses pelatihan model AI.
 
-%%-------------------------------------------------------------
-\section{Metode Penelitian}
+%%=============================================================
+%% BAB III - METODOLOGI PENELITIAN
+%%=============================================================
+\chapter[METODOLOGI PENELITIAN]{\\ METODOLOGI PENELITIAN}
 
 Metode penelitian mengikuti kerangka kerja pengembangan sistem yang sistematis, didukung oleh teknik pengumpulan data yang valid dan analisis metrik yang ketat.
 
-\subsection{Jenis, Sifat dan Pendekatan Penelitian}
+\section{Jenis, Sifat dan Pendekatan Penelitian}
 
 Penelitian ini merupakan jenis penelitian pengembangan (\textit{Research and Development}) dengan pendekatan kuantitatif untuk pengujian model prediksi dan kualitatif untuk analisis kebutuhan pengguna. Model pengembangan yang digunakan adalah \textit{Waterfall}, yang terdiri dari lima tahap utama:
-\begin{enumerate}[leftmargin=1.5\parindent]
+\begin{enumerate}
     \item \textbf{Analisis Kebutuhan:} Mengidentifikasi fitur utama POS (kasir, stok, laporan) dan spesifikasi data untuk kebutuhan LSTM.
     \item \textbf{Desain Sistem:} Membuat arsitektur sistem, skema basis data PostgreSQL, dan rancangan antarmuka (UI/UX).
-    \item \textbf{Implementasi:} Melakukan pengkodean \textit{front-end} (Flutter), \textit{back-end} integrasi (Supabase), dan modul AI (Python/TensorFlow).
+    \item \textbf{Implementasi:} Melakukan pengkodean \textit{front-end} (Flutter), integrasi \textit{back-end} (Supabase), dan modul AI (Python/TensorFlow).
     \item \textbf{Pengujian:} Melakukan uji coba fungsional menggunakan \textit{Black Box Testing} dan uji akurasi model menggunakan data historis.
     \item \textbf{Pemeliharaan:} Melakukan optimasi parameter model berdasarkan umpan balik penggunaan nyata.
 \end{enumerate}
 
-\subsection{Teknik Pengumpulan Data}
+\section{Teknik Pengumpulan Data}
 
 Data dikumpulkan melalui tiga saluran utama:
-\begin{enumerate}[leftmargin=1.5\parindent]
+\begin{enumerate}
     \item \textbf{Observasi dan Wawancara:} Dilakukan pada pemilik UMKM di Lhokseumawe untuk memahami proses bisnis dan kendala manajemen stok.
     \item \textbf{Dokumentasi Transaksi:} Mengambil data sejarah penjualan (tanggal, item, jumlah) dari catatan manual atau sistem lama milik mitra UMKM.
     \item \textbf{Studi Pustaka:} Mengkaji referensi jurnal, buku manajemen operasi (Heizer \& Render), dan dokumentasi teknis Flutter/LSTM.
 \end{enumerate}
 
-\subsection{Teknik Analisis Data}
+\section{Teknik Analisis Data}
 
 Data transaksi yang terkumpul melalui aplikasi POS diproses melalui tahapan berikut sebelum digunakan untuk prediksi:
-\begin{enumerate}[leftmargin=1.5\parindent]
+\begin{enumerate}
     \item \textbf{Pembersihan Data:} Menghapus data duplikat dan mengisi nilai yang kosong menggunakan teknik interpolasi linier untuk memastikan kontinuitas deret waktu.
     \item \textbf{Normalisasi:} Mengubah data volume penjualan ke dalam skala 0 hingga 1 menggunakan MinMaxScaler guna menstabilkan proses pelatihan pada saraf tiruan.
     \item \textbf{Struktur \textit{Supervised Learning}:} Mengubah data sekuensial menjadi format input (X) dan label (y) dengan panjang jendela (\textit{sliding window}) tertentu, misalnya data 14 hari sebelumnya digunakan untuk memprediksi hari berikutnya.
@@ -334,7 +420,7 @@ Data transaksi yang terkumpul melalui aplikasi POS diproses melalui tahapan beri
     \item \textbf{Denormalisasi:} Mengembalikan nilai prediksi ke dalam satuan unit barang untuk ditampilkan pada antarmuka aplikasi.
 \end{enumerate}
 
-\subsection{Alur Penelitian}
+\section{Alur Penelitian}
 
 Alur penelitian ini dirancang secara sistematis untuk membangun sebuah sistem \textit{Point of Sale} (POS) berbasis \textit{mobile} yang dilengkapi dengan fitur prediksi penjualan harian menggunakan metode \textit{Long Short-Term Memory} (LSTM). Tahapan penelitian ini merepresentasikan kerangka kerja pengembangan sistem yang dimulai dari tahap analisis kebutuhan, perancangan, implementasi aplikasi, hingga proses pemodelan dan evaluasi sistem secara menyeluruh.
 
@@ -353,7 +439,6 @@ Pada Fase Pengembangan Model Prediksi Penjualan, data transaksi yang telah terku
 
 Model prediksi yang telah teruji kemudian diintegrasikan kembali ke dalam sistem POS sehingga aplikasi tidak hanya berfungsi sebagai alat pencatatan transaksi, tetapi juga mampu menampilkan hasil prediksi penjualan harian kepada pengguna. Tahap akhir penelitian dilakukan melalui pengujian fungsional sistem menggunakan metode \textit{black box} serta evaluasi performa model untuk memastikan sistem berjalan sesuai dengan kebutuhan dan tujuan penelitian.
 
-%%-------------------------------------------------------------
 \section{Rancangan Sistem}
 
 Perancangan sistem dalam penelitian ini dilakukan menggunakan \textit{Unified Modeling Language} (UML), yang bertujuan untuk memberikan gambaran dan ilustrasi sistem secara jelas dan terstruktur. Pemodelan sistem ini direpresentasikan melalui perancangan \textit{Use Case Diagram}, \textit{Activity Diagram}, serta \textit{User Interface} guna menggambarkan alur proses dan interaksi pengguna dengan sistem.
@@ -436,7 +521,7 @@ Desain metode \textit{Long Short-Term Memory} (LSTM) berfungsi untuk memberikan 
 \end{figure}
 
 Gambar \ref{fig:lstm_alur} menggambarkan alur kerja model LSTM yang dimulai dari input data transaksi penjualan harian hingga proses evaluasi model. Adapun langkah-langkah proses algoritma dalam penelitian ini dijelaskan sebagai berikut:
-\begin{enumerate}[leftmargin=1.5\parindent]
+\begin{enumerate}
     \item Proses penelitian diawali dengan \textit{input} data berupa dataset transaksi penjualan harian yang diperoleh dari aplikasi POS yang telah diimplementasikan pada mitra UMKM.
     \item Data yang digunakan kemudian melalui tahap pra-pemrosesan (\textit{preprocessing}), meliputi pembersihan data (\textit{data cleaning}), penyelarasan format tanggal, serta normalisasi data menggunakan metode \textit{Min-Max Scaling} agar sesuai untuk pemodelan \textit{time series}.
     \item Selanjutnya, data disusun dalam bentuk runtun waktu (\textit{time series}) melalui proses \textit{windowing} (\textit{time step}) untuk membentuk pola historis yang akan digunakan sebagai input model.
@@ -454,11 +539,10 @@ Perancangan pengujian pada penelitian ini menggunakan metode \textit{black box t
 
 Pengujian diterapkan pada beberapa fitur utama sistem, meliputi fitur \textit{login}, pengelolaan data, prediksi penjualan, pengeditan data, penghapusan data, pembuatan laporan, serta \textit{logout}, guna memastikan setiap fungsi berjalan sesuai dengan kebutuhan dan spesifikasi yang telah ditetapkan.
 
-%%-------------------------------------------------------------
 \section{Hasil yang Diharapkan}
 
 Hasil yang diharapkan dari penelitian ini meliputi beberapa aspek sebagai berikut:
-\begin{enumerate}[leftmargin=1.5\parindent]
+\begin{enumerate}
     \item Sistem \textit{Point of Sale} (POS) yang dikembangkan mampu membantu pelaku UMKM dalam melakukan pengelolaan transaksi penjualan, data produk, dan laporan penjualan secara efisien dan terintegrasi.
     \item Implementasi metode \textit{Long Short-Term Memory} (LSTM) pada sistem dapat berjalan dengan baik dan akurat dalam melakukan prediksi penjualan harian, sehingga dapat digunakan sebagai dasar pengambilan keputusan usaha.
     \item Sistem yang dibangun mampu menyajikan informasi prediksi dan laporan penjualan dalam bentuk yang mudah dipahami oleh pengguna, khususnya pelaku UMKM.
@@ -466,8 +550,9 @@ Hasil yang diharapkan dari penelitian ini meliputi beberapa aspek sebagai beriku
     \item Penelitian ini menghasilkan laporan tugas akhir sebagai salah satu syarat penyelesaian studi pada Program Studi terkait.
 \end{enumerate}
 
-%%-------------------------------------------------------------
 \section{Rincian Biaya}
+
+Rencana anggaran biaya penelitian ini dijabarkan secara terperinci pada Tabel \ref{tab:biaya} berikut.
 
 \begin{table}[H]
 \setstretch{1.2}
@@ -511,10 +596,9 @@ Hasil yang diharapkan dari penelitian ini meliputi beberapa aspek sebagai beriku
 \end{tabularx}
 \end{table}
 
-%%-------------------------------------------------------------
 \section{Rencana Jadwal Penelitian}
 
-Berikut ini merupakan jadwal kegiatan penelitian yang dilaksanakan mulai dari bulan Januari sampai dengan Juni:
+Berikut ini merupakan jadwal kegiatan penelitian yang dilaksanakan mulai dari bulan Januari sampai dengan Juni, sebagaimana ditampilkan pada Tabel \ref{tab:jadwal}.
 
 \begin{table}[H]
 \setstretch{1.0}
@@ -558,6 +642,8 @@ Berikut ini merupakan jadwal kegiatan penelitian yang dilaksanakan mulai dari bu
 \end{tabular}
 \end{table}
 
+\end{spacing}
+
 %%=============================================================
 %% DAFTAR PUSTAKA
 %%=============================================================
@@ -567,7 +653,7 @@ Berikut ini merupakan jadwal kegiatan penelitian yang dilaksanakan mulai dari bu
 \end{center}
 
 \vspace{0.5cm}
-\setstretch{1.0}
+\begin{spacing}{1.0}
 
 \noindent\hangindent=1.5cm
 L. Breiman, ``Random Forests,'' \textit{Machine Learning}, vol. 45, no. 1, pp. 5--32, Oct. 2001, doi: \url{https://doi.org/10.1023/A:1010933404324}.
@@ -616,6 +702,8 @@ S. Hochreiter and J. Schmidhuber, ``Long Short-Term Memory,'' \textit{Neural Com
 \noindent\hangindent=1.5cm
 I. Goodfellow, Y. Bengio, and A. Courville, \textit{Deep Learning}. Cambridge, MA, USA: MIT Press, 2016.
 
+\end{spacing}
+
 %%=============================================================
 %% LAMPIRAN
 %%=============================================================
@@ -631,7 +719,7 @@ I. Goodfellow, Y. Bengio, and A. Courville, \textit{Deep Learning}. Cambridge, M
 \noindent{\bfseries A. Identitas Ketua Tim}
 
 \vspace{0.3cm}
-\setstretch{1.2}
+\begin{spacing}{1.2}
 \begin{tabularx}{\textwidth}{|c|l|X|}
 \hline
 1 & Nama Lengkap & Muhammad Kholis \\
@@ -679,9 +767,10 @@ I. Goodfellow, Y. Bengio, and A. Courville, \textit{Deep Learning}. Cambridge, M
 2 & Finalis Kategori UI/UX Computer Multi-Challenge Day 2025 & Universitas Syiah Kuala & 2025 \\
 \hline
 \end{tabularx}
+\end{spacing}
 
 \vspace{0.8cm}
-\setstretch{1.5}
+\begin{spacing}{1.5}
 \noindent Semua data yang saya isikan dan tercantum dalam biodata ini adalah benar dan dapat dipertanggungjawabkan secara hukum. Apabila di kemudian hari ternyata dijumpai ketidaksesuaian dengan kenyataan, saya sanggup menerima sanksi.
 
 \noindent Demikian biodata ini saya buat dengan sebenarnya untuk memenuhi salah satu persyaratan dalam pengajuan Penelitian Skripsi Mahasiswa.
@@ -693,13 +782,14 @@ Ketua Tim
 \vspace{3cm}
 
 \noindent\textbf{Muhammad Kholis}
+\end{spacing}
 
-%%-- Anggota Tim --------------------------------------------------
+%%-- Anggota Tim
 \newpage
 \noindent{\bfseries B. Identitas Anggota Tim}
 
 \vspace{0.3cm}
-\setstretch{1.2}
+\begin{spacing}{1.2}
 \begin{tabularx}{\textwidth}{|c|l|X|}
 \hline
 1 & Nama Lengkap & \\
@@ -747,9 +837,10 @@ Ketua Tim
 2 & & & \\[12pt]
 \hline
 \end{tabularx}
+\end{spacing}
 
 \vspace{0.8cm}
-\setstretch{1.5}
+\begin{spacing}{1.5}
 \noindent Semua data yang saya isikan dan tercantum dalam biodata ini adalah benar dan dapat dipertanggungjawabkan secara hukum. Apabila di kemudian hari ternyata dijumpai ketidaksesuaian dengan kenyataan, saya sanggup menerima sanksi.
 
 \noindent Demikian biodata ini saya buat dengan sebenarnya untuk memenuhi salah satu persyaratan dalam pengajuan Penelitian Skripsi Mahasiswa.
@@ -768,13 +859,14 @@ Anggota Tim
 
 \vspace{0.5cm}
 \noindent\textit{Catatan: *Setelah diisi dan diberi tanda tangan basah, satu halaman penuh yang ada tanda tangannya dipindai (scan) atau difoto yang rapi.}
+\end{spacing}
 
-%%-- Dosen Pendamping ---------------------------------------------
+%%-- Dosen Pendamping
 \newpage
 \noindent{\bfseries C. Identitas Dosen Pendamping}
 
 \vspace{0.3cm}
-\setstretch{1.2}
+\begin{spacing}{1.2}
 \begin{tabularx}{\textwidth}{|c|l|X|}
 \hline
 1 & Nama Lengkap (dengan gelar) & \\
@@ -853,9 +945,10 @@ Anggota Tim
 2 & & & \\[8pt]
 \hline
 \end{tabularx}
+\end{spacing}
 
 \vspace{0.8cm}
-\setstretch{1.5}
+\begin{spacing}{1.5}
 \noindent Semua data yang saya isikan dan tercantum dalam biodata ini adalah benar dan dapat dipertanggungjawabkan secara hukum. Apabila dikemudian hari ternyata dijumpai ketidak\-sesuaian dengan kenyataan, saya sanggup menerima sanksi.
 
 \noindent Demikian biodata ini saya buat dengan sebenarnya untuk memenuhi salah satu persyaratan dalam pengajuan Penelitian Skripsi Mahasiswa.
@@ -870,5 +963,6 @@ Anggota Tim
 \vspace{1cm}
 
 \noindent\textbf{(Nama Lengkap)}
+\end{spacing}
 
 \end{document}
