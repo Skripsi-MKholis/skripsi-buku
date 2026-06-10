@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.26)  9 JUN 2026 01:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.26)  11 JUN 2026 02:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -534,15 +534,14 @@ Package array Warning: Column W is already defined on input line 106.
 (C:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count334
-)
-No file Pendanaan.aux.
+) (Pendanaan.aux)
 \openout1 = `Pendanaan.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 120.
 LaTeX Font Info:    ... okay on input line 120.
 LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 120.
 LaTeX Font Info:    Trying to load font information for OMS+pzccm on input line 120.
-(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/psnfss\omspzccm.fd
+ (C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/psnfss\omspzccm.fd
 File: omspzccm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/pzccm.
 )
 LaTeX Font Info:    ... okay on input line 120.
@@ -618,15 +617,16 @@ Package caption Info: End \AtBeginDocument code.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package hyperref Info: Link coloring OFF on input line 120.
+(Pendanaan.out) (Pendanaan.out)
 \@outlinefile=\write3
 \openout3 = `Pendanaan.out'.
 
-<../Project/gambar/logo-pnl-skripsi.png, id=3, 126.7134pt x 122.3772pt>
+<../Project/gambar/logo-pnl-skripsi.png, id=135, 126.7134pt x 122.3772pt>
 File: ../Project/gambar/logo-pnl-skripsi.png Graphic file (type png)
 <use ../Project/gambar/logo-pnl-skripsi.png>
 Package pdftex.def Info: ../Project/gambar/logo-pnl-skripsi.png  used on input line 141.
 (pdftex.def)             Requested size: 99.58464pt x 96.17833pt.
-[1
+ [1
 
 {C:/Users/acern/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Program Files/MiKTeX/fonts/enc/dvips/base/8r.enc} <../Project/gambar/logo-pnl-skripsi.png>]
 LaTeX Font Info:    Trying to load font information for OT1+ptmcm on input line 197.
@@ -659,234 +659,217 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has b
 <to be read again> 
                    \relax 
 l.213 
-       [1] [2]
-No file Pendanaan.toc.
+       [1] [2] (Pendanaan.toc
+Overfull \hbox (6.0pt too wide) detected at line 25
+\T1/ptm/m/n/12 3.5.1 
+ []
+
+
+Overfull \hbox (6.0pt too wide) detected at line 26
+\T1/ptm/m/n/12 3.5.2 
+ []
+
+
+Overfull \hbox (6.0pt too wide) detected at line 27
+\T1/ptm/m/n/12 3.5.3 
+ []
+
+
+Overfull \hbox (6.0pt too wide) detected at line 28
+\T1/ptm/m/n/12 3.5.4 
+ []
+
+
+Overfull \hbox (6.0pt too wide) detected at line 29
+\T1/ptm/m/n/12 3.5.5 
+ []
+
+
+Overfull \hbox (3.0pt too wide) detected at line 34
+\T1/ptm/m/n/12 3.10 
+ []
+
+)
 \tf@toc=\write4
 \openout4 = `Pendanaan.toc'.
 
-[1]
-No file Pendanaan.lof.
+ [1] (Pendanaan.lof)
 \tf@lof=\write5
 \openout5 = `Pendanaan.lof'.
 
-[2]
-No file Pendanaan.lot.
+ [2] (Pendanaan.lot)
 \tf@lot=\write6
 \openout6 = `Pendanaan.lot'.
 
-[3]
+ [3]
 Bab 1.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.265 P
+l.276 P
        enerapan metode \textit{Long Short-Term Memory} (LSTM) dalam sistem \... [1
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.280     \item M
+l.291     \item M
                  erancang dan membangun aplikasi \textit{Point of Sale} (POS... [2] [3] [4] [5]
 Bab 2.
-
-LaTeX Warning: Reference `tab:perbandingan' on page 6 undefined on input line 325.
-
 [6
 
 ] [7] [8] [9]
 Bab 3.
 [10
 
-]
-
-LaTeX Warning: Reference `fig:alur_penelitian' on page 11 undefined on input line 427.
-
-<../Project/gambar/alur_penelitian.png, id=125, 1529.715pt x 927.465pt>
+] [11]
+<../Project/gambar/alur_penelitian.png, id=303, 1529.715pt x 927.465pt>
 File: ../Project/gambar/alur_penelitian.png Graphic file (type png)
 <use ../Project/gambar/alur_penelitian.png>
-Package pdftex.def Info: ../Project/gambar/alur_penelitian.png  used on input line 431.
+Package pdftex.def Info: ../Project/gambar/alur_penelitian.png  used on input line 443.
 (pdftex.def)             Requested size: 338.59023pt x 205.2883pt.
-[11] [12 <../Project/gambar/alur_penelitian.png>]
-
-LaTeX Warning: Reference `fig:use_case' on page 13 undefined on input line 448.
-
-<../Project/gambar/use_case_diagram.png, id=143, 873.2625pt x 1412.27625pt>
-File: ../Project/gambar/use_case_diagram.png Graphic file (type png)
-<use ../Project/gambar/use_case_diagram.png>
-Package pdftex.def Info: ../Project/gambar/use_case_diagram.png  used on input line 452.
+ [12] [13 <../Project/gambar/alur_penelitian.png>]
+<../Rancangan/Mermaid/use_case.png, id=319, 873.2625pt x 1412.27625pt>
+File: ../Rancangan/Mermaid/use_case.png Graphic file (type png)
+<use ../Rancangan/Mermaid/use_case.png>
+Package pdftex.def Info: ../Rancangan/Mermaid/use_case.png  used on input line 462.
 (pdftex.def)             Requested size: 338.59023pt x 547.57465pt.
-[13]
+ [14] [15 <../Rancangan/Mermaid/use_case.png>] [16] [17]
+<../Project/gambar/activity_checkout.png, id=339, 710.655pt x 3157.7975pt>
+File: ../Project/gambar/activity_checkout.png Graphic file (type png)
+<use ../Project/gambar/activity_checkout.png>
+Package pdftex.def Info: ../Project/gambar/activity_checkout.png  used on input line 547.
+(pdftex.def)             Requested size: 338.59023pt x 1504.54692pt.
+ [18]
+Overfull \vbox (882.26935pt too high) has occurred while \output is active []
 
-LaTeX Warning: Reference `fig:use_case' on page 14 undefined on input line 457.
+ [19 <../Project/gambar/activity_checkout.png>]
+<../Project/gambar/activity_sync.png, id=350, 677.53125pt x 3437.84375pt>
+File: ../Project/gambar/activity_sync.png Graphic file (type png)
+<use ../Project/gambar/activity_sync.png>
+Package pdftex.def Info: ../Project/gambar/activity_sync.png  used on input line 562.
+(pdftex.def)             Requested size: 338.59023pt x 1718.07838pt.
+ [20]
+Overfull \vbox (1095.80081pt too high) has occurred while \output is active []
 
-[14 <../Project/gambar/use_case_diagram.png>]
+ [21 <../Project/gambar/activity_sync.png>]
+<../Project/gambar/activity_ai.png, id=361, 1056.94875pt x 3171.85pt>
+File: ../Project/gambar/activity_ai.png Graphic file (type png)
+<use ../Project/gambar/activity_ai.png>
+Package pdftex.def Info: ../Project/gambar/activity_ai.png  used on input line 577.
+(pdftex.def)             Requested size: 338.59023pt x 1016.07753pt.
+ [22]
+Overfull \vbox (393.79996pt too high) has occurred while \output is active []
 
-LaTeX Warning: Reference `tab:aktor' on page 15 undefined on input line 461.
-
-
-LaTeX Warning: Reference `tab:usecase' on page 15 undefined on input line 483.
-
-[15]
-
-LaTeX Warning: Reference `fig:lstm_alur' on page 16 undefined on input line 511.
-
-[16]
-
-LaTeX Warning: Reference `fig:lstm_alur' on page 17 undefined on input line 523.
-
-[17] [18]
-
-LaTeX Warning: Reference `tab:biaya' on page 19 undefined on input line 555.
-
-
-LaTeX Warning: Reference `tab:jadwal' on page 19 undefined on input line 601.
-
+ [23 <../Project/gambar/activity_ai.png>]
+<../Project/gambar/erd.png, id=371, 1911.14pt x 1126.2075pt>
+File: ../Project/gambar/erd.png Graphic file (type png)
+<use ../Project/gambar/erd.png>
+Package pdftex.def Info: ../Project/gambar/erd.png  used on input line 590.
+(pdftex.def)             Requested size: 338.59023pt x 199.51228pt.
+ [24 <../Project/gambar/erd.png>] [25] [26] [27] [28] [29] [30]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 609.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 802.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 609.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 802.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 609.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 802.
 
-Overfull \hbox (274.72272pt too wide) in paragraph at lines 609--643
+Overfull \hbox (11.95052pt too wide) in paragraph at lines 818--818
+[]|\T1/ptm/m/n/10.95 Revisi/Perbaikan 
+ []
+
+
+Overfull \hbox (52.738pt too wide) in paragraph at lines 802--823
  [][] 
  []
 
-[19] [20] [21] [22]
-Overfull \hbox (28.45274pt too wide) in paragraph at lines 739--740
+[31] [32] [33] [34]
+*geometry* verbose mode - [ newgeometry ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(85.35826pt, 426.79135pt, 85.35826pt)
+* v-part:(T,H,B)=(85.35826pt, 674.33032pt, 85.35826pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=426.79135pt
+* \textheight=674.33032pt
+* \oddsidemargin=13.08827pt
+* \evensidemargin=13.08827pt
+* \topmargin=-26.41173pt
+* \headheight=14.5pt
+* \headsep=25.0pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=35.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+
+Overfull \hbox (28.45274pt too wide) in paragraph at lines 920--921
 [][] 
  []
 
 
-Overfull \hbox (15.63004pt too wide) in paragraph at lines 755--755
-[]|\T1/ptm/b/n/12 Jenis 
+Overfull \hbox (4.19316pt too wide) in paragraph at lines 937--937
+\T1/ptm/m/n/12 Ke-gi-at-an|  
  []
 
 
-Overfull \hbox (36.17387pt too wide) in paragraph at lines 755--755
-\T1/ptm/b/n/12 Ke-gi-at-an|  
- []
-
-
-Overfull \hbox (41.78993pt too wide) in paragraph at lines 755--755
+Overfull \hbox (13.33717pt too wide) in paragraph at lines 937--937
 []|\T1/ptm/m/n/12 Hackathon 
  []
 
 
-Overfull \hbox (28.46999pt too wide) in paragraph at lines 755--755
-\T1/ptm/m/n/12 KMIPN 
- []
-
-
-Overfull \hbox (2.46623pt too wide) in paragraph at lines 755--755
-\T1/ptm/m/n/12 VI|  
- []
-
-
-Overfull \hbox (17.80211pt too wide) in paragraph at lines 755--755
-[]|\T1/ptm/m/n/12 UKM 
- []
-
-
-Overfull \hbox (33.138pt too wide) in paragraph at lines 755--755
+Overfull \hbox (4.68524pt too wide) in paragraph at lines 937--937
 \T1/ptm/m/n/12 PO-LI-CY|  
  []
 
 
-Overfull \hbox (20.05792pt too wide) in paragraph at lines 755--755
-[]|\T1/ptm/m/n/12 Komit 
- []
-
-
-Overfull \hbox (12.47418pt too wide) in paragraph at lines 755--755
-\T1/ptm/m/n/12 PNL|  
- []
-
-
-Overfull \hbox (28.45274pt too wide) in paragraph at lines 755--756
+Overfull \hbox (28.45274pt too wide) in paragraph at lines 937--938
 [][] 
  []
 
 
-Overfull \hbox (28.45274pt too wide) in paragraph at lines 769--770
+Overfull \hbox (28.45274pt too wide) in paragraph at lines 952--953
 [][] 
  []
 
-[23] [24]
-Overfull \hbox (28.45274pt too wide) in paragraph at lines 809--810
-[][] 
- []
+[35
 
-
-Overfull \hbox (28.45274pt too wide) in paragraph at lines 825--826
-[][] 
- []
-
-
-Overfull \hbox (28.45274pt too wide) in paragraph at lines 839--840
-[][] 
- []
-
-[25] [26]
-Overfull \hbox (28.45274pt too wide) in paragraph at lines 886--887
-[][] 
- []
-
-
-Overfull \hbox (28.45274pt too wide) in paragraph at lines 902--903
-[][] 
- []
-
-
-Overfull \hbox (28.45274pt too wide) in paragraph at lines 919--920
-[][] 
- []
-
-
-Overfull \hbox (28.45274pt too wide) in paragraph at lines 933--934
-[][] 
- []
-
-
-Overfull \hbox (28.45274pt too wide) in paragraph at lines 947--948
-[][] 
- []
-
-[27] [28] (Pendanaan.aux)
+] (Pendanaan.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `Pendanaan.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Pendanaan.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  803AF9EBB905D5393A3928905E12A6A0;4977.
+Package rerunfilecheck Info: File `Pendanaan.out' has not changed.
+(rerunfilecheck)             Checksum: FFFC3D2867446DC4A781E473F836FD83;5580.
  ) 
 Here is how much of TeX's memory you used:
- 15842 strings out of 467871
- 250879 string characters out of 5428443
- 753234 words of memory out of 5000000
- 44355 multiletter control sequences out of 15000+600000
- 689949 words of font info for 129 fonts, out of 8000000 for 9000
+ 15978 strings out of 467871
+ 253677 string characters out of 5428443
+ 720035 words of memory out of 5000000
+ 44445 multiletter control sequences out of 15000+600000
+ 685502 words of font info for 126 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,12n,79p,833b,891s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,12n,79p,947b,892s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Pendanaan.pdf (34 pages, 468413 bytes).
+Output written on Pendanaan.pdf (41 pages, 1197358 bytes).
 PDF statistics:
- 309 PDF objects out of 1000 (max. 8388607)
- 113 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 539 PDF objects out of 1000 (max. 8388607)
+ 148 named destinations out of 1000 (max. 500000)
+ 300 words of extra memory for PDF output out of 10000 (max. 10000000)
 

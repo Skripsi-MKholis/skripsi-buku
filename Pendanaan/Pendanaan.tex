@@ -10,7 +10,7 @@
 \usepackage{setspace}
 \usepackage[raggedrightboxes]{ragged2e}
 \usepackage{graphicx}
-\graphicspath{{../Project/gambar/}{gambar/}}
+\graphicspath{{../Project/gambar/}{gambar/}{../Rancangan/Mermaid/}}
 \usepackage{float}
 \usepackage{indentfirst}
 \setlength\parindent{1cm}
@@ -72,8 +72,8 @@
 \titleformat{\section}{\fontsize{12}{14}\bfseries}{\thesection}{0.4cm}{}
 \titleformat{\subsection}{\fontsize{12}{14}\bfseries}{\thesubsection}{0.675cm}{}
 \titlespacing*{\chapter}{0pt}{-1cm}{20pt}
-\titlespacing*{\section}{0pt}{10pt}{0cm}
-\titlespacing*{\subsection}{0pt}{10pt}{0cm}
+\titlespacing*{\section}{0pt}{1cm}{0pt}
+\titlespacing*{\subsection}{0pt}{0.75cm}{0pt}
 
 \captionsetup[figure]{labelsep=space}
 \captionsetup[table]{labelsep=space}
@@ -103,7 +103,7 @@
 %%=============================================================
 \definecolor{jadwal}{gray}{0.65}
 \newcommand{\G}{\cellcolor{jadwal}}
-\newcolumntype{W}{>{\centering\arraybackslash}m{0.36cm}}
+\newcolumntype{W}{>{\centering\arraybackslash}m{0.2cm}}
 
 %%=============================================================
 %% EQUATION NUMBERING
@@ -186,10 +186,10 @@ PENJUALAN HARIAN MENGGUNAKAN METODE \textit{LONG SHORT-TERM}\\
 \vspace{0.5cm}
 
 \noindent Telah disetujui oleh Tim Dosen Pembimbing Penelitian Skripsi
-pada tanggal 12 Mei 2026
+pada tanggal 10 Juni 2026
 
 \vspace{0.8cm}
-\noindent Buketrata, 12 Mei 2026
+\noindent Buketrata, 10 Juni 2026
 
 \vspace{1cm}
 
@@ -221,26 +221,37 @@ NIP. 197404242002121001
 \setcounter{page}{1}
 \pagestyle{fancy}
 
-\renewcommand{\contentsname}{DAFTAR ISI}
-\renewcommand{\listfigurename}{DAFTAR GAMBAR}
-\renewcommand{\listtablename}{DAFTAR TABEL}
-
-\begin{spacing}{1.2}
+\renewcommand{\contentsname}{}
+\renewcommand{\listfigurename}{}
+\renewcommand{\listtablename}{}
 
 \phantomsection
 \addcontentsline{toc}{chapter}{DAFTAR ISI}
-\tableofcontents
+\vspace*{-1cm}
+{\centering\fontsize{14pt}{16pt}\selectfont\bfseries DAFTAR ISI\par}
+\vspace{20pt}
+\begin{spacing}{1.2}
+\makeatletter\@starttoc{toc}\makeatother
+\end{spacing}
 
 \newpage
 \phantomsection
 \addcontentsline{toc}{chapter}{DAFTAR GAMBAR}
-\listoffigures
+\vspace*{-1cm}
+{\centering\fontsize{14pt}{16pt}\selectfont\bfseries DAFTAR GAMBAR\par}
+\vspace{20pt}
+\begin{spacing}{1.2}
+\makeatletter\@starttoc{lof}\makeatother
+\end{spacing}
 
 \newpage
 \phantomsection
 \addcontentsline{toc}{chapter}{DAFTAR TABEL}
-\listoftables
-
+\vspace*{-1cm}
+{\centering\fontsize{14pt}{16pt}\selectfont\bfseries DAFTAR TABEL\par}
+\vspace{20pt}
+\begin{spacing}{1.2}
+\makeatletter\@starttoc{lot}\makeatother
 \end{spacing}
 
 %%=============================================================
@@ -387,44 +398,45 @@ Supabase menyediakan lapisan infrastruktur yang matang di atas basis data Postgr
 %%=============================================================
 \chapter[METODOLOGI PENELITIAN]{\\ METODOLOGI PENELITIAN}
 
-Metode penelitian mengikuti kerangka kerja pengembangan sistem yang sistematis, didukung oleh teknik pengumpulan data yang valid dan analisis metrik yang ketat.
+Metodologi penelitian ini menguraikan kerangka kerja pengembangan sistem yang sistematis, mencakup jenis penelitian, teknik pengumpulan dan analisis data, alur penelitian, rancangan sistem, serta rencana pengujian dan jadwal pelaksanaan. Seluruh tahapan dirancang untuk membangun aplikasi \textit{Point of Sale} (POS) \textit{mobile} yang dilengkapi dengan fitur prediksi penjualan harian berbasis algoritma \textit{Long Short-Term Memory} (LSTM).
 
-\section{Jenis, Sifat dan Pendekatan Penelitian}
+\section{Metode Penelitian}
 
 Penelitian ini merupakan jenis penelitian pengembangan (\textit{Research and Development}) dengan pendekatan kuantitatif untuk pengujian model prediksi dan kualitatif untuk analisis kebutuhan pengguna. Model pengembangan yang digunakan adalah \textit{Waterfall}, yang terdiri dari lima tahap utama:
 \begin{enumerate}
-    \item \textbf{Analisis Kebutuhan:} Mengidentifikasi fitur utama POS (kasir, stok, laporan) dan spesifikasi data untuk kebutuhan LSTM.
-    \item \textbf{Desain Sistem:} Membuat arsitektur sistem, skema basis data PostgreSQL, dan rancangan antarmuka (UI/UX).
-    \item \textbf{Implementasi:} Melakukan pengkodean \textit{front-end} (Flutter), integrasi \textit{back-end} (Supabase), dan modul AI (Python/TensorFlow).
-    \item \textbf{Pengujian:} Melakukan uji coba fungsional menggunakan \textit{Black Box Testing} dan uji akurasi model menggunakan data historis.
-    \item \textbf{Pemeliharaan:} Melakukan optimasi parameter model berdasarkan umpan balik penggunaan nyata.
+    \item \textbf{Analisis Kebutuhan:} Mengidentifikasi fitur utama POS (kasir, stok, laporan) berdasarkan observasi dan wawancara dengan mitra UMKM, serta menentukan spesifikasi data yang diperlukan untuk pelatihan model LSTM.
+    \item \textbf{Desain Sistem:} Membuat arsitektur sistem \textit{offline-first}, skema basis data PostgreSQL di Supabase dan Isar DB lokal, serta rancangan antarmuka pengguna (UI/UX) berbasis komponen Shadcn UI.
+    \item \textbf{Implementasi:} Melakukan pengkodean \textit{frontend} menggunakan \textit{framework} Flutter dan bahasa Dart, integrasi \textit{backend} dengan Supabase, serta pengembangan modul AI prediksi penjualan menggunakan Python dan TensorFlow di sisi server (VPS).
+    \item \textbf{Pengujian:} Melakukan uji coba fungsional menggunakan \textit{Black Box Testing} untuk validasi fitur POS dan uji akurasi model LSTM menggunakan data transaksi historis mitra UMKM.
+    \item \textbf{Pemeliharaan:} Melakukan optimasi parameter model berdasarkan umpan balik penggunaan nyata dan sinkronisasi data berkelanjutan antara aplikasi \textit{mobile} dan server \textit{cloud}.
 \end{enumerate}
 
-\section{Teknik Pengumpulan Data}
+\section{Data dan Pengumpulan Data}
+
+Data utama yang digunakan dalam penelitian ini adalah data transaksi penjualan harian dari mitra UMKM di Lhokseumawe dengan periode minimal satu tahun. Data mencakup tanggal transaksi, total nilai penjualan harian (nominal rupiah), jumlah transaksi per hari, dan jumlah produk terjual per hari. Data tersebut bersifat kuantitatif dan berbentuk deret waktu (\textit{time series}) yang akan digunakan sebagai masukan model prediksi LSTM.
 
 Data dikumpulkan melalui tiga saluran utama:
 \begin{enumerate}
-    \item \textbf{Observasi dan Wawancara:} Dilakukan pada pemilik UMKM di Lhokseumawe untuk memahami proses bisnis dan kendala manajemen stok.
-    \item \textbf{Dokumentasi Transaksi:} Mengambil data sejarah penjualan (tanggal, item, jumlah) dari catatan manual atau sistem lama milik mitra UMKM.
-    \item \textbf{Studi Pustaka:} Mengkaji referensi jurnal, buku manajemen operasi (Heizer \& Render), dan dokumentasi teknis Flutter/LSTM.
+    \item \textbf{Observasi dan Wawancara:} Dilakukan pada pemilik UMKM mitra di Lhokseumawe untuk memahami proses bisnis, alur transaksi harian, dan kendala manajemen stok yang selama ini dihadapi.
+    \item \textbf{Dokumentasi Transaksi:} Mengambil data sejarah penjualan harian (tanggal, produk, jumlah, total) dari catatan manual atau sistem lama milik mitra UMKM sebagai data latih awal model prediksi.
+    \item \textbf{Studi Pustaka:} Mengkaji referensi jurnal ilmiah, buku manajemen operasi (Heizer \& Render), serta dokumentasi teknis \textit{framework} Flutter, TensorFlow LSTM, dan layanan Supabase sebagai landasan implementasi.
 \end{enumerate}
 
 \section{Teknik Analisis Data}
 
-Data transaksi yang terkumpul melalui aplikasi POS diproses melalui tahapan berikut sebelum digunakan untuk prediksi:
+Data transaksi yang terkumpul melalui aplikasi POS diproses melalui tahapan berikut sebelum digunakan untuk prediksi penjualan:
 \begin{enumerate}
-    \item \textbf{Pembersihan Data:} Menghapus data duplikat dan mengisi nilai yang kosong menggunakan teknik interpolasi linier untuk memastikan kontinuitas deret waktu.
-    \item \textbf{Normalisasi:} Mengubah data volume penjualan ke dalam skala 0 hingga 1 menggunakan MinMaxScaler guna menstabilkan proses pelatihan pada saraf tiruan.
-    \item \textbf{Struktur \textit{Supervised Learning}:} Mengubah data sekuensial menjadi format input (X) dan label (y) dengan panjang jendela (\textit{sliding window}) tertentu, misalnya data 14 hari sebelumnya digunakan untuk memprediksi hari berikutnya.
-    \item \textbf{Pelatihan Model:} Melatih arsitektur LSTM di VPS menggunakan fungsi aktivasi ReLU pada lapisan tersembunyi dan Adam Optimizer untuk pembaruan bobot.
-    \item \textbf{Denormalisasi:} Mengembalikan nilai prediksi ke dalam satuan unit barang untuk ditampilkan pada antarmuka aplikasi.
+    \item \textbf{Pembersihan Data (\textit{Data Cleaning}):} Menghapus data duplikat, mengisi nilai yang kosong menggunakan teknik interpolasi linier, dan menyelaraskan format tanggal agar data deret waktu bersifat kontinu dan konsisten.
+    \item \textbf{Normalisasi:} Mengubah nilai volume penjualan harian ke dalam skala 0 hingga 1 menggunakan \textit{MinMaxScaler} untuk menstabilkan proses pelatihan jaringan saraf tiruan dan mempercepat konvergensi model.
+    \item \textbf{Pembentukan Struktur \textit{Time Series} (\textit{Windowing}):} Mengubah data sekuensial menjadi format input (X) dan label (y) dengan panjang jendela \textit{sliding window} tertentu, misalnya data 14 hari sebelumnya digunakan untuk memprediksi penjualan hari berikutnya.
+    \item \textbf{Pembagian Data (\textit{Time-Based Split}):} Membagi dataset menjadi data latih dan data uji menggunakan metode pemisahan berbasis waktu untuk menjaga urutan temporal dan mencegah kebocoran data.
+    \item \textbf{Pelatihan Model:} Melatih arsitektur LSTM di sisi server menggunakan Adam Optimizer dan fungsi aktivasi ReLU pada lapisan tersembunyi untuk membangun model prediksi penjualan harian.
+    \item \textbf{Denormalisasi:} Mengembalikan nilai prediksi ke satuan aslinya untuk ditampilkan pada antarmuka aplikasi \textit{mobile} secara mudah dipahami pengguna.
 \end{enumerate}
 
 \section{Alur Penelitian}
 
-Alur penelitian ini dirancang secara sistematis untuk membangun sebuah sistem \textit{Point of Sale} (POS) berbasis \textit{mobile} yang dilengkapi dengan fitur prediksi penjualan harian menggunakan metode \textit{Long Short-Term Memory} (LSTM). Tahapan penelitian ini merepresentasikan kerangka kerja pengembangan sistem yang dimulai dari tahap analisis kebutuhan, perancangan, implementasi aplikasi, hingga proses pemodelan dan evaluasi sistem secara menyeluruh.
-
-Sebagaimana diilustrasikan pada Gambar \ref{fig:alur_penelitian}, alur penelitian terbagi menjadi dua fase utama yang saling berkaitan, yaitu Fase Pengembangan dan Implementasi Sistem POS serta Fase Pengembangan Model Prediksi Penjualan.
+Alur penelitian ini dirancang secara sistematis untuk membangun sistem \textit{Point of Sale} (POS) berbasis \textit{mobile} yang dilengkapi fitur prediksi penjualan harian menggunakan metode LSTM. Sebagaimana diilustrasikan pada Gambar \ref{fig:alur_penelitian}, tahapan penelitian dibagi menjadi dua fase utama yang saling berkaitan.
 
 \begin{figure}[H]
     \centering
@@ -433,32 +445,28 @@ Sebagaimana diilustrasikan pada Gambar \ref{fig:alur_penelitian}, alur penelitia
     \label{fig:alur_penelitian}
 \end{figure}
 
-Pada Fase Pengembangan dan Implementasi Sistem POS, penelitian diawali dengan analisis kebutuhan melalui observasi dan identifikasi permasalahan pada mitra UMKM. Selanjutnya dilakukan perancangan sistem meliputi arsitektur aplikasi, desain basis data, serta perancangan UML dan antarmuka pengguna. Setelah tahap perancangan selesai, sistem POS dikembangkan menggunakan Flutter sebagai \textit{frontend}, Supabase sebagai basis data, dan \textit{backend} Python untuk pengolahan data. Aplikasi yang telah dibangun kemudian diimplementasikan pada mitra UMKM untuk digunakan dalam kegiatan transaksi harian. Dari tahap implementasi ini diperoleh data transaksi penjualan aktual yang tersimpan secara otomatis di dalam basis data sistem.
+Pada \textbf{Fase Pengembangan dan Implementasi Sistem POS}, penelitian diawali dengan analisis kebutuhan melalui observasi langsung dan identifikasi permasalahan pada mitra UMKM di Lhokseumawe. Selanjutnya dilakukan perancangan sistem meliputi arsitektur \textit{offline-first}, desain basis data relasional (Supabase PostgreSQL dan Isar DB), serta perancangan \textit{Use Case Diagram}, \textit{Activity Diagram}, ERD, dan antarmuka pengguna. Setelah tahap perancangan, sistem POS dikembangkan menggunakan Flutter sebagai \textit{frontend}, Supabase sebagai basis data \textit{cloud}, Isar DB sebagai basis data lokal, dan Python di VPS untuk pengolahan model AI. Aplikasi yang telah dibangun kemudian diimplementasikan pada mitra UMKM untuk digunakan dalam kegiatan transaksi harian, sehingga menghasilkan data transaksi aktual yang tersimpan secara otomatis.
 
-Pada Fase Pengembangan Model Prediksi Penjualan, data transaksi yang telah terkumpul selama periode tertentu selanjutnya melalui tahap pra-pemrosesan (\textit{data preparation}), seperti pembersihan data, agregasi harian, normalisasi, serta pembentukan data runtun waktu (\textit{time series}). Dataset kemudian dibagi menjadi data latih dan data uji untuk proses pemodelan. Model LSTM dilatih menggunakan data latih untuk mempelajari pola penjualan jangka pendek maupun jangka panjang. Setelah proses pelatihan selesai, model diuji menggunakan data uji untuk mengukur tingkat akurasi prediksi dengan metrik evaluasi yang sesuai.
-
-Model prediksi yang telah teruji kemudian diintegrasikan kembali ke dalam sistem POS sehingga aplikasi tidak hanya berfungsi sebagai alat pencatatan transaksi, tetapi juga mampu menampilkan hasil prediksi penjualan harian kepada pengguna. Tahap akhir penelitian dilakukan melalui pengujian fungsional sistem menggunakan metode \textit{black box} serta evaluasi performa model untuk memastikan sistem berjalan sesuai dengan kebutuhan dan tujuan penelitian.
+Pada \textbf{Fase Pengembangan Model Prediksi Penjualan}, data transaksi yang telah terkumpul selanjutnya melalui tahap pra-pemrosesan meliputi pembersihan data, agregasi harian, normalisasi, dan pembentukan data deret waktu (\textit{time series}). Dataset kemudian dibagi menjadi data latih dan data uji. Model LSTM dilatih menggunakan data latih untuk mempelajari pola penjualan jangka pendek maupun jangka panjang. Setelah pelatihan, model diuji dan diintegrasikan kembali ke dalam sistem POS sehingga aplikasi mampu menampilkan hasil prediksi penjualan harian kepada pengguna melalui REST API.
 
 \section{Rancangan Sistem}
 
-Perancangan sistem dalam penelitian ini dilakukan menggunakan \textit{Unified Modeling Language} (UML), yang bertujuan untuk memberikan gambaran dan ilustrasi sistem secara jelas dan terstruktur. Pemodelan sistem ini direpresentasikan melalui perancangan \textit{Use Case Diagram}, \textit{Activity Diagram}, serta \textit{User Interface} guna menggambarkan alur proses dan interaksi pengguna dengan sistem.
+Perancangan sistem dalam penelitian ini dilakukan menggunakan \textit{Unified Modeling Language} (UML) untuk memberikan gambaran yang jelas dan terstruktur mengenai alur proses dan interaksi pengguna dengan sistem POS. Pemodelan sistem direpresentasikan melalui \textit{Use Case Diagram}, \textit{Activity Diagram}, serta \textit{Entity Relationship Diagram} (ERD).
 
 \subsection{\textit{Use Case Diagram}}
 
-Rancangan sistem pada penelitian ini melibatkan tiga aktor utama, yaitu Admin (Pemilik UMKM), Kasir, dan Pelanggan. \textit{Use Case Diagram} digunakan untuk menggambarkan fungsi-fungsi yang dapat dilakukan oleh masing-masing aktor dalam sistem \textit{Point of Sale} (POS) yang dilengkapi dengan fitur prediksi penjualan harian. Adapun rancangan \textit{use case} pada penelitian ini diilustrasikan pada Gambar \ref{fig:use_case}.
+Sistem POS melibatkan dua aktor utama, yaitu \textbf{Owner (Pemilik Toko)} dan \textbf{Kasir (Karyawan)}. \textit{Use Case Diagram} menggambarkan fungsi-fungsi yang dapat diakses oleh masing-masing aktor. Rancangan \textit{use case} diilustrasikan pada Gambar \ref{fig:use_case}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{use_case_diagram}
+    \includegraphics[width=0.85\textwidth]{use_case}
     \caption{\textit{Use Case Diagram} Sistem POS}
     \label{fig:use_case}
 \end{figure}
 
-Gambar \ref{fig:use_case} menggambarkan \textit{use case diagram} pada aplikasi \textit{Point of Sale} (POS) dengan fitur prediksi penjualan harian menggunakan metode LSTM. Penjelasan mengenai aktor dan \textit{use case} pada sistem tersebut dijelaskan sebagai berikut:
+\noindent\textbf{1. Definisi Aktor}
 
-\noindent\textbf{Definisi Aktor}
-
-Definisi aktor pada sistem \textit{Point of Sale} diilustrasikan pada Tabel \ref{tab:aktor} berikut:
+Definisi aktor pada sistem POS diilustrasikan pada Tabel \ref{tab:aktor} berikut:
 
 \begin{table}[H]
 \setstretch{1.2}
@@ -469,18 +477,16 @@ Definisi aktor pada sistem \textit{Point of Sale} diilustrasikan pada Tabel \ref
 \hline
 \textbf{No.} & \textbf{Aktor} & \textbf{Deskripsi} \\
 \hline
-1 & Admin & Admin memiliki hak akses penuh terhadap sistem, termasuk pengelolaan data produk, data transaksi, melihat laporan, serta melihat hasil prediksi penjualan harian. \\
+1 & Owner (Pemilik) & Aktor dengan hak akses penuh terhadap seluruh sistem, mencakup pengelolaan produk, laporan keuangan, manajemen staf, pengaturan toko, serta fitur AI \textit{Smart Analytics} untuk proyeksi penjualan berbasis kecerdasan buatan. \\
 \hline
-2 & Kasir & Kasir bertugas melakukan pencatatan transaksi penjualan harian melalui aplikasi POS. \\
-\hline
-3 & Pelanggan & Pelanggan berperan sebagai pihak yang melakukan transaksi pembelian dan menerima bukti transaksi dari sistem POS. \\
+2 & Kasir (Karyawan) & Staf operasional harian dengan akses terbatas pada modul POS, pencatatan transaksi, pemantauan status meja, dan ringkasan omzet harian shift berjalan. \\
 \hline
 \end{tabularx}
 \end{table}
 
-\noindent\textbf{Definisi \textit{Use Case}}
+\noindent\textbf{2. Definisi \textit{Use Case}}
 
-Definisi \textit{use case} pada sistem \textit{Point of Sale} diilustrasikan pada Tabel \ref{tab:usecase} berikut:
+Definisi \textit{use case} pada sistem POS diilustrasikan pada Tabel \ref{tab:usecase} berikut:
 
 \begin{table}[H]
 \setstretch{1.2}
@@ -491,24 +497,206 @@ Definisi \textit{use case} pada sistem \textit{Point of Sale} diilustrasikan pad
 \hline
 \textbf{No.} & \textbf{\textit{Use Case}} & \textbf{Deskripsi} \\
 \hline
-1 & Input Data Transaksi & Proses pencatatan transaksi penjualan harian oleh kasir pada aplikasi POS. \\
+1 & Registrasi Toko Baru & Mendaftarkan akun toko baru saat inisialisasi awal sistem (Owner). \\
 \hline
-2 & Kelola Data Produk & Proses admin dalam menambah, mengubah, dan menghapus data produk yang dijual. \\
+2 & Login Akun & Autentikasi pengguna menggunakan email dan kata sandi via Supabase Auth. \\
 \hline
-3 & Proses Prediksi Penjualan & Proses sistem dalam mengolah data transaksi penjualan menggunakan metode LSTM untuk menghasilkan prediksi penjualan harian. \\
+3 & Melakukan \textit{Checkout} & Memasukkan produk ke keranjang dan memproses transaksi pembayaran. \\
 \hline
-4 & Menampilkan Hasil Prediksi & Proses sistem menampilkan hasil prediksi penjualan harian kepada admin melalui aplikasi POS. \\
+4 & Menerapkan Voucher/Diskon & Memasukkan kode promosi untuk memotong total tagihan transaksi. \\
 \hline
-5 & Laporan Penjualan & Proses sistem menghasilkan laporan transaksi penjualan dan hasil prediksi dalam bentuk data yang dapat ditampilkan atau diekspor. \\
+5 & Melakukan \textit{Split Bill} & Memecah pembayaran satu nota menjadi beberapa bagian. \\
 \hline
-6 & Transaksi Pembelian & Proses interaksi antara kasir dan pelanggan dalam melakukan transaksi pembelian menggunakan sistem POS. \\
+6 & Mencetak Struk & Mencetak struk transaksi fisik via printer \textit{thermal} Bluetooth. \\
+\hline
+7 & Memonitor Status Meja & Memantau keterisian meja dan status pesanan \textit{dine-in}. \\
+\hline
+8 & Mengelola Katalog Produk & Menambah, menyunting, dan menghapus produk/stok barang (Owner). \\
+\hline
+9 & Mengelola Kategori & Mengatur pengelompokan menu katalog produk toko (Owner). \\
+\hline
+10 & Mengaudit Riwayat Stok & Melihat log mutasi stok untuk keperluan audit inventaris (Owner). \\
+\hline
+11 & Melihat \textit{Dashboard} & Memantau performa keuangan; kasir dibatasi pada data hari berjalan. \\
+\hline
+12 & Melihat AI \textit{Smart Analytics} & Mengakses proyeksi penjualan berbasis Model LSTM (Owner). \\
+\hline
+13 & Kirim \textit{Broadcast} Notifikasi & Mengirim pemberitahuan \textit{real-time} ke semua kasir (Owner). \\
+\hline
+14 & Sinkronisasi Data & Menyinkronkan transaksi \textit{offline} lokal ke cloud Supabase otomatis. \\
+\hline
+15 & Mengelola Karyawan & Mendaftarkan atau mengubah peran staf kasir (Owner). \\
+\hline
+16 & Mengatur Profil Toko & Mengubah nama toko, alamat, dan logo outlet (Owner). \\
 \hline
 \end{tabularx}
 \end{table}
 
+\subsection{\textit{Activity Diagram}}
+
+\textit{Activity Diagram} digunakan untuk memvisualisasikan aliran kerja dinamis dan logika prosedural sistem POS. Terdapat tiga alur kerja utama yang dimodelkan dalam penelitian ini.
+
+
+\vspace{0.5cm}
+\noindent 1. Activity Diagram Alur Kerja Transaksi Kasir (\textit{POS Checkout})
+
+Diagram aktivitas ini menggambarkan alur kerja kasir dalam memproses transaksi belanja pelanggan, mulai dari pemilihan produk hingga pencetakan struk, termasuk opsi penerapan voucher dan pemisahan tagihan (\textit{split bill}). Diagram aktivitas transaksi kasir diilustrasikan pada Gambar \ref{fig:activity_checkout}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{activity_checkout}
+    \caption{\textit{Activity Diagram} Alur Kerja Transaksi Kasir}
+    \label{fig:activity_checkout}
+\end{figure}
+
+Alur dimulai ketika kasir membuka layar POS dan memilih produk ke keranjang belanja. Sistem memvalidasi keranjang, lalu kasir dapat menerapkan voucher diskon atau melakukan \textit{split bill}. Setelah memilih metode pembayaran (Tunai, QRIS, Debit, atau Transfer) dan mengonfirmasi nominal, transaksi disimpan di basis data lokal Isar DB, stok produk dikurangi secara otomatis, dan struk dicetak melalui printer \textit{thermal} Bluetooth.
+
+
+\vspace{0.5cm}
+\noindent 2. Activity Diagram Sinkronisasi Data Latar Belakang (\textit{Offline-First Sync Engine})
+
+Diagram aktivitas ini mengilustrasikan logika mesin sinkronisasi \texttt{SyncNotifier} dalam mendeteksi koneksi jaringan dan melakukan sinkronisasi data transaksi lokal ke basis data cloud Supabase secara otomatis. Diagram aktivitas sinkronisasi diilustrasikan pada Gambar \ref{fig:activity_sync}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{activity_sync}
+    \caption{\textit{Activity Diagram} Sinkronisasi Data \textit{Offline-First}}
+    \label{fig:activity_sync}
+\end{figure}
+
+Proses sinkronisasi dipicu secara otomatis ketika perangkat mendeteksi pemulihan koneksi internet. Sistem memeriksa antrean data yang belum tersinkronkan secara berurutan: kategori, produk, transaksi, lalu riwayat stok. Setelah setiap entitas berhasil diunggah ke Supabase, statusnya diperbarui dan notifikasi keberhasilan ditampilkan kepada pengguna.
+
+
+\vspace{0.5cm}
+\noindent 3. Activity Diagram Kalibrasi AI \textit{Smart Analytics}
+
+Diagram aktivitas ini menggambarkan alur permintaan analisis bisnis cerdas oleh Owner, meliputi proses penyaringan privasi data pelanggan (\textit{PII scrubbing}), pemanggilan model LSTM melalui REST API server, hingga hasil analisis divisualisasikan. Diagram aktivitas kalibrasi AI diilustrasikan pada Gambar \ref{fig:activity_ai}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{activity_ai}
+    \caption{\textit{Activity Diagram} Kalibrasi AI \textit{Smart Analytics}}
+    \label{fig:activity_ai}
+\end{figure}
+
+Alur dimulai ketika Owner membuka layar \textit{Smart Analytics}. Sistem memeriksa persetujuan privasi data dan ketersediaan minimal 20 riwayat transaksi. Setelah syarat terpenuhi, sistem melakukan agregasi data lokal, penghapusan informasi pribadi pelanggan, dan pemanggilan model LSTM melalui REST API server untuk analisis prediktif. Hasil berupa proyeksi omzet, prediksi produk terlaris, dan rekomendasi strategi bisnis divisualisasikan kepada Owner.
+
+\subsection{\textit{Entity Relationship Diagram} (ERD)}
+
+Basis data sistem POS dirancang secara hibrida menggunakan Supabase PostgreSQL untuk penyimpanan \textit{cloud} dan Isar DB untuk penyimpanan lokal di perangkat \textit{mobile}. Skema basis data \textit{cloud} terdiri dari sepuluh entitas utama yang saling berelasi sebagaimana diilustrasikan pada Gambar \ref{fig:erd}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{erd}
+    \caption{\textit{Entity Relationship Diagram} (ERD) Sistem POS}
+    \label{fig:erd}
+\end{figure}
+
+Entitas \texttt{stores} menjadi entitas induk yang berelasi dengan seluruh entitas lainnya. Entitas \texttt{store\_members} mengelola hak akses berbasis peran (\textit{Role-Based Access Control}/RBAC) untuk Owner dan Kasir. Katalog produk dikelola melalui entitas \texttt{products} dan \texttt{categories}, sedangkan data transaksi disimpan pada entitas \texttt{transactions} dan \texttt{transaction\_items}. Riwayat perubahan stok dicatat pada entitas \texttt{stock\_histories}, sementara entitas \texttt{vouchers}, \texttt{tables}, dan \texttt{notifications} mendukung fitur diskon, manajemen meja \textit{dine-in}, dan sistem notifikasi. Daftar seluruh tabel basis data yang digunakan dirangkum pada Tabel \ref{tab:database}.
+
+\begin{table}[H]
+\setstretch{1.2}
+\centering
+\caption{Daftar Tabel Basis Data POS}
+\label{tab:database}
+\begin{tabularx}{\textwidth}{|c|l|X|}
+\hline
+\textbf{No.} & \textbf{Nama Tabel} & \textbf{Deskripsi} \\
+\hline
+1 & \texttt{stores} & Menyimpan data identitas dan konfigurasi outlet toko merchant. \\
+\hline
+2 & \texttt{store\_members} & Mengelola hak akses dan peran staf (Owner/Kasir) pada setiap toko. \\
+\hline
+3 & \texttt{categories} & Menyimpan kategori pengelompokan produk atau menu dagangan. \\
+\hline
+4 & \texttt{products} & Menyimpan katalog produk beserta harga, stok, dan data SKU/barcode. \\
+\hline
+5 & \texttt{tables} & Mengelola data meja operasional untuk kebutuhan \textit{dine-in} restoran. \\
+\hline
+6 & \texttt{vouchers} & Menyimpan data kupon promosi diskon yang diterapkan pada transaksi. \\
+\hline
+7 & \texttt{transactions} & Menyimpan data nota transaksi penjualan kasir sebagai tabel induk. \\
+\hline
+8 & \texttt{transaction\_items} & Menyimpan rincian produk yang dibeli dalam setiap transaksi. \\
+\hline
+9 & \texttt{stock\_histories} & Mencatat log audit perubahan stok masuk dan keluar produk. \\
+\hline
+10 & \texttt{notifications} & Menyimpan pesan notifikasi sistem dan \textit{broadcast} Owner ke staf. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Perancangan Wireframe}
+
+Perancangan wireframe dalam penelitian ini mencakup rancangan antarmuka pengguna untuk semua layar utama yang menjadi bagian dari alur operasional aplikasi POS. Wireframe dirancang dengan mempertimbangkan kebutuhan pengguna, aksesibilitas, dan alur kerja yang efisien. Aplikasi sistem POS dirancang dengan berbagai screen yang melayani kebutuhan berbeda sesuai dengan peran pengguna, sebagai berikut:
+
+\begin{enumerate}
+    \item \textbf{Halaman Pengenalan}
+
+    \indent Halaman awal untuk pengguna baru sebelum masuk ke aplikasi, memberikan pengenalan fitur dan navigasi dasar.
+
+    \item \textbf{Halaman Login}
+
+    \indent Halaman masuk akun untuk staff atau pemilik toko dengan autentikasi berbasis email dan kata sandi melalui Supabase Auth.
+
+    \item \textbf{Halaman Pemilihan Toko}
+
+    \indent Memungkinkan pengguna yang sudah login untuk memilih toko aktif yang akan dioperasikan.
+
+    \item \textbf{Halaman Dasbor}
+
+    \indent Ringkasan performa toko yang menampilkan statistik penjualan harian, pintasan fitur penting, dan akses cepat ke modul utama, dapat diakses oleh semua staff toko.
+
+    \item \textbf{Halaman POS}
+
+    \indent Layar utama kasir yang dirancang untuk mencari produk, membuat pesanan, menerapkan voucher, melakukan split bill, dan memproses transaksi dengan antarmuka yang intuitif dan responsif.
+
+    \item \textbf{Halaman Riwayat Transaksi}
+
+    \indent Menampilkan riwayat transaksi yang sudah dilakukan dengan fitur pencarian dan filter, berguna untuk verifikasi dan audit oleh semua staff toko.
+
+    \item \textbf{Halaman Daftar Produk}
+
+    \indent Memungkinkan owner atau admin untuk mengelola daftar produk yang dijual lengkap dengan harga, stok, SKU/barcode, dan kategori.
+
+    \item \textbf{Halaman Daftar Kategori}
+
+    \indent Memungkinkan owner atau admin untuk membuat, mengedit, dan menghapus kategori produk untuk organisasi katalog yang lebih baik.
+
+    \item \textbf{Halaman Laporan}
+
+    \indent Screen khusus owner atau admin yang menampilkan laporan penjualan, tren bisnis, proyeksi berdasarkan model LSTM, dan ringkasan performa operasional.
+
+    \item \textbf{Halaman Pengaturan}
+
+    \indent Pusat pengaturan aplikasi dan toko yang dapat diakses oleh semua staff toko, dengan menu tertentu yang khusus untuk owner atau admin seperti pengaturan profil toko dan integrasi pembayaran.
+
+    \item \textbf{Halaman Manajemen Staf}
+
+    \indent Memungkinkan owner atau admin untuk mengelola data staf, mengatur hak akses berbasis peran (RBAC), dan mengaktifkan atau menonaktifkan akun karyawan.
+
+    \item \textbf{Halaman Pengaturan Struk}
+
+    \indent Memberikan kemampuan bagi owner atau admin untuk mengatur tampilan struk, logo toko, informasi yang dicetak, dan tata letak format struk.
+
+    \item \textbf{Halaman Beranda Pelanggan}
+
+    \indent Beranda mode pelanggan yang menampilkan katalog produk toko, kategori menu, dan akses ke fitur pencarian produk.
+
+    \item \textbf{Halaman Detail Toko Pelanggan}
+
+    \indent Menampilkan detail toko, produk individual dengan gambar dan deskripsi, harga, dan opsi aksi belanja untuk pelanggan.
+
+    \item \textbf{Halaman Checkout Pelanggan}
+
+    \indent Halaman checkout pelanggan yang dirancang untuk menyelesaikan pesanan dengan review keranjang belanja, pengaturan pengiriman, pilihan metode pembayaran, dan konfirmasi final.
+\end{enumerate}
+
+Rancangan wireframe untuk setiap screen mengikuti prinsip desain yang responsif, intuitif, dan konsisten dengan identitas visual aplikasi. Setiap screen dirancang dengan mempertimbangkan user experience yang optimal sesuai dengan konteks penggunaannya, baik untuk operasional internal toko maupun interaksi dengan pelanggan.
+
 \subsection{Rancangan Algoritma \textit{Long Short-Term Memory} (LSTM)}
 
-Desain metode \textit{Long Short-Term Memory} (LSTM) berfungsi untuk memberikan gambaran mengenai alur kerja algoritma yang digunakan dalam proses prediksi penjualan harian pada sistem \textit{Point of Sale} (POS). Desain metode ini dapat dilihat pada Gambar \ref{fig:lstm_alur} yang menunjukkan tahapan proses pengolahan data transaksi hingga menghasilkan nilai prediksi penjualan harian.
+Desain metode LSTM memberikan gambaran mengenai alur kerja algoritma yang digunakan dalam proses prediksi penjualan harian pada sistem POS. Alur kerja algoritma diilustrasikan pada Gambar \ref{fig:lstm_alur}.
 
 \begin{figure}[H]
     \centering
@@ -520,34 +708,41 @@ Desain metode \textit{Long Short-Term Memory} (LSTM) berfungsi untuk memberikan 
     \label{fig:lstm_alur}
 \end{figure}
 
-Gambar \ref{fig:lstm_alur} menggambarkan alur kerja model LSTM yang dimulai dari input data transaksi penjualan harian hingga proses evaluasi model. Adapun langkah-langkah proses algoritma dalam penelitian ini dijelaskan sebagai berikut:
+Gambar \ref{fig:lstm_alur} menggambarkan alur kerja model LSTM dari input data transaksi harian hingga proses evaluasi model. Adapun langkah-langkah proses algoritma dalam penelitian ini adalah sebagai berikut:
 \begin{enumerate}
-    \item Proses penelitian diawali dengan \textit{input} data berupa dataset transaksi penjualan harian yang diperoleh dari aplikasi POS yang telah diimplementasikan pada mitra UMKM.
-    \item Data yang digunakan kemudian melalui tahap pra-pemrosesan (\textit{preprocessing}), meliputi pembersihan data (\textit{data cleaning}), penyelarasan format tanggal, serta normalisasi data menggunakan metode \textit{Min-Max Scaling} agar sesuai untuk pemodelan \textit{time series}.
-    \item Selanjutnya, data disusun dalam bentuk runtun waktu (\textit{time series}) melalui proses \textit{windowing} (\textit{time step}) untuk membentuk pola historis yang akan digunakan sebagai input model.
-    \item Dataset kemudian dibagi menjadi data \textit{training} dan data \textit{testing} menggunakan metode \textit{split data} berbasis waktu (\textit{time-based split}) untuk menjaga urutan temporal data.
-    \item Data \textit{training} digunakan pada tahap pemodelan menggunakan algoritma LSTM yang terdiri dari \textit{input layer}, \textit{hidden layer} LSTM, dan \textit{dense layer} sebagai \textit{output} untuk membangun model prediksi penjualan harian.
-    \item Model yang telah dibangun selanjutnya diuji menggunakan data \textit{testing} untuk menghasilkan nilai prediksi penjualan.
-    \item Tahap terakhir adalah evaluasi model menggunakan metrik MAE, RMSE, dan MAPE untuk menilai tingkat akurasi prediksi yang dihasilkan.
+    \item Data transaksi penjualan harian diekstrak dari basis data Supabase, kemudian melalui tahap pra-pemrosesan (\textit{preprocessing}) meliputi pembersihan data, penyelarasan format tanggal, dan normalisasi menggunakan \textit{Min-Max Scaling}.
+    \item Data disusun dalam bentuk deret waktu melalui proses \textit{windowing} (\textit{time step}) untuk membentuk pola historis yang digunakan sebagai input model LSTM.
+    \item Dataset dibagi menjadi data \textit{training} dan \textit{testing} menggunakan metode \textit{time-based split} untuk menjaga urutan temporal data.
+    \item Model LSTM dibangun dengan arsitektur yang terdiri dari \textit{input layer}, satu atau lebih \textit{hidden layer} LSTM, dan \textit{dense layer} sebagai keluaran prediksi penjualan harian.
+    \item Model yang telah dilatih diuji menggunakan data \textit{testing} dan dievaluasi dengan metrik MAE (\textit{Mean Absolute Error}), RMSE (\textit{Root Mean Square Error}), dan MAPE (\textit{Mean Absolute Percentage Error}).
+    \item Apabila hasil evaluasi belum memenuhi kriteria yang diharapkan, dilakukan \textit{hyperparameter tuning} terhadap jumlah \textit{epoch}, \textit{batch size}, jumlah neuron LSTM, dan \textit{learning rate}.
+    \item Model prediksi yang telah teruji diintegrasikan ke dalam sistem POS melalui REST API sehingga aplikasi \textit{mobile} dapat menampilkan hasil prediksi penjualan harian kepada pengguna.
 \end{enumerate}
 
-Apabila hasil evaluasi belum memenuhi kriteria yang diharapkan, dilakukan proses \textit{tuning} parameter seperti jumlah \textit{epoch}, \textit{batch size}, jumlah neuron LSTM, atau \textit{learning rate} untuk meningkatkan performa model.
+\section{Teknik Pengujian}
 
-\subsection{Teknik Pengujian}
+Pengujian sistem pada penelitian ini menggunakan metode \textit{black box testing}, yaitu metode pengujian perangkat lunak yang berfokus pada validasi fungsional sistem dengan mengamati kesesuaian antara masukan (\textit{input}) dan keluaran (\textit{output}) yang dihasilkan, tanpa memperhatikan struktur internal kode program.
 
-Perancangan pengujian pada penelitian ini menggunakan metode \textit{black box testing}, yaitu metode pengujian perangkat lunak yang berfokus pada pengujian fungsional sistem dengan mengamati kesesuaian antara data masukan (\textit{input}) dan keluaran (\textit{output}) yang dihasilkan. Pengujian ini dilakukan tanpa memperhatikan struktur internal kode program.
+Pengujian diterapkan pada fitur-fitur utama sistem, meliputi autentikasi (login/registrasi), pengelolaan produk dan kategori, proses transaksi POS (\textit{checkout}, voucher, \textit{split bill}), pencetakan struk, sinkronisasi data \textit{offline-first}, dan fitur AI \textit{Smart Analytics}. Pengujian akurasi model LSTM dilakukan menggunakan metrik MAE, RMSE, dan MAPE terhadap data transaksi historis mitra UMKM.
 
-Pengujian diterapkan pada beberapa fitur utama sistem, meliputi fitur \textit{login}, pengelolaan data, prediksi penjualan, pengeditan data, penghapusan data, pembuatan laporan, serta \textit{logout}, guna memastikan setiap fungsi berjalan sesuai dengan kebutuhan dan spesifikasi yang telah ditetapkan.
+\section{Variabel Penelitian}
+
+Variabel penelitian yang digunakan dalam proses prediksi penjualan harian pada sistem POS adalah sebagai berikut:
+\begin{enumerate}
+    \item \textbf{Variabel Input (Fitur):} Data transaksi penjualan harian yang mencakup total nilai transaksi harian (nominal rupiah), jumlah transaksi per hari, dan jumlah produk terjual per hari selama periode minimal satu tahun dari mitra UMKM di Lhokseumawe.
+    \item \textbf{Variabel Output (Target):} Nilai prediksi total penjualan harian untuk hari berikutnya, yang digunakan sebagai dasar pengambilan keputusan manajemen stok dan strategi promosi usaha.
+    \item \textbf{Variabel Evaluasi:} Kinerja model diukur menggunakan tiga metrik evaluasi, yaitu MAE (\textit{Mean Absolute Error}), RMSE (\textit{Root Mean Square Error}), dan MAPE (\textit{Mean Absolute Percentage Error}).
+\end{enumerate}
 
 \section{Hasil yang Diharapkan}
 
 Hasil yang diharapkan dari penelitian ini meliputi beberapa aspek sebagai berikut:
 \begin{enumerate}
-    \item Sistem \textit{Point of Sale} (POS) yang dikembangkan mampu membantu pelaku UMKM dalam melakukan pengelolaan transaksi penjualan, data produk, dan laporan penjualan secara efisien dan terintegrasi.
-    \item Implementasi metode \textit{Long Short-Term Memory} (LSTM) pada sistem dapat berjalan dengan baik dan akurat dalam melakukan prediksi penjualan harian, sehingga dapat digunakan sebagai dasar pengambilan keputusan usaha.
-    \item Sistem yang dibangun mampu menyajikan informasi prediksi dan laporan penjualan dalam bentuk yang mudah dipahami oleh pengguna, khususnya pelaku UMKM.
+    \item Aplikasi \textit{Point of Sale} (POS) \textit{mobile} yang mampu membantu pelaku UMKM dalam mengelola transaksi penjualan, inventaris produk, dan laporan keuangan secara efisien dengan kemampuan operasional \textit{offline-first}.
+    \item Implementasi metode LSTM pada sistem yang berjalan dengan baik dan menghasilkan prediksi penjualan harian yang akurat, sehingga dapat digunakan sebagai dasar pengambilan keputusan usaha.
+    \item Sistem yang mampu menyajikan informasi prediksi dan laporan penjualan dalam bentuk visualisasi grafik yang mudah dipahami oleh pengguna, khususnya pelaku UMKM.
     \item Hasil penelitian ini diharapkan dapat dipublikasikan dalam jurnal ilmiah sebagai kontribusi dalam pengembangan sistem informasi dan penerapan \textit{machine learning} pada UMKM.
-    \item Penelitian ini menghasilkan laporan tugas akhir sebagai salah satu syarat penyelesaian studi pada Program Studi terkait.
+    \item Penelitian ini menghasilkan laporan tugas akhir sebagai salah satu syarat penyelesaian studi pada Program Studi Teknik Informatika Politeknik Negeri Lhokseumawe.
 \end{enumerate}
 
 \section{Rincian Biaya}
@@ -573,11 +768,9 @@ Rencana anggaran biaya penelitian ini dijabarkan secara terperinci pada Tabel \r
 \hline
  & Domain .com 1 Tahun & Rp 200.000 \\
 \hline
- & VPS Niagahoster KVM 4 (12 Bulan) & Rp 2.600.000 \\
+ & HuggingFace Pro (1 Bulan) & Rp 170.000 \\
 \hline
- & Supabase Pro Plan (6 Bulan) & Rp 2.700.000 \\
-\hline
-\multicolumn{2}{|r|}{\textbf{Jumlah II}} & \textbf{Rp 6.000.000} \\
+\multicolumn{2}{|r|}{\textbf{Jumlah II}} & \textbf{Rp 370.000} \\
 \hline
 \multicolumn{3}{|l|}{\textbf{III.\quad Perjalanan}} \\
 \hline
@@ -591,7 +784,7 @@ Rencana anggaran biaya penelitian ini dijabarkan secara terperinci pada Tabel \r
 \hline
 \multicolumn{2}{|r|}{\textbf{Jumlah IV}} & \textbf{Rp 200.000} \\
 \hline
-\multicolumn{2}{|r|}{\textbf{Total Dana I+II+III+IV}} & \textbf{Rp 7.000.000} \\
+\multicolumn{2}{|r|}{\textbf{Total Dana I+II+III+IV}} & \textbf{Rp 1.370.000} \\
 \hline
 \end{tabularx}
 \end{table}
@@ -606,38 +799,25 @@ Berikut ini merupakan jadwal kegiatan penelitian yang dilaksanakan mulai dari bu
 \caption{Rencana Jadwal Penelitian}
 \label{tab:jadwal}
 \small
-\begin{tabular}{|c|p{3.2cm}|*{24}{W|}}
+\begin{tabular}{|c|p{2.2cm}|cccccccccccccccccccc|}
 \hline
-\multirow{2}{*}{\textbf{No}} & \multirow{2}{*}{\textbf{Kegiatan}} &
-\multicolumn{4}{c|}{\textbf{Januari}} &
-\multicolumn{4}{c|}{\textbf{Februari}} &
-\multicolumn{4}{c|}{\textbf{Maret}} &
-\multicolumn{4}{c|}{\textbf{April}} &
-\multicolumn{4}{c|}{\textbf{Mei}} &
-\multicolumn{4}{c|}{\textbf{Juni}} \\
-\cline{3-26}
- & & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 \\
+\multirow{2}{*}{\textbf{No}} & \multirow{2}{*}{\textbf{Kegiatan}} & \multicolumn{4}{c}{\textbf{Maret}} & \multicolumn{4}{c}{\textbf{April}} & \multicolumn{4}{c}{\textbf{Mei}} & \multicolumn{4}{c}{\textbf{Juni}} & \multicolumn{4}{c}{\textbf{Juli}} \\
+\cline{3-22}
+ & & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 \\
 \hline
-1 & Pengumpulan Data
-  & \G & \G & \G & \G & & & & & & & & & & & & & & & & & & & & \\
+1 & Pengumpulan Data & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
 \hline
-2 & Perancangan Kebutuhan
-  & & & \G & \G & \G & \G & & & & & & & & & & & & & & & & & & \\
+2 & Perancangan Kebutuhan &  &  & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
 \hline
-3 & Perancangan Sistem
-  & & & & & & & \G & \G & \G & \G & & & & & & & & & & & & & & \\
+3 & Perancangan Sistem &  &  &  &  &  &  & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} &  &  &  &  &  &  &  &  &  &  \\
 \hline
-4 & Rancang Bangun Sistem
-  & & & & & & & & & & & \G & \G & \G & \G & \G & \G & \G & & & & & & & \\
+4 & Rancang Bangun Sistem &  &  &  &  &  &  &  &  &  &  & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} &  &  &  \\
 \hline
-5 & Pengujian Sistem
-  & & & & & & & & & & & & & & & & & \G & \G & \G & & & & & \\
+5 & Pengujian Sistem &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} &  \\
 \hline
-6 & Revisi/Perbaikan Sistem
-  & & & & & & & & & & & & & & & & & & \G & \G & \G & \G & \G & & \\
+6 & Revisi/Perbaikan Sistem &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} \\
 \hline
-7 & Penyusunan Laporan
-  & & & & & & & & & & & & & & & & & & & & & \G & \G & \G & \G \\
+7 & Penyusunan Laporan &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & \cellcolor{black} & \cellcolor{black} \\
 \hline
 \end{tabular}
 \end{table}
@@ -708,18 +888,19 @@ I. Goodfellow, Y. Bengio, and A. Courville, \textit{Deep Learning}. Cambridge, M
 %% LAMPIRAN
 %%=============================================================
 \newpage
-\begin{center}
-{\large\bfseries LAMPIRAN}
-\end{center}
+\newgeometry{left=3cm, right=3cm, top=3cm, bottom=3cm}
+\textbf{LAMPIRAN}
 
-\vspace{0.5cm}
-\noindent{\bfseries Lampiran 1. Biodata Ketua dan Anggota serta Dosen Pendamping}
+\begin{spacing}{1.5}
 
-\vspace{1cm}
-\noindent{\bfseries A. Identitas Ketua Tim}
+\vspace{0.2cm}
+\noindent Lampiran 1. Biodata Ketua dan Anggota serta Dosen Pendamping
 
 \vspace{0.3cm}
-\begin{spacing}{1.2}
+\noindent A. Identitas Diri
+
+\vspace{0.1cm}
+\setstretch{1.0}
 \begin{tabularx}{\textwidth}{|c|l|X|}
 \hline
 1 & Nama Lengkap & Muhammad Kholis \\
@@ -738,13 +919,14 @@ I. Goodfellow, Y. Bengio, and A. Courville, \textit{Deep Learning}. Cambridge, M
 \hline
 \end{tabularx}
 
-\vspace{0.8cm}
-\noindent{\bfseries Kegiatan Kemahasiswaan yang Sedang/Pernah Diikuti}
+\vspace{0.2cm}
+\noindent B. Kegiatan Kemahasiswaan yang Sedang/Pernah Diikuti
 
-\vspace{0.3cm}
+\vspace{0.1cm}
+\setstretch{1.0}
 \begin{tabularx}{\textwidth}{|c|X|l|l|}
 \hline
-\textbf{No} & \textbf{Jenis Kegiatan} & \textbf{Status dalam Kegiatan} & \textbf{Waktu dan Tempat} \\
+\rowcolor{lightgray}No & Jenis Kegiatan & Status dalam Kegiatan & Waktu dan Tempat \\
 \hline
 1 & Hackathon KMIPN VI & Finalis & 01 Juli 2024, Politeknik Negeri Jakarta \\
 \hline
@@ -754,215 +936,35 @@ I. Goodfellow, Y. Bengio, and A. Courville, \textit{Deep Learning}. Cambridge, M
 \hline
 \end{tabularx}
 
-\vspace{0.8cm}
-\noindent{\bfseries Penghargaan yang Pernah Diterima}
+\vspace{0.2cm}
+\noindent C. Penghargaan yang Pernah Diterima
 
-\vspace{0.3cm}
+\vspace{0.1cm}
+\setstretch{1.0}
 \begin{tabularx}{\textwidth}{|c|X|l|c|}
 \hline
-\textbf{No} & \textbf{Jenis Penghargaan} & \textbf{Pihak Pemberi Penghargaan} & \textbf{Tahun} \\
+\rowcolor{lightgray}No & Jenis Penghargaan & Pihak Pemberi Penghargaan & Tahun \\
 \hline
 1 & Finalis Kategori Hackathon KMIPN VI & Politeknik Negeri Jakarta & 2024 \\
 \hline
 2 & Finalis Kategori UI/UX Computer Multi-Challenge Day 2025 & Universitas Syiah Kuala & 2025 \\
 \hline
 \end{tabularx}
-\end{spacing}
 
-\vspace{0.8cm}
-\begin{spacing}{1.5}
+\vspace{0.3cm}
 \noindent Semua data yang saya isikan dan tercantum dalam biodata ini adalah benar dan dapat dipertanggungjawabkan secara hukum. Apabila di kemudian hari ternyata dijumpai ketidaksesuaian dengan kenyataan, saya sanggup menerima sanksi.
 
 \noindent Demikian biodata ini saya buat dengan sebenarnya untuk memenuhi salah satu persyaratan dalam pengajuan Penelitian Skripsi Mahasiswa.
 
-\vspace{0.5cm}
-\noindent Lhokseumawe, 12 Mei 2026\\
-Ketua Tim
+\vspace{2.0cm}
+\noindent\hfill Lhokseumawe, 10 Juni 2026
 
-\vspace{3cm}
+\noindent\hfill Ketua Tim
 
-\noindent\textbf{Muhammad Kholis}
-\end{spacing}
+\vspace{2.0cm}
 
-%%-- Anggota Tim
-\newpage
-\noindent{\bfseries B. Identitas Anggota Tim}
+\noindent\hfill Muhammad Kholis
 
-\vspace{0.3cm}
-\begin{spacing}{1.2}
-\begin{tabularx}{\textwidth}{|c|l|X|}
-\hline
-1 & Nama Lengkap & \\
-\hline
-2 & Jenis Kelamin & Laki-laki/Perempuan \\
-\hline
-3 & Program Studi & \\
-\hline
-4 & NIM & \\
-\hline
-5 & Tempat dan Tanggal Lahir & \\
-\hline
-6 & Alamat E-mail & \\
-\hline
-7 & Nomor Telepon/HP & \\
-\hline
-\end{tabularx}
-
-\vspace{0.8cm}
-\noindent{\bfseries Kegiatan Kemahasiswaan yang Sedang/Pernah Diikuti}
-
-\vspace{0.3cm}
-\begin{tabularx}{\textwidth}{|c|X|l|l|}
-\hline
-\textbf{No} & \textbf{Jenis Kegiatan} & \textbf{Status dalam Kegiatan} & \textbf{Waktu dan Tempat} \\
-\hline
-1 & & & \\[12pt]
-\hline
-2 & & & \\[12pt]
-\hline
-3 & & & \\[12pt]
-\hline
-\end{tabularx}
-
-\vspace{0.8cm}
-\noindent{\bfseries Penghargaan yang Pernah Diterima}
-
-\vspace{0.3cm}
-\begin{tabularx}{\textwidth}{|c|X|l|c|}
-\hline
-\textbf{No} & \textbf{Jenis Penghargaan} & \textbf{Pihak Pemberi Penghargaan} & \textbf{Tahun} \\
-\hline
-1 & & & \\[12pt]
-\hline
-2 & & & \\[12pt]
-\hline
-\end{tabularx}
-\end{spacing}
-
-\vspace{0.8cm}
-\begin{spacing}{1.5}
-\noindent Semua data yang saya isikan dan tercantum dalam biodata ini adalah benar dan dapat dipertanggungjawabkan secara hukum. Apabila di kemudian hari ternyata dijumpai ketidaksesuaian dengan kenyataan, saya sanggup menerima sanksi.
-
-\noindent Demikian biodata ini saya buat dengan sebenarnya untuk memenuhi salah satu persyaratan dalam pengajuan Penelitian Skripsi Mahasiswa.
-
-\vspace{0.5cm}
-\noindent Kota, tanggal-bulan-tahun\\
-Anggota Tim
-
-\vspace{3cm}
-
-\noindent Tanda tangan (asli TT basah*)
-
-\vspace{1cm}
-
-\noindent\textbf{(Nama Lengkap)}
-
-\vspace{0.5cm}
-\noindent\textit{Catatan: *Setelah diisi dan diberi tanda tangan basah, satu halaman penuh yang ada tanda tangannya dipindai (scan) atau difoto yang rapi.}
-\end{spacing}
-
-%%-- Dosen Pendamping
-\newpage
-\noindent{\bfseries C. Identitas Dosen Pendamping}
-
-\vspace{0.3cm}
-\begin{spacing}{1.2}
-\begin{tabularx}{\textwidth}{|c|l|X|}
-\hline
-1 & Nama Lengkap (dengan gelar) & \\
-\hline
-2 & Jenis Kelamin & Laki-laki/Perempuan \\
-\hline
-3 & Program Studi & \\
-\hline
-4 & NIP/NIDN & \\
-\hline
-5 & Tempat dan Tanggal Lahir & \\
-\hline
-6 & Alamat E-mail & \\
-\hline
-7 & Nomor Telepon/HP & \\
-\hline
-\end{tabularx}
-
-\vspace{0.8cm}
-\noindent{\bfseries Riwayat Pendidikan}
-
-\vspace{0.3cm}
-\begin{tabularx}{\textwidth}{|c|l|X|l|c|}
-\hline
-\textbf{No} & \textbf{Jenjang} & \textbf{Bidang Ilmu} & \textbf{Institusi} & \textbf{Tahun Lulus} \\
-\hline
-1 & Sarjana (S1) & & & \\[8pt]
-\hline
-2 & Magister (S2) & & & \\[8pt]
-\hline
-3 & Doktor (S3) & & & \\[8pt]
-\hline
-\end{tabularx}
-
-\vspace{0.8cm}
-\noindent{\bfseries Rekam Jejak Tri Dharma PT}
-
-\vspace{0.3cm}
-\noindent\textit{Pendidikan/Pengajaran}
-
-\vspace{0.2cm}
-\begin{tabularx}{\textwidth}{|c|X|l|c|}
-\hline
-\textbf{No} & \textbf{Nama Mata Kuliah} & \textbf{Wajib/Pilihan} & \textbf{SKS} \\
-\hline
-1 & & & \\[8pt]
-\hline
-2 & & & \\[8pt]
-\hline
-\end{tabularx}
-
-\vspace{0.5cm}
-\noindent\textit{Penelitian}
-
-\vspace{0.2cm}
-\begin{tabularx}{\textwidth}{|c|X|l|c|}
-\hline
-\textbf{No} & \textbf{Judul Penelitian} & \textbf{Penyandang Dana} & \textbf{Tahun} \\
-\hline
-1 & & & \\[8pt]
-\hline
-2 & & & \\[8pt]
-\hline
-\end{tabularx}
-
-\vspace{0.5cm}
-\noindent\textit{Pengabdian kepada Masyarakat}
-
-\vspace{0.2cm}
-\begin{tabularx}{\textwidth}{|c|X|l|c|}
-\hline
-\textbf{No} & \textbf{Judul Pengabdian kepada Masyarakat} & \textbf{Penyandang Dana} & \textbf{Tahun} \\
-\hline
-1 & & & \\[8pt]
-\hline
-2 & & & \\[8pt]
-\hline
-\end{tabularx}
-\end{spacing}
-
-\vspace{0.8cm}
-\begin{spacing}{1.5}
-\noindent Semua data yang saya isikan dan tercantum dalam biodata ini adalah benar dan dapat dipertanggungjawabkan secara hukum. Apabila dikemudian hari ternyata dijumpai ketidak\-sesuaian dengan kenyataan, saya sanggup menerima sanksi.
-
-\noindent Demikian biodata ini saya buat dengan sebenarnya untuk memenuhi salah satu persyaratan dalam pengajuan Penelitian Skripsi Mahasiswa.
-
-\vspace{0.5cm}
-\noindent Kota, tanggal-bulan-tahun
-
-\vspace{3cm}
-
-\noindent Tanda tangan (asli TT basah*)
-
-\vspace{1cm}
-
-\noindent\textbf{(Nama Lengkap)}
 \end{spacing}
 
 \end{document}
