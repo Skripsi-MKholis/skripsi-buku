@@ -331,45 +331,102 @@ Bab ini menjelaskan tahapan metodologi penelitian yang dilakukan, meliputi jenis
 %%=============================================================
 \chapter[TINJAUAN PUSTAKA]{\\ TINJAUAN PUSTAKA}
 
-Kajian literatur dalam penelitian ini mencakup perbandingan antara berbagai metode peramalan penjualan dan implementasi sistem informasi manajemen ritel. Perkembangan teknologi jaringan saraf tiruan telah membawa perubahan besar dalam efisiensi peramalan bisnis.
+\section{\textit{State Of The Art}}
 
-\section{Perbandingan Metode Peramalan Penjualan}
+Penelitian terkait prediksi penjualan dan pengembangan sistem \textit{Point of Sale} berbasis \textit{mobile} telah mengalami perkembangan signifikan seiring meningkatnya pemanfaatan teknologi \textit{deep learning} dan komputasi awan. Berbagai penelitian telah dilakukan dengan fokus pada peramalan data deret waktu (\textit{time series}) menggunakan metode jaringan saraf tiruan, khususnya \textit{Long Short-Term Memory} (LSTM), maupun pada pengembangan sistem POS berbasis Android yang memanfaatkan layanan \textit{cloud}.
 
-Berbagai penelitian terdahulu menunjukkan keunggulan metode \textit{deep learning} dibandingkan model statistik klasik. Dalam studi peramalan penjualan produk aerosol, ditemukan bahwa LSTM memberikan performa terbaik dengan nilai MAPE sebesar 10,76\%, mengungguli ARIMA (11,23\%) dan GRU (11,47\%) dalam menangkap tren jangka panjang. Hal ini diperkuat oleh penelitian pada koperasi sekolah di Malang yang mencapai akurasi 88,19\% melalui arsitektur LSTM hibrida untuk produk makanan yang memiliki volatilitas tinggi. Perbandingan ketiga metode peramalan tersebut dirangkum pada Tabel \ref{tab:perbandingan}.
+Secara umum, penelitian terdahulu dapat dikelompokkan ke dalam dua kategori utama. Pertama, penelitian yang berfokus pada penerapan metode \textit{deep learning} untuk memprediksi data penjualan ritel, baik produk makanan, elektronik, maupun komoditas lainnya, dengan tujuan meningkatkan akurasi estimasi permintaan. Kedua, penelitian yang mengembangkan aplikasi POS \textit{mobile} berbasis Android menggunakan berbagai platform \textit{backend} seperti Firebase atau Supabase, yang umumnya bersifat deskriptif dan belum dilengkapi kemampuan prediksi analitik.
 
-\begin{table}[H]
-\setstretch{1.2}
-\centering
-\caption{Perbandingan Metode Peramalan Penjualan}
-\label{tab:perbandingan}
-\begin{tabularx}{\textwidth}{|l|X|X|X|}
+Meskipun demikian, penelitian yang secara spesifik mengintegrasikan modul prediksi penjualan berbasis LSTM langsung ke dalam sistem POS \textit{mobile} yang beroperasi secara \textit{offline-first} untuk konteks UMKM masih sangat terbatas. Ringkasan penelitian terdahulu tersebut disajikan dalam bentuk tabel \textit{State of The Art} yang dapat dilihat pada Tabel \ref{tab:sota}.
+
+\setlength{\tabcolsep}{4pt}
+{\small\setstretch{1.1}
+\begin{longtable}{|>{\centering\arraybackslash}p{0.4cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\raggedright\arraybackslash}p{1.5cm}|>{\raggedright\arraybackslash}p{2.0cm}|>{\raggedright\arraybackslash}p{2.0cm}|>{\raggedright\arraybackslash}p{2.8cm}|}
+
+\caption{\textit{State Of The Art}} \label{tab:sota} \\
 \hline
-\textbf{Metrik Evaluasi} & \textbf{LSTM (Deep Learning)} & \textbf{ARIMA (Statistik)} & \textbf{GRU (Gated Unit)} \\
+\textbf{No} &
+\textbf{Penulis, Tahun dan Judul Artikel} &
+\textbf{Metode yang Digunakan} &
+\textbf{Hasil yang Diperoleh} &
+\textbf{Persamaan} &
+\textbf{Perbedaan} \\
 \hline
-Kapasitas Data & Sangat baik untuk dataset besar & Terbatas pada data linear & Efisien untuk dataset menengah \\
+\endfirsthead
+
 \hline
-Waktu Pelatihan & Relatif lama karena kompleksitas gerbang & Cepat namun kaku & Lebih cepat dari LSTM \\
+\textbf{No} &
+\textbf{Penulis, Tahun dan Judul Artikel} &
+\textbf{Metode yang Digunakan} &
+\textbf{Hasil yang Diperoleh} &
+\textbf{Persamaan} &
+\textbf{Perbedaan} \\
 \hline
-Akurasi (MAPE) & Umumnya $<$ 12\% pada data ritel & Berkisar 20--25\% & Mendekati LSTM \\
+\endhead
+
 \hline
-Kebutuhan Memori & Tinggi & Rendah & Sedang \\
+\endfoot
+
 \hline
-\end{tabularx}
-\end{table}
+\endlastfoot
 
-Penelitian lain di bidang peramalan penjualan laptop mengategorikan produk berdasarkan rentang harga dan menemukan bahwa LSTM sangat akurat untuk kategori harga menengah (\textit{mid-end}) dengan skor R-squared mencapai 0,9890. Keberhasilan ini mengindikasikan bahwa perilaku konsumen pada segmen tertentu lebih mudah dipelajari oleh algoritma jika dataset memiliki kerapatan informasi yang cukup.
+1 &
+Penelitian prediksi penjualan produk aerosol menggunakan perbandingan metode \textit{deep learning} dan statistik klasik. &
+LSTM, ARIMA, GRU &
+LSTM menghasilkan MAPE terbaik 10,76\%, mengungguli ARIMA (11,23\%) dan GRU (11,47\%) dalam menangkap tren jangka panjang. &
+Sama-sama menggunakan LSTM untuk prediksi data penjualan berbasis deret waktu. &
+Penelitian sebelumnya hanya membandingkan metode tanpa mengintegrasikan hasil prediksi ke dalam sistem operasional; penelitian ini mengintegrasikan LSTM ke dalam aplikasi POS. \\
+\hline
 
-\section{Implementasi Sistem POS \textit{Mobile}}
+2 &
+Prediksi penjualan produk makanan pada koperasi sekolah di Malang menggunakan arsitektur LSTM hibrida. &
+LSTM Hibrida &
+Akurasi prediksi mencapai 88,19\% pada produk makanan dengan volatilitas tinggi. &
+Sama-sama menerapkan LSTM untuk prediksi penjualan harian pada skala usaha kecil. &
+Penelitian sebelumnya tidak memiliki sistem pencatatan transaksi terintegrasi; penelitian ini membangun POS sekaligus modul prediksi dalam satu aplikasi. \\
+\hline
 
-Pengembangan aplikasi POS berbasis Android telah banyak dieksplorasi menggunakan berbagai teknologi. Penggunaan Firebase sebagai basis data \textit{real-time} sering menjadi pilihan utama bagi pengembang karena kemudahan sinkronisasi, namun penelitian terbaru mulai beralih ke Supabase atau integrasi API khusus untuk fleksibilitas manajemen data yang lebih besar. \textit{Framework} Flutter terbukti efektif dalam membangun antarmuka yang responsif dan memudahkan integrasi fitur-fitur modern seperti pembayaran QRIS.
+3 &
+Prediksi penjualan laptop berdasarkan kategori rentang harga menggunakan LSTM. &
+LSTM &
+LSTM sangat akurat untuk kategori \textit{mid-end} dengan R-squared mencapai 0,9890. &
+Sama-sama menggunakan LSTM sebagai model prediksi berbasis data historis. &
+Penelitian sebelumnya bersifat \textit{standalone} dan tidak terhubung dengan sistem POS; penelitian ini menyajikan prediksi langsung dari data transaksi POS riil. \\
+\hline
 
-Sistem POS yang dirancang untuk UMKM memerlukan pendekatan yang berbeda dibandingkan sistem ritel besar. Fokus utama harus terletak pada kesederhanaan alur kerja kasir dan kecepatan proses transaksi. Penelitian oleh Rangga Gelar Guntara (2022) menekankan bahwa penggunaan \textit{cloud computing} pada aplikasi POS \textit{mobile} secara signifikan meningkatkan fleksibilitas pemilik usaha dalam memantau bisnis dari mana saja secara \textit{real-time}.
+4 &
+Rangga Gelar Guntara (2022). Pengembangan aplikasi POS \textit{mobile} berbasis \textit{cloud computing} untuk UMKM. &
+Sistem POS berbasis Android dan Firebase &
+Penggunaan \textit{cloud computing} meningkatkan fleksibilitas pemantauan bisnis secara \textit{real-time}. &
+Sama-sama mengembangkan aplikasi POS berbasis Android untuk kebutuhan operasional UMKM. &
+Penelitian sebelumnya tidak memiliki fitur prediksi penjualan dan tidak mendukung operasi \textit{offline-first}; penelitian ini menambahkan modul LSTM dan arsitektur \textit{offline-first}. \\
+\hline
 
-\section{Teori Peramalan (\textit{Forecasting})}
+5 &
+\textbf{Penelitian Ini.} Rancang Bangun Aplikasi \textit{Point of Sale} dengan Fitur Prediksi Penjualan Harian Menggunakan Metode LSTM. &
+\textbf{LSTM, Flutter, Supabase, Isar DB} &
+Aplikasi POS \textit{mobile offline-first} terintegrasi dengan prediksi penjualan harian berbasis LSTM untuk UMKM di Lhokseumawe. &
+-- &
+-- \\
+
+\end{longtable}
+}
+
+Berdasarkan kajian terhadap penelitian terdahulu pada Tabel \ref{tab:sota}, dapat disimpulkan bahwa sebagian besar penelitian prediksi penjualan menggunakan LSTM masih bersifat \textit{standalone}, yakni tidak terintegrasi dengan sistem pencatatan transaksi yang aktif digunakan. Sebaliknya, penelitian pengembangan sistem POS \textit{mobile} yang ada belum dilengkapi kemampuan analitik prediktif berbasis \textit{machine learning}. Selain itu, belum ada sistem POS untuk UMKM yang secara bersamaan menerapkan arsitektur \textit{offline-first} sekaligus menyertakan modul prediksi LSTM terintegrasi.
+
+Oleh karena itu, penelitian ini hadir untuk mengisi celah tersebut dengan mengusulkan sistem yang menggabungkan ketiga aspek sekaligus, yaitu: (1) aplikasi POS \textit{mobile} berbasis Flutter dengan kemampuan operasional \textit{offline-first} menggunakan Isar DB dan sinkronisasi otomatis ke Supabase; (2) modul prediksi penjualan harian berbasis LSTM yang dilatih dari data transaksi riil mitra UMKM di Lhokseumawe; dan (3) penyajian hasil prediksi secara langsung kepada pengguna melalui dasbor analitik di dalam aplikasi yang sama.
+
+\section{Sistem \textit{Point of Sale} (POS)}
+
+Sistem \textit{Point of Sale} (POS) merupakan kombinasi perangkat keras dan perangkat lunak yang digunakan untuk memproses transaksi penjualan pada titik pembelian. Dalam konteks UMKM, sistem POS berfungsi sebagai alat pencatatan transaksi, pengelolaan stok barang, dan pelaporan keuangan yang menggantikan proses manual berbasis buku catatan. Perkembangan teknologi \textit{mobile} telah mendorong lahirnya aplikasi POS berbasis Android yang lebih fleksibel, murah, dan mudah dioperasikan oleh pelaku usaha kecil tanpa keahlian teknis khusus.
+
+Sistem POS modern yang dirancang untuk UMKM memerlukan pendekatan yang berbeda dibandingkan sistem ritel skala besar. Fokus utama harus terletak pada kesederhanaan alur kerja kasir, kecepatan proses transaksi, dan kemampuan beroperasi dalam kondisi konektivitas internet yang tidak stabil. Arsitektur \textit{offline-first} menjadi solusi utama untuk memastikan kelancaran operasional, di mana data transaksi disimpan terlebih dahulu secara lokal dan disinkronkan ke \textit{cloud} secara otomatis ketika koneksi tersedia.
+
+\section{Peramalan Penjualan (\textit{Forecasting})}
 
 Peramalan penjualan merupakan proyeksi teknis dari permintaan pelanggan potensial untuk periode waktu tertentu berdasarkan asumsi-asumsi yang ditetapkan. Menurut Heizer dan Render, peramalan yang akurat sangat krusial dalam manajemen operasi karena mempengaruhi keputusan strategis di bidang pemasaran, keuangan, dan sumber daya manusia. Terdapat empat prinsip utama dalam peramalan: peramalan jarang sekali sempurna, peramalan jangka pendek biasanya lebih akurat daripada jangka panjang, peramalan agregat lebih akurat daripada peramalan item individu, dan pemilihan metode harus disesuaikan dengan pola data (horizontal, tren, musiman, atau siklis).
 
-Metode kuantitatif dalam peramalan mengandalkan model matematika untuk memproyeksikan data masa lalu ke masa depan. Dalam konteks ritel, tantangan utama adalah menangani variasi musiman, yaitu fluktuasi yang berulang dalam jangka waktu kurang dari satu tahun, seperti lonjakan penjualan menjelang hari raya atau awal bulan.
+Metode kuantitatif dalam peramalan mengandalkan model matematika untuk memproyeksikan data masa lalu ke masa depan. Dalam konteks ritel, tantangan utama adalah menangani variasi musiman, yaitu fluktuasi yang berulang dalam jangka waktu kurang dari satu tahun, seperti lonjakan penjualan menjelang hari raya atau awal bulan. Pendekatan berbasis \textit{deep learning}, khususnya LSTM, terbukti lebih unggul dibandingkan metode statistik konvensional seperti ARIMA dalam menangkap pola jangka panjang pada data penjualan harian yang bersifat nonlinier.
 
 \section{Arsitektur \textit{Long Short-Term Memory} (LSTM)}
 
@@ -380,20 +437,34 @@ LSTM adalah jenis khusus dari \textit{Recurrent Neural Network} (RNN) yang memil
     \item \textbf{\textit{Output Gate}:} Menentukan bagian dari status sel yang akan dikeluarkan sebagai \textit{hidden state} untuk langkah waktu berikutnya.
 \end{enumerate}
 
-Persamaan matematis sederhana untuk pembaruan status sel $C_t$ dapat dinyatakan sebagai berikut:
+Persamaan matematis untuk pembaruan status sel $C_t$ dapat dinyatakan sebagai berikut:
 \begin{equation}
     C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t
 \end{equation}
 
-\noindent Di mana $f_t$ adalah \textit{output} dari \textit{forget gate}, $i_t$ adalah \textit{output} dari \textit{input gate}, dan $\tilde{C}_t$ adalah kandidat nilai baru.
+\noindent Di mana $f_t$ adalah \textit{output} dari \textit{forget gate}, $i_t$ adalah \textit{output} dari \textit{input gate}, dan $\tilde{C}_t$ adalah kandidat nilai baru yang akan ditambahkan ke dalam status sel.
 
 \section{\textit{Framework} Flutter dan Bahasa Dart}
 
-Flutter menggunakan mesin grafis Skia untuk merender antarmuka pengguna secara langsung, yang menghasilkan performa tinggi mendekati aplikasi \textit{native}. Bahasa pemrograman Dart yang menyertai Flutter mendukung fitur \textit{Just-In-Time} (JIT) untuk pengembangan cepat dan \textit{Ahead-Of-Time} (AOT) untuk rilis produksi yang efisien. Arsitektur \textit{widget} pada Flutter memungkinkan pengembang untuk membangun komponen antarmuka yang modular dan dapat digunakan kembali, sangat cocok untuk aplikasi POS yang memiliki banyak elemen interaktif.
+Flutter merupakan \textit{framework} pengembangan aplikasi \textit{cross-platform} yang dikembangkan oleh Google dan menggunakan mesin grafis Skia untuk merender antarmuka pengguna secara langsung, menghasilkan performa tinggi mendekati aplikasi \textit{native}. Bahasa pemrograman Dart yang menyertai Flutter mendukung fitur \textit{Just-In-Time} (JIT) untuk pengembangan cepat dan \textit{Ahead-Of-Time} (AOT) untuk rilis produksi yang efisien. Arsitektur \textit{widget} pada Flutter memungkinkan pengembang membangun komponen antarmuka yang modular dan dapat digunakan kembali, sangat cocok untuk aplikasi POS yang memiliki banyak elemen interaktif.
+
+Dalam penelitian ini, Flutter dipilih sebagai \textit{framework} utama pengembangan aplikasi \textit{mobile} karena kemampuannya menghasilkan aplikasi Android berkinerja tinggi dari satu basis kode, serta dukungan ekosistem \textit{package} yang kaya untuk integrasi fitur seperti koneksi Bluetooth, pemindaian barcode, dan komunikasi \textit{REST API}.
 
 \section{Layanan Supabase dan Integrasi \textit{Cloud}}
 
-Supabase menyediakan lapisan infrastruktur yang matang di atas basis data PostgreSQL, mencakup fitur \textit{real-time subscriptions} yang memungkinkan aplikasi \textit{mobile} menerima pembaruan data secara instan tanpa perlu melakukan \textit{polling} ke server. Penggunaan Supabase dalam penelitian ini memfasilitasi penyimpanan data transaksi dalam jumlah besar yang nantinya akan ditarik oleh modul Python di VPS untuk proses pelatihan model AI.
+Supabase merupakan platform \textit{Backend-as-a-Service} (BaaS) \textit{open-source} yang menyediakan lapisan infrastruktur matang di atas basis data PostgreSQL. Supabase mencakup fitur autentikasi pengguna, \textit{real-time subscriptions}, penyimpanan file, dan \textit{Row Level Security} (RLS) yang memungkinkan pengelolaan hak akses data secara granular. Fitur \textit{real-time subscriptions} pada Supabase memungkinkan aplikasi \textit{mobile} menerima pembaruan data secara instan tanpa perlu melakukan \textit{polling} ke server.
+
+Penggunaan Supabase dalam penelitian ini memfasilitasi penyimpanan data transaksi dalam jumlah besar yang nantinya akan ditarik oleh modul Python di server untuk proses pelatihan model AI. Supabase juga menangani autentikasi multi-pengguna (Owner dan Kasir) dengan mekanisme \textit{Role-Based Access Control} (RBAC) yang terimplementasi langsung di lapisan basis data.
+
+\section{Isar Database (\textit{Local Storage})}
+
+Isar DB adalah basis data \textit{embedded} berkinerja tinggi yang dirancang khusus untuk Flutter dan mendukung operasi baca/tulis secara \textit{asynchronous} tanpa memerlukan koneksi internet. Isar DB beroperasi langsung di perangkat pengguna menggunakan format penyimpanan \textit{binary} yang dioptimalkan untuk kecepatan tinggi, serta mendukung kueri kompleks dengan antarmuka yang intuitif.
+
+Dalam penelitian ini, Isar DB berperan sebagai penyimpanan lokal utama pada perangkat \textit{mobile} untuk menjamin kelancaran operasional kasir dalam kondisi \textit{offline}. Seluruh transaksi yang dilakukan tanpa koneksi akan disimpan terlebih dahulu di Isar DB, kemudian disinkronkan secara otomatis ke Supabase oleh mesin \texttt{SyncNotifier} ketika koneksi internet tersedia kembali.
+
+\section{Python dan TensorFlow}
+
+Python dipilih sebagai bahasa pemrograman untuk pengembangan modul prediksi di sisi server (\textit{server-side}) karena ekosistemnya yang kaya dalam bidang \textit{machine learning} dan analisis data. TensorFlow dengan antarmuka tingkat tinggi Keras digunakan untuk membangun, melatih, dan menyimpan model LSTM. Proses pelatihan model dilakukan di server menggunakan data transaksi yang ditarik dari Supabase, kemudian model yang telah terlatih di-\textit{deploy} sebagai layanan prediksi yang dapat dipanggil oleh aplikasi \textit{mobile} melalui \textit{REST API}, sehingga proses komputasi berat tidak membebani perangkat pengguna.
 
 %%=============================================================
 %% BAB III - METODOLOGI PENELITIAN
