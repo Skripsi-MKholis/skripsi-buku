@@ -10,7 +10,7 @@
 \usepackage{setspace}
 \usepackage[raggedrightboxes]{ragged2e}
 \usepackage{graphicx}
-\graphicspath{{../Project/gambar/}{gambar/}{../Rancangan/Mermaid/}}
+\graphicspath{{../Project/gambar/}{gambar/}{../Rancangan/Mermaid/}{../Rancangan/Wireframe/}}
 \usepackage{float}
 \usepackage{indentfirst}
 \setlength\parindent{1cm}
@@ -628,71 +628,165 @@ Entitas \texttt{stores} menjadi entitas induk yang berelasi dengan seluruh entit
 
 \subsection{Perancangan Wireframe}
 
-Perancangan wireframe dalam penelitian ini mencakup rancangan antarmuka pengguna untuk semua layar utama yang menjadi bagian dari alur operasional aplikasi POS. Wireframe dirancang dengan mempertimbangkan kebutuhan pengguna, aksesibilitas, dan alur kerja yang efisien. Aplikasi sistem POS dirancang dengan berbagai screen yang melayani kebutuhan berbeda sesuai dengan peran pengguna, sebagai berikut:
+Perancangan wireframe dalam penelitian ini mencakup rancangan antarmuka pengguna untuk semua layar utama yang menjadi bagian dari alur operasional aplikasi POS. Wireframe dirancang dengan mempertimbangkan kebutuhan pengguna, aksesibilitas, dan alur kerja yang efisien. Terdapat 14 rancangan layar yang melayani kebutuhan berbeda sesuai dengan peran pengguna, sebagaimana diuraikan berikut ini.
 
 \begin{enumerate}
-    \item \textbf{Halaman Pengenalan}
 
-    \indent Halaman awal untuk pengguna baru sebelum masuk ke aplikasi, memberikan pengenalan fitur dan navigasi dasar.
+    \item \textbf{Halaman Registrasi Toko Baru}
+
+    Halaman pendaftaran akun dan toko baru yang digunakan saat inisialisasi awal sistem oleh Owner, mencakup pengisian data identitas pengguna dan informasi outlet toko.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{wireframe_register}
+        \caption{Wireframe Halaman Registrasi Toko Baru}
+        \label{fig:wf_register}
+    \end{figure}
 
     \item \textbf{Halaman Login}
 
-    \indent Halaman masuk akun untuk staff atau pemilik toko dengan autentikasi berbasis email dan kata sandi melalui Supabase Auth.
+    Halaman masuk akun untuk Owner maupun Kasir dengan autentikasi berbasis email dan kata sandi melalui Supabase Auth.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{wireframe_login}
+        \caption{Wireframe Halaman Login}
+        \label{fig:wf_login}
+    \end{figure}
 
     \item \textbf{Halaman Pemilihan Toko}
 
-    \indent Memungkinkan pengguna yang sudah login untuk memilih toko aktif yang akan dioperasikan.
+    Memungkinkan pengguna yang telah login untuk memilih toko aktif yang akan dioperasikan, terutama bagi pengguna yang terdaftar di lebih dari satu outlet.
 
-    \item \textbf{Halaman Dasbor}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{wireframe_store_list}
+        \caption{Wireframe Halaman Pemilihan Toko}
+        \label{fig:wf_store_list}
+    \end{figure}
 
-    \indent Ringkasan performa toko yang menampilkan statistik penjualan harian, pintasan fitur penting, dan akses cepat ke modul utama, dapat diakses oleh semua staff toko.
+    \item \textbf{Halaman Dasbor Owner}
 
-    \item \textbf{Halaman POS}
+    Ringkasan performa toko yang menampilkan statistik penjualan harian, grafik tren omzet, pintasan fitur penting, dan akses cepat ke modul utama khusus Owner.
 
-    \indent Layar utama kasir yang dirancang untuk mencari produk, membuat pesanan, menerapkan voucher, melakukan split bill, dan memproses transaksi dengan antarmuka yang intuitif dan responsif.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{wireframe_dashboard_owner}
+        \caption{Wireframe Halaman Dasbor Owner}
+        \label{fig:wf_dashboard_owner}
+    \end{figure}
+
+    \item \textbf{Halaman POS (Pembayaran)}
+
+    Layar utama kasir untuk mencari produk, menyusun keranjang pesanan, menerapkan voucher diskon, melakukan \textit{split bill}, memilih metode pembayaran, dan memproses transaksi.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{wireframe_payment}
+        \caption{Wireframe Halaman POS (Pembayaran)}
+        \label{fig:wf_payment}
+    \end{figure}
 
     \item \textbf{Halaman Riwayat Transaksi}
 
-    \indent Menampilkan riwayat transaksi yang sudah dilakukan dengan fitur pencarian dan filter, berguna untuk verifikasi dan audit oleh semua staff toko.
+    Menampilkan daftar transaksi yang telah dilakukan lengkap dengan fitur pencarian dan filter berdasarkan tanggal, berguna untuk keperluan verifikasi dan audit oleh semua staf toko.
 
-    \item \textbf{Halaman Daftar Produk}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{wireframe_transaction_history}
+        \caption{Wireframe Halaman Riwayat Transaksi}
+        \label{fig:wf_transaction_history}
+    \end{figure}
 
-    \indent Memungkinkan owner atau admin untuk mengelola daftar produk yang dijual lengkap dengan harga, stok, SKU/barcode, dan kategori.
+    \item \textbf{Halaman Kelola Produk}
 
-    \item \textbf{Halaman Daftar Kategori}
+    Memungkinkan Owner untuk menambah, menyunting, dan menghapus produk yang dijual, lengkap dengan harga, stok, SKU/barcode, gambar produk, dan kategori.
 
-    \indent Memungkinkan owner atau admin untuk membuat, mengedit, dan menghapus kategori produk untuk organisasi katalog yang lebih baik.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{wireframe_add_product}
+        \caption{Wireframe Halaman Kelola Produk}
+        \label{fig:wf_add_product}
+    \end{figure}
+
+    \item \textbf{Halaman Kelola Kategori}
+
+    Memungkinkan Owner untuk membuat, mengedit, dan menghapus kategori produk guna mengorganisasi katalog dagangan toko dengan lebih terstruktur.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{wireframe_manage_categories}
+        \caption{Wireframe Halaman Kelola Kategori}
+        \label{fig:wf_manage_categories}
+    \end{figure}
 
     \item \textbf{Halaman Laporan}
 
-    \indent Screen khusus owner atau admin yang menampilkan laporan penjualan, tren bisnis, proyeksi berdasarkan model LSTM, dan ringkasan performa operasional.
+    Layar khusus Owner yang menampilkan laporan penjualan, tren bisnis, proyeksi penjualan harian berbasis model LSTM, dan ringkasan performa operasional toko.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{wireframe_reports}
+        \caption{Wireframe Halaman Laporan}
+        \label{fig:wf_reports}
+    \end{figure}
 
     \item \textbf{Halaman Pengaturan}
 
-    \indent Pusat pengaturan aplikasi dan toko yang dapat diakses oleh semua staff toko, dengan menu tertentu yang khusus untuk owner atau admin seperti pengaturan profil toko dan integrasi pembayaran.
+    Pusat konfigurasi aplikasi dan toko yang dapat diakses oleh semua staf, dengan sejumlah menu yang hanya tersedia bagi Owner seperti pengaturan profil toko dan integrasi pembayaran.
 
-    \item \textbf{Halaman Manajemen Staf}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{wireframe_settings}
+        \caption{Wireframe Halaman Pengaturan}
+        \label{fig:wf_settings}
+    \end{figure}
 
-    \indent Memungkinkan owner atau admin untuk mengelola data staf, mengatur hak akses berbasis peran (RBAC), dan mengaktifkan atau menonaktifkan akun karyawan.
+    \item \textbf{Halaman Informasi Toko}
 
-    \item \textbf{Halaman Pengaturan Struk}
+    Memungkinkan Owner untuk mengubah nama toko, alamat, logo outlet, dan informasi operasional lainnya yang ditampilkan kepada pelanggan.
 
-    \indent Memberikan kemampuan bagi owner atau admin untuk mengatur tampilan struk, logo toko, informasi yang dicetak, dan tata letak format struk.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{wireframe_store_info}
+        \caption{Wireframe Halaman Informasi Toko}
+        \label{fig:wf_store_info}
+    \end{figure}
 
-    \item \textbf{Halaman Beranda Pelanggan}
+    \item \textbf{Halaman Struk Digital}
 
-    \indent Beranda mode pelanggan yang menampilkan katalog produk toko, kategori menu, dan akses ke fitur pencarian produk.
+    Menampilkan pratinjau struk transaksi dalam format digital yang dapat dibagikan kepada pelanggan, mencakup rincian produk, total pembayaran, dan informasi toko.
 
-    \item \textbf{Halaman Detail Toko Pelanggan}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{wireframe_digital_receipt}
+        \caption{Wireframe Halaman Struk Digital}
+        \label{fig:wf_digital_receipt}
+    \end{figure}
 
-    \indent Menampilkan detail toko, produk individual dengan gambar dan deskripsi, harga, dan opsi aksi belanja untuk pelanggan.
+    \item \textbf{Halaman Katalog Produk Pelanggan}
 
-    \item \textbf{Halaman Checkout Pelanggan}
+    Beranda mode pelanggan yang menampilkan katalog produk toko beserta kategori menu, informasi harga, dan fitur pencarian produk secara mandiri.
 
-    \indent Halaman checkout pelanggan yang dirancang untuk menyelesaikan pesanan dengan review keranjang belanja, pengaturan pengiriman, pilihan metode pembayaran, dan konfirmasi final.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{wireframe_product_catalog}
+        \caption{Wireframe Halaman Katalog Produk Pelanggan}
+        \label{fig:wf_product_catalog}
+    \end{figure}
+
+    \item \textbf{Halaman Dasbor Pelanggan}
+
+    Halaman ringkasan antarmuka pelanggan yang menampilkan informasi toko, kategori produk unggulan, dan akses ke fitur pemesanan mandiri (\textit{self-order}).
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{wireframe_dashboard_customer}
+        \caption{Wireframe Halaman Dasbor Pelanggan}
+        \label{fig:wf_dashboard_customer}
+    \end{figure}
+
 \end{enumerate}
-
-Rancangan wireframe untuk setiap screen mengikuti prinsip desain yang responsif, intuitif, dan konsisten dengan identitas visual aplikasi. Setiap screen dirancang dengan mempertimbangkan user experience yang optimal sesuai dengan konteks penggunaannya, baik untuk operasional internal toko maupun interaksi dengan pelanggan.
 
 \subsection{Rancangan Algoritma \textit{Long Short-Term Memory} (LSTM)}
 
