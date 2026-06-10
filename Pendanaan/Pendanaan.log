@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.26)  11 JUN 2026 03:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.26)  11 JUN 2026 03:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -523,55 +523,244 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 284.
 )
 \Hy@SectionHShift=\skip128
+) (C:\Program Files\MiKTeX\tex/latex/pgf/frontendlayer\tikz.sty (C:\Program Files\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty (C:\Program Files\MiKTeX\tex/latex/pgf/utilities\pgfrcs.sty (C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfutil-common.tex
+\pgfutil@everybye=\toks35
+\pgfutil@tempdima=\dimen265
+\pgfutil@tempdimb=\dimen266
+) (C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfutil-latex.def
+\pgfutil@abb=\box66
+) (C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfrcs.code.tex (C:\Program Files\MiKTeX\tex/generic/pgf\pgf.revision.tex)
+Package: pgfrcs 2025-08-29 v3.1.11a (3.1.11a)
+))
+Package: pgf 2025-08-29 v3.1.11a (3.1.11a)
+ (C:\Program Files\MiKTeX\tex/latex/pgf/basiclayer\pgfcore.sty (C:\Program Files\MiKTeX\tex/latex/pgf/systemlayer\pgfsys.sty (C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsys.code.tex
+Package: pgfsys 2025-08-29 v3.1.11a (3.1.11a)
+ (C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks36
+\pgfkeys@temptoks=\toks37
+ (C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfkeyslibraryfiltered.code.tex
+\pgfkeys@tmptoks=\toks38
+))
+\pgf@x=\dimen267
+\pgf@y=\dimen268
+\pgf@xa=\dimen269
+\pgf@ya=\dimen270
+\pgf@xb=\dimen271
+\pgf@yb=\dimen272
+\pgf@xc=\dimen273
+\pgf@yc=\dimen274
+\pgf@xd=\dimen275
+\pgf@yd=\dimen276
+\w@pgf@writea=\write3
+\r@pgf@reada=\read3
+\c@pgf@counta=\count334
+\c@pgf@countb=\count335
+\c@pgf@countc=\count336
+\c@pgf@countd=\count337
+\t@pgf@toka=\toks39
+\t@pgf@tokb=\toks40
+\t@pgf@tokc=\toks41
+\pgf@sys@id@count=\count338
+ (C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgf.cfg
+File: pgf.cfg 2025-08-29 v3.1.11a (3.1.11a)
+)
+Driver file for pgf: pgfsys-pdftex.def
+ (C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2025-08-29 v3.1.11a (3.1.11a)
+ (C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2025-08-29 v3.1.11a (3.1.11a)
+))) (C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfsyssoftpath@smallbuffer@items=\count339
+\pgfsyssoftpath@bigbuffer@items=\count340
+) (C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcore.code.tex
+Package: pgfcore 2025-08-29 v3.1.11a (3.1.11a)
+ (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathutil.code.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathparser.code.tex
+\pgfmath@dimen=\dimen277
+\pgfmath@count=\count341
+\pgfmath@box=\box67
+\pgfmath@toks=\toks42
+\pgfmath@stack@operand=\toks43
+\pgfmath@stack@operation=\toks44
+) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.code.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.basic.code.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.trigonometric.code.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.random.code.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.comparison.code.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.base.code.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.round.code.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.misc.code.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.integerarithmetics.code.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathcalc.code.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count342
+)) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfint.code.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@picminx=\dimen278
+\pgf@picmaxx=\dimen279
+\pgf@picminy=\dimen280
+\pgf@picmaxy=\dimen281
+\pgf@pathminx=\dimen282
+\pgf@pathmaxx=\dimen283
+\pgf@pathminy=\dimen284
+\pgf@pathmaxy=\dimen285
+\pgf@xx=\dimen286
+\pgf@xy=\dimen287
+\pgf@yx=\dimen288
+\pgf@yy=\dimen289
+\pgf@zx=\dimen290
+\pgf@zy=\dimen291
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@path@lastx=\dimen292
+\pgf@path@lasty=\dimen293
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@shorten@end@additional=\dimen294
+\pgf@shorten@start@additional=\dimen295
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfpic=\box68
+\pgf@hbox=\box69
+\pgf@layerbox@main=\box70
+\pgf@picture@serial@count=\count343
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgflinewidth=\dimen296
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@pt@x=\dimen297
+\pgf@pt@y=\dimen298
+\pgf@pt@temp=\dimen299
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfarrowsep=\dimen300
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@max=\dimen301
+\pgf@sys@shading@range@num=\count344
+\pgf@shadingcount=\count345
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfexternal@startupbox=\box71
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+))) (C:\Program Files\MiKTeX\tex/generic/pgf/modules\pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfnodeparttextbox=\box72
+) (C:\Program Files\MiKTeX\tex/generic/pgf/modules\pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (C:\Program Files\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@nodesepstart=\dimen302
+\pgf@nodesepend=\dimen303
+) (C:\Program Files\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2025-08-29 v3.1.11a (3.1.11a)
+)) (C:\Program Files\MiKTeX\tex/latex/pgf/utilities\pgffor.sty (C:\Program Files\MiKTeX\tex/latex/pgf/utilities\pgfkeys.sty (C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfkeys.code.tex)) (C:\Program Files\MiKTeX\tex/latex/pgf/math\pgfmath.sty (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex)) (C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgffor.code.tex
+Package: pgffor 2025-08-29 v3.1.11a (3.1.11a)
+\pgffor@iter=\dimen304
+\pgffor@skip=\dimen305
+\pgffor@stack=\toks45
+\pgffor@toks=\toks46
+)) (C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz\tikz.code.tex
+Package: tikz 2025-08-29 v3.1.11a (3.1.11a)
+ (C:\Program Files\MiKTeX\tex/generic/pgf/libraries\pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@plot@mark@count=\count346
+\pgfplotmarksize=\dimen306
+)
+\tikz@lastx=\dimen307
+\tikz@lasty=\dimen308
+\tikz@lastxsaved=\dimen309
+\tikz@lastysaved=\dimen310
+\tikz@lastmovetox=\dimen311
+\tikz@lastmovetoy=\dimen312
+\tikzleveldistance=\dimen313
+\tikzsiblingdistance=\dimen314
+\tikz@figbox=\box73
+\tikz@figbox@bg=\box74
+\tikz@tempbox=\box75
+\tikz@tempbox@bg=\box76
+\tikztreelevel=\count347
+\tikznumberofchildren=\count348
+\tikznumberofcurrentchild=\count349
+\tikz@fig@count=\count350
+ (C:\Program Files\MiKTeX\tex/generic/pgf/modules\pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfmatrixcurrentrow=\count351
+\pgfmatrixcurrentcolumn=\count352
+\pgf@matrix@numberofcolumns=\count353
+)
+\tikz@expandcount=\count354
+ (C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+))) (C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibraryshapes.geometric.code.tex
+File: tikzlibraryshapes.geometric.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+ (C:\Program Files\MiKTeX\tex/generic/pgf/libraries/shapes\pgflibraryshapes.geometric.code.tex
+File: pgflibraryshapes.geometric.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)) (C:\Program Files\MiKTeX\tex/generic/pgf/libraries\pgflibraryarrows.meta.code.tex
+File: pgflibraryarrows.meta.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfarrowinset=\dimen315
+\pgfarrowlength=\dimen316
+\pgfarrowwidth=\dimen317
+\pgfarrowlinewidth=\dimen318
+) (C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarypositioning.code.tex
+File: tikzlibrarypositioning.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 )
 \mylen=\skip129
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 64.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 66.
 
 
-Package array Warning: Column W is already defined on input line 106.
+Package array Warning: Column W is already defined on input line 108.
 
 (C:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count334
+\l__color_backend_stack_int=\count355
 ) (Pendanaan.aux)
 \openout1 = `Pendanaan.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 120.
-LaTeX Font Info:    Trying to load font information for OMS+pzccm on input line 120.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 122.
+LaTeX Font Info:    Trying to load font information for OMS+pzccm on input line 122.
  (C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/psnfss\omspzccm.fd
 File: omspzccm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/pzccm.
 )
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 120.
-LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
  (C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count335
-\scratchdimen=\dimen265
-\scratchbox=\box66
-\nofMPsegments=\count336
-\nofMParguments=\count337
-\everyMPshowfont=\toks35
-\MPscratchCnt=\count338
-\MPscratchDim=\dimen266
-\MPnumerator=\count339
-\makeMPintoPDFobject=\count340
-\everyMPtoPDFconversion=\toks36
+\scratchcounter=\count356
+\scratchdimen=\dimen319
+\scratchbox=\box77
+\nofMPsegments=\count357
+\nofMParguments=\count358
+\everyMPshowfont=\toks47
+\MPscratchCnt=\count359
+\MPscratchDim=\dimen320
+\MPnumerator=\count360
+\makeMPintoPDFobject=\count361
+\everyMPtoPDFconversion=\toks48
 ) (C:\Program Files\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -616,49 +805,49 @@ Package caption Info: End \AtBeginDocument code.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 120.
+Package hyperref Info: Link coloring OFF on input line 122.
 (Pendanaan.out) (Pendanaan.out)
-\@outlinefile=\write3
-\openout3 = `Pendanaan.out'.
+\@outlinefile=\write4
+\openout4 = `Pendanaan.out'.
 
-<../Project/gambar/logo-pnl-skripsi.png, id=135, 126.7134pt x 122.3772pt>
+<../Project/gambar/logo-pnl-skripsi.png, id=138, 126.7134pt x 122.3772pt>
 File: ../Project/gambar/logo-pnl-skripsi.png Graphic file (type png)
 <use ../Project/gambar/logo-pnl-skripsi.png>
-Package pdftex.def Info: ../Project/gambar/logo-pnl-skripsi.png  used on input line 141.
+Package pdftex.def Info: ../Project/gambar/logo-pnl-skripsi.png  used on input line 143.
 (pdftex.def)             Requested size: 99.58464pt x 96.17833pt.
  [1
 
 {C:/Users/acern/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Program Files/MiKTeX/fonts/enc/dvips/base/8r.enc} <../Project/gambar/logo-pnl-skripsi.png>]
-LaTeX Font Info:    Trying to load font information for OT1+ptmcm on input line 197.
+LaTeX Font Info:    Trying to load font information for OT1+ptmcm on input line 199.
  (C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/psnfss\ot1ptmcm.fd
 File: ot1ptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ptmcm.
 )
-LaTeX Font Info:    Trying to load font information for OML+ptmcm on input line 197.
+LaTeX Font Info:    Trying to load font information for OML+ptmcm on input line 199.
  (C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/psnfss\omlptmcm.fd
 File: omlptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ptmcm.
 )
-LaTeX Font Info:    Trying to load font information for OMX+psycm on input line 197.
+LaTeX Font Info:    Trying to load font information for OMX+psycm on input line 199.
  (C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/psnfss\omxpsycm.fd
 File: omxpsycm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/psycm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 197.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 199.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 197.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 199.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 197.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 197.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 199.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 199.
  (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 197.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 199.
  (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.213 
+l.215 
        [1] [2] (Pendanaan.toc
 Overfull \hbox (6.0pt too wide) detected at line 25
 \T1/ptm/m/n/12 3.5.1 
@@ -690,16 +879,16 @@ Overfull \hbox (3.0pt too wide) detected at line 34
  []
 
 )
-\tf@toc=\write4
-\openout4 = `Pendanaan.toc'.
+\tf@toc=\write5
+\openout5 = `Pendanaan.toc'.
 
  [1] (Pendanaan.lof)
-\tf@lof=\write5
-\openout5 = `Pendanaan.lof'.
+\tf@lof=\write6
+\openout6 = `Pendanaan.lof'.
 
  [2] (Pendanaan.lot)
-\tf@lot=\write6
-\openout6 = `Pendanaan.lot'.
+\tf@lot=\write7
+\openout7 = `Pendanaan.lot'.
 
  [3]
 Bab 1.
@@ -707,14 +896,14 @@ Bab 1.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.276 P
+l.278 P
        enerapan metode \textit{Long Short-Term Memory} (LSTM) dalam sistem \... [1
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.291     \item M
+l.293     \item M
                  erancang dan membangun aplikasi \textit{Point of Sale} (POS... [2] [3] [4] [5]
 Bab 2.
 [6
@@ -724,147 +913,147 @@ Bab 3.
 [10
 
 ] [11]
-<../Project/gambar/alur_penelitian.png, id=303, 1529.715pt x 927.465pt>
+<../Project/gambar/alur_penelitian.png, id=334, 1529.715pt x 927.465pt>
 File: ../Project/gambar/alur_penelitian.png Graphic file (type png)
 <use ../Project/gambar/alur_penelitian.png>
-Package pdftex.def Info: ../Project/gambar/alur_penelitian.png  used on input line 443.
+Package pdftex.def Info: ../Project/gambar/alur_penelitian.png  used on input line 445.
 (pdftex.def)             Requested size: 338.59023pt x 205.2883pt.
  [12] [13 <../Project/gambar/alur_penelitian.png>]
-<../Rancangan/Mermaid/use_case.png, id=319, 873.2625pt x 1412.27625pt>
+<../Rancangan/Mermaid/use_case.png, id=350, 873.2625pt x 1412.27625pt>
 File: ../Rancangan/Mermaid/use_case.png Graphic file (type png)
 <use ../Rancangan/Mermaid/use_case.png>
-Package pdftex.def Info: ../Rancangan/Mermaid/use_case.png  used on input line 462.
+Package pdftex.def Info: ../Rancangan/Mermaid/use_case.png  used on input line 464.
 (pdftex.def)             Requested size: 338.59023pt x 547.57465pt.
  [14] [15 <../Rancangan/Mermaid/use_case.png>] [16] [17]
-<../Project/gambar/activity_checkout.png, id=339, 710.655pt x 3157.7975pt>
+<../Project/gambar/activity_checkout.png, id=370, 710.655pt x 3157.7975pt>
 File: ../Project/gambar/activity_checkout.png Graphic file (type png)
 <use ../Project/gambar/activity_checkout.png>
-Package pdftex.def Info: ../Project/gambar/activity_checkout.png  used on input line 547.
+Package pdftex.def Info: ../Project/gambar/activity_checkout.png  used on input line 549.
 (pdftex.def)             Requested size: 338.59023pt x 1504.54692pt.
  [18]
 Overfull \vbox (882.26935pt too high) has occurred while \output is active []
 
  [19 <../Project/gambar/activity_checkout.png>]
-<../Project/gambar/activity_sync.png, id=350, 677.53125pt x 3437.84375pt>
+<../Project/gambar/activity_sync.png, id=381, 677.53125pt x 3437.84375pt>
 File: ../Project/gambar/activity_sync.png Graphic file (type png)
 <use ../Project/gambar/activity_sync.png>
-Package pdftex.def Info: ../Project/gambar/activity_sync.png  used on input line 562.
+Package pdftex.def Info: ../Project/gambar/activity_sync.png  used on input line 564.
 (pdftex.def)             Requested size: 338.59023pt x 1718.07838pt.
  [20]
 Overfull \vbox (1095.80081pt too high) has occurred while \output is active []
 
  [21 <../Project/gambar/activity_sync.png>]
-<../Project/gambar/activity_ai.png, id=361, 1056.94875pt x 3171.85pt>
+<../Project/gambar/activity_ai.png, id=392, 1056.94875pt x 3171.85pt>
 File: ../Project/gambar/activity_ai.png Graphic file (type png)
 <use ../Project/gambar/activity_ai.png>
-Package pdftex.def Info: ../Project/gambar/activity_ai.png  used on input line 577.
+Package pdftex.def Info: ../Project/gambar/activity_ai.png  used on input line 579.
 (pdftex.def)             Requested size: 338.59023pt x 1016.07753pt.
  [22]
 Overfull \vbox (393.79996pt too high) has occurred while \output is active []
 
  [23 <../Project/gambar/activity_ai.png>]
-<../Project/gambar/erd.png, id=371, 1911.14pt x 1126.2075pt>
+<../Project/gambar/erd.png, id=402, 1911.14pt x 1126.2075pt>
 File: ../Project/gambar/erd.png Graphic file (type png)
 <use ../Project/gambar/erd.png>
-Package pdftex.def Info: ../Project/gambar/erd.png  used on input line 590.
+Package pdftex.def Info: ../Project/gambar/erd.png  used on input line 592.
 (pdftex.def)             Requested size: 338.59023pt x 199.51228pt.
  [24 <../Project/gambar/erd.png>] [25]
-<../Rancangan/Wireframe/wireframe_register.png, id=382, 488.82625pt x 1109.14375pt>
+<../Rancangan/Wireframe/wireframe_register.png, id=413, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_register.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_register.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_register.png  used on input line 641.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_register.png  used on input line 643.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
-<../Rancangan/Wireframe/wireframe_login.png, id=383, 488.82625pt x 818.05624pt>
+<../Rancangan/Wireframe/wireframe_login.png, id=414, 488.82625pt x 818.05624pt>
 File: ../Rancangan/Wireframe/wireframe_login.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_login.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_login.png  used on input line 652.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_login.png  used on input line 654.
 (pdftex.def)             Requested size: 179.25114pt x 299.97984pt.
  [26 <../Rancangan/Wireframe/wireframe_register.png>]
-<../Rancangan/Wireframe/wireframe_store_list.png, id=390, 488.82625pt x 1109.14375pt>
+<../Rancangan/Wireframe/wireframe_store_list.png, id=421, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_store_list.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_store_list.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_store_list.png  used on input line 663.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_store_list.png  used on input line 665.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
  [27 <../Rancangan/Wireframe/wireframe_login.png>]
-<../Rancangan/Wireframe/wireframe_dashboard_owner.png, id=398, 488.82625pt x 1109.14375pt>
+<../Rancangan/Wireframe/wireframe_dashboard_owner.png, id=428, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_dashboard_owner.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_dashboard_owner.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_dashboard_owner.png  used on input line 674.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_dashboard_owner.png  used on input line 676.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
  [28 <../Rancangan/Wireframe/wireframe_store_list.png>]
-<../Rancangan/Wireframe/wireframe_payment.png, id=405, 488.82625pt x 1035.87pt>
+<../Rancangan/Wireframe/wireframe_payment.png, id=434, 488.82625pt x 1035.87pt>
 File: ../Rancangan/Wireframe/wireframe_payment.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_payment.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_payment.png  used on input line 685.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_payment.png  used on input line 687.
 (pdftex.def)             Requested size: 179.25114pt x 379.85178pt.
  [29 <../Rancangan/Wireframe/wireframe_dashboard_owner.png>]
-<../Rancangan/Wireframe/wireframe_transaction_history.png, id=412, 488.82625pt x 1109.14375pt>
+<../Rancangan/Wireframe/wireframe_transaction_history.png, id=440, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_transaction_history.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_transaction_history.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_transaction_history.png  used on input line 696.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_transaction_history.png  used on input line 698.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
  [30 <../Rancangan/Wireframe/wireframe_payment.png>]
-<../Rancangan/Wireframe/wireframe_add_product.png, id=420, 488.82625pt x 1109.14375pt>
+<../Rancangan/Wireframe/wireframe_add_product.png, id=447, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_add_product.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_add_product.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_add_product.png  used on input line 707.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_add_product.png  used on input line 709.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
  [31 <../Rancangan/Wireframe/wireframe_transaction_history.png>]
-<../Rancangan/Wireframe/wireframe_manage_categories.png, id=428, 488.82625pt x 1109.14375pt>
+<../Rancangan/Wireframe/wireframe_manage_categories.png, id=454, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_manage_categories.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_manage_categories.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_manage_categories.png  used on input line 718.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_manage_categories.png  used on input line 720.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
  [32 <../Rancangan/Wireframe/wireframe_add_product.png>]
-<../Rancangan/Wireframe/wireframe_reports.png, id=435, 488.82625pt x 1397.22pt>
+<../Rancangan/Wireframe/wireframe_reports.png, id=460, 488.82625pt x 1397.22pt>
 File: ../Rancangan/Wireframe/wireframe_reports.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_reports.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_reports.png  used on input line 729.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_reports.png  used on input line 731.
 (pdftex.def)             Requested size: 179.25114pt x 512.35823pt.
  [33 <../Rancangan/Wireframe/wireframe_manage_categories.png>]
-<../Rancangan/Wireframe/wireframe_settings.png, id=442, 488.82625pt x 1236.62pt>
+<../Rancangan/Wireframe/wireframe_settings.png, id=466, 488.82625pt x 1236.62pt>
 File: ../Rancangan/Wireframe/wireframe_settings.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_settings.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_settings.png  used on input line 740.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_settings.png  used on input line 742.
 (pdftex.def)             Requested size: 179.25114pt x 453.46648pt.
  [34 <../Rancangan/Wireframe/wireframe_reports.png>]
-<../Rancangan/Wireframe/wireframe_store_info.png, id=450, 488.82625pt x 950.55125pt>
+<../Rancangan/Wireframe/wireframe_store_info.png, id=473, 488.82625pt x 950.55125pt>
 File: ../Rancangan/Wireframe/wireframe_store_info.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_store_info.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_store_info.png  used on input line 751.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_store_info.png  used on input line 753.
 (pdftex.def)             Requested size: 179.25114pt x 348.56555pt.
  [35 <../Rancangan/Wireframe/wireframe_settings.png>]
-<../Rancangan/Wireframe/wireframe_digital_receipt.png, id=457, 488.82625pt x 975.645pt>
+<../Rancangan/Wireframe/wireframe_digital_receipt.png, id=479, 488.82625pt x 975.645pt>
 File: ../Rancangan/Wireframe/wireframe_digital_receipt.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_digital_receipt.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_digital_receipt.png  used on input line 762.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_digital_receipt.png  used on input line 764.
 (pdftex.def)             Requested size: 179.25114pt x 357.76738pt.
  [36 <../Rancangan/Wireframe/wireframe_store_info.png>]
-<../Rancangan/Wireframe/wireframe_product_catalog.png, id=465, 488.82625pt x 1109.14375pt>
+<../Rancangan/Wireframe/wireframe_product_catalog.png, id=486, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_product_catalog.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_product_catalog.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_product_catalog.png  used on input line 773.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_product_catalog.png  used on input line 775.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
  [37 <../Rancangan/Wireframe/wireframe_digital_receipt.png>]
-<../Rancangan/Wireframe/wireframe_dashboard_customer.png, id=474, 488.82625pt x 1201.48875pt>
+<../Rancangan/Wireframe/wireframe_dashboard_customer.png, id=494, 488.82625pt x 1201.48875pt>
 File: ../Rancangan/Wireframe/wireframe_dashboard_customer.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_dashboard_customer.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_dashboard_customer.png  used on input line 784.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_dashboard_customer.png  used on input line 786.
 (pdftex.def)             Requested size: 179.25114pt x 440.58391pt.
- [38 <../Rancangan/Wireframe/wireframe_product_catalog.png>] [39 <../Rancangan/Wireframe/wireframe_dashboard_customer.png>] [40] [41] [42]
+ [38 <../Rancangan/Wireframe/wireframe_product_catalog.png>]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 896.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 847.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 896.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 847.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 896.
-
-Overfull \hbox (11.95052pt too wide) in paragraph at lines 912--912
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 847.
+ [39 <../Rancangan/Wireframe/wireframe_dashboard_customer.png>] [40] [41] [42]
+Overfull \hbox (11.95052pt too wide) in paragraph at lines 959--959
 []|\T1/ptm/m/n/10.95 Revisi/Perbaikan 
  []
 
 
-Overfull \hbox (52.738pt too wide) in paragraph at lines 896--917
+Overfull \hbox (52.738pt too wide) in paragraph at lines 943--964
  [][] 
  []
 
@@ -902,32 +1091,32 @@ Overfull \hbox (52.738pt too wide) in paragraph at lines 896--917
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 
-Overfull \hbox (28.45274pt too wide) in paragraph at lines 1014--1015
+Overfull \hbox (28.45274pt too wide) in paragraph at lines 1061--1062
 [][] 
  []
 
 
-Overfull \hbox (4.19316pt too wide) in paragraph at lines 1031--1031
+Overfull \hbox (4.19316pt too wide) in paragraph at lines 1078--1078
 \T1/ptm/m/n/12 Ke-gi-at-an|  
  []
 
 
-Overfull \hbox (13.33717pt too wide) in paragraph at lines 1031--1031
+Overfull \hbox (13.33717pt too wide) in paragraph at lines 1078--1078
 []|\T1/ptm/m/n/12 Hackathon 
  []
 
 
-Overfull \hbox (4.68524pt too wide) in paragraph at lines 1031--1031
+Overfull \hbox (4.68524pt too wide) in paragraph at lines 1078--1078
 \T1/ptm/m/n/12 PO-LI-CY|  
  []
 
 
-Overfull \hbox (28.45274pt too wide) in paragraph at lines 1031--1032
+Overfull \hbox (28.45274pt too wide) in paragraph at lines 1078--1079
 [][] 
  []
 
 
-Overfull \hbox (28.45274pt too wide) in paragraph at lines 1046--1047
+Overfull \hbox (28.45274pt too wide) in paragraph at lines 1093--1094
 [][] 
  []
 
@@ -938,31 +1127,21 @@ Overfull \hbox (28.45274pt too wide) in paragraph at lines 1046--1047
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `Pendanaan.out' has not changed.
 (rerunfilecheck)             Checksum: FFFC3D2867446DC4A781E473F836FD83;5580.
  ) 
 Here is how much of TeX's memory you used:
- 16187 strings out of 467871
- 261965 string characters out of 5428443
- 720888 words of memory out of 5000000
- 44627 multiletter control sequences out of 15000+600000
- 685502 words of font info for 126 fonts, out of 8000000 for 9000
+ 27168 strings out of 467871
+ 504808 string characters out of 5428443
+ 941975 words of memory out of 5000000
+ 55390 multiletter control sequences out of 15000+600000
+ 686945 words of font info for 129 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,12n,79p,947b,891s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{table.caption.16} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{table.caption.15} has been referenced but does not exist, replaced by a fixed one
-
+ 88i,12n,94p,947b,1160s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Pendanaan.pdf (53 pages, 2282596 bytes).
+Output written on Pendanaan.pdf (53 pages, 2289931 bytes).
 PDF statistics:
- 628 PDF objects out of 1000 (max. 8388607)
- 175 named destinations out of 1000 (max. 500000)
- 370 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 642 PDF objects out of 1000 (max. 8388607)
+ 173 named destinations out of 1000 (max. 500000)
+ 382 words of extra memory for PDF output out of 10000 (max. 10000000)
 

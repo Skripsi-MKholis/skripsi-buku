@@ -32,6 +32,8 @@
 \usepackage{tocloft}
 \usepackage{ifthen}
 \usepackage[hidelinks]{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
 
 %%=============================================================
 %% LAYOUT
@@ -794,10 +796,55 @@ Desain metode LSTM memberikan gambaran mengenai alur kerja algoritma yang diguna
 
 \begin{figure}[H]
     \centering
-    \fbox{\parbox{0.8\textwidth}{\centering\vspace{1.5cm}
-    [\textit{Gambar Alur Kerja Algoritma LSTM}]\\[0.3cm]
-    \textit{Sisipkan diagram alur LSTM di sini}
-    \vspace{1.5cm}}}
+    \resizebox{0.92\textwidth}{!}{%
+    \begin{tikzpicture}[
+        node distance=0.6cm,
+        every node/.style={align=center},
+        startstop/.style={
+            rectangle, rounded corners=8pt,
+            minimum width=9cm, minimum height=1cm,
+            text centered, draw=black, fill=gray!20, font=\small
+        },
+        process/.style={
+            rectangle,
+            minimum width=9cm, minimum height=1cm,
+            text centered, draw=black, fill=white, font=\small
+        },
+        decision/.style={
+            diamond, aspect=2.8,
+            text centered, draw=black, fill=white, font=\small,
+            inner sep=3pt
+        },
+        arr/.style={->, >=Stealth, thick},
+    ]
+
+    \node (data)   [startstop] {Data Transaksi Harian (Supabase)};
+    \node (pre)    [process, below=of data]   {Pra-pemrosesan: Pembersihan Data \&\\Normalisasi \textit{Min-Max Scaling}};
+    \node (window) [process, below=of pre]    {Pembentukan \textit{Time Series} (\textit{Sliding Window})};
+    \node (split)  [process, below=of window] {Pembagian Dataset (\textit{Time-Based Split})\\Data \textit{Training} \& Data \textit{Testing}};
+    \node (build)  [process, below=of split]  {Pembangunan Arsitektur LSTM\\(\textit{Input Layer} $\to$ \textit{LSTM Layer} $\to$ \textit{Dense Output Layer})};
+    \node (train)  [process, below=of build]  {Pelatihan Model (\textit{Adam Optimizer}, Aktivasi \textit{ReLU})};
+    \node (eval)   [process, below=of train]  {Evaluasi Model: MAE, RMSE, MAPE};
+    \node (dec)    [decision, below=0.8cm of eval] {Akurasi\\Memenuhi\\Kriteria?};
+    \node (tune)   [process, minimum width=3.8cm, right=2.8cm of dec]
+                   {\textit{Hyperparameter Tuning}\\(\textit{epoch}, \textit{batch size},\\neuron, \textit{learning rate})};
+    \node (api)    [process, below=0.8cm of dec]  {Integrasi Model ke Sistem POS via \textit{REST API}};
+    \node (end)    [startstop, below=of api]  {Prediksi Penjualan Harian\\Ditampilkan kepada Pengguna};
+
+    \draw [arr] (data)   -- (pre);
+    \draw [arr] (pre)    -- (window);
+    \draw [arr] (window) -- (split);
+    \draw [arr] (split)  -- (build);
+    \draw [arr] (build)  -- (train);
+    \draw [arr] (train)  -- (eval);
+    \draw [arr] (eval)   -- (dec);
+    \draw [arr] (dec)    -- node[left,  font=\small] {Ya}    (api);
+    \draw [arr] (dec)    -- node[above, font=\small] {Tidak} (tune);
+    \draw [arr] (tune.north) |- (train.east);
+    \draw [arr] (api)    -- (end);
+
+    \end{tikzpicture}%
+    }
     \caption{Alur Kerja Algoritma \textit{Long Short-Term Memory} (LSTM)}
     \label{fig:lstm_alur}
 \end{figure}

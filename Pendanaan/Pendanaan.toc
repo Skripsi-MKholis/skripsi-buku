@@ -28,7 +28,7 @@
 \contentsline {subsection}{\numberline {3.5.4}Perancangan Wireframe}{25}{subsection.3.5.4}%
 \contentsline {subsection}{\numberline {3.5.5}Rancangan Algoritma \textit {Long Short-Term Memory} (LSTM)}{39}{subsection.3.5.5}%
 \contentsline {section}{\numberline {3.6}Teknik Pengujian}{41}{section.3.6}%
-\contentsline {section}{\numberline {3.7}Variabel Penelitian}{41}{section.3.7}%
+\contentsline {section}{\numberline {3.7}Variabel Penelitian}{42}{section.3.7}%
 \contentsline {section}{\numberline {3.8}Hasil yang Diharapkan}{42}{section.3.8}%
-\contentsline {section}{\numberline {3.9}Rincian Biaya}{42}{section.3.9}%
+\contentsline {section}{\numberline {3.9}Rincian Biaya}{43}{section.3.9}%
 \contentsline {section}{\numberline {3.10}Rencana Jadwal Penelitian}{43}{section.3.10}%
