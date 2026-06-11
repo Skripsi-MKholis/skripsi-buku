@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.26)  11 JUN 2026 23:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.26)  11 JUN 2026 23:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -842,14 +842,14 @@ Package hyperref Info: Link coloring OFF on input line 123.
 \@outlinefile=\write4
 \openout4 = `Pendanaan.out'.
 
-<../Project/gambar/logo-pnl-skripsi.png, id=146, 126.7134pt x 122.3772pt>
-File: ../Project/gambar/logo-pnl-skripsi.png Graphic file (type png)
-<use ../Project/gambar/logo-pnl-skripsi.png>
-Package pdftex.def Info: ../Project/gambar/logo-pnl-skripsi.png  used on input line 144.
-(pdftex.def)             Requested size: 99.58464pt x 96.17833pt.
+<../Project/gambar/logo-pnl-skripsi2.png, id=142, 273.27094pt x 258.21469pt>
+File: ../Project/gambar/logo-pnl-skripsi2.png Graphic file (type png)
+<use ../Project/gambar/logo-pnl-skripsi2.png>
+Package pdftex.def Info: ../Project/gambar/logo-pnl-skripsi2.png  used on input line 144.
+(pdftex.def)             Requested size: 99.58464pt x 94.09587pt.
  [1
 
-{C:/Users/acern/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Program Files/MiKTeX/fonts/enc/dvips/base/8r.enc} <../Project/gambar/logo-pnl-skripsi.png>]
+{C:/Users/acern/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Program Files/MiKTeX/fonts/enc/dvips/base/8r.enc} <../Project/gambar/logo-pnl-skripsi2.png>]
 *geometry* verbose mode - [ newgeometry ] result:
 * driver: pdftex
 * paper: a4paper
@@ -882,7 +882,7 @@ Package pdftex.def Info: ../Project/gambar/logo-pnl-skripsi.png  used on input l
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<Gambar/halaman-pengesahan.jpg, id=157, 1988.17781pt x 2982.64313pt>
+<Gambar/halaman-pengesahan.jpg, id=153, 1988.17781pt x 2982.64313pt>
 File: Gambar/halaman-pengesahan.jpg Graphic file (type jpg)
 <use Gambar/halaman-pengesahan.jpg>
 Package pdftex.def Info: Gambar/halaman-pengesahan.jpg  used on input line 169.
@@ -941,12 +941,7 @@ Overfull \hbox (6.0pt too wide) detected at line 30
  []
 
 
-Overfull \hbox (6.0pt too wide) detected at line 31
-\T1/ptm/m/n/12 3.5.5 
- []
-
-
-Overfull \hbox (3.0pt too wide) detected at line 36
+Overfull \hbox (3.0pt too wide) detected at line 35
 \T1/ptm/m/n/12 3.10 
  []
 
@@ -956,15 +951,15 @@ Overfull \hbox (3.0pt too wide) detected at line 36
 
  [1
 
-] [2] (Pendanaan.lof)
+] (Pendanaan.lof)
 \tf@lof=\write6
 \openout6 = `Pendanaan.lof'.
 
- [3] (Pendanaan.lot)
+ [2] (Pendanaan.lot)
 \tf@lot=\write7
 \openout7 = `Pendanaan.lot'.
 
- [4]
+ [3]
 Bab 1.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
@@ -1099,13 +1094,13 @@ Bab 3.
 [16
 
 ] [17]
-<../Project/gambar/alur_penelitian.png, id=376, 1529.715pt x 927.465pt>
+<../Project/gambar/alur_penelitian.png, id=361, 1529.715pt x 927.465pt>
 File: ../Project/gambar/alur_penelitian.png Graphic file (type png)
 <use ../Project/gambar/alur_penelitian.png>
 Package pdftex.def Info: ../Project/gambar/alur_penelitian.png  used on input line 514.
 (pdftex.def)             Requested size: 338.59023pt x 205.2883pt.
  [18] [19 <../Project/gambar/alur_penelitian.png>]
-<../Rancangan/Mermaid/use_case.png, id=392, 873.2625pt x 1412.27625pt>
+<../Rancangan/Mermaid/use_case.png, id=376, 873.2625pt x 1412.27625pt>
 File: ../Rancangan/Mermaid/use_case.png Graphic file (type png)
 <use ../Rancangan/Mermaid/use_case.png>
 Package pdftex.def Info: ../Rancangan/Mermaid/use_case.png  used on input line 533.
@@ -1127,85 +1122,85 @@ LaTeX Warning: Float too large for page by 61.14587pt on input line 844.
 
 
 ]
-<../Rancangan/Wireframe/wireframe_register.png, id=432, 488.82625pt x 1109.14375pt>
+<../Rancangan/Wireframe/wireframe_register.png, id=416, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_register.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_register.png>
 Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_register.png  used on input line 893.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
  [28]
-<../Rancangan/Wireframe/wireframe_login.png, id=438, 488.82625pt x 818.05624pt>
+<../Rancangan/Wireframe/wireframe_login.png, id=422, 488.82625pt x 818.05624pt>
 File: ../Rancangan/Wireframe/wireframe_login.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_login.png>
 Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_login.png  used on input line 904.
 (pdftex.def)             Requested size: 179.25114pt x 299.97984pt.
  [29 <../Rancangan/Wireframe/wireframe_register.png>]
-<../Rancangan/Wireframe/wireframe_store_list.png, id=444, 488.82625pt x 1109.14375pt>
+<../Rancangan/Wireframe/wireframe_store_list.png, id=428, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_store_list.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_store_list.png>
 Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_store_list.png  used on input line 915.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
  [30 <../Rancangan/Wireframe/wireframe_login.png>]
-<../Rancangan/Wireframe/wireframe_dashboard_owner.png, id=451, 488.82625pt x 1109.14375pt>
+<../Rancangan/Wireframe/wireframe_dashboard_owner.png, id=435, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_dashboard_owner.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_dashboard_owner.png>
 Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_dashboard_owner.png  used on input line 926.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
  [31 <../Rancangan/Wireframe/wireframe_store_list.png>]
-<../Rancangan/Wireframe/wireframe_payment.png, id=459, 488.82625pt x 1035.87pt>
+<../Rancangan/Wireframe/wireframe_payment.png, id=441, 488.82625pt x 1035.87pt>
 File: ../Rancangan/Wireframe/wireframe_payment.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_payment.png>
 Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_payment.png  used on input line 937.
 (pdftex.def)             Requested size: 179.25114pt x 379.85178pt.
  [32 <../Rancangan/Wireframe/wireframe_dashboard_owner.png>]
-<../Rancangan/Wireframe/wireframe_transaction_history.png, id=465, 488.82625pt x 1109.14375pt>
+<../Rancangan/Wireframe/wireframe_transaction_history.png, id=448, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_transaction_history.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_transaction_history.png>
 Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_transaction_history.png  used on input line 948.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
  [33 <../Rancangan/Wireframe/wireframe_payment.png>]
-<../Rancangan/Wireframe/wireframe_add_product.png, id=472, 488.82625pt x 1109.14375pt>
+<../Rancangan/Wireframe/wireframe_add_product.png, id=455, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_add_product.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_add_product.png>
 Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_add_product.png  used on input line 959.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
  [34 <../Rancangan/Wireframe/wireframe_transaction_history.png>]
-<../Rancangan/Wireframe/wireframe_manage_categories.png, id=478, 488.82625pt x 1109.14375pt>
+<../Rancangan/Wireframe/wireframe_manage_categories.png, id=461, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_manage_categories.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_manage_categories.png>
 Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_manage_categories.png  used on input line 970.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
  [35 <../Rancangan/Wireframe/wireframe_add_product.png>]
-<../Rancangan/Wireframe/wireframe_reports.png, id=484, 488.82625pt x 1397.22pt>
+<../Rancangan/Wireframe/wireframe_reports.png, id=467, 488.82625pt x 1397.22pt>
 File: ../Rancangan/Wireframe/wireframe_reports.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_reports.png>
 Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_reports.png  used on input line 981.
 (pdftex.def)             Requested size: 179.25114pt x 512.35823pt.
  [36 <../Rancangan/Wireframe/wireframe_manage_categories.png>]
-<../Rancangan/Wireframe/wireframe_settings.png, id=490, 488.82625pt x 1236.62pt>
+<../Rancangan/Wireframe/wireframe_settings.png, id=473, 488.82625pt x 1236.62pt>
 File: ../Rancangan/Wireframe/wireframe_settings.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_settings.png>
 Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_settings.png  used on input line 992.
 (pdftex.def)             Requested size: 179.25114pt x 453.46648pt.
  [37 <../Rancangan/Wireframe/wireframe_reports.png>]
-<../Rancangan/Wireframe/wireframe_store_info.png, id=498, 488.82625pt x 950.55125pt>
+<../Rancangan/Wireframe/wireframe_store_info.png, id=480, 488.82625pt x 950.55125pt>
 File: ../Rancangan/Wireframe/wireframe_store_info.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_store_info.png>
 Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_store_info.png  used on input line 1003.
 (pdftex.def)             Requested size: 179.25114pt x 348.56555pt.
  [38 <../Rancangan/Wireframe/wireframe_settings.png>]
-<../Rancangan/Wireframe/wireframe_digital_receipt.png, id=504, 488.82625pt x 975.645pt>
+<../Rancangan/Wireframe/wireframe_digital_receipt.png, id=487, 488.82625pt x 975.645pt>
 File: ../Rancangan/Wireframe/wireframe_digital_receipt.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_digital_receipt.png>
 Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_digital_receipt.png  used on input line 1014.
 (pdftex.def)             Requested size: 179.25114pt x 357.76738pt.
  [39 <../Rancangan/Wireframe/wireframe_store_info.png>]
-<../Rancangan/Wireframe/wireframe_product_catalog.png, id=511, 488.82625pt x 1109.14375pt>
+<../Rancangan/Wireframe/wireframe_product_catalog.png, id=494, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_product_catalog.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_product_catalog.png>
 Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_product_catalog.png  used on input line 1025.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
  [40 <../Rancangan/Wireframe/wireframe_digital_receipt.png>]
-<../Rancangan/Wireframe/wireframe_dashboard_customer.png, id=518, 488.82625pt x 1201.48875pt>
+<../Rancangan/Wireframe/wireframe_dashboard_customer.png, id=501, 488.82625pt x 1201.48875pt>
 File: ../Rancangan/Wireframe/wireframe_dashboard_customer.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_dashboard_customer.png>
 Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_dashboard_customer.png  used on input line 1036.
@@ -1258,55 +1253,21 @@ Overfull \hbox (11.95052pt too wide) in paragraph at lines 1209--1209
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `Pendanaan.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Pendanaan.out':
-(rerunfilecheck)             Before: 9C8D41A2756BFB601B42C9B01594F3AC;5855
-(rerunfilecheck)             After:  0CE89EE8532C4008956883BB93A3AB6A;5710.
+Package rerunfilecheck Info: File `Pendanaan.out' has not changed.
+(rerunfilecheck)             Checksum: 0CE89EE8532C4008956883BB93A3AB6A;5710.
  ) 
 Here is how much of TeX's memory you used:
- 27948 strings out of 467871
- 528288 string characters out of 5428443
- 999678 words of memory out of 5000000
- 56134 multiletter control sequences out of 15000+600000
+ 27935 strings out of 467871
+ 528084 string characters out of 5428443
+ 999424 words of memory out of 5000000
+ 56130 multiletter control sequences out of 15000+600000
  701132 words of font info for 145 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  88i,12n,94p,1151b,1368s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{table.caption.30} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{table.caption.29} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{table.caption.13} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{figure.caption.28} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{figure.caption.27} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{figure.caption.26} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{figure.caption.10} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{subsection.3.5.5} has been referenced but does not exist, replaced by a fixed one
-
 <C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Pendanaan.pdf (59 pages, 2069271 bytes).
+Output written on Pendanaan.pdf (58 pages, 2039587 bytes).
 PDF statistics:
- 669 PDF objects out of 1000 (max. 8388607)
- 187 named destinations out of 1000 (max. 500000)
- 383 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 647 PDF objects out of 1000 (max. 8388607)
+ 178 named destinations out of 1000 (max. 500000)
+ 375 words of extra memory for PDF output out of 10000 (max. 10000000)
 

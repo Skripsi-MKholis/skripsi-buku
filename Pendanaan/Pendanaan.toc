@@ -1,7 +1,7 @@
 \babel@toc {indonesian}{}\relax 
 \contentsline {chapter}{DAFTAR ISI}{i}{section*.1}%
-\contentsline {chapter}{DAFTAR GAMBAR}{iii}{section*.2}%
-\contentsline {chapter}{DAFTAR TABEL}{iv}{section*.3}%
+\contentsline {chapter}{DAFTAR GAMBAR}{ii}{section*.2}%
+\contentsline {chapter}{DAFTAR TABEL}{iii}{section*.3}%
 \contentsline {chapter}{\numberline {1}PENDAHULUAN}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Latar Belakang Masalah}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Rumusan Masalah}{3}{section.1.2}%
