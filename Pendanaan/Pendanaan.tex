@@ -603,54 +603,54 @@ Definisi \textit{use case} pada sistem POS diilustrasikan pada Tabel \ref{tab:us
 \end{tabularx}
 \end{table}
 
-\subsection{\textit{Activity Diagram}}
-
-\textit{Activity Diagram} digunakan untuk memvisualisasikan aliran kerja dinamis dan logika prosedural sistem POS. Terdapat tiga alur kerja utama yang dimodelkan dalam penelitian ini.
-
-
-\vspace{0.5cm}
-\noindent 1. Activity Diagram Alur Kerja Transaksi Kasir (\textit{POS Checkout})
-
-Diagram aktivitas ini menggambarkan alur kerja kasir dalam memproses transaksi belanja pelanggan, mulai dari pemilihan produk hingga pencetakan struk, termasuk opsi penerapan voucher dan pemisahan tagihan (\textit{split bill}). Diagram aktivitas transaksi kasir diilustrasikan pada Gambar \ref{fig:activity_checkout}.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\textwidth]{activity_checkout}
-    \caption{\textit{Activity Diagram} Alur Kerja Transaksi Kasir}
-    \label{fig:activity_checkout}
-\end{figure}
-
-Alur dimulai ketika kasir membuka layar POS dan memilih produk ke keranjang belanja. Sistem memvalidasi keranjang, lalu kasir dapat menerapkan voucher diskon atau melakukan \textit{split bill}. Setelah memilih metode pembayaran (Tunai, QRIS, Debit, atau Transfer) dan mengonfirmasi nominal, transaksi disimpan di basis data lokal Isar DB, stok produk dikurangi secara otomatis, dan struk dicetak melalui printer \textit{thermal} Bluetooth.
-
-
-\vspace{0.5cm}
-\noindent 2. Activity Diagram Sinkronisasi Data Latar Belakang (\textit{Offline-First Sync Engine})
-
-Diagram aktivitas ini mengilustrasikan logika mesin sinkronisasi \texttt{SyncNotifier} dalam mendeteksi koneksi jaringan dan melakukan sinkronisasi data transaksi lokal ke basis data cloud Supabase secara otomatis. Diagram aktivitas sinkronisasi diilustrasikan pada Gambar \ref{fig:activity_sync}.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\textwidth]{activity_sync}
-    \caption{\textit{Activity Diagram} Sinkronisasi Data \textit{Offline-First}}
-    \label{fig:activity_sync}
-\end{figure}
-
-Proses sinkronisasi dipicu secara otomatis ketika perangkat mendeteksi pemulihan koneksi internet. Sistem memeriksa antrean data yang belum tersinkronkan secara berurutan: kategori, produk, transaksi, lalu riwayat stok. Setelah setiap entitas berhasil diunggah ke Supabase, statusnya diperbarui dan notifikasi keberhasilan ditampilkan kepada pengguna.
-
-
-\vspace{0.5cm}
-\noindent 3. Activity Diagram Kalibrasi AI \textit{Smart Analytics}
-
-Diagram aktivitas ini menggambarkan alur permintaan analisis bisnis cerdas oleh Owner, meliputi proses penyaringan privasi data pelanggan (\textit{PII scrubbing}), pemanggilan model LSTM melalui REST API server, hingga hasil analisis divisualisasikan. Diagram aktivitas kalibrasi AI diilustrasikan pada Gambar \ref{fig:activity_ai}.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\textwidth]{activity_ai}
-    \caption{\textit{Activity Diagram} Kalibrasi AI \textit{Smart Analytics}}
-    \label{fig:activity_ai}
-\end{figure}
-
-Alur dimulai ketika Owner membuka layar \textit{Smart Analytics}. Sistem memeriksa persetujuan privasi data dan ketersediaan minimal 20 riwayat transaksi. Setelah syarat terpenuhi, sistem melakukan agregasi data lokal, penghapusan informasi pribadi pelanggan, dan pemanggilan model LSTM melalui REST API server untuk analisis prediktif. Hasil berupa proyeksi omzet, prediksi produk terlaris, dan rekomendasi strategi bisnis divisualisasikan kepada Owner.
+% \subsection{\textit{Activity Diagram}}
+%
+% \textit{Activity Diagram} digunakan untuk memvisualisasikan aliran kerja dinamis dan logika prosedural sistem POS. Terdapat tiga alur kerja utama yang dimodelkan dalam penelitian ini.
+%
+%
+% \vspace{0.5cm}
+% \noindent 1. Activity Diagram Alur Kerja Transaksi Kasir (\textit{POS Checkout})
+%
+% Diagram aktivitas ini menggambarkan alur kerja kasir dalam memproses transaksi belanja pelanggan, mulai dari pemilihan produk hingga pencetakan struk, termasuk opsi penerapan voucher dan pemisahan tagihan (\textit{split bill}). Diagram aktivitas transaksi kasir diilustrasikan pada Gambar \ref{fig:activity_checkout}.
+%
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.85\textwidth]{activity_checkout}
+%     \caption{\textit{Activity Diagram} Alur Kerja Transaksi Kasir}
+%     \label{fig:activity_checkout}
+% \end{figure}
+%
+% Alur dimulai ketika kasir membuka layar POS dan memilih produk ke keranjang belanja. Sistem memvalidasi keranjang, lalu kasir dapat menerapkan voucher diskon atau melakukan \textit{split bill}. Setelah memilih metode pembayaran (Tunai, QRIS, Debit, atau Transfer) dan mengonfirmasi nominal, transaksi disimpan di basis data lokal Isar DB, stok produk dikurangi secara otomatis, dan struk dicetak melalui printer \textit{thermal} Bluetooth.
+%
+%
+% \vspace{0.5cm}
+% \noindent 2. Activity Diagram Sinkronisasi Data Latar Belakang (\textit{Offline-First Sync Engine})
+%
+% Diagram aktivitas ini mengilustrasikan logika mesin sinkronisasi \texttt{SyncNotifier} dalam mendeteksi koneksi jaringan dan melakukan sinkronisasi data transaksi lokal ke basis data cloud Supabase secara otomatis. Diagram aktivitas sinkronisasi diilustrasikan pada Gambar \ref{fig:activity_sync}.
+%
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.85\textwidth]{activity_sync}
+%     \caption{\textit{Activity Diagram} Sinkronisasi Data \textit{Offline-First}}
+%     \label{fig:activity_sync}
+% \end{figure}
+%
+% Proses sinkronisasi dipicu secara otomatis ketika perangkat mendeteksi pemulihan koneksi internet. Sistem memeriksa antrean data yang belum tersinkronkan secara berurutan: kategori, produk, transaksi, lalu riwayat stok. Setelah setiap entitas berhasil diunggah ke Supabase, statusnya diperbarui dan notifikasi keberhasilan ditampilkan kepada pengguna.
+%
+%
+% \vspace{0.5cm}
+% \noindent 3. Activity Diagram Kalibrasi AI \textit{Smart Analytics}
+%
+% Diagram aktivitas ini menggambarkan alur permintaan analisis bisnis cerdas oleh Owner, meliputi proses penyaringan privasi data pelanggan (\textit{PII scrubbing}), pemanggilan model LSTM melalui REST API server, hingga hasil analisis divisualisasikan. Diagram aktivitas kalibrasi AI diilustrasikan pada Gambar \ref{fig:activity_ai}.
+%
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.85\textwidth]{activity_ai}
+%     \caption{\textit{Activity Diagram} Kalibrasi AI \textit{Smart Analytics}}
+%     \label{fig:activity_ai}
+% \end{figure}
+%
+% Alur dimulai ketika Owner membuka layar \textit{Smart Analytics}. Sistem memeriksa persetujuan privasi data dan ketersediaan minimal 20 riwayat transaksi. Setelah syarat terpenuhi, sistem melakukan agregasi data lokal, penghapusan informasi pribadi pelanggan, dan pemanggilan model LSTM melalui REST API server untuk analisis prediktif. Hasil berupa proyeksi omzet, prediksi produk terlaris, dan rekomendasi strategi bisnis divisualisasikan kepada Owner.
 
 \subsection{\textit{Entity Relationship Diagram} (ERD)}
 
