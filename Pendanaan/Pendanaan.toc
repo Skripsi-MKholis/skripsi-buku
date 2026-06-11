@@ -4,33 +4,33 @@
 \contentsline {chapter}{DAFTAR TABEL}{iv}{section*.3}%
 \contentsline {chapter}{\numberline {1}PENDAHULUAN}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Latar Belakang Masalah}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Rumusan Masalah}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.2}Rumusan Masalah}{3}{section.1.2}%
 \contentsline {section}{\numberline {1.3}Tujuan Penelitian}{3}{section.1.3}%
-\contentsline {section}{\numberline {1.4}Batasan Masalah}{3}{section.1.4}%
+\contentsline {section}{\numberline {1.4}Batasan Masalah}{4}{section.1.4}%
 \contentsline {section}{\numberline {1.5}Manfaat Penelitian}{4}{section.1.5}%
-\contentsline {section}{\numberline {1.6}Sistematika Penulisan}{4}{section.1.6}%
-\contentsline {chapter}{\numberline {2}TINJAUAN PUSTAKA}{6}{chapter.2}%
-\contentsline {section}{\numberline {2.1}\textit {State Of The Art}}{6}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Sistem \textit {Point of Sale} (POS)}{9}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Peramalan Penjualan (\textit {Forecasting})}{9}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Arsitektur \textit {Long Short-Term Memory} (LSTM)}{10}{section.2.4}%
-\contentsline {section}{\numberline {2.5}\textit {Framework} Flutter dan Bahasa Dart}{11}{section.2.5}%
-\contentsline {section}{\numberline {2.6}Layanan Supabase dan Integrasi \textit {Cloud}}{11}{section.2.6}%
-\contentsline {section}{\numberline {2.7}Isar Database (\textit {Local Storage})}{12}{section.2.7}%
-\contentsline {section}{\numberline {2.8}Python dan TensorFlow}{12}{section.2.8}%
-\contentsline {chapter}{\numberline {3}METODOLOGI PENELITIAN}{13}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Metode Penelitian}{13}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Data dan Pengumpulan Data}{14}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Teknik Analisis Data}{14}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Alur Penelitian}{15}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Rancangan Sistem}{17}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}\textit {Use Case Diagram}}{17}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}\textit {Activity Diagram}}{21}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}\textit {Entity Relationship Diagram} (ERD)}{27}{subsection.3.5.3}%
-\contentsline {subsection}{\numberline {3.5.4}Perancangan Wireframe}{28}{subsection.3.5.4}%
-\contentsline {subsection}{\numberline {3.5.5}Rancangan Algoritma \textit {Long Short-Term Memory} (LSTM)}{42}{subsection.3.5.5}%
-\contentsline {section}{\numberline {3.6}Teknik Pengujian}{44}{section.3.6}%
-\contentsline {section}{\numberline {3.7}Variabel Penelitian}{45}{section.3.7}%
-\contentsline {section}{\numberline {3.8}Hasil yang Diharapkan}{45}{section.3.8}%
-\contentsline {section}{\numberline {3.9}Rincian Biaya}{46}{section.3.9}%
-\contentsline {section}{\numberline {3.10}Rencana Jadwal Penelitian}{46}{section.3.10}%
+\contentsline {section}{\numberline {1.6}Sistematika Penulisan}{5}{section.1.6}%
+\contentsline {chapter}{\numberline {2}TINJAUAN PUSTAKA}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}\textit {State Of The Art}}{7}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Sistem \textit {Point of Sale} (POS)}{11}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Peramalan Penjualan (\textit {Forecasting})}{11}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Arsitektur \textit {Long Short-Term Memory} (LSTM)}{12}{section.2.4}%
+\contentsline {section}{\numberline {2.5}\textit {Framework} Flutter dan Bahasa Dart}{13}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Layanan Supabase dan Integrasi \textit {Cloud}}{13}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Isar Database (\textit {Local Storage})}{14}{section.2.7}%
+\contentsline {section}{\numberline {2.8}Python dan TensorFlow}{14}{section.2.8}%
+\contentsline {chapter}{\numberline {3}METODOLOGI PENELITIAN}{16}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Metode Penelitian}{16}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Data dan Pengumpulan Data}{17}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Teknik Analisis Data}{17}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Alur Penelitian}{18}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Rancangan Sistem}{20}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}\textit {Use Case Diagram}}{20}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}\textit {Activity Diagram}}{24}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}\textit {Entity Relationship Diagram} (ERD)}{30}{subsection.3.5.3}%
+\contentsline {subsection}{\numberline {3.5.4}Perancangan Wireframe}{34}{subsection.3.5.4}%
+\contentsline {subsection}{\numberline {3.5.5}Rancangan Algoritma \textit {Long Short-Term Memory} (LSTM)}{48}{subsection.3.5.5}%
+\contentsline {section}{\numberline {3.6}Teknik Pengujian}{50}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Variabel Penelitian}{51}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Hasil yang Diharapkan}{51}{section.3.8}%
+\contentsline {section}{\numberline {3.9}Rincian Biaya}{52}{section.3.9}%
+\contentsline {section}{\numberline {3.10}Rencana Jadwal Penelitian}{52}{section.3.10}%

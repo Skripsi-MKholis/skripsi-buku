@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.26)  11 JUN 2026 04:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.26)  11 JUN 2026 22:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -700,7 +700,15 @@ File: pgfmodulematrix.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \tikz@expandcount=\count354
  (C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-))) (C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibraryshapes.geometric.code.tex
+))) (C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/pdflscape\pdflscape.sty
+Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
+ (C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/pdflscape\pdflscape-nometadata.sty
+Package: pdflscape-nometadata 2022-10-28 v0.13 Display of landscape pages in PDF (HO)
+ (C:\Program Files\MiKTeX\tex/latex/graphics\lscape.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+)) (C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibraryshapes.geometric.code.tex
 File: tikzlibraryshapes.geometric.code.tex 2025-08-29 v3.1.11a (3.1.11a)
  (C:\Program Files\MiKTeX\tex/generic/pgf/libraries/shapes\pgflibraryshapes.geometric.code.tex
 File: pgflibraryshapes.geometric.code.tex 2025-08-29 v3.1.11a (3.1.11a)
@@ -712,13 +720,37 @@ File: pgflibraryarrows.meta.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgfarrowlinewidth=\dimen318
 ) (C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarypositioning.code.tex
 File: tikzlibrarypositioning.code.tex 2025-08-29 v3.1.11a (3.1.11a)
-)
+) (C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibraryshapes.multipart.code.tex
+File: tikzlibraryshapes.multipart.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+ (C:\Program Files\MiKTeX\tex/generic/pgf/libraries/shapes\pgflibraryshapes.multipart.code.tex
+File: pgflibraryshapes.multipart.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfnodepartlowerbox=\box77
+\pgfnodeparttwobox=\box78
+\pgfnodepartthreebox=\box79
+\pgfnodepartfourbox=\box80
+\pgfnodeparttwentybox=\box81
+\pgfnodepartnineteenbox=\box82
+\pgfnodeparteighteenbox=\box83
+\pgfnodepartseventeenbox=\box84
+\pgfnodepartsixteenbox=\box85
+\pgfnodepartfifteenbox=\box86
+\pgfnodepartfourteenbox=\box87
+\pgfnodepartthirteenbox=\box88
+\pgfnodeparttwelvebox=\box89
+\pgfnodepartelevenbox=\box90
+\pgfnodeparttenbox=\box91
+\pgfnodepartninebox=\box92
+\pgfnodeparteightbox=\box93
+\pgfnodepartsevenbox=\box94
+\pgfnodepartsixbox=\box95
+\pgfnodepartfivebox=\box96
+))
 \mylen=\skip129
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 66.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 67.
 
 
-Package array Warning: Column W is already defined on input line 108.
+Package array Warning: Column W is already defined on input line 109.
 
 (C:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
@@ -726,33 +758,33 @@ File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 ) (Pendanaan.aux)
 \openout1 = `Pendanaan.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 122.
-LaTeX Font Info:    Trying to load font information for OMS+pzccm on input line 122.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OMS/pzccm/m/n on input line 123.
+LaTeX Font Info:    Trying to load font information for OMS+pzccm on input line 123.
  (C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/psnfss\omspzccm.fd
 File: omspzccm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/pzccm.
 )
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 122.
-LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
  (C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count356
 \scratchdimen=\dimen319
-\scratchbox=\box77
+\scratchbox=\box97
 \nofMPsegments=\count357
 \nofMParguments=\count358
 \everyMPshowfont=\toks47
@@ -805,7 +837,7 @@ Package caption Info: End \AtBeginDocument code.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 122.
+Package hyperref Info: Link coloring OFF on input line 123.
 (Pendanaan.out) (Pendanaan.out)
 \@outlinefile=\write4
 \openout4 = `Pendanaan.out'.
@@ -813,42 +845,82 @@ Package hyperref Info: Link coloring OFF on input line 122.
 <../Project/gambar/logo-pnl-skripsi.png, id=146, 126.7134pt x 122.3772pt>
 File: ../Project/gambar/logo-pnl-skripsi.png Graphic file (type png)
 <use ../Project/gambar/logo-pnl-skripsi.png>
-Package pdftex.def Info: ../Project/gambar/logo-pnl-skripsi.png  used on input line 143.
+Package pdftex.def Info: ../Project/gambar/logo-pnl-skripsi.png  used on input line 144.
 (pdftex.def)             Requested size: 99.58464pt x 96.17833pt.
  [1
 
 {C:/Users/acern/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Program Files/MiKTeX/fonts/enc/dvips/base/8r.enc} <../Project/gambar/logo-pnl-skripsi.png>]
-LaTeX Font Info:    Trying to load font information for OT1+ptmcm on input line 199.
+*geometry* verbose mode - [ newgeometry ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(0.0pt, 597.50787pt, 0.0pt)
+* v-part:(T,H,B)=(0.0pt, 845.04684pt, 0.0pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=597.50787pt
+* \textheight=845.04684pt
+* \oddsidemargin=-72.26999pt
+* \evensidemargin=-72.26999pt
+* \topmargin=-111.76999pt
+* \headheight=14.5pt
+* \headsep=25.0pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=35.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+<Gambar/halaman-pengesahan.jpg, id=157, 1988.17781pt x 2982.64313pt>
+File: Gambar/halaman-pengesahan.jpg Graphic file (type jpg)
+<use Gambar/halaman-pengesahan.jpg>
+Package pdftex.def Info: Gambar/halaman-pengesahan.jpg  used on input line 169.
+(pdftex.def)             Requested size: 597.51974pt x 845.01038pt.
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.170 \restoregeometry
+                       [1
+
+ <./Gambar/halaman-pengesahan.jpg>] (Pendanaan.toc
+LaTeX Font Info:    Trying to load font information for OT1+ptmcm on input line 2.
  (C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/psnfss\ot1ptmcm.fd
 File: ot1ptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ptmcm.
 )
-LaTeX Font Info:    Trying to load font information for OML+ptmcm on input line 199.
+LaTeX Font Info:    Trying to load font information for OML+ptmcm on input line 2.
  (C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/psnfss\omlptmcm.fd
 File: omlptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ptmcm.
 )
-LaTeX Font Info:    Trying to load font information for OMX+psycm on input line 199.
+LaTeX Font Info:    Trying to load font information for OMX+psycm on input line 2.
  (C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/psnfss\omxpsycm.fd
 File: omxpsycm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/psycm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 199.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 2.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 199.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 2.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 199.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 199.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 2.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 2.
  (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 199.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 2.
  (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.215 
-       [1] [2] (Pendanaan.toc
 Overfull \hbox (6.0pt too wide) detected at line 27
 \T1/ptm/m/n/12 3.5.1 
  []
@@ -882,7 +954,9 @@ Overfull \hbox (3.0pt too wide) detected at line 36
 \tf@toc=\write5
 \openout5 = `Pendanaan.toc'.
 
- [1] [2] (Pendanaan.lof)
+ [1
+
+] [2] (Pendanaan.lof)
 \tf@lof=\write6
 \openout6 = `Pendanaan.lof'.
 
@@ -896,224 +970,282 @@ Bab 1.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.278 P
-       enerapan metode \textit{Long Short-Term Memory} (LSTM) dalam sistem \... [1
+l.235 
+       [1
 
-]
-pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.293     \item M
-                 erancang dan membangun aplikasi \textit{Point of Sale} (POS... [2] [3] [4] [5]
+] [2] [3] [4] [5] [6]
 Bab 2.
 
-Overfull \hbox (1.99992pt too wide) in paragraph at lines 348--348
+Overfull \hbox (1.99992pt too wide) in paragraph at lines 306--306
  []|\T1/ptm/b/n/10.95 No| 
  []
 
 
-Overfull \hbox (9.04817pt too wide) in paragraph at lines 350--350
+Overfull \hbox (9.04817pt too wide) in paragraph at lines 308--308
 \T1/ptm/b/n/10.95 Di-gu-nak-an|  
  []
 
 
-Overfull \hbox (1.99992pt too wide) in paragraph at lines 358--358
+Overfull \hbox (1.99992pt too wide) in paragraph at lines 316--316
  []|\T1/ptm/b/n/10.95 No| 
  []
 
 
-Overfull \hbox (9.04817pt too wide) in paragraph at lines 360--360
+Overfull \hbox (9.04817pt too wide) in paragraph at lines 318--318
 \T1/ptm/b/n/10.95 Di-gu-nak-an|  
  []
 
 
-Overfull \hbox (3.92102pt too wide) in paragraph at lines 376--376
-\T1/ptm/m/n/10.95 meng-ha-silk-an 
- []
-
-
-Overfull \hbox (0.88812pt too wide) in paragraph at lines 376--376
+Overfull \hbox (0.88812pt too wide) in paragraph at lines 334--334
 \T1/ptm/m/n/10.95 meng-ung-gu-li 
  []
 
 
-Overfull \hbox (4.52359pt too wide) in paragraph at lines 377--377
+Overfull \hbox (4.52359pt too wide) in paragraph at lines 335--335
 \T1/ptm/m/n/10.95 meng-gu-nak-an 
  []
 
 
-Overfull \hbox (4.52359pt too wide) in paragraph at lines 393--393
-\T1/ptm/m/n/10.95 meng-gu-nak-an 
- []
-
-
-Overfull \hbox (5.13658pt too wide) in paragraph at lines 400--400
-\T1/ptm/m/n/10.95 me-ning-katk-an 
- []
-
-
-Overfull \hbox (17.9043pt too wide) in paragraph at lines 401--401
+Overfull \hbox (17.9043pt too wide) in paragraph at lines 343--343
 \T1/ptm/m/n/10.95 meng-em-bangk-an 
  []
 
 
-Overfull \hbox (4.48198pt too wide) in paragraph at lines 407--407
+Overfull \hbox (6.96477pt too wide) in paragraph at lines 350--350
+\T1/ptm/m/n/10.95 ter-sink-ro-ni-sa-si 
+ []
+
+
+Overfull \hbox (16.08656pt too wide) in paragraph at lines 359--359
+\T1/ptm/m/n/10.95 mem-ban-dingk-an 
+ []
+
+
+Overfull \hbox (1.41606pt too wide) in paragraph at lines 365--365
+[]|\T1/ptm/m/n/10.95 Supabase, 
+ []
+
+
+Overfull \hbox (10.85483pt too wide) in paragraph at lines 365--365
+\T1/ptm/m/n/10.95 Pos-tgre-SQL|  
+ []
+
+
+Overfull \hbox (9.33063pt too wide) in paragraph at lines 366--366
+\T1/ptm/m/n/10.95 pe-ngem-bang-an 
+ []
+
+
+Overfull \hbox (4.52359pt too wide) in paragraph at lines 367--367
+\T1/ptm/m/n/10.95 meng-gu-nak-an 
+ []
+
+
+Overfull \hbox (10.90921pt too wide) in paragraph at lines 373--373
+[]|\T1/ptm/m/n/10.95 Multivariate 
+ []
+
+
+Overfull \hbox (6.95432pt too wide) in paragraph at lines 374--374
+\T1/ptm/m/n/10.95 me-nam-bahk-an 
+ []
+
+
+Overfull \hbox (4.52359pt too wide) in paragraph at lines 375--375
+\T1/ptm/m/n/10.95 meng-gu-nak-an 
+ []
+
+
+Overfull \hbox (4.7667pt too wide) in paragraph at lines 381--381
+\T1/ptm/m/n/10.95 Ob-je-ctBox|  
+ []
+
+
+Overfull \hbox (4.52359pt too wide) in paragraph at lines 383--383
+\T1/ptm/m/n/10.95 meng-gu-nak-an 
+ []
+
+
+Overfull \hbox (15.86789pt too wide) in paragraph at lines 391--391
+\T1/ptm/m/n/10.95 meng-hu-bungk-an 
+ []
+
+
+Overfull \hbox (6.35204pt too wide) in paragraph at lines 398--398
+[]|\T1/ptm/m/n/10.95 Meningkatkan 
+ []
+
+
+Overfull \hbox (17.9043pt too wide) in paragraph at lines 399--399
+\T1/ptm/m/n/10.95 meng-em-bangk-an 
+ []
+
+
+Overfull \hbox (4.48198pt too wide) in paragraph at lines 405--405
 \T1/ptm/b/n/10.95 Su-pa-ba-se, 
  []
 
 
-Overfull \hbox (9.52766pt too wide) in paragraph at lines 408--408
+Overfull \hbox (9.52766pt too wide) in paragraph at lines 406--406
 \T1/ptm/m/n/10.95 Lhok-se-u-ma-we.|  
  []
 
-[6
+e:/SKRIPSI/Kholis/skripsi-buku/Pendanaan/Pendanaan.tex:410: ignored error: Infinite glue shrinkage found in box being split [7
 
 ]
-e:/SKRIPSI/Kholis/skripsi-buku/Pendanaan/Pendanaan.tex:412: ignored error: Infinite glue shrinkage found in box being split [7] [8] [9] [10] [11] [12]
+e:/SKRIPSI/Kholis/skripsi-buku/Pendanaan/Pendanaan.tex:410: ignored error: Infinite glue shrinkage found in box being split [8]
+e:/SKRIPSI/Kholis/skripsi-buku/Pendanaan/Pendanaan.tex:410: ignored error: Infinite glue shrinkage found in box being split [9] [10] [11] [12] [13] [14] [15]
 Bab 3.
-[13
+[16
 
-] [14]
-<../Project/gambar/alur_penelitian.png, id=362, 1529.715pt x 927.465pt>
+] [17]
+<../Project/gambar/alur_penelitian.png, id=376, 1529.715pt x 927.465pt>
 File: ../Project/gambar/alur_penelitian.png Graphic file (type png)
 <use ../Project/gambar/alur_penelitian.png>
-Package pdftex.def Info: ../Project/gambar/alur_penelitian.png  used on input line 516.
+Package pdftex.def Info: ../Project/gambar/alur_penelitian.png  used on input line 514.
 (pdftex.def)             Requested size: 338.59023pt x 205.2883pt.
- [15] [16 <../Project/gambar/alur_penelitian.png>]
-<../Rancangan/Mermaid/use_case.png, id=377, 873.2625pt x 1412.27625pt>
+ [18] [19 <../Project/gambar/alur_penelitian.png>]
+<../Rancangan/Mermaid/use_case.png, id=392, 873.2625pt x 1412.27625pt>
 File: ../Rancangan/Mermaid/use_case.png Graphic file (type png)
 <use ../Rancangan/Mermaid/use_case.png>
-Package pdftex.def Info: ../Rancangan/Mermaid/use_case.png  used on input line 535.
+Package pdftex.def Info: ../Rancangan/Mermaid/use_case.png  used on input line 533.
 (pdftex.def)             Requested size: 338.59023pt x 547.57465pt.
- [17] [18 <../Rancangan/Mermaid/use_case.png>] [19] [20]
-<../Project/gambar/activity_checkout.png, id=398, 710.655pt x 3157.7975pt>
+ [20] [21 <../Rancangan/Mermaid/use_case.png>] [22] [23]
+<../Project/gambar/activity_checkout.png, id=412, 710.655pt x 3157.7975pt>
 File: ../Project/gambar/activity_checkout.png Graphic file (type png)
 <use ../Project/gambar/activity_checkout.png>
-Package pdftex.def Info: ../Project/gambar/activity_checkout.png  used on input line 620.
+Package pdftex.def Info: ../Project/gambar/activity_checkout.png  used on input line 618.
 (pdftex.def)             Requested size: 338.59023pt x 1504.54692pt.
- [21]
+ [24]
 Overfull \vbox (882.26935pt too high) has occurred while \output is active []
 
- [22 <../Project/gambar/activity_checkout.png>]
-<../Project/gambar/activity_sync.png, id=408, 677.53125pt x 3437.84375pt>
+ [25 <../Project/gambar/activity_checkout.png>]
+<../Project/gambar/activity_sync.png, id=423, 677.53125pt x 3437.84375pt>
 File: ../Project/gambar/activity_sync.png Graphic file (type png)
 <use ../Project/gambar/activity_sync.png>
-Package pdftex.def Info: ../Project/gambar/activity_sync.png  used on input line 635.
+Package pdftex.def Info: ../Project/gambar/activity_sync.png  used on input line 633.
 (pdftex.def)             Requested size: 338.59023pt x 1718.07838pt.
- [23]
+ [26]
 Overfull \vbox (1095.80081pt too high) has occurred while \output is active []
 
- [24 <../Project/gambar/activity_sync.png>]
-<../Project/gambar/activity_ai.png, id=419, 1056.94875pt x 3171.85pt>
+ [27 <../Project/gambar/activity_sync.png>]
+<../Project/gambar/activity_ai.png, id=433, 1056.94875pt x 3171.85pt>
 File: ../Project/gambar/activity_ai.png Graphic file (type png)
 <use ../Project/gambar/activity_ai.png>
-Package pdftex.def Info: ../Project/gambar/activity_ai.png  used on input line 650.
+Package pdftex.def Info: ../Project/gambar/activity_ai.png  used on input line 648.
 (pdftex.def)             Requested size: 338.59023pt x 1016.07753pt.
- [25]
+ [28]
 Overfull \vbox (393.79996pt too high) has occurred while \output is active []
 
- [26 <../Project/gambar/activity_ai.png>]
-<../Project/gambar/erd.png, id=429, 1911.14pt x 1126.2075pt>
-File: ../Project/gambar/erd.png Graphic file (type png)
-<use ../Project/gambar/erd.png>
-Package pdftex.def Info: ../Project/gambar/erd.png  used on input line 663.
-(pdftex.def)             Requested size: 338.59023pt x 199.51228pt.
- [27 <../Project/gambar/erd.png>] [28]
-<../Rancangan/Wireframe/wireframe_register.png, id=439, 488.82625pt x 1109.14375pt>
+ [29 <../Project/gambar/activity_ai.png>] [30]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 680.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 680.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 680.
+ [31]
+
+LaTeX Warning: Float too large for page by 61.14587pt on input line 844.
+
+[32] [33
+
+
+
+
+]
+<../Rancangan/Wireframe/wireframe_register.png, id=462, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_register.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_register.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_register.png  used on input line 714.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_register.png  used on input line 893.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
-<../Rancangan/Wireframe/wireframe_login.png, id=440, 488.82625pt x 818.05624pt>
+ [34]
+<../Rancangan/Wireframe/wireframe_login.png, id=468, 488.82625pt x 818.05624pt>
 File: ../Rancangan/Wireframe/wireframe_login.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_login.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_login.png  used on input line 725.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_login.png  used on input line 904.
 (pdftex.def)             Requested size: 179.25114pt x 299.97984pt.
- [29 <../Rancangan/Wireframe/wireframe_register.png>]
-<../Rancangan/Wireframe/wireframe_store_list.png, id=447, 488.82625pt x 1109.14375pt>
+ [35 <../Rancangan/Wireframe/wireframe_register.png>]
+<../Rancangan/Wireframe/wireframe_store_list.png, id=474, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_store_list.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_store_list.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_store_list.png  used on input line 736.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_store_list.png  used on input line 915.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
- [30 <../Rancangan/Wireframe/wireframe_login.png>]
-<../Rancangan/Wireframe/wireframe_dashboard_owner.png, id=455, 488.82625pt x 1109.14375pt>
+ [36 <../Rancangan/Wireframe/wireframe_login.png>]
+<../Rancangan/Wireframe/wireframe_dashboard_owner.png, id=481, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_dashboard_owner.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_dashboard_owner.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_dashboard_owner.png  used on input line 747.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_dashboard_owner.png  used on input line 926.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
- [31 <../Rancangan/Wireframe/wireframe_store_list.png>]
-<../Rancangan/Wireframe/wireframe_payment.png, id=461, 488.82625pt x 1035.87pt>
+ [37 <../Rancangan/Wireframe/wireframe_store_list.png>]
+<../Rancangan/Wireframe/wireframe_payment.png, id=488, 488.82625pt x 1035.87pt>
 File: ../Rancangan/Wireframe/wireframe_payment.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_payment.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_payment.png  used on input line 758.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_payment.png  used on input line 937.
 (pdftex.def)             Requested size: 179.25114pt x 379.85178pt.
- [32 <../Rancangan/Wireframe/wireframe_dashboard_owner.png>]
-<../Rancangan/Wireframe/wireframe_transaction_history.png, id=467, 488.82625pt x 1109.14375pt>
+ [38 <../Rancangan/Wireframe/wireframe_dashboard_owner.png>]
+<../Rancangan/Wireframe/wireframe_transaction_history.png, id=494, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_transaction_history.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_transaction_history.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_transaction_history.png  used on input line 769.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_transaction_history.png  used on input line 948.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
- [33 <../Rancangan/Wireframe/wireframe_payment.png>]
-<../Rancangan/Wireframe/wireframe_add_product.png, id=474, 488.82625pt x 1109.14375pt>
+ [39 <../Rancangan/Wireframe/wireframe_payment.png>]
+<../Rancangan/Wireframe/wireframe_add_product.png, id=501, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_add_product.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_add_product.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_add_product.png  used on input line 780.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_add_product.png  used on input line 959.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
- [34 <../Rancangan/Wireframe/wireframe_transaction_history.png>]
-<../Rancangan/Wireframe/wireframe_manage_categories.png, id=480, 488.82625pt x 1109.14375pt>
+ [40 <../Rancangan/Wireframe/wireframe_transaction_history.png>]
+<../Rancangan/Wireframe/wireframe_manage_categories.png, id=507, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_manage_categories.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_manage_categories.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_manage_categories.png  used on input line 791.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_manage_categories.png  used on input line 970.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
- [35 <../Rancangan/Wireframe/wireframe_add_product.png>]
-<../Rancangan/Wireframe/wireframe_reports.png, id=486, 488.82625pt x 1397.22pt>
+ [41 <../Rancangan/Wireframe/wireframe_add_product.png>]
+<../Rancangan/Wireframe/wireframe_reports.png, id=513, 488.82625pt x 1397.22pt>
 File: ../Rancangan/Wireframe/wireframe_reports.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_reports.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_reports.png  used on input line 802.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_reports.png  used on input line 981.
 (pdftex.def)             Requested size: 179.25114pt x 512.35823pt.
- [36 <../Rancangan/Wireframe/wireframe_manage_categories.png>]
-<../Rancangan/Wireframe/wireframe_settings.png, id=493, 488.82625pt x 1236.62pt>
+ [42 <../Rancangan/Wireframe/wireframe_manage_categories.png>]
+<../Rancangan/Wireframe/wireframe_settings.png, id=519, 488.82625pt x 1236.62pt>
 File: ../Rancangan/Wireframe/wireframe_settings.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_settings.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_settings.png  used on input line 813.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_settings.png  used on input line 992.
 (pdftex.def)             Requested size: 179.25114pt x 453.46648pt.
- [37 <../Rancangan/Wireframe/wireframe_reports.png>]
-<../Rancangan/Wireframe/wireframe_store_info.png, id=500, 488.82625pt x 950.55125pt>
+ [43 <../Rancangan/Wireframe/wireframe_reports.png>]
+<../Rancangan/Wireframe/wireframe_store_info.png, id=527, 488.82625pt x 950.55125pt>
 File: ../Rancangan/Wireframe/wireframe_store_info.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_store_info.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_store_info.png  used on input line 824.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_store_info.png  used on input line 1003.
 (pdftex.def)             Requested size: 179.25114pt x 348.56555pt.
- [38 <../Rancangan/Wireframe/wireframe_settings.png>]
-<../Rancangan/Wireframe/wireframe_digital_receipt.png, id=506, 488.82625pt x 975.645pt>
+ [44 <../Rancangan/Wireframe/wireframe_settings.png>]
+<../Rancangan/Wireframe/wireframe_digital_receipt.png, id=533, 488.82625pt x 975.645pt>
 File: ../Rancangan/Wireframe/wireframe_digital_receipt.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_digital_receipt.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_digital_receipt.png  used on input line 835.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_digital_receipt.png  used on input line 1014.
 (pdftex.def)             Requested size: 179.25114pt x 357.76738pt.
- [39 <../Rancangan/Wireframe/wireframe_store_info.png>]
-<../Rancangan/Wireframe/wireframe_product_catalog.png, id=513, 488.82625pt x 1109.14375pt>
+ [45 <../Rancangan/Wireframe/wireframe_store_info.png>]
+<../Rancangan/Wireframe/wireframe_product_catalog.png, id=540, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_product_catalog.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_product_catalog.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_product_catalog.png  used on input line 846.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_product_catalog.png  used on input line 1025.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
- [40 <../Rancangan/Wireframe/wireframe_digital_receipt.png>]
-<../Rancangan/Wireframe/wireframe_dashboard_customer.png, id=520, 488.82625pt x 1201.48875pt>
+ [46 <../Rancangan/Wireframe/wireframe_digital_receipt.png>]
+<../Rancangan/Wireframe/wireframe_dashboard_customer.png, id=547, 488.82625pt x 1201.48875pt>
 File: ../Rancangan/Wireframe/wireframe_dashboard_customer.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_dashboard_customer.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_dashboard_customer.png  used on input line 857.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_dashboard_customer.png  used on input line 1036.
 (pdftex.def)             Requested size: 179.25114pt x 440.58391pt.
- [41 <../Rancangan/Wireframe/wireframe_product_catalog.png>]
+ [47 <../Rancangan/Wireframe/wireframe_product_catalog.png>]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 918.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 918.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 918.
- [42 <../Rancangan/Wireframe/wireframe_dashboard_customer.png>] [43] [44] [45]
-Overfull \hbox (11.95052pt too wide) in paragraph at lines 1030--1030
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1097.
+ [48 <../Rancangan/Wireframe/wireframe_dashboard_customer.png>] [49] [50] [51]
+Overfull \hbox (11.95052pt too wide) in paragraph at lines 1209--1209
 []|\T1/ptm/m/n/10.95 Revisi/Perbaikan 
  []
 
-[46] [47] [48] [49]
+[52] [53] [54] [55]
 *geometry* verbose mode - [ newgeometry ] result:
 * driver: pdftex
 * paper: a4paper
@@ -1146,39 +1278,9 @@ Overfull \hbox (11.95052pt too wide) in paragraph at lines 1030--1030
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
+ [56
 
-Overfull \hbox (28.45274pt too wide) in paragraph at lines 1132--1133
-[][] 
- []
-
-
-Overfull \hbox (4.19316pt too wide) in paragraph at lines 1149--1149
-\T1/ptm/m/n/12 Ke-gi-at-an|  
- []
-
-
-Overfull \hbox (13.33717pt too wide) in paragraph at lines 1149--1149
-[]|\T1/ptm/m/n/12 Hackathon 
- []
-
-
-Overfull \hbox (4.68524pt too wide) in paragraph at lines 1149--1149
-\T1/ptm/m/n/12 PO-LI-CY|  
- []
-
-
-Overfull \hbox (28.45274pt too wide) in paragraph at lines 1149--1150
-[][] 
- []
-
-
-Overfull \hbox (28.45274pt too wide) in paragraph at lines 1164--1165
-[][] 
- []
-
-[50
-
-] (Pendanaan.aux)
+] [57] [58] [59] (Pendanaan.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
@@ -1187,17 +1289,17 @@ Package rerunfilecheck Info: File `Pendanaan.out' has not changed.
 (rerunfilecheck)             Checksum: 9C8D41A2756BFB601B42C9B01594F3AC;5855.
  ) 
 Here is how much of TeX's memory you used:
- 27180 strings out of 467871
- 504956 string characters out of 5428443
- 942985 words of memory out of 5000000
- 55396 multiletter control sequences out of 15000+600000
- 686945 words of font info for 129 fonts, out of 8000000 for 9000
+ 27986 strings out of 467871
+ 529507 string characters out of 5428443
+ 999873 words of memory out of 5000000
+ 56170 multiletter control sequences out of 15000+600000
+ 701132 words of font info for 145 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 88i,12n,94p,947b,1174s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 88i,12n,94p,1151b,1374s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Pendanaan.pdf (57 pages, 2290760 bytes).
+Output written on Pendanaan.pdf (65 pages, 2582603 bytes).
 PDF statistics:
- 666 PDF objects out of 1000 (max. 8388607)
- 179 named destinations out of 1000 (max. 500000)
+ 696 PDF objects out of 1000 (max. 8388607)
+ 189 named destinations out of 1000 (max. 500000)
  398 words of extra memory for PDF output out of 10000 (max. 10000000)
 

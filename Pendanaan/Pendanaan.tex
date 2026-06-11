@@ -33,7 +33,8 @@
 \usepackage{ifthen}
 \usepackage[hidelinks]{hyperref}
 \usepackage{tikz}
-\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+\usepackage{pdflscape}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, shapes.multipart}
 
 %%=============================================================
 %% LAYOUT
@@ -161,59 +162,12 @@ TAHUN 2026}
 \end{titlepage}
 
 %%-------------------------------------------------------------
-%% HALAMAN PERSETUJUAN
+%% HALAMAN PENGESAHAN
 %%-------------------------------------------------------------
-\newpage
+\newgeometry{left=0cm,right=0cm,top=0cm,bottom=0cm}
 \thispagestyle{empty}
-\begin{spacing}{1.5}
-
-\begin{center}
-{\fontsize{14}{16}\selectfont\bfseries HALAMAN PERSETUJUAN}
-\end{center}
-
-\vspace{0.4cm}
-
-\begin{center}
-\textbf{RANCANG BANGUN APLIKASI \textit{POINT OF SALE} DENGAN FITUR PREDIKSI\\
-PENJUALAN HARIAN MENGGUNAKAN METODE \textit{LONG SHORT-TERM}\\
-\textit{MEMORY} (LSTM)}
-\end{center}
-
-\vspace{0.5cm}
-
-\noindent Dipersiapkan dan Disusun oleh\\[0.2cm]
-\indent\textbf{MUHAMMAD KHOLIS}\\
-\indent\textbf{2022573010098}
-
-\vspace{0.5cm}
-
-\noindent Telah disetujui oleh Tim Dosen Pembimbing Penelitian Skripsi
-pada tanggal 10 Juni 2026
-
-\vspace{0.8cm}
-\noindent Buketrata, 10 Juni 2026
-
-\vspace{1cm}
-
-\noindent
-\begin{tabular}{p{0.44\textwidth}p{0.08\textwidth}p{0.38\textwidth}}
-Mengetahui: & & Ketua Pengusul, \\
-Ketua Prodi Teknik Informatika & & \\[3.2cm]
-\textbf{M. Khadafi, S.T., M.T.} & & \textbf{Muhammad Kholis} \\
-NIP. 197507182002121004 & & NIM. 2022573010098 \\
-\end{tabular}
-
-\vspace{1.5cm}
-
-\noindent Menyetujui,\\
-Ketua Jurusan Teknologi Informasi \& Komputer
-
-\vspace{3.2cm}
-
-\noindent\textbf{Salahuddin, S.T., M.Cs.}\\
-NIP. 197404242002121001
-
-\end{spacing}
+\noindent\includegraphics[width=\paperwidth,height=\paperheight]{Gambar/halaman-pengesahan}
+\restoregeometry
 
 %%-------------------------------------------------------------
 %% DAFTAR ISI, DAFTAR GAMBAR, DAFTAR TABEL
@@ -221,6 +175,8 @@ NIP. 197404242002121001
 \newpage
 \pagenumbering{roman}
 \setcounter{page}{1}
+\fancyhf{}
+\cfoot{\thepage}
 \pagestyle{fancy}
 
 \renewcommand{\contentsname}{}
@@ -262,6 +218,8 @@ NIP. 197404242002121001
 \newpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
+\fancyhf{}
+\rhead{\thepage}
 \pagestyle{fancy}
 
 \begin{spacing}{1.5}
@@ -269,15 +227,17 @@ NIP. 197404242002121001
 \chapter[PENDAHULUAN]{\\ PENDAHULUAN}
 
 \section{Latar Belakang Masalah}
-Perkembangan teknologi informasi dan komunikasi telah mendorong terjadinya transformasi digital di berbagai sektor bisnis, termasuk dalam pengelolaan transaksi dan operasional penjualan pada usaha mikro, kecil, dan menengah (UMKM). Pemanfaatan sistem \textit{Point of Sale} (POS) berbasis aplikasi menjadi salah satu solusi yang banyak digunakan untuk membantu pelaku usaha dalam mencatat transaksi, mengelola stok barang, serta menyusun laporan penjualan secara lebih terstruktur dan efisien. Seiring dengan meningkatnya kebutuhan akan pengambilan keputusan yang cepat dan berbasis data, sistem POS tidak lagi hanya berfungsi sebagai alat pencatatan transaksi, tetapi juga dituntut untuk mampu menyediakan informasi analitis yang mendukung strategi bisnis.
+Perkembangan teknologi informasi dan komunikasi telah mendorong terjadinya transformasi digital di berbagai sektor bisnis, termasuk dalam pengelolaan transaksi dan operasional penjualan pada usaha mikro, kecil, dan menengah (UMKM). Pratama dan Handayani [9] mencatat bahwa adopsi teknologi kasir digital di Indonesia masih terbatas, di mana minimnya fitur analitik menjadi penyebab utama UMKM gagal mengantisipasi siklus musiman penjualan. Pemanfaatan sistem \textit{Point of Sale} (POS) berbasis aplikasi menjadi salah satu solusi yang banyak digunakan untuk membantu pelaku usaha dalam mencatat transaksi, mengelola stok barang, serta menyusun laporan penjualan secara lebih terstruktur dan efisien [11].
 
-Pada praktiknya, sebagian besar aplikasi \textit{Point of Sale} yang digunakan oleh UMKM masih bersifat deskriptif, yaitu hanya menampilkan data historis penjualan tanpa adanya kemampuan analisis prediktif. Pelaku usaha umumnya harus melakukan perhitungan dan estimasi penjualan secara manual berdasarkan pengalaman atau intuisi, yang berpotensi menimbulkan kesalahan dalam perencanaan stok, penentuan target penjualan, dan pengelolaan arus kas. Ketidakmampuan sistem dalam memprediksi penjualan harian secara akurat dapat menyebabkan berbagai permasalahan, seperti kelebihan stok, kekurangan stok, serta tidak optimalnya strategi penjualan yang diterapkan.
+Pada praktiknya, sebagian besar aplikasi \textit{Point of Sale} yang digunakan oleh UMKM masih bersifat deskriptif, yaitu hanya menampilkan data historis penjualan tanpa adanya kemampuan analisis prediktif. Pelaku usaha umumnya harus melakukan perhitungan dan estimasi penjualan secara manual berdasarkan pengalaman atau intuisi, yang berpotensi menimbulkan kesalahan dalam perencanaan stok, penentuan target penjualan, dan pengelolaan arus kas. Ketidakmampuan sistem dalam memprediksi penjualan harian secara akurat dapat menyebabkan berbagai permasalahan, seperti kelebihan stok (\textit{overstock}), kekurangan persediaan (\textit{stockout}), serta tidak optimalnya strategi penjualan yang diterapkan [2].
 
-Perkembangan teknologi kecerdasan buatan, khususnya dalam bidang \textit{machine learning} dan \textit{deep learning}, membuka peluang untuk menghadirkan fitur prediksi penjualan yang lebih akurat dan adaptif terhadap pola data historis. Salah satu metode \textit{deep learning} yang banyak digunakan dalam analisis data runtun waktu (\textit{time series}) adalah \textit{Long Short-Term Memory} (LSTM). Metode LSTM memiliki keunggulan dalam mempelajari pola jangka pendek dan jangka panjang pada data penjualan harian, sehingga mampu menghasilkan prediksi yang lebih baik dibandingkan metode statistik konvensional.
+Perkembangan teknologi kecerdasan buatan, khususnya dalam bidang \textit{deep learning}, membuka peluang untuk menghadirkan fitur prediksi penjualan yang lebih akurat dan adaptif terhadap pola data historis. Salah satu metode \textit{deep learning} yang banyak digunakan dalam analisis data runtun waktu (\textit{time series}) adalah \textit{Long Short-Term Memory} (LSTM). Abbas dkk.~[1] membuktikan bahwa LSTM mengungguli model ARIMA konvensional dalam memprediksi data penjualan ritel harian yang memiliki tingkat fluktuasi non-linier tinggi, dengan penurunan \textit{error} hingga 15\%. Wilson dan Davies [14] menjelaskan bahwa mekanisme \textit{forget gate} pada arsitektur LSTM mampu mempertahankan memori pola penjualan jangka panjang, seperti tren musiman akibat periode Ramadan atau Tahun Baru, yang sering menjadi titik kritis bagi operasional UMKM. Choi dan Lee [3] lebih lanjut menunjukkan bahwa penambahan variabel kontekstual seperti jumlah transaksi harian pada model LSTM multivariate dapat meningkatkan akurasi prediksi secara signifikan.
 
-Penerapan metode \textit{Long Short-Term Memory} (LSTM) dalam sistem \textit{Point of Sale} diharapkan dapat membantu pelaku usaha dalam memprediksi penjualan harian berdasarkan data transaksi sebelumnya. Dengan adanya fitur prediksi penjualan, sistem POS tidak hanya berperan sebagai alat pencatatan transaksi, tetapi juga sebagai sistem pendukung keputusan yang dapat memberikan gambaran tren penjualan di masa mendatang. Informasi prediksi tersebut dapat dimanfaatkan untuk perencanaan stok barang, pengaturan strategi promosi, serta pengelolaan keuangan usaha secara lebih efektif dan efisien.
+Tantangan infrastruktur menjadi hambatan nyata bagi UMKM di daerah, khususnya koneksi internet yang tidak stabil. Martinez dan Silva [6] menunjukkan bahwa arsitektur \textit{offline-first} menggunakan basis data lokal \textit{embedded} merupakan solusi efektif untuk menjamin kelancaran operasional sistem pada kondisi jaringan yang tidak andal. Novikov dan Petrov [8] membuktikan bahwa Isar DB unggul sebagai basis data lokal pada aplikasi Flutter berkat kecepatan operasi baca dan tulis yang optimal dibandingkan alternatif seperti Hive dan ObjectBox. Untuk mendukung ekosistem \textit{cloud backend} yang andal, Fischer dan Weber [4] mengevaluasi Supabase sebagai platform \textit{Backend-as-a-Service} (BaaS) \textit{open-source} yang menawarkan fitur \textit{Row Level Security} (RLS) dan \textit{real-time subscription} yang sesuai untuk pengelolaan data transaksi multi-tenant UMKM.
 
-Berdasarkan permasalahan tersebut, maka diperlukan suatu penelitian yang merancang dan membangun aplikasi \textit{Point of Sale} dengan fitur prediksi penjualan harian menggunakan metode \textit{Long Short-Term Memory} (LSTM). Penelitian ini diharapkan dapat menghasilkan sebuah aplikasi POS yang mampu memberikan nilai tambah bagi pengguna melalui pemanfaatan teknologi kecerdasan buatan, serta menjadi referensi bagi pengembangan sistem \textit{Point of Sale} berbasis \textit{machine learning} di masa mendatang.
+Meskipun riset terdahulu telah membuktikan keunggulan masing-masing komponen secara terpisah, belum ada penelitian yang mengintegrasikan keseluruhan komponen tersebut menjadi satu sistem yang utuh. Kumar dan Sharma [5] menyoroti tantangan latensi ketika modul AI di-\textit{deploy} sebagai layanan terpisah yang dipanggil oleh aplikasi klien kasir. Nguyen dan Tran [7] merekomendasikan pemisahan beban kerja transaksional dengan beban kerja analitik melalui arsitektur \textit{microservices} untuk menjamin sistem kasir tidak mengalami gangguan selama proses pelatihan model. Roberts dan Thomas [10] membahas standarisasi pengiriman data dari aplikasi \textit{mobile} ke server AI berbasis REST API, yang menjadi jembatan integrasi antara sistem POS dan modul prediksi.
+
+Berdasarkan permasalahan tersebut, maka diperlukan suatu penelitian yang merancang dan membangun aplikasi \textit{Point of Sale} berbasis \textit{mobile} Android dengan arsitektur \textit{offline-first} menggunakan \textit{framework} Flutter dan Isar DB, yang secara bersamaan dilengkapi fitur prediksi penjualan harian berbasis metode LSTM yang dieksekusi di sisi server melalui \textit{REST API}. Penelitian ini diharapkan menghasilkan sebuah sistem POS yang sekaligus berfungsi sebagai \textit{Decision Support System} bagi pelaku UMKM di Lhokseumawe dalam mengambil keputusan manajemen stok dan strategi penjualan secara lebih akurat dan berbasis data.
 
 \section{Rumusan Masalah}
 Berdasarkan latar belakang yang telah diuraikan, maka rumusan masalah dalam penelitian ini adalah sebagai berikut:
@@ -333,11 +293,9 @@ Bab ini menjelaskan tahapan metodologi penelitian yang dilakukan, meliputi jenis
 
 \section{\textit{State Of The Art}}
 
-Penelitian terkait prediksi penjualan dan pengembangan sistem \textit{Point of Sale} berbasis \textit{mobile} telah mengalami perkembangan signifikan seiring meningkatnya pemanfaatan teknologi \textit{deep learning} dan komputasi awan. Berbagai penelitian telah dilakukan dengan fokus pada peramalan data deret waktu (\textit{time series}) menggunakan metode jaringan saraf tiruan, khususnya \textit{Long Short-Term Memory} (LSTM), maupun pada pengembangan sistem POS berbasis Android yang memanfaatkan layanan \textit{cloud}.
+Penelitian terkait prediksi penjualan dan pengembangan sistem \textit{Point of Sale} berbasis \textit{mobile} telah mengalami perkembangan signifikan seiring meningkatnya pemanfaatan teknologi \textit{deep learning} dan komputasi awan. Abbas dkk.~[1] dan Zhang dan Liu [15] membuktikan keunggulan LSTM dibandingkan model statistik konvensional maupun arsitektur \textit{Gated Recurrent Unit} (GRU) dalam menangkap pola non-linier pada data penjualan ritel. Choi dan Lee [3] memperluas pendekatan ini dengan menggunakan model multivariate yang menggabungkan variabel kontekstual seperti frekuensi transaksi harian. Di sisi pengembangan sistem, Setiawan dan Nugroho [11] serta Pratama dan Handayani [9] mengembangkan aplikasi POS berbasis Android untuk UMKM, namun keduanya bersifat murni deskriptif tanpa komponen prediksi analitik.
 
-Secara umum, penelitian terdahulu dapat dikelompokkan ke dalam dua kategori utama. Pertama, penelitian yang berfokus pada penerapan metode \textit{deep learning} untuk memprediksi data penjualan ritel, baik produk makanan, elektronik, maupun komoditas lainnya, dengan tujuan meningkatkan akurasi estimasi permintaan. Kedua, penelitian yang mengembangkan aplikasi POS \textit{mobile} berbasis Android menggunakan berbagai platform \textit{backend} seperti Firebase atau Supabase, yang umumnya bersifat deskriptif dan belum dilengkapi kemampuan prediksi analitik.
-
-Meskipun demikian, penelitian yang secara spesifik mengintegrasikan modul prediksi penjualan berbasis LSTM langsung ke dalam sistem POS \textit{mobile} yang beroperasi secara \textit{offline-first} untuk konteks UMKM masih sangat terbatas. Ringkasan penelitian terdahulu tersebut disajikan dalam bentuk tabel \textit{State of The Art} yang dapat dilihat pada Tabel \ref{tab:sota}.
+Meskipun demikian, penelitian yang secara spesifik mengintegrasikan modul prediksi penjualan berbasis LSTM langsung ke dalam sistem POS \textit{mobile} yang beroperasi secara \textit{offline-first} untuk konteks UMKM masih sangat terbatas. Ringkasan penelitian terdahulu tersebut disajikan dalam Tabel~\ref{tab:sota}.
 
 \setlength{\tabcolsep}{4pt}
 {\small\setstretch{1.1}
@@ -371,38 +329,78 @@ Meskipun demikian, penelitian yang secara spesifik mengintegrasikan modul predik
 \endlastfoot
 
 1 &
-Penelitian prediksi penjualan produk aerosol menggunakan perbandingan metode \textit{deep learning} dan statistik klasik. &
-LSTM, ARIMA, GRU &
-LSTM menghasilkan MAPE terbaik 10,76\%, mengungguli ARIMA (11,23\%) dan GRU (11,47\%) dalam menangkap tren jangka panjang. &
+Abbas dkk.~(2021) [1]. \textit{Sales Forecasting Using LSTM Networks in Retail Industry}. &
+LSTM, ARIMA &
+LSTM mengungguli ARIMA pada data penjualan non-linier dengan penurunan \textit{error} hingga 15\%. &
 Sama-sama menggunakan LSTM untuk prediksi data penjualan berbasis deret waktu. &
-Penelitian sebelumnya hanya membandingkan metode tanpa mengintegrasikan hasil prediksi ke dalam sistem operasional; penelitian ini mengintegrasikan LSTM ke dalam aplikasi POS. \\
+Model bersifat \textit{standalone} tanpa integrasi sistem kasir nyata; penelitian ini mengintegrasikan LSTM ke dalam aplikasi POS. \\
 \hline
 
 2 &
-Prediksi penjualan produk makanan pada koperasi sekolah di Malang menggunakan arsitektur LSTM hibrida. &
-LSTM Hibrida &
-Akurasi prediksi mencapai 88,19\% pada produk makanan dengan volatilitas tinggi. &
-Sama-sama menerapkan LSTM untuk prediksi penjualan harian pada skala usaha kecil. &
-Penelitian sebelumnya tidak memiliki sistem pencatatan transaksi terintegrasi; penelitian ini membangun POS sekaligus modul prediksi dalam satu aplikasi. \\
+Setiawan \& Nugroho (2023) [11]. \textit{Development of Cross-Platform POS Application using Flutter for SMEs}. &
+Flutter, Firebase &
+Aplikasi kasir stabil dan mampu mencatat transaksi secara \textit{real-time}. &
+Sama-sama mengembangkan aplikasi POS berbasis Android untuk UMKM. &
+Aplikasi murni deskriptif tanpa fungsi prediksi analitik; penelitian ini menambahkan modul LSTM terintegrasi. \\
 \hline
 
 3 &
-Prediksi penjualan laptop berdasarkan kategori rentang harga menggunakan LSTM. &
-LSTM &
-LSTM sangat akurat untuk kategori \textit{mid-end} dengan R-squared mencapai 0,9890. &
-Sama-sama menggunakan LSTM sebagai model prediksi berbasis data historis. &
-Penelitian sebelumnya bersifat \textit{standalone} dan tidak terhubung dengan sistem POS; penelitian ini menyajikan prediksi langsung dari data transaksi POS riil. \\
+Martinez \& Silva (2022) [6]. \textit{Architecture Design of Offline-First Mobile Application using Local Embedded Database}. &
+\textit{Offline-First}, SQLite &
+Data tersinkronisasi aman tanpa tumpang tindih saat kembali \textit{online}. &
+Sama-sama menerapkan arsitektur \textit{offline-first} pada aplikasi \textit{mobile}. &
+Tidak menguji volume data besar dan tidak memiliki komponen AI; penelitian ini mengintegrasikan keduanya. \\
 \hline
 
 4 &
-Rangga Gelar Guntara (2022). Pengembangan aplikasi POS \textit{mobile} berbasis \textit{cloud computing} untuk UMKM. &
-Sistem POS berbasis Android dan Firebase &
-Penggunaan \textit{cloud computing} meningkatkan fleksibilitas pemantauan bisnis secara \textit{real-time}. &
-Sama-sama mengembangkan aplikasi POS berbasis Android untuk kebutuhan operasional UMKM. &
-Penelitian sebelumnya tidak memiliki fitur prediksi penjualan dan tidak mendukung operasi \textit{offline-first}; penelitian ini menambahkan modul LSTM dan arsitektur \textit{offline-first}. \\
+Zhang \& Liu (2022) [15]. \textit{Comparative Analysis of LSTM and GRU for Time-Series Sales Forecasting}. &
+LSTM, GRU &
+LSTM memberikan akurasi lebih stabil pada data tren penjualan multi-tahun. &
+Sama-sama membandingkan model \textit{deep learning} untuk prediksi deret waktu penjualan. &
+Memerlukan daya komputasi tinggi; penelitian ini men-\textit{deploy} model di server \textit{cloud} terpisah agar tidak membebani perangkat. \\
 \hline
 
 5 &
+Fischer \& Weber (2024) [4]. \textit{Evaluating Open-Source BaaS Platforms: A Case Study on Supabase and PostgreSQL}. &
+Supabase, PostgreSQL &
+RLS Supabase memangkas waktu pengembangan \textit{backend} hingga 40\%. &
+Sama-sama menggunakan Supabase sebagai infrastruktur \textit{backend cloud}. &
+Belum diuji untuk performa \textit{mobile dynamic sync} berskala harian; penelitian ini mengujinya dalam konteks UMKM. \\
+\hline
+
+6 &
+Choi \& Lee (2022) [3]. \textit{Multivariate Time-Series Forecasting for Retail Sales Using LSTM with Economic Indicators}. &
+Multivariate LSTM &
+Akurasi model naik dengan menambahkan variabel kontekstual seperti hari libur. &
+Sama-sama menggunakan variabel transaksi harian sebagai input model LSTM. &
+Bergantung pada data eksternal yang sulit diakses pelaku UMKM kecil; penelitian ini menggunakan data transaksi internal saja. \\
+\hline
+
+7 &
+Novikov \& Petrov (2023) [8]. \textit{Performance Comparison of Local NoSQL Embedded Databases in Flutter: Hive, ObjectBox, and Isar}. &
+Isar DB, Hive, ObjectBox &
+Isar DB tercepat dalam operasi \textit{batch insert} transaksi pada perangkat Android. &
+Sama-sama menggunakan Isar DB sebagai \textit{local storage} pada aplikasi Flutter. &
+Belum diintegrasikan ke arsitektur sinkronisasi \textit{cloud}; penelitian ini mengintegrasikan keduanya secara penuh. \\
+\hline
+
+8 &
+Brown \& Green (2021) [2]. \textit{Demand Forecasting for Inventory Management in Small Retail Stores Using Neural Networks}. &
+Neural Networks &
+Mampu memprediksi \textit{demand} mingguan dengan MAPE 12\%. &
+Sama-sama menghubungkan prediksi penjualan ke manajemen stok barang. &
+Rentang prediksi mingguan terlalu luas; penelitian ini berfokus pada prediksi harian yang lebih granular. \\
+\hline
+
+9 &
+Guntara (2022). Pengembangan Aplikasi POS \textit{Mobile} Berbasis \textit{Cloud Computing} untuk UMKM. &
+Android, Firebase &
+Meningkatkan fleksibilitas pemantauan bisnis secara \textit{real-time}. &
+Sama-sama mengembangkan aplikasi POS berbasis Android untuk UMKM lokal. &
+Sangat bergantung koneksi internet tanpa dukungan \textit{offline-first} dan tanpa modul prediksi penjualan. \\
+\hline
+
+10 &
 \textbf{Penelitian Ini.} Rancang Bangun Aplikasi \textit{Point of Sale} dengan Fitur Prediksi Penjualan Harian Menggunakan Metode LSTM. &
 \textbf{LSTM, Flutter, Supabase, Isar DB} &
 Aplikasi POS \textit{mobile offline-first} terintegrasi dengan prediksi penjualan harian berbasis LSTM untuk UMKM di Lhokseumawe. &
@@ -412,25 +410,25 @@ Aplikasi POS \textit{mobile offline-first} terintegrasi dengan prediksi penjuala
 \end{longtable}
 }
 
-Berdasarkan kajian terhadap penelitian terdahulu pada Tabel \ref{tab:sota}, dapat disimpulkan bahwa sebagian besar penelitian prediksi penjualan menggunakan LSTM masih bersifat \textit{standalone}, yakni tidak terintegrasi dengan sistem pencatatan transaksi yang aktif digunakan. Sebaliknya, penelitian pengembangan sistem POS \textit{mobile} yang ada belum dilengkapi kemampuan analitik prediktif berbasis \textit{machine learning}. Selain itu, belum ada sistem POS untuk UMKM yang secara bersamaan menerapkan arsitektur \textit{offline-first} sekaligus menyertakan modul prediksi LSTM terintegrasi.
+Berdasarkan kajian terhadap penelitian terdahulu pada Tabel~\ref{tab:sota}, dapat disimpulkan bahwa sebagian besar penelitian prediksi penjualan menggunakan LSTM masih bersifat \textit{standalone}, yakni tidak terintegrasi dengan sistem pencatatan transaksi yang aktif digunakan. Sebaliknya, penelitian pengembangan sistem POS \textit{mobile} yang ada belum dilengkapi kemampuan analitik prediktif berbasis \textit{machine learning}. Selain itu, belum ada sistem POS untuk UMKM yang secara bersamaan menerapkan arsitektur \textit{offline-first} sekaligus menyertakan modul prediksi LSTM terintegrasi.
 
-Oleh karena itu, penelitian ini hadir untuk mengisi celah tersebut dengan mengusulkan sistem yang menggabungkan ketiga aspek sekaligus, yaitu: (1) aplikasi POS \textit{mobile} berbasis Flutter dengan kemampuan operasional \textit{offline-first} menggunakan Isar DB dan sinkronisasi otomatis ke Supabase; (2) modul prediksi penjualan harian berbasis LSTM yang dilatih dari data transaksi riil mitra UMKM di Lhokseumawe; dan (3) penyajian hasil prediksi secara langsung kepada pengguna melalui dasbor analitik di dalam aplikasi yang sama.
+Oleh karena itu, penelitian ini hadir untuk mengisi celah tersebut dengan mengusulkan sistem yang menggabungkan ketiga aspek sekaligus, yaitu: (1) aplikasi POS \textit{mobile} berbasis Flutter dengan kemampuan operasional \textit{offline-first} menggunakan Isar DB dan sinkronisasi otomatis ke Supabase [4],[8]; (2) modul prediksi penjualan harian berbasis LSTM yang dilatih dari data transaksi riil mitra UMKM di Lhokseumawe [1],[3],[14]; dan (3) penyajian hasil prediksi secara langsung kepada pengguna melalui dasbor analitik di dalam aplikasi yang sama [10].
 
 \section{Sistem \textit{Point of Sale} (POS)}
 
-Sistem \textit{Point of Sale} (POS) merupakan kombinasi perangkat keras dan perangkat lunak yang digunakan untuk memproses transaksi penjualan pada titik pembelian. Dalam konteks UMKM, sistem POS berfungsi sebagai alat pencatatan transaksi, pengelolaan stok barang, dan pelaporan keuangan yang menggantikan proses manual berbasis buku catatan. Perkembangan teknologi \textit{mobile} telah mendorong lahirnya aplikasi POS berbasis Android yang lebih fleksibel, murah, dan mudah dioperasikan oleh pelaku usaha kecil tanpa keahlian teknis khusus.
+Sistem \textit{Point of Sale} (POS) merupakan kombinasi perangkat keras dan perangkat lunak yang digunakan untuk memproses transaksi penjualan pada titik pembelian. Dalam konteks UMKM, sistem POS berfungsi sebagai alat pencatatan transaksi, pengelolaan stok barang, dan pelaporan keuangan yang menggantikan proses manual berbasis buku catatan. Perkembangan teknologi \textit{mobile} telah mendorong lahirnya aplikasi POS berbasis Android yang lebih fleksibel, murah, dan mudah dioperasikan oleh pelaku usaha kecil tanpa keahlian teknis khusus [9],[11].
 
-Sistem POS modern yang dirancang untuk UMKM memerlukan pendekatan yang berbeda dibandingkan sistem ritel skala besar. Fokus utama harus terletak pada kesederhanaan alur kerja kasir, kecepatan proses transaksi, dan kemampuan beroperasi dalam kondisi konektivitas internet yang tidak stabil. Arsitektur \textit{offline-first} menjadi solusi utama untuk memastikan kelancaran operasional, di mana data transaksi disimpan terlebih dahulu secara lokal dan disinkronkan ke \textit{cloud} secara otomatis ketika koneksi tersedia.
+Sistem POS modern yang dirancang untuk UMKM memerlukan pendekatan yang berbeda dibandingkan sistem ritel skala besar. Fokus utama harus terletak pada kesederhanaan alur kerja kasir, kecepatan proses transaksi, dan kemampuan beroperasi dalam kondisi konektivitas internet yang tidak stabil. Arsitektur \textit{offline-first} menjadi solusi utama untuk memastikan kelancaran operasional, di mana data transaksi disimpan terlebih dahulu secara lokal dan disinkronkan ke \textit{cloud} secara otomatis ketika koneksi tersedia [6].
 
 \section{Peramalan Penjualan (\textit{Forecasting})}
 
 Peramalan penjualan merupakan proyeksi teknis dari permintaan pelanggan potensial untuk periode waktu tertentu berdasarkan asumsi-asumsi yang ditetapkan. Menurut Heizer dan Render, peramalan yang akurat sangat krusial dalam manajemen operasi karena mempengaruhi keputusan strategis di bidang pemasaran, keuangan, dan sumber daya manusia. Terdapat empat prinsip utama dalam peramalan: peramalan jarang sekali sempurna, peramalan jangka pendek biasanya lebih akurat daripada jangka panjang, peramalan agregat lebih akurat daripada peramalan item individu, dan pemilihan metode harus disesuaikan dengan pola data (horizontal, tren, musiman, atau siklis).
 
-Metode kuantitatif dalam peramalan mengandalkan model matematika untuk memproyeksikan data masa lalu ke masa depan. Dalam konteks ritel, tantangan utama adalah menangani variasi musiman, yaitu fluktuasi yang berulang dalam jangka waktu kurang dari satu tahun, seperti lonjakan penjualan menjelang hari raya atau awal bulan. Pendekatan berbasis \textit{deep learning}, khususnya LSTM, terbukti lebih unggul dibandingkan metode statistik konvensional seperti ARIMA dalam menangkap pola jangka panjang pada data penjualan harian yang bersifat nonlinier.
+Metode kuantitatif dalam peramalan mengandalkan model matematika untuk memproyeksikan data masa lalu ke masa depan. Dalam konteks ritel, tantangan utama adalah menangani variasi musiman, yaitu fluktuasi yang berulang dalam jangka waktu kurang dari satu tahun, seperti lonjakan penjualan menjelang hari raya atau awal bulan. Pendekatan berbasis \textit{deep learning}, khususnya LSTM, terbukti lebih unggul dibandingkan metode statistik konvensional seperti ARIMA dalam menangkap pola jangka panjang pada data penjualan harian yang bersifat nonlinier [1],[15]. Evaluasi akurasi model peramalan umumnya menggunakan kombinasi metrik MAE (\textit{Mean Absolute Error}), RMSE (\textit{Root Mean Square Error}), dan MAPE (\textit{Mean Absolute Percentage Error}) secara bersamaan untuk menghindari bias pembacaan akurasi akibat lonjakan data [12]. Brown dan Green [2] menunjukkan bahwa prediksi berbasis jaringan saraf tiruan dapat mencapai MAPE 12\% pada data permintaan ritel kecil, sementara penggunaan pendekatan multivariate dapat meningkatkan presisi tersebut lebih jauh [3].
 
 \section{Arsitektur \textit{Long Short-Term Memory} (LSTM)}
 
-LSTM adalah jenis khusus dari \textit{Recurrent Neural Network} (RNN) yang memiliki kemampuan untuk mempelajari ketergantungan jangka panjang dalam urutan data. Arsitektur LSTM dirancang untuk mengatasi masalah \textit{vanishing gradient} yang menghambat RNN standar dalam memproses informasi yang terpisah jauh dalam satu urutan. Komponen inti dari unit LSTM adalah \textit{cell state} (keadaan sel) yang bertindak sebagai jalur informasi utama, serta tiga gerbang fungsional:
+LSTM adalah jenis khusus dari \textit{Recurrent Neural Network} (RNN) yang memiliki kemampuan untuk mempelajari ketergantungan jangka panjang dalam urutan data [1],[14]. Arsitektur LSTM dirancang untuk mengatasi masalah \textit{vanishing gradient} yang menghambat RNN standar dalam memproses informasi yang terpisah jauh dalam satu urutan [14]. Komponen inti dari unit LSTM adalah \textit{cell state} (keadaan sel) yang bertindak sebagai jalur informasi utama, serta tiga gerbang fungsional:
 \begin{enumerate}
     \item \textbf{\textit{Forget Gate}:} Menggunakan fungsi aktivasi sigmoid untuk menentukan bagian informasi dari status sel sebelumnya yang harus dibuang.
     \item \textbf{\textit{Input Gate}:} Memutuskan informasi baru mana yang akan diperbarui ke dalam status sel melalui kombinasi fungsi sigmoid dan tanh.
@@ -446,25 +444,25 @@ Persamaan matematis untuk pembaruan status sel $C_t$ dapat dinyatakan sebagai be
 
 \section{\textit{Framework} Flutter dan Bahasa Dart}
 
-Flutter merupakan \textit{framework} pengembangan aplikasi \textit{cross-platform} yang dikembangkan oleh Google dan menggunakan mesin grafis Skia untuk merender antarmuka pengguna secara langsung, menghasilkan performa tinggi mendekati aplikasi \textit{native}. Bahasa pemrograman Dart yang menyertai Flutter mendukung fitur \textit{Just-In-Time} (JIT) untuk pengembangan cepat dan \textit{Ahead-Of-Time} (AOT) untuk rilis produksi yang efisien. Arsitektur \textit{widget} pada Flutter memungkinkan pengembang membangun komponen antarmuka yang modular dan dapat digunakan kembali, sangat cocok untuk aplikasi POS yang memiliki banyak elemen interaktif.
+Flutter merupakan \textit{framework} pengembangan aplikasi \textit{cross-platform} yang dikembangkan oleh Google dan menggunakan mesin grafis Skia untuk merender antarmuka pengguna secara langsung, menghasilkan performa tinggi mendekati aplikasi \textit{native} [11]. Bahasa pemrograman Dart yang menyertai Flutter mendukung fitur \textit{Just-In-Time} (JIT) untuk pengembangan cepat dan \textit{Ahead-Of-Time} (AOT) untuk rilis produksi yang efisien. Arsitektur \textit{widget} pada Flutter memungkinkan pengembang membangun komponen antarmuka yang modular dan dapat digunakan kembali, sangat cocok untuk aplikasi POS yang memiliki banyak elemen interaktif.
 
-Dalam penelitian ini, Flutter dipilih sebagai \textit{framework} utama pengembangan aplikasi \textit{mobile} karena kemampuannya menghasilkan aplikasi Android berkinerja tinggi dari satu basis kode, serta dukungan ekosistem \textit{package} yang kaya untuk integrasi fitur seperti koneksi Bluetooth, pemindaian barcode, dan komunikasi \textit{REST API}.
+Dalam penelitian ini, Flutter dipilih sebagai \textit{framework} utama pengembangan aplikasi \textit{mobile} karena kemampuannya menghasilkan aplikasi Android berkinerja tinggi dari satu basis kode, serta dukungan ekosistem \textit{package} yang kaya untuk integrasi fitur seperti koneksi Bluetooth, pemindaian barcode, dan komunikasi \textit{REST API} [10],[11].
 
 \section{Layanan Supabase dan Integrasi \textit{Cloud}}
 
-Supabase merupakan platform \textit{Backend-as-a-Service} (BaaS) \textit{open-source} yang menyediakan lapisan infrastruktur matang di atas basis data PostgreSQL. Supabase mencakup fitur autentikasi pengguna, \textit{real-time subscriptions}, penyimpanan file, dan \textit{Row Level Security} (RLS) yang memungkinkan pengelolaan hak akses data secara granular. Fitur \textit{real-time subscriptions} pada Supabase memungkinkan aplikasi \textit{mobile} menerima pembaruan data secara instan tanpa perlu melakukan \textit{polling} ke server.
+Supabase merupakan platform \textit{Backend-as-a-Service} (BaaS) \textit{open-source} yang menyediakan lapisan infrastruktur matang di atas basis data PostgreSQL [4]. Supabase mencakup fitur autentikasi pengguna, \textit{real-time subscriptions}, penyimpanan file, dan \textit{Row Level Security} (RLS) yang memungkinkan pengelolaan hak akses data secara granular. Fischer dan Weber [4] membuktikan bahwa penggunaan RLS pada Supabase dapat memangkas waktu pengembangan \textit{backend} hingga 40\% sekaligus mengamankan data transaksi multi-tenant. Fitur \textit{real-time subscriptions} pada Supabase memungkinkan aplikasi \textit{mobile} menerima pembaruan data secara instan tanpa perlu melakukan \textit{polling} ke server.
 
-Penggunaan Supabase dalam penelitian ini memfasilitasi penyimpanan data transaksi dalam jumlah besar yang nantinya akan ditarik oleh modul Python di server untuk proses pelatihan model AI. Supabase juga menangani autentikasi multi-pengguna (Owner dan Kasir) dengan mekanisme \textit{Role-Based Access Control} (RBAC) yang terimplementasi langsung di lapisan basis data.
+Penggunaan Supabase dalam penelitian ini memfasilitasi penyimpanan data transaksi dalam jumlah besar yang nantinya akan ditarik oleh modul Python di server untuk proses pelatihan model AI. Supabase juga menangani autentikasi multi-pengguna (Owner dan Kasir) dengan mekanisme \textit{Role-Based Access Control} (RBAC) yang terimplementasi langsung di lapisan basis data, memastikan privasi data antar-merchant terjaga [13].
 
 \section{Isar Database (\textit{Local Storage})}
 
-Isar DB adalah basis data \textit{embedded} berkinerja tinggi yang dirancang khusus untuk Flutter dan mendukung operasi baca/tulis secara \textit{asynchronous} tanpa memerlukan koneksi internet. Isar DB beroperasi langsung di perangkat pengguna menggunakan format penyimpanan \textit{binary} yang dioptimalkan untuk kecepatan tinggi, serta mendukung kueri kompleks dengan antarmuka yang intuitif.
+Isar DB adalah basis data \textit{embedded} berkinerja tinggi yang dirancang khusus untuk Flutter dan mendukung operasi baca/tulis secara \textit{asynchronous} tanpa memerlukan koneksi internet. Novikov dan Petrov [8] membuktikan bahwa Isar DB memiliki kecepatan \textit{batch insert} dan pembacaan data sekuensial yang paling optimal dibandingkan basis data lokal lain yang umum digunakan pada Flutter, yakni Hive dan ObjectBox. Isar DB beroperasi langsung di perangkat pengguna menggunakan format penyimpanan \textit{binary} yang dioptimalkan untuk kecepatan tinggi, serta mendukung kueri kompleks dengan antarmuka yang intuitif.
 
-Dalam penelitian ini, Isar DB berperan sebagai penyimpanan lokal utama pada perangkat \textit{mobile} untuk menjamin kelancaran operasional kasir dalam kondisi \textit{offline}. Seluruh transaksi yang dilakukan tanpa koneksi akan disimpan terlebih dahulu di Isar DB, kemudian disinkronkan secara otomatis ke Supabase oleh mesin \texttt{SyncNotifier} ketika koneksi internet tersedia kembali.
+Dalam penelitian ini, Isar DB berperan sebagai penyimpanan lokal utama pada perangkat \textit{mobile} untuk menjamin kelancaran operasional kasir dalam kondisi \textit{offline} [6],[8]. Seluruh transaksi yang dilakukan tanpa koneksi akan disimpan terlebih dahulu di Isar DB, kemudian disinkronkan secara otomatis ke Supabase oleh mesin \texttt{SyncNotifier} ketika koneksi internet tersedia kembali.
 
 \section{Python dan TensorFlow}
 
-Python dipilih sebagai bahasa pemrograman untuk pengembangan modul prediksi di sisi server (\textit{server-side}) karena ekosistemnya yang kaya dalam bidang \textit{machine learning} dan analisis data. TensorFlow dengan antarmuka tingkat tinggi Keras digunakan untuk membangun, melatih, dan menyimpan model LSTM. Proses pelatihan model dilakukan di server menggunakan data transaksi yang ditarik dari Supabase, kemudian model yang telah terlatih di-\textit{deploy} sebagai layanan prediksi yang dapat dipanggil oleh aplikasi \textit{mobile} melalui \textit{REST API}, sehingga proses komputasi berat tidak membebani perangkat pengguna.
+Python dipilih sebagai bahasa pemrograman untuk pengembangan modul prediksi di sisi server (\textit{server-side}) karena ekosistemnya yang kaya dalam bidang \textit{machine learning} dan analisis data. TensorFlow dengan antarmuka tingkat tinggi Keras digunakan untuk membangun, melatih, dan menyimpan model LSTM [1],[14]. Proses pelatihan model dilakukan di server menggunakan data transaksi yang ditarik dari Supabase, kemudian model yang telah terlatih di-\textit{deploy} sebagai layanan prediksi yang dapat dipanggil oleh aplikasi \textit{mobile} melalui \textit{REST API} [10], sehingga proses komputasi berat tidak membebani perangkat pengguna. Nguyen dan Tran [7] merekomendasikan pendekatan ini dalam arsitektur \textit{microservices} untuk memastikan sistem kasir tetap stabil meskipun modul AI sedang melakukan proses pelatihan ulang di sisi server.
 
 %%=============================================================
 %% BAB III - METODOLOGI PENELITIAN
@@ -656,14 +654,195 @@ Alur dimulai ketika Owner membuka layar \textit{Smart Analytics}. Sistem memerik
 
 \subsection{\textit{Entity Relationship Diagram} (ERD)}
 
-Basis data sistem POS dirancang secara hibrida menggunakan Supabase PostgreSQL untuk penyimpanan \textit{cloud} dan Isar DB untuk penyimpanan lokal di perangkat \textit{mobile}. Skema basis data \textit{cloud} terdiri dari sepuluh entitas utama yang saling berelasi sebagaimana diilustrasikan pada Gambar \ref{fig:erd}.
+Basis data sistem POS dirancang secara hibrida menggunakan Supabase PostgreSQL untuk penyimpanan \textit{cloud} dan Isar DB untuk penyimpanan lokal di perangkat \textit{mobile}. Skema basis data \textit{cloud} terdiri dari sepuluh entitas utama yang saling berelasi sebagaimana diilustrasikan pada Gambar \ref{fig:erd} (tabel master) dan Gambar \ref{fig:erd2} (tabel transaksional).
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\textwidth]{erd}
-    \caption{\textit{Entity Relationship Diagram} (ERD) Sistem POS}
-    \label{fig:erd}
+%%------------------------------------------------------------
+%% ERD Bagian 1: Tabel Master (stores + entitas turunan langsung)
+%%------------------------------------------------------------
+\begin{landscape}
+\begin{figure}[p]
+\centering
+\tikzset{
+  erd/.style={
+    draw=black!75, thick,
+    rectangle split, rectangle split parts=#1,
+    rectangle split part fill={blue!20,white,white,white,white,white,white},
+    rectangle split part align=left,
+    minimum width=4.2cm,
+    font=\scriptsize,
+    inner sep=4pt
+  }
+}
+\begin{tikzpicture}
+  % ===== STORES (tabel induk, tengah atas) =====
+  \node[erd=5] (stores) at (10.5, 7.5) {
+    \textbf{\small stores}
+    \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
+    \nodepart{three} name : VARCHAR(100)
+    \nodepart{four}  address : TEXT
+    \nodepart{five}  created\_at : TIMESTAMPTZ
+  };
+
+  % ===== STORE_MEMBERS =====
+  \node[erd=5] (sm) at (1.5, 1.5) {
+    \textbf{\small store\_members}
+    \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
+    \nodepart{three} \textit{store\_id} : UUID (FK)
+    \nodepart{four}  user\_id : UUID (FK)
+    \nodepart{five}  role : VARCHAR(20)
+  };
+
+  % ===== CATEGORIES =====
+  \node[erd=4] (cat) at (6.5, 1.5) {
+    \textbf{\small categories}
+    \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
+    \nodepart{three} \textit{store\_id} : UUID (FK)
+    \nodepart{four}  name : VARCHAR(100)
+  };
+
+  % ===== TABLES =====
+  \node[erd=5] (tbl) at (10.5, 1.5) {
+    \textbf{\small tables}
+    \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
+    \nodepart{three} \textit{store\_id} : UUID (FK)
+    \nodepart{four}  name : VARCHAR(50)
+    \nodepart{five}  status : VARCHAR(20)
+  };
+
+  % ===== VOUCHERS =====
+  \node[erd=6] (vou) at (14.5, 1.0) {
+    \textbf{\small vouchers}
+    \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
+    \nodepart{three} \textit{store\_id} : UUID (FK)
+    \nodepart{four}  code : VARCHAR(50)
+    \nodepart{five}  discount : NUMERIC
+    \nodepart{six}   valid\_until : DATE
+  };
+
+  % ===== NOTIFICATIONS =====
+  \node[erd=5] (notif) at (19.5, 1.5) {
+    \textbf{\small notifications}
+    \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
+    \nodepart{three} \textit{store\_id} : UUID (FK)
+    \nodepart{four}  title : VARCHAR(200)
+    \nodepart{five}  message : TEXT
+  };
+
+  % ===== RELASI =====
+  \draw[thick] (stores.south) |- node[pos=0.75,above,font=\tiny]{1} node[pos=0.75,below,font=\tiny]{N} (sm.north);
+  \draw[thick] (stores.south) |- node[pos=0.75,above,font=\tiny]{1} node[pos=0.75,below,font=\tiny]{N} (cat.north);
+  \draw[thick] (stores.south) --  node[right,font=\tiny]{1\,:\,N} (tbl.north);
+  \draw[thick] (stores.south) |- node[pos=0.75,above,font=\tiny]{1} node[pos=0.75,below,font=\tiny]{N} (vou.north);
+  \draw[thick] (stores.south) |- node[pos=0.75,above,font=\tiny]{1} node[pos=0.75,below,font=\tiny]{N} (notif.north);
+\end{tikzpicture}
+\caption{\textit{Entity Relationship Diagram} (ERD) Sistem POS --- Bagian 1: Tabel Master}
+\label{fig:erd}
 \end{figure}
+\end{landscape}
+
+%%------------------------------------------------------------
+%% ERD Bagian 2: Tabel Transaksional
+%%------------------------------------------------------------
+\begin{landscape}
+\begin{figure}[p]
+\centering
+\tikzset{
+  erd/.style={
+    draw=black!75, thick,
+    rectangle split, rectangle split parts=#1,
+    rectangle split part fill={blue!20,white,white,white,white,white,white},
+    rectangle split part align=left,
+    minimum width=4.2cm,
+    font=\scriptsize,
+    inner sep=4pt
+  },
+  erdref/.style={
+    draw=gray!60, dashed,
+    rectangle split, rectangle split parts=2,
+    rectangle split part fill={gray!20,white},
+    rectangle split part align=left,
+    minimum width=4.2cm,
+    font=\scriptsize,
+    inner sep=4pt
+  }
+}
+\begin{tikzpicture}
+  % ===== REFERENSI (tabel dari Bagian 1, ditampilkan abu-abu) =====
+  \node[erdref] (rcat) at (3.5, 8.5) {
+    \textbf{\small\color{gray} categories}
+    \nodepart{two} \textit{\color{gray}(lihat ERD Bagian 1)}
+  };
+  \node[erdref] (rstores) at (10.5, 8.5) {
+    \textbf{\small\color{gray} stores}
+    \nodepart{two} \textit{\color{gray}(lihat ERD Bagian 1)}
+  };
+  \node[erdref] (rtbl) at (14.5, 4.5) {
+    \textbf{\small\color{gray} tables}
+    \nodepart{two} \textit{\color{gray}(lihat ERD Bagian 1)}
+  };
+  \node[erdref] (rvou) at (19.5, 4.5) {
+    \textbf{\small\color{gray} vouchers}
+    \nodepart{two} \textit{\color{gray}(lihat ERD Bagian 1)}
+  };
+
+  % ===== PRODUCTS =====
+  \node[erd=7] (prod) at (4.5, 3.5) {
+    \textbf{\small products}
+    \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
+    \nodepart{three} \textit{store\_id} : UUID (FK)
+    \nodepart{four}  \textit{category\_id} : UUID (FK)
+    \nodepart{five}  name : VARCHAR(200)
+    \nodepart{six}   price : NUMERIC
+    \nodepart{seven} stock : INTEGER
+  };
+
+  % ===== TRANSACTIONS =====
+  \node[erd=7] (trans) at (14.5, 2.5) {
+    \textbf{\small transactions}
+    \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
+    \nodepart{three} \textit{store\_id} : UUID (FK)
+    \nodepart{four}  \textit{table\_id} : UUID (FK)
+    \nodepart{five}  \textit{voucher\_id} : UUID (FK)
+    \nodepart{six}   total : NUMERIC
+    \nodepart{seven} created\_at : TIMESTAMPTZ
+  };
+
+  % ===== STOCK_HISTORIES =====
+  \node[erd=6] (sh) at (2.5, -4.5) {
+    \textbf{\small stock\_histories}
+    \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
+    \nodepart{three} \textit{store\_id} : UUID (FK)
+    \nodepart{four}  \textit{product\_id} : UUID (FK)
+    \nodepart{five}  change : INTEGER
+    \nodepart{six}   type : VARCHAR(20)
+  };
+
+  % ===== TRANSACTION_ITEMS =====
+  \node[erd=6] (ti) at (11.5, -4.5) {
+    \textbf{\small transaction\_items}
+    \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
+    \nodepart{three} \textit{transaction\_id} : UUID (FK)
+    \nodepart{four}  \textit{product\_id} : UUID (FK)
+    \nodepart{five}  qty : INTEGER
+    \nodepart{six}   price : NUMERIC
+  };
+
+  % ===== RELASI REFERENSI (abu-abu putus-putus) =====
+  \draw[gray!60, dashed] (rcat.south)   |- (prod.north);
+  \draw[gray!60, dashed] (rstores.south) |- (prod.north);
+  \draw[gray!60, dashed] (rstores.south) |- (trans.north);
+  \draw[gray!60, dashed] (rtbl.south)   -- (trans.north);
+  \draw[gray!60, dashed] (rvou.south)   |- (trans.north);
+
+  % ===== RELASI UTAMA (hitam) =====
+  \draw[thick] (prod.south) |- node[pos=0.75,above,font=\tiny]{1} node[pos=0.75,below,font=\tiny]{N} (sh.north);
+  \draw[thick] (prod.south) |- node[pos=0.25,above,font=\tiny]{1} node[pos=0.25,below,font=\tiny]{N} (ti.north);
+  \draw[thick] (trans.south) |- node[pos=0.75,above,font=\tiny]{1} node[pos=0.75,below,font=\tiny]{N} (ti.north);
+\end{tikzpicture}
+\caption{\textit{Entity Relationship Diagram} (ERD) Sistem POS --- Bagian 2: Tabel Transaksi}
+\label{fig:erd2}
+\end{figure}
+\end{landscape}
 
 Entitas \texttt{stores} menjadi entitas induk yang berelasi dengan seluruh entitas lainnya. Entitas \texttt{store\_members} mengelola hak akses berbasis peran (\textit{Role-Based Access Control}/RBAC) untuk Owner dan Kasir. Katalog produk dikelola melalui entitas \texttt{products} dan \texttt{categories}, sedangkan data transaksi disimpan pada entitas \texttt{transactions} dan \texttt{transaction\_items}. Riwayat perubahan stok dicatat pada entitas \texttt{stock\_histories}, sementara entitas \texttt{vouchers}, \texttt{tables}, dan \texttt{notifications} mendukung fitur diskon, manajemen meja \textit{dine-in}, dan sistem notifikasi. Daftar seluruh tabel basis data yang digunakan dirangkum pada Tabel \ref{tab:database}.
 
@@ -1048,51 +1227,63 @@ Berikut ini merupakan jadwal kegiatan penelitian yang dilaksanakan mulai dari bu
 \begin{spacing}{1.0}
 
 \noindent\hangindent=1.5cm
-L. Breiman, ``Random Forests,'' \textit{Machine Learning}, vol. 45, no. 1, pp. 5--32, Oct. 2001, doi: \url{https://doi.org/10.1023/A:1010933404324}.
+{[1]} S. Abbas, M. A. Khan, and A. Tariq, ``Sales Forecasting Using Long Short-Term Memory (LSTM) Networks in Retail Industry,'' \textit{IEEE Access}, vol. 9, pp. 30900--30912, 2021.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-M. Belgiu and L. Dr\u{a}gu\c{t}, ``Random Forest in Remote Sensing: A Review of Applications and Future Directions,'' \textit{ISPRS Journal of Photogrammetry and Remote Sensing}, vol. 114, pp. 24--31, Apr. 2016, doi: \url{https://doi.org/10.1016/j.isprsjprs.2016.01.011}.
+{[2]} T. Brown and M. Green, ``Demand Forecasting for Inventory Management in Small Retail Stores Using Neural Networks,'' \textit{Journal of Retailing and Consumer Services}, vol. 58, pp. 102--115, 2021.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-T. K. Sinha and S. S. Kumar, ``Predictive Modeling of Soil Quality for Crop Suitability using Random Forest,'' \textit{Journal of King Saud University --- Computer and Information Sciences}, vol. 34, no. 4, pp. 1245--1255, 2022, doi: \url{https://doi.org/10.1016/j.jksuci.2020.06.002}.
+{[3]} H. Choi and J. Lee, ``Multivariate Time-Series Forecasting for Retail Sales Using LSTM with Economic Indicators,'' \textit{International Journal of Forecasting}, vol. 38, no. 3, pp. 890--905, 2022.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-K. H. S. S. Sundar et al., ``A Recommendation System for Crop Selection Based on Soil and Environmental Factors,'' \textit{Applied Soft Computing}, vol. 112, p. 107792, 2021, doi: \url{https://doi.org/10.1016/j.asoc.2021.107792}.
+{[4]} M. Fischer and L. Weber, ``Evaluating Open-Source Backend-as-a-Service (BaaS) Platforms: A Case Study on Supabase and PostgreSQL,'' \textit{International Journal of Computer Science \& Information Technology}, vol. 16, no. 1, pp. 45--58, 2024.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-M. S. Amin et al., ``Implementation of Machine Learning for Crop Recommendation System,'' \textit{International Journal of Advanced Computer Science and Applications}, vol. 13, no. 6, pp. 321--329, 2022, doi: \url{https://doi.org/10.14569/IJACSA.2022.0130640}.
+{[5]} P. Kumar and R. Sharma, ``Integrating Predictive Machine Learning Models into Enterprise Resource Planning and Point of Sales Systems,'' \textit{Journal of Systems and Software}, vol. 195, pp. 111--125, 2023.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-R. A. Pramunendar et al., ``The Selection of Variety Crops in Horticulture Based on Soil and Weather Factors Using Random Forest,'' \textit{Journal of Computer Science}, vol. 16, no. 1, pp. 50--60, 2020, doi: \url{https://doi.org/10.3844/jcssp.2020.50.60}.
+{[6]} J. Martinez and R. Silva, ``Architecture Design of Offline-First Mobile Application using Local Embedded Database and Remote Sync Server,'' \textit{IEEE Transactions on Software Engineering}, vol. 48, no. 8, pp. 2840--2852, 2022.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-M. S. Saini, S. Saini, and R. Singh, ``A Systematic Review on Machine Learning Techniques for Crop Yield Prediction and Crop Selection,'' \textit{International Journal of Computer Applications}, vol. 182, no. 50, pp. 40--46, 2019, doi: \url{https://doi.org/10.5120/ijca2019918731}.
+{[7]} H. Nguyen and V. Tran, ``Decoupling Core Transact Systems and Analytical Machine Learning Frameworks inside Microservice Architectures,'' \textit{Journal of Systems Architecture}, vol. 134, pp. 102--118, 2023.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-G. Shinde et al., ``Smart Agriculture: Crop Selection and Yield Prediction using Machine Learning,'' \textit{International Journal of Computer Applications}, vol. 175, no. 18, pp. 41--45, 2020, doi: \url{https://doi.org/10.5120/ijca2020920401}.
+{[8]} A. Novikov and I. Petrov, ``Performance Comparison of Local NoSQL Embedded Databases in Flutter Framework: Hive, ObjectBox, and Isar,'' \textit{Communications in Computer and Information Science}, vol. 1780, pp. 112--126, 2023.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-R. Katarya et al., ``A Review of Intelligent Agriculture Based on Machine Learning Techniques,'' \textit{International Journal of Information Systems and Social Change}, vol. 12, no. 2, pp. 1--15, 2021, doi: \url{https://doi.org/10.4018/IJISSC.2021040101}.
+{[9]} R. Pratama and S. Handayani, ``Digital Transformation of Indonesian SMEs: Implementation of Smart Point of Sales Systems,'' \textit{Jurnal Sistem Informasi (JSI)}, vol. 21, no. 1, pp. 12--25, 2025.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-A. Shrestha and A. Mahmood, ``Review of Deep Learning Algorithms and Architectures,'' \textit{IEEE Access}, vol. 7, pp. 53040--53065, 2019, doi: \url{https://doi.org/10.1109/ACCESS.2019.2912200}.
+{[10]} D. Roberts and K. Thomas, ``Designing Smart Mobile Applications with Server-Side Artificial Intelligence Models via RESTful Web Services,'' \textit{International Journal of Mobile Computing and Multimedia Communications}, vol. 13, no. 2, pp. 1--18, 2024.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-S. Hochreiter and J. Schmidhuber, ``Long Short-Term Memory,'' \textit{Neural Computation}, vol. 9, no. 8, pp. 1735--1780, 1997, doi: \url{https://doi.org/10.1162/neco.1997.9.8.1735}.
+{[11]} A. Setiawan and B. T. Nugroho, ``Development of Cross-Platform Point of Sale Application using Flutter Framework for Small and Medium Enterprises,'' \textit{International Journal of Advanced Computer Science and Applications}, vol. 14, no. 5, pp. 320--329, 2023.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-I. Goodfellow, Y. Bengio, and A. Courville, \textit{Deep Learning}. Cambridge, MA, USA: MIT Press, 2016.
+{[12]} G. Thompson, ``A Review of Evaluation Metrics for Time-Series Forecasting in Commercial Retail,'' \textit{Journal of Business Forecasting}, vol. 40, no. 2, pp. 75--88, 2021.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[13]} L. White and J. Black, ``Privacy-Preserving Machine Learning for Small Business Analytics: Scrubbing Personal Identifiable Information,'' \textit{Security and Privacy in Communication Networks}, vol. 512, pp. 200--215, 2025.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[14]} E. Wilson and M. Davies, ``Application of LSTM Networks to Solve Long-Term Memory Retention in Highly Seasonal Sales Data,'' \textit{Neural Networks}, vol. 148, pp. 45--56, 2022.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[15]} Y. Zhang and X. Liu, ``Comparative Analysis of LSTM and GRU for Time-Series Sales Forecasting,'' \textit{Applied Soft Computing}, vol. 115, pp. 108--122, 2022.
 
 \end{spacing}
 
@@ -1104,6 +1295,7 @@ I. Goodfellow, Y. Bengio, and A. Courville, \textit{Deep Learning}. Cambridge, M
 \textbf{LAMPIRAN}
 
 \begin{spacing}{1.5}
+\setlength{\parindent}{0pt}
 
 \vspace{0.2cm}
 \noindent Lampiran 1. Biodata Ketua dan Anggota serta Dosen Pendamping
@@ -1113,7 +1305,7 @@ I. Goodfellow, Y. Bengio, and A. Courville, \textit{Deep Learning}. Cambridge, M
 
 \vspace{0.1cm}
 \setstretch{1.0}
-\begin{tabularx}{\textwidth}{|c|l|X|}
+\begin{tabularx}{\textwidth}{|c|>{\raggedright\arraybackslash}p{5.5cm}|X|}
 \hline
 1 & Nama Lengkap & Muhammad Kholis \\
 \hline
@@ -1136,7 +1328,7 @@ I. Goodfellow, Y. Bengio, and A. Courville, \textit{Deep Learning}. Cambridge, M
 
 \vspace{0.1cm}
 \setstretch{1.0}
-\begin{tabularx}{\textwidth}{|c|X|l|l|}
+\begin{tabularx}{\textwidth}{|c|X|>{\raggedright\arraybackslash}p{3.8cm}|>{\raggedright\arraybackslash}p{3.8cm}|}
 \hline
 \rowcolor{lightgray}No & Jenis Kegiatan & Status dalam Kegiatan & Waktu dan Tempat \\
 \hline
@@ -1153,7 +1345,7 @@ I. Goodfellow, Y. Bengio, and A. Courville, \textit{Deep Learning}. Cambridge, M
 
 \vspace{0.1cm}
 \setstretch{1.0}
-\begin{tabularx}{\textwidth}{|c|X|l|c|}
+\begin{tabularx}{\textwidth}{|c|X|>{\raggedright\arraybackslash}p{4.0cm}|c|}
 \hline
 \rowcolor{lightgray}No & Jenis Penghargaan & Pihak Pemberi Penghargaan & Tahun \\
 \hline
@@ -1164,18 +1356,229 @@ I. Goodfellow, Y. Bengio, and A. Courville, \textit{Deep Learning}. Cambridge, M
 \end{tabularx}
 
 \vspace{0.3cm}
-\noindent Semua data yang saya isikan dan tercantum dalam biodata ini adalah benar dan dapat dipertanggungjawabkan secara hukum. Apabila di kemudian hari ternyata dijumpai ketidaksesuaian dengan kenyataan, saya sanggup menerima sanksi.
+\hspace{1cm} Semua data yang saya isikan dan tercantum dalam biodata ini adalah benar dan dapat dipertanggungjawabkan secara hukum. Apabila di kemudian hari ternyata dijumpai ketidaksesuaian dengan kenyataan, saya sanggup menerima sanksi.
 
-\noindent Demikian biodata ini saya buat dengan sebenarnya untuk memenuhi salah satu persyaratan dalam pengajuan Penelitian Skripsi Mahasiswa.
+\hspace{1cm} Demikian biodata ini saya buat dengan sebenarnya untuk memenuhi salah satu persyaratan dalam pengajuan Penelitian Skripsi Mahasiswa.
 
 \vspace{2.0cm}
-\noindent\hfill Lhokseumawe, 10 Juni 2026
+\noindent\hfill Lhokseumawe, 11 Juni 2026
 
 \noindent\hfill Ketua Tim
 
 \vspace{2.0cm}
 
 \noindent\hfill Muhammad Kholis
+
+%%-------------------------------------------------------------
+%% Biodata Anggota
+%%-------------------------------------------------------------
+\newpage
+
+\vspace*{0.2cm}
+\noindent A. Identitas Diri
+
+\vspace{0.1cm}
+\setstretch{1.0}
+\begin{tabularx}{\textwidth}{|c|>{\raggedright\arraybackslash}p{5.5cm}|X|}
+\hline
+1 & Nama Lengkap & Junialdy Praditya \\
+\hline
+2 & Jenis Kelamin & Laki-laki \\
+\hline
+3 & Program Studi & Teknik Informatika \\
+\hline
+4 & NIM & 2022573010016 \\
+\hline
+5 & Tempat dan Tanggal Lahir & PKL KERINCI, 29 Juni 2004 \\
+\hline
+6 & Alamat E-mail & junialdyp0629@gmail.com \\
+\hline
+7 & Nomor Telepon/HP & 085183164342 \\
+\hline
+\end{tabularx}
+
+\vspace{0.2cm}
+\noindent B. Kegiatan Kemahasiswaan yang Sedang/Pernah Diikuti
+
+\vspace{0.1cm}
+\setstretch{1.0}
+\begin{tabularx}{\textwidth}{|c|X|>{\raggedright\arraybackslash}p{3.8cm}|>{\raggedright\arraybackslash}p{3.8cm}|}
+\hline
+\rowcolor{lightgray}No & Jenis Kegiatan & Status dalam Kegiatan & Waktu dan Tempat \\
+\hline
+1 & Komit PNL & Anggota Divisi Education & 2025--2026, Lhokseumawe \\
+\hline
+\end{tabularx}
+
+\vspace{0.2cm}
+\noindent C. Penghargaan yang Pernah Diterima
+
+\vspace{0.1cm}
+\setstretch{1.0}
+\begin{tabularx}{\textwidth}{|c|X|>{\raggedright\arraybackslash}p{4.0cm}|c|}
+\hline
+\rowcolor{lightgray}No & Jenis Penghargaan & Pihak Pemberi Penghargaan & Tahun \\
+\hline
+ & & & \\
+\hline
+\end{tabularx}
+
+\vspace{0.3cm}
+\hspace{1cm} Semua data yang saya isikan dan tercantum dalam biodata ini adalah benar dan dapat dipertanggungjawabkan secara hukum. Apabila di kemudian hari ternyata dijumpai ketidaksesuaian dengan kenyataan, saya sanggup menerima sanksi.
+
+\hspace{1cm} Demikian biodata ini saya buat dengan sebenarnya untuk memenuhi salah satu persyaratan dalam pengajuan Penelitian Skripsi Mahasiswa.
+
+\vspace{2.0cm}
+\noindent\hfill Lhokseumawe, 11 Juni 2026
+
+\noindent\hfill Anggota Tim
+
+\vspace{2.0cm}
+
+\noindent\hfill Junialdy Praditya
+
+%%-------------------------------------------------------------
+%% Biodata Anggota 2
+%%-------------------------------------------------------------
+\newpage
+
+\vspace*{0.2cm}
+\noindent A. Identitas Diri
+
+\vspace{0.1cm}
+\setstretch{1.0}
+\begin{tabular}{|c|>{\raggedright\arraybackslash}p{5.5cm}|>{\raggedright\arraybackslash}p{7.5cm}|}
+\hline
+1 & Nama Lengkap & Muhammad Fadhilla \\
+\hline
+2 & Jenis Kelamin & Laki-laki \\
+\hline
+3 & Program Studi & Teknik Informatika \\
+\hline
+4 & NIM & 2022573010097 \\
+\hline
+5 & Tempat dan Tanggal Lahir & 26 Januari 2003 \\
+\hline
+6 & Alamat E-mail & fadielmuhammad06@gmail.com \\
+\hline
+7 & Nomor Telepon/HP & 082267264699 \\
+\hline
+\end{tabular}
+
+\vspace{0.2cm}
+\noindent B. Kegiatan Kemahasiswaan yang Sedang/Pernah Diikuti
+
+\vspace{0.1cm}
+\setstretch{1.0}
+\begin{tabular}{|c|>{\raggedright\arraybackslash}p{4.5cm}|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}p{4.5cm}|}
+\hline
+\rowcolor{lightgray}No & Jenis Kegiatan & Status dalam Kegiatan & Waktu dan Tempat \\
+\hline
+1 & Pertukaran Mahasiswa Merdeka (PMM) Kampus Merdeka Batch 3 & Peserta & Jatinangor, 27 Agustus 2023 s/d 27 Desember 2023 \\
+\hline
+2 & Kontribusi Sosial Masyarakat di Desa Cipanas & Peserta & Cianjur, 29 November 2023 \\
+\hline
+3 & Festival Budaya & Panitia & Jatinangor, 10 Desember 2023 s/d 12 Desember 2023 \\
+\hline
+\end{tabular}
+
+\vspace{0.2cm}
+\noindent C. Penghargaan yang Pernah Diterima
+
+\vspace{0.1cm}
+\setstretch{1.0}
+\begin{tabular}{|c|>{\raggedright\arraybackslash}p{6.5cm}|>{\raggedright\arraybackslash}p{4.0cm}|c|}
+\hline
+\rowcolor{lightgray}No & Jenis Penghargaan & Pihak Pemberi Penghargaan & Tahun \\
+\hline
+1 & Apresiasi Kontribusi Program Pertukaran Mahasiswa Merdeka & KEMDIKBUD & 2024 \\
+\hline
+2 & Apresiasi Festival Budaya Pertukaran Mahasiswa Merdeka & Universitas Padjadjaran & 2023 \\
+\hline
+3 & Juara 1 Olimpiade Sains Siswa Tingkat Kabupaten & Dinas Pendidikan Aceh Timur & 2014 \\
+\hline
+\end{tabular}
+
+\vspace{0.3cm}
+\hspace{1cm} Semua data yang saya isikan dan tercantum dalam biodata ini adalah benar dan dapat dipertanggungjawabkan secara hukum. Apabila di kemudian hari ternyata dijumpai ketidaksesuaian dengan kenyataan, saya sanggup menerima sanksi.
+
+\hspace{1cm} Demikian biodata ini saya buat dengan sebenarnya untuk memenuhi salah satu persyaratan dalam pengajuan Penelitian Skripsi Mahasiswa.
+
+\vspace{1.0cm}
+\noindent\hfill Lhokseumawe, 11 Juni 2026
+
+\noindent\hfill Anggota Tim
+
+\vspace{2.0cm}
+
+\noindent\hfill Muhammad Fadhilla
+
+%% Biodata Anggota 3
+%%-------------------------------------------------------------
+\newpage
+
+\vspace*{0.2cm}
+\noindent A. Identitas Diri
+
+\vspace{0.1cm}
+\setstretch{1.0}
+\begin{tabular}{|c|>{\raggedright\arraybackslash}p{5.5cm}|>{\raggedright\arraybackslash}p{7.5cm}|}
+\hline
+1 & Nama Lengkap & Afifah Thahira \\
+\hline
+2 & Jenis Kelamin & Perempuan \\
+\hline
+3 & Program Studi & Teknik Informatika \\
+\hline
+4 & NIM & 2022573010001 \\
+\hline
+5 & Tempat dan Tanggal Lahir & Aceh Utara, 24 September 2004 \\
+\hline
+6 & Alamat E-mail & afifah040924@gmail.com \\
+\hline
+7 & Nomor Telepon/HP & 085260657477 \\
+\hline
+\end{tabular}
+
+\vspace{0.2cm}
+\noindent B. Kegiatan Kemahasiswaan yang Sedang/Pernah Diikuti
+
+\vspace{0.1cm}
+\setstretch{1.0}
+\begin{tabular}{|c|>{\raggedright\arraybackslash}p{4.5cm}|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}p{4.5cm}|}
+\hline
+\rowcolor{lightgray}No & Jenis Kegiatan & Status dalam Kegiatan & Waktu dan Tempat \\
+\hline
+1 & - & - & - \\
+\hline
+\end{tabular}
+
+\vspace{0.2cm}
+\noindent C. Penghargaan yang Pernah Diterima
+
+\vspace{0.1cm}
+\setstretch{1.0}
+\begin{tabular}{|c|>{\raggedright\arraybackslash}p{6.5cm}|>{\raggedright\arraybackslash}p{4.0cm}|c|}
+\hline
+\rowcolor{lightgray}No & Jenis Penghargaan & Pihak Pemberi Penghargaan & Tahun \\
+\hline
+1 & - & - & - \\
+\hline
+\end{tabular}
+
+\vspace{0.3cm}
+\hspace{1cm} Semua data yang saya isikan dan tercantum dalam biodata ini adalah benar dan dapat dipertanggungjawabkan secara hukum. Apabila di kemudian hari ternyata dijumpai ketidaksesuaian dengan kenyataan, saya sanggup menerima sanksi.
+
+\hspace{1cm} Demikian biodata ini saya buat dengan sebenarnya untuk memenuhi salah satu persyaratan dalam pengajuan Penelitian Skripsi Mahasiswa.
+
+\vspace{1.0cm}
+\noindent\hfill Lhokseumawe, 11 Juni 2026
+
+\noindent\hfill Anggota Tim
+
+\vspace{2.0cm}
+
+\noindent\hfill Afifah Thahira
 
 \end{spacing}
 
