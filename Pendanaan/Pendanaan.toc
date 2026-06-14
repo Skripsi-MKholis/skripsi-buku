@@ -1,7 +1,7 @@
 \babel@toc {indonesian}{}\relax 
 \contentsline {chapter}{DAFTAR ISI}{i}{section*.1}%
-\contentsline {chapter}{DAFTAR GAMBAR}{iii}{section*.2}%
-\contentsline {chapter}{DAFTAR TABEL}{iv}{section*.3}%
+\contentsline {chapter}{DAFTAR GAMBAR}{ii}{section*.2}%
+\contentsline {chapter}{DAFTAR TABEL}{iii}{section*.3}%
 \contentsline {chapter}{\numberline {1}PENDAHULUAN}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Latar Belakang Masalah}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Rumusan Masalah}{3}{section.1.2}%
@@ -21,17 +21,15 @@
 \contentsline {chapter}{\numberline {3}METODOLOGI PENELITIAN}{16}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Metode Penelitian}{16}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Data dan Pengumpulan Data}{17}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Teknik Analisis Data}{17}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Alur Penelitian}{18}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Rancangan Sistem}{20}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}\textit {Use Case Diagram}}{20}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}\textit {Entity Relationship Diagram} (ERD)}{23}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}Perancangan Wireframe}{26}{subsection.3.5.3}%
-\contentsline {subsection}{\numberline {3.5.4}Rancangan Algoritma \textit {Long Short-Term Memory} (LSTM)}{39}{subsection.3.5.4}%
-\contentsline {section}{\numberline {3.6}Teknik Pengujian}{41}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Rancangan Pengujian Evaluasi Model Prediksi}{41}{subsection.3.6.1}%
-\contentsline {subsection}{\numberline {3.6.2}Rancangan Analisis Pengujian \textit {Black Box}}{43}{subsection.3.6.2}%
-\contentsline {section}{\numberline {3.7}Variabel Penelitian}{44}{section.3.7}%
-\contentsline {section}{\numberline {3.8}Hasil yang Diharapkan}{45}{section.3.8}%
-\contentsline {section}{\numberline {3.9}Rincian Biaya}{45}{section.3.9}%
-\contentsline {section}{\numberline {3.10}Rencana Jadwal Penelitian}{46}{section.3.10}%
+\contentsline {section}{\numberline {3.3}Variabel Penelitian}{17}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Teknik Analisis Data}{18}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Alur Penelitian}{19}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Rancangan Sistem}{20}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}\textit {Use Case Diagram}}{20}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}\textit {Entity Relationship Diagram} (ERD)}{23}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.6.3}Perancangan Wireframe}{25}{subsection.3.6.3}%
+\contentsline {subsection}{\numberline {3.6.4}Rancangan Algoritma \textit {Long Short-Term Memory} (LSTM)}{38}{subsection.3.6.4}%
+\contentsline {section}{\numberline {3.7}Teknik Pengujian}{40}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Rancangan Pengujian Evaluasi Model Prediksi}{40}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}Rancangan Analisis Pengujian \textit {Black Box}}{42}{subsection.3.7.2}%
+\contentsline {section}{\numberline {3.8}Hasil yang Diharapkan}{43}{section.3.8}%

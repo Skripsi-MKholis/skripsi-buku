@@ -100,6 +100,14 @@
         \setlength{\parskip}{0pt}
         \setlength{\parsep}{0pt}
         }{\end{itemize}}
+
+%%=============================================================
+%% GANTT CHART HELPERS
+%%=============================================================
+\definecolor{jadwal}{gray}{0.65}
+\newcommand{\G}{\cellcolor{jadwal}}
+\newcolumntype{W}{>{\centering\arraybackslash}m{0.2cm}}
+
 %%=============================================================
 %% EQUATION NUMBERING
 %%=============================================================
@@ -276,7 +284,7 @@ Bab ini menguraikan gambaran umum penelitian yang meliputi latar belakang masala
 Bab ini berisi kajian literatur dan landasan teori yang relevan dengan penelitian. Kajian mencakup perbandingan metode peramalan penjualan dan implementasi sistem POS berbasis \textit{mobile}. Landasan teori menyajikan konsep peramalan, arsitektur LSTM, \textit{framework} Flutter, bahasa Dart, serta layanan Supabase yang digunakan sebagai infrastruktur sistem.
 
 \noindent\textbf{BAB III METODOLOGI PENELITIAN}\\
-Bab ini menjelaskan tahapan metodologi penelitian yang dilakukan, meliputi jenis dan pendekatan penelitian, teknik pengumpulan data, teknik analisis data, alur penelitian, rancangan sistem menggunakan UML, teknik pengujian, serta hasil yang diharapkan.
+Bab ini menjelaskan tahapan metodologi penelitian yang dilakukan, meliputi jenis dan pendekatan penelitian, teknik pengumpulan data, teknik analisis data, alur penelitian, rancangan sistem menggunakan UML, teknik pengujian, hasil yang diharapkan, rincian biaya, serta rencana jadwal pelaksanaan penelitian.
 
 %%=============================================================
 %% BAB II - TINJAUAN PUSTAKA
@@ -461,7 +469,7 @@ Python dipilih sebagai bahasa pemrograman untuk pengembangan modul prediksi di s
 %%=============================================================
 \chapter[METODOLOGI PENELITIAN]{\\ METODOLOGI PENELITIAN}
 
-Metodologi penelitian ini menguraikan kerangka kerja pengembangan sistem yang sistematis, mencakup jenis penelitian, teknik pengumpulan dan analisis data, alur penelitian, rancangan sistem, serta rencana pengujian. Seluruh tahapan dirancang untuk membangun aplikasi \textit{Point of Sale} (POS) \textit{mobile} yang dilengkapi dengan fitur prediksi penjualan harian berbasis algoritma \textit{Long Short-Term Memory} (LSTM).
+Metodologi penelitian ini menguraikan kerangka kerja pengembangan sistem yang sistematis, mencakup jenis penelitian, teknik pengumpulan dan analisis data, alur penelitian, rancangan sistem, serta rencana pengujian dan jadwal pelaksanaan. Seluruh tahapan dirancang untuk membangun aplikasi \textit{Point of Sale} (POS) \textit{mobile} yang dilengkapi dengan fitur prediksi penjualan harian berbasis algoritma \textit{Long Short-Term Memory} (LSTM).
 
 \section{Metode Penelitian}
 
@@ -658,13 +666,160 @@ Definisi \textit{use case} pada sistem POS diilustrasikan pada Tabel \ref{tab:us
 
 \subsection{\textit{Entity Relationship Diagram} (ERD)}
 
-Basis data sistem POS dirancang secara hibrida menggunakan Supabase PostgreSQL untuk penyimpanan \textit{cloud} dan Isar DB untuk penyimpanan lokal di perangkat \textit{mobile}. Skema basis data \textit{cloud} terdiri dari delapan entitas utama yang saling berelasi sebagaimana diilustrasikan pada Gambar \ref{fig:erd}.
+Basis data sistem POS dirancang secara hibrida menggunakan Supabase PostgreSQL untuk penyimpanan \textit{cloud} dan Isar DB untuk penyimpanan lokal di perangkat \textit{mobile}. Skema basis data \textit{cloud} terdiri dari sepuluh entitas utama yang saling berelasi sebagaimana diilustrasikan pada Gambar \ref{fig:erd} (tabel master) dan Gambar \ref{fig:erd2} (tabel transaksional).
+
+%%------------------------------------------------------------
+%% ERD Bagian 1: Tabel Master (stores + entitas turunan langsung)
+%%------------------------------------------------------------
 \begin{landscape}
 \begin{figure}[p]
-    \centering
-    \includegraphics[width=1.0\linewidth, height=0.92\textheight, keepaspectratio]{erd_new}
-    \caption{\textit{Entity Relationship Diagram} (ERD) Sistem POS}
-    \label{fig:erd}
+\centering
+\tikzset{
+  erd/.style={
+    draw=black!75, thick,
+    rectangle split, rectangle split parts=#1,
+    rectangle split part fill={blue!20,white,white,white,white,white,white},
+    rectangle split part align=left,
+    minimum width=4.2cm,
+    font=\scriptsize,
+    inner sep=4pt
+  }
+}
+\begin{tikzpicture}
+  % ===== STORES (tabel induk, tengah atas) =====
+  \node[erd=5] (stores) at (10.5, 7.5) {
+    \textbf{\small stores}
+    \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
+    \nodepart{three} name : VARCHAR(100)
+    \nodepart{four}  address : TEXT
+    \nodepart{five}  created\_at : TIMESTAMPTZ
+  };
+
+  % ===== STORE_MEMBERS =====
+  \node[erd=5] (sm) at (1.5, 1.5) {
+    \textbf{\small store\_members}
+    \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
+    \nodepart{three} \textit{store\_id} : UUID (FK)
+    \nodepart{four}  user\_id : UUID (FK)
+    \nodepart{five}  role : VARCHAR(20)
+  };
+
+  % ===== CATEGORIES =====
+  \node[erd=4] (cat) at (6.5, 1.5) {
+    \textbf{\small categories}
+    \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
+    \nodepart{three} \textit{store\_id} : UUID (FK)
+    \nodepart{four}  name : VARCHAR(100)
+  };
+
+  % ===== NOTIFICATIONS =====
+  \node[erd=5] (notif) at (19.5, 1.5) {
+    \textbf{\small notifications}
+    \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
+    \nodepart{three} \textit{store\_id} : UUID (FK)
+    \nodepart{four}  title : VARCHAR(200)
+    \nodepart{five}  message : TEXT
+  };
+
+  % ===== RELASI =====
+  \draw[thick] (stores.south) |- node[pos=0.75,above,font=\tiny]{1} node[pos=0.75,below,font=\tiny]{N} (sm.north);
+  \draw[thick] (stores.south) |- node[pos=0.75,above,font=\tiny]{1} node[pos=0.75,below,font=\tiny]{N} (cat.north);
+  \draw[thick] (stores.south) |- node[pos=0.75,above,font=\tiny]{1} node[pos=0.75,below,font=\tiny]{N} (notif.north);
+\end{tikzpicture}
+\caption{\textit{Entity Relationship Diagram} (ERD) Sistem POS --- Bagian 1: Tabel Master}
+\label{fig:erd}
+\end{figure}
+\end{landscape}
+
+%%------------------------------------------------------------
+%% ERD Bagian 2: Tabel Transaksional
+%%------------------------------------------------------------
+\begin{landscape}
+\begin{figure}[p]
+\centering
+\tikzset{
+  erd/.style={
+    draw=black!75, thick,
+    rectangle split, rectangle split parts=#1,
+    rectangle split part fill={blue!20,white,white,white,white,white,white},
+    rectangle split part align=left,
+    minimum width=4.2cm,
+    font=\scriptsize,
+    inner sep=4pt
+  },
+  erdref/.style={
+    draw=gray!60, dashed,
+    rectangle split, rectangle split parts=2,
+    rectangle split part fill={gray!20,white},
+    rectangle split part align=left,
+    minimum width=4.2cm,
+    font=\scriptsize,
+    inner sep=4pt
+  }
+}
+\begin{tikzpicture}
+  % ===== REFERENSI (tabel dari Bagian 1, ditampilkan abu-abu) =====
+  \node[erdref] (rcat) at (3.5, 8.5) {
+    \textbf{\small\color{gray} categories}
+    \nodepart{two} \textit{\color{gray}(lihat ERD Bagian 1)}
+  };
+  \node[erdref] (rstores) at (10.5, 8.5) {
+    \textbf{\small\color{gray} stores}
+    \nodepart{two} \textit{\color{gray}(lihat ERD Bagian 1)}
+  };
+
+  % ===== PRODUCTS =====
+  \node[erd=7] (prod) at (4.5, 3.5) {
+    \textbf{\small products}
+    \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
+    \nodepart{three} \textit{store\_id} : UUID (FK)
+    \nodepart{four}  \textit{category\_id} : UUID (FK)
+    \nodepart{five}  name : VARCHAR(200)
+    \nodepart{six}   price : NUMERIC
+    \nodepart{seven} stock : INTEGER
+  };
+
+  % ===== TRANSACTIONS =====
+  \node[erd=5] (trans) at (14.5, 2.5) {
+    \textbf{\small transactions}
+    \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
+    \nodepart{three} \textit{store\_id} : UUID (FK)
+    \nodepart{four}  total : NUMERIC
+    \nodepart{five}  created\_at : TIMESTAMPTZ
+  };
+
+  % ===== STOCK_HISTORIES =====
+  \node[erd=6] (sh) at (2.5, -4.5) {
+    \textbf{\small stock\_histories}
+    \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
+    \nodepart{three} \textit{store\_id} : UUID (FK)
+    \nodepart{four}  \textit{product\_id} : UUID (FK)
+    \nodepart{five}  change : INTEGER
+    \nodepart{six}   type : VARCHAR(20)
+  };
+
+  % ===== TRANSACTION_ITEMS =====
+  \node[erd=6] (ti) at (11.5, -4.5) {
+    \textbf{\small transaction\_items}
+    \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
+    \nodepart{three} \textit{transaction\_id} : UUID (FK)
+    \nodepart{four}  \textit{product\_id} : UUID (FK)
+    \nodepart{five}  qty : INTEGER
+    \nodepart{six}   price : NUMERIC
+  };
+
+  % ===== RELASI REFERENSI (abu-abu putus-putus) =====
+  \draw[gray!60, dashed] (rcat.south)   |- (prod.north);
+  \draw[gray!60, dashed] (rstores.south) |- (prod.north);
+  \draw[gray!60, dashed] (rstores.south) |- (trans.north);
+
+  % ===== RELASI UTAMA (hitam) =====
+  \draw[thick] (prod.south) |- node[pos=0.75,above,font=\tiny]{1} node[pos=0.75,below,font=\tiny]{N} (sh.north);
+  \draw[thick] (prod.south) |- node[pos=0.25,above,font=\tiny]{1} node[pos=0.25,below,font=\tiny]{N} (ti.north);
+  \draw[thick] (trans.south) |- node[pos=0.75,above,font=\tiny]{1} node[pos=0.75,below,font=\tiny]{N} (ti.north);
+\end{tikzpicture}
+\caption{\textit{Entity Relationship Diagram} (ERD) Sistem POS --- Bagian 2: Tabel Transaksi}
+\label{fig:erd2}
 \end{figure}
 \end{landscape}
 
@@ -1004,6 +1159,83 @@ Hasil yang diharapkan dari penelitian ini meliputi beberapa aspek sebagai beriku
     \item Hasil penelitian ini diharapkan dapat dipublikasikan dalam jurnal ilmiah sebagai kontribusi dalam pengembangan sistem informasi dan penerapan \textit{machine learning} pada UMKM.
     \item Penelitian ini menghasilkan laporan tugas akhir sebagai salah satu syarat penyelesaian studi pada Program Studi Teknik Informatika Politeknik Negeri Lhokseumawe.
 \end{enumerate}
+
+\section{Rincian Biaya}
+
+Rencana anggaran biaya penelitian ini dijabarkan secara terperinci pada Tabel \ref{tab:biaya} berikut.
+
+\begin{table}[H]
+\setstretch{1.2}
+\centering
+\caption{Rekapitulasi Rencana Anggaran Biaya}
+\label{tab:biaya}
+\begin{tabularx}{\textwidth}{|c|X|r|}
+\hline
+\textbf{No.} & \textbf{Jenis Pengeluaran} & \textbf{Besaran Dana (Rp)} \\
+\hline
+\multicolumn{3}{|l|}{\textbf{I.\quad Bahan Habis Pakai}} \\
+\hline
+ & Kertas, Tinta, Penjilidan Laporan, Materai & Rp 500.000 \\
+\hline
+\multicolumn{2}{|r|}{\textbf{Jumlah I}} & \textbf{Rp 500.000} \\
+\hline
+\multicolumn{3}{|l|}{\textbf{II.\quad Sewa Peralatan}} \\
+\hline
+ & Domain .com 1 Tahun & Rp 200.000 \\
+\hline
+ & HuggingFace Pro (1 Bulan) & Rp 170.000 \\
+\hline
+\multicolumn{2}{|r|}{\textbf{Jumlah II}} & \textbf{Rp 370.000} \\
+\hline
+\multicolumn{3}{|l|}{\textbf{III.\quad Perjalanan}} \\
+\hline
+ & Transportasi -- Kunjungan ke Mitra UMKM di Lhokseumawe & Rp 300.000 \\
+\hline
+\multicolumn{2}{|r|}{\textbf{Jumlah III}} & \textbf{Rp 300.000} \\
+\hline
+\multicolumn{3}{|l|}{\textbf{IV.\quad Lain-lain}} \\
+\hline
+ & Biaya Lain-lain -- Akses Publikasi, Komunikasi, dan Dokumentasi & Rp 200.000 \\
+\hline
+\multicolumn{2}{|r|}{\textbf{Jumlah IV}} & \textbf{Rp 200.000} \\
+\hline
+\multicolumn{2}{|r|}{\textbf{Total Dana I+II+III+IV}} & \textbf{Rp 1.370.000} \\
+\hline
+\end{tabularx}
+\end{table}
+
+\section{Rencana Jadwal Penelitian}
+
+Berikut ini merupakan jadwal kegiatan penelitian yang dilaksanakan mulai dari bulan Januari sampai dengan Juni, sebagaimana ditampilkan pada Tabel \ref{tab:jadwal}.
+
+\begin{table}[H]
+\setstretch{1.0}
+\centering
+\caption{Rencana Jadwal Penelitian}
+\label{tab:jadwal}
+\small
+\begin{tabular}{|c|p{2.2cm}|cccccccccccccccccccc|}
+\hline
+\multirow{2}{*}{\textbf{No}} & \multirow{2}{*}{\textbf{Kegiatan}} & \multicolumn{4}{c}{\textbf{Maret}} & \multicolumn{4}{c}{\textbf{April}} & \multicolumn{4}{c}{\textbf{Mei}} & \multicolumn{4}{c}{\textbf{Juni}} & \multicolumn{4}{c}{\textbf{Juli}} \\
+\cline{3-22}
+ & & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 \\
+\hline
+1 & Pengumpulan Data & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\hline
+2 & Perancangan Kebutuhan &  &  & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\hline
+3 & Perancangan Sistem &  &  &  &  &  &  & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} &  &  &  &  &  &  &  &  &  &  \\
+\hline
+4 & Rancang Bangun Sistem &  &  &  &  &  &  &  &  &  &  & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} &  &  &  \\
+\hline
+5 & Pengujian Sistem &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} &  \\
+\hline
+6 & Revisi/Perbaikan Sistem &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} \\
+\hline
+7 & Penyusunan Laporan &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & \cellcolor{black} & \cellcolor{black} \\
+\hline
+\end{tabular}
+\end{table}
 
 \end{spacing}
 
