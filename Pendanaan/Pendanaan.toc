@@ -25,11 +25,11 @@
 \contentsline {section}{\numberline {3.4}Alur Penelitian}{18}{section.3.4}%
 \contentsline {section}{\numberline {3.5}Rancangan Sistem}{20}{section.3.5}%
 \contentsline {subsection}{\numberline {3.5.1}\textit {Use Case Diagram}}{20}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}\textit {Entity Relationship Diagram} (ERD)}{24}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}Perancangan Wireframe}{28}{subsection.3.5.3}%
-\contentsline {subsection}{\numberline {3.5.4}Rancangan Algoritma \textit {Long Short-Term Memory} (LSTM)}{42}{subsection.3.5.4}%
-\contentsline {section}{\numberline {3.6}Teknik Pengujian}{44}{section.3.6}%
-\contentsline {section}{\numberline {3.7}Variabel Penelitian}{45}{section.3.7}%
-\contentsline {section}{\numberline {3.8}Hasil yang Diharapkan}{45}{section.3.8}%
-\contentsline {section}{\numberline {3.9}Rincian Biaya}{46}{section.3.9}%
-\contentsline {section}{\numberline {3.10}Rencana Jadwal Penelitian}{46}{section.3.10}%
+\contentsline {subsection}{\numberline {3.5.2}\textit {Entity Relationship Diagram} (ERD)}{23}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Perancangan Wireframe}{26}{subsection.3.5.3}%
+\contentsline {subsection}{\numberline {3.5.4}Rancangan Algoritma \textit {Long Short-Term Memory} (LSTM)}{39}{subsection.3.5.4}%
+\contentsline {section}{\numberline {3.6}Teknik Pengujian}{41}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Variabel Penelitian}{42}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Hasil yang Diharapkan}{42}{section.3.8}%
+\contentsline {section}{\numberline {3.9}Rincian Biaya}{43}{section.3.9}%
+\contentsline {section}{\numberline {3.10}Rencana Jadwal Penelitian}{43}{section.3.10}%

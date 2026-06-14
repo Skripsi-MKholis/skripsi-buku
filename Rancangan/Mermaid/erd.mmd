@@ -2,14 +2,11 @@ erDiagram
     STORES ||--o{ STORE_MEMBERS : "has"
     STORES ||--o{ CATEGORIES : "defines"
     STORES ||--o{ PRODUCTS : "stocks"
-    STORES ||--o{ TABLES : "manages"
-    STORES ||--o{ VOUCHERS : "creates"
     STORES ||--o{ TRANSACTIONS : "records"
     STORES ||--o{ STOCK_HISTORIES : "tracks"
     STORES ||--o{ NOTIFICATIONS : "broadcasts"
     
     CATEGORIES ||--o{ PRODUCTS : "classifies"
-    TABLES ||--o{ TRANSACTIONS : "assigns"
     
     PRODUCTS ||--o{ TRANSACTION_ITEMS : "included_in"
     PRODUCTS ||--o{ STOCK_HISTORIES : "logs_change"
@@ -58,31 +55,14 @@ erDiagram
         timestamptz created_at
     }
 
-    TABLES {
-        uuid id PK
-        uuid store_id FK
-        varchar name
-        integer capacity
-        varchar status "available, occupied, cleaning, reserved"
-        timestamptz created_at
-    }
 
-    VOUCHERS {
-        uuid id PK
-        uuid store_id FK
-        varchar code
-        numeric discount_value
-        varchar discount_type "percentage, fixed"
-        numeric min_transaction
-        boolean is_active
-        timestamptz created_at
-    }
+
+
 
     TRANSACTIONS {
         uuid id PK
         uuid store_id FK
         uuid cashier_id FK
-        uuid table_id FK "nullable"
         numeric total_amount
         numeric discount_total
         varchar payment_method "Tunai, QRIS, Debit"

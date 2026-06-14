@@ -22,14 +22,11 @@ erDiagram
     STORES ||--o{ STORE_MEMBERS : "has"
     STORES ||--o{ CATEGORIES : "defines"
     STORES ||--o{ PRODUCTS : "stocks"
-    STORES ||--o{ TABLES : "manages"
-    STORES ||--o{ VOUCHERS : "creates"
     STORES ||--o{ TRANSACTIONS : "records"
     STORES ||--o{ STOCK_HISTORIES : "tracks"
     STORES ||--o{ NOTIFICATIONS : "broadcasts"
     
     CATEGORIES ||--o{ PRODUCTS : "classifies"
-    TABLES ||--o{ TRANSACTIONS : "assigns"
     
     PRODUCTS ||--o{ TRANSACTION_ITEMS : "included_in"
     PRODUCTS ||--o{ STOCK_HISTORIES : "logs_change"
@@ -78,31 +75,14 @@ erDiagram
         timestamptz created_at
     }
 
-    TABLES {
-        uuid id PK
-        uuid store_id FK
-        varchar name
-        integer capacity
-        varchar status "available, occupied, cleaning, reserved"
-        timestamptz created_at
-    }
 
-    VOUCHERS {
-        uuid id PK
-        uuid store_id FK
-        varchar code
-        numeric discount_value
-        varchar discount_type "percentage, fixed"
-        numeric min_transaction
-        boolean is_active
-        timestamptz created_at
-    }
+
+
 
     TRANSACTIONS {
         uuid id PK
         uuid store_id FK
         uuid cashier_id FK
-        uuid table_id FK "nullable"
         numeric total_amount
         numeric discount_total
         varchar payment_method "Tunai, QRIS, Debit"
@@ -206,33 +186,7 @@ Katalog produk barang atau makanan/minuman yang dijual.
 | `is_deleted` | BOOLEAN | *Isar Local Only* | Flag *soft delete* produk. |
 | `created_at` | TIMESTAMPTZ | DEFAULT now() | Waktu pembuatan produk. |
 
-### 5. Tabel: `tables`
-Tata letak meja operasional restoran (untuk F&B dine-in).
-
-| Nama Kolom | Tipe Data | Kendala | Deskripsi |
-| :--- | :--- | :--- | :--- |
-| `id` | UUID | PRIMARY KEY | ID Unik meja. |
-| `store_id` | UUID | FK -> `stores.id` | Kepemilikan meja per toko. |
-| `name` | VARCHAR(100) | NOT NULL | Nama meja (contoh: *Meja 01*, *VIP 2*). |
-| `capacity` | INTEGER | DEFAULT 2 | Kapasitas daya tampung orang di meja. |
-| `status` | VARCHAR(50) | DEFAULT 'available'| Status meja: `'available'`, `'occupied'`, `'cleaning'`, `'reserved'`. |
-| `created_at` | TIMESTAMPTZ | DEFAULT now() | Waktu pembuatan meja. |
-
-### 6. Tabel: `vouchers`
-Kupon promosi diskon transaksi belanja.
-
-| Nama Kolom | Tipe Data | Kendala | Deskripsi |
-| :--- | :--- | :--- | :--- |
-| `id` | UUID | PRIMARY KEY | ID Unik voucher. |
-| `store_id` | UUID | FK -> `stores.id` | Kepemilikan voucher per toko. |
-| `code` | VARCHAR(100) | UNIQUE, NOT NULL| Kode kupon transaksi (contoh: *MERDEKA10*). |
-| `discount_value`| NUMERIC(12,2) | NOT NULL | Besaran nilai pemotongan diskon. |
-| `discount_type` | VARCHAR(50) | NOT NULL | Tipe diskon: `'percentage'` (persen) atau `'fixed'` (rupiah). |
-| `min_transaction`| NUMERIC(12,2)| DEFAULT 0 | Batas minimal transaksi agar kupon dapat digunakan. |
-| `is_active` | BOOLEAN | DEFAULT TRUE | Status keaktifan kupon diskon. |
-| `created_at` | TIMESTAMPTZ | DEFAULT now() | Waktu kupon dibuat. |
-
-### 7. Tabel: `transactions`
+### 5. Tabel: `transactions`
 Nota transaksi penjualan kasir (induk dari struk).
 
 | Nama Kolom | Tipe Data | Kendala | Deskripsi |
@@ -240,7 +194,6 @@ Nota transaksi penjualan kasir (induk dari struk).
 | `id` | UUID | PRIMARY KEY | ID Nota transaksi. |
 | `store_id` | UUID | FK -> `stores.id` | Transaksi dicatat pada store terkait. |
 | `cashier_id` | UUID | FK -> `store_members.user_id`| ID Kasir yang melayani pembayaran. |
-| `table_id` | UUID | FK -> `tables.id` (NULL) | ID Meja jika transaksi berupa F&B dine-in (dapat NULL). |
 | `total_amount` | NUMERIC(12,2) | NOT NULL | Total akhir nominal yang harus dibayar. |
 | `discount_total`| NUMERIC(12,2)| DEFAULT 0 | Total potongan diskon dari transaksi. |
 | `payment_method`| VARCHAR(100) | NOT NULL | Metode bayar: `'Tunai'`, `'QRIS'`, `'Debit'`, `'Kredit'`. |
@@ -251,7 +204,7 @@ Nota transaksi penjualan kasir (induk dari struk).
 | `is_synced` | BOOLEAN | *Isar Local Only* | Status sinkronisasi transaksi offline ke server cloud. |
 | `created_at` | TIMESTAMPTZ | DEFAULT now() | Waktu terjadinya transaksi belanja. |
 
-### 8. Tabel: `transaction_items`
+### 6. Tabel: `transaction_items`
 Rincian baris menu/produk yang dibeli dalam sebuah transaksi (anak tabel `transactions`).
 
 | Nama Kolom | Tipe Data | Kendala | Deskripsi |
@@ -264,7 +217,7 @@ Rincian baris menu/produk yang dibeli dalam sebuah transaksi (anak tabel `transa
 | `quantity` | INTEGER | NOT NULL | Jumlah barang yang dibeli. |
 | `subtotal` | NUMERIC(12,2) | NOT NULL | Total harga baris (`unit_price * quantity`). |
 
-### 9. Tabel: `stock_histories`
+### 7. Tabel: `stock_histories`
 Kartu log riwayat audit perubahan inventaris produk.
 
 | Nama Kolom | Tipe Data | Kendala | Deskripsi |
@@ -278,7 +231,7 @@ Kartu log riwayat audit perubahan inventaris produk.
 | `is_synced` | BOOLEAN | *Isar Local Only* | Status sinkronisasi audit lokal ke server. |
 | `created_at` | TIMESTAMPTZ | DEFAULT now() | Waktu pencatatan mutasi stok. |
 
-### 10. Tabel: `notifications`
+### 8. Tabel: `notifications`
 Log notifikasi pusat pesan (in-app dan push alert).
 
 | Nama Kolom | Tipe Data | Kendala | Deskripsi |

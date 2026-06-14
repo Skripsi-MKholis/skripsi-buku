@@ -1,76 +1,73 @@
 flowchart LR
-    %% Definition of Actors
-    subgraph Aktor_Sistem [Aktor Sistem]
-        Owner["Owner (Pemilik)"]
-        Kasir["Kasir (Staf)"]
-    end
+    %% Aktor di luar Batas Sistem (Owner di kiri, Kasir di kanan)
+    Owner["Owner (Pemilik)"]
+    Kasir["Kasir (Staf)"]
 
-    %% Definition of System Boundary
+    %% Batas Sistem
     subgraph System_Boundary [Batas Sistem Parzello POS]
-        %% Autentikasi
-        UC_Login(["Login Akun"])
+        %% Kolom 1: Autentikasi & Administrasi (Owner-Only)
         UC_Register(["Registrasi Toko Baru"])
+        UC_StoreConfig(["Mengatur Profil Toko"])
+        UC_ManageStaff(["Mengelola Anggota Karyawan"])
+        UC_BroadcastNotif(["Kirim Broadcast Notifikasi"])
         
-        %% POS & Transaksi
-        UC_Checkout(["Melakukan Checkout Transaksi"])
-        UC_Discount(["Menerapkan Voucher/Diskon"])
-        UC_SplitBill(["Melakukan Split Bill"])
-        UC_PrintReceipt(["Mencetak Struk Belanja"])
-        UC_TableMon(["Memonitor Status Meja"])
-        
-        %% Katalog & Stok
+        %% Kolom 2: Katalog & Stok (Owner-Only)
         UC_ManageCatalog(["Mengelola Katalog Produk"])
         UC_ManageCategory(["Mengelola Kategori"])
         UC_AuditStock(["Mengaudit Riwayat Stok"])
-        
-        %% Laporan & AI
-        UC_Dashboard(["Melihat Dashboard Penjualan"])
         UC_AIAnalytics(["Melihat AI Smart Analytics"])
-        UC_BroadcastNotif(["Kirim Broadcast Notifikasi"])
-        UC_SyncLocal(["Sinkronisasi Data Offline-First"])
         
-        %% Administrasi
-        UC_ManageStaff(["Mengelola Anggota Karyawan"])
-        UC_StoreConfig(["Mengatur Profil Toko"])
+        %% Kolom 3: Fitur Utama & Transaksi (Shared & POS)
+        UC_Login(["Login Akun"])
+        UC_SyncLocal(["Sinkronisasi Data Offline-First"])
+        UC_Dashboard(["Melihat Dashboard Penjualan"])
+        UC_Checkout(["Melakukan Checkout Transaksi"])
+        
+        %% Kolom 4: Relasi Detail Checkout
+        UC_Discount(["Menerapkan Voucher/Diskon"])
+        UC_PrintReceipt(["Mencetak Struk Belanja"])
+
+        %% Invisible Links untuk merapikan tata letak grid (kolom-kolom)
+        UC_Register ~~~ UC_ManageCatalog ~~~ UC_Login
+        UC_StoreConfig ~~~ UC_ManageCategory ~~~ UC_SyncLocal
+        UC_ManageStaff ~~~ UC_AuditStock ~~~ UC_Dashboard
+        UC_BroadcastNotif ~~~ UC_AIAnalytics ~~~ UC_Checkout
     end
 
-    %% Associations for Kasir
-    Kasir --> UC_Login
-    Kasir --> UC_Checkout
-    Kasir --> UC_TableMon
-    Kasir --> UC_Dashboard
-    Kasir --> UC_SyncLocal
+    %% Hubungan Aktor ke Use Case (Owner - Asosiasi Kiri)
+    Owner --- UC_Register
+    Owner --- UC_StoreConfig
+    Owner --- UC_ManageStaff
+    Owner --- UC_BroadcastNotif
+    Owner --- UC_ManageCatalog
+    Owner --- UC_ManageCategory
+    Owner --- UC_AuditStock
+    Owner --- UC_AIAnalytics
+    Owner --- UC_Login
+    Owner --- UC_SyncLocal
+    Owner --- UC_Dashboard
+    Owner --- UC_Checkout
 
-    %% Associations for Owner
-    Owner --> UC_Register
-    Owner --> UC_Login
-    Owner --> UC_Checkout
-    Owner --> UC_TableMon
-    Owner --> UC_ManageCatalog
-    Owner --> UC_ManageCategory
-    Owner --> UC_AuditStock
-    Owner --> UC_Dashboard
-    Owner --> UC_AIAnalytics
-    Owner --> UC_BroadcastNotif
-    Owner --> UC_ManageStaff
-    Owner --> UC_StoreConfig
-    Owner --> UC_SyncLocal
+    %% Hubungan Use Case ke Aktor (Kasir - Asosiasi Kanan)
+    UC_Login --- Kasir
+    UC_SyncLocal --- Kasir
+    UC_Dashboard --- Kasir
+    UC_Checkout --- Kasir
 
-    %% Relationships <<include>> & <<extend>>
+    %% Hubungan Dependensi antar Use Case (include / extend)
     UC_Checkout -.->|"<<include>>"| UC_Login
     UC_Checkout -.->|"<<extend>>"| UC_Discount
-    UC_Checkout -.->|"<<extend>>"| UC_SplitBill
     UC_Checkout -.->|"<<include>>"| UC_PrintReceipt
     
     UC_ManageCatalog -.->|"<<include>>"| UC_Login
     UC_AIAnalytics -.->|"<<include>>"| UC_Login
     UC_ManageStaff -.->|"<<include>>"| UC_Login
 
-    %% Style Customization
-    style Owner fill:#9AE600,stroke:#000,stroke-width:2px,color:#000
-    style Kasir fill:#9AE600,stroke:#000,stroke-width:2px,color:#000
-    style System_Boundary fill:#fdfdfd,stroke:#9AE600,stroke-width:3px,stroke-dasharray: 5 5
+    %% Style Sederhana Hitam Putih (seperti Draw.io)
+    classDef default fill:#ffffff,stroke:#000000,stroke-width:1.5px,color:#000000;
+    classDef actor fill:#ffffff,stroke:#000000,stroke-width:2px,color:#000000;
+    class Owner,Kasir actor;
     
-    style UC_Checkout fill:#eef,stroke:#0005,stroke-width:1px
-    style UC_AIAnalytics fill:#fef,stroke:#0005,stroke-width:1px
-    style UC_SyncLocal fill:#efe,stroke:#0005,stroke-width:1px
+    style System_Boundary fill:#ffffff,stroke:#000000,stroke-width:2px,stroke-dasharray: 5 5,color:#000000;
+    
+    linkStyle default stroke:#000000,stroke-width:1.2px,fill:none;

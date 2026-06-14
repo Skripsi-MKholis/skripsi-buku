@@ -31,81 +31,78 @@ Mermaid diagram berikut memodelkan sistem batas (*system boundary*) Parzello POS
 
 ```mermaid
 flowchart LR
-    %% Definition of Actors
-    subgraph Aktor_Sistem [Aktor Sistem]
-        Owner["Owner (Pemilik)"]
-        Kasir["Kasir (Staf)"]
-    end
+    %% Aktor di luar Batas Sistem (Owner di kiri, Kasir di kanan)
+    Owner["Owner (Pemilik)"]
+    Kasir["Kasir (Staf)"]
 
-    %% Definition of System Boundary
+    %% Batas Sistem
     subgraph System_Boundary [Batas Sistem Parzello POS]
-        %% Autentikasi
-        UC_Login(["Login Akun"])
+        %% Kolom 1: Autentikasi & Administrasi (Owner-Only)
         UC_Register(["Registrasi Toko Baru"])
+        UC_StoreConfig(["Mengatur Profil Toko"])
+        UC_ManageStaff(["Mengelola Anggota Karyawan"])
+        UC_BroadcastNotif(["Kirim Broadcast Notifikasi"])
         
-        %% POS & Transaksi
-        UC_Checkout(["Melakukan Checkout Transaksi"])
-        UC_Discount(["Menerapkan Voucher/Diskon"])
-        UC_SplitBill(["Melakukan Split Bill"])
-        UC_PrintReceipt(["Mencetak Struk Belanja"])
-        UC_TableMon(["Memonitor Status Meja"])
-        
-        %% Katalog & Stok
+        %% Kolom 2: Katalog & Stok (Owner-Only)
         UC_ManageCatalog(["Mengelola Katalog Produk"])
         UC_ManageCategory(["Mengelola Kategori"])
         UC_AuditStock(["Mengaudit Riwayat Stok"])
-        
-        %% Laporan & AI
-        UC_Dashboard(["Melihat Dashboard Penjualan"])
         UC_AIAnalytics(["Melihat AI Smart Analytics"])
-        UC_BroadcastNotif(["Kirim Broadcast Notifikasi"])
-        UC_SyncLocal(["Sinkronisasi Data Offline-First"])
         
-        %% Administrasi
-        UC_ManageStaff(["Mengelola Anggota Karyawan"])
-        UC_StoreConfig(["Mengatur Profil Toko"])
+        %% Kolom 3: Fitur Utama & Transaksi (Shared & POS)
+        UC_Login(["Login Akun"])
+        UC_SyncLocal(["Sinkronisasi Data Offline-First"])
+        UC_Dashboard(["Melihat Dashboard Penjualan"])
+        UC_Checkout(["Melakukan Checkout Transaksi"])
+        
+        %% Kolom 4: Relasi Detail Checkout
+        UC_Discount(["Menerapkan Voucher/Diskon"])
+        UC_PrintReceipt(["Mencetak Struk Belanja"])
+
+        %% Invisible Links untuk merapikan tata letak grid (kolom-kolom)
+        UC_Register ~~~ UC_ManageCatalog ~~~ UC_Login
+        UC_StoreConfig ~~~ UC_ManageCategory ~~~ UC_SyncLocal
+        UC_ManageStaff ~~~ UC_AuditStock ~~~ UC_Dashboard
+        UC_BroadcastNotif ~~~ UC_AIAnalytics ~~~ UC_Checkout
     end
 
-    %% Associations for Kasir
-    Kasir --> UC_Login
-    Kasir --> UC_Checkout
-    Kasir --> UC_TableMon
-    Kasir --> UC_Dashboard
-    Kasir --> UC_SyncLocal
+    %% Hubungan Aktor ke Use Case (Owner - Asosiasi Kiri)
+    Owner --- UC_Register
+    Owner --- UC_StoreConfig
+    Owner --- UC_ManageStaff
+    Owner --- UC_BroadcastNotif
+    Owner --- UC_ManageCatalog
+    Owner --- UC_ManageCategory
+    Owner --- UC_AuditStock
+    Owner --- UC_AIAnalytics
+    Owner --- UC_Login
+    Owner --- UC_SyncLocal
+    Owner --- UC_Dashboard
+    Owner --- UC_Checkout
 
-    %% Associations for Owner
-    Owner --> UC_Register
-    Owner --> UC_Login
-    Owner --> UC_Checkout
-    Owner --> UC_TableMon
-    Owner --> UC_ManageCatalog
-    Owner --> UC_ManageCategory
-    Owner --> UC_AuditStock
-    Owner --> UC_Dashboard
-    Owner --> UC_AIAnalytics
-    Owner --> UC_BroadcastNotif
-    Owner --> UC_ManageStaff
-    Owner --> UC_StoreConfig
-    Owner --> UC_SyncLocal
+    %% Hubungan Use Case ke Aktor (Kasir - Asosiasi Kanan)
+    UC_Login --- Kasir
+    UC_SyncLocal --- Kasir
+    UC_Dashboard --- Kasir
+    UC_Checkout --- Kasir
 
-    %% Relationships <<include>> & <<extend>>
+    %% Hubungan Dependensi antar Use Case (include / extend)
     UC_Checkout -.->|"<<include>>"| UC_Login
     UC_Checkout -.->|"<<extend>>"| UC_Discount
-    UC_Checkout -.->|"<<extend>>"| UC_SplitBill
     UC_Checkout -.->|"<<include>>"| UC_PrintReceipt
     
     UC_ManageCatalog -.->|"<<include>>"| UC_Login
     UC_AIAnalytics -.->|"<<include>>"| UC_Login
     UC_ManageStaff -.->|"<<include>>"| UC_Login
 
-    %% Style Customization
-    style Owner fill:#9AE600,stroke:#000,stroke-width:2px,color:#000
-    style Kasir fill:#9AE600,stroke:#000,stroke-width:2px,color:#000
-    style System_Boundary fill:#fdfdfd,stroke:#9AE600,stroke-width:3px,stroke-dasharray: 5 5
+    %% Style Sederhana Hitam Putih (seperti Draw.io)
+    classDef default fill:#ffffff,stroke:#000000,stroke-width:1.5px,color:#000000;
+    classDef actor fill:#ffffff,stroke:#000000,stroke-width:2px,color:#000000;
+    class Owner,Kasir actor;
     
-    style UC_Checkout fill:#eef,stroke:#0005,stroke-width:1px
-    style UC_AIAnalytics fill:#fef,stroke:#0005,stroke-width:1px
-    style UC_SyncLocal fill:#efe,stroke:#0005,stroke-width:1px
+    style System_Boundary fill:#ffffff,stroke:#000000,stroke-width:2px,stroke-dasharray: 5 5,color:#000000;
+    
+    linkStyle default stroke:#000000,stroke-width:1.2px,fill:none;
 ```
 
 ---
@@ -120,18 +117,16 @@ Daftar berikut merinci fungsi dari masing-masing *use case* yang digambarkan pad
 | **UC-02** | Login Akun | Owner, Kasir | Autentikasi pengguna menggunakan email dan kata sandi. |
 | **UC-03** | Melakukan Checkout | Owner, Kasir | Memasukkan pesanan ke keranjang dan memproses transaksi bayar. |
 | **UC-04** | Menerapkan Voucher | Owner, Kasir | Memasukkan kode promosi voucher belanja untuk memotong tagihan. |
-| **UC-05** | Melakukan Split Bill | Owner, Kasir | Memecah pembayaran satu nota belanja menjadi beberapa bill. |
-| **UC-06** | Mencetak Struk Belanja | Owner, Kasir | Mencetak struk transaksi fisik melalui printer thermal Bluetooth. |
-| **UC-07** | Memonitor Status Meja | Owner, Kasir | Memantau keterisian meja kasir secara visual (*dormant*). |
-| **UC-08** | Mengelola Katalog | Owner | Menambah, menyunting, dan menghapus produk atau stok barang. |
-| **UC-09** | Mengelola Kategori | Owner | Mengatur pengelompokan menu katalog produk toko. |
-| **UC-10** | Mengaudit Riwayat Stok | Owner | Melihat log keluar-masuk mutasi barang untuk mencegah fraud. |
-| **UC-11** | Melihat Dashboard | Owner, Kasir | Memantau performa keuangan (Kasir dibatasi khusus hari ini). |
-| **UC-12** | Melihat AI Analytics | Owner | Melihat proyeksi omzet cerdas berbasis Gemini AI (*simulated*). |
-| **UC-13** | Kirim Broadcast Notif | Owner | Mengirim pesan push pemberitahuan real-time ke semua kasir. |
-| **UC-14** | Sinkronisasi Data | Owner, Kasir | Menyinkronkan antrean transaksi offline lokal ke cloud Supabase. |
-| **UC-15** | Mengelola Karyawan | Owner | Mendaftarkan, menangguhkan, atau mengubah peran staf kasir. |
-| **UC-16** | Mengatur Profil Toko | Owner | Mengubah identitas nama toko, alamat, dan logo outlet. |
+| **UC-05** | Mencetak Struk Belanja | Owner, Kasir | Mencetak struk transaksi fisik melalui printer thermal Bluetooth. |
+| **UC-06** | Mengelola Katalog | Owner | Menambah, menyunting, dan menghapus produk atau stok barang. |
+| **UC-07** | Mengelola Kategori | Owner | Mengatur pengelompokan menu katalog produk toko. |
+| **UC-08** | Mengaudit Riwayat Stok | Owner | Melihat log keluar-masuk mutasi barang untuk mencegah fraud. |
+| **UC-09** | Melihat Dashboard | Owner, Kasir | Memantau performa keuangan (Kasir dibatasi khusus hari ini). |
+| **UC-10** | Melihat AI Analytics | Owner | Melihat proyeksi omzet cerdas berbasis Gemini AI (*simulated*). |
+| **UC-11** | Kirim Broadcast Notif | Owner | Mengirim pesan push pemberitahuan real-time ke semua kasir. |
+| **UC-12** | Sinkronisasi Data | Owner, Kasir | Menyinkronkan antrean transaksi offline lokal ke cloud Supabase. |
+| **UC-13** | Mengelola Karyawan | Owner | Mendaftarkan, menangguhkan, atau mengubah peran staf kasir. |
+| **UC-14** | Mengatur Profil Toko | Owner | Mengubah identitas nama toko, alamat, dan logo outlet. |
 
 ---
 
@@ -157,7 +152,7 @@ Berikut adalah skenario alur kejadian (*flow of events*) rinci untuk tiga fungsi
 
 ---
 
-### Skenario 2: Kalibrasi & Latihan AI Smart Analytics (UC-12)
+### Skenario 2: Kalibrasi & Latihan AI Smart Analytics (UC-10)
 *   **Aktor Utama**: Owner
 *   **Kondisi Awal**: Owner berada di halaman laporan keuangan dan data transaksi toko memiliki minimal 20 entri riwayat penjualan baru.
 *   **Kondisi Akhir**: Model forecasting Gemini AI terkalibrasi secara cloud dan grafik peramalan omzet terbaru tersaji secara lokal.
@@ -171,7 +166,7 @@ Berikut adalah skenario alur kejadian (*flow of events*) rinci untuk tiga fungsi
 
 ---
 
-### Skenario 3: Sinkronisasi Data Otomatis di Latar Belakang (UC-14)
+### Skenario 3: Sinkronisasi Data Otomatis di Latar Belakang (UC-12)
 *   **Aktor Utama**: Owner / Kasir (Tidak sadar/Latar Belakang) atau dipicu Manual
 *   **Kondisi Awal**: Perangkat sebelumnya dalam keadaan luring (*offline*) dan baru saja mendapatkan kembali koneksi internet (*online*).
 *   **Kondisi Akhir**: Seluruh data transaksi lokal tersinkronkan ke Supabase Cloud dan status produk lokal diperbarui ke cloud.

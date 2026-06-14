@@ -528,14 +528,12 @@ Perancangan sistem dalam penelitian ini dilakukan menggunakan \textit{Unified Mo
 
 Sistem POS melibatkan dua aktor utama, yaitu \textbf{Owner (Pemilik Toko)} dan \textbf{Kasir (Karyawan)}. \textit{Use Case Diagram} menggambarkan fungsi-fungsi yang dapat diakses oleh masing-masing aktor. Rancangan \textit{use case} diilustrasikan pada Gambar \ref{fig:use_case}.
 
-\begin{landscape}
-\begin{figure}[p]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\linewidth]{use_case_drawio}
+    \includegraphics[width=0.85\textwidth]{use_case}
     \caption{\textit{Use Case Diagram} Sistem POS}
     \label{fig:use_case}
 \end{figure}
-\end{landscape}
 
 \noindent\textbf{1. Definisi Aktor}
 
@@ -552,7 +550,7 @@ Definisi aktor pada sistem POS diilustrasikan pada Tabel \ref{tab:aktor} berikut
 \hline
 1 & Owner (Pemilik) & Aktor dengan hak akses penuh terhadap seluruh sistem, mencakup pengelolaan produk, laporan keuangan, manajemen staf, pengaturan toko, serta fitur AI \textit{Smart Analytics} untuk proyeksi penjualan berbasis kecerdasan buatan. \\
 \hline
-2 & Kasir (Karyawan) & Staf operasional harian dengan akses terbatas pada modul POS, pencatatan transaksi, dan ringkasan omzet harian shift berjalan. \\
+2 & Kasir (Karyawan) & Staf operasional harian dengan akses terbatas pada modul POS, pencatatan transaksi, pemantauan status meja, dan ringkasan omzet harian shift berjalan. \\
 \hline
 \end{tabularx}
 \end{table}
@@ -561,20 +559,15 @@ Definisi aktor pada sistem POS diilustrasikan pada Tabel \ref{tab:aktor} berikut
 
 Definisi \textit{use case} pada sistem POS diilustrasikan pada Tabel \ref{tab:usecase} berikut:
 
-{\setstretch{1.2}
-\begin{longtable}{|>{\centering\arraybackslash}p{0.6cm}|>{\raggedright\arraybackslash}p{4.0cm}|>{\raggedright\arraybackslash}p{8.4cm}|}
-\caption{Definisi \textit{Use Case}} \label{tab:usecase} \\
+\begin{table}[H]
+\setstretch{1.2}
+\centering
+\caption{Definisi \textit{Use Case}}
+\label{tab:usecase}
+\begin{tabularx}{\textwidth}{|c|l|X|}
 \hline
 \textbf{No.} & \textbf{\textit{Use Case}} & \textbf{Deskripsi} \\
 \hline
-\endfirsthead
-\endhead
-
-\hline
-\endfoot
-\hline
-\endlastfoot
-
 1 & Registrasi Toko Baru & Mendaftarkan akun toko baru saat inisialisasi awal sistem (Owner). \\
 \hline
 2 & Login Akun & Autentikasi pengguna menggunakan email dan kata sandi via Supabase Auth. \\
@@ -583,28 +576,32 @@ Definisi \textit{use case} pada sistem POS diilustrasikan pada Tabel \ref{tab:us
 \hline
 4 & Menerapkan Voucher/Diskon & Memasukkan kode promosi untuk memotong total tagihan transaksi. \\
 \hline
-5 & Mencetak Struk & Mencetak struk transaksi fisik via printer \textit{thermal} Bluetooth. \\
+5 & Melakukan \textit{Split Bill} & Memecah pembayaran satu nota menjadi beberapa bagian. \\
 \hline
-6 & Mengelola Katalog Produk & Menambah, menyunting, dan menghapus produk/stok barang (Owner). \\
+6 & Mencetak Struk & Mencetak struk transaksi fisik via printer \textit{thermal} Bluetooth. \\
 \hline
-7 & Mengelola Kategori & Mengatur pengelompokan menu katalog produk toko (Owner). \\
+7 & Memonitor Status Meja & Memantau keterisian meja dan status pesanan \textit{dine-in}. \\
 \hline
-8 & Mengaudit Riwayat Stok & Melihat log mutasi stok untuk keperluan audit inventaris (Owner). \\
+8 & Mengelola Katalog Produk & Menambah, menyunting, dan menghapus produk/stok barang (Owner). \\
 \hline
-9 & Melihat \textit{Dashboard} & Memantau performa keuangan; kasir dibatasi pada data hari berjalan. \\
+9 & Mengelola Kategori & Mengatur pengelompokan menu katalog produk toko (Owner). \\
 \hline
-10 & Melihat AI \textit{Smart Analytics} & Mengakses proyeksi penjualan berbasis Model LSTM (Owner). \\
+10 & Mengaudit Riwayat Stok & Melihat log mutasi stok untuk keperluan audit inventaris (Owner). \\
 \hline
-11 & Kirim \textit{Broadcast} Notifikasi & Mengirim pemberitahuan \textit{real-time} ke semua kasir (Owner). \\
+11 & Melihat \textit{Dashboard} & Memantau performa keuangan; kasir dibatasi pada data hari berjalan. \\
 \hline
-12 & Sinkronisasi Data & Menyinkronkan transaksi \textit{offline} lokal ke cloud Supabase otomatis. \\
+12 & Melihat AI \textit{Smart Analytics} & Mengakses proyeksi penjualan berbasis Model LSTM (Owner). \\
 \hline
-13 & Mengelola Karyawan & Mendaftarkan atau mengubah peran staf kasir (Owner). \\
+13 & Kirim \textit{Broadcast} Notifikasi & Mengirim pemberitahuan \textit{real-time} ke semua kasir (Owner). \\
 \hline
-14 & Mengatur Profil Toko & Mengubah nama toko, alamat, dan logo outlet (Owner). \\
+14 & Sinkronisasi Data & Menyinkronkan transaksi \textit{offline} lokal ke cloud Supabase otomatis. \\
 \hline
-\end{longtable}
-}
+15 & Mengelola Karyawan & Mendaftarkan atau mengubah peran staf kasir (Owner). \\
+\hline
+16 & Mengatur Profil Toko & Mengubah nama toko, alamat, dan logo outlet (Owner). \\
+\hline
+\end{tabularx}
+\end{table}
 
 % \subsection{\textit{Activity Diagram}}
 %
@@ -614,7 +611,7 @@ Definisi \textit{use case} pada sistem POS diilustrasikan pada Tabel \ref{tab:us
 % \vspace{0.5cm}
 % \noindent 1. Activity Diagram Alur Kerja Transaksi Kasir (\textit{POS Checkout})
 %
-% Diagram aktivitas ini menggambarkan alur kerja kasir dalam memproses transaksi belanja pelanggan, mulai dari pemilihan produk hingga pencetakan struk, termasuk opsi penerapan voucher. Diagram aktivitas transaksi kasir diilustrasikan pada Gambar \ref{fig:activity_checkout}.
+% Diagram aktivitas ini menggambarkan alur kerja kasir dalam memproses transaksi belanja pelanggan, mulai dari pemilihan produk hingga pencetakan struk, termasuk opsi penerapan voucher dan pemisahan tagihan (\textit{split bill}). Diagram aktivitas transaksi kasir diilustrasikan pada Gambar \ref{fig:activity_checkout}.
 %
 % \begin{figure}[H]
 %     \centering
@@ -623,7 +620,7 @@ Definisi \textit{use case} pada sistem POS diilustrasikan pada Tabel \ref{tab:us
 %     \label{fig:activity_checkout}
 % \end{figure}
 %
-% Alur dimulai ketika kasir membuka layar POS dan memilih produk ke keranjang belanja. Sistem memvalidasi keranjang, lalu kasir dapat menerapkan voucher diskon. Setelah memilih metode pembayaran (Tunai, QRIS, Debit, atau Transfer) dan mengonfirmasi nominal, transaksi disimpan di basis data lokal Isar DB, stok produk dikurangi secara otomatis, dan struk dicetak melalui printer \textit{thermal} Bluetooth.
+% Alur dimulai ketika kasir membuka layar POS dan memilih produk ke keranjang belanja. Sistem memvalidasi keranjang, lalu kasir dapat menerapkan voucher diskon atau melakukan \textit{split bill}. Setelah memilih metode pembayaran (Tunai, QRIS, Debit, atau Transfer) dan mengonfirmasi nominal, transaksi disimpan di basis data lokal Isar DB, stok produk dikurangi secara otomatis, dan struk dicetak melalui printer \textit{thermal} Bluetooth.
 %
 %
 % \vspace{0.5cm}
@@ -703,6 +700,25 @@ Basis data sistem POS dirancang secara hibrida menggunakan Supabase PostgreSQL u
     \nodepart{four}  name : VARCHAR(100)
   };
 
+  % ===== TABLES =====
+  \node[erd=5] (tbl) at (10.5, 1.5) {
+    \textbf{\small tables}
+    \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
+    \nodepart{three} \textit{store\_id} : UUID (FK)
+    \nodepart{four}  name : VARCHAR(50)
+    \nodepart{five}  status : VARCHAR(20)
+  };
+
+  % ===== VOUCHERS =====
+  \node[erd=6] (vou) at (14.5, 1.0) {
+    \textbf{\small vouchers}
+    \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
+    \nodepart{three} \textit{store\_id} : UUID (FK)
+    \nodepart{four}  code : VARCHAR(50)
+    \nodepart{five}  discount : NUMERIC
+    \nodepart{six}   valid\_until : DATE
+  };
+
   % ===== NOTIFICATIONS =====
   \node[erd=5] (notif) at (19.5, 1.5) {
     \textbf{\small notifications}
@@ -715,6 +731,8 @@ Basis data sistem POS dirancang secara hibrida menggunakan Supabase PostgreSQL u
   % ===== RELASI =====
   \draw[thick] (stores.south) |- node[pos=0.75,above,font=\tiny]{1} node[pos=0.75,below,font=\tiny]{N} (sm.north);
   \draw[thick] (stores.south) |- node[pos=0.75,above,font=\tiny]{1} node[pos=0.75,below,font=\tiny]{N} (cat.north);
+  \draw[thick] (stores.south) --  node[right,font=\tiny]{1\,:\,N} (tbl.north);
+  \draw[thick] (stores.south) |- node[pos=0.75,above,font=\tiny]{1} node[pos=0.75,below,font=\tiny]{N} (vou.north);
   \draw[thick] (stores.south) |- node[pos=0.75,above,font=\tiny]{1} node[pos=0.75,below,font=\tiny]{N} (notif.north);
 \end{tikzpicture}
 \caption{\textit{Entity Relationship Diagram} (ERD) Sistem POS --- Bagian 1: Tabel Master}
@@ -758,6 +776,14 @@ Basis data sistem POS dirancang secara hibrida menggunakan Supabase PostgreSQL u
     \textbf{\small\color{gray} stores}
     \nodepart{two} \textit{\color{gray}(lihat ERD Bagian 1)}
   };
+  \node[erdref] (rtbl) at (14.5, 4.5) {
+    \textbf{\small\color{gray} tables}
+    \nodepart{two} \textit{\color{gray}(lihat ERD Bagian 1)}
+  };
+  \node[erdref] (rvou) at (19.5, 4.5) {
+    \textbf{\small\color{gray} vouchers}
+    \nodepart{two} \textit{\color{gray}(lihat ERD Bagian 1)}
+  };
 
   % ===== PRODUCTS =====
   \node[erd=7] (prod) at (4.5, 3.5) {
@@ -771,12 +797,14 @@ Basis data sistem POS dirancang secara hibrida menggunakan Supabase PostgreSQL u
   };
 
   % ===== TRANSACTIONS =====
-  \node[erd=5] (trans) at (14.5, 2.5) {
+  \node[erd=7] (trans) at (14.5, 2.5) {
     \textbf{\small transactions}
     \nodepart{two}   \underline{id} : UUID \textbf{(PK)}
     \nodepart{three} \textit{store\_id} : UUID (FK)
-    \nodepart{four}  total : NUMERIC
-    \nodepart{five}  created\_at : TIMESTAMPTZ
+    \nodepart{four}  \textit{table\_id} : UUID (FK)
+    \nodepart{five}  \textit{voucher\_id} : UUID (FK)
+    \nodepart{six}   total : NUMERIC
+    \nodepart{seven} created\_at : TIMESTAMPTZ
   };
 
   % ===== STOCK_HISTORIES =====
@@ -803,6 +831,8 @@ Basis data sistem POS dirancang secara hibrida menggunakan Supabase PostgreSQL u
   \draw[gray!60, dashed] (rcat.south)   |- (prod.north);
   \draw[gray!60, dashed] (rstores.south) |- (prod.north);
   \draw[gray!60, dashed] (rstores.south) |- (trans.north);
+  \draw[gray!60, dashed] (rtbl.south)   -- (trans.north);
+  \draw[gray!60, dashed] (rvou.south)   |- (trans.north);
 
   % ===== RELASI UTAMA (hitam) =====
   \draw[thick] (prod.south) |- node[pos=0.75,above,font=\tiny]{1} node[pos=0.75,below,font=\tiny]{N} (sh.north);
@@ -814,7 +844,7 @@ Basis data sistem POS dirancang secara hibrida menggunakan Supabase PostgreSQL u
 \end{figure}
 \end{landscape}
 
-Entitas \texttt{stores} menjadi entitas induk yang berelasi dengan seluruh entitas lainnya. Entitas \texttt{store\_members} mengelola hak akses berbasis peran (\textit{Role-Based Access Control}/RBAC) untuk Owner dan Kasir. Katalog produk dikelola melalui entitas \texttt{products} dan \texttt{categories}, sedangkan data transaksi disimpan pada entitas \texttt{transactions} dan \texttt{transaction\_items}. Riwayat perubahan stok dicatat pada entitas \texttt{stock\_histories}, sementara entitas \texttt{notifications} mendukung sistem notifikasi. Daftar seluruh tabel basis data yang digunakan dirangkum pada Tabel \ref{tab:database}.
+Entitas \texttt{stores} menjadi entitas induk yang berelasi dengan seluruh entitas lainnya. Entitas \texttt{store\_members} mengelola hak akses berbasis peran (\textit{Role-Based Access Control}/RBAC) untuk Owner dan Kasir. Katalog produk dikelola melalui entitas \texttt{products} dan \texttt{categories}, sedangkan data transaksi disimpan pada entitas \texttt{transactions} dan \texttt{transaction\_items}. Riwayat perubahan stok dicatat pada entitas \texttt{stock\_histories}, sementara entitas \texttt{vouchers}, \texttt{tables}, dan \texttt{notifications} mendukung fitur diskon, manajemen meja \textit{dine-in}, dan sistem notifikasi. Daftar seluruh tabel basis data yang digunakan dirangkum pada Tabel \ref{tab:database}.
 
 \begin{table}[H]
 \setstretch{1.2}
@@ -833,20 +863,24 @@ Entitas \texttt{stores} menjadi entitas induk yang berelasi dengan seluruh entit
 \hline
 4 & \texttt{products} & Menyimpan katalog produk beserta harga, stok, dan data SKU/barcode. \\
 \hline
-5 & \texttt{transactions} & Menyimpan data nota transaksi penjualan kasir sebagai tabel induk. \\
+5 & \texttt{tables} & Mengelola data meja operasional untuk kebutuhan \textit{dine-in} restoran. \\
 \hline
-6 & \texttt{transaction\_items} & Menyimpan rincian produk yang dibeli dalam setiap transaksi. \\
+6 & \texttt{vouchers} & Menyimpan data kupon promosi diskon yang diterapkan pada transaksi. \\
 \hline
-7 & \texttt{stock\_histories} & Mencatat log audit perubahan stok masuk dan keluar produk. \\
+7 & \texttt{transactions} & Menyimpan data nota transaksi penjualan kasir sebagai tabel induk. \\
 \hline
-8 & \texttt{notifications} & Menyimpan pesan notifikasi sistem dan \textit{broadcast} Owner ke staf. \\
+8 & \texttt{transaction\_items} & Menyimpan rincian produk yang dibeli dalam setiap transaksi. \\
+\hline
+9 & \texttt{stock\_histories} & Mencatat log audit perubahan stok masuk dan keluar produk. \\
+\hline
+10 & \texttt{notifications} & Menyimpan pesan notifikasi sistem dan \textit{broadcast} Owner ke staf. \\
 \hline
 \end{tabularx}
 \end{table}
 
 \subsection{Perancangan Wireframe}
 
-Perancangan wireframe dalam penelitian ini mencakup rancangan antarmuka pengguna untuk semua layar utama yang menjadi bagian dari alur operasional aplikasi POS. Wireframe dirancang dengan mempertimbangkan kebutuhan pengguna, aksesibilitas, dan alur kerja yang efisien. Terdapat 13 rancangan layar yang melayani kebutuhan berbeda sesuai dengan peran pengguna, sebagaimana diuraikan berikut ini.
+Perancangan wireframe dalam penelitian ini mencakup rancangan antarmuka pengguna untuk semua layar utama yang menjadi bagian dari alur operasional aplikasi POS. Wireframe dirancang dengan mempertimbangkan kebutuhan pengguna, aksesibilitas, dan alur kerja yang efisien. Terdapat 14 rancangan layar yang melayani kebutuhan berbeda sesuai dengan peran pengguna, sebagaimana diuraikan berikut ini.
 
 \begin{enumerate}
 
@@ -856,12 +890,10 @@ Perancangan wireframe dalam penelitian ini mencakup rancangan antarmuka pengguna
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.35\textwidth]{wireframe_register}
+        \includegraphics[width=0.45\textwidth]{wireframe_register}
         \caption{Wireframe Halaman Registrasi Toko Baru}
         \label{fig:wf_register}
     \end{figure}
-
-    \newpage
 
     \item \textbf{Halaman Login}
 
@@ -898,7 +930,7 @@ Perancangan wireframe dalam penelitian ini mencakup rancangan antarmuka pengguna
 
     \item \textbf{Halaman POS (Pembayaran)}
 
-    Layar utama kasir untuk mencari produk, menyusun keranjang pesanan, menerapkan voucher diskon, memilih metode pembayaran, dan memproses transaksi.
+    Layar utama kasir untuk mencari produk, menyusun keranjang pesanan, menerapkan voucher diskon, melakukan \textit{split bill}, memilih metode pembayaran, dan memproses transaksi.
 
     \begin{figure}[H]
         \centering
@@ -984,18 +1016,27 @@ Perancangan wireframe dalam penelitian ini mencakup rancangan antarmuka pengguna
         \label{fig:wf_digital_receipt}
     \end{figure}
 
-    \item \textbf{Halaman Katalog Produk}
+    \item \textbf{Halaman Katalog Produk Pelanggan}
 
     Beranda mode pelanggan yang menampilkan katalog produk toko beserta kategori menu, informasi harga, dan fitur pencarian produk secara mandiri.
 
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.45\textwidth]{wireframe_product_catalog}
-        \caption{Wireframe Halaman Katalog Produk}
+        \caption{Wireframe Halaman Katalog Produk Pelanggan}
         \label{fig:wf_product_catalog}
     \end{figure}
 
+    \item \textbf{Halaman Dasbor Pelanggan}
 
+    Halaman ringkasan antarmuka pelanggan yang menampilkan informasi toko, kategori produk unggulan, dan akses ke fitur pemesanan mandiri (\textit{self-order}).
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{wireframe_dashboard_customer}
+        \caption{Wireframe Halaman Dasbor Pelanggan}
+        \label{fig:wf_dashboard_customer}
+    \end{figure}
 
 \end{enumerate}
 
@@ -1073,7 +1114,7 @@ Gambar \ref{fig:lstm_alur} menggambarkan alur kerja model LSTM dari input data t
 
 Pengujian sistem pada penelitian ini menggunakan metode \textit{black box testing}, yaitu metode pengujian perangkat lunak yang berfokus pada validasi fungsional sistem dengan mengamati kesesuaian antara masukan (\textit{input}) dan keluaran (\textit{output}) yang dihasilkan, tanpa memperhatikan struktur internal kode program.
 
-Pengujian diterapkan pada fitur-fitur utama sistem, meliputi autentikasi (login/registrasi), pengelolaan produk dan kategori, proses transaksi POS (\textit{checkout}, voucher), pencetakan struk, sinkronisasi data \textit{offline-first}, dan fitur AI \textit{Smart Analytics}. Pengujian akurasi model LSTM dilakukan menggunakan metrik MAE, RMSE, dan MAPE terhadap data transaksi historis mitra UMKM.
+Pengujian diterapkan pada fitur-fitur utama sistem, meliputi autentikasi (login/registrasi), pengelolaan produk dan kategori, proses transaksi POS (\textit{checkout}, voucher, \textit{split bill}), pencetakan struk, sinkronisasi data \textit{offline-first}, dan fitur AI \textit{Smart Analytics}. Pengujian akurasi model LSTM dilakukan menggunakan metrik MAE, RMSE, dan MAPE terhadap data transaksi historis mitra UMKM.
 
 \section{Variabel Penelitian}
 
