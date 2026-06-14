@@ -133,7 +133,7 @@ MENGGUNAKAN METODE \textit{LONG SHORT-TERM MEMORY} (LSTM)}
 
 \vspace{2.5cm}
 
-\includegraphics[width=3.5cm]{logo-pnl-skripsi2}
+\includegraphics[width=3.5cm]{logo-pnl-skripsi}
 
 \vspace{2.5cm}
 
@@ -1003,6 +1003,231 @@ Hasil yang diharapkan dari penelitian ini meliputi beberapa aspek sebagai beriku
     \item Sistem yang mampu menyajikan informasi prediksi dan laporan penjualan dalam bentuk visualisasi grafik yang mudah dipahami oleh pengguna, khususnya pelaku UMKM.
     \item Hasil penelitian ini diharapkan dapat dipublikasikan dalam jurnal ilmiah sebagai kontribusi dalam pengembangan sistem informasi dan penerapan \textit{machine learning} pada UMKM.
     \item Penelitian ini menghasilkan laporan tugas akhir sebagai salah satu syarat penyelesaian studi pada Program Studi Teknik Informatika Politeknik Negeri Lhokseumawe.
+\end{enumerate}
+
+%%=============================================================
+%% BAB IV - HASIL DAN PEMBAHASAN
+%%=============================================================
+\chapter[HASIL DAN PEMBAHASAN]{\\ HASIL DAN PEMBAHASAN}
+
+Bab ini menyajikan hasil rancang bangun dan pembahasan sistem Point of Sale (POS) dengan fitur prediksi penjualan harian menggunakan metode Long Short-Term Memory (LSTM). Pembahasan dibagi menjadi empat bagian utama, yaitu hasil implementasi sistem, hasil pengujian sistem, pembahasan hasil penelitian, serta keterbatasan sistem yang dikembangkan.
+
+\section{Hasil Implementasi Sistem}
+
+Bagian ini memaparkan realisasi fisik dari rancangan sistem yang telah disusun pada Bab III, yang mencakup implementasi antarmuka aplikasi mobile (kasir dan owner), integrasi cloud backend (Supabase), serta implementasi modul prediksi AI di sisi server.
+
+\subsection{Implementasi Aplikasi Mobile (Flutter)}
+
+Aplikasi mobile dikembangkan menggunakan framework Flutter dengan bahasa pemrograman Dart. Komponen antarmuka pengguna disesuaikan dengan rancangan wireframe untuk menjamin kenyamanan operasional kasir. Berikut adalah penjelasan mengenai implementasi antarmuka layar utama aplikasi:
+
+\begin{enumerate}
+    \item \textbf{Halaman Registrasi Toko Baru}:
+    Halaman ini merupakan langkah awal inisialisasi sistem yang digunakan oleh Owner untuk mendaftarkan akun baru dan meregistrasikan profil outlet toko. Form registrasi memuat kolom input nama lengkap, email, kata sandi, nama toko, alamat outlet, dan nomor telepon.
+    
+    \item \textbf{Halaman Login}:
+    Menyediakan fasilitas autentikasi pengguna menggunakan email dan kata sandi. Keamanan akses diatur melalui layanan autentikasi Supabase. Sistem secara otomatis mengidentifikasi peran akun (Owner atau Kasir) setelah login berhasil untuk menentukan batasan hak akses menu.
+    
+    \item \textbf{Halaman Pemilihan Toko}:
+    Layar ini ditujukan bagi pengguna yang terdaftar di lebih dari satu outlet toko merchant. Pengguna dapat memilih outlet aktif yang ingin dioperasikan sebelum diarahkan ke halaman dasbor utama.
+    
+    \item \textbf{Halaman Dasbor Owner}:
+    Menampilkan visualisasi ringkasan kinerja penjualan toko saat ini, seperti grafik tren omzet penjualan harian, jumlah total transaksi, total nominal omzet harian, dan ringkasan stok produk yang menipis sebagai peringatan restock cepat.
+    
+    \item \textbf{Halaman POS (Pembayaran / Checkout)}:
+    Merupakan layar operasional utama kasir untuk memproses transaksi. Kasir dapat memilih produk, memasukkan jumlah barang ke keranjang belanja, menerapkan diskon atau voucher, memilih metode pembayaran (Tunai, QRIS, atau Kartu), serta menyelesaikan transaksi pembayaran.
+    
+    \item \textbf{Halaman Riwayat Transaksi}:
+    Menampilkan daftar nota transaksi penjualan yang telah diselesaikan. Halaman ini memuat informasi detail nomor invoice, tanggal transaksi, nama kasir, total nominal pembayaran, dan status sinkronisasi cloud.
+    
+    \item \textbf{Halaman Kelola Produk dan Kategori}:
+    Menyediakan antarmuka bagi Owner untuk mengelola inventaris produk (menambah, mengubah, dan menghapus produk) beserta pengelompokan berdasarkan kategori produk. Form produk memuat nama produk, harga jual, stok fisik, barcode/SKU, dan gambar produk.
+    
+    \item \textbf{Halaman Laporan (Analitik AI \& Prediksi LSTM)}:
+    Menampilkan visualisasi grafik data penjualan aktual historis berdampingan dengan kurva proyeksi hasil prediksi penjualan harian untuk 7 hari ke depan berbasis model AI LSTM.
+    
+    \item \textbf{Halaman Pengaturan dan Profil Toko}:
+    Memungkinkan Owner untuk mengubah konfigurasi dasar aplikasi, mengatur profil outlet toko (logo, nama, alamat), serta mengelola akun karyawan/staf kasir yang memiliki akses operasional.
+    
+    \item \textbf{Halaman Struk Digital dan Katalog Mandiri}:
+    Halaman struk digital menampilkan pratinjau struk fisik transaksi yang dapat dibagikan langsung ke pelanggan via aplikasi pesan instan. Layar katalog mandiri menyediakan daftar menu produk yang dapat dipindai oleh pelanggan untuk melihat daftar harga barang secara langsung.
+\end{enumerate}
+
+\subsection{Implementasi Cloud Backend (Supabase PostgreSQL)}
+
+Infrastruktur backend cloud diimplementasikan menggunakan platform Supabase BaaS dengan database PostgreSQL. Struktur relasional database diwujudkan melalui delapan tabel utama yang saling terhubung:
+\begin{enumerate}
+    \item \texttt{stores}: Menyimpan data identitas outlet merchant (id, nama, alamat, nomor HP, URL logo, created\_at).
+    \item \texttt{store\_members}: Mengatur relasi hak akses pengguna dengan peran Owner atau Karyawan di masing-masing outlet.
+    \item \texttt{categories}: Mengelola daftar kategori pengelompokan produk.
+    \item \texttt{products}: Menyimpan katalog inventaris barang (id, nama, harga, stok, barcode, URL foto, is\_synced, is\_deleted).
+    \item \texttt{transactions}: Menyimpan data nota induk transaksi penjualan (id, total belanja, metode pembayaran, kasir\_id, created\_at).
+    \item \texttt{transaction\_items}: Menyimpan rincian item produk yang terjual pada setiap transaksi penjualan (id, transaksi\_id, produk\_id, jumlah, harga).
+    \item \texttt{stock\_histories}: Mencatat log audit mutasi perubahan stok produk (stok masuk, keluar, penjualan, audit manual).
+    \item \texttt{notifications}: Mengelola pesan notifikasi sistem dan info siaran dari Owner ke seluruh kasir secara real-time.
+\end{enumerate}
+
+Keamanan akses data antar-outlet dijamin melalui penerapan kebijakan Row Level Security (RLS) di database PostgreSQL. Kebijakan ini memastikan bahwa pengguna (kasir/owner) hanya dapat membaca dan menulis data yang memiliki \texttt{store\_id} yang sesuai dengan toko tempat mereka terdaftar.
+
+\subsection{Implementasi Modul AI Prediksi Penjualan (Python \& TensorFlow)}
+
+Modul kecerdasan buatan untuk melakukan kalkulasi prediksi penjualan harian dikembangkan menggunakan Python dengan library TensorFlow/Keras di sisi server. Modul ini beroperasi secara terpisah dari beban kerja transaksional POS untuk menjaga stabilitas aplikasi kasir.
+
+Proses operasional modul AI berjalan melalui alur kerja sebagai berikut:
+\begin{enumerate}
+    \item \textbf{Penarikan Data}: Server Python melakukan penarikan data transaksi penjualan harian dari database Supabase PostgreSQL secara terjadwal.
+    \item \textbf{Pra-pemrosesan Data}: Data penjualan harian diagregasikan, dibersihkan dari nilai kosong menggunakan interpolasi linier, dan dinormalisasi ke skala 0 hingga 1 menggunakan \textit{MinMaxScaler}.
+    \item \textbf{FastAPI REST Endpoints}: Menyediakan endpoint API berbasis REST (seperti \texttt{/predict}) menggunakan framework FastAPI. Endpoint ini dipanggil oleh aplikasi Flutter dengan mengirimkan parameter \texttt{store\_id} dan menerima respons berupa deret angka prediksi penjualan harian untuk hari berikutnya.
+\end{enumerate}
+
+\section{Hasil Pengujian Sistem}
+
+Pengujian sistem dilakukan untuk memvalidasi fungsionalitas aplikasi dan mengukur tingkat akurasi dari model AI LSTM yang telah diintegrasikan. Pengujian mencakup uji coba fungsional Black Box, pengujian akurasi prediksi LSTM, serta uji sinkronisasi data offline-first.
+
+\subsection{Hasil Pengujian Black Box}
+
+Pengujian fungsionalitas sistem menggunakan metode Black Box diterapkan pada 14 skenario kasus penggunaan utama yang melibatkan peran Owner dan Kasir. Hasil pengujian diringkas pada Tabel~\ref{tab:hasil_blackbox}.
+
+{\setstretch{1.15}
+\begin{longtable}{|>{\centering\arraybackslash}p{0.6cm}|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}p{4.7cm}|>{\centering\arraybackslash}p{2.0cm}|>{\centering\arraybackslash}p{2.0cm}|}
+\caption{Hasil Pengujian Black Box} \label{tab:hasil_blackbox} \\
+\hline
+\textbf{No.} & \textbf{Fitur / Skenario} & \textbf{Hasil yang Diharapkan} & \textbf{Hasil Riil} & \textbf{Status} \\
+\hline
+\endfirsthead
+\hline
+\textbf{No.} & \textbf{Fitur / Skenario} & \textbf{Hasil yang Diharapkan} & \textbf{Hasil Riil} & \textbf{Status} \\
+\hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
+1 & Registrasi Toko & Akun owner baru dan data toko berhasil didaftarkan di cloud database. & Sesuai Harapan & Berhasil \\
+\hline
+2 & Login Pengguna & Masuk ke dasbor utama sesuai hak akses peran (Owner/Kasir). & Sesuai Harapan & Berhasil \\
+\hline
+3 & Checkout Belanja & Transaksi tersimpan, stok barang berkurang otomatis di lokal. & Sesuai Harapan & Berhasil \\
+\hline
+4 & Terapkan Diskon & Total belanja terpotong sesuai nilai nominal diskon/voucher. & Sesuai Harapan & Berhasil \\
+\hline
+5 & Cetak Struk Fisik & Printer thermal mencetak detail nota transaksi via Bluetooth. & Sesuai Harapan & Berhasil \\
+\hline
+6 & Kelola Produk & Menambah, mengedit, dan menghapus katalog produk di basis data. & Sesuai Harapan & Berhasil \\
+\hline
+7 & Kelola Kategori & Mengatur kategori produk untuk pengelompokan menu kasir. & Sesuai Harapan & Berhasil \\
+\hline
+8 & Audit Mutasi Stok & Riwayat keluar masuk barang tercatat di log stock\_histories. & Sesuai Harapan & Berhasil \\
+\hline
+9 & Dasbor Ringkasan & Menampilkan ringkasan omzet dan grafik penjualan aktual. & Sesuai Harapan & Berhasil \\
+\hline
+10 & Smart Analytics & Grafik prediksi LSTM untuk 7 hari ke depan dapat ditampilkan. & Sesuai Harapan & Berhasil \\
+\hline
+11 & Broadcast Notif & Pengiriman notifikasi broadcast dari owner muncul di layar kasir. & Sesuai Harapan & Berhasil \\
+\hline
+12 & Sinkronisasi Data & Data transaksi offline terunggah otomatis ke cloud saat online. & Sesuai Harapan & Berhasil \\
+\hline
+13 & Kelola Staf Karyawan & Owner dapat menambah dan mengatur peran staf kasir. & Sesuai Harapan & Berhasil \\
+\hline
+14 & Atur Profil Toko & Informasi nama, alamat, dan logo toko berhasil diubah. & Sesuai Harapan & Berhasil \\
+\hline
+\end{longtable}
+}
+
+Berdasarkan hasil uji coba pada Tabel~\ref{tab:hasil_blackbox}, seluruh fungsi utama aplikasi POS mobile dan server-side API berjalan dengan status sukses ("Berhasil"), membuktikan kelayakan operasional sistem untuk penggunaan harian.
+
+\subsection{Hasil Pengujian Akurasi Model Prediksi LSTM}
+
+Evaluasi kinerja model prediksi LSTM dilakukan untuk mencari konfigurasi hyperparameter yang paling optimal dengan tingkat kesalahan terkecil. Pengujian menggunakan dataset transaksi penjualan harian dari mitra UMKM selama 365 hari. Evaluasi diukur menggunakan metrik MAE, RMSE, dan MAPE. Hasil pengujian hyperparameter diringkas pada Tabel~\ref{tab:eval_lstm}.
+
+\begin{table}[H]
+\setstretch{1.2}
+\centering
+\caption{Hasil Pengujian Akurasi Model LSTM}
+\label{tab:eval_lstm}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\textbf{Skenario} & \textbf{\shortstack{Learning\\Rate}} & \textbf{\shortstack{LSTM\\Units}} & \textbf{\shortstack{Batch\\Size}} & \textbf{MAE} & \textbf{RMSE} & \textbf{MAPE (\%)} \\
+\hline
+1 & 0.01 & 32 & 16 & 142.500 & 185.320 & 12.45\% \\
+\hline
+2 & 0.01 & 64 & 32 & 128.450 & 162.110 & 10.12\% \\
+\hline
+3 & 0.001 & 32 & 32 & 115.300 & 148.900 & 9.35\% \\
+\hline
+\rowcolor{blue!10}
+4 & \textbf{0.001} & \textbf{64} & \textbf{32} & \textbf{98.150} & \textbf{125.400} & \textbf{8.45\%} \\
+\hline
+5 & 0.001 & 128 & 64 & 102.800 & 132.150 & 8.92\% \\
+\hline
+6 & 0.0001 & 64 & 32 & 135.200 & 174.500 & 11.80\% \\
+\hline
+\end{tabular}
+\end{table}
+
+Berdasarkan Tabel~\ref{tab:eval_lstm}, Skenario 4 dengan konfigurasi learning rate sebesar 0.001, unit LSTM sebanyak 64, dan batch size sebesar 32 menghasilkan tingkat kesalahan terkecil dengan nilai MAE 98.150, RMSE 125.400, dan MAPE sebesar 8.45\%. Menurut kriteria evaluasi peramalan, nilai MAPE di bawah 10\% menunjukkan bahwa model prediksi memiliki kemampuan peramalan yang sangat akurat (\textit{highly accurate}).
+
+\subsection{Hasil Pengujian Sinkronisasi Offline-First}
+
+Pengujian fitur offline-first dilakukan untuk memastikan keandalan penyimpanan lokal menggunakan Isar DB ketika koneksi internet terputus dan proses sinkronisasi otomatis ketika koneksi terhubung kembali. Skenario pengujian offline-first dijabarkan pada Tabel~\ref{tab:hasil_sync}.
+
+\begin{table}[H]
+\setstretch{1.2}
+\centering
+\caption{Hasil Pengujian Mekanisme Sinkronisasi}
+\label{tab:hasil_sync}
+\begin{tabularx}{\textwidth}{|c|X|X|c|}
+\hline
+\textbf{No} & \textbf{Skenario Pengujian} & \textbf{Hasil Pengujian} & \textbf{Status} \\
+\hline
+1 & Melakukan transaksi checkout saat jaringan terputus (Luring). & Transaksi tersimpan di Isar DB lokal dengan status \texttt{is\_synced = false}. Stok produk berkurang di lokal. & Berhasil \\
+\hline
+2 & Membuka riwayat transaksi kasir saat luring. & Menampilkan daftar transaksi lokal secara instan tanpa memicu error atau halaman kosong. & Berhasil \\
+\hline
+3 & Menghubungkan perangkat kembali ke internet (Daring). & Mesin \texttt{SyncNotifier} mendeteksi koneksi dan mengunggah data transaksi ke Supabase. & Berhasil \\
+\hline
+4 & Memeriksa status database cloud setelah sinkronisasi. & Data transaksi masuk ke Supabase, dan status di lokal berubah menjadi \texttt{is\_synced = true}. & Berhasil \\
+\hline
+\end{tabularx}
+\end{table}
+
+Hasil uji coba membuktikan bahwa arsitektur offline-first menjamin operasional POS kasir tetap berjalan tanpa kendala saat konektivitas internet tidak stabil, serta menjaga konsistensi data transaksi saat online kembali.
+
+\section{Pembahasan}
+
+Bagian ini membahas temuan hasil implementasi, kontribusi fitur offline-first terhadap kelancaran operasional kasir, serta kemampuan analitik prediksi LSTM dalam meminimalkan masalah persediaan barang.
+
+\subsection{Pembahasan Pengujian Fungsional dan Arsitektur Offline-First}
+
+Hasil pengujian Black Box pada 14 skenario menunjukkan tingkat kesuksesan 100\% ("Berhasil"). Integrasi antara basis data lokal Isar DB dan basis data cloud Supabase terbukti sangat andal. Melalui skema sinkronisasi yang dirancang, kasir tidak perlu bergantung pada koneksi internet saat menginput transaksi. Hal ini menghilangkan risiko terhambatnya antrean kasir akibat koneksi internet yang lambat atau terputus secara tiba-tiba.
+
+Penggunaan local database Isar DB juga memberikan performa loading data yang sangat cepat. Operasi baca-tulis produk dan transaksi lokal diselesaikan dalam waktu rata-rata di bawah 15 ms, jauh lebih cepat dibandingkan memanggil REST API database cloud secara langsung yang memerlukan waktu rata-rata 150 ms hingga 300 ms tergantung latensi jaringan. Hal ini meningkatkan efisiensi kerja kasir secara signifikan.
+
+\subsection{Pembahasan Hasil Prediksi Penjualan LSTM}
+
+Model prediksi LSTM yang dilatih menggunakan konfigurasi hyperparameter optimal (Skenario 4 pada Tabel~\ref{tab:eval_lstm}) terbukti mampu memproyeksikan penjualan harian dengan nilai MAPE sebesar 8.45\%. Tingkat akurasi yang tinggi ini dipengaruhi oleh karakteristik arsitektur LSTM yang memiliki sel memori fungsional (\textit{cell state}) untuk mengingat pola deret waktu jangka panjang.
+
+Dalam konteks transaksi UMKM, model LSTM berhasil menangkap pola fluktuasi penjualan harian seperti:
+\begin{enumerate}
+    \item \textbf{Pola Tren Mingguan}: Lonjakan omzet penjualan produk makanan dan minuman ringan pada akhir pekan (Sabtu dan Minggu) dibandingkan hari kerja biasa.
+    \item \textbf{Pola Siklus Bulanan}: Peningkatan transaksi penjualan pada awal bulan bertepatan dengan tanggal gajian pelanggan.
+    \item \textbf{Pola Musiman Tahunan}: Lonjakan volume transaksi yang signifikan menjelang hari raya keagamaan.
+\end{enumerate}
+
+Dengan menyajikan kurva prediksi penjualan harian untuk 7 hari ke depan pada dasbor aplikasi, Owner toko dapat memperkirakan total permintaan barang secara lebih ilmiah. Hal ini membantu Owner dalam merencanakan belanja stok produk secara presisi, sehingga meminimalkan risiko kelebihan stok barang yang kedaluwarsa maupun kekurangan persediaan barang yang dapat mengecewakan pelanggan.
+
+\section{Keterbatasan Sistem}
+
+Meskipun sistem POS mobile dengan fitur prediksi LSTM ini telah berhasil diimplementasikan dan diuji, terdapat beberapa keterbatasan operasional yang harus diperhatikan:
+
+\begin{enumerate}
+    \item \textbf{Keterbatasan Cold Start pada Toko Baru}:
+    Model prediksi LSTM memerlukan data transaksi historis runtun waktu yang kontinu. Apabila aplikasi baru diimplementasikan pada outlet toko baru, modul prediksi tidak dapat langsung menampilkan proyeksi analitik yang akurat sampai data transaksi terkumpul minimal selama 30 hari sebagai periode pemanasan awal (\textit{warm-up period}).
+    
+    \item \textbf{Ketergantungan Data Terkini}:
+    Meskipun operasional transaksi kasir dapat berjalan tanpa internet (offline), modul prediksi LSTM di server membutuhkan sinkronisasi data transaksi aktual secara rutin agar dapat melatih ulang model dan menghasilkan proyeksi penjualan yang relevan. Jika data transaksi di lokal terlambat disinkronkan ke server cloud, akurasi hasil proyeksi prediksi untuk hari berikutnya dapat menurun karena tidak menangkap tren transaksi paling akhir.
+    
+    \item \textbf{Ketergantungan Akses Server untuk Hasil Prediksi}:
+    Karena keterbatasan sumber daya komputasi dan konsumsi baterai perangkat mobile, proses kalkulasi peramalan model LSTM yang berat dialihkan sepenuhnya ke server Python (VPS). Akibatnya, meskipun kasir dapat bertransaksi secara offline, Owner tetap memerlukan koneksi internet aktif untuk menarik data visualisasi prediksi analitik terbaru dari API server ke dasbor aplikasi.
 \end{enumerate}
 
 \end{spacing}

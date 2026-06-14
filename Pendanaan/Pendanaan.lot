@@ -7,3 +7,7 @@
 \contentsline {table}{\numberline {3.2}{\ignorespaces Definisi \textit {Use Case}}}{23}{table.3.2}%
 \contentsline {table}{\numberline {3.3}{\ignorespaces Daftar Tabel Basis Data POS}}{26}{table.caption.8}%
 \contentsline {table}{\numberline {3.4}{\ignorespaces Skenario Pengujian \textit {Black Box}}}{43}{table.3.4}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Hasil Pengujian Black Box}}{50}{table.4.1}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Hasil Pengujian Akurasi Model LSTM}}{51}{table.caption.23}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{52}{table.caption.24}%
