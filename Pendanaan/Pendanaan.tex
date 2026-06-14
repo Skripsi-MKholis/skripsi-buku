@@ -1230,6 +1230,46 @@ Meskipun sistem POS mobile dengan fitur prediksi LSTM ini telah berhasil diimple
     Karena keterbatasan sumber daya komputasi dan konsumsi baterai perangkat mobile, proses kalkulasi peramalan model LSTM yang berat dialihkan sepenuhnya ke server Python (VPS). Akibatnya, meskipun kasir dapat bertransaksi secara offline, Owner tetap memerlukan koneksi internet aktif untuk menarik data visualisasi prediksi analitik terbaru dari API server ke dasbor aplikasi.
 \end{enumerate}
 
+%%=============================================================
+%% BAB V - KESIMPULAN DAN SARAN
+%%=============================================================
+\chapter[KESIMPULAN DAN SARAN]{\\ KESIMPULAN DAN SARAN}
+
+Bab ini menyajikan kesimpulan dari hasil perancangan, implementasi, dan pengujian sistem Point of Sale (POS) mobile dengan fitur prediksi penjualan harian menggunakan metode Long Short-Term Memory (LSTM) dan arsitektur offline-first, serta saran-saran untuk pengembangan sistem lebih lanjut di masa mendatang.
+
+\section{Kesimpulan}
+
+Berdasarkan hasil analisis, perancangan, implementasi, dan pengujian yang telah dilakukan pada penelitian ini, maka dapat ditarik beberapa kesimpulan sebagai berikut:
+\begin{enumerate}
+    \item Penelitian ini telah berhasil membangun aplikasi \textit{Point of Sale} (POS) \textit{mobile} berbasis Flutter yang terintegrasi dengan basis data cloud Supabase PostgreSQL dan modul AI prediksi penjualan harian berbasis Python (FastAPI dan TensorFlow).
+    \item Penerapan arsitektur \textit{offline-first} menggunakan basis data lokal Isar DB terbukti handal dalam menjaga keberlangsungan transaksi kasir tanpa ketergantungan penuh pada koneksi internet. Operasi baca-tulis lokal sangat responsif (rata-rata di bawah 15 ms), dan sinkronisasi otomatis menggunakan modul \textit{SyncNotifier} berhasil mengunggah data transaksi lokal ke database cloud saat perangkat terhubung kembali ke internet.
+    \item Implementasi metode peramalan \textit{Long Short-Term Memory} (LSTM) berhasil memproyeksikan data penjualan harian UMKM untuk 7 hari ke depan secara akurat. Konfigurasi model terbaik dicapai pada \textit{learning rate} 0.001, 64 unit LSTM, dan \textit{batch size} 32, yang menghasilkan nilai MAE sebesar 98.150, RMSE sebesar 125.400, serta MAPE sebesar 8.45\%. Hasil tersebut menunjukkan tingkat akurasi peramalan yang sangat tinggi (di bawah batas kesalahan 10\%).
+    \item Hasil pengujian fungsionalitas menggunakan metode \textit{Black Box Testing} terhadap 14 skenario kasus penggunaan utama yang melibatkan peran Owner dan Kasir berjalan dengan sukses tanpa kegagalan (tingkat keberhasilan 100\%), menunjukkan sistem layak dioperasikan secara penuh pada unit usaha UMKM.
+\end{enumerate}
+
+\section{Saran}
+
+Berdasarkan keterbatasan sistem yang diidentifikasi selama proses pengembangan dan pengujian, berikut adalah beberapa saran konstruktif untuk pengembangan sistem lebih lanjut:
+\begin{enumerate}
+    \item \textbf{Penerapan Metode Prediksi Hybrid}:
+    Untuk meningkatkan akurasi proyeksi penjualan pada data yang memiliki volatilitas tinggi atau tren musiman yang sangat dinamis, disarankan untuk menggabungkan model LSTM dengan model \textit{Gated Recurrent Unit} (GRU) atau model statistik klasik ARIMA menjadi model \textit{hybrid} (seperti ARIMA-LSTM atau LSTM-GRU).
+    
+    \item \textbf{Mengatasi Masalah Cold Start}:
+    Untuk memfasilitasi toko baru yang belum memiliki riwayat transaksi selama 30 hari, disarankan mengimplementasikan teknik \textit{transfer learning} atau melatih model \textit{global} awal menggunakan data transaksi historis dari toko sejenis sebelum melatih model secara spesifik menggunakan data toko tersebut.
+    
+    \item \textbf{Penguatan Keamanan Data Lokal}:
+    Guna melindungi data transaksi sensitif pelaku UMKM yang disimpan secara lokal pada perangkat fisik, disarankan untuk mengaktifkan fitur enkripsi basis data lokal pada Isar DB dengan menggunakan kunci enkripsi dinamis yang dikelola secara aman oleh perangkat.
+    
+    \item \textbf{Penyediaan Skalabilitas Tinggi (High Availability)}:
+    Untuk menghadapi potensi ekspansi multi-outlet dengan ribuan kasir aktif, arsitektur modul AI berbasis FastAPI disarankan dimigrasikan ke infrastruktur cloud dengan konfigurasi \textit{load balancer}, \textit{Docker container clusters}, dan replikasi basis data Supabase PostgreSQL untuk meminimalisasi \textit{single point of failure}.
+    
+    \item \textbf{Notifikasi Multi-Kanal Otomatis}:
+    Mengembangkan fitur integrasi notifikasi dengan layanan pihak ketiga seperti WhatsApp API atau SMS Gateway untuk mengirimkan laporan ringkasan omzet harian secara langsung ke nomor WhatsApp Owner, serta memberikan peringatan dini jika terdapat stok produk tertentu yang berada di bawah ambang batas minimum (\textit{safety stock}).
+    
+    \item \textbf{Integrasi Sistem Pembayaran Digital (E-Wallet \& QRIS Dynamic)}:
+    Menambahkan integrasi langsung dengan penyedia gerbang pembayaran (\textit{payment gateway}) lokal untuk menghasilkan kode QRIS dinamis secara real-time pada layar transaksi kasir, sehingga mempermudah pembukuan dan meminimalkan kesalahan input nominal transaksi nontunai oleh kasir.
+\end{enumerate}
+
 \end{spacing}
 
 %%=============================================================

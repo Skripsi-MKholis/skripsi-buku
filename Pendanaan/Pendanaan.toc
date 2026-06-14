@@ -46,3 +46,6 @@
 \contentsline {subsection}{\numberline {4.3.1}Pembahasan Pengujian Fungsional dan Arsitektur Offline-First}{53}{subsection.4.3.1}%
 \contentsline {subsection}{\numberline {4.3.2}Pembahasan Hasil Prediksi Penjualan LSTM}{53}{subsection.4.3.2}%
 \contentsline {section}{\numberline {4.4}Keterbatasan Sistem}{54}{section.4.4}%
+\contentsline {chapter}{\numberline {5}KESIMPULAN DAN SARAN}{56}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Kesimpulan}{56}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Saran}{57}{section.5.2}%
