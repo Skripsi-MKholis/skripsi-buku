@@ -1,7 +1,7 @@
 \babel@toc {indonesian}{}\relax 
 \contentsline {chapter}{DAFTAR ISI}{i}{section*.1}%
-\contentsline {chapter}{DAFTAR GAMBAR}{ii}{section*.2}%
-\contentsline {chapter}{DAFTAR TABEL}{iii}{section*.3}%
+\contentsline {chapter}{DAFTAR GAMBAR}{iii}{section*.2}%
+\contentsline {chapter}{DAFTAR TABEL}{iv}{section*.3}%
 \contentsline {chapter}{\numberline {1}PENDAHULUAN}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Latar Belakang Masalah}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Rumusan Masalah}{3}{section.1.2}%
@@ -29,7 +29,9 @@
 \contentsline {subsection}{\numberline {3.5.3}Perancangan Wireframe}{26}{subsection.3.5.3}%
 \contentsline {subsection}{\numberline {3.5.4}Rancangan Algoritma \textit {Long Short-Term Memory} (LSTM)}{39}{subsection.3.5.4}%
 \contentsline {section}{\numberline {3.6}Teknik Pengujian}{41}{section.3.6}%
-\contentsline {section}{\numberline {3.7}Variabel Penelitian}{42}{section.3.7}%
-\contentsline {section}{\numberline {3.8}Hasil yang Diharapkan}{42}{section.3.8}%
-\contentsline {section}{\numberline {3.9}Rincian Biaya}{43}{section.3.9}%
-\contentsline {section}{\numberline {3.10}Rencana Jadwal Penelitian}{43}{section.3.10}%
+\contentsline {subsection}{\numberline {3.6.1}Rancangan Pengujian Evaluasi Model Prediksi}{41}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Rancangan Analisis Pengujian \textit {Black Box}}{43}{subsection.3.6.2}%
+\contentsline {section}{\numberline {3.7}Variabel Penelitian}{44}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Hasil yang Diharapkan}{45}{section.3.8}%
+\contentsline {section}{\numberline {3.9}Rincian Biaya}{45}{section.3.9}%
+\contentsline {section}{\numberline {3.10}Rencana Jadwal Penelitian}{46}{section.3.10}%

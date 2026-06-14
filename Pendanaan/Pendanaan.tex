@@ -1071,9 +1071,74 @@ Gambar \ref{fig:lstm_alur} menggambarkan alur kerja model LSTM dari input data t
 
 \section{Teknik Pengujian}
 
-Pengujian sistem pada penelitian ini menggunakan metode \textit{black box testing}, yaitu metode pengujian perangkat lunak yang berfokus pada validasi fungsional sistem dengan mengamati kesesuaian antara masukan (\textit{input}) dan keluaran (\textit{output}) yang dihasilkan, tanpa memperhatikan struktur internal kode program.
+Pengujian sistem pada penelitian ini mencakup dua pendekatan utama untuk memastikan kualitas fungsional aplikasi dan keandalan model prediksi yang diintegrasikan. Pendekatan pengujian tersebut dibagi menjadi pengujian evaluasi model prediksi penjualan dan pengujian fungsionalitas sistem secara keseluruhan menggunakan metode \textit{black box}.
 
-Pengujian diterapkan pada fitur-fitur utama sistem, meliputi autentikasi (login/registrasi), pengelolaan produk dan kategori, proses transaksi POS (\textit{checkout}, voucher), pencetakan struk, sinkronisasi data \textit{offline-first}, dan fitur AI \textit{Smart Analytics}. Pengujian akurasi model LSTM dilakukan menggunakan metrik MAE, RMSE, dan MAPE terhadap data transaksi historis mitra UMKM.
+\subsection{Rancangan Pengujian Evaluasi Model Prediksi}
+
+Pengujian model prediksi dilakukan untuk mengukur kinerja dan tingkat akurasi dari algoritma \textit{Long Short-Term Memory} (LSTM) yang dikembangkan. Pengujian ini menggunakan data pengujian (\textit{testing data}) yang diambil dari data histori transaksi penjualan harian mitra UMKM. Evaluasi akurasi model diukur berdasarkan tingkat kesalahan (\textit{error}) prediksi menggunakan tiga metrik utama, yaitu:
+
+\begin{enumerate}
+    \item \textbf{\textit{Mean Absolute Error} (MAE):}
+    MAE digunakan untuk mengukur rata-rata selisih absolut antara nilai aktual penjualan dengan nilai hasil prediksi. Semakin kecil nilai MAE, maka model prediksi semakin akurat. Formula MAE didefinisikan sebagai berikut:
+    \begin{equation}
+        \text{MAE} = \frac{1}{n} \sum_{t=1}^{n} |Y_t - \hat{Y}_t|
+    \end{equation}
+    di mana $Y_t$ adalah nilai aktual pada hari ke-$t$, $\hat{Y}_t$ adalah nilai prediksi pada hari ke-$t$, dan $n$ adalah jumlah data pengujian.
+
+    \item \textbf{\textit{Root Mean Square Error} (RMSE):}
+    RMSE memberikan bobot lebih besar pada kesalahan prediksi yang bernilai besar karena selisihnya dikuadratkan terlebih dahulu sebelum dirata-ratakan dan ditarik akarnya. Formula RMSE didefinisikan sebagai berikut:
+    \begin{equation}
+        \text{RMSE} = \sqrt{\frac{1}{n} \sum_{t=1}^{n} (Y_t - \hat{Y}_t)^2}
+    \end{equation}
+
+    \item \textbf{\textit{Mean Absolute Percentage Error} (MAPE):}
+    MAPE digunakan untuk mengukur persentase kesalahan absolut rata-rata relatif terhadap nilai aktual. Keunggulan MAPE adalah menghasilkan nilai dalam bentuk persentase sehingga mudah diinterpretasikan. Formula MAPE didefinisikan sebagai berikut:
+    \begin{equation}
+        \text{MAPE} = \left( \frac{1}{n} \sum_{t=1}^{n} \left| \frac{Y_t - \hat{Y}_t}{Y_t} \right| \right) \times 100\%
+    \end{equation}
+\end{enumerate}
+
+Pengujian evaluasi ini dilakukan dengan membandingkan performa model pada variasi \textit{hyperparameter} (seperti jumlah neuron LSTM, \textit{learning rate}, \textit{batch size}, dan jumlah \textit{epoch}) untuk memperoleh konfigurasi model prediksi yang paling optimal dengan tingkat kesalahan terkecil.
+
+\subsection{Rancangan Analisis Pengujian \textit{Black Box}}
+
+Pengujian fungsional sistem pada penelitian ini menggunakan metode \textit{black box testing}, yaitu metode pengujian perangkat lunak yang berfokus pada validasi fungsional sistem dengan mengamati kesesuaian antara masukan (\textit{input}) dan keluaran (\textit{output}) yang dihasilkan, tanpa memperhatikan struktur internal kode program. Pengujian diterapkan pada fitur-fitur utama sistem untuk memastikan aplikasi berjalan sesuai dengan kebutuhan operasional pengguna.
+
+Rancangan skenario pengujian \textit{black box} untuk fitur-fitur utama sistem POS ini dijabarkan pada Tabel \ref{tab:blackbox} berikut:
+
+{\setstretch{1.15}
+\begin{longtable}{|>{\centering\arraybackslash}p{0.6cm}|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}p{4.7cm}|>{\raggedright\arraybackslash}p{4.7cm}|}
+\caption{Skenario Pengujian \textit{Black Box}} \label{tab:blackbox} \\
+\hline
+\textbf{No.} & \textbf{Fitur / Fungsi} & \textbf{Skenario Pengujian} & \textbf{Hasil yang Diharapkan} \\
+\hline
+\endfirsthead
+
+\endhead
+
+\hline
+\endfoot
+\hline
+\endlastfoot
+
+1 & Registrasi Toko Baru & Mengisi form registrasi dengan email baru, kata sandi, nama toko, alamat, dan nomor HP. & Akun owner berhasil dibuat, data toko tersimpan di database Supabase Cloud, dan beralih ke halaman utama. \\
+\hline
+2 & Login Akun & Memasukkan email dan kata sandi yang valid/invalid pada layar login. & Jika valid, pengguna masuk ke dasbor. Jika invalid, sistem menampilkan pesan error autentikasi. \\
+\hline
+3 & Kelola Produk & Menambah produk baru dengan nama, harga, stok, foto, dan kategori serta mengubah/menghapus produk. & Data produk baru tersimpan di database lokal Isar DB, terdaftar pada list produk, dan dapat diubah/dihapus. \\
+\hline
+4 & Kelola Kategori & Menambahkan kategori baru, menyunting nama kategori, atau menghapus kategori produk. & Kategori berhasil dibuat, muncul sebagai opsi filter menu, dan terupdate secara real-time. \\
+\hline
+5 & Checkout Transaksi & Memasukkan produk ke keranjang, menerapkan voucher diskon, memilih metode bayar, dan mengonfirmasi nominal bayar. & Transaksi berhasil disimpan di database lokal Isar DB, jumlah stok produk berkurang otomatis, dan dialihkan ke struk sukses. \\
+\hline
+6 & Mencetak Struk & Menghubungkan printer Bluetooth thermal dan menekan tombol cetak struk dari riwayat transaksi. & Printer thermal mencetak struk fisik transaksi secara lengkap (nama produk, total, tanggal, metode bayar). \\
+\hline
+7 & Sinkronisasi Offline & Mematikan koneksi internet (luring), membuat transaksi lokal, lalu mengaktifkan internet kembali (daring). & Transaksi disimpan secara lokal di Isar DB (offline-first), lalu terunggah otomatis ke Supabase Cloud saat internet aktif kembali. \\
+\hline
+8 & Dasbor Laporan & Membuka dasbor laporan penjualan harian, mingguan, dan grafik visualisasi omzet. & Menampilkan statistik ringkasan omzet, total transaksi harian, dan grafik visualisasi garis yang akurat. \\
+\hline
+\end{longtable}
+}
 
 \section{Variabel Penelitian}
 
