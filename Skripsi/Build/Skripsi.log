@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.26)  15 JUN 2026 02:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.26)  15 JUN 2026 13:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**e:/SKRIPSI/Kholis/skripsi-buku/Pendanaan/Pendanaan.tex
-(e:/SKRIPSI/Kholis/skripsi-buku/Pendanaan/Pendanaan.tex
+**e:/SKRIPSI/Kholis/skripsi-buku/Skripsi/Skripsi.tex
+(e:/SKRIPSI/Kholis/skripsi-buku/Skripsi/Skripsi.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
 (C:\Program Files\MiKTeX\tex/latex/base\report.cls
@@ -751,8 +751,8 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
  (C:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count355
-) (Pendanaan.aux)
-\openout1 = `Pendanaan.aux'.
+) (e:/SKRIPSI\Kholis\skripsi-buku\Skripsi\Build\Skripsi.aux)
+\openout1 = `Skripsi.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 115.
 LaTeX Font Info:    ... okay on input line 115.
@@ -834,9 +834,9 @@ Package caption Info: End \AtBeginDocument code.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package hyperref Info: Link coloring OFF on input line 115.
-(Pendanaan.out) (Pendanaan.out)
+(e:/SKRIPSI\Kholis\skripsi-buku\Skripsi\Build\Skripsi.out) (e:/SKRIPSI\Kholis\skripsi-buku\Skripsi\Build\Skripsi.out)
 \@outlinefile=\write4
-\openout4 = `Pendanaan.out'.
+\openout4 = `Skripsi.out'.
 
 <../Project/gambar/logo-pnl-skripsi.png, id=206, 126.7134pt x 122.3772pt>
 File: ../Project/gambar/logo-pnl-skripsi.png Graphic file (type png)
@@ -890,7 +890,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has b
 l.162 \restoregeometry
                        [1
 
- <./Gambar/halaman-pengesahan.jpg>] (Pendanaan.toc
+ <./Gambar/halaman-pengesahan.jpg>] (e:/SKRIPSI\Kholis\skripsi-buku\Skripsi\Build\Skripsi.toc
 LaTeX Font Info:    Trying to load font information for OT1+ptmcm on input line 2.
  (C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/psnfss\ot1ptmcm.fd
 File: ot1ptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ptmcm.
@@ -990,15 +990,15 @@ Overfull \hbox (6.0pt too wide) detected at line 47
 
 )
 \tf@toc=\write5
-\openout5 = `Pendanaan.toc'.
+\openout5 = `Skripsi.toc'.
 
- [2] (Pendanaan.lof)
+ [2] (e:/SKRIPSI\Kholis\skripsi-buku\Skripsi\Build\Skripsi.lof)
 \tf@lof=\write6
-\openout6 = `Pendanaan.lof'.
+\openout6 = `Skripsi.lof'.
 
- [3] (Pendanaan.lot)
+ [3] (e:/SKRIPSI\Kholis\skripsi-buku\Skripsi\Build\Skripsi.lot)
 \tf@lot=\write7
-\openout7 = `Pendanaan.lot'.
+\openout7 = `Skripsi.lot'.
 
  [4]
 Bab 1.
@@ -1064,9 +1064,9 @@ Overfull \hbox (3.8372pt too wide) in paragraph at lines 398--398
 [7
 
 ]
-e:/SKRIPSI/Kholis/skripsi-buku/Pendanaan/Pendanaan.tex:402: ignored error: Infinite glue shrinkage found in box being split [8]
-e:/SKRIPSI/Kholis/skripsi-buku/Pendanaan/Pendanaan.tex:402: ignored error: Infinite glue shrinkage found in box being split [9]
-e:/SKRIPSI/Kholis/skripsi-buku/Pendanaan/Pendanaan.tex:402: ignored error: Infinite glue shrinkage found in box being split [10] [11] [12] [13] [14] [15] [16]
+e:/SKRIPSI/Kholis/skripsi-buku/Skripsi/Skripsi.tex:402: ignored error: Infinite glue shrinkage found in box being split [8]
+e:/SKRIPSI/Kholis/skripsi-buku/Skripsi/Skripsi.tex:402: ignored error: Infinite glue shrinkage found in box being split [9]
+e:/SKRIPSI/Kholis/skripsi-buku/Skripsi/Skripsi.tex:402: ignored error: Infinite glue shrinkage found in box being split [10] [11] [12] [13] [14] [15] [16]
 Bab 3.
 [17
 
@@ -1087,7 +1087,7 @@ Overfull \hbox (0.59213pt too wide) in paragraph at lines 569--569
  []|\T1/ptm/b/n/12 No.| 
  []
 
-e:/SKRIPSI/Kholis/skripsi-buku/Pendanaan/Pendanaan.tex:607: ignored error: Infinite glue shrinkage found in box being split [23
+e:/SKRIPSI/Kholis/skripsi-buku/Skripsi/Skripsi.tex:607: ignored error: Infinite glue shrinkage found in box being split [23
 
 
 ] [24]
@@ -1213,7 +1213,7 @@ Overfull \hbox (5.54718pt too wide) in alignment at lines 976--994
  [] [] [] [] 
  []
 
-e:/SKRIPSI/Kholis/skripsi-buku/Pendanaan/Pendanaan.tex:994: ignored error: Infinite glue shrinkage found in box being split [43] [44] [45]
+e:/SKRIPSI/Kholis/skripsi-buku/Skripsi/Skripsi.tex:994: ignored error: Infinite glue shrinkage found in box being split [43] [44] [45]
 Bab 4.
 [46
 
@@ -1228,28 +1228,28 @@ Overfull \hbox (0.59213pt too wide) in paragraph at lines 1098--1098
  []
 
 [49]
-e:/SKRIPSI/Kholis/skripsi-buku/Pendanaan/Pendanaan.tex:1133: ignored error: Infinite glue shrinkage found in box being split [50] [51] [52] [53] [54] [55]
+e:/SKRIPSI/Kholis/skripsi-buku/Skripsi/Skripsi.tex:1133: ignored error: Infinite glue shrinkage found in box being split [50] [51] [52] [53] [54] [55]
 Bab 5.
 [56
 
-] [57] [58] [59] [60] (Pendanaan.aux)
+] [57] [58] [59] [60] (e:/SKRIPSI\Kholis\skripsi-buku\Skripsi\Build\Skripsi.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
-Package rerunfilecheck Info: File `Pendanaan.out' has not changed.
+Package rerunfilecheck Info: File `Skripsi.out' has not changed.
 (rerunfilecheck)             Checksum: 0083B33ABDB17D97F047009CCB4B0A46;9462.
  ) 
 Here is how much of TeX's memory you used:
  27823 strings out of 467871
- 524814 string characters out of 5428443
- 960395 words of memory out of 5000000
+ 525128 string characters out of 5428443
+ 960392 words of memory out of 5000000
  55955 multiletter control sequences out of 15000+600000
  691012 words of font info for 134 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 88i,13n,94p,1151b,1179s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 88i,13n,94p,1147b,1179s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/symbol/usyr.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Pendanaan.pdf (66 pages, 2350398 bytes).
+Output written on Skripsi.pdf (66 pages, 2350398 bytes).
 PDF statistics:
  830 PDF objects out of 1000 (max. 8388607)
  244 named destinations out of 1000 (max. 500000)

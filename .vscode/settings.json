@@ -1,4 +1,12 @@
 {
+  "latex-workshop.latex.outDir": "%DIR%",
+  "latex-workshop.latex.magic.args": [
+    "-synctex=1",
+    "-interaction=nonstopmode",
+    "-file-line-error",
+    "-aux-directory=%DIR%/Build",
+    "%DOC%"
+  ],
   "latex-workshop.latex.recipes": [
     {
       "name": "pdflatex -> bibtex -> pdflatex*2 (No Perl Required)",
@@ -24,6 +32,7 @@
         "-synctex=1",
         "-interaction=nonstopmode",
         "-file-line-error",
+        "-aux-directory=%DIR%/Build",
         "%DOC%"
       ],
       "env": {}
@@ -32,7 +41,7 @@
       "name": "bibtex",
       "command": "bibtex",
       "args": [
-        "%DOCFILE%"
+        "%DIR%/Build/%DOCFILE%"
       ],
       "env": {}
     }
