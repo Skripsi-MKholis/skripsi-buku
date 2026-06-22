@@ -2,22 +2,22 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Alur Penelitian}}{20}{figure.caption.4}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces \textit {Use Case Diagram} Sistem POS}}{22}{figure.caption.5}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces \textit {Entity Relationship Diagram} (ERD) Sistem POS}}{25}{figure.caption.7}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Wireframe Halaman Registrasi Toko Baru}}{27}{figure.caption.9}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Wireframe Halaman Login}}{28}{figure.caption.10}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Wireframe Halaman Pemilihan Toko}}{29}{figure.caption.11}%
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Wireframe Halaman Dasbor Owner}}{30}{figure.caption.12}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Wireframe Halaman POS (Pembayaran)}}{31}{figure.caption.13}%
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Wireframe Halaman Riwayat Transaksi}}{32}{figure.caption.14}%
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Wireframe Halaman Kelola Produk}}{33}{figure.caption.15}%
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Wireframe Halaman Kelola Kategori}}{34}{figure.caption.16}%
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Wireframe Halaman Laporan}}{35}{figure.caption.17}%
-\contentsline {figure}{\numberline {3.13}{\ignorespaces Wireframe Halaman Pengaturan}}{36}{figure.caption.18}%
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Wireframe Halaman Informasi Toko}}{37}{figure.caption.19}%
-\contentsline {figure}{\numberline {3.15}{\ignorespaces Wireframe Halaman Struk Digital}}{38}{figure.caption.20}%
-\contentsline {figure}{\numberline {3.16}{\ignorespaces Wireframe Halaman Katalog Produk}}{39}{figure.caption.21}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces \textit {Use Case Diagram} Sistem POS}}{19}{figure.caption.4}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces \textit {Entity Relationship Diagram} (ERD) Sistem POS}}{22}{figure.caption.6}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Wireframe Halaman Registrasi Toko Baru}}{25}{figure.caption.8}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Wireframe Halaman Login}}{26}{figure.caption.9}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Wireframe Halaman Pemilihan Toko}}{27}{figure.caption.10}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Wireframe Halaman Dasbor Owner}}{28}{figure.caption.11}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Wireframe Halaman POS (Pembayaran)}}{29}{figure.caption.12}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Wireframe Halaman Riwayat Transaksi}}{30}{figure.caption.13}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Wireframe Halaman Kelola Produk}}{31}{figure.caption.14}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Wireframe Halaman Kelola Kategori}}{32}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Wireframe Halaman Laporan}}{33}{figure.caption.16}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Wireframe Halaman Pengaturan}}{34}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Wireframe Halaman Informasi Toko}}{35}{figure.caption.18}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Wireframe Halaman Struk Digital}}{36}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Wireframe Halaman Katalog Produk}}{37}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Alur Penelitian}}{38}{figure.caption.21}%
 \contentsline {figure}{\numberline {3.17}{\ignorespaces Alur Kerja Algoritma \textit {Long Short-Term Memory} (LSTM)}}{40}{figure.caption.22}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }

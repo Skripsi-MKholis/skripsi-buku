@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.26)  15 JUN 2026 16:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.26)  23 JUN 2026 02:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -838,7 +838,7 @@ Package hyperref Info: Link coloring OFF on input line 115.
 \@outlinefile=\write4
 \openout4 = `Skripsi.out'.
 
-<../Project/gambar/logo-pnl-skripsi.png, id=206, 126.7134pt x 122.3772pt>
+<../Project/gambar/logo-pnl-skripsi.png, id=210, 126.7134pt x 122.3772pt>
 File: ../Project/gambar/logo-pnl-skripsi.png Graphic file (type png)
 <use ../Project/gambar/logo-pnl-skripsi.png>
 Package pdftex.def Info: ../Project/gambar/logo-pnl-skripsi.png  used on input line 136.
@@ -878,7 +878,7 @@ Package pdftex.def Info: ../Project/gambar/logo-pnl-skripsi.png  used on input l
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<Gambar/halaman-pengesahan.jpg, id=217, 1988.17781pt x 2982.64313pt>
+<Gambar/halaman-pengesahan.jpg, id=221, 1988.17781pt x 2982.64313pt>
 File: Gambar/halaman-pengesahan.jpg Graphic file (type jpg)
 <use Gambar/halaman-pengesahan.jpg>
 Package pdftex.def Info: Gambar/halaman-pengesahan.jpg  used on input line 161.
@@ -917,74 +917,79 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 2.
  (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (6.0pt too wide) detected at line 28
-\T1/ptm/m/n/12 3.6.1 
+Overfull \hbox (6.0pt too wide) detected at line 25
+\T1/ptm/m/n/12 3.3.1 
  []
 
 
-Overfull \hbox (6.0pt too wide) detected at line 29
-\T1/ptm/m/n/12 3.6.2 
+Overfull \hbox (6.0pt too wide) detected at line 26
+\T1/ptm/m/n/12 3.3.2 
  []
 
 
 Overfull \hbox (6.0pt too wide) detected at line 30
-\T1/ptm/m/n/12 3.6.3 
+\T1/ptm/m/n/12 3.6.1 
  []
 
 
 Overfull \hbox (6.0pt too wide) detected at line 31
-\T1/ptm/m/n/12 3.6.4 
+\T1/ptm/m/n/12 3.6.2 
  []
 
 
-Overfull \hbox (6.0pt too wide) detected at line 33
-\T1/ptm/m/n/12 3.7.1 
+Overfull \hbox (6.0pt too wide) detected at line 32
+\T1/ptm/m/n/12 3.6.3 
  []
 
 
 Overfull \hbox (6.0pt too wide) detected at line 34
+\T1/ptm/m/n/12 3.7.1 
+ []
+
+
+Overfull \hbox (6.0pt too wide) detected at line 35
 \T1/ptm/m/n/12 3.7.2 
  []
 
 [1
 
 ]
-Overfull \hbox (6.0pt too wide) detected at line 38
+Overfull \hbox (6.0pt too wide) detected at line 39
 \T1/ptm/m/n/12 4.1.1 
  []
 
 
-Overfull \hbox (6.0pt too wide) detected at line 39
+Overfull \hbox (6.0pt too wide) detected at line 40
 \T1/ptm/m/n/12 4.1.2 
  []
 
 
-Overfull \hbox (6.0pt too wide) detected at line 40
+Overfull \hbox (6.0pt too wide) detected at line 41
 \T1/ptm/m/n/12 4.1.3 
  []
 
 
-Overfull \hbox (6.0pt too wide) detected at line 42
+Overfull \hbox (6.0pt too wide) detected at line 43
 \T1/ptm/m/n/12 4.2.1 
  []
 
 
-Overfull \hbox (6.0pt too wide) detected at line 43
+Overfull \hbox (6.0pt too wide) detected at line 44
 \T1/ptm/m/n/12 4.2.2 
  []
 
 
-Overfull \hbox (6.0pt too wide) detected at line 44
+Overfull \hbox (6.0pt too wide) detected at line 45
 \T1/ptm/m/n/12 4.2.3 
  []
 
 
-Overfull \hbox (6.0pt too wide) detected at line 46
+Overfull \hbox (6.0pt too wide) detected at line 47
 \T1/ptm/m/n/12 4.3.1 
  []
 
 
-Overfull \hbox (6.0pt too wide) detected at line 47
+Overfull \hbox (6.0pt too wide) detected at line 48
 \T1/ptm/m/n/12 4.3.2 
  []
 
@@ -1070,165 +1075,165 @@ e:/SKRIPSI/Kholis/skripsi-buku/Skripsi/Skripsi.tex:404: ignored error: Infinite 
 Bab 3.
 [17
 
-] [18] [19]
-<../Project/gambar/alur_penelitian.png, id=460, 1529.715pt x 927.465pt>
-File: ../Project/gambar/alur_penelitian.png Graphic file (type png)
-<use ../Project/gambar/alur_penelitian.png>
-Package pdftex.def Info: ../Project/gambar/alur_penelitian.png  used on input line 517.
-(pdftex.def)             Requested size: 338.59023pt x 205.2883pt.
- [20 <../Project/gambar/alur_penelitian.png>] [21]
-<gambar/use_case_drawio.png, id=471, 2850.65pt x 1445.4pt>
+] [18]
+<gambar/use_case_drawio.png, id=451, 2850.65pt x 1445.4pt>
 File: gambar/use_case_drawio.png Graphic file (type png)
 <use gambar/use_case_drawio.png>
-Package pdftex.def Info: gambar/use_case_drawio.png  used on input line 537.
+Package pdftex.def Info: gambar/use_case_drawio.png  used on input line 499.
 (pdftex.def)             Requested size: 613.58171pt x 311.10782pt.
- [22 <./gambar/use_case_drawio.png>]
-Overfull \hbox (0.59213pt too wide) in paragraph at lines 571--571
+ [19 <./gambar/use_case_drawio.png>]
+Overfull \hbox (0.59213pt too wide) in paragraph at lines 533--533
  []|\T1/ptm/b/n/12 No.| 
  []
 
-e:/SKRIPSI/Kholis/skripsi-buku/Skripsi/Skripsi.tex:609: ignored error: Infinite glue shrinkage found in box being split [23
+e:/SKRIPSI/Kholis/skripsi-buku/Skripsi/Skripsi.tex:571: ignored error: Infinite glue shrinkage found in box being split [20
 
 
-] [24]
-<gambar/erd_new.png, id=487, 2629.825pt x 1947.275pt>
+] [21]
+<gambar/erd_new.png, id=468, 2629.825pt x 1947.275pt>
 File: gambar/erd_new.png Graphic file (type png)
 <use gambar/erd_new.png>
-Package pdftex.def Info: gambar/erd_new.png  used on input line 667.
+Package pdftex.def Info: gambar/erd_new.png  used on input line 580.
 (pdftex.def)             Requested size: 494.89673pt x 366.45026pt.
- [25 <./gambar/erd_new.png>] [26
+ [22 <./gambar/erd_new.png>] [23
 
 
 ]
-<../Rancangan/Wireframe/wireframe_register.png, id=498, 488.82625pt x 1109.14375pt>
+<../Rancangan/Wireframe/wireframe_register.png, id=479, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_register.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_register.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_register.png  used on input line 715.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_register.png  used on input line 689.
 (pdftex.def)             Requested size: 139.42093pt x 316.34619pt.
- [27 <../Rancangan/Wireframe/wireframe_register.png>]
-<../Rancangan/Wireframe/wireframe_login.png, id=504, 488.82625pt x 818.05624pt>
+ [24] [25 <../Rancangan/Wireframe/wireframe_register.png>]
+<../Rancangan/Wireframe/wireframe_login.png, id=495, 488.82625pt x 818.05624pt>
 File: ../Rancangan/Wireframe/wireframe_login.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_login.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_login.png  used on input line 728.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_login.png  used on input line 702.
 (pdftex.def)             Requested size: 179.25114pt x 299.97984pt.
-<../Rancangan/Wireframe/wireframe_store_list.png, id=505, 488.82625pt x 1109.14375pt>
+<../Rancangan/Wireframe/wireframe_store_list.png, id=496, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_store_list.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_store_list.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_store_list.png  used on input line 739.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_store_list.png  used on input line 713.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
- [28 <../Rancangan/Wireframe/wireframe_login.png>]
-<../Rancangan/Wireframe/wireframe_dashboard_owner.png, id=513, 488.82625pt x 1109.14375pt>
+ [26 <../Rancangan/Wireframe/wireframe_login.png>]
+<../Rancangan/Wireframe/wireframe_dashboard_owner.png, id=504, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_dashboard_owner.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_dashboard_owner.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_dashboard_owner.png  used on input line 750.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_dashboard_owner.png  used on input line 724.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
- [29 <../Rancangan/Wireframe/wireframe_store_list.png>]
-<../Rancangan/Wireframe/wireframe_payment.png, id=519, 488.82625pt x 1035.87pt>
+ [27 <../Rancangan/Wireframe/wireframe_store_list.png>]
+<../Rancangan/Wireframe/wireframe_payment.png, id=510, 488.82625pt x 1035.87pt>
 File: ../Rancangan/Wireframe/wireframe_payment.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_payment.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_payment.png  used on input line 761.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_payment.png  used on input line 735.
 (pdftex.def)             Requested size: 179.25114pt x 379.85178pt.
- [30 <../Rancangan/Wireframe/wireframe_dashboard_owner.png>]
-<../Rancangan/Wireframe/wireframe_transaction_history.png, id=525, 488.82625pt x 1109.14375pt>
+ [28 <../Rancangan/Wireframe/wireframe_dashboard_owner.png>]
+<../Rancangan/Wireframe/wireframe_transaction_history.png, id=516, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_transaction_history.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_transaction_history.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_transaction_history.png  used on input line 772.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_transaction_history.png  used on input line 746.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
- [31 <../Rancangan/Wireframe/wireframe_payment.png>]
-<../Rancangan/Wireframe/wireframe_add_product.png, id=533, 488.82625pt x 1109.14375pt>
+ [29 <../Rancangan/Wireframe/wireframe_payment.png>]
+<../Rancangan/Wireframe/wireframe_add_product.png, id=523, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_add_product.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_add_product.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_add_product.png  used on input line 783.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_add_product.png  used on input line 757.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
- [32 <../Rancangan/Wireframe/wireframe_transaction_history.png>]
-<../Rancangan/Wireframe/wireframe_manage_categories.png, id=539, 488.82625pt x 1109.14375pt>
+ [30 <../Rancangan/Wireframe/wireframe_transaction_history.png>]
+<../Rancangan/Wireframe/wireframe_manage_categories.png, id=529, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_manage_categories.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_manage_categories.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_manage_categories.png  used on input line 794.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_manage_categories.png  used on input line 768.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
- [33 <../Rancangan/Wireframe/wireframe_add_product.png>]
-<../Rancangan/Wireframe/wireframe_reports.png, id=545, 488.82625pt x 1397.22pt>
+ [31 <../Rancangan/Wireframe/wireframe_add_product.png>]
+<../Rancangan/Wireframe/wireframe_reports.png, id=536, 488.82625pt x 1397.22pt>
 File: ../Rancangan/Wireframe/wireframe_reports.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_reports.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_reports.png  used on input line 805.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_reports.png  used on input line 779.
 (pdftex.def)             Requested size: 179.25114pt x 512.35823pt.
- [34 <../Rancangan/Wireframe/wireframe_manage_categories.png>]
-<../Rancangan/Wireframe/wireframe_settings.png, id=551, 488.82625pt x 1236.62pt>
+ [32 <../Rancangan/Wireframe/wireframe_manage_categories.png>]
+<../Rancangan/Wireframe/wireframe_settings.png, id=542, 488.82625pt x 1236.62pt>
 File: ../Rancangan/Wireframe/wireframe_settings.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_settings.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_settings.png  used on input line 816.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_settings.png  used on input line 790.
 (pdftex.def)             Requested size: 179.25114pt x 453.46648pt.
- [35 <../Rancangan/Wireframe/wireframe_reports.png>]
-<../Rancangan/Wireframe/wireframe_store_info.png, id=558, 488.82625pt x 950.55125pt>
+ [33 <../Rancangan/Wireframe/wireframe_reports.png>]
+<../Rancangan/Wireframe/wireframe_store_info.png, id=549, 488.82625pt x 950.55125pt>
 File: ../Rancangan/Wireframe/wireframe_store_info.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_store_info.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_store_info.png  used on input line 827.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_store_info.png  used on input line 801.
 (pdftex.def)             Requested size: 179.25114pt x 348.56555pt.
- [36 <../Rancangan/Wireframe/wireframe_settings.png>]
-<../Rancangan/Wireframe/wireframe_digital_receipt.png, id=564, 488.82625pt x 975.645pt>
+ [34 <../Rancangan/Wireframe/wireframe_settings.png>]
+<../Rancangan/Wireframe/wireframe_digital_receipt.png, id=555, 488.82625pt x 975.645pt>
 File: ../Rancangan/Wireframe/wireframe_digital_receipt.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_digital_receipt.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_digital_receipt.png  used on input line 838.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_digital_receipt.png  used on input line 812.
 (pdftex.def)             Requested size: 179.25114pt x 357.76738pt.
- [37 <../Rancangan/Wireframe/wireframe_store_info.png>]
-<../Rancangan/Wireframe/wireframe_product_catalog.png, id=572, 488.82625pt x 1109.14375pt>
+ [35 <../Rancangan/Wireframe/wireframe_store_info.png>]
+<../Rancangan/Wireframe/wireframe_product_catalog.png, id=562, 488.82625pt x 1109.14375pt>
 File: ../Rancangan/Wireframe/wireframe_product_catalog.png Graphic file (type png)
 <use ../Rancangan/Wireframe/wireframe_product_catalog.png>
-Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_product_catalog.png  used on input line 849.
+Package pdftex.def Info: ../Rancangan/Wireframe/wireframe_product_catalog.png  used on input line 823.
 (pdftex.def)             Requested size: 179.25114pt x 406.72115pt.
- [38 <../Rancangan/Wireframe/wireframe_digital_receipt.png>]
+ [36 <../Rancangan/Wireframe/wireframe_digital_receipt.png>] [37 <../Rancangan/Wireframe/wireframe_product_catalog.png>]
+<../Project/gambar/alur_penelitian.png, id=575, 1529.715pt x 927.465pt>
+File: ../Project/gambar/alur_penelitian.png Graphic file (type png)
+<use ../Project/gambar/alur_penelitian.png>
+Package pdftex.def Info: ../Project/gambar/alur_penelitian.png  used on input line 841.
+(pdftex.def)             Requested size: 338.59023pt x 205.2883pt.
+ [38 <../Project/gambar/alur_penelitian.png>]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 912.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 913.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 912.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 913.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 912.
- [39 <../Rancangan/Wireframe/wireframe_product_catalog.png>] [40] [41] [42]
-Overfull \hbox (0.59213pt too wide) in paragraph at lines 969--969
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 913.
+ [39] [40] [41] [42]
+Overfull \hbox (0.59213pt too wide) in paragraph at lines 970--970
  []|\T1/ptm/b/n/12 No.| 
  []
 
 
-Overfull \hbox (5.54718pt too wide) in alignment at lines 966--971
+Overfull \hbox (5.54718pt too wide) in alignment at lines 967--972
  [] [] [] [] 
  []
 
 
-Overfull \hbox (5.54718pt too wide) in alignment at lines 971--973
+Overfull \hbox (5.54718pt too wide) in alignment at lines 972--974
  [] [] [] [] 
  []
 
 
-Overfull \hbox (5.54718pt too wide) in alignment at lines 973--976
+Overfull \hbox (5.54718pt too wide) in alignment at lines 974--977
  [] [] [] [] 
  []
 
 
-Overfull \hbox (5.54718pt too wide) in alignment at lines 976--978
+Overfull \hbox (5.54718pt too wide) in alignment at lines 977--979
  [] [] [] [] 
  []
 
 
-Overfull \hbox (5.54718pt too wide) in alignment at lines 978--996
+Overfull \hbox (5.54718pt too wide) in alignment at lines 979--997
  [] [] [] [] 
  []
 
-e:/SKRIPSI/Kholis/skripsi-buku/Skripsi/Skripsi.tex:996: ignored error: Infinite glue shrinkage found in box being split [43] [44] [45]
+e:/SKRIPSI/Kholis/skripsi-buku/Skripsi/Skripsi.tex:997: ignored error: Infinite glue shrinkage found in box being split [43] [44] [45]
 Bab 4.
 [46
 
 ] [47] [48]
-Overfull \hbox (0.59213pt too wide) in paragraph at lines 1096--1096
+Overfull \hbox (0.59213pt too wide) in paragraph at lines 1097--1097
  []|\T1/ptm/b/n/12 No.| 
  []
 
 
-Overfull \hbox (0.59213pt too wide) in paragraph at lines 1100--1100
+Overfull \hbox (0.59213pt too wide) in paragraph at lines 1101--1101
  []|\T1/ptm/b/n/12 No.| 
  []
 
 [49]
-e:/SKRIPSI/Kholis/skripsi-buku/Skripsi/Skripsi.tex:1135: ignored error: Infinite glue shrinkage found in box being split [50] [51] [52] [53] [54] [55]
+e:/SKRIPSI/Kholis/skripsi-buku/Skripsi/Skripsi.tex:1136: ignored error: Infinite glue shrinkage found in box being split [50] [51] [52] [53] [54] [55]
 Bab 5.
 [56
 
@@ -1237,21 +1242,25 @@ Bab 5.
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `Skripsi.out' has not changed.
-(rerunfilecheck)             Checksum: 4937DF57E0DA91D9F88182B2BFAEE74C;9419.
+(rerunfilecheck)             Checksum: 273769973A52801855848C7B7C64590E;9627.
  ) 
 Here is how much of TeX's memory you used:
- 27823 strings out of 467871
- 525128 string characters out of 5428443
- 960392 words of memory out of 5000000
- 55955 multiletter control sequences out of 15000+600000
+ 27825 strings out of 467871
+ 525162 string characters out of 5428443
+ 960391 words of memory out of 5000000
+ 55956 multiletter control sequences out of 15000+600000
  691012 words of font info for 134 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 88i,13n,94p,1147b,1179s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 88i,13n,94p,1147b,1185s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/symbol/usyr.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Skripsi.pdf (66 pages, 2350802 bytes).
+Output written on Skripsi.pdf (66 pages, 2351371 bytes).
 PDF statistics:
- 830 PDF objects out of 1000 (max. 8388607)
- 244 named destinations out of 1000 (max. 500000)
- 503 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 835 PDF objects out of 1000 (max. 8388607)
+ 245 named destinations out of 1000 (max. 500000)
+ 511 words of extra memory for PDF output out of 10000 (max. 10000000)
 

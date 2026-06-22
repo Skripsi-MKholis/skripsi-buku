@@ -463,19 +463,6 @@ Python dipilih sebagai bahasa pemrograman untuk pengembangan modul prediksi di s
 %%=============================================================
 \chapter[METODOLOGI PENELITIAN]{\\ METODOLOGI PENELITIAN}
 
-Metodologi penelitian ini menguraikan kerangka kerja pengembangan sistem yang sistematis, mencakup jenis penelitian, teknik pengumpulan dan analisis data, alur penelitian, rancangan sistem, serta rencana pengujian. Seluruh tahapan dirancang untuk membangun aplikasi \textit{Point of Sale} (POS) \textit{mobile} yang dilengkapi dengan fitur prediksi penjualan harian berbasis algoritma \textit{Long Short-Term Memory} (LSTM).
-
-\section{Metode Penelitian}
-
-Penelitian ini merupakan jenis penelitian pengembangan (\textit{Research and Development}) dengan pendekatan kuantitatif untuk pengujian model prediksi dan kualitatif untuk analisis kebutuhan pengguna. Model pengembangan yang digunakan adalah \textit{Waterfall}, yang terdiri dari lima tahap utama:
-\begin{enumerate}
-    \item \textbf{Analisis Kebutuhan:} Mengidentifikasi fitur utama POS (kasir, stok, laporan) berdasarkan observasi dan wawancara dengan mitra UMKM, serta menentukan spesifikasi data yang diperlukan untuk pelatihan model LSTM.
-    \item \textbf{Desain Sistem:} Membuat arsitektur sistem \textit{offline-first}, skema basis data PostgreSQL di Supabase dan Isar DB lokal, serta rancangan antarmuka pengguna (UI/UX) berbasis komponen Shadcn UI.
-    \item \textbf{Implementasi:} Melakukan pengkodean \textit{frontend} menggunakan \textit{framework} Flutter dan bahasa Dart, integrasi \textit{backend} dengan Supabase, serta pengembangan modul AI prediksi penjualan menggunakan Python dan TensorFlow di sisi server (VPS).
-    \item \textbf{Pengujian:} Melakukan uji coba fungsional menggunakan \textit{Black Box Testing} untuk validasi fitur POS dan uji akurasi model LSTM menggunakan data transaksi historis mitra UMKM.
-    \item \textbf{Pemeliharaan:} Melakukan optimasi parameter model berdasarkan umpan balik penggunaan nyata dan sinkronisasi data berkelanjutan antara aplikasi \textit{mobile} dan server \textit{cloud}.
-\end{enumerate}
-
 \section{Data dan Pengumpulan Data}
 
 Data utama yang digunakan dalam penelitian ini adalah data transaksi penjualan harian dari mitra UMKM di Lhokseumawe dengan periode minimal satu tahun. Data mencakup tanggal transaksi, total nilai penjualan harian (nominal rupiah), jumlah transaksi per hari, dan jumlah produk terjual per hari. Data tersebut bersifat kuantitatif dan berbentuk deret waktu (\textit{time series}) yang akan digunakan sebagai masukan model prediksi LSTM.
@@ -487,41 +474,16 @@ Data dikumpulkan melalui tiga saluran utama:
     \item \textbf{Studi Pustaka:} Mengkaji referensi jurnal ilmiah, buku manajemen operasi (Heizer \& Render), serta dokumentasi teknis \textit{framework} Flutter, TensorFlow LSTM, dan layanan Supabase sebagai landasan implementasi.
 \end{enumerate}
 
-\section{Variabel Penelitian}
+\section{Metode Penelitian}
 
-Variabel penelitian yang digunakan dalam proses prediksi penjualan harian pada sistem POS adalah sebagai berikut:
+Penelitian ini merupakan jenis penelitian pengembangan (\textit{Research and Development}) dengan pendekatan kuantitatif untuk pengujian model prediksi dan kualitatif untuk analisis kebutuhan pengguna. Model pengembangan yang digunakan adalah \textit{Waterfall}, yang terdiri dari lima tahap utama:
 \begin{enumerate}
-    \item \textbf{Variabel Input (Fitur):} Data transaksi penjualan harian yang mencakup total nilai transaksi harian (nominal rupiah), jumlah transaksi per hari, dan jumlah produk terjual per hari selama periode minimal satu tahun dari mitra UMKM di Lhokseumawe.
-    \item \textbf{Variabel Output (Target):} Nilai prediksi total penjualan harian untuk hari berikutnya, yang digunakan sebagai dasar pengambilan keputusan manajemen stok dan strategi promosi usaha.
-    \item \textbf{Variabel Evaluasi:} Kinerja model diukur menggunakan tiga metrik evaluasi, yaitu MAE (\textit{Mean Absolute Error}), RMSE (\textit{Root Mean Square Error}), dan MAPE (\textit{Mean Absolute Percentage Error}).
+    \item \textbf{Analisis Kebutuhan:} Mengidentifikasi fitur utama POS (kasir, stok, laporan) berdasarkan observasi dan wawancara dengan mitra UMKM, serta menentukan spesifikasi data yang diperlukan untuk pelatihan model LSTM.
+    \item \textbf{Desain Sistem:} Membuat arsitektur sistem \textit{offline-first}, skema basis data PostgreSQL di Supabase dan Isar DB lokal, serta rancangan antarmuka pengguna (UI/UX) berbasis komponen Shadcn UI.
+    \item \textbf{Implementasi:} Melakukan pengkodean \textit{frontend} menggunakan \textit{framework} Flutter dan bahasa Dart, integrasi \textit{backend} dengan Supabase, serta pengembangan modul AI prediksi penjualan menggunakan Python dan TensorFlow di sisi server (VPS).
+    \item \textbf{Pengujian:} Melakukan uji coba fungsional menggunakan \textit{Black Box Testing} untuk validasi fitur POS dan uji akurasi model LSTM menggunakan data transaksi historis mitra UMKM.
+    \item \textbf{Pemeliharaan:} Melakukan optimasi parameter model berdasarkan umpan balik penggunaan nyata dan sinkronisasi data berkelanjutan antara aplikasi \textit{mobile} dan server \textit{cloud}.
 \end{enumerate}
-
-\section{Teknik Analisis Data}
-
-Data transaksi yang terkumpul melalui aplikasi POS diproses melalui tahapan berikut sebelum digunakan untuk prediksi penjualan:
-\begin{enumerate}
-    \item \textbf{Pembersihan Data (\textit{Data Cleaning}):} Menghapus data duplikat, mengisi nilai yang kosong menggunakan teknik interpolasi linier, dan menyelaraskan format tanggal agar data deret waktu bersifat kontinu dan konsisten.
-    \item \textbf{Normalisasi:} Mengubah nilai volume penjualan harian ke dalam skala 0 hingga 1 menggunakan \textit{MinMaxScaler} untuk menstabilkan proses pelatihan jaringan saraf tiruan dan mempercepat konvergensi model.
-    \item \textbf{Pembentukan Struktur \textit{Time Series} (\textit{Windowing}):} Mengubah data sekuensial menjadi format input (X) dan label (y) dengan panjang jendela \textit{sliding window} tertentu, misalnya data 14 hari sebelumnya digunakan untuk memprediksi penjualan hari berikutnya.
-    \item \textbf{Pembagian Data (\textit{Time-Based Split}):} Membagi dataset menjadi data latih dan data uji menggunakan metode pemisahan berbasis waktu untuk menjaga urutan temporal dan mencegah kebocoran data.
-    \item \textbf{Pelatihan Model:} Melatih arsitektur LSTM di sisi server menggunakan Adam Optimizer dan fungsi aktivasi ReLU pada lapisan tersembunyi untuk membangun model prediksi penjualan harian.
-    \item \textbf{Denormalisasi:} Mengembalikan nilai prediksi ke satuan aslinya untuk ditampilkan pada antarmuka aplikasi \textit{mobile} secara mudah dipahami pengguna.
-\end{enumerate}
-
-\section{Alur Penelitian}
-
-Alur penelitian ini dirancang secara sistematis untuk membangun sistem \textit{Point of Sale} (POS) berbasis \textit{mobile} yang dilengkapi fitur prediksi penjualan harian menggunakan metode LSTM. Sebagaimana diilustrasikan pada Gambar \ref{fig:alur_penelitian}, tahapan penelitian dibagi menjadi dua fase utama yang saling berkaitan.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\textwidth]{alur_penelitian}
-    \caption{Alur Penelitian}
-    \label{fig:alur_penelitian}
-\end{figure}
-
-Pada \textbf{Fase Pengembangan dan Implementasi Sistem POS}, penelitian diawali dengan analisis kebutuhan melalui observasi langsung dan identifikasi permasalahan pada mitra UMKM di Lhokseumawe. Selanjutnya dilakukan perancangan sistem meliputi arsitektur \textit{offline-first}, desain basis data relasional (Supabase PostgreSQL dan Isar DB), serta perancangan \textit{Use Case Diagram}, \textit{Activity Diagram}, ERD, dan antarmuka pengguna. Setelah tahap perancangan, sistem POS dikembangkan menggunakan Flutter sebagai \textit{frontend}, Supabase sebagai basis data \textit{cloud}, Isar DB sebagai basis data lokal, dan Python di VPS untuk pengolahan model AI. Aplikasi yang telah dibangun kemudian diimplementasikan pada mitra UMKM untuk digunakan dalam kegiatan transaksi harian, sehingga menghasilkan data transaksi aktual yang tersimpan secara otomatis.
-
-Pada \textbf{Fase Pengembangan Model Prediksi Penjualan}, data transaksi yang telah terkumpul selanjutnya melalui tahap pra-pemrosesan meliputi pembersihan data, agregasi harian, normalisasi, dan pembentukan data deret waktu (\textit{time series}). Dataset kemudian dibagi menjadi data latih dan data uji. Model LSTM dilatih menggunakan data latih untuk mempelajari pola penjualan jangka pendek maupun jangka panjang. Setelah pelatihan, model diuji dan diintegrasikan kembali ke dalam sistem POS sehingga aplikasi mampu menampilkan hasil prediksi penjualan harian kepada pengguna melalui REST API.
 
 \section{Rancangan Sistem}
 
@@ -609,7 +571,61 @@ Definisi \textit{use case} pada sistem POS diilustrasikan pada Tabel \ref{tab:us
 \end{longtable}
 }
 
-% \subsection{\textit{Activity Diagram}}
+\subsection{\textit{Entity Relationship Diagram} (ERD)}
+
+Basis data sistem POS dirancang secara hibrida menggunakan Supabase PostgreSQL untuk penyimpanan \textit{cloud} dan Isar DB untuk penyimpanan lokal di perangkat \textit{mobile}. Skema basis data \textit{cloud} terdiri dari delapan entitas utama yang saling berelasi sebagaimana diilustrasikan pada Gambar \ref{fig:erd}.
+\begin{landscape}
+\begin{figure}[p]
+    \centering
+    \includegraphics[width=1.0\linewidth, height=0.92\textheight, keepaspectratio]{erd_new}
+    \caption{\textit{Entity Relationship Diagram} (ERD) Sistem POS}
+    \label{fig:erd}
+\end{figure}
+\end{landscape}
+
+Entitas \texttt{stores} menjadi entitas induk yang berelasi dengan seluruh entitas lainnya. Entitas \texttt{store\_members} mengelola hak akses berbasis peran (\textit{Role-Based Access Control}/RBAC) untuk Owner dan Kasir. Katalog produk dikelola melalui entitas \texttt{products} dan \texttt{categories}, sedangkan data transaksi disimpan pada entitas \texttt{transactions} dan \texttt{transaction\_items}. Riwayat perubahan stok dicatat pada entitas \texttt{stock\_histories}, sementara entitas \texttt{notifications} mendukung sistem notifikasi. Daftar seluruh tabel basis data yang digunakan dirangkum pada Tabel \ref{tab:database}.
+
+\begin{table}[H]
+\setstretch{1.2}
+\centering
+\caption{Daftar Tabel Basis Data POS}
+\label{tab:database}
+\begin{tabularx}{\textwidth}{|c|l|X|}
+\hline
+\textbf{No.} & \textbf{Nama Tabel} & \textbf{Deskripsi} \\
+\hline
+1 & \texttt{stores} & Menyimpan data identitas dan konfigurasi outlet toko merchant. \\
+\hline
+2 & \texttt{store\_members} & Mengelola hak akses dan peran staf (Owner/Kasir) pada setiap toko. \\
+\hline
+3 & \texttt{categories} & Menyimpan kategori pengelompokan produk atau menu dagangan. \\
+\hline
+4 & \texttt{products} & Menyimpan katalog produk beserta harga, stok, dan data SKU/barcode. \\
+\hline
+5 & \texttt{transactions} & Menyimpan data nota transaksi penjualan kasir sebagai tabel induk. \\
+\hline
+6 & \texttt{transaction\_items} & Menyimpan rincian produk yang dibeli dalam setiap transaksi. \\
+\hline
+7 & \texttt{stock\_histories} & Mencatat log audit perubahan stok masuk dan keluar produk. \\
+\hline
+8 & \texttt{notifications} & Menyimpan pesan notifikasi sistem dan \textit{broadcast} Owner ke staf. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\section{Preprocessing Data}
+
+Data transaksi yang terkumpul melalui aplikasi POS diproses melalui tahapan berikut sebelum digunakan untuk prediksi penjualan:
+\begin{enumerate}
+    \item \textbf{Pembersihan Data (\textit{Data Cleaning}):} Menghapus data duplikat, mengisi nilai yang kosong menggunakan teknik interpolasi linier, dan menyelaraskan format tanggal agar data deret waktu bersifat kontinu dan konsisten.
+    \item \textbf{Normalisasi:} Mengubah nilai volume penjualan harian ke dalam skala 0 hingga 1 menggunakan \textit{MinMaxScaler} untuk menstabilkan proses pelatihan jaringan saraf tiruan dan mempercepat konvergensi model.
+    \item \textbf{Pembentukan Struktur \textit{Time Series} (\textit{Windowing}):} Mengubah data sekuensial menjadi format input (X) dan label (y) dengan panjang jendela \textit{sliding window} tertentu, misalnya data 14 hari sebelumnya digunakan untuk memprediksi penjualan hari berikutnya.
+    \item \textbf{Pembagian Data (\textit{Time-Based Split}):} Membagi dataset menjadi data latih dan data uji menggunakan metode pemisahan berbasis waktu untuk menjaga urutan temporal dan mencegah kebocoran data.
+    \item \textbf{Pelatihan Model:} Melatih arsitektur LSTM di sisi server menggunakan Adam Optimizer dan fungsi aktivasi ReLU pada lapisan tersembunyi untuk membangun model prediksi penjualan harian.
+    \item \textbf{Denormalisasi:} Mengembalikan nilai prediksi ke satuan aslinya untuk ditampilkan pada antarmuka aplikasi \textit{mobile} secara mudah dipahami pengguna.
+\end{enumerate}
+
+% \section{Activity Diagram}
 %
 % \textit{Activity Diagram} digunakan untuk memvisualisasikan aliran kerja dinamis dan logika prosedural sistem POS. Terdapat tiga alur kerja utama yang dimodelkan dalam penelitian ini.
 %
@@ -658,49 +674,7 @@ Definisi \textit{use case} pada sistem POS diilustrasikan pada Tabel \ref{tab:us
 %
 % Alur dimulai ketika Owner membuka layar \textit{Smart Analytics}. Sistem memeriksa persetujuan privasi data dan ketersediaan minimal 20 riwayat transaksi. Setelah syarat terpenuhi, sistem melakukan agregasi data lokal, penghapusan informasi pribadi pelanggan, dan pemanggilan model LSTM melalui REST API server untuk analisis prediktif. Hasil berupa proyeksi omzet, prediksi produk terlaris, dan rekomendasi strategi bisnis divisualisasikan kepada Owner.
 
-\subsection{\textit{Entity Relationship Diagram} (ERD)}
-
-Basis data sistem POS dirancang secara hibrida menggunakan Supabase PostgreSQL untuk penyimpanan \textit{cloud} dan Isar DB untuk penyimpanan lokal di perangkat \textit{mobile}. Skema basis data \textit{cloud} terdiri dari delapan entitas utama yang saling berelasi sebagaimana diilustrasikan pada Gambar \ref{fig:erd}.
-\begin{landscape}
-\begin{figure}[p]
-    \centering
-    \includegraphics[width=1.0\linewidth, height=0.92\textheight, keepaspectratio]{erd_new}
-    \caption{\textit{Entity Relationship Diagram} (ERD) Sistem POS}
-    \label{fig:erd}
-\end{figure}
-\end{landscape}
-
-Entitas \texttt{stores} menjadi entitas induk yang berelasi dengan seluruh entitas lainnya. Entitas \texttt{store\_members} mengelola hak akses berbasis peran (\textit{Role-Based Access Control}/RBAC) untuk Owner dan Kasir. Katalog produk dikelola melalui entitas \texttt{products} dan \texttt{categories}, sedangkan data transaksi disimpan pada entitas \texttt{transactions} dan \texttt{transaction\_items}. Riwayat perubahan stok dicatat pada entitas \texttt{stock\_histories}, sementara entitas \texttt{notifications} mendukung sistem notifikasi. Daftar seluruh tabel basis data yang digunakan dirangkum pada Tabel \ref{tab:database}.
-
-\begin{table}[H]
-\setstretch{1.2}
-\centering
-\caption{Daftar Tabel Basis Data POS}
-\label{tab:database}
-\begin{tabularx}{\textwidth}{|c|l|X|}
-\hline
-\textbf{No.} & \textbf{Nama Tabel} & \textbf{Deskripsi} \\
-\hline
-1 & \texttt{stores} & Menyimpan data identitas dan konfigurasi outlet toko merchant. \\
-\hline
-2 & \texttt{store\_members} & Mengelola hak akses dan peran staf (Owner/Kasir) pada setiap toko. \\
-\hline
-3 & \texttt{categories} & Menyimpan kategori pengelompokan produk atau menu dagangan. \\
-\hline
-4 & \texttt{products} & Menyimpan katalog produk beserta harga, stok, dan data SKU/barcode. \\
-\hline
-5 & \texttt{transactions} & Menyimpan data nota transaksi penjualan kasir sebagai tabel induk. \\
-\hline
-6 & \texttt{transaction\_items} & Menyimpan rincian produk yang dibeli dalam setiap transaksi. \\
-\hline
-7 & \texttt{stock\_histories} & Mencatat log audit perubahan stok masuk dan keluar produk. \\
-\hline
-8 & \texttt{notifications} & Menyimpan pesan notifikasi sistem dan \textit{broadcast} Owner ke staf. \\
-\hline
-\end{tabularx}
-\end{table}
-
-\subsection{Perancangan Wireframe}
+\section{Perancangan Wireframe}
 
 Perancangan wireframe dalam penelitian ini mencakup rancangan antarmuka pengguna untuk semua layar utama yang menjadi bagian dari alur operasional aplikasi POS. Wireframe dirancang dengan mempertimbangkan kebutuhan pengguna, aksesibilitas, dan alur kerja yang efisien. Terdapat 13 rancangan layar yang melayani kebutuhan berbeda sesuai dengan peran pengguna, sebagaimana diuraikan berikut ini.
 
@@ -853,6 +827,33 @@ Perancangan wireframe dalam penelitian ini mencakup rancangan antarmuka pengguna
 
 
 
+\end{enumerate}
+
+\section{Metode dan Variabel Penelitian}
+Bagian ini menjelaskan alur operasional penelitian, variabel-variabel penelitian yang digunakan, serta rancangan algoritma prediksi yang diimplementasikan pada sistem.
+
+\subsection{Alur Penelitian}
+
+Alur penelitian ini dirancang secara sistematis untuk membangun sistem \textit{Point of Sale} (POS) berbasis \textit{mobile} yang dilengkapi fitur prediksi penjualan harian menggunakan metode LSTM. Sebagaimana diilustrasikan pada Gambar \ref{fig:alur_penelitian}, tahapan penelitian dibagi menjadi dua fase utama yang saling berkaitan.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{alur_penelitian}
+    \caption{Alur Penelitian}
+    \label{fig:alur_penelitian}
+\end{figure}
+
+Pada \textbf{Fase Pengembangan dan Implementasi Sistem POS}, penelitian diawali dengan analisis kebutuhan melalui observasi langsung dan identifikasi permasalahan pada mitra UMKM di Lhokseumawe. Selanjutnya dilakukan perancangan sistem meliputi arsitektur \textit{offline-first}, desain basis data relasional (Supabase PostgreSQL dan Isar DB), serta perancangan \textit{Use Case Diagram}, \textit{Activity Diagram}, ERD, dan antarmuka pengguna. Setelah tahap perancangan, sistem POS dikembangkan menggunakan Flutter sebagai \textit{frontend}, Supabase sebagai basis data \textit{cloud}, Isar DB sebagai basis data lokal, dan Python di VPS untuk pengolahan model AI. Aplikasi yang telah dibangun kemudian diimplementasikan pada mitra UMKM untuk digunakan dalam kegiatan transaksi harian, sehingga menghasilkan data transaksi aktual yang tersimpan secara otomatis.
+
+Pada \textbf{Fase Pengembangan Model Prediksi Penjualan}, data transaksi yang telah terkumpul selanjutnya melalui tahap pra-pemrosesan meliputi pembersihan data, agregasi harian, normalisasi, dan pembentukan data deret waktu (\textit{time series}). Dataset kemudian dibagi menjadi data latih dan data uji. Model LSTM dilatih menggunakan data latih untuk mempelajari pola penjualan jangka pendek maupun jangka panjang. Setelah pelatihan, model diuji dan diintegrasikan kembali ke dalam sistem POS sehingga aplikasi mampu menampilkan hasil prediksi penjualan harian kepada pengguna melalui REST API.
+
+\subsection{Variabel Penelitian}
+
+Variabel penelitian yang digunakan dalam proses prediksi penjualan harian pada sistem POS adalah sebagai berikut:
+\begin{enumerate}
+    \item \textbf{Variabel Input (Fitur):} Data transaksi penjualan harian yang mencakup total nilai transaksi harian (nominal rupiah), jumlah transaksi per hari, dan jumlah produk terjual per hari selama periode minimal satu tahun dari mitra UMKM di Lhokseumawe.
+    \item \textbf{Variabel Output (Target):} Nilai prediksi total penjualan harian untuk hari berikutnya, yang digunakan sebagai dasar pengambilan keputusan manajemen stok dan strategi promosi usaha.
+    \item \textbf{Variabel Evaluasi:} Kinerja model diukur menggunakan tiga metrik evaluasi, yaitu MAE (\textit{Mean Absolute Error}), RMSE (\textit{Root Mean Square Error}), dan MAPE (\textit{Mean Absolute Percentage Error}).
 \end{enumerate}
 
 \subsection{Rancangan Algoritma \textit{Long Short-Term Memory} (LSTM)}
