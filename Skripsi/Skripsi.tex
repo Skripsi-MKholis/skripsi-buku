@@ -452,7 +452,7 @@ Penggunaan Supabase dalam penelitian ini memfasilitasi penyimpanan data transaks
 
 Isar DB adalah basis data \textit{embedded} berkinerja tinggi yang dirancang khusus untuk Flutter dan mendukung operasi baca/tulis secara \textit{asynchronous} tanpa memerlukan koneksi internet. Novikov dan Petrov [8] membuktikan bahwa Isar DB memiliki kecepatan \textit{batch insert} dan pembacaan data sekuensial yang paling optimal dibandingkan basis data lokal lain yang umum digunakan pada Flutter, yakni Hive dan ObjectBox. Isar DB beroperasi langsung di perangkat pengguna menggunakan format penyimpanan \textit{binary} yang dioptimalkan untuk kecepatan tinggi, serta mendukung kueri kompleks dengan antarmuka yang intuitif.
 
-Dalam penelitian ini, Isar DB berperan sebagai penyimpanan lokal utama pada perangkat \textit{mobile} untuk menjamin kelancaran operasional kasir dalam kondisi \textit{offline} [6],[8]. Seluruh transaksi yang dilakukan tanpa koneksi akan disimpan terlebih dahulu di Isar DB, kemudian disinkronkan secara otomatis ke Supabase oleh mesin \texttt{SyncNotifier} ketika koneksi internet tersedia kembali.
+Dalam penelitian ini, Isar DB berperan sebagai penyimpanan lokal utama pada perangkat \textit{mobile} untuk menjamin kelancaran operasional kasir dalam kondisi \textit{offline} [6],[8]. Seluruh transaksi yang dilakukan tanpa koneksi akan disimpan terlebih dahulu di Isar DB, kemudian disinkronkan secara otomatis ke Supabase oleh mesin \textit{SyncNotifier} ketika koneksi internet tersedia kembali.
 
 \section{Python dan TensorFlow}
 
@@ -465,14 +465,14 @@ Python dipilih sebagai bahasa pemrograman untuk pengembangan modul prediksi di s
 
 \section{Data dan Pengumpulan Data}
 
-Data utama yang digunakan dalam penelitian ini adalah basis data transaksi penjualan harian yang bersumber dari platform katalog menu digital interaktif \textbf{EatsTEDI} pada Departemen Teknik Elektro dan Informatika (DTEDI/TRE) Universitas Gadjah Mada (UGM). Dataset ini berupa dump basis data relasional dalam format SQL (\texttt{eatstedi-20260621-010820.sql}) berukuran 32,15 MB dengan total sekitar 395.090 baris data.
+Data utama yang digunakan dalam penelitian ini adalah basis data transaksi penjualan harian yang bersumber dari platform katalog menu digital interaktif \textbf{EatsTEDI} pada Departemen Teknik Elektro dan Informatika (DTEDI/TRE) Universitas Gadjah Mada (UGM). \textit{Dataset} ini berupa \textit{dump} basis data relasional dalam format SQL (\textit{eatstedi-20260621-010820.sql}) berukuran 32,15 MB dengan total sekitar 395.090 baris data.
 
-Rentang waktu transaksi riil yang digunakan adalah dari tanggal \textbf{24 Agustus 2024 s.d. 20 Juni 2026} (mencakup periode 666 hari atau sekitar 22 bulan). Data yang diekstrak berfokus pada transaksi dengan status lunas (\texttt{is\_paid = 1}) dari tabel \texttt{invoices} serta rincian item produk terjual dari tabel \texttt{product\_sold} yang dihubungkan dengan tabel master \texttt{products} dan \texttt{categories}.
+Rentang waktu transaksi riil yang digunakan adalah dari tanggal \textbf{24 Agustus 2024 s.d. 20 Juni 2026} (mencakup periode 666 hari atau sekitar 22 bulan). Data yang diekstrak berfokus pada transaksi dengan status lunas (\textit{is\_paid = 1}) dari tabel \textit{invoices} serta rincian item produk terjual dari tabel \textit{product\_sold} yang dihubungkan dengan tabel master \textit{products} dan \textit{categories}.
 
 Secara umum, karakteristik data deret waktu (\textit{time series}) EatsTEDI UGM memiliki pola musiman unik yang sangat dipengaruhi oleh kalender akademis kampus, antara lain:
 \begin{enumerate}
-    \item \textbf{Pola Mingguan (Weekly Profile):} Penjualan aktif hampir 100\% terkonsentrasi pada hari kerja (Senin s.d. Jumat) dengan rata-rata 195,41 transaksi per hari aktif. Sedangkan pada hari Sabtu dan Minggu, transaksi bernilai Rp 0 karena kantin kampus tutup.
-    \item \textbf{Pola Libur Akademis (Academic Holiday Profile):} Pada masa libur semester mahasiswa (sepanjang bulan Januari dan Juli), transaksi bernilai Rp 0 karena aktivitas perkuliahan dan operasional kantin berhenti total.
+    \item \textbf{Pola Mingguan (\textit{weekly profile}):} Penjualan aktif hampir 100\% terkonsentrasi pada hari kerja (Senin s.d. Jumat) dengan rata-rata 195,41 transaksi per hari aktif. Sedangkan pada hari Sabtu dan Minggu, transaksi bernilai Rp 0 karena kantin kampus tutup.
+    \item \textbf{Pola Libur Akademis (\textit{academic holiday profile}):} Pada masa libur semester mahasiswa (sepanjang bulan Januari dan Juli), transaksi bernilai Rp 0 karena aktivitas perkuliahan dan operasional kantin berhenti total.
     \item \textbf{Pola Bulan Ramadan:} Omzet harian merosot tajam secara signifikan karena penutupan atau pembatasan jam operasional kantin selama bulan puasa (misalnya total omzet Maret 2025 hanya Rp 1.427.000,00 dan Maret 2026 sebesar Rp 3.531.000,00).
 \end{enumerate}
 
@@ -481,19 +481,18 @@ Selama periode transaksi tersebut, tercatat sebanyak \textbf{61.749 transaksi} l
 Adapun data dikumpulkan melalui tiga saluran utama:
 \begin{enumerate}
     \item \textbf{Observasi dan Wawancara:} Dilakukan terhadap pengelola divisi kewirausahaan mahasiswa platform EatsTEDI di Departemen Teknik Elektro dan Informatika UGM untuk memahami alur operasional kasir fisik, pencatatan menu harian, status stok, serta tantangan dalam mengantisipasi sisa stok makanan.
-    \item \textbf{Dokumentasi Transaksi:} Mengunduh dan mengekstrak basis data transaksi digital EatsTEDI dari file dump SQL untuk tabel \texttt{invoices}, \texttt{product\_sold}, \texttt{products}, dan \texttt{categories} sebagai data latihan (\textit{training data}) dan data uji (\textit{testing data}) model prediksi LSTM.
+    \item \textbf{Dokumentasi Transaksi:} Mengunduh dan mengekstrak basis data transaksi digital EatsTEDI dari file \textit{dump} SQL untuk tabel \textit{invoices}, \textit{product\_sold}, \textit{products}, dan \textit{categories} sebagai data latihan (\textit{training data}) dan data uji (\textit{testing data}) model prediksi LSTM.
     \item \textbf{Studi Pustaka:} Mengkaji referensi jurnal ilmiah, buku manajemen operasi (Heizer \& Render), serta dokumentasi teknis \textit{framework} Flutter, TensorFlow LSTM, dan layanan Supabase sebagai landasan implementasi.
 \end{enumerate}
 
 \section{Metode Penelitian}
 
-Penelitian ini merupakan jenis penelitian pengembangan (\textit{Research and Development}) dengan pendekatan kuantitatif untuk pengujian model prediksi dan kualitatif untuk analisis kebutuhan pengguna. Model pengembangan yang digunakan adalah \textit{Waterfall}, yang terdiri dari lima tahap utama:
+Penelitian ini merupakan jenis penelitian pengembangan (\textit{Research and Development}) dengan pendekatan kuantitatif untuk pengujian model prediksi dan kualitatif untuk analisis kebutuhan pengguna. Model pengembangan yang digunakan adalah \textbf{\textit{Agile} (Tangkas)} dengan pendekatan kombinasi antara \textbf{\textit{Iterative} (Berulang)} dan \textbf{\textit{Incremental} (Bertahap)}, serta mengadopsi prinsip \textbf{\textit{Lean Software Development}}. Metode ini diterapkan melalui fase-fase berikut:
 \begin{enumerate}
-    \item \textbf{Analisis Kebutuhan:} Mengidentifikasi fitur utama POS (kasir, stok, laporan) berdasarkan observasi dan wawancara dengan mitra UMKM, serta menentukan spesifikasi data yang diperlukan untuk pelatihan model LSTM.
-    \item \textbf{Desain Sistem:} Membuat arsitektur sistem \textit{offline-first}, skema basis data PostgreSQL di Supabase dan Isar DB lokal, serta rancangan antarmuka pengguna (UI/UX) berbasis komponen Shadcn UI.
-    \item \textbf{Implementasi:} Melakukan pengkodean \textit{frontend} menggunakan \textit{framework} Flutter dan bahasa Dart, integrasi \textit{backend} dengan Supabase, serta pengembangan modul AI prediksi penjualan menggunakan Python dan TensorFlow di sisi server (VPS).
-    \item \textbf{Pengujian:} Melakukan uji coba fungsional menggunakan \textit{Black Box Testing} untuk validasi fitur POS dan uji akurasi model LSTM menggunakan data transaksi historis mitra UMKM.
-    \item \textbf{Pemeliharaan:} Melakukan optimasi parameter model berdasarkan umpan balik penggunaan nyata dan sinkronisasi data berkelanjutan antara aplikasi \textit{mobile} dan server \textit{cloud}.
+    \item \textbf{Fokus pada \textit{Minimum Viable Product} (MVP):} Pengembangan difokuskan pada penyelesaian fitur inti sistem kasir terlebih dahulu (\textit{Core POS}, autentikasi pengguna, manajemen produk, dan integrasi \textit{hardware} printer) agar produk minimal dapat segera berfungsi untuk mempercepat waktu rilis ke pasar (\textit{time-to-market}). Fitur lanjutan seperti analisis cerdas (\textit{Smart Analytics}) dan notifikasi \textit{push} direncanakan pada fase pasca-MVP.
+    \item \textbf{Pengembangan Berbasis Sesi/Iterasi Pendek (\textit{sprints}):} Proses pengembangan dipecah menjadi siklus iterasi pendek dalam bentuk sesi-sesi harian terfokus. Setiap sesi ditujukan untuk menambahkan fungsionalitas baru (\textit{increment}) secara bertahap atau melakukan optimasi spesifik, seperti perbaikan antarmuka dasbor, optimasi navigasi \textit{sidebar}, dan penataan ulang modul \textit{database}.
+    \item \textbf{Refaktorisasi Kode dan Adaptasi Perubahan:} Pengembangan bersifat adaptif dan responsif terhadap kendala teknis atau perubahan kebutuhan yang ditemui di tengah proses pengembangan. Siklus mencakup proses refaktorisasi kode mengikuti pembaruan standar \textit{framework} Flutter, penyelarasan skema \textit{database} (\textit{schema alignment}), optimasi sinkronisasi data lokal-\textit{cloud}, serta mitigasi kebocoran memori (\textit{memory leaks}).
+    \item \textbf{Uji Coba Berulang (\textit{Iterative Testing}):} Melakukan pengujian fungsionalitas menggunakan metode \textit{Black Box Testing} secara berkala untuk setiap penambahan fitur baru untuk memastikan integritas dan stabilitas aplikasi kasir serta modul prediksi penjualan berbasis LSTM tetap terjaga.
 \end{enumerate}
 
 \section{Rancangan Sistem}
@@ -553,11 +552,11 @@ Definisi \textit{use case} pada sistem POS diilustrasikan pada Tabel \ref{tab:us
 
 1 & Registrasi Toko Baru & Mendaftarkan akun toko baru saat inisialisasi awal sistem (Owner). \\
 \hline
-2 & Login Akun & Autentikasi pengguna menggunakan email dan kata sandi via Supabase Auth. \\
+2 & \textit{Login} Akun & Autentikasi pengguna menggunakan email dan kata sandi via Supabase Auth. \\
 \hline
 3 & Melakukan \textit{Checkout} & Memasukkan produk ke keranjang dan memproses transaksi pembayaran. \\
 \hline
-4 & Menerapkan Voucher/Diskon & Memasukkan kode promosi untuk memotong total tagihan transaksi. \\
+4 & Menerapkan \textit{Voucher}/Diskon & Memasukkan kode promosi untuk memotong total tagihan transaksi. \\
 \hline
 5 & Mencetak Struk & Mencetak struk transaksi fisik via printer \textit{thermal} Bluetooth. \\
 \hline
@@ -565,7 +564,7 @@ Definisi \textit{use case} pada sistem POS diilustrasikan pada Tabel \ref{tab:us
 \hline
 7 & Mengelola Kategori & Mengatur pengelompokan menu katalog produk toko (Owner). \\
 \hline
-8 & Mengaudit Riwayat Stok & Melihat log mutasi stok untuk keperluan audit inventaris (Owner). \\
+8 & Mengaudit Riwayat Stok & Melihat \textit{log} mutasi stok untuk keperluan audit inventaris (Owner). \\
 \hline
 9 & Melihat \textit{Dashboard} & Memantau performa keuangan; kasir dibatasi pada data hari berjalan. \\
 \hline
@@ -573,7 +572,7 @@ Definisi \textit{use case} pada sistem POS diilustrasikan pada Tabel \ref{tab:us
 \hline
 11 & Kirim \textit{Broadcast} Notifikasi & Mengirim pemberitahuan \textit{real-time} ke semua kasir (Owner). \\
 \hline
-12 & Sinkronisasi Data & Menyinkronkan transaksi \textit{offline} lokal ke cloud Supabase otomatis. \\
+12 & Sinkronisasi Data & Menyinkronkan transaksi \textit{offline} lokal ke \textit{cloud} Supabase secara otomatis. \\
 \hline
 13 & Mengelola Karyawan & Mendaftarkan atau mengubah peran staf kasir (Owner). \\
 \hline
@@ -594,7 +593,7 @@ Basis data sistem POS dirancang secara hibrida menggunakan Supabase PostgreSQL u
 \end{figure}
 \end{landscape}
 
-Entitas \texttt{stores} menjadi entitas induk yang berelasi dengan seluruh entitas lainnya. Entitas \texttt{store\_members} mengelola hak akses berbasis peran (\textit{Role-Based Access Control}/RBAC) untuk Owner dan Kasir. Katalog produk dikelola melalui entitas \texttt{products} dan \texttt{categories}, sedangkan data transaksi disimpan pada entitas \texttt{transactions} dan \texttt{transaction\_items}. Riwayat perubahan stok dicatat pada entitas \texttt{stock\_histories}, sementara entitas \texttt{notifications} mendukung sistem notifikasi. Daftar seluruh tabel basis data yang digunakan dirangkum pada Tabel \ref{tab:database}.
+Entitas \textit{stores} menjadi entitas induk yang berelasi dengan seluruh entitas lainnya. Entitas \textit{store\_members} mengelola hak akses berbasis peran (\textit{Role-Based Access Control}/RBAC) untuk Owner dan Kasir. Katalog produk dikelola melalui entitas \textit{products} dan \textit{categories}, sedangkan data transaksi disimpan pada entitas \textit{transactions} dan \textit{transaction\_items}. Riwayat perubahan stok dicatat pada entitas \textit{stock\_histories}, sementara entitas \textit{notifications} mendukung sistem notifikasi. Daftar seluruh tabel basis data yang digunakan dirangkum pada Tabel \ref{tab:database}.
 
 \begin{table}[H]
 \setstretch{1.2}
@@ -605,21 +604,21 @@ Entitas \texttt{stores} menjadi entitas induk yang berelasi dengan seluruh entit
 \hline
 \textbf{No.} & \textbf{Nama Tabel} & \textbf{Deskripsi} \\
 \hline
-1 & \texttt{stores} & Menyimpan data identitas dan konfigurasi outlet toko merchant. \\
+1 & \textit{stores} & Menyimpan data identitas dan konfigurasi outlet toko \textit{merchant}. \\
 \hline
-2 & \texttt{store\_members} & Mengelola hak akses dan peran staf (Owner/Kasir) pada setiap toko. \\
+2 & \textit{store\_members} & Mengelola hak akses dan peran staf (Owner/Kasir) pada setiap toko. \\
 \hline
-3 & \texttt{categories} & Menyimpan kategori pengelompokan produk atau menu dagangan. \\
+3 & \textit{categories} & Menyimpan kategori pengelompokan produk atau menu dagangan. \\
 \hline
-4 & \texttt{products} & Menyimpan katalog produk beserta harga, stok, dan data SKU/barcode. \\
+4 & \textit{products} & Menyimpan katalog produk beserta harga, stok, dan data SKU/\textit{barcode}. \\
 \hline
-5 & \texttt{transactions} & Menyimpan data nota transaksi penjualan kasir sebagai tabel induk. \\
+5 & \textit{transactions} & Menyimpan data nota transaksi penjualan kasir sebagai tabel induk. \\
 \hline
-6 & \texttt{transaction\_items} & Menyimpan rincian produk yang dibeli dalam setiap transaksi. \\
+6 & \textit{transaction\_items} & Menyimpan rincian produk yang dibeli dalam setiap transaksi. \\
 \hline
-7 & \texttt{stock\_histories} & Mencatat log audit perubahan stok masuk dan keluar produk. \\
+7 & \textit{stock\_histories} & Mencatat \textit{log} audit perubahan stok masuk dan keluar produk. \\
 \hline
-8 & \texttt{notifications} & Menyimpan pesan notifikasi sistem dan \textit{broadcast} Owner ke staf. \\
+8 & \textit{notifications} & Menyimpan pesan notifikasi sistem dan \textit{broadcast} Owner ke staf. \\
 \hline
 \end{tabularx}
 \end{table}
@@ -628,11 +627,11 @@ Entitas \texttt{stores} menjadi entitas induk yang berelasi dengan seluruh entit
 
 Data transaksi yang terkumpul melalui basis data EatsTEDI diproses melalui tahapan berikut sebelum digunakan untuk pelatihan dan pengujian model prediksi LSTM:
 \begin{enumerate}
-    \item \textbf{Pembersihan Data (\textit{Data Cleaning} \& \textit{Imputation}):} Menghapus data duplikat dan menyelaraskan format tanggal. Untuk mengatasi gap/nilai kosong sebesar Rp 0 pada akhir pekan (Sabtu dan Minggu) serta libur semester panjang (Januari dan Juli), data disaring (\textit{filtering}) hanya menggunakan hari kerja aktif (\textit{business days}), serta dilakukan pengelompokan pelatihan terpisah per semester untuk menghindari bias prediksi akibat libur akademis yang panjang.
+    \item \textbf{Pembersihan Data (\textit{Data Cleaning} \& \textit{Imputation}):} Menghapus data duplikat dan menyelaraskan format tanggal. Untuk mengatasi \textit{gap}/nilai kosong sebesar Rp 0 pada akhir pekan (Sabtu dan Minggu) serta libur semester panjang (Januari dan Juli), data disaring (\textit{filtering}) hanya menggunakan hari kerja aktif (\textit{business days}), serta dilakukan pengelompokan pelatihan terpisah per semester untuk menghindari bias prediksi akibat libur akademis yang panjang.
     \item \textbf{Normalisasi:} Mengubah nilai volume dan nominal penjualan harian ke dalam skala 0 hingga 1 menggunakan \textit{MinMaxScaler} untuk menstabilkan proses pelatihan jaringan saraf tiruan, mempercepat konvergensi, dan mencegah bias dominasi nilai nominal uang yang besar.
-    \item \textbf{Pembentukan Struktur \textit{Time Series} (\textit{Windowing}):} Mengubah data sekuensial menjadi format input ($X$) dan label ($y$) dengan panjang jendela \textit{sliding window} tertentu, di mana data transaksi 14 hari kerja aktif sebelumnya digunakan untuk memprediksi penjualan hari aktif berikutnya.
-    \item \textbf{Pembagian Data (\textit{Time-Based Split}):} Membagi dataset menjadi data latih (\textit{training data}) dan data uji (\textit{testing data}) menggunakan pemisahan berbasis waktu (\textit{time-based split}) untuk menjaga urutan temporal dan mencegah kebocoran data masa depan ke masa lalu.
-    \item \textbf{Pelatihan Model:} Melatih arsitektur LSTM di sisi server menggunakan \textit{Adam Optimizer} dan fungsi aktivasi \textit{ReLU} pada lapisan tersembunyi untuk membangun model prediksi penjualan harian.
+    \item \textbf{Pembentukan Struktur \textit{time series} (\textit{windowing}):} Mengubah data sekuensial menjadi format \textit{input} ($X$) dan label ($y$) dengan panjang jendela \textit{sliding window} tertentu, di mana data transaksi 14 hari kerja aktif sebelumnya digunakan untuk memprediksi penjualan hari aktif berikutnya.
+    \item \textbf{Pembagian Data (\textit{time-based split}):} Membagi \textit{dataset} menjadi data latih (\textit{training data}) dan data uji (\textit{testing data}) menggunakan pemisahan berbasis waktu (\textit{time-based split}) untuk menjaga urutan temporal dan mencegah kebocoran data masa depan ke masa lalu.
+    \item \textbf{Pelatihan Model:} Melatih arsitektur LSTM di sisi \textit{server} menggunakan \textit{Adam Optimizer} dan fungsi aktivasi \textit{ReLU} pada lapisan tersembunyi untuk membangun model prediksi penjualan harian.
     \item \textbf{Denormalisasi:} Mengembalikan nilai keluaran prediksi LSTM (skala 0 s.d. 1) ke satuan nominal mata uang aslinya agar dapat disajikan secara informatif pada antarmuka aplikasi \textit{mobile}.
 \end{enumerate}
 
@@ -685,9 +684,9 @@ Data transaksi yang terkumpul melalui basis data EatsTEDI diproses melalui tahap
 %
 % Alur dimulai ketika Owner membuka layar \textit{Smart Analytics}. Sistem memeriksa persetujuan privasi data dan ketersediaan minimal 20 riwayat transaksi. Setelah syarat terpenuhi, sistem melakukan agregasi data lokal, penghapusan informasi pribadi pelanggan, dan pemanggilan model LSTM melalui REST API server untuk analisis prediktif. Hasil berupa proyeksi omzet, prediksi produk terlaris, dan rekomendasi strategi bisnis divisualisasikan kepada Owner.
 
-\section{Perancangan Wireframe}
+\section{Perancangan \textit{Wireframe}}
 
-Perancangan wireframe dalam penelitian ini mencakup rancangan antarmuka pengguna untuk semua layar utama yang menjadi bagian dari alur operasional aplikasi POS. Wireframe dirancang dengan mempertimbangkan kebutuhan pengguna, aksesibilitas, dan alur kerja yang efisien. Terdapat 13 rancangan layar yang melayani kebutuhan berbeda sesuai dengan peran pengguna, sebagaimana diuraikan berikut ini.
+Perancangan \textit{wireframe} dalam penelitian ini mencakup rancangan antarmuka pengguna untuk semua layar utama yang menjadi bagian dari alur operasional aplikasi POS. \textit{Wireframe} dirancang dengan mempertimbangkan kebutuhan pengguna, aksesibilitas, dan alur kerja yang efisien. Terdapat 13 rancangan layar yang melayani kebutuhan berbeda sesuai dengan peran pengguna, sebagaimana diuraikan berikut ini.
 
 \begin{enumerate}
 
@@ -698,31 +697,31 @@ Perancangan wireframe dalam penelitian ini mencakup rancangan antarmuka pengguna
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.35\textwidth]{wireframe_register}
-        \caption{Wireframe Halaman Registrasi Toko Baru}
+        \caption{\textit{Wireframe} Halaman Registrasi Toko Baru}
         \label{fig:wf_register}
     \end{figure}
 
     \newpage
 
-    \item \textbf{Halaman Login}
+    \item \textbf{Halaman \textit{Login}}
 
     Halaman masuk akun untuk Owner maupun Kasir dengan autentikasi berbasis email dan kata sandi melalui Supabase Auth.
 
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.45\textwidth]{wireframe_login}
-        \caption{Wireframe Halaman Login}
+        \caption{\textit{Wireframe} Halaman \textit{Login}}
         \label{fig:wf_login}
     \end{figure}
 
     \item \textbf{Halaman Pemilihan Toko}
 
-    Memungkinkan pengguna yang telah login untuk memilih toko aktif yang akan dioperasikan, terutama bagi pengguna yang terdaftar di lebih dari satu outlet.
+    Memungkinkan pengguna yang telah \textit{login} untuk memilih toko aktif yang akan dioperasikan, terutama bagi pengguna yang terdaftar di lebih dari satu outlet.
 
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.45\textwidth]{wireframe_store_list}
-        \caption{Wireframe Halaman Pemilihan Toko}
+        \caption{\textit{Wireframe} Halaman Pemilihan Toko}
         \label{fig:wf_store_list}
     \end{figure}
 
@@ -733,40 +732,40 @@ Perancangan wireframe dalam penelitian ini mencakup rancangan antarmuka pengguna
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.45\textwidth]{wireframe_dashboard_owner}
-        \caption{Wireframe Halaman Dasbor Owner}
+        \caption{\textit{Wireframe} Halaman Dasbor Owner}
         \label{fig:wf_dashboard_owner}
     \end{figure}
 
     \item \textbf{Halaman POS (Pembayaran)}
 
-    Layar utama kasir untuk mencari produk, menyusun keranjang pesanan, menerapkan voucher diskon, memilih metode pembayaran, dan memproses transaksi.
+    Layar utama kasir untuk mencari produk, menyusun keranjang pesanan, menerapkan \textit{voucher} diskon, memilih metode pembayaran, dan memproses transaksi.
 
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.45\textwidth]{wireframe_payment}
-        \caption{Wireframe Halaman POS (Pembayaran)}
+        \caption{\textit{Wireframe} Halaman POS (Pembayaran)}
         \label{fig:wf_payment}
     \end{figure}
 
     \item \textbf{Halaman Riwayat Transaksi}
 
-    Menampilkan daftar transaksi yang telah dilakukan lengkap dengan fitur pencarian dan filter berdasarkan tanggal, berguna untuk keperluan verifikasi dan audit oleh semua staf toko.
+    Menampilkan daftar transaksi yang telah dilakukan lengkap dengan fitur pencarian dan \textit{filter} berdasarkan tanggal, berguna untuk keperluan verifikasi dan audit oleh semua staf toko.
 
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.45\textwidth]{wireframe_transaction_history}
-        \caption{Wireframe Halaman Riwayat Transaksi}
+        \caption{\textit{Wireframe} Halaman Riwayat Transaksi}
         \label{fig:wf_transaction_history}
     \end{figure}
 
     \item \textbf{Halaman Kelola Produk}
 
-    Memungkinkan Owner untuk menambah, menyunting, dan menghapus produk yang dijual, lengkap dengan harga, stok, SKU/barcode, gambar produk, dan kategori.
+    Memungkinkan Owner untuk menambah, menyunting, dan menghapus produk yang dijual, lengkap dengan harga, stok, SKU/\textit{barcode}, gambar produk, dan kategori.
 
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.45\textwidth]{wireframe_add_product}
-        \caption{Wireframe Halaman Kelola Produk}
+        \caption{\textit{Wireframe} Halaman Kelola Produk}
         \label{fig:wf_add_product}
     \end{figure}
 
@@ -777,7 +776,7 @@ Perancangan wireframe dalam penelitian ini mencakup rancangan antarmuka pengguna
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.45\textwidth]{wireframe_manage_categories}
-        \caption{Wireframe Halaman Kelola Kategori}
+        \caption{\textit{Wireframe} Halaman Kelola Kategori}
         \label{fig:wf_manage_categories}
     \end{figure}
 
@@ -788,7 +787,7 @@ Perancangan wireframe dalam penelitian ini mencakup rancangan antarmuka pengguna
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.45\textwidth]{wireframe_reports}
-        \caption{Wireframe Halaman Laporan}
+        \caption{\textit{Wireframe} Halaman Laporan}
         \label{fig:wf_reports}
     \end{figure}
 
@@ -799,7 +798,7 @@ Perancangan wireframe dalam penelitian ini mencakup rancangan antarmuka pengguna
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.45\textwidth]{wireframe_settings}
-        \caption{Wireframe Halaman Pengaturan}
+        \caption{\textit{Wireframe} Halaman Pengaturan}
         \label{fig:wf_settings}
     \end{figure}
 
@@ -810,7 +809,7 @@ Perancangan wireframe dalam penelitian ini mencakup rancangan antarmuka pengguna
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.45\textwidth]{wireframe_store_info}
-        \caption{Wireframe Halaman Informasi Toko}
+        \caption{\textit{Wireframe} Halaman Informasi Toko}
         \label{fig:wf_store_info}
     \end{figure}
 
@@ -821,7 +820,7 @@ Perancangan wireframe dalam penelitian ini mencakup rancangan antarmuka pengguna
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.45\textwidth]{wireframe_digital_receipt}
-        \caption{Wireframe Halaman Struk Digital}
+        \caption{\textit{Wireframe} Halaman Struk Digital}
         \label{fig:wf_digital_receipt}
     \end{figure}
 
@@ -832,7 +831,7 @@ Perancangan wireframe dalam penelitian ini mencakup rancangan antarmuka pengguna
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.45\textwidth]{wireframe_product_catalog}
-        \caption{Wireframe Halaman Katalog Produk}
+        \caption{\textit{Wireframe} Halaman Katalog Produk}
         \label{fig:wf_product_catalog}
     \end{figure}
 
@@ -856,21 +855,21 @@ Alur penelitian ini dirancang secara sistematis untuk membangun sistem \textit{P
 
 Pada \textbf{Fase Pengembangan dan Implementasi Sistem POS}, penelitian diawali dengan analisis kebutuhan melalui observasi langsung dan identifikasi permasalahan pada mitra EatsTEDI. Selanjutnya dilakukan perancangan sistem meliputi arsitektur \textit{offline-first}, desain basis data relasional (Supabase PostgreSQL dan Isar DB), serta perancangan \textit{Use Case Diagram}, \textit{Activity Diagram}, ERD, dan antarmuka pengguna. Setelah tahap perancangan, sistem POS dikembangkan menggunakan Flutter sebagai \textit{frontend}, Supabase sebagai basis data \textit{cloud}, Isar DB sebagai basis data lokal, dan Python di VPS untuk pengolahan model AI. Aplikasi yang telah dibangun kemudian diimplementasikan pada mitra EatsTEDI untuk digunakan dalam kegiatan transaksi harian, sehingga menghasilkan data transaksi aktual yang tersimpan secara otomatis.
 
-Pada \textbf{Fase Pengembangan Model Prediksi Penjualan}, data transaksi yang telah terkumpul selanjutnya melalui tahap pra-pemrosesan meliputi pembersihan data, agregasi harian, normalisasi, dan pembentukan data deret waktu (\textit{time series}). Dataset kemudian dibagi menjadi data latih dan data uji. Model LSTM dilatih menggunakan data latih untuk mempelajari pola penjualan jangka pendek maupun jangka panjang. Setelah pelatihan, model diuji dan diintegrasikan kembali ke dalam sistem POS sehingga aplikasi mampu menampilkan hasil prediksi penjualan harian kepada pengguna melalui REST API.
+Pada \textbf{Fase Pengembangan Model Prediksi Penjualan}, data transaksi yang telah terkumpul selanjutnya melalui tahap pra-pemrosesan meliputi pembersihan data, agregasi harian, normalisasi, dan pembentukan data deret waktu (\textit{time series}). \textit{Dataset} kemudian dibagi menjadi data latih dan data uji. Model LSTM dilatih menggunakan data latih untuk mempelajari pola penjualan jangka pendek maupun jangka panjang. Setelah pelatihan, model diuji dan diintegrasikan kembali ke dalam sistem POS sehingga aplikasi mampu menampilkan hasil prediksi penjualan harian kepada pengguna melalui \textit{REST API}.
 
 \subsection{Variabel Penelitian}
 
 Variabel penelitian yang digunakan dalam proses prediksi penjualan harian pada sistem POS berbasis algoritma LSTM adalah sebagai berikut:
 \begin{enumerate}
-    \item \textbf{Variabel Input (Fitur):} Data deret waktu transaksi penjualan harian dari platform EatsTEDI yang mencakup:
+    \item \textbf{Variabel \textit{Input} (Fitur):} Data deret waktu transaksi penjualan harian dari platform EatsTEDI yang mencakup:
     \begin{itemize}
-        \item \textit{Total nilai transaksi harian} (nominal rupiah dari invoice lunas).
-        \item \textit{Jumlah transaksi per hari} (volume invoice harian).
+        \item \textit{Total nilai transaksi harian} (nominal rupiah dari \textit{invoice} lunas).
+        \item \textit{Jumlah transaksi per hari} (volume \textit{invoice} harian).
         \item \textit{Jumlah produk terjual per hari} (kuantitas unit barang terjual).
-        \item \textit{Indeks hari dalam seminggu} (indeks integer 0 s.d. 4 untuk Senin--Jumat, dan 5--6 untuk Sabtu--Minggu).
-        \item \textit{Status libur akademis} (fitur biner, bernilai 1 jika berada di bulan libur semester/Ramadan, dan 0 jika masa perkuliahan aktif).
+        \item \textit{Indeks hari dalam seminggu} (fitur \textit{Day of Week} berupa indeks \textit{integer} 0 s.d. 4 untuk Senin--Jumat, dan 5--6 untuk Sabtu--Minggu).
+        \item \textit{Status libur akademis} (fitur biner \textit{Is\_Holiday}, bernilai 1 jika berada di bulan libur semester/Ramadan, dan 0 jika masa perkuliahan aktif).
     \end{itemize}
-    \item \textbf{Variabel Output (Target):} Nilai prediksi total nominal penjualan harian untuk hari berikutnya, yang digunakan sebagai dasar pengambilan keputusan manajemen stok (terutama produk makanan basah) dan strategi operasional usaha.
+    \item \textbf{Variabel \textit{Output} (Target):} Nilai prediksi total nominal penjualan harian untuk hari berikutnya, yang digunakan sebagai dasar pengambilan keputusan manajemen stok (terutama produk makanan basah) dan strategi operasional usaha.
     \item \textbf{Variabel Evaluasi:} Kinerja model diukur menggunakan tiga metrik evaluasi secara bersamaan, yaitu MAE (\textit{Mean Absolute Error}), RMSE (\textit{Root Mean Square Error}), dan MAPE (\textit{Mean Absolute Percentage Error}).
 \end{enumerate}
 
@@ -933,20 +932,20 @@ Desain metode LSTM memberikan gambaran mengenai alur kerja algoritma yang diguna
     \label{fig:lstm_alur}
 \end{figure}
 
-Gambar \ref{fig:lstm_alur} menggambarkan alur kerja model LSTM dari input data transaksi harian hingga proses evaluasi model. Adapun langkah-langkah proses algoritma dalam penelitian ini adalah sebagai berikut:
+Gambar \ref{fig:lstm_alur} menggambarkan alur kerja model LSTM dari \textit{input} data transaksi harian hingga proses evaluasi model. Adapun langkah-langkah proses algoritma dalam penelitian ini adalah sebagai berikut:
 \begin{enumerate}
     \item Data transaksi penjualan harian diekstrak dari basis data Supabase, kemudian melalui tahap pra-pemrosesan (\textit{preprocessing}) meliputi pembersihan data, penyelarasan format tanggal, dan normalisasi menggunakan \textit{Min-Max Scaling}.
-    \item Data disusun dalam bentuk deret waktu melalui proses \textit{windowing} (\textit{time step}) untuk membentuk pola historis yang digunakan sebagai input model LSTM.
-    \item Dataset dibagi menjadi data \textit{training} dan \textit{testing} menggunakan metode \textit{time-based split} untuk menjaga urutan temporal data.
+    \item Data disusun dalam bentuk deret waktu melalui proses \textit{windowing} (\textit{time step}) untuk membentuk pola historis yang digunakan sebagai \textit{input} model LSTM.
+    \item \textit{Dataset} dibagi menjadi data \textit{training} dan \textit{testing} menggunakan metode \textit{time-based split} untuk menjaga urutan temporal data.
     \item Model LSTM dibangun dengan arsitektur yang terdiri dari \textit{input layer}, satu atau lebih \textit{hidden layer} LSTM, dan \textit{dense layer} sebagai keluaran prediksi penjualan harian.
     \item Model yang telah dilatih diuji menggunakan data \textit{testing} dan dievaluasi dengan metrik MAE (\textit{Mean Absolute Error}), RMSE (\textit{Root Mean Square Error}), dan MAPE (\textit{Mean Absolute Percentage Error}).
     \item Apabila hasil evaluasi belum memenuhi kriteria yang diharapkan, dilakukan \textit{hyperparameter tuning} terhadap jumlah \textit{epoch}, \textit{batch size}, jumlah neuron LSTM, dan \textit{learning rate}.
-    \item Model prediksi yang telah teruji diintegrasikan ke dalam sistem POS melalui REST API sehingga aplikasi \textit{mobile} dapat menampilkan hasil prediksi penjualan harian kepada pengguna.
+    \item Model prediksi yang telah teruji diintegrasikan ke dalam sistem POS melalui \textit{REST API} sehingga aplikasi \textit{mobile} dapat menampilkan hasil prediksi penjualan harian kepada pengguna.
 \end{enumerate}
 
 \section{Teknik Pengujian}
 
-Pengujian sistem pada penelitian ini mencakup dua pendekatan utama untuk memastikan kualitas fungsional aplikasi dan keandalan model prediksi yang diintegrasikan. Pendekatan pengujian tersebut dibagi menjadi pengujian evaluasi model prediksi penjualan dan pengujian fungsionalitas sistem secara keseluruhan menggunakan metode \textit{black box}.
+Pengujian sistem pada penelitian ini mencakup dua pendekatan utama untuk memastikan kualitas fungsional aplikasi dan keandalan model prediksi yang diintegrasikan. Pendekatan pengujian tersebut dibagi menjadi pengujian evaluasi model prediksi penjualan dan pengujian fungsionalitas sistem secara keseluruhan menggunakan metode \textit{black box testing}.
 
 \subsection{Rancangan Pengujian Evaluasi Model Prediksi}
 
@@ -996,19 +995,19 @@ Rancangan skenario pengujian \textit{black box} untuk fitur-fitur utama sistem P
 \hline
 \endlastfoot
 
-1 & Registrasi Toko Baru & Mengisi form registrasi dengan email baru, kata sandi, nama toko, alamat, dan nomor HP. & Akun owner berhasil dibuat, data toko tersimpan di database Supabase Cloud, dan beralih ke halaman utama. \\
+1 & Registrasi Toko Baru & Mengisi \textit{form} registrasi dengan email baru, kata sandi, nama toko, alamat, dan nomor HP. & Akun Owner berhasil dibuat, data toko tersimpan di \textit{database} Supabase \textit{cloud}, dan beralih ke halaman utama. \\
 \hline
-2 & Login Akun & Memasukkan email dan kata sandi yang valid/invalid pada layar login. & Jika valid, pengguna masuk ke dasbor. Jika invalid, sistem menampilkan pesan error autentikasi. \\
+2 & \textit{Login} Akun & Memasukkan email dan kata sandi yang \textit{valid}/\textit{invalid} pada layar \textit{login}. & Jika \textit{valid}, pengguna masuk ke dasbor. Jika \textit{invalid}, sistem menampilkan pesan \textit{error} autentikasi. \\
 \hline
-3 & Kelola Produk & Menambah produk baru dengan nama, harga, stok, foto, dan kategori serta mengubah/menghapus produk. & Data produk baru tersimpan di database lokal Isar DB, terdaftar pada list produk, dan dapat diubah/dihapus. \\
+3 & Kelola Produk & Menambah produk baru dengan nama, harga, stok, foto, dan kategori serta mengubah/menghapus produk. & Data produk baru tersimpan di \textit{database} lokal Isar DB, terdaftar pada \textit{list} produk, dan dapat diubah/dihapus. \\
 \hline
-4 & Kelola Kategori & Menambahkan kategori baru, menyunting nama kategori, atau menghapus kategori produk. & Kategori berhasil dibuat, muncul sebagai opsi filter menu, dan terupdate secara real-time. \\
+4 & Kelola Kategori & Menambahkan kategori baru, menyunting nama kategori, atau menghapus kategori produk. & Kategori berhasil dibuat, muncul sebagai opsi \textit{filter} menu, dan diperbarui secara \textit{real-time}. \\
 \hline
-5 & Checkout Transaksi & Memasukkan produk ke keranjang, menerapkan voucher diskon, memilih metode bayar, dan mengonfirmasi nominal bayar. & Transaksi berhasil disimpan di database lokal Isar DB, jumlah stok produk berkurang otomatis, dan dialihkan ke struk sukses. \\
+5 & \textit{Checkout} Transaksi & Memasukkan produk ke keranjang, menerapkan \textit{voucher} diskon, memilih metode bayar, dan mengonfirmasi nominal bayar. & Transaksi berhasil disimpan di \textit{database} lokal Isar DB, jumlah stok produk berkurang otomatis, dan dialihkan ke struk sukses. \\
 \hline
-6 & Mencetak Struk & Menghubungkan printer Bluetooth thermal dan menekan tombol cetak struk dari riwayat transaksi. & Printer thermal mencetak struk fisik transaksi secara lengkap (nama produk, total, tanggal, metode bayar). \\
+6 & Mencetak Struk & Menghubungkan printer Bluetooth \textit{thermal} dan menekan tombol cetak struk dari riwayat transaksi. & Printer \textit{thermal} mencetak struk fisik transaksi secara lengkap (nama produk, total, tanggal, metode bayar). \\
 \hline
-7 & Sinkronisasi Offline & Mematikan koneksi internet (luring), membuat transaksi lokal, lalu mengaktifkan internet kembali (daring). & Transaksi disimpan secara lokal di Isar DB (offline-first), lalu terunggah otomatis ke Supabase Cloud saat internet aktif kembali. \\
+7 & Sinkronisasi \textit{Offline} & Mematikan koneksi internet (luring), membuat transaksi lokal, lalu mengaktifkan internet kembali (daring). & Transaksi disimpan secara lokal di Isar DB (\textit{offline-first}), lalu terunggah otomatis ke Supabase \textit{cloud} saat internet aktif kembali. \\
 \hline
 8 & Dasbor Laporan & Membuka dasbor laporan penjualan harian, mingguan, dan grafik visualisasi omzet. & Menampilkan statistik ringkasan omzet, total transaksi harian, dan grafik visualisasi garis yang akurat. \\
 \hline
@@ -1077,17 +1076,17 @@ Aplikasi mobile dikembangkan menggunakan framework Flutter dengan bahasa pemrogr
 
 Infrastruktur backend cloud diimplementasikan menggunakan platform Supabase BaaS dengan database PostgreSQL. Struktur relasional database diwujudkan melalui delapan tabel utama yang saling terhubung:
 \begin{enumerate}
-    \item \texttt{stores}: Menyimpan data identitas outlet merchant (id, nama, alamat, nomor HP, URL logo, created\_at).
-    \item \texttt{store\_members}: Mengatur relasi hak akses pengguna dengan peran Owner atau Karyawan di masing-masing outlet.
-    \item \texttt{categories}: Mengelola daftar kategori pengelompokan produk.
-    \item \texttt{products}: Menyimpan katalog inventaris barang (id, nama, harga, stok, barcode, URL foto, is\_synced, is\_deleted).
-    \item \texttt{transactions}: Menyimpan data nota induk transaksi penjualan (id, total belanja, metode pembayaran, kasir\_id, created\_at).
-    \item \texttt{transaction\_items}: Menyimpan rincian item produk yang terjual pada setiap transaksi penjualan (id, transaksi\_id, produk\_id, jumlah, harga).
-    \item \texttt{stock\_histories}: Mencatat log audit mutasi perubahan stok produk (stok masuk, keluar, penjualan, audit manual).
-    \item \texttt{notifications}: Mengelola pesan notifikasi sistem dan info siaran dari Owner ke seluruh kasir secara real-time.
+    \item \textit{stores}: Menyimpan data identitas outlet merchant (id, nama, alamat, nomor HP, URL logo, created\_at).
+    \item \textit{store\_members}: Mengatur relasi hak akses pengguna dengan peran Owner atau Karyawan di masing-masing outlet.
+    \item \textit{categories}: Mengelola daftar kategori pengelompokan produk.
+    \item \textit{products}: Menyimpan katalog inventaris barang (id, nama, harga, stok, barcode, URL foto, is\_synced, is\_deleted).
+    \item \textit{transactions}: Menyimpan data nota induk transaksi penjualan (id, total belanja, metode pembayaran, kasir\_id, created\_at).
+    \item \textit{transaction\_items}: Menyimpan rincian item produk yang terjual pada setiap transaksi penjualan (id, transaksi\_id, produk\_id, jumlah, harga).
+    \item \textit{stock\_histories}: Mencatat log audit mutasi perubahan stok produk (stok masuk, keluar, penjualan, audit manual).
+    \item \textit{notifications}: Mengelola pesan notifikasi sistem dan info siaran dari Owner ke seluruh kasir secara real-time.
 \end{enumerate}
 
-Keamanan akses data antar-outlet dijamin melalui penerapan kebijakan Row Level Security (RLS) di database PostgreSQL. Kebijakan ini memastikan bahwa pengguna (kasir/owner) hanya dapat membaca dan menulis data yang memiliki \texttt{store\_id} yang sesuai dengan toko tempat mereka terdaftar.
+Keamanan akses data antar-outlet dijamin melalui penerapan kebijakan Row Level Security (RLS) di database PostgreSQL. Kebijakan ini memastikan bahwa pengguna (kasir/owner) hanya dapat membaca dan menulis data yang memiliki \textit{store\_id} yang sesuai dengan toko tempat mereka terdaftar.
 
 \subsection{Implementasi Modul AI Prediksi Penjualan (Python \& TensorFlow)}
 
@@ -1097,7 +1096,7 @@ Proses operasional modul AI berjalan melalui alur kerja sebagai berikut:
 \begin{enumerate}
     \item \textbf{Penarikan Data}: Server Python melakukan penarikan data transaksi penjualan harian dari database Supabase PostgreSQL secara terjadwal.
     \item \textbf{Pra-pemrosesan Data}: Data penjualan harian diagregasikan, dibersihkan dari nilai kosong menggunakan interpolasi linier, dan dinormalisasi ke skala 0 hingga 1 menggunakan \textit{MinMaxScaler}.
-    \item \textbf{FastAPI REST Endpoints}: Menyediakan endpoint API berbasis REST (seperti \texttt{/predict}) menggunakan framework FastAPI. Endpoint ini dipanggil oleh aplikasi Flutter dengan mengirimkan parameter \texttt{store\_id} dan menerima respons berupa deret angka prediksi penjualan harian untuk hari berikutnya.
+    \item \textbf{FastAPI REST Endpoints}: Menyediakan endpoint API berbasis REST (seperti \textit{/predict}) menggunakan framework FastAPI. Endpoint ini dipanggil oleh aplikasi Flutter dengan mengirimkan parameter \textit{store\_id} dan menerima respons berupa deret angka prediksi penjualan harian untuk hari berikutnya.
 \end{enumerate}
 
 \section{Hasil Pengujian Sistem}
@@ -1200,13 +1199,13 @@ Pengujian fitur offline-first dilakukan untuk memastikan keandalan penyimpanan l
 \hline
 \textbf{No} & \textbf{Skenario Pengujian} & \textbf{Hasil Pengujian} & \textbf{Status} \\
 \hline
-1 & Melakukan transaksi checkout saat jaringan terputus (Luring). & Transaksi tersimpan di Isar DB lokal dengan status \texttt{is\_synced = false}. Stok produk berkurang di lokal. & Berhasil \\
+1 & Melakukan transaksi checkout saat jaringan terputus (Luring). & Transaksi tersimpan di Isar DB lokal dengan status \textit{is\_synced = false}. Stok produk berkurang di lokal. & Berhasil \\
 \hline
 2 & Membuka riwayat transaksi kasir saat luring. & Menampilkan daftar transaksi lokal secara instan tanpa memicu error atau halaman kosong. & Berhasil \\
 \hline
-3 & Menghubungkan perangkat kembali ke internet (Daring). & Mesin \texttt{SyncNotifier} mendeteksi koneksi dan mengunggah data transaksi ke Supabase. & Berhasil \\
+3 & Menghubungkan perangkat kembali ke internet (Daring). & Mesin \textit{SyncNotifier} mendeteksi koneksi dan mengunggah data transaksi ke Supabase. & Berhasil \\
 \hline
-4 & Memeriksa status database cloud setelah sinkronisasi. & Data transaksi masuk ke Supabase, dan status di lokal berubah menjadi \texttt{is\_synced = true}. & Berhasil \\
+4 & Memeriksa status database cloud setelah sinkronisasi. & Data transaksi masuk ke Supabase, dan status di lokal berubah menjadi \textit{is\_synced = true}. & Berhasil \\
 \hline
 \end{tabularx}
 \end{table}
