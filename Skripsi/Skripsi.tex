@@ -497,7 +497,26 @@ Penelitian ini merupakan jenis penelitian pengembangan (\textit{Research and Dev
 
 \section{Rancangan Sistem}
 
-Perancangan sistem dalam penelitian ini dilakukan menggunakan \textit{Unified Modeling Language} (UML) untuk memberikan gambaran yang jelas dan terstruktur mengenai alur proses dan interaksi pengguna dengan sistem POS. Pemodelan sistem direpresentasikan melalui \textit{Use Case Diagram}, \textit{Activity Diagram}, serta \textit{Entity Relationship Diagram} (ERD).
+Perancangan sistem dalam penelitian ini dilakukan menggunakan pendekatan arsitektur terdistribusi dan pemodelan \textit{Unified Modeling Language} (UML) untuk memberikan gambaran yang jelas mengenai arsitektur sistem, alur proses, dan interaksi pengguna. Pemodelan rancangan sistem direpresentasikan melalui arsitektur sistem, \textit{Use Case Diagram}, \textit{Activity Diagram}, serta \textit{Entity Relationship Diagram} (ERD).
+
+\subsection{Arsitektur Sistem}
+
+Sistem Parzello POS Mobile dirancang menggunakan pendekatan arsitektur \textit{hybrid-cloud} yang membagi pemrosesan antara perangkat lokal dan infrastruktur \textit{cloud}. Secara keseluruhan, sistem terdiri dari empat komponen utama yang saling terintegrasi, yaitu \textit{Flutter Mobile App}, \textit{Supabase Cloud}, \textit{Firebase}, dan \textit{Layanan Inferensi Model LSTM} (Hugging Face). Rancangan arsitektur sistem diilustrasikan pada Gambar \ref{fig:arsitektur_sistem}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{arsitektur_sistem}
+    \caption{Arsitektur Sistem POS}
+    \label{fig:arsitektur_sistem}
+\end{figure}
+
+Penjelasan mengenai empat komponen utama dalam arsitektur sistem adalah sebagai berikut:
+\begin{enumerate}
+    \item \textbf{Sisi Klien (\textit{Client-Side}):} Aplikasi dibangun menggunakan \textit{framework} Flutter dengan manajemen \textit{state} Riverpod dan navigasi GoRouter. Komponen inti dari sisi klien adalah Isar DB, sebuah database NoSQL lokal yang berperan sebagai \textit{cache offline-first}, memungkinkan kasir tetap dapat melakukan transaksi penuh meskipun koneksi internet terputus. \textit{Sync Engine} kemudian bekerja di latar belakang untuk menyinkronkan data lokal ke \textit{cloud} secara otomatis ketika koneksi terdeteksi kembali aktif, menggunakan penanda \texttt{isSynced} pada setiap \textit{record} untuk menghindari duplikasi data. Selain itu, sisi klien juga mengelola integrasi perangkat keras berupa printer \textit{thermal} Bluetooth/USB untuk mencetak struk dan kamera untuk pemindaian \textit{barcode} produk.
+    \item \textbf{Infrastruktur \textit{Cloud} (Supabase):} Sebagai tulang punggung infrastruktur \textit{cloud}, Supabase menyediakan empat layanan utama. Supabase Auth menangani autentikasi pengguna melalui protokol JWT dan Google OAuth. Supabase PostgreSQL menjadi basis data relasional terpusat yang dilengkapi kebijakan \textit{Row Level Security} (RLS) untuk mengisolasi data antar \textit{merchant}, pemicu database (\textit{triggers}), serta prosedur tersimpan (\textit{RPC}) untuk memproses transaksi secara aman. Supabase Storage menyimpan aset media seperti gambar produk dan logo toko. Sedangkan \textit{Edge Functions} berfungsi sebagai \textit{middleware} komputasi \textit{server} yang menangani permintaan analitik AI sekaligus melakukan \textit{PII Scrubbing} guna memastikan data pribadi pelanggan tidak diteruskan ke model kecerdasan buatan.
+    \item \textbf{Telemetri dan Notifikasi (Firebase):} Untuk kebutuhan telemetri dan notifikasi, sistem terintegrasi dengan Firebase. \textit{Firebase Cloud Messaging} (FCM) bertugas menyampaikan \textit{push notification} secara \textit{real-time} kepada pemilik toko, misalnya peringatan stok habis atau pembatalan transaksi oleh kasir. \textit{Firebase Analytics} digunakan untuk mencatat perilaku penggunaan aplikasi, seperti volume transaksi harian, penggunaan fitur \textit{split bill}, dan inisiasi kalibrasi model AI.
+    \item \textbf{Layanan Inferensi Model LSTM (Hugging Face):} Komponen terakhir adalah layanan inferensi untuk mendukung fitur analitik prediktif. Pada penelitian ini, dikembangkan sebuah model \textit{deep learning} berbasis \textbf{Long Short-Term Memory (LSTM)} secara mandiri, yang dirancang khusus untuk memproyeksikan data runtun waktu (\textit{time-series}) penjualan harian pada usaha berskala UMKM. Model LSTM tersebut kemudian di-\textit{deploy} pada platform Hugging Face sebagai layanan inferensi berbasis \textit{REST API}, sehingga dapat diakses oleh sistem secara efisien tanpa memerlukan infrastruktur \textit{server} komputasi tersendiri. Ketika pemilik toko mengakses fitur \textit{Smart Analytics}, aplikasi mengirimkan data runtun waktu transaksi ke Supabase \textit{Edge Functions} untuk dilakukan pembersihan data sensitif (\textit{PII Scrubbing}) sebelum \textit{payload} diteruskan ke model LSTM. Model memproses data tersebut dan mengembalikan hasil prediksi dalam format JSON, mencakup estimasi omzet harian, prediksi kunjungan pelanggan, serta rekomendasi promosi berbasis stok, yang selanjutnya divisualisasikan kepada pengguna melalui antarmuka grafik interaktif menggunakan pustaka \texttt{fl\_chart}.
+\end{enumerate}
 
 \subsection{\textit{Use Case Diagram}}
 
