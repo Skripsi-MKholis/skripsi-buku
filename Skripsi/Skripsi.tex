@@ -421,13 +421,13 @@ Sistem POS modern yang dirancang untuk UMKM memerlukan pendekatan yang berbeda d
 
 \section{Peramalan Penjualan (\textit{Forecasting})}
 
-Peramalan penjualan merupakan proyeksi teknis dari permintaan pelanggan potensial untuk periode waktu tertentu berdasarkan asumsi-asumsi yang ditetapkan. Menurut Heizer dan Render, peramalan yang akurat sangat krusial dalam manajemen operasi karena mempengaruhi keputusan strategis di bidang pemasaran, keuangan, dan sumber daya manusia. Terdapat empat prinsip utama dalam peramalan: peramalan jarang sekali sempurna, peramalan jangka pendek biasanya lebih akurat daripada jangka panjang, peramalan agregat lebih akurat daripada peramalan item individu, dan pemilihan metode harus disesuaikan dengan pola data (horizontal, tren, musiman, atau siklis).
+Peramalan penjualan merupakan proyeksi teknis dari permintaan pelanggan potensial untuk periode waktu tertentu berdasarkan asumsi-asumsi yang ditetapkan. Menurut Heizer dan Render [23], peramalan yang akurat sangat krusial dalam manajemen operasi karena mempengaruhi keputusan strategis di bidang pemasaran, keuangan, dan sumber daya manusia. Terdapat empat prinsip utama dalam peramalan: peramalan jarang sekali sempurna, peramalan jangka pendek biasanya lebih akurat daripada jangka panjang, peramalan agregat lebih akurat daripada peramalan item individu, dan pemilihan metode harus disesuaikan dengan pola data (horizontal, tren, musiman, atau siklis).
 
-Metode kuantitatif dalam peramalan mengandalkan model matematika untuk memproyeksikan data masa lalu ke masa depan. Dalam konteks ritel, tantangan utama adalah menangani variasi musiman, yaitu fluktuasi yang berulang dalam jangka waktu kurang dari satu tahun, seperti lonjakan penjualan menjelang hari raya atau awal bulan. Pendekatan berbasis \textit{deep learning}, khususnya LSTM, terbukti lebih unggul dibandingkan metode statistik konvensional seperti ARIMA dalam menangkap pola jangka panjang pada data penjualan harian yang bersifat nonlinier [1],[15]. Evaluasi akurasi model peramalan umumnya menggunakan kombinasi metrik MAE (\textit{Mean Absolute Error}), RMSE (\textit{Root Mean Square Error}), dan MAPE (\textit{Mean Absolute Percentage Error}) secara bersamaan untuk menghindari bias pembacaan akurasi akibat lonjakan data [12]. Brown dan Green [2] menunjukkan bahwa prediksi berbasis jaringan saraf tiruan dapat mencapai MAPE 12\% pada data permintaan ritel kecil, sementara penggunaan pendekatan multivariate dapat meningkatkan presisi tersebut lebih jauh [3].
+Metode kuantitatif dalam peramalan mengandalkan model matematika untuk memproyeksikan data masa lalu ke masa depan. Dalam konteks ritel, tantangan utama adalah menangani variasi musiman, yaitu fluktuasi yang berulang dalam jangka waktu kurang dari satu tahun, seperti lonjakan penjualan menjelang hari raya atau awal bulan. Pendekatan berbasis \textit{deep learning}, khususnya LSTM, terbukti lebih unggul dibandingkan metode statistik konvensional seperti ARIMA dalam menangkap pola jangka panjang pada data penjualan harian yang bersifat nonlinier [1],[15]. Evaluasi akurasi model peramalan umumnya menggunakan kombinasi metrik MAE (\textit{Mean Absolute Error}), RMSE (\textit{Root Mean Square Error}), dan MAPE (\textit{Mean Absolute Percentage Error}) secara bersamaan untuk menghindari bias pembacaan akurasi akibat lonjakan data [12]. Khusus pada data yang memuat nilai aktual mendekati nol, metrik persentase simetris sMAPE dan metrik galat terskala MASE lebih dianjurkan karena tahan terhadap pembagian dengan nol [26]. Brown dan Green [2] menunjukkan bahwa prediksi berbasis jaringan saraf tiruan dapat mencapai MAPE 12\% pada data permintaan ritel kecil, sementara penggunaan pendekatan multivariate dapat meningkatkan presisi tersebut lebih jauh [3].
 
 \section{Arsitektur \textit{Long Short-Term Memory} (LSTM)}
 
-LSTM adalah jenis khusus dari \textit{Recurrent Neural Network} (RNN) yang memiliki kemampuan untuk mempelajari ketergantungan jangka panjang dalam urutan data [1],[14]. Arsitektur LSTM dirancang untuk mengatasi masalah \textit{vanishing gradient} yang menghambat RNN standar dalam memproses informasi yang terpisah jauh dalam satu urutan [14]. Komponen inti dari unit LSTM adalah \textit{cell state} (keadaan sel) yang bertindak sebagai jalur informasi utama, serta tiga gerbang fungsional:
+LSTM adalah jenis khusus dari \textit{Recurrent Neural Network} (RNN) yang pertama kali diperkenalkan oleh Hochreiter dan Schmidhuber [24] dan memiliki kemampuan untuk mempelajari ketergantungan jangka panjang dalam urutan data [1],[14]. Arsitektur LSTM dirancang untuk mengatasi masalah \textit{vanishing gradient} yang menghambat RNN standar dalam memproses informasi yang terpisah jauh dalam satu urutan [14]. Komponen inti dari unit LSTM adalah \textit{cell state} (keadaan sel) yang bertindak sebagai jalur informasi utama, serta tiga gerbang fungsional:
 \begin{enumerate}
     \item \textbf{\textit{Forget Gate}:} Menggunakan fungsi aktivasi sigmoid untuk menentukan bagian informasi dari status sel sebelumnya yang harus dibuang.
     \item \textbf{\textit{Input Gate}:} Memutuskan informasi baru mana yang akan diperbarui ke dalam status sel melalui kombinasi fungsi sigmoid dan tanh.
@@ -441,6 +441,34 @@ Persamaan matematis untuk pembaruan status sel $C_t$ dapat dinyatakan sebagai be
 
 \noindent Di mana $f_t$ adalah \textit{output} dari \textit{forget gate}, $i_t$ adalah \textit{output} dari \textit{input gate}, dan $\tilde{C}_t$ adalah kandidat nilai baru yang akan ditambahkan ke dalam status sel.
 
+Dalam praktiknya, pelatihan jaringan LSTM umumnya menggunakan algoritma optimasi \textbf{Adam} (\textit{Adaptive Moment Estimation}), yaitu metode optimasi berbasis gradien stokastik yang menyesuaikan \textit{learning rate} secara adaptif untuk setiap parameter dan terbukti efisien pada berbagai permasalahan \textit{deep learning} [27]. Untuk mencegah \textit{overfitting} pada data latih berukuran kecil, diterapkan teknik regularisasi \textbf{Dropout}, yaitu menonaktifkan sebagian neuron secara acak selama pelatihan agar jaringan tidak bergantung berlebihan pada neuron tertentu [34].
+
+\section{Model Pembanding Peramalan (\textit{Baseline})}
+
+Dalam penelitian peramalan deret waktu, kinerja sebuah model kompleks harus selalu disandingkan dengan model pembanding sederhana (\textit{baseline}) untuk memvalidasi apakah kompleksitas tambahan benar-benar memberikan nilai tambah akurasi [25]. Beberapa \textit{baseline} standar yang digunakan dalam penelitian ini adalah:
+\begin{enumerate}
+    \item \textbf{\textit{Naive}}: Nilai peramalan disamakan dengan nilai observasi terakhir yang tersedia. Metode ini menjadi tolok ukur minimum yang wajib dikalahkan oleh model yang lebih kompleks [25].
+    \item \textbf{\textit{Seasonal-Naive}}: Nilai peramalan diambil dari observasi terakhir pada musim yang sama — misalnya penjualan hari Senin diprediksi dari rata-rata beberapa hari Senin sebelumnya — sehingga efektif menangkap pola musiman mingguan [25].
+    \item \textbf{\textit{Moving Average} (Rata-rata Bergerak)}: Nilai peramalan berupa rata-rata dari $k$ observasi terakhir, berguna untuk meredam fluktuasi acak jangka pendek [23].
+    \item \textbf{SARIMA} (\textit{Seasonal Autoregressive Integrated Moving Average}): Model statistik klasik dari keluarga Box--Jenkins yang memodelkan komponen autoregresif, diferensiasi, rata-rata bergerak, beserta pola musimannya secara eksplisit [18].
+\end{enumerate}
+
+Temuan pada kompetisi peramalan berskala global M3 dan M4 menunjukkan bahwa metode statistik klasik dan kombinasinya kerap mengungguli metode \textit{machine learning} murni pada deret waktu bisnis, terutama ketika data historis yang tersedia terbatas [28],[29]. Temuan tersebut menjadi dasar metodologis dalam penelitian ini untuk mengevaluasi model LSTM secara jujur terhadap \textit{baseline} sederhana sebelum diputuskan metode mana yang layak disajikan kepada pengguna akhir.
+
+\section{Metrik Evaluasi Peramalan (sMAPE dan MASE)}
+
+Selain MAE dan RMSE, penelitian ini menggunakan dua metrik evaluasi tambahan yang direkomendasikan untuk deret waktu bisnis dengan skala nilai yang bervariasi [26]:
+\begin{enumerate}
+    \item \textbf{sMAPE} (\textit{Symmetric Mean Absolute Percentage Error}): Varian MAPE yang membagi galat absolut terhadap rata-rata nilai aktual dan prediksi, sehingga terhindar dari ledakan nilai persentase ketika nilai aktual mendekati nol dan memiliki batas atas galat sebesar 200\%.
+    \item \textbf{MASE} (\textit{Mean Absolute Scaled Error}): Metrik yang diusulkan Hyndman dan Koehler [26] untuk menormalisasi galat model terhadap galat metode naif \textit{in-sample} pada data latih. Nilai MASE $< 1$ menandakan model lebih baik daripada metode naif, sehingga metrik ini dapat dibandingkan lintas dataset tanpa terpengaruh satuan nominal.
+\end{enumerate}
+
+\section{\textit{Generative Adversarial Network} (GAN) dan TimeGAN}
+
+\textit{Generative Adversarial Network} (GAN) adalah kerangka pembelajaran generatif yang diperkenalkan oleh Goodfellow dkk.~[21], terdiri atas dua jaringan saraf yang saling berkompetisi: \textit{generator} yang berusaha menghasilkan data tiruan semirip mungkin dengan data asli, dan \textit{discriminator} yang berusaha membedakan data asli dari data tiruan. Melalui proses pelatihan \textit{adversarial} ini, \textit{generator} secara bertahap belajar mereproduksi distribusi data asli, sehingga GAN banyak dimanfaatkan untuk augmentasi data (\textit{data augmentation}) ketika jumlah data riil terbatas.
+
+\textbf{TimeGAN} (\textit{Time-series Generative Adversarial Networks}) merupakan pengembangan GAN yang dirancang khusus untuk data deret waktu, diusulkan oleh Yoon dkk.~[35] pada konferensi NeurIPS 2019. Berbeda dengan GAN konvensional yang hanya menangkap distribusi statis, TimeGAN menggabungkan kerangka \textit{adversarial} (\textit{unsupervised}) dengan pelatihan \textit{supervised} pada ruang laten agar dinamika temporal antar-langkah waktu pada data asli ikut dipelajari. Arsitektur TimeGAN terdiri atas lima komponen jaringan: \textit{embedder} dan \textit{recovery} yang memetakan data ke/dari ruang laten (\textit{autoencoder}), serta \textit{generator}, \textit{supervisor}, dan \textit{discriminator} yang dilatih dalam tiga fase (pelatihan \textit{autoencoder}, pelatihan \textit{supervised}, dan pelatihan gabungan \textit{adversarial}) [35]. Dalam penelitian ini, TimeGAN digunakan untuk mensintesis sekuens data penjualan harian tambahan sebagai upaya mitigasi keterbatasan ukuran dataset pada pelatihan model LSTM.
+
 \section{\textit{Framework} Flutter dan Bahasa Dart}
 
 Flutter merupakan \textit{framework} pengembangan aplikasi \textit{cross-platform} yang dikembangkan oleh Google dan menggunakan mesin grafis Skia untuk merender antarmuka pengguna secara langsung, menghasilkan performa tinggi mendekati aplikasi \textit{native} [11]. Bahasa pemrograman Dart yang menyertai Flutter mendukung fitur \textit{Just-In-Time} (JIT) untuk pengembangan cepat dan \textit{Ahead-Of-Time} (AOT) untuk rilis produksi yang efisien. Arsitektur \textit{widget} pada Flutter memungkinkan pengembang membangun komponen antarmuka yang modular dan dapat digunakan kembali, sangat cocok untuk aplikasi POS yang memiliki banyak elemen interaktif.
@@ -451,7 +479,7 @@ Dalam penelitian ini, Flutter dipilih sebagai \textit{framework} utama pengemban
 
 Supabase merupakan platform \textit{Backend-as-a-Service} (BaaS) \textit{open-source} yang menyediakan lapisan infrastruktur matang di atas basis data PostgreSQL [4]. Supabase mencakup fitur autentikasi pengguna, \textit{real-time subscriptions}, penyimpanan file, dan \textit{Row Level Security} (RLS) yang memungkinkan pengelolaan hak akses data secara granular. Fischer dan Weber [4] membuktikan bahwa penggunaan RLS pada Supabase dapat memangkas waktu pengembangan \textit{backend} hingga 40\% sekaligus mengamankan data transaksi multi-tenant. Fitur \textit{real-time subscriptions} pada Supabase memungkinkan aplikasi \textit{mobile} menerima pembaruan data secara instan tanpa perlu melakukan \textit{polling} ke server.
 
-Penggunaan Supabase dalam penelitian ini memfasilitasi penyimpanan data transaksi dalam jumlah besar yang nantinya akan ditarik oleh modul Python di server untuk proses pelatihan model AI. Supabase juga menangani autentikasi multi-pengguna (Owner dan Kasir) dengan mekanisme \textit{Role-Based Access Control} (RBAC) yang terimplementasi langsung di lapisan basis data, memastikan privasi data antar-merchant terjaga [13].
+Penggunaan Supabase dalam penelitian ini memfasilitasi penyimpanan data transaksi terpusat dalam jumlah besar sebagai muara sinkronisasi data penjualan dari perangkat kasir. Supabase juga menangani autentikasi multi-pengguna (Owner dan Kasir) dengan mekanisme \textit{Role-Based Access Control} (RBAC) yang terimplementasi langsung di lapisan basis data, memastikan privasi data antar-merchant terjaga [13].
 
 \section{Isar Database (\textit{Local Storage})}
 
@@ -459,9 +487,29 @@ Isar DB adalah basis data \textit{embedded} berkinerja tinggi yang dirancang khu
 
 Dalam penelitian ini, Isar DB berperan sebagai penyimpanan lokal utama pada perangkat \textit{mobile} untuk menjamin kelancaran operasional kasir dalam kondisi \textit{offline} [6],[8]. Seluruh transaksi yang dilakukan tanpa koneksi akan disimpan terlebih dahulu di Isar DB, kemudian disinkronkan secara otomatis ke Supabase oleh mesin \textit{SyncNotifier} ketika koneksi internet tersedia kembali.
 
-\section{Python dan TensorFlow}
+\section{Python, TensorFlow, PyTorch, dan Flask}
 
-Python dipilih sebagai bahasa pemrograman untuk pengembangan modul prediksi di sisi server (\textit{server-side}) karena ekosistemnya yang kaya dalam bidang \textit{machine learning} dan analisis data. TensorFlow dengan antarmuka tingkat tinggi Keras digunakan untuk membangun, melatih, dan menyimpan model LSTM [1],[14]. Proses pelatihan model dilakukan di server menggunakan data transaksi yang ditarik dari Supabase, kemudian model yang telah terlatih di-\textit{deploy} sebagai layanan prediksi yang dapat dipanggil oleh aplikasi \textit{mobile} melalui \textit{REST API} [10], sehingga proses komputasi berat tidak membebani perangkat pengguna. Nguyen dan Tran [7] merekomendasikan pendekatan ini dalam arsitektur \textit{microservices} untuk memastikan sistem kasir tetap stabil meskipun modul AI sedang melakukan proses pelatihan ulang di sisi server.
+Python dipilih sebagai bahasa pemrograman untuk pengembangan modul prediksi di sisi server (\textit{server-side}) karena ekosistemnya yang kaya dalam bidang \textit{machine learning} dan analisis data. \textbf{TensorFlow} [16] dengan antarmuka tingkat tinggi Keras digunakan untuk membangun, melatih, dan menyimpan model LSTM [1],[14], sedangkan \textbf{PyTorch} [31] — pustaka \textit{deep learning} imperatif dengan komputasi graf dinamis — digunakan untuk mengimplementasikan model augmentasi data sintetis TimeGAN. Proses pelatihan model dilakukan di sisi server menggunakan data transaksi historis yang telah diekstraksi, kemudian layanan prediksi di-\textit{deploy} agar dapat dipanggil oleh aplikasi \textit{mobile} melalui \textit{REST API} [10], sehingga proses komputasi berat tidak membebani perangkat pengguna. Nguyen dan Tran [7] merekomendasikan pendekatan ini dalam arsitektur \textit{microservices} untuk memastikan sistem kasir tetap stabil meskipun modul AI sedang melakukan proses pelatihan ulang di sisi server.
+
+Layanan prediksi tersebut dibangun menggunakan \textbf{Flask}, yaitu \textit{micro-framework} web Python yang ringan dan modular untuk membangun aplikasi web dan layanan API [22]. Komunikasi antara aplikasi \textit{mobile} dan layanan prediksi mengikuti gaya arsitektur \textbf{REST} (\textit{Representational State Transfer}) yang diformulasikan oleh Fielding [20], di mana setiap sumber daya diakses melalui \textit{endpoint} HTTP yang seragam (\textit{uniform interface}) tanpa menyimpan status sesi di server (\textit{stateless}), dengan format pertukaran data JSON.
+
+\section{Layanan Firebase}
+
+Firebase merupakan platform pengembangan aplikasi dari Google yang menyediakan kumpulan layanan siap pakai di sisi \textit{backend} untuk aplikasi \textit{mobile} [30]. Dua layanan Firebase yang dimanfaatkan pada penelitian ini adalah \textbf{Firebase Cloud Messaging} (FCM) sebagai infrastruktur pengiriman \textit{push notification} lintas perangkat secara \textit{real-time} — dimanfaatkan untuk pemberitahuan seperti peringatan stok menipis dan \textit{broadcast} pesan antar staf toko — serta \textbf{Firebase Analytics} untuk pencatatan telemetri perilaku penggunaan aplikasi (seperti volume transaksi dan pemakaian fitur) sebagai bahan evaluasi produk [30].
+
+\section{Metode Pengembangan Perangkat Lunak \textit{Agile}}
+
+\textit{Agile} adalah paradigma pengembangan perangkat lunak yang menekankan iterasi pendek, penyerahan produk fungsional secara bertahap (\textit{incremental}), dan adaptasi cepat terhadap perubahan kebutuhan [33]. Pendekatan \textit{iterative and incremental} membagi pengembangan menjadi siklus-siklus kecil di mana setiap siklus menghasilkan pertambahan fungsionalitas yang dapat diuji. Selanjutnya, \textbf{\textit{Lean Software Development}} yang diadaptasi Poppendieck dari prinsip \textit{lean manufacturing} menambahkan tujuh prinsip utama, antara lain menghilangkan pemborosan (\textit{eliminate waste}), memperkuat pembelajaran, menunda keputusan hingga saat paling akhir yang bertanggung jawab, dan menyerahkan produk secepat mungkin [32]. Kombinasi pendekatan ini melandasi strategi pengembangan sistem pada penelitian ini yang memprioritaskan \textit{Minimum Viable Product} (MVP) fitur inti kasir sebelum fitur analitik lanjutan.
+
+\section{Pemodelan Sistem (UML dan ERD)}
+
+\textit{Unified Modeling Language} (UML) adalah bahasa pemodelan visual standar untuk menspesifikasikan, memvisualisasikan, dan mendokumentasikan artefak sistem perangkat lunak [17]. Diagram UML yang digunakan pada penelitian ini meliputi \textit{Use Case Diagram} (memetakan interaksi aktor terhadap fungsi sistem beserta relasi \textit{include}/\textit{extend}), \textit{Activity Diagram} (memvisualisasikan aliran kerja dan titik keputusan proses), \textit{Sequence Diagram} (menggambarkan urutan pertukaran pesan antar-objek berdasarkan waktu), dan \textit{Class Diagram} (menggambarkan struktur kelas beserta relasinya) [17].
+
+Adapun \textit{Entity Relationship Diagram} (ERD) adalah model konseptual basis data yang diperkenalkan oleh Chen [19], yang merepresentasikan data sebagai entitas, atribut, dan relasi antar-entitas beserta kardinalitasnya. ERD digunakan dalam penelitian ini untuk merancang skema basis data relasional PostgreSQL di sisi \textit{cloud} beserta padanan koleksi datanya di basis data lokal Isar DB.
+
+\section{Pengujian \textit{Black Box}}
+
+Pengujian \textit{black box} adalah teknik pengujian perangkat lunak yang memvalidasi fungsionalitas sistem murni dari sisi masukan dan keluaran yang teramati, tanpa memeriksa struktur internal kode program [33]. Penguji menyusun skenario uji berdasarkan spesifikasi kebutuhan fungsional, kemudian membandingkan hasil aktual sistem terhadap hasil yang diharapkan. Teknik ini efektif untuk memverifikasi kesesuaian perilaku fitur aplikasi terhadap kebutuhan pengguna akhir, dan pada penelitian ini diterapkan terhadap skenario-skenario penggunaan utama aplikasi POS oleh peran Owner dan Kasir [33].
 
 %%=============================================================
 %% BAB III - METODOLOGI PENELITIAN
@@ -1831,6 +1879,86 @@ Berdasarkan keterbatasan sistem yang diidentifikasi selama proses pengembangan d
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
 {[15]} Y. Zhang and X. Liu, ``Comparative Analysis of LSTM and GRU for Time-Series Sales Forecasting,'' \textit{Applied Soft Computing}, vol. 115, pp. 108--122, 2022.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[16]} M. Abadi et al., ``TensorFlow: A System for Large-Scale Machine Learning,'' in \textit{Proc. 12th USENIX Symposium on Operating Systems Design and Implementation (OSDI)}, Savannah, GA, USA, pp. 265--283, 2016.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[17]} G. Booch, J. Rumbaugh, and I. Jacobson, \textit{The Unified Modeling Language User Guide}, 2nd ed. Boston, MA, USA: Addison-Wesley, 2005.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[18]} G. E. P. Box, G. M. Jenkins, G. C. Reinsel, and G. M. Ljung, \textit{Time Series Analysis: Forecasting and Control}, 5th ed. Hoboken, NJ, USA: John Wiley \& Sons, 2015.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[19]} P. P.-S. Chen, ``The Entity-Relationship Model---Toward a Unified View of Data,'' \textit{ACM Transactions on Database Systems}, vol. 1, no. 1, pp. 9--36, 1976.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[20]} R. T. Fielding, ``Architectural Styles and the Design of Network-based Software Architectures,'' Ph.D. dissertation, University of California, Irvine, CA, USA, 2000.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[21]} I. Goodfellow, J. Pouget-Abadie, M. Mirza, B. Xu, D. Warde-Farley, S. Ozair, A. Courville, and Y. Bengio, ``Generative Adversarial Nets,'' in \textit{Advances in Neural Information Processing Systems (NeurIPS)}, vol. 27, pp. 2672--2680, 2014.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[22]} M. Grinberg, \textit{Flask Web Development: Developing Web Applications with Python}, 2nd ed. Sebastopol, CA, USA: O'Reilly Media, 2018.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[23]} J. Heizer, B. Render, and C. Munson, \textit{Operations Management: Sustainability and Supply Chain Management}, 12th ed. Boston, MA, USA: Pearson, 2017.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[24]} S. Hochreiter and J. Schmidhuber, ``Long Short-Term Memory,'' \textit{Neural Computation}, vol. 9, no. 8, pp. 1735--1780, 1997.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[25]} R. J. Hyndman and G. Athanasopoulos, \textit{Forecasting: Principles and Practice}, 3rd ed. Melbourne, Australia: OTexts, 2021.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[26]} R. J. Hyndman and A. B. Koehler, ``Another Look at Measures of Forecast Accuracy,'' \textit{International Journal of Forecasting}, vol. 22, no. 4, pp. 679--688, 2006.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[27]} D. P. Kingma and J. Ba, ``Adam: A Method for Stochastic Optimization,'' in \textit{Proc. 3rd International Conference on Learning Representations (ICLR)}, San Diego, CA, USA, 2015.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[28]} S. Makridakis, E. Spiliotis, and V. Assimakopoulos, ``Statistical and Machine Learning Forecasting Methods: Concerns and Ways Forward,'' \textit{PLoS ONE}, vol. 13, no. 3, e0194889, 2018.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[29]} S. Makridakis, E. Spiliotis, and V. Assimakopoulos, ``The M4 Competition: 100,000 Time Series and 61 Forecasting Methods,'' \textit{International Journal of Forecasting}, vol. 36, no. 1, pp. 54--74, 2020.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[30]} L. Moroney, \textit{The Definitive Guide to Firebase: Build Android Apps on Google's Mobile Platform}. New York, NY, USA: Apress, 2017.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[31]} A. Paszke et al., ``PyTorch: An Imperative Style, High-Performance Deep Learning Library,'' in \textit{Advances in Neural Information Processing Systems (NeurIPS)}, vol. 32, pp. 8024--8035, 2019.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[32]} M. Poppendieck and T. Poppendieck, \textit{Lean Software Development: An Agile Toolkit}. Boston, MA, USA: Addison-Wesley, 2003.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[33]} R. S. Pressman and B. R. Maxim, \textit{Software Engineering: A Practitioner's Approach}, 9th ed. New York, NY, USA: McGraw-Hill Education, 2020.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[34]} N. Srivastava, G. Hinton, A. Krizhevsky, I. Sutskever, and R. Salakhutdinov, ``Dropout: A Simple Way to Prevent Neural Networks from Overfitting,'' \textit{Journal of Machine Learning Research}, vol. 15, no. 1, pp. 1929--1958, 2014.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[35]} J. Yoon, D. Jarrett, and M. van der Schaar, ``Time-series Generative Adversarial Networks,'' in \textit{Advances in Neural Information Processing Systems (NeurIPS)}, vol. 32, pp. 5508--5518, 2019.
 
 \end{spacing}
 
