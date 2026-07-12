@@ -14,7 +14,7 @@ Teks Bab 3 di `Skripsi.tex` sudah diselaraskan dengan dokumen Rancangan (revisi 
 ## 2. `arsitektur_sistem` (Arsitektur Sistem)
 
 - **Hapus jalur AI via Edge Function**: hilangkan panah `App → Edge Function → LSTM` (beserta langkah "PII Scrubbing" bila digambar).
-- **Ganti dengan panggilan langsung**: panah `Flutter App → Hugging Face LSTM` (label: HTTPS / REST API, payload data agregat penjualan).
+- **Ganti dengan panggilan langsung**: panah `Flutter App → Layanan API Prediksi (Flask) di Hugging Face` (label: HTTPS / REST API, payload data agregat penjualan). Layanan ini menaungi model peramalan; endpoint produksi menyajikan metode Seasonal-Naive/Mean sesuai hasil evaluasi Bab 4.
 - **Tambah panah penyimpanan hasil**: `Flutter App → Supabase PostgreSQL (tabel smart_analytics_snapshots)` untuk menyimpan snapshot hasil analitik.
 - Edge Function boleh tetap digambar, tetapi **hanya untuk jalur webhook push notification** (mis. peringatan stok menipis → FCM), bukan jalur AI.
 - Jangan menambahkan OpenWeatherMap ke gambar — variabel cuaca tidak dipakai model LSTM pada penelitian ini.
