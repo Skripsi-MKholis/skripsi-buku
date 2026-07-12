@@ -261,7 +261,7 @@ Untuk menghindari meluasnya materi pembahasan, maka penelitian ini dibatasi pada
     \item Aplikasi dikembangkan menggunakan \textit{framework} Flutter dan difokuskan untuk sistem operasi Android, mengingat dominasi pasar Android pada segmen UMKM lokal.
     \item Basis data yang digunakan adalah Supabase dengan skema relasional untuk menyimpan data produk, transaksi, dan akun pengguna.
     \item Algoritma yang digunakan adalah \textit{Long Short-Term Memory} (LSTM) dengan model \textit{univariate} atau \textit{multivariate} terbatas, dan prediksi dilakukan untuk rentang waktu harian.
-    \item Data uji bersumber dari basis data transaksi riil platform EatsTEDI DTEDI Universitas Gadjah Mada dengan periode minimal satu tahun atau setidaknya mencakup siklus musiman tahunan.
+    \item Data uji bersumber dari basis data transaksi riil platform EatsTEDI DTEDI Universitas Gadjah Mada dengan periode lebih dari satu tahun; pola musiman yang diobservasi bersifat kalender akademis (mingguan dan semester), karena cakupan data yang tersedia belum cukup untuk mengamati siklus musiman tahunan penuh secara statistik.
     \item Proses pelatihan model dan prediksi dilakukan di sisi \textit{server/cloud} menggunakan bahasa Python, sedangkan aplikasi \textit{mobile} bertugas mengirim data transaksi dan menerima hasil prediksi melalui \textit{REST API}.
 \end{enumerate}
 
@@ -529,17 +529,11 @@ Untuk mendukung kelancaran pelaksanaan penelitian dan pengembangan sistem POS mo
 
 \subsection{Variabel Data}
 
-Variabel penelitian yang digunakan dalam proses prediksi penjualan harian pada sistem POS berbasis algoritma LSTM adalah sebagai berikut:
+Variabel penelitian yang digunakan dalam proses prediksi penjualan harian dikelompokkan menjadi tiga:
 \begin{enumerate}
-    \item \textbf{Variabel \textit{Input} (Fitur):} Data deret waktu transaksi penjualan harian dari platform EatsTEDI yang mencakup:
-    \begin{itemize}
-        \item \textit{Logaritma nominal pendapatan harian} (\texttt{rev\_log} yang dihitung menggunakan fungsi $\log(x+1)$ dari total penjualan harian untuk menstabilkan variansi data).
-        \item \textit{Pengodean siklik waktu} (\textit{cyclical encoding}) berupa nilai sinus dan kosinus untuk fitur indeks hari dalam seminggu (\texttt{dow\_sin}/\texttt{cos}), minggu ke-n dalam setahun (\texttt{week\_sin}/\texttt{cos}), serta bulan (\texttt{month\_sin}/\texttt{cos}) untuk memodelkan pola musiman kalender.
-        \item \textit{Faktor musiman Ramadan} (\texttt{is\_ramadan} berupa penanda biner untuk menunjukkan periode bulan Ramadan).
-    \end{itemize}
-    \textit{Catatan:} Variabel volume transaksi harian (\textit{transactions}) dan jumlah produk terjual harian (\textit{qty\_sold}) sengaja dihapus dari fitur masukan model prediksi untuk menghindari kebocoran data (\textit{data leakage}), karena nilai variabel tersebut tidak tersedia saat melakukan peramalan untuk periode di masa depan.
-    \item \textbf{Variabel \textit{Output} (Target):} Nilai prediksi \textit{log-return} (selisih logaritmik pendapatan antara hari $t$ dan $t-1$), yang selanjutnya direkonstruksi kembali ke nominal Rupiah. Nilai ini menjadi acuan Owner dalam mengestimasi omzet harian dan kebutuhan stok produk.
-    \item \textbf{Variabel Evaluasi:} Kinerja model diukur menggunakan empat metrik evaluasi secara bersamaan, yaitu MAE (\textit{Mean Absolute Error}), RMSE (\textit{Root Mean Square Error}), sMAPE (\textit{Symmetric Mean Absolute Percentage Error}), dan MASE (\textit{Mean Absolute Scaled Error}). Penggunaan MAPE konvensional dihindari karena menghasilkan nilai kesalahan yang tak berhingga (\textit{infinity}) saat dihadapkan pada data dengan nilai aktual mendekati nol.
+    \item \textbf{Variabel \textit{Input} (Fitur):} Deret waktu transaksi harian EatsTEDI yang terdiri atas \textit{log-return} pendapatan, pengodean siklik (sinus--kosinus) untuk hari, minggu, dan bulan, serta penanda biner periode Ramadan. Variabel jumlah transaksi (\textit{transactions}) dan kuantitas terjual (\textit{qty\_sold}) sengaja tidak digunakan sebagai fitur untuk menghindari kebocoran data (\textit{data leakage}), karena keduanya belum tersedia saat memprediksi hari mendatang.
+    \item \textbf{Variabel \textit{Output} (Target):} Nilai prediksi \textit{log-return} pendapatan, yang direkonstruksi kembali ke nominal Rupiah sebagai acuan estimasi omzet harian dan kebutuhan stok produk.
+    \item \textbf{Variabel Evaluasi:} Kinerja model diukur dengan empat metrik evaluasi (MAE, RMSE, sMAPE, dan MASE). MAPE konvensional dihindari karena menghasilkan nilai tak terhingga saat dihadapkan pada hari dengan pendapatan mendekati nol. Rincian formula masing-masing metrik dijabarkan pada Subbab 3.2.10.1.
 \end{enumerate}
 
 \subsection{Sumber Data}
@@ -555,7 +549,7 @@ Secara umum, karakteristik data deret waktu (\textit{time series}) EatsTEDI UGM 
     \item \textbf{Pola Bulan Ramadan:} Omzet harian merosot tajam secara signifikan karena penutupan atau pembatasan jam operasional kantin selama bulan puasa (misalnya total omzet Maret 2025 hanya Rp 1.427.000,00 dan Maret 2026 sebesar Rp 3.531.000,00).
 \end{enumerate}
 
-Selama periode transaksi tersebut, tercatat sebanyak \textbf{61.749 transaksi} lunas dengan total produk terjual sebanyak \textbf{150.709 unit} dan menghasilkan total akumulasi omzet sebesar \textbf{Rp 501.440.492,00}. Rata-rata nominal pendapatan harian pada hari aktif adalah sebesar \textbf{Rp 1.586.837,00/hari} dengan kuantitas produk terjual rata-rata \textbf{476,93 unit/hari}.
+Selama periode transaksi tersebut, tercatat sebanyak \textbf{61.749 transaksi} lunas dengan total produk terjual sebanyak \textbf{150.709 unit} dan menghasilkan total akumulasi omzet sebesar \textbf{Rp 501.440.492,00}. Rata-rata nominal pendapatan harian pada hari aktif adalah sebesar \textbf{Rp 1.586.837,00/hari} dengan kuantitas produk terjual rata-rata \textbf{476,93 unit/hari}. Statistik di atas dihitung dari seluruh hari kalender dalam rentang tersebut termasuk hari non-aktif (Rp 0). Setelah penyaringan hanya pada hari kerja aktif (tanpa akhir pekan dan libur semester), analisis model pada Bab IV menggunakan \textbf{313 hari aktif} dengan total omzet sebesar \textbf{Rp 471.200.494,00} — selisih ini wajar karena hari kalender non-aktif dikeluarkan dari dataset pelatihan.
 
 Selain statistik agregat di atas, sebaran penjualan berdasarkan kategori produk pada platform EatsTEDI disajikan pada Tabel \ref{tab:kategori_sales}.
 
@@ -690,15 +684,16 @@ Analisis kebutuhan data dilakukan untuk mengidentifikasi karakteristik dan kebut
 
 \subsection{Preprocessing Data}
 
-Data transaksi yang terkumpul melalui basis data EatsTEDI diproses melalui tahapan berikut sebelum digunakan untuk pelatihan dan pengujian model prediksi LSTM:
+Data transaksi yang terkumpul dari basis data EatsTEDI melalui beberapa tahap penyiapan berikut sebelum digunakan untuk pelatihan model:
 \begin{enumerate}
-    \item \textbf{Pembersihan Data (\textit{Data Cleaning} \& \textit{Imputation}):} Menghapus data duplikat dan menyelaraskan format tanggal. Untuk mengatasi \textit{gap}/nilai kosong sebesar Rp 0 pada akhir pekan (Sabtu dan Minggu) serta libur semester panjang (Januari dan Juli), data disaring (\textit{filtering}) hanya menggunakan hari kerja aktif (\textit{business days}), serta dilakukan pengelompokan pelatihan terpisah per semester untuk menghindari bias prediksi akibat libur akademis yang panjang.
-    \item \textbf{Normalisasi:} Mengubah nilai volume dan nominal penjualan harian ke dalam skala 0 hingga 1 menggunakan \textit{MinMaxScaler} untuk menstabilkan proses pelatihan jaringan saraf tiruan, mempercepat konvergensi, dan mencegah bias dominasi nilai nominal uang yang besar.
-    \item \textbf{Pembentukan Struktur \textit{time series} (\textit{windowing}):} Mengubah data sekuensial menjadi format \textit{input} ($X$) dan label ($y$) dengan panjang jendela \textit{sliding window} tertentu, di mana data transaksi 14 hari kerja aktif sebelumnya digunakan untuk memprediksi penjualan hari aktif berikutnya.
-    \item \textbf{Pembagian Data (\textit{time-based split}):} Membagi \textit{dataset} menjadi data latih (\textit{training data}) dan data uji (\textit{testing data}) menggunakan pemisahan berbasis waktu (\textit{time-based split}) untuk menjaga urutan temporal dan mencegah kebocoran data masa depan ke masa lalu.
-    \item \textbf{Pelatihan Model:} Melatih arsitektur LSTM di sisi \textit{server} menggunakan \textit{Adam Optimizer} dan fungsi aktivasi \textit{ReLU} pada lapisan tersembunyi untuk membangun model prediksi penjualan harian.
-    \item \textbf{Denormalisasi:} Mengembalikan nilai keluaran prediksi LSTM (skala 0 s.d. 1) ke satuan nominal mata uang aslinya agar dapat disajikan secara informatif pada antarmuka aplikasi \textit{mobile}.
+    \item \textbf{Pembersihan dan Penyaringan Hari Aktif:} Menghapus data duplikat dan menyelaraskan format tanggal, serta menyaring hari non-aktif bernilai Rp~0 (Sabtu, Minggu, dan libur semester pada Januari dan Juli). Penyaringan ini mencegah \textit{gap} panjang pada deret waktu yang dapat mengaburkan pola musiman harian.
+    \item \textbf{Transformasi Target:} Nilai pendapatan ditransformasikan ke skala logaritma untuk menstabilkan variansi, kemudian diubah menjadi bentuk \textit{log-return} (selisih logaritmik antar hari aktif) agar model mempelajari deviasi pendapatan relatif, bukan nilai nominal mentah.
+    \item \textbf{Normalisasi:} Seluruh fitur masukan diskalakan ke rentang $[0, 1]$ menggunakan \textit{Min-Max Scaling}, dengan \textit{fitting} parameter \textit{scaler} hanya pada data latih untuk mencegah kebocoran informasi (\textit{data leakage}).
+    \item \textbf{Pembentukan \textit{Sequence} (\textit{Windowing}):} Data diubah ke format \textit{input}--label menggunakan \textit{sliding window} sepanjang 7 hari kerja aktif ($LOOK\_BACK = 7$) untuk memprediksi penjualan hari aktif berikutnya.
+    \item \textbf{Pembagian Data (\textit{Time-Based Split}):} Dataset dibagi secara kronologis agar urutan temporal terjaga dan tidak terjadi kebocoran data masa depan ke masa lalu.
 \end{enumerate}
+
+Rincian teknis rumus \textit{log-return}, \textit{cyclical encoding}, dan arsitektur model dijabarkan secara lengkap pada Subbagian~\ref{subsec:lstm_alg}.
 
 \section{Rancangan Sistem}
 
@@ -727,7 +722,7 @@ Alur penelitian ini dirancang secara sistematis untuk membangun sistem \textit{P
 
 Pada \textbf{Fase Pengembangan dan Implementasi Sistem POS}, penelitian diawali dengan analisis kebutuhan melalui observasi langsung dan identifikasi permasalahan pada mitra EatsTEDI. Selanjutnya dilakukan perancangan sistem meliputi arsitektur \textit{offline-first}, desain basis data relasional (Supabase PostgreSQL dan Isar DB), serta perancangan \textit{Use Case Diagram}, \textit{Activity Diagram}, ERD, dan antarmuka pengguna. Setelah tahap perancangan, sistem POS dikembangkan menggunakan Flutter sebagai \textit{frontend}, Supabase sebagai basis data \textit{cloud}, Isar DB sebagai basis data lokal, dan Python di VPS untuk pengolahan model AI. Aplikasi yang telah dibangun kemudian diimplementasikan pada mitra EatsTEDI untuk digunakan dalam kegiatan transaksi harian, sehingga menghasilkan data transaksi aktual yang tersimpan secara otomatis.
 
-Pada \textbf{Fase Pengembangan Model Prediksi Penjualan}, data transaksi yang telah terkumpul selanjutnya melalui tahap pra-pemrosesan meliputi pembersihan data, agregasi harian, normalisasi, dan pembentukan data deret waktu (\textit{time series}). \textit{Dataset} kemudian dibagi menjadi data latih dan data uji. Model LSTM dilatih menggunakan data latih untuk mempelajari pola penjualan jangka pendek maupun jangka panjang. Setelah pelatihan, model diuji dan diintegrasikan kembali ke dalam sistem POS sehingga aplikasi mampu menampilkan hasil prediksi penjualan harian kepada pengguna melalui \textit{REST API}.
+Pada \textbf{Fase Pengembangan Model Prediksi Penjualan}, data transaksi yang telah terkumpul selanjutnya melalui tahap pra-pemrosesan meliputi pembersihan data, agregasi harian, normalisasi, dan pembentukan data deret waktu (\textit{time series}). \textit{Dataset} kemudian dibagi menjadi data latih dan data uji. Model LSTM dilatih menggunakan data latih untuk mempelajari pola penjualan jangka pendek maupun jangka panjang. Setelah pelatihan, model dievaluasi menggunakan metrik regresi deret waktu, yaitu MAE, RMSE, sMAPE, dan MASE, kemudian diintegrasikan ke dalam sistem POS sehingga aplikasi mampu menampilkan hasil prediksi penjualan harian kepada pengguna melalui \textit{REST API}.
 
 \subsection{Diagram Use Case}
 
@@ -836,83 +831,7 @@ Penjelasan mengenai empat komponen utama dalam arsitektur sistem adalah sebagai 
 
 \begin{figure}[H]
     \centering
-    \resizebox{0.92\textwidth}{!}{%
-    \begin{tikzpicture}[
-        classbox/.style={
-            rectangle split, rectangle split parts=3,
-            draw=black, fill=white,
-            minimum width=3.5cm, font=\small,
-            align=left
-        },
-        arrow/.style={-{Latex[scale=1.2]}, thick}
-    ]
-    % Nodes
-    \node (Store) [classbox] {
-        \textbf{Store}
-        \nodepart{second}
-        + supabaseId: String \\
-        + name: String \\
-        + address: String \\
-        + phone: String
-        \nodepart{third}
-        + getDetails() \\
-        + updateConfig()
-    };
-    
-    \node (Category) [classbox, right=2cm of Store] {
-        \textbf{Category}
-        \nodepart{second}
-        + supabaseId: String \\
-        + storeId: String \\
-        + name: String
-        \nodepart{third}
-        + getProducts()
-    };
-    
-    \node (Product) [classbox, below=1.5cm of Category] {
-        \textbf{Product}
-        \nodepart{second}
-        + supabaseId: String \\
-        + categoryId: String \\
-        + name: String \\
-        + price: Double \\
-        + stockQuantity: Int
-        \nodepart{third}
-        + updateStock() \\
-        + getPrice()
-    };
-    
-    \node (Transaction) [classbox, below=1.5cm of Store] {
-        \textbf{TransactionLocal}
-        \nodepart{second}
-        + supabaseId: String \\
-        + totalAmount: Double \\
-        + paymentMethod: String \\
-        + isSynced: Bool
-        \nodepart{third}
-        + calculateTotal() \\
-        + syncToCloud()
-    };
-    
-    \node (TransactionItem) [classbox, right=2cm of Transaction] {
-        \textbf{TransactionItemLocal}
-        \nodepart{second}
-        + productId: String \\
-        + quantity: Int \\
-        + subtotal: Double
-        \nodepart{third}
-        + getSubtotal()
-    };
-
-    % Connections
-    \draw [arrow] (Store) -- (Category) node[midway, above] {1..*};
-    \draw [arrow] (Category) -- (Product) node[midway, right] {1..*};
-    \draw [arrow] (Store) -- (Transaction) node[midway, left] {1..*};
-    \draw [arrow] (Transaction) -- (TransactionItem) node[midway, above] {1..*};
-    \draw [arrow] (Product) -- (TransactionItem) node[midway, right] {1..*};
-
-    \end{tikzpicture}%
-    }
+    \includegraphics[width=0.92\textwidth]{../Rancangan/Class Diagram/Class Diagram.drawio.png}
     \caption{Class Diagram Sistem POS}
     \label{fig:class_diagram}
 \end{figure}
@@ -1056,6 +975,7 @@ Entitas \textit{stores} menjadi entitas induk yang berelasi dengan seluruh entit
 \end{table}
 
 \subsection{Rancangan Algoritma \textit{Long Short-Term Memory} (LSTM)}
+\label{subsec:lstm_alg}
 
 Desain metode LSTM memberikan gambaran mengenai alur kerja algoritma yang digunakan dalam proses prediksi penjualan harian pada sistem POS. Alur kerja algoritma diilustrasikan pada Gambar \ref{fig:lstm_alur}.
 
@@ -1340,7 +1260,7 @@ Pengujian sistem pada penelitian ini mencakup dua pendekatan utama untuk memasti
 
 \subsubsection{Rancangan Pengujian Evaluasi Model Prediksi}
 
-Pengujian model prediksi dilakukan untuk mengukur kinerja dan tingkat akurasi dari algoritma \textit{Long Short-Term Memory} (LSTM) yang dikembangkan. Pengujian ini menggunakan data pengujian (\textit{testing data}) yang diambil dari data histori transaksi penjualan harian mitra UMKM. Evaluasi akurasi model diukur berdasarkan tingkat kesalahan (\textit{error}) prediksi menggunakan tiga metrik utama, yaitu:
+Pengujian model prediksi dilakukan untuk mengukur kinerja dan tingkat akurasi dari algoritma \textit{Long Short-Term Memory} (LSTM) yang dikembangkan. Pengujian ini menggunakan data pengujian (\textit{testing data}) yang diambil dari data histori transaksi penjualan harian mitra UMKM. Evaluasi akurasi model diukur berdasarkan tingkat kesalahan (\textit{error}) prediksi menggunakan empat metrik utama, yaitu MAE, RMSE, sMAPE, dan MASE.
 
 \begin{enumerate}
     \item \textbf{\textit{Mean Absolute Error} (MAE):}
