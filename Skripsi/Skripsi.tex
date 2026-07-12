@@ -678,7 +678,7 @@ Analisis kebutuhan data dilakukan untuk mengidentifikasi karakteristik dan kebut
 \begin{enumerate}
     \item \textbf{Volume Data Minimum (\textit{Cold Start Mitigation}):} Model LSTM memerlukan data runtun waktu yang kontinu. Ditetapkan batas minimum data transaksi historis sebanyak 30 hari aktif transaksi sebelum sistem dapat melakukan estimasi prediksi harian yang andal untuk meminimalkan masalah \textit{cold start} pada merchant baru.
     \item \textbf{Pembersihan dan Imputasi Data:} Karena data mentah transaksi sering kali memiliki hari luring atau libur, diperlukan aturan pembersihan data. Hari non-aktif (Sabtu, Minggu, dan libur semester) disaring agar tidak mengacaukan analisis pola musiman bisnis harian.
-    \item \textbf{Keamanan Data (\textit{PII Scrubbing}):} Seluruh data transaksi yang ditarik dari database lokal (Isar DB) harus dibersihkan dari informasi sensitif pelanggan (seperti nama pelanggan, nomor telepon, dan detail pembayaran spesifik) sebelum dikirimkan ke cloud Supabase atau modul inferensi FastAPI di server untuk menjaga privasi.
+    \item \textbf{Keamanan Data (Minimalisasi Data):} \textit{Payload} yang dikirimkan ke modul inferensi FastAPI secara desain hanya berisi data agregat numerik penjualan (total omzet harian, kuantitas terjual, dan indeks waktu kalender) tanpa menyertakan informasi identitas pelanggan seperti nama, nomor telepon, maupun detail pembayaran spesifik, sehingga privasi pelanggan tetap terjaga.
     \item \textbf{Struktur Payload Data API:} Data runtun waktu harus dikirimkan dalam format terstruktur JSON melalui protokol HTTPS. Payload berisi larik nominal omzet harian 7 hari terakhir beserta indeks waktu kalender yang relevan.
 \end{enumerate}
 
@@ -720,13 +720,13 @@ Alur penelitian ini dirancang secara sistematis untuk membangun sistem \textit{P
     \label{fig:alur_penelitian}
 \end{figure}
 
-Pada \textbf{Fase Pengembangan dan Implementasi Sistem POS}, penelitian diawali dengan analisis kebutuhan melalui observasi langsung dan identifikasi permasalahan pada mitra EatsTEDI. Selanjutnya dilakukan perancangan sistem meliputi arsitektur \textit{offline-first}, desain basis data relasional (Supabase PostgreSQL dan Isar DB), serta perancangan \textit{Use Case Diagram}, \textit{Activity Diagram}, ERD, dan antarmuka pengguna. Setelah tahap perancangan, sistem POS dikembangkan menggunakan Flutter sebagai \textit{frontend}, Supabase sebagai basis data \textit{cloud}, Isar DB sebagai basis data lokal, dan Python di VPS untuk pengolahan model AI. Aplikasi yang telah dibangun kemudian diimplementasikan pada mitra EatsTEDI untuk digunakan dalam kegiatan transaksi harian, sehingga menghasilkan data transaksi aktual yang tersimpan secara otomatis.
+Pada \textbf{Fase Pengembangan dan Implementasi Sistem POS}, penelitian diawali dengan analisis kebutuhan melalui observasi langsung dan identifikasi permasalahan pada mitra EatsTEDI. Selanjutnya dilakukan perancangan sistem meliputi arsitektur \textit{offline-first}, desain basis data relasional (Supabase PostgreSQL dan Isar DB), serta perancangan \textit{Use Case Diagram}, \textit{Activity Diagram}, ERD, dan antarmuka pengguna. Setelah tahap perancangan, sistem POS dikembangkan menggunakan Flutter sebagai \textit{frontend}, Supabase sebagai basis data \textit{cloud}, Isar DB sebagai basis data lokal, dan layanan inferensi Python (FastAPI) yang di-\textit{deploy} pada platform Hugging Face untuk pengolahan model AI. Aplikasi yang telah dibangun kemudian diimplementasikan pada mitra EatsTEDI untuk digunakan dalam kegiatan transaksi harian, sehingga menghasilkan data transaksi aktual yang tersimpan secara otomatis.
 
 Pada \textbf{Fase Pengembangan Model Prediksi Penjualan}, data transaksi yang telah terkumpul selanjutnya melalui tahap pra-pemrosesan meliputi pembersihan data, agregasi harian, normalisasi, dan pembentukan data deret waktu (\textit{time series}). \textit{Dataset} kemudian dibagi menjadi data latih dan data uji. Model LSTM dilatih menggunakan data latih untuk mempelajari pola penjualan jangka pendek maupun jangka panjang. Setelah pelatihan, model dievaluasi menggunakan metrik regresi deret waktu, yaitu MAE, RMSE, sMAPE, dan MASE, kemudian diintegrasikan ke dalam sistem POS sehingga aplikasi mampu menampilkan hasil prediksi penjualan harian kepada pengguna melalui \textit{REST API}.
 
 \subsection{Diagram Use Case}
 
-Sistem POS melibatkan dua aktor utama, yaitu \textbf{Owner (Pemilik Toko)} dan \textbf{Kasir (Karyawan)}. \textit{Use Case Diagram} menggambarkan fungsi-fungsi yang dapat diakses oleh masing-masing aktor. Rancangan \textit{use case} diilustrasikan pada Gambar \ref{fig:use_case}.
+Sistem POS melibatkan dua aktor utama, yaitu \textbf{Owner (Pemilik Toko)} dan \textbf{Kasir (Karyawan)}. \textit{Use Case Diagram} menggambarkan fungsi-fungsi yang dapat diakses oleh masing-masing aktor. Pembatasan hak akses berbasis peran (\textit{Role-Based Access Control}/RBAC) ditegakkan pada lapisan navigasi aplikasi (\texttt{router.dart}), di mana hanya rute Manajemen Karyawan dan Pengaturan Profil Toko yang dibatasi eksklusif untuk Owner, sedangkan fungsi operasional lainnya dapat diakses oleh seluruh staf toko. Rancangan \textit{use case} diilustrasikan pada Gambar \ref{fig:use_case}.
 
 \begin{landscape}
 \begin{figure}[p]
@@ -750,9 +750,9 @@ Definisi aktor pada sistem POS diilustrasikan pada Tabel \ref{tab:aktor} berikut
 \hline
 \textbf{No.} & \textbf{Aktor} & \textbf{Deskripsi} \\
 \hline
-1 & Owner (Pemilik) & Aktor dengan hak akses penuh terhadap seluruh sistem, mencakup pengelolaan produk, laporan keuangan, manajemen staf, pengaturan toko, serta fitur AI \textit{Smart Analytics} untuk proyeksi penjualan berbasis kecerdasan buatan. \\
+1 & Owner (Pemilik) & Aktor dengan hak akses penuh terhadap seluruh sistem. Hak eksklusif Owner pada lapisan navigasi adalah manajemen data karyawan dan pengaturan identitas toko. Owner juga menjadi penanggung jawab utama konfigurasi toko dan pengambilan keputusan strategis berbasis laporan serta fitur AI \textit{Smart Analytics}. \\
 \hline
-2 & Kasir (Karyawan) & Staf operasional harian dengan akses terbatas pada modul POS, pencatatan transaksi, dan ringkasan omzet harian shift berjalan. \\
+2 & Kasir (Karyawan) & Staf operasional harian toko dengan akses mencakup pelayanan penjualan (POS), pencetakan struk, manajemen produk dan kategori, audit riwayat stok, \textit{dashboard}, laporan penjualan, \textit{broadcast} notifikasi, serta AI \textit{Smart Analytics} — kecuali manajemen karyawan dan pengaturan profil toko yang tetap eksklusif Owner. \\
 \hline
 \end{tabularx}
 \end{table}
@@ -783,25 +783,29 @@ Definisi \textit{use case} pada sistem POS diilustrasikan pada Tabel \ref{tab:us
 \hline
 4 & Menerapkan \textit{Voucher}/Diskon & Memasukkan kode promosi untuk memotong total tagihan transaksi. \\
 \hline
-5 & Mencetak Struk & Mencetak struk transaksi fisik via printer \textit{thermal} Bluetooth. \\
+5 & Melakukan \textit{Split Bill} & Memecah pembayaran satu nota belanja menjadi beberapa bagian tagihan, terintegrasi di lembar keranjang dan layar pembayaran. \\
 \hline
-6 & Mengelola Katalog Produk & Menambah, menyunting, dan menghapus produk/stok barang (Owner). \\
+6 & Mencetak Struk & Mencetak struk transaksi fisik via printer \textit{thermal} Bluetooth. \\
 \hline
-7 & Mengelola Kategori & Mengatur pengelompokan menu katalog produk toko (Owner). \\
+7 & Memonitor Status Meja & Memantau keterisian meja secara visual, terintegrasi di dalam alur POS. \\
 \hline
-8 & Mengaudit Riwayat Stok & Melihat \textit{log} mutasi stok untuk keperluan audit inventaris (Owner). \\
+8 & Mengelola Katalog Produk & Menambah, menyunting, dan menghapus produk/stok barang. \\
 \hline
-9 & Melihat \textit{Dashboard} & Memantau performa keuangan; kasir dibatasi pada data hari berjalan. \\
+9 & Mengelola Kategori & Mengatur pengelompokan menu katalog produk toko. \\
 \hline
-10 & Melihat AI \textit{Smart Analytics} & Mengakses proyeksi penjualan berbasis Model LSTM (Owner). \\
+10 & Mengaudit Riwayat Stok & Melihat \textit{log} mutasi stok untuk keperluan audit inventaris. \\
 \hline
-11 & Kirim \textit{Broadcast} Notifikasi & Mengirim pemberitahuan \textit{real-time} ke semua kasir (Owner). \\
+11 & Melihat \textit{Dashboard} & Memantau performa keuangan dan statistik penjualan toko. \\
 \hline
-12 & Sinkronisasi Data & Menyinkronkan transaksi \textit{offline} lokal ke \textit{cloud} Supabase secara otomatis. \\
+12 & Melihat AI \textit{Smart Analytics} & Mengakses proyeksi penjualan berbasis Model LSTM beserta riwayat hasil analitik sebelumnya. \\
 \hline
-13 & Mengelola Karyawan & Mendaftarkan atau mengubah peran staf kasir (Owner). \\
+13 & Kirim \textit{Broadcast} Notifikasi & Mengirim pemberitahuan \textit{real-time} ke staf toko. \\
 \hline
-14 & Mengatur Profil Toko & Mengubah nama toko, alamat, dan logo outlet (Owner). \\
+14 & Sinkronisasi Data & Menyinkronkan transaksi \textit{offline} lokal ke \textit{cloud} Supabase secara otomatis. \\
+\hline
+15 & Mengelola Karyawan & Mendaftarkan atau mengubah peran staf kasir (Owner). \\
+\hline
+16 & Mengatur Profil Toko & Mengubah nama toko, alamat, dan logo outlet (Owner). \\
 \hline
 \end{longtable}
 }
@@ -820,9 +824,9 @@ Sistem Parzello POS Mobile dirancang menggunakan pendekatan arsitektur \textit{h
 Penjelasan mengenai empat komponen utama dalam arsitektur sistem adalah sebagai berikut:
 \begin{enumerate}
     \item \textbf{Sisi Klien (\textit{Client-Side}):} Aplikasi dibangun menggunakan \textit{framework} Flutter dengan manajemen \textit{state} Riverpod dan navigasi GoRouter. Komponen inti dari sisi klien adalah Isar DB, sebuah database NoSQL lokal yang berperan sebagai \textit{cache offline-first}, memungkinkan kasir tetap dapat melakukan transaksi penuh meskipun koneksi internet terputus. \textit{Sync Engine} kemudian bekerja di latar belakang untuk menyinkronkan data lokal ke \textit{cloud} secara otomatis ketika koneksi terdeteksi kembali aktif, menggunakan penanda \texttt{isSynced} pada setiap \textit{record} untuk menghindari duplikasi data. Selain itu, sisi klien juga mengelola integrasi perangkat keras berupa printer \textit{thermal} Bluetooth/USB untuk mencetak struk dan kamera untuk pemindaian \textit{barcode} produk.
-    \item \textbf{Infrastruktur \textit{Cloud} (Supabase):} Sebagai tulang punggung infrastruktur \textit{cloud}, Supabase menyediakan empat layanan utama. Supabase Auth menangani autentikasi pengguna melalui protokol JWT dan Google OAuth. Supabase PostgreSQL menjadi basis data relasional terpusat yang dilengkapi kebijakan \textit{Row Level Security} (RLS) untuk mengisolasi data antar \textit{merchant}, pemicu database (\textit{triggers}), serta prosedur tersimpan (\textit{RPC}) untuk memproses transaksi secara aman. Supabase Storage menyimpan aset media seperti gambar produk dan logo toko. Sedangkan \textit{Edge Functions} berfungsi sebagai \textit{middleware} komputasi \textit{server} yang menangani permintaan analitik AI sekaligus melakukan \textit{PII Scrubbing} guna memastikan data pribadi pelanggan tidak diteruskan ke model kecerdasan buatan.
+    \item \textbf{Infrastruktur \textit{Cloud} (Supabase):} Sebagai tulang punggung infrastruktur \textit{cloud}, Supabase menyediakan empat layanan utama. Supabase Auth menangani autentikasi pengguna melalui protokol JWT dan Google OAuth. Supabase PostgreSQL menjadi basis data relasional terpusat yang dilengkapi kebijakan \textit{Row Level Security} (RLS) untuk mengisolasi data antar \textit{merchant}, pemicu database (\textit{triggers}), serta prosedur tersimpan (\textit{RPC}) untuk memproses transaksi secara aman. Supabase Storage menyimpan aset media seperti gambar produk dan logo toko. Sedangkan \textit{Edge Functions} digunakan untuk memproses \textit{webhook} basis data yang bersifat sensitif, seperti pemicu pengiriman \textit{push notification} peringatan stok menipis kepada pemilik toko.
     \item \textbf{Telemetri dan Notifikasi (Firebase):} Untuk kebutuhan telemetri dan notifikasi, sistem terintegrasi dengan Firebase. \textit{Firebase Cloud Messaging} (FCM) bertugas menyampaikan \textit{push notification} secara \textit{real-time} kepada pemilik toko, misalnya peringatan stok habis atau pembatalan transaksi oleh kasir. \textit{Firebase Analytics} digunakan untuk mencatat perilaku penggunaan aplikasi, seperti volume transaksi harian, penggunaan fitur \textit{split bill}, dan inisiasi kalibrasi model AI.
-    \item \textbf{Layanan Inferensi Model LSTM (Hugging Face):} Komponen terakhir adalah layanan inferensi untuk mendukung fitur analitik prediktif. Pada penelitian ini, dikembangkan sebuah model \textit{deep learning} berbasis \textbf{Long Short-Term Memory (LSTM)} secara mandiri, yang dirancang khusus untuk memproyeksikan data runtun waktu (\textit{time-series}) penjualan harian pada usaha berskala UMKM. Model LSTM tersebut kemudian di-\textit{deploy} pada platform Hugging Face as layanan inferensi berbasis \textit{REST API}, sehingga dapat diakses oleh sistem secara efisien tanpa memerlukan infrastruktur \textit{server} komputasi tersendiri. Ketika pemilik toko mengakses fitur \textit{Smart Analytics}, aplikasi mengirimkan data runtun waktu transaksi ke Supabase \textit{Edge Functions} untuk dilakukan pembersihan data sensitif (\textit{PII Scrubbing}) sebelum \textit{payload} diteruskan ke model LSTM. Model memproses data tersebut dan mengembalikan hasil prediksi dalam format JSON, mencakup estimasi omzet harian, prediksi kunjungan pelanggan, serta rekomendasi promosi berbasis stok, yang selanjutnya divisualisasikan kepada pengguna melalui antarmuka grafik interaktif menggunakan pustaka \texttt{fl\_chart}.
+    \item \textbf{Layanan Inferensi Model LSTM (Hugging Face):} Komponen terakhir adalah layanan inferensi untuk mendukung fitur analitik prediktif. Pada penelitian ini, dikembangkan sebuah model \textit{deep learning} berbasis \textbf{Long Short-Term Memory (LSTM)} secara mandiri, yang dirancang khusus untuk memproyeksikan data runtun waktu (\textit{time-series}) penjualan harian pada usaha berskala UMKM. Model LSTM tersebut kemudian di-\textit{deploy} pada platform Hugging Face sebagai layanan inferensi berbasis \textit{REST API}, sehingga dapat diakses oleh sistem secara efisien tanpa memerlukan infrastruktur \textit{server} komputasi tersendiri. Ketika pengguna mengakses fitur \textit{Smart Analytics}, aplikasi Flutter memanggil \textit{endpoint} model LSTM tersebut secara langsung melalui protokol HTTPS (dikonfigurasi pada berkas \texttt{env.dart} dan dapat dioverride saat \textit{build} melalui \texttt{--dart-define}), dengan \textit{payload} berupa data agregat penjualan tanpa informasi identitas pelanggan. Model memproses data tersebut dan mengembalikan hasil prediksi dalam format JSON, mencakup estimasi omzet harian, prediksi produk terlaris, serta rekomendasi promosi berbasis stok, yang selanjutnya divisualisasikan melalui antarmuka grafik interaktif menggunakan pustaka \texttt{fl\_chart}. Aplikasi juga menangani kondisi \textit{cold start}, yaitu menampilkan peringatan pemuatan ketika \textit{server} inferensi baru aktif kembali dari kondisi \textit{idle}. Setiap hasil analisis disimpan sebagai \textit{snapshot} pada tabel \textit{smart\_analytics\_snapshots} di Supabase, sehingga riwayat analitik dapat ditinjau kembali tanpa perlu memanggil ulang model.
 \end{enumerate}
 
 \subsection{Class Diagram}
@@ -851,7 +855,7 @@ Penjelasan mengenai kelas-kelas utama dalam sistem adalah sebagai berikut:
 
 \begin{enumerate}
     \item \textbf{Activity Diagram Alur Kerja Transaksi Kasir (POS Checkout)} \\
-    Gambar \ref{fig:act-checkout} menggambarkan alur kerja kasir atau \textit{owner} dalam memproses transaksi belanja pelanggan di kasir, termasuk opsi penerapan kupon/voucher diskon dan pemisahan tagihan (\textit{split bill}) sebelum data disimpan di penyimpanan lokal Isar DB.
+    Gambar \ref{fig:act-checkout} menggambarkan alur kerja kasir atau \textit{owner} dalam memproses transaksi belanja pelanggan di kasir, termasuk opsi penerapan kupon/voucher diskon dan pemisahan tagihan (\textit{split bill}) yang terintegrasi langsung di dalam lembar keranjang belanja dan layar pembayaran, sebelum data disimpan di penyimpanan lokal Isar DB.
     
     \begin{figure}[H]
         \centering
@@ -861,7 +865,7 @@ Penjelasan mengenai kelas-kelas utama dalam sistem adalah sebagai berikut:
     \end{figure}
 
     \item \textbf{Activity Diagram Sinkronisasi Latar Belakang (Offline-First Sync Engine)} \\
-    Gambar \ref{fig:act-sync} menggambarkan logika sinkronisasi data dari \textit{local database} (Isar DB) ke cloud database (Supabase) secara otomatis saat status konektivitas terdeteksi \textit{online}. Alur data dilakukan berdasarkan ketergantungan relasi tabel (kategori, produk, transaksi, riwayat stok) untuk menjaga konsistensi.
+    Gambar \ref{fig:act-sync} menggambarkan logika sinkronisasi data dari \textit{local database} (Isar DB) ke cloud database (Supabase) secara otomatis saat status konektivitas terdeteksi \textit{online}. Alur data dilakukan berdasarkan ketergantungan relasi tabel (kategori, produk, transaksi, riwayat stok) untuk menjaga konsistensi, di mana pengunggahan transaksi dilakukan melalui pemanggilan prosedur RPC \texttt{create\_transaction\_v4} pada PostgreSQL agar pencatatan nota dan pemotongan stok di \textit{cloud} berlangsung dalam satu transaksi basis data yang aman.
     
     \begin{figure}[H]
         \centering
@@ -870,13 +874,13 @@ Penjelasan mengenai kelas-kelas utama dalam sistem adalah sebagai berikut:
         \label{fig:act-sync}
     \end{figure}
 
-    \item \textbf{Activity Diagram Proses Kalibrasi AI Smart Analytics} \\
-    Gambar \ref{fig:act-ai} menggambarkan alur kerja pemrosesan data historis transaksi lokal, melakukan penapisan data pribadi pelanggan (\textit{PII scrubbing}), mengunggah data teragregasi dan terenkripsi ke \textit{Edge Function}, dan memicu model peramalan penjualan untuk menampilkan visualisasi analitik omzet serta rekomendasi promosi.
+    \item \textbf{Activity Diagram Proses AI Smart Analytics} \\
+    Gambar \ref{fig:act-ai} menggambarkan alur kerja fitur analitik prediktif: pengguna membuka layar \textit{Smart Analytics}, sistem mengagregasi data penjualan historis dari Isar DB lokal, lalu memanggil \textit{endpoint} model LSTM yang di-\textit{hosting} di Hugging Face secara langsung melalui HTTPS. Selama pemrosesan, sistem menampilkan status pemuatan (termasuk peringatan \textit{cold start} bila \textit{server} inferensi baru aktif dari kondisi \textit{idle}), kemudian merender visualisasi analitik omzet beserta rekomendasi promosi, dan menyimpan hasilnya sebagai \textit{snapshot} riwayat analitik di tabel \textit{smart\_analytics\_snapshots}.
     
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.65\textwidth,height=0.45\textheight,keepaspectratio]{activity_ai.png}
-        \caption{Activity Diagram Kalibrasi AI Smart Analytics}
+        \caption{Activity Diagram Proses AI Smart Analytics}
         \label{fig:act-ai}
     \end{figure}
 \end{enumerate}
@@ -928,13 +932,13 @@ Penjelasan alur urutan transaksi pada diagram di atas adalah sebagai berikut:
     \item Isar DB mengembalikan respon sukses penulisan data transaksi.
     \item Aplikasi melakukan pembaruan stok produk secara lokal pada Isar DB.
     \item Aplikasi menampilkan informasi checkout sukses ke layar kasir.
-    \item \textit{Sync Engine} mendeteksi status internet aktif dan menyinkronkan transaksi ke cloud Supabase.
+    \item \textit{Sync Engine} mendeteksi status internet aktif dan menyinkronkan transaksi ke cloud Supabase melalui pemanggilan RPC \texttt{create\_transaction\_v4}.
     \item Supabase mengembalikan respon sukses, lalu \textit{Sync Engine} memperbarui status transaksi lokal menjadi \texttt{isSynced=true}.
 \end{enumerate}
 
 \subsection{\textit{Entity Relationship Diagram} (ERD)}
 
-Basis data sistem POS dirancang secara hibrida menggunakan Supabase PostgreSQL untuk penyimpanan \textit{cloud} dan Isar DB untuk penyimpanan lokal di perangkat \textit{mobile}. Skema basis data \textit{cloud} terdiri dari delapan entitas utama yang saling berelasi sebagaimana diilustrasikan pada Gambar \ref{fig:erd}.
+Basis data sistem POS dirancang secara hibrida menggunakan Supabase PostgreSQL untuk penyimpanan \textit{cloud} dan Isar DB untuk penyimpanan lokal di perangkat \textit{mobile}. Skema basis data \textit{cloud} terdiri dari sembilan entitas utama yang saling berelasi sebagaimana diilustrasikan pada Gambar \ref{fig:erd}.
 \begin{landscape}
 \begin{figure}[p]
     \centering
@@ -944,7 +948,7 @@ Basis data sistem POS dirancang secara hibrida menggunakan Supabase PostgreSQL u
 \end{figure}
 \end{landscape}
 
-Entitas \textit{stores} menjadi entitas induk yang berelasi dengan seluruh entitas lainnya. Entitas \textit{store\_members} mengelola hak akses berbasis peran (\textit{Role-Based Access Control}/RBAC) untuk Owner dan Kasir. Katalog produk dikelola melalui entitas \textit{products} dan \textit{categories}, sedangkan data transaksi disimpan pada entitas \textit{transactions} dan \textit{transaction\_items}. Riwayat perubahan stok dicatat pada entitas \textit{stock\_histories}, sementara entitas \textit{notifications} mendukung sistem notifikasi. Daftar seluruh tabel basis data yang digunakan dirangkum pada Tabel \ref{tab:database}.
+Entitas \textit{stores} menjadi entitas induk yang berelasi dengan seluruh entitas lainnya. Entitas \textit{store\_members} mengelola hak akses berbasis peran (\textit{Role-Based Access Control}/RBAC) untuk Owner dan Kasir. Katalog produk dikelola melalui entitas \textit{products} dan \textit{categories}, sedangkan data transaksi disimpan pada entitas \textit{transactions} dan \textit{transaction\_items}. Riwayat perubahan stok dicatat pada entitas \textit{stock\_history}, sementara entitas \textit{notifications} mendukung sistem notifikasi. Adapun hasil analisis fitur AI \textit{Smart Analytics} disimpan sebagai riwayat \textit{snapshot} pada entitas \textit{smart\_analytics\_snapshots}. Daftar seluruh tabel basis data yang digunakan dirangkum pada Tabel \ref{tab:database}.
 
 \begin{table}[H]
 \setstretch{1.2}
@@ -967,9 +971,11 @@ Entitas \textit{stores} menjadi entitas induk yang berelasi dengan seluruh entit
 \hline
 6 & \textit{transaction\_items} & Menyimpan rincian produk yang dibeli dalam setiap transaksi. \\
 \hline
-7 & \textit{stock\_histories} & Mencatat \textit{log} audit perubahan stok masuk dan keluar produk. \\
+7 & \textit{stock\_history} & Mencatat \textit{log} audit perubahan stok masuk dan keluar produk. \\
 \hline
-8 & \textit{notifications} & Menyimpan pesan notifikasi sistem dan \textit{broadcast} Owner ke staf. \\
+8 & \textit{notifications} & Menyimpan pesan notifikasi sistem dan \textit{broadcast} antar staf toko. \\
+\hline
+9 & \textit{smart\_analytics\_snapshots} & Menyimpan riwayat \textit{snapshot} hasil analitik prediksi LSTM setiap kali fitur \textit{Smart Analytics} dijalankan. \\
 \hline
 \end{tabularx}
 \end{table}
@@ -1177,7 +1183,7 @@ Perancangan \textit{wireframe} dalam penelitian ini mencakup rancangan antarmuka
 
     \item \textbf{Halaman Kelola Produk}
 
-    Memungkinkan Owner untuk menambah, menyunting, dan menghapus produk yang dijual, lengkap dengan harga, stok, SKU/\textit{barcode}, gambar produk, dan kategori.
+    Memungkinkan staf toko untuk menambah, menyunting, dan menghapus produk yang dijual, lengkap dengan harga, stok, SKU/\textit{barcode}, gambar produk, dan kategori.
 
     \begin{figure}[H]
         \centering
@@ -1188,7 +1194,7 @@ Perancangan \textit{wireframe} dalam penelitian ini mencakup rancangan antarmuka
 
     \item \textbf{Halaman Kelola Kategori}
 
-    Memungkinkan Owner untuk membuat, mengedit, dan menghapus kategori produk guna mengorganisasi katalog dagangan toko dengan lebih terstruktur.
+    Memungkinkan staf toko untuk membuat, mengedit, dan menghapus kategori produk guna mengorganisasi katalog dagangan toko dengan lebih terstruktur.
 
     \begin{figure}[H]
         \centering
@@ -1199,7 +1205,7 @@ Perancangan \textit{wireframe} dalam penelitian ini mencakup rancangan antarmuka
 
     \item \textbf{Halaman Laporan}
 
-    Layar khusus Owner yang menampilkan laporan penjualan, tren bisnis, proyeksi penjualan harian berbasis model LSTM, dan ringkasan performa operasional toko.
+    Layar yang dapat diakses seluruh staf toko untuk menampilkan laporan penjualan, tren bisnis, proyeksi penjualan harian berbasis model LSTM, dan ringkasan performa operasional toko.
 
     \begin{figure}[H]
         \centering
@@ -1372,19 +1378,19 @@ Aplikasi mobile dikembangkan menggunakan framework Flutter dengan bahasa pemrogr
     Menampilkan visualisasi ringkasan kinerja penjualan toko saat ini, seperti grafik tren omzet penjualan harian, jumlah total transaksi, total nominal omzet harian, dan ringkasan stok produk yang menipis sebagai peringatan restock cepat.
     
     \item \textbf{Halaman POS (Pembayaran / Checkout)}:
-    Merupakan layar operasional utama kasir untuk memproses transaksi. Kasir dapat memilih produk, memasukkan jumlah barang ke keranjang belanja, menerapkan diskon atau voucher, memilih metode pembayaran (Tunai, QRIS, atau Kartu), serta menyelesaikan transaksi pembayaran.
+    Merupakan layar operasional utama kasir untuk memproses transaksi. Kasir dapat memilih produk, memasukkan jumlah barang ke keranjang belanja, menerapkan diskon atau voucher, memilih metode pembayaran (Tunai, QRIS, atau Transfer), serta menyelesaikan transaksi pembayaran.
     
     \item \textbf{Halaman Riwayat Transaksi}:
     Menampilkan daftar nota transaksi penjualan yang telah diselesaikan. Halaman ini memuat informasi detail nomor invoice, tanggal transaksi, nama kasir, total nominal pembayaran, dan status sinkronisasi cloud.
     
     \item \textbf{Halaman Kelola Produk dan Kategori}:
-    Menyediakan antarmuka bagi Owner untuk mengelola inventaris produk (menambah, mengubah, dan menghapus produk) beserta pengelompokan berdasarkan kategori produk. Form produk memuat nama produk, harga jual, stok fisik, barcode/SKU, dan gambar produk.
+    Menyediakan antarmuka bagi staf toko untuk mengelola inventaris produk (menambah, mengubah, dan menghapus produk) beserta pengelompokan berdasarkan kategori produk. Form produk memuat nama produk, harga jual, stok fisik, barcode/SKU, dan gambar produk.
     
     \item \textbf{Halaman Laporan (Analitik AI \& Prediksi LSTM)}:
     Menampilkan visualisasi grafik data penjualan aktual historis berdampingan dengan kurva proyeksi hasil prediksi penjualan harian untuk 7 hari ke depan berbasis model AI LSTM.
     
     \item \textbf{Halaman Pengaturan dan Profil Toko}:
-    Memungkinkan Owner untuk mengubah konfigurasi dasar aplikasi, mengatur profil outlet toko (logo, nama, alamat), serta mengelola akun karyawan/staf kasir yang memiliki akses operasional.
+    Memungkinkan staf toko untuk mengubah konfigurasi dasar aplikasi, dengan menu pengaturan profil outlet toko (logo, nama, alamat) dan pengelolaan akun karyawan/staf kasir yang khusus tersedia bagi Owner.
     
     \item \textbf{Halaman Struk Digital dan Katalog Mandiri}:
     Halaman struk digital menampilkan pratinjau struk fisik transaksi yang dapat dibagikan langsung ke pelanggan via aplikasi pesan instan. Layar katalog mandiri menyediakan daftar menu produk yang dapat dipindai oleh pelanggan untuk melihat daftar harga barang secara langsung.
@@ -1392,7 +1398,7 @@ Aplikasi mobile dikembangkan menggunakan framework Flutter dengan bahasa pemrogr
 
 \subsection{Implementasi Cloud Backend (Supabase PostgreSQL)}
 
-Infrastruktur backend cloud diimplementasikan menggunakan platform Supabase BaaS dengan database PostgreSQL. Struktur relasional database diwujudkan melalui delapan tabel utama yang saling terhubung:
+Infrastruktur backend cloud diimplementasikan menggunakan platform Supabase BaaS dengan database PostgreSQL. Struktur relasional database diwujudkan melalui sembilan tabel utama yang saling terhubung:
 \begin{enumerate}
     \item \textit{stores}: Menyimpan data identitas outlet merchant (id, nama, alamat, nomor HP, URL logo, created\_at).
     \item \textit{store\_members}: Mengatur relasi hak akses pengguna dengan peran Owner atau Karyawan di masing-masing outlet.
@@ -1400,21 +1406,22 @@ Infrastruktur backend cloud diimplementasikan menggunakan platform Supabase BaaS
     \item \textit{products}: Menyimpan katalog inventaris barang (id, nama, harga, stok, barcode, URL foto, is\_synced, is\_deleted).
     \item \textit{transactions}: Menyimpan data nota induk transaksi penjualan (id, total belanja, metode pembayaran, kasir\_id, created\_at).
     \item \textit{transaction\_items}: Menyimpan rincian item produk yang terjual pada setiap transaksi penjualan (id, transaksi\_id, produk\_id, jumlah, harga).
-    \item \textit{stock\_histories}: Mencatat log audit mutasi perubahan stok produk (stok masuk, keluar, penjualan, audit manual).
-    \item \textit{notifications}: Mengelola pesan notifikasi sistem dan info siaran dari Owner ke seluruh kasir secara real-time.
+    \item \textit{stock\_history}: Mencatat log audit mutasi perubahan stok produk (stok masuk, keluar, penjualan, audit manual).
+    \item \textit{notifications}: Mengelola pesan notifikasi sistem dan info siaran antar staf toko secara real-time.
+    \item \textit{smart\_analytics\_snapshots}: Menyimpan riwayat \textit{snapshot} hasil analitik prediksi LSTM setiap kali fitur \textit{Smart Analytics} dijalankan, sehingga hasil analisis sebelumnya dapat ditinjau kembali tanpa memanggil ulang model.
 \end{enumerate}
 
 Keamanan akses data antar-outlet dijamin melalui penerapan kebijakan Row Level Security (RLS) di database PostgreSQL. Kebijakan ini memastikan bahwa pengguna (kasir/owner) hanya dapat membaca dan menulis data yang memiliki \textit{store\_id} yang sesuai dengan toko tempat mereka terdaftar.
 
 \subsection{Implementasi Modul AI Prediksi Penjualan (Python \& TensorFlow)}
 
-Modul kecerdasan buatan untuk melakukan kalkulasi prediksi penjualan harian dikembangkan menggunakan Python dengan library TensorFlow/Keras di sisi server. Modul ini beroperasi secara terpisah dari beban kerja transaksional POS untuk menjaga stabilitas aplikasi kasir.
+Modul kecerdasan buatan untuk melakukan kalkulasi prediksi penjualan harian dikembangkan menggunakan Python dengan library TensorFlow/Keras, lalu di-\textit{deploy} sebagai layanan inferensi pada platform Hugging Face. Modul ini beroperasi secara terpisah dari beban kerja transaksional POS untuk menjaga stabilitas aplikasi kasir.
 
 Proses operasional modul AI berjalan melalui alur kerja sebagai berikut:
 \begin{enumerate}
-    \item \textbf{Penarikan Data}: Server Python melakukan penarikan data transaksi penjualan harian dari database Supabase PostgreSQL secara terjadwal.
-    \item \textbf{Pra-pemrosesan Data}: Data penjualan harian diagregasikan, dibersihkan dari nilai kosong menggunakan interpolasi linier, dan dinormalisasi ke skala 0 hingga 1 menggunakan \textit{MinMaxScaler}.
-    \item \textbf{FastAPI REST Endpoints}: Menyediakan endpoint API berbasis REST (seperti \textit{/predict}) menggunakan framework FastAPI. Endpoint ini dipanggil oleh aplikasi Flutter dengan mengirimkan parameter \textit{store\_id} dan menerima respons berupa deret angka prediksi penjualan harian untuk hari berikutnya.
+    \item \textbf{Agregasi Data di Sisi Klien}: Aplikasi Flutter mengagregasi data transaksi penjualan harian dari basis data lokal Isar DB menjadi \textit{payload} deret waktu agregat (tanpa informasi identitas pelanggan) pada saat pengguna membuka fitur \textit{Smart Analytics}.
+    \item \textbf{Pra-pemrosesan Data}: Di sisi server inferensi, data penjualan harian dibersihkan dari nilai kosong menggunakan interpolasi linier dan dinormalisasi ke skala 0 hingga 1 menggunakan \textit{MinMaxScaler} sebelum diumpankan ke model LSTM.
+    \item \textbf{FastAPI REST Endpoints}: Layanan inferensi menyediakan endpoint API berbasis REST (seperti \textit{/predict}) menggunakan framework FastAPI. Endpoint ini dipanggil langsung oleh aplikasi Flutter melalui HTTPS dan mengembalikan respons berupa deret angka prediksi penjualan harian untuk hari-hari berikutnya. Hasil analisis kemudian disimpan aplikasi sebagai \textit{snapshot} pada tabel \textit{smart\_analytics\_snapshots} di Supabase.
 \end{enumerate}
 
 \section{Hasil Pengujian Sistem}
@@ -1454,7 +1461,7 @@ Pengujian fungsionalitas sistem menggunakan metode Black Box diterapkan pada 14 
 \hline
 7 & Kelola Kategori & Mengatur kategori produk untuk pengelompokan menu kasir. & Sesuai Harapan & Berhasil \\
 \hline
-8 & Audit Mutasi Stok & Riwayat keluar masuk barang tercatat di log stock\_histories. & Sesuai Harapan & Berhasil \\
+8 & Audit Mutasi Stok & Riwayat keluar masuk barang tercatat di log stock\_history. & Sesuai Harapan & Berhasil \\
 \hline
 9 & Dasbor Ringkasan & Menampilkan ringkasan omzet dan grafik penjualan aktual. & Sesuai Harapan & Berhasil \\
 \hline
@@ -1660,10 +1667,10 @@ Beberapa keterbatasan operasional dari sistem POS mobile yang dikembangkan melip
     Model prediksi LSTM memerlukan data transaksi historis runtun waktu yang kontinu. Apabila aplikasi baru diimplementasikan pada outlet toko baru, modul prediksi tidak dapat langsung menampilkan proyeksi analitik yang akurat sampai data transaksi terkumpul minimal selama 30 hari sebagai periode pemanasan awal (\textit{warm-up period}).
     
     \item \textbf{Ketergantungan Data Terkini}:
-    Meskipun operasional transaksi kasir dapat berjalan tanpa internet (offline), modul prediksi LSTM di server membutuhkan sinkronisasi data transaksi aktual secara rutin agar dapat melatih ulang model dan menghasilkan proyeksi penjualan yang relevan. Jika data transaksi di lokal terlambat disinkronkan ke server cloud, akurasi hasil proyeksi prediksi untuk hari berikutnya dapat menurun karena tidak menangkap tren transaksi paling akhir.
+    Meskipun operasional transaksi kasir dapat berjalan tanpa internet (offline), kualitas proyeksi modul prediksi LSTM bergantung pada kelengkapan data transaksi aktual yang menjadi \textit{payload} permintaan analisis. Jika data transaksi terbaru belum tercatat atau tersinkronkan, akurasi hasil proyeksi prediksi untuk hari berikutnya dapat menurun karena tidak menangkap tren transaksi paling akhir.
     
     \item \textbf{Ketergantungan Akses Server untuk Hasil Prediksi}:
-    Karena keterbatasan sumber daya komputasi dan konsumsi baterai perangkat mobile, proses kalkulasi peramalan model LSTM yang berat dialihkan sepenuhnya ke server Python (VPS). Akibatnya, meskipun kasir dapat bertransaksi secara offline, Owner tetap memerlukan koneksi internet aktif untuk menarik data visualisasi prediksi analitik terbaru dari API server ke dasbor aplikasi.
+    Karena keterbatasan sumber daya komputasi dan konsumsi baterai perangkat mobile, proses kalkulasi peramalan model LSTM yang berat dialihkan sepenuhnya ke layanan inferensi Python yang di-\textit{hosting} pada platform Hugging Face. Akibatnya, meskipun kasir dapat bertransaksi secara offline, pengguna tetap memerlukan koneksi internet aktif untuk memperbarui visualisasi prediksi analitik terbaru dari API inferensi ke dasbor aplikasi. Selain itu, layanan inferensi gratis pada Hugging Face dapat mengalami kondisi \textit{cold start} (jeda pemuatan saat \textit{server} baru aktif kembali dari \textit{idle}) yang memperlambat respons analisis pertama.
 \end{enumerate}
 
 \subsection{Keterbatasan Penelitian Model Prediksi}

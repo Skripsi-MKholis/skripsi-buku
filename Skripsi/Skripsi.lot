@@ -12,13 +12,13 @@
 \contentsline {table}{\numberline {3.7}{\ignorespaces Struktur Skema Dataset \texttt {monthly\_sales.csv}}}{25}{table.caption.10}%
 \contentsline {table}{\numberline {3.8}{\ignorespaces Definisi Aktor}}{31}{table.caption.13}%
 \contentsline {table}{\numberline {3.9}{\ignorespaces Definisi \textit {Use Case}}}{31}{table.3.9}%
-\contentsline {table}{\numberline {3.10}{\ignorespaces Daftar Tabel Basis Data POS}}{41}{table.caption.21}%
-\contentsline {table}{\numberline {3.11}{\ignorespaces Skenario Pengujian \textit {Black Box}}}{62}{table.3.11}%
+\contentsline {table}{\numberline {3.10}{\ignorespaces Daftar Tabel Basis Data POS}}{42}{table.caption.21}%
+\contentsline {table}{\numberline {3.11}{\ignorespaces Skenario Pengujian \textit {Black Box}}}{63}{table.3.11}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Hasil Pengujian Black Box}}{68}{table.4.1}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{70}{table.caption.36}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces Statistik Ringkas Dataset Pendapatan Harian}}{71}{table.caption.37}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces Pembagian Dataset dan Dimensi Sequence}}{72}{table.caption.38}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces Perbandingan Performa pada Data Uji (\textit {One-Step-Ahead})}}{74}{table.caption.40}%
-\contentsline {table}{\numberline {4.6}{\ignorespaces Statistik Performa LSTM Hybrid pada 10 Seed}}{75}{table.caption.42}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Hasil Pengujian Black Box}}{69}{table.4.1}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{71}{table.caption.36}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Statistik Ringkas Dataset Pendapatan Harian}}{72}{table.caption.37}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Pembagian Dataset dan Dimensi Sequence}}{73}{table.caption.38}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Perbandingan Performa pada Data Uji (\textit {One-Step-Ahead})}}{75}{table.caption.40}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Statistik Performa LSTM Hybrid pada 10 Seed}}{76}{table.caption.42}%
 \addvspace {10\p@ }
