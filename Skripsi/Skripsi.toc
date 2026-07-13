@@ -55,23 +55,23 @@
 \contentsline {subsection}{\numberline {4.1.1}Implementasi Aplikasi Mobile (Flutter)}{70}{subsection.4.1.1}%
 \contentsline {subsection}{\numberline {4.1.2}Implementasi Cloud Backend (Supabase PostgreSQL)}{72}{subsection.4.1.2}%
 \contentsline {subsection}{\numberline {4.1.3}Implementasi Modul AI Prediksi Penjualan (Python \& TensorFlow)}{73}{subsection.4.1.3}%
-\contentsline {section}{\numberline {4.2}Hasil Pengujian Sistem}{74}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Hasil Pengujian Black Box}{74}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Hasil Pengujian Sinkronisasi Offline-First}{76}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Deskripsi Data dan Eksplorasi Awal}{76}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}Pra-pemrosesan dan Pembentukan Sequence}{77}{subsection.4.2.4}%
-\contentsline {subsection}{\numberline {4.2.5}Arsitektur Model dan Skenario Eksperimen}{78}{subsection.4.2.5}%
-\contentsline {subsection}{\numberline {4.2.6}Hasil Pelatihan Model}{79}{subsection.4.2.6}%
-\contentsline {subsection}{\numberline {4.2.7}Evaluasi Model dan Perbandingan dengan Baseline}{80}{subsection.4.2.7}%
-\contentsline {subsection}{\numberline {4.2.8}Evaluasi Multi-Seed dan Analisis Kestabilan}{81}{subsection.4.2.8}%
-\contentsline {subsection}{\numberline {4.2.9}Hasil Eksperimen Augmentasi Data Sintetis TimeGAN}{82}{subsection.4.2.9}%
-\contentsline {subsection}{\numberline {4.2.10}Hasil Peramalan ke Depan}{84}{subsection.4.2.10}%
-\contentsline {section}{\numberline {4.3}Pembahasan}{84}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Pembahasan Pengujian Fungsional dan Arsitektur Offline-First}{85}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Pembahasan Hasil Prediksi Penjualan LSTM}{85}{subsection.4.3.2}%
-\contentsline {section}{\numberline {4.4}Keterbatasan Sistem dan Penelitian}{87}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Keterbatasan Sistem POS}{87}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Keterbatasan Penelitian Model Prediksi}{88}{subsection.4.4.2}%
-\contentsline {chapter}{\numberline {5}KESIMPULAN DAN SARAN}{90}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Kesimpulan}{90}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Saran}{91}{section.5.2}%
+\contentsline {section}{\numberline {4.2}Hasil Pengujian Sistem}{75}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Hasil Pengujian Black Box}{75}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Hasil Pengujian Sinkronisasi Offline-First}{77}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Deskripsi Data dan Eksplorasi Awal}{78}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Pra-pemrosesan dan Pembentukan Sequence}{79}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.5}Arsitektur Model dan Skenario Eksperimen}{80}{subsection.4.2.5}%
+\contentsline {subsection}{\numberline {4.2.6}Hasil Pelatihan Model}{83}{subsection.4.2.6}%
+\contentsline {subsection}{\numberline {4.2.7}Evaluasi Model dan Perbandingan dengan Baseline}{84}{subsection.4.2.7}%
+\contentsline {subsection}{\numberline {4.2.8}Evaluasi Multi-Seed dan Analisis Kestabilan}{85}{subsection.4.2.8}%
+\contentsline {subsection}{\numberline {4.2.9}Hasil Eksperimen Augmentasi Data Sintetis TimeGAN}{87}{subsection.4.2.9}%
+\contentsline {subsection}{\numberline {4.2.10}Hasil Peramalan ke Depan}{90}{subsection.4.2.10}%
+\contentsline {section}{\numberline {4.3}Pembahasan}{91}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Pembahasan Pengujian Fungsional dan Arsitektur Offline-First}{92}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Pembahasan Hasil Prediksi Penjualan LSTM}{92}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}Keterbatasan Sistem dan Penelitian}{94}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Keterbatasan Sistem POS}{94}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Keterbatasan Penelitian Model Prediksi}{95}{subsection.4.4.2}%
+\contentsline {chapter}{\numberline {5}KESIMPULAN DAN SARAN}{97}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Kesimpulan}{97}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Saran}{98}{section.5.2}%

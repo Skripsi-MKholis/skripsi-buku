@@ -24,6 +24,26 @@
 \usepackage{enumitem}
 \usepackage{longtable}
 \usepackage{booktabs}
+\usepackage{listings}
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\bfseries,
+  commentstyle=\itshape\color{gray},
+  showstringspaces=false,
+  breaklines=true,
+  breakatwhitespace=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny,
+  xleftmargin=2em,
+  framexleftmargin=1.5em,
+  captionpos=b,
+  tabsize=2,
+  aboveskip=0.8em,
+  belowskip=0.8em
+}
+\renewcommand{\lstlistingname}{Kode Program}
 \usepackage[font=small, format=plain, labelfont=bf, up, textfont=up]{caption}
 \usepackage{subcaption}
 \usepackage{geometry}
@@ -1482,6 +1502,44 @@ Layanan API produksi menyediakan tujuh \textit{endpoint} REST dengan fungsi seba
 
 Aplikasi Flutter memanggil \textit{endpoint} tersebut secara langsung melalui HTTPS dengan \textit{payload} agregat penjualan tanpa informasi identitas pelanggan, kemudian menyimpan hasil analisis sebagai \textit{snapshot} pada tabel \textit{smart\_analytics\_snapshots} di Supabase.
 
+Inti implementasi \textit{endpoint} prediksi harian pada berkas \texttt{app.py} disajikan pada Kode Program~\ref{lst:flask_daily} (dipersingkat). Metode \textit{Seasonal-Naive} dihitung dengan merata-ratakan $k$ kemunculan terakhir dari setiap hari kerja yang sama, dan tanggal prediksi dihasilkan dengan melewati hari tutup.
+
+\begin{lstlisting}[caption={Implementasi Endpoint Prediksi Harian Seasonal-Naive (\texttt{app.py})}, label={lst:flask_daily}]
+@app.route('/api/predict/daily', methods=['GET', 'POST'])
+def predict_daily():
+    data = request.get_json(silent=True) or {}
+    n_days = int(data.get("n_days", 7))
+    k = int(data.get("k", 4))
+    dfa = get_daily_dataframe(data.get("history", None))
+    last_date = dfa['date'].max()
+
+    # Seasonal-Naive: rata-rata k kemunculan terakhir
+    # dari hari kerja yang sama (0=Senin ... 4=Jumat)
+    by_dow = {}
+    for dow in range(5):
+        dow_data = dfa[dfa['day_of_week'] == dow]['revenue']
+        if len(dow_data) >= k:
+            by_dow[dow] = dow_data.tail(k).mean()
+        elif len(dow_data) > 0:
+            by_dow[dow] = dow_data.mean()
+        else:
+            by_dow[dow] = dfa['revenue'].tail(10).mean()
+
+    # Naive: prediksi = omzet hari kerja terakhir
+    naive_value = float(dfa['revenue'].iloc[-1])
+
+    # Tanggal prediksi otomatis melewati hari tutup
+    future_dates = generate_future_business_days(last_date, n_days)
+    predictions = []
+    for dt in future_dates:
+        pred_sn = int(round(by_dow.get(dt.weekday(), naive_value)))
+        predictions.append({
+            "date": dt.strftime('%Y-%m-%d'),
+            "predicted_revenue_seasonal_naive": pred_sn,
+            "predicted_revenue_naive": int(round(naive_value))})
+    return jsonify({"predictions": predictions}), 200
+\end{lstlisting}
+
 \section{Hasil Pengujian Sistem}
 
 Pengujian sistem dilakukan untuk memvalidasi fungsionalitas aplikasi dan mengukur tingkat akurasi dari model AI LSTM yang telah diintegrasikan. Pengujian mencakup uji coba fungsional Black Box, pengujian akurasi prediksi LSTM, serta uji sinkronisasi data offline-first.
@@ -1612,7 +1670,82 @@ Uji (\textit{test}) & 48 & 41 & (41, 7, 8) \\ \hline
 
 Arsitektur model peramalan yang diimplementasikan adalah LSTM satu lapis (\textit{single-layer LSTM}) dengan 24 \textit{hidden units}, diikuti oleh lapisan \textit{Dropout} dengan laju 0,1 untuk regularisasi, satu lapisan \textit{Dense} dengan 16 neuron beraktivasi \textit{Rectified Linear Unit} (ReLU), dan diakhiri oleh satu lapisan keluaran (\textit{output layer}) tunggal beraktivasi linear. Model ini dirancang secara minimalis dengan total parameter terlatih hanya sebanyak 3.585 parameter. Pemilihan model berkapasitas rendah ini didasarkan pada jumlah data latih yang sangat terbatas (212 sampel sequence), sehingga penggunaan model LSTM berkapasitas besar (\textit{stacked layers}) akan berisiko tinggi memicu kegagalan konvergensi pelatihan atau bias \textit{overfitting}. Proses optimasi menggunakan metode Adam dengan \textit{learning rate} awal sebesar $5 \times 10^{-4}$, fungsi kerugian (\textit{loss function}) MSE, serta didukung \textit{callbacks} \textit{EarlyStopping} dan \textit{ReduceLROnPlateau}.
 
-Pengukuran akurasi model dilakukan menggunakan empat metrik evaluasi secara simultan, yaitu MAE, RMSE, sMAPE, dan MASE. Penggunaan MAPE konvensional dihindari karena karakteristik dataset transaksi memiliki beberapa hari aktif dengan nilai nominal pendapatan yang sangat rendah (mendekati nol), sehingga pembagian terhadap nilai aktual tersebut akan menyebabkan pembagian dengan nol atau nilai persentase galat yang sangat besar (\textit{exploding MAPE}) yang tidak representatif. Metrik MASE dipilih sebagai acuan performa utama karena ternormalisasi terhadap galat peramalan naif secara \textit{in-sample}, di mana nilai MASE kurang dari satu menandakan bahwa kinerja model prediksi lebih baik dibandingkan model naif sederhana. Sebagai model pembanding (\textit{baselines}), digunakan tiga metode deterministik: (1) \textit{Naive} (kemarin) di mana prediksi hari ini disamakan dengan realisasi hari kemarin, (2) \textit{Mean-7} berupa rata-rata bergerak dari 7 hari aktif terakhir, dan (3) model statistik \textit{SARIMA} dengan skema peramalan \textit{rolling one-step}.
+Implementasi pra-pemrosesan data — meliputi penyaringan hari aktif, transformasi target \textit{log-return}, dan pengodean siklik fitur kalender — disajikan pada Kode Program~\ref{lst:preprocessing}, sedangkan konstruksi arsitektur model beserta konfigurasi pelatihannya disajikan pada Kode Program~\ref{lst:build_lstm}.
+
+\begin{lstlisting}[caption={Pra-pemrosesan Data: Filter Hari Aktif, Log-Return, dan Fitur Siklik}, label={lst:preprocessing}]
+df = pd.read_csv(DAILY_CSV, parse_dates=['date'])
+# Hanya hari aktif (revenue > 0) yang dilatih ke model
+dfa = df[df['revenue'] > 0].copy() \
+        .sort_values('date').reset_index(drop=True)
+
+dfa['rev_log'] = np.log1p(dfa['revenue'])
+# TARGET: log-return (perubahan pendapatan harian)
+dfa['logret']  = dfa['rev_log'].diff().fillna(0.0)
+# Pengodean siklik sinus-kosinus fitur kalender
+dfa['week_sin']  = np.sin(2*np.pi*dfa['week_of_year']/52)
+dfa['week_cos']  = np.cos(2*np.pi*dfa['week_of_year']/52)
+dfa['month_sin'] = np.sin(2*np.pi*dfa['month']/12)
+dfa['month_cos'] = np.cos(2*np.pi*dfa['month']/12)
+dfa['dow_sin']   = np.sin(2*np.pi*dfa['day_of_week']/5)
+dfa['dow_cos']   = np.cos(2*np.pi*dfa['day_of_week']/5)
+
+# 'logret' wajib kolom pertama (kolom target)
+FEATURES = ['logret','week_sin','week_cos','month_sin',
+            'month_cos','dow_sin','dow_cos','is_ramadan']
+
+# Pembagian kronologis 70/15/15 (tanpa pengacakan)
+n = len(dfa); n_tr = int(n*0.70); n_va = int(n*0.15)
+df_tr = dfa.iloc[:n_tr]
+df_va = dfa.iloc[n_tr:n_tr+n_va]
+df_te = dfa.iloc[n_tr+n_va:]
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Konstruksi Arsitektur LSTM Tersederhanakan dan Konfigurasi Pelatihan}, label={lst:build_lstm}]
+LOOK_BACK = 7   # jendela masukan: 7 hari aktif
+HORIZON   = 1   # prediksi 1 langkah ke depan
+UNITS     = 24
+DROPOUT   = 0.1
+
+def build_lstm():
+    m = Sequential([
+        LSTM(UNITS, input_shape=(LOOK_BACK, len(FEATURES))),
+        Dropout(DROPOUT),
+        Dense(16, activation='relu'),
+        Dense(HORIZON)
+    ], name='lstm_hybrid_residual')
+    m.compile(optimizer=Adam(5e-4), loss='mse', metrics=['mae'])
+    return m
+
+cb = [EarlyStopping('val_loss', patience=20,
+                    restore_best_weights=True),
+      ReduceLROnPlateau('val_loss', factor=0.5,
+                        patience=8, min_lr=1e-6)]
+
+model = build_lstm()
+hist  = model.fit(X_tr, y_tr, validation_data=(X_va, y_va),
+                  epochs=200, batch_size=16, callbacks=cb)
+\end{lstlisting}
+
+Pengukuran akurasi model dilakukan menggunakan empat metrik evaluasi secara simultan, yaitu MAE, RMSE, sMAPE, dan MASE. Penggunaan MAPE konvensional dihindari karena karakteristik dataset transaksi memiliki beberapa hari aktif dengan nilai nominal pendapatan yang sangat rendah (mendekati nol), sehingga pembagian terhadap nilai aktual tersebut akan menyebabkan pembagian dengan nol atau nilai persentase galat yang sangat besar (\textit{exploding MAPE}) yang tidak representatif. Metrik MASE dipilih sebagai acuan performa utama karena ternormalisasi terhadap galat peramalan naif secara \textit{in-sample}, di mana nilai MASE kurang dari satu menandakan bahwa kinerja model prediksi lebih baik dibandingkan model naif sederhana. Sebagai model pembanding (\textit{baselines}), digunakan tiga metode deterministik: (1) \textit{Naive} (kemarin) di mana prediksi hari ini disamakan dengan realisasi hari kemarin, (2) \textit{Mean-7} berupa rata-rata bergerak dari 7 hari aktif terakhir, dan (3) model statistik \textit{SARIMA} dengan skema peramalan \textit{rolling one-step}. Implementasi fungsi metrik evaluasi sMAPE dan MASE yang digunakan pada seluruh pengujian disajikan pada Kode Program~\ref{lst:metrics}.
+
+\begin{lstlisting}[caption={Implementasi Fungsi Metrik Evaluasi sMAPE dan MASE}, label={lst:metrics}]
+def smape(y, yhat):
+    # sMAPE: galat dibagi rata-rata |aktual| dan |prediksi|
+    d = (np.abs(y) + np.abs(yhat)) / 2
+    return np.mean(np.abs(y - yhat)
+                   / np.where(d == 0, 1, d)) * 100
+
+def mase(y, yhat, naive_mae):
+    # MASE: galat dinormalisasi thd galat naif in-sample
+    return mean_absolute_error(y, yhat) / naive_mae
+
+def report(y, yhat, naive_mae, label):
+    rmse = np.sqrt(mean_squared_error(y, yhat))
+    mae  = mean_absolute_error(y, yhat)
+    return {'rmse': rmse, 'mae': mae,
+            'smape': smape(y, yhat),
+            'mase': mase(y, yhat, naive_mae)}
+\end{lstlisting}
 
 \subsection{Hasil Pelatihan Model}
 
@@ -1655,7 +1788,32 @@ Berdasarkan hasil perbandingan pada Tabel \ref{tab:eval_baseline_comp}, secara r
 
 \subsection{Evaluasi Multi-Seed dan Analisis Kestabilan}
 
-Meningkatnya sensitivitas performa model LSTM terhadap inisialisasi bobot acak awal pada data kecil mengharuskan pengujian dilakukan menggunakan pendekatan \textit{multi-seed evaluation} dengan melatih model sebanyak sepuluh kali menggunakan nilai \textit{seed} acak yang berbeda. Ringkasan statistik hasil pengujian sepuluh \textit{seeds} tersebut disajikan pada Tabel \ref{tab:statistik_multiseed}.
+Meningkatnya sensitivitas performa model LSTM terhadap inisialisasi bobot acak awal pada data kecil mengharuskan pengujian dilakukan menggunakan pendekatan \textit{multi-seed evaluation} dengan melatih model sebanyak sepuluh kali menggunakan nilai \textit{seed} acak yang berbeda. Prosedur pengujian diimplementasikan sebagai perulangan pelatihan dengan pengaturan \textit{seed} eksplisit pada seluruh sumber keacakan (Python, NumPy, dan TensorFlow) sebagaimana disajikan pada Kode Program~\ref{lst:multiseed}. Ringkasan statistik hasil pengujian sepuluh \textit{seeds} tersebut disajikan pada Tabel \ref{tab:statistik_multiseed}.
+
+\begin{lstlisting}[caption={Prosedur Evaluasi \textit{Multi-Seed} (10 Kali Pelatihan Ulang)}, label={lst:multiseed}]
+def set_seed(s):
+    os.environ['PYTHONHASHSEED'] = str(s)
+    random.seed(s); np.random.seed(s); tf.random.set_seed(s)
+
+rows = []
+for s in range(N_SEEDS):   # N_SEEDS = 10
+    set_seed(s)
+    cb = [EarlyStopping('val_loss', patience=20,
+                        restore_best_weights=True, verbose=0),
+          ReduceLROnPlateau('val_loss', factor=0.5,
+                            patience=8, min_lr=1e-6, verbose=0)]
+    mdl = build()
+    mdl.fit(X_tr, y_tr, validation_data=(X_va, y_va),
+            epochs=200, batch_size=16, callbacks=cb, verbose=0)
+    # Rekonstruksi log-return prediksi ke nominal Rupiah
+    logret_hat = inv_logret(
+        mdl.predict(X_te, verbose=0).flatten())
+    y_lstm = np.expm1(np.log1p(rev_prev) + logret_hat)
+    r = metrics(rev_true, y_lstm); r['seed'] = s
+    rows.append(r)
+
+res = pd.DataFrame(rows)   # rata-rata +- deviasi per metrik
+\end{lstlisting}
 
 \begin{table}[H]
 \setstretch{1.2}
@@ -1702,11 +1860,79 @@ LSTM Tanpa Augmentasi & 1.750.355 & 1.935.119 & 115,40\% & 4,823 \\ \hline
 
 Perlu dicatat bahwa nilai galat pada Tabel \ref{tab:eval_timegan} tidak dapat dibandingkan secara langsung dengan Tabel \ref{tab:eval_baseline_comp}, karena eksperimen augmentasi ini menggunakan skema peramalan multi-langkah langsung (\textit{direct multi-step}, horizon 7 hari sekaligus) yang secara inheren lebih sulit daripada skema satu langkah ke depan (\textit{one-step-ahead}).
 
+Cuplikan implementasi dua dari lima jaringan penyusun TimeGAN pada berkas \texttt{TimeGAN.py} — jaringan \textit{embedder} yang memetakan data riil ke ruang laten dan \textit{generator} yang memetakan derau acak menjadi representasi laten sintetis — disajikan pada Kode Program~\ref{lst:timegan}.
+
+\begin{lstlisting}[caption={Implementasi Jaringan \textit{Embedder} dan \textit{Generator} TimeGAN (PyTorch)}, label={lst:timegan}]
+class EmbedderNet(nn.Module):
+    """Memetakan data nyata X -> representasi laten H."""
+    def __init__(self):
+        super().__init__()
+        self.rnn  = nn.GRU(NUM_FEAT, HIDDEN_DIM,
+                           NUM_LAYERS, batch_first=True)
+        self.proj = nn.Sequential(
+            nn.Linear(HIDDEN_DIM, HIDDEN_DIM), nn.Sigmoid())
+
+    def forward(self, x):
+        h, _ = self.rnn(x)
+        return self.proj(h)
+
+class GeneratorNet(nn.Module):
+    """Memetakan noise Z -> laten sintetis E."""
+    def __init__(self):
+        super().__init__()
+        self.rnn  = nn.GRU(NUM_FEAT, HIDDEN_DIM,
+                           NUM_LAYERS, batch_first=True)
+        self.proj = nn.Sequential(
+            nn.Linear(HIDDEN_DIM, HIDDEN_DIM), nn.Sigmoid())
+
+    def forward(self, z):
+        h, _ = self.rnn(z)
+        return self.proj(h)
+
+# Tiga fase pelatihan (masing-masing 600 epoch):
+# 1) train_embedder : autoencoder embedder-recovery
+# 2) train_supervisor: dinamika temporal ruang laten
+# 3) train_joint    : pelatihan gabungan adversarial
+\end{lstlisting}
+
 Hasil eksperimen menunjukkan dua temuan penting. Pertama, augmentasi TimeGAN terbukti efektif memperbaiki kualitas pelatihan LSTM pada data terbatas: nilai MAE model turun drastis dari Rp 1.750.355,00 menjadi Rp 860.695,00 (perbaikan sekitar 50,8\%), dan nilai MASE membaik dari 4,823 menjadi 2,372. Kedua, meskipun mengalami perbaikan signifikan, model LSTM teraugmentasi tetap belum mampu mengungguli \textit{baseline} \textit{Seasonal-Naive} ($m=5$, MAE Rp 755.403,00) yang memanfaatkan pola musiman mingguan secara sederhana. Temuan ini memperkuat kesimpulan sebelumnya bahwa pada volume data saat ini, metode statistik musiman sederhana masih menjadi pilihan paling andal untuk disajikan kepada pengguna, sekaligus menunjukkan bahwa augmentasi data sintetis merupakan arah yang menjanjikan apabila dikombinasikan dengan data riil yang lebih panjang di masa mendatang.
 
 \subsection{Hasil Peramalan ke Depan}
 
-Untuk kebutuhan penyajian visualisasi ramalan penjualan harian selama 7 hari aktif ke depan secara rekursif (\textit{recursive forecasting}), model LSTM residual yang melakukan iterasi mandiri mengalami kerentanan berupa penumpukan kesalahan (\textit{error propagation}) di mana nilai prediksi meluruh secara eksponensial hingga bernilai sangat kecil dan tidak realistis. Setelah ditambahkan mekanisme pengaman berupa \textit{clipping} pada \textit{log-return} (dijepit antara persentil 10--90 data latih), \textit{damping factor} ($\phi = 0.7$) untuk meredam perubahan pada horizon yang jauh, serta \textit{safety rail} penahan nominal omzet harian aktif, grafik prediksi yang dihasilkan menjadi lebih stabil dan realistis.
+Untuk kebutuhan penyajian visualisasi ramalan penjualan harian selama 7 hari aktif ke depan secara rekursif (\textit{recursive forecasting}), model LSTM residual yang melakukan iterasi mandiri mengalami kerentanan berupa penumpukan kesalahan (\textit{error propagation}) di mana nilai prediksi meluruh secara eksponensial hingga bernilai sangat kecil dan tidak realistis. Setelah ditambahkan mekanisme pengaman berupa \textit{clipping} pada \textit{log-return} (dijepit antara persentil 10--90 data latih), \textit{damping factor} ($\phi = 0.7$) untuk meredam perubahan pada horizon yang jauh, serta \textit{safety rail} penahan nominal omzet harian aktif, grafik prediksi yang dihasilkan menjadi lebih stabil dan realistis. Implementasi inti dari fungsi peramalan rekursif beserta ketiga mekanisme pengaman tersebut disajikan pada Kode Program~\ref{lst:recursive}.
+
+\begin{lstlisting}[caption={Peramalan Rekursif dengan \textit{Clipping}, \textit{Damping}, dan \textit{Safety Rail}}, label={lst:recursive}]
+# Batas clip dari persentil 10-90 log-return data latih
+LR_LO, LR_HI = np.percentile(_train_logret, [10, 90])
+REV_FLOOR = np.percentile(_act_rev, 2)   # rail bawah
+REV_CEIL  = _act_rev.max()               # rail atas
+
+def forecast_hybrid_stable(model, dfa, scaler, features,
+                           look_back, n_steps, phi=0.7):
+    window   = scaler.transform(
+        dfa.tail(look_back)[features].values)
+    prev_rev = float(dfa['revenue'].iloc[-1])
+    d, step, rows = pd.Timestamp(dfa['date'].max()), 0, []
+    while len(rows) < n_steps:
+        d += pd.Timedelta(days=1)
+        # Lewati hari tutup (akhir pekan, Januari & Juli)
+        if d.weekday() >= 5 or d.month in [1, 7]:
+            continue
+        step += 1
+        raw_lr  = float(inv_logret(
+            model.predict(window[np.newaxis])[0, 0]))
+        lr_clip = float(np.clip(raw_lr, LR_LO, LR_HI))  # 1) clip
+        lr_damp = lr_clip * (phi ** (step - 1))         # 2) damp
+        rev = float(np.expm1(np.log1p(prev_rev) + lr_damp))
+        rev = float(np.clip(rev, REV_FLOOR, REV_CEIL))  # 3) rail
+        # Geser jendela masukan dengan baris fitur baru
+        window   = np.vstack([window[1:],
+                              scaler.transform([raw])[0]])
+        prev_rev = rev
+        rows.append({'tanggal': d.date(),
+                     'prediksi_revenue': int(round(rev))})
+    return pd.DataFrame(rows)
+\end{lstlisting}
 
 Meskipun demikian, secara statistik peramalan rekursif jangka panjang berbasis LSTM pada data terbatas ini akan dengan cepat meredam menuju nilai rata-rata historis (sifat \textit{mean-reverting}) dan menyerupai prediksi naif. Untuk diintegrasikan ke dalam fitur aplikasi riil kasir, metode peramalan statistik \textit{SARIMA} dan \textit{Seasonal-Naive} (rata-rata hari sejenis pada minggu sebelumnya) lebih direkomendasikan karena memberikan hasil peramalan multi-langkah yang jauh lebih stabil dan konsisten. Rekomendasi ini diwujudkan pada layanan API produksi, di mana \textit{endpoint} prediksi menyajikan metode \textit{Seasonal-Naive} ($k=4$) sebagai metode penyaji utama peramalan harian kepada aplikasi POS. Dalam penelitian skripsi ini, hasil evaluasi akurasi ilmiah tetap didasarkan pada pengujian satu langkah ke depan (\textit{one-step-ahead}), sedangkan visualisasi peramalan multi-langkah diposisikan murni sebagai ilustrasi fungsionalitas sistem.
 
