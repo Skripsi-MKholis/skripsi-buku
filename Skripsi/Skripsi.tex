@@ -187,7 +187,7 @@ TAHUN 2026}
 \restoregeometry
 
 %%-------------------------------------------------------------
-%% DAFTAR ISI, DAFTAR GAMBAR, DAFTAR TABEL
+%% ABSTRAK & ABSTRACT
 %%-------------------------------------------------------------
 \newpage
 \pagenumbering{roman}
@@ -195,6 +195,39 @@ TAHUN 2026}
 \fancyhf{}
 \cfoot{\thepage}
 \pagestyle{fancy}
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{ABSTRAK}
+\begin{spacing}{1.0}
+\begin{center}
+    \textbf{ABSTRAK}\\[0.5cm]
+\end{center}
+
+Penelitian ini bertujuan merancang dan membangun aplikasi \textit{Point of Sale} (POS) berbasis \textit{mobile} dengan arsitektur \textit{offline-first} yang dilengkapi fitur prediksi penjualan harian menggunakan metode \textit{Long Short-Term Memory} (LSTM), guna membantu pelaku UMKM—dalam hal ini kantin EatsTEDI Universitas Gadjah Mada sebagai mitra penelitian—dalam pengambilan keputusan operasional berbasis data. Sistem dikembangkan menggunakan \textit{framework} Flutter yang terintegrasi dengan basis data lokal Isar DB dan basis data \textit{cloud} Supabase PostgreSQL, sedangkan modul prediksi dibangun menggunakan Python (TensorFlow dan Flask) yang di-\textit{deploy} sebagai layanan API terpisah. Data yang digunakan berupa 313 hari aktif transaksi penjualan harian yang diolah sebagai data deret waktu (\textit{time series}) dengan pendekatan target \textit{log-return}. Kinerja model LSTM dievaluasi menggunakan metrik MAE, RMSE, sMAPE, dan MASE, serta dibandingkan dengan model pembanding \textit{Naive}, \textit{Mean-7}, dan SARIMA melalui pengujian \textit{multi-seed}. Hasil evaluasi menunjukkan bahwa model LSTM \textit{Hybrid} (MAE rata-rata Rp667.718,00; MASE 1,840) belum mampu mengungguli metode \textit{Naive} (MAE Rp519.841,00; MASE 1,432) akibat keterbatasan volume data historis dan dominasi persistensi jangka pendek pada data penjualan. Eksperimen augmentasi data sintetis menggunakan TimeGAN berhasil menurunkan galat model LSTM multi-langkah secara signifikan, namun tetap belum melampaui \textit{baseline Seasonal-Naive}. Berdasarkan temuan tersebut, layanan API produksi menyajikan metode \textit{Seasonal-Naive} sebagai metode penyaji utama peramalan harian. Pengujian fungsional \textit{Black Box} terhadap 14 skenario dan pengujian \textit{White Box} terhadap fungsi kritis layanan prediksi menunjukkan tingkat keberhasilan 100\%, sehingga sistem POS \textit{offline-first} ini terbukti layak dioperasikan secara penuh dalam mendukung operasional UMKM.\\[0.6cm]
+
+\noindent \textbf{Kata Kunci}: \textit{Point of Sale} (POS), Prediksi Penjualan Harian, \textit{Long Short-Term Memory} (LSTM), \textit{Offline-First}, TimeGAN, UMKM
+\end{spacing}
+
+\newpage
+\selectlanguage{english}
+\phantomsection
+\addcontentsline{toc}{chapter}{ABSTRACT}
+\begin{spacing}{1.0}
+\begin{center}
+    \textbf{\textit{ABSTRACT}}\\[0.5cm]
+\end{center}
+
+\textit{This study aims to design and develop a mobile-based Point of Sale (POS) application with an offline-first architecture, equipped with a daily sales prediction feature using the Long Short-Term Memory (LSTM) method, to assist MSMEs—in this case the EatsTEDI canteen of Universitas Gadjah Mada as the research partner—in data-driven operational decision-making. The system was developed using the Flutter framework integrated with the local Isar DB database and the Supabase PostgreSQL cloud database, while the prediction module was built using Python (TensorFlow and Flask) deployed as a separate API service. The data used consist of 313 active days of daily sales transactions processed as time-series data using a log-return target approach. The performance of the LSTM model was evaluated using the MAE, RMSE, sMAPE, and MASE metrics, and compared against the Naive, Mean-7, and SARIMA baseline models through multi-seed testing. The evaluation results show that the Hybrid LSTM model (average MAE of IDR 667,718.00; MASE of 1.840) was unable to outperform the Naive method (MAE of IDR 519,841.00; MASE of 1.432) due to the limited volume of historical data and the dominance of short-term persistence in the sales data. A synthetic data augmentation experiment using TimeGAN significantly reduced the error of the multi-step LSTM model, yet still did not surpass the Seasonal-Naive baseline. Based on these findings, the production API service presents the Seasonal-Naive method as the primary forecasting method for daily predictions. Black Box functional testing on 14 scenarios and White Box testing on the critical functions of the prediction service showed a 100\% success rate, proving that this offline-first POS system is fully viable for supporting MSME operations.}\\[0.6cm]
+
+\noindent \textbf{\textit{Keywords}}: \textit{Point of Sale (POS), Daily Sales Prediction, Long Short-Term Memory (LSTM), Offline-First, TimeGAN, MSMEs}
+\end{spacing}
+\selectlanguage{indonesian}
+
+%%-------------------------------------------------------------
+%% DAFTAR ISI, DAFTAR GAMBAR, DAFTAR TABEL
+%%-------------------------------------------------------------
+\newpage
 
 \renewcommand{\contentsname}{}
 \renewcommand{\listfigurename}{}
