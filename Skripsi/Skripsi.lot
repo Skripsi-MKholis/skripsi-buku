@@ -7,22 +7,22 @@
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {3.1}{\ignorespaces Jadwal Pelaksanaan Penelitian}}{23}{table.caption.8}%
 \contentsline {table}{\numberline {3.2}{\ignorespaces Daftar Alat dan Bahan Penelitian}}{23}{table.3.2}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Sebaran Penjualan Berdasarkan Kategori Produk}}{26}{table.caption.9}%
-\contentsline {table}{\numberline {3.4}{\ignorespaces Daftar 10 Produk Terlaris EatsTEDI UGM}}{27}{table.caption.10}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Sebaran Penjualan Berdasarkan Kategori Produk}}{27}{table.caption.9}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Daftar 10 Produk Terlaris EatsTEDI UGM}}{28}{table.caption.10}%
 \contentsline {table}{\numberline {3.5}{\ignorespaces Struktur Skema Dataset \texttt {daily\_sales.csv}}}{29}{table.caption.11}%
-\contentsline {table}{\numberline {3.6}{\ignorespaces Struktur Skema Dataset \texttt {weekly\_sales.csv}}}{29}{table.caption.12}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces Struktur Skema Dataset \texttt {weekly\_sales.csv}}}{30}{table.caption.12}%
 \contentsline {table}{\numberline {3.7}{\ignorespaces Struktur Skema Dataset \texttt {monthly\_sales.csv}}}{30}{table.caption.13}%
-\contentsline {table}{\numberline {3.8}{\ignorespaces Definisi Aktor}}{36}{table.caption.16}%
-\contentsline {table}{\numberline {3.9}{\ignorespaces Definisi \textit {Use Case}}}{36}{table.3.9}%
-\contentsline {table}{\numberline {3.10}{\ignorespaces Daftar Tabel Basis Data POS}}{47}{table.caption.24}%
-\contentsline {table}{\numberline {3.11}{\ignorespaces Skenario Pengujian \textit {Black Box}}}{69}{table.3.11}%
+\contentsline {table}{\numberline {3.8}{\ignorespaces Definisi Aktor}}{37}{table.caption.16}%
+\contentsline {table}{\numberline {3.9}{\ignorespaces Definisi \textit {Use Case}}}{37}{table.3.9}%
+\contentsline {table}{\numberline {3.10}{\ignorespaces Daftar Tabel Basis Data POS}}{48}{table.caption.24}%
+\contentsline {table}{\numberline {3.11}{\ignorespaces Skenario Pengujian \textit {Black Box}}}{70}{table.3.11}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Statistik Ringkas Dataset Pendapatan Harian}}{79}{table.caption.39}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Pembagian Dataset dan Dimensi Sequence}}{80}{table.caption.40}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces Perbandingan Performa pada Data Uji (\textit {One-Step-Ahead})}}{89}{table.caption.42}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces Statistik Performa LSTM Hybrid pada 10 Seed}}{91}{table.caption.44}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces Perbandingan Performa Eksperimen Augmentasi TimeGAN (\textit {Multi-Step}, Horizon 7)}}{92}{table.caption.46}%
-\contentsline {table}{\numberline {4.6}{\ignorespaces Hasil Pengujian Black Box}}{94}{table.4.6}%
-\contentsline {table}{\numberline {4.7}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{96}{table.caption.47}%
-\contentsline {table}{\numberline {4.8}{\ignorespaces Hasil Pengujian White Box}}{97}{table.caption.48}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Statistik Ringkas Dataset Pendapatan Harian}}{80}{table.caption.39}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Pembagian Dataset dan Dimensi Sequence}}{81}{table.caption.40}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Perbandingan Performa pada Data Uji (\textit {One-Step-Ahead})}}{90}{table.caption.42}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Statistik Performa LSTM Hybrid pada 10 Seed}}{92}{table.caption.44}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Perbandingan Performa Eksperimen Augmentasi TimeGAN (\textit {Multi-Step}, Horizon 7)}}{93}{table.caption.46}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Hasil Pengujian Black Box}}{95}{table.4.6}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{97}{table.caption.47}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces Hasil Pengujian White Box}}{98}{table.caption.48}%
 \addvspace {10\p@ }
