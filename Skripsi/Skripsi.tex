@@ -23,6 +23,7 @@
 \usepackage{amssymb}
 \usepackage{enumitem}
 \usepackage{longtable}
+\usepackage{xltabular}
 \usepackage{booktabs}
 \usepackage{listings}
 \lstset{
@@ -714,30 +715,39 @@ Penelitian ini dilaksanakan selama 4 (empat) bulan, terhitung mulai bulan Maret 
 
 Untuk mendukung kelancaran pelaksanaan penelitian dan pengembangan sistem POS mobile, dibutuhkan alat (perangkat keras dan perangkat lunak) serta bahan penelitian dengan rincian yang disajikan pada Tabel~\ref{tab:alat_bahan}.
 
-\begin{table}[H]
-\setstretch{1.15}
-\centering
-\caption{Daftar Alat dan Bahan Penelitian}
-\label{tab:alat_bahan}
-\begin{tabularx}{\textwidth}{|c|p{2.8cm}|p{3.5cm}|X|}
+{\setstretch{1.15}\footnotesize
+\begin{xltabular}{\textwidth}{|c|p{2.8cm}|p{3.5cm}|X|}
+\caption{Daftar Alat dan Bahan Penelitian} \label{tab:alat_bahan} \\
 \hline
 \textbf{No} & \textbf{Kategori} & \textbf{Nama Alat/Bahan} & \textbf{Spesifikasi / Deskripsi} \\ \hline
-\multirow{3}{*}{1} & \multirow{3}{2.8cm}{Perangkat Keras (\textit{Hardware})} & Laptop Acer Nitro 5 & Intel Core i5 Gen 12, RAM 16 GB, SSD 512 GB, NVIDIA GeForce RTX 3050. Digunakan sebagai perangkat utama pengembangan aplikasi dan pelatihan model. \\ \cline{3-4}
-& & Smartphone Android & OS Android 11. Digunakan untuk pengujian operasional aplikasi POS secara langsung di perangkat mobile. \\ \cline{3-4}
+\endfirsthead
+
+\hline
+\textbf{No} & \textbf{Kategori} & \textbf{Nama Alat/Bahan} & \textbf{Spesifikasi / Deskripsi} \\ \hline
+\endhead
+
+\hline
+\endfoot
+
+\hline
+\endlastfoot
+
+1 & Perangkat Keras (\textit{Hardware}) & Laptop Acer Nitro 5 & Intel Core i5 Gen 12, RAM 16 GB, SSD 512 GB, NVIDIA GeForce RTX 3050. Digunakan sebagai perangkat utama pengembangan aplikasi dan pelatihan model. \\ \cline{2-4}
+& & Smartphone Android & OS Android 11. Digunakan untuk pengujian operasional aplikasi POS secara langsung di perangkat mobile. \\ \cline{2-4}
 & & Printer Thermal & Bluetooth 58mm. Digunakan untuk menguji fungsionalitas cetak struk transaksi fisik. \\ \hline
-\multirow{10}{*}{2} & \multirow{10}{2.8cm}{Perangkat Lunak (\textit{Software})} & Windows 11 & Sistem Operasi Laptop (Home Single Language). \\ \cline{3-4}
-& & VS Code \& Android Studio & \textit{Integrated Development Environment} (IDE) utama untuk penulisan kode program. \\ \cline{3-4}
-& & Flutter SDK (Dart) & \textit{Framework} lintas platform untuk membangun aplikasi kasir mobile. \\ \cline{3-4}
-& & Python 3.10 & Bahasa pemrograman dengan TensorFlow, Keras, PyTorch, Pandas, NumPy, Scikit-Learn, dan Flask untuk melatih model LSTM, membangun modul augmentasi data sintetis TimeGAN, dan membuat REST API prediksi. \\ \cline{3-4}
-& & Supabase Cloud & Basis data \textit{cloud} terpusat (PostgreSQL) untuk sinkronisasi data transaksi. \\ \cline{3-4}
-& & Isar Database & Basis data lokal terbenam (\textit{embedded}) pada perangkat Android (\textit{offline-first}). \\ \cline{3-4}
-& & Firebase & Layanan Google untuk \textit{push notification} (FCM) dan telemetri (Analytics). \\ \cline{3-4}
-& & Jupyter Notebook & Lingkungan \textit{pipeline} riset untuk eksplorasi data dan pelatihan model peramalan. \\ \cline{3-4}
-& & Hugging Face & Platform \textit{hosting} tempat layanan API prediksi Flask di-\textit{deploy}. \\ \cline{3-4}
+2 & Perangkat Lunak (\textit{Software}) & Windows 11 & Sistem Operasi Laptop (Home Single Language). \\ \cline{2-4}
+& & VS Code \& Android Studio & \textit{Integrated Development Environment} (IDE) utama untuk penulisan kode program. \\ \cline{2-4}
+& & Flutter SDK (Dart) & \textit{Framework} lintas platform untuk membangun aplikasi kasir mobile. \\ \cline{2-4}
+& & Python 3.10 & Bahasa pemrograman dengan TensorFlow, Keras, PyTorch, Pandas, NumPy, Scikit-Learn, dan Flask untuk melatih model LSTM, membangun modul augmentasi data sintetis TimeGAN, dan membuat REST API prediksi. \\ \cline{2-4}
+& & Supabase Cloud & Basis data \textit{cloud} terpusat (PostgreSQL) untuk sinkronisasi data transaksi. \\ \cline{2-4}
+& & Isar Database & Basis data lokal terbenam (\textit{embedded}) pada perangkat Android (\textit{offline-first}). \\ \cline{2-4}
+& & Firebase & Layanan Google untuk \textit{push notification} (FCM) dan telemetri (Analytics). \\ \cline{2-4}
+& & Jupyter Notebook & Lingkungan \textit{pipeline} riset untuk eksplorasi data dan pelatihan model peramalan. \\ \cline{2-4}
+& & Hugging Face & Platform \textit{hosting} tempat layanan API prediksi Flask di-\textit{deploy}. \\ \cline{2-4}
 & & Draw.io \& Mermaid.js & Alat pemodelan sistem untuk membuat diagram UML, ERD, dan arsitektur. \\ \hline
 3 & Bahan Penelitian & Dataset EatsTEDI UGM & Berkas transaksi riil platform EatsTEDI DTEDI UGM dalam format SQL dump dan CSV (periode Agustus 2024 s.d. Juni 2026). \\ \hline
-\end{tabularx}
-\end{table}
+\end{xltabular}
+}
 
 \subsection{Variabel Data}
 
@@ -2437,124 +2447,84 @@ Berdasarkan keterbatasan sistem yang diidentifikasi selama proses pengembangan d
 % Lampiran 5 Tangkapan layar implementasi aplikasi, Lampiran 6 Cuplikan dataset.
 
 \newpage
+\newgeometry{left=3.5cm, top=4cm, right=3.5cm, bottom=3cm}
 \thispagestyle{empty}
 \begin{spacing}{1.0}
 
-\noindent\textbf{Lampiran 1. Bimbingan Skripsi (Pembimbing I)}
+\begin{center}
+{\bfseries LEMBAR KONSULTASI PEMBIMBING I}\\
+{\bfseries LEMBAR KONSULTASI SKRIPSI}\\[0.2cm]
+{\bfseries JURUSAN TEKNOLOGI INFORMASI DAN KOMPUTER}\\
+{\bfseries PROGRAM STUDI TEKNIK INFORMATIKA}
+\end{center}
+\vspace{0.5cm}
 
 \begin{center}
-{\large\bfseries FORM BIMBINGAN SKRIPSI}
+\begin{tabularx}{0.85\textwidth}{@{}p{2.7cm}p{0.3cm}X@{}}
+Nama & : & Muhammad Kholis \\
+NIM & : & 2022573010098 \\
+Judul TA & : & Rancang Bangun Aplikasi \textit{Point of Sale} dengan Fitur Prediksi Penjualan Harian Menggunakan Metode \textit{Long Short-Term Memory} (LSTM) \\
+Pembimbing I & : & Zulfan Khairil Simbolon, S.T., M.Eng. \\
+NIP & : & 196909021993031004 \\
+\end{tabularx}
 \end{center}
-\vspace{0.3cm}
-
-\noindent
-\begin{tabular}{@{}ll@{}}
-NAMA & : Muhammad Kholis \\
-NIM MAHASISWA & : 2022573010098 \\
-JUDUL SKRIPSI & : Rancang Bangun Aplikasi \textit{Point of Sale} dengan Fitur Prediksi \\
- & \ \ Penjualan Harian Menggunakan Metode \textit{Long Short-Term} \\
- & \ \ \textit{Memory} (LSTM) \\
-DOSEN PEMBIMBING I & : Zulfan Khairil Simbolon, S.T., M.Eng. \\
-\end{tabular}
 
 \vspace{0.4cm}
 
-\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{0.7cm}|>{\centering\arraybackslash}p{2.6cm}|X|>{\centering\arraybackslash}p{2.8cm}|}
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{0.8cm}|>{\centering\arraybackslash}p{2.2cm}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}p{2.6cm}|}
 \hline
-\textbf{No} & \textbf{Hari/ Tanggal Bimbingan} & \textbf{Materi Bimbingan} & \textbf{Tanda Tangan Pembimbing} \\
+\textbf{No.} & \textbf{Tanggal} & \textbf{Hasil Konsultasi} & \textbf{Paraf Pembimbing} \\
 \hline
-1 & & & \\
-\hline
-2 & & & \\
-\hline
-3 & & & \\
-\hline
-4 & & & \\
-\hline
-5 & & & \\
-\hline
-6 & & & \\
-\hline
-7 & & & \\
-\hline
-8 & & & \\
-\hline
-9 & & & \\
-\hline
-10 & & & \\
+ & & & \\[1cm]
+ & & & \\[1cm]
+ & & & \\[1cm]
+ & & & \\[1cm]
+ & & & \\[1cm]
+ & & & \\[1cm]
+ & & & \\[1cm]
+ & & & \\[1cm]
 \hline
 \end{tabularx}
-
-\vspace{1cm}
-\begin{flushright}
-\begin{tabular}{@{}l@{}}
-Lhokseumawe, \dotfill \\[0.8cm]
-Ketua Program Studi \\
-Teknik Informatika \\[2cm]
-\textbf{\underline{M. Khadafi, S.T., M.T}} \\
-NIP. 197507182002121004
-\end{tabular}
-\end{flushright}
 
 \newpage
 \thispagestyle{empty}
 
-\noindent\textbf{Lampiran 2. Bimbingan Skripsi (Pembimbing II)}
+\begin{center}
+{\bfseries LEMBAR KONSULTASI PEMBIMBING II}\\
+{\bfseries LEMBAR KONSULTASI SKRIPSI}\\[0.2cm]
+{\bfseries JURUSAN TEKNOLOGI INFORMASI DAN KOMPUTER}\\
+{\bfseries PROGRAM STUDI TEKNIK INFORMATIKA}
+\end{center}
+\vspace{0.5cm}
 
 \begin{center}
-{\large\bfseries FORM BIMBINGAN SKRIPSI}
+\begin{tabularx}{0.85\textwidth}{@{}p{2.7cm}p{0.3cm}X@{}}
+Nama & : & Muhammad Kholis \\
+NIM & : & 2022573010098 \\
+Judul TA & : & Rancang Bangun Aplikasi \textit{Point of Sale} dengan Fitur Prediksi Penjualan Harian Menggunakan Metode \textit{Long Short-Term Memory} (LSTM) \\
+Pembimbing II & : & Azhar, S.T., M.T. \\
+NIP & : & 196408301990031005 \\
+\end{tabularx}
 \end{center}
-\vspace{0.3cm}
-
-\noindent
-\begin{tabular}{@{}ll@{}}
-NAMA & : Muhammad Kholis \\
-NIM MAHASISWA & : 2022573010098 \\
-JUDUL SKRIPSI & : Rancang Bangun Aplikasi \textit{Point of Sale} dengan Fitur Prediksi \\
- & \ \ Penjualan Harian Menggunakan Metode \textit{Long Short-Term} \\
- & \ \ \textit{Memory} (LSTM) \\
-DOSEN PEMBIMBING II & : Azhar, S.T., M.T. \\
-\end{tabular}
 
 \vspace{0.4cm}
 
-\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{0.7cm}|>{\centering\arraybackslash}p{2.6cm}|X|>{\centering\arraybackslash}p{2.8cm}|}
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{0.8cm}|>{\centering\arraybackslash}p{2.2cm}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}p{2.6cm}|}
 \hline
-\textbf{No} & \textbf{Hari/ Tanggal Bimbingan} & \textbf{Materi Bimbingan} & \textbf{Tanda Tangan Pembimbing} \\
+\textbf{No.} & \textbf{Tanggal} & \textbf{Hasil Konsultasi} & \textbf{Paraf Pembimbing} \\
 \hline
-1 & & & \\
-\hline
-2 & & & \\
-\hline
-3 & & & \\
-\hline
-4 & & & \\
-\hline
-5 & & & \\
-\hline
-6 & & & \\
-\hline
-7 & & & \\
-\hline
-8 & & & \\
-\hline
-9 & & & \\
-\hline
-10 & & & \\
+ & & & \\[1cm]
+ & & & \\[1cm]
+ & & & \\[1cm]
+ & & & \\[1cm]
+ & & & \\[1cm]
+ & & & \\[1cm]
+ & & & \\[1cm]
+ & & & \\[1cm]
 \hline
 \end{tabularx}
 
-\vspace{1cm}
-\begin{flushright}
-\begin{tabular}{@{}l@{}}
-Lhokseumawe, \dotfill \\[0.8cm]
-Ketua Program Studi \\
-Teknik Informatika \\[2cm]
-\textbf{\underline{M. Khadafi, S.T., M.T}} \\
-NIP. 197507182002121004
-\end{tabular}
-\end{flushright}
-
 \end{spacing}
+\restoregeometry
 
 \end{document}

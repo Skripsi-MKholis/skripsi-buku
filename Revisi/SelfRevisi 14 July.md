@@ -150,17 +150,17 @@ Nama "Parzello POS Mobile" pertama kali muncul di 3.2.3 (hal. 36) tanpa pernah d
 
 ## Checklist Prioritas Revisi
 
-- [ ] Ganti judul sampul "PROPOSAL PENELITIAN SKRIPSI" → "SKRIPSI"; hapus kata "proposal" di 1.6 (K1)
-- [ ] Tambah deskripsi Bab IV & V di Sistematika Penulisan (K2)
-- [ ] Lengkapi Tabel 3.11 menjadi 14 skenario sesuai Tabel 4.6 (K3)
-- [ ] Tambah Lembar Pengesahan, Pernyataan Keaslian, Kata Pengantar, Daftar Lampiran, dan Lampiran (termasuk surat izin data UGM) (K4)
-- [ ] Masukkan Guntara (2022) ke Daftar Pustaka atau hapus dari Tabel 2.1 (K5)
-- [ ] Verifikasi/ganti referensi [1]–[13], [15], [26] dengan sumber nyata; sesuaikan klaim kuantitatif yang menumpang padanya (K6)
-- [ ] Rekonsiliasi angka: tanggal awal data, total omzet 501,4 jt vs 471,2 jt, rata-rata 1,586 jt vs 1,505 jt, 316 vs 313 hari (D1–D3)
-- [ ] Perbaiki deskripsi `day_of_week`/`is_weekend` di Tabel 3.5 (D4)
-- [ ] Samakan jumlah & komposisi baseline; tambahkan Seasonal-Naive (k=4) ke evaluasi; satukan notasi k/m; dasar Mean-4/Mean-3 (D5–D8)
-- [ ] Perbaiki rujukan "Subbab 4.2"→4.4 dan "3.9.3"→3.2.10.3 (S1–S2)
-- [ ] Selaraskan Rumusan Masalah ↔ Tujuan ↔ Kesimpulan (S3)
-- [ ] Tambah teori White Box di Bab 2 (S4)
-- [ ] Selesaikan klaim UMKM Lhokseumawe: laporkan buktinya atau revisi klaim (S7)
-- [ ] Sapu bersih item format minor 1–15
+- [x] Ganti judul sampul "PROPOSAL PENELITIAN SKRIPSI" → "SKRIPSI"; hapus kata "proposal" di 1.6 (K1)
+- [x] Tambah deskripsi Bab IV & V di Sistematika Penulisan (K2)
+- [x] Lengkapi Tabel 3.11 menjadi 14 skenario sesuai Tabel 4.6 (K3)
+- [x] Tambah Pernyataan Keaslian, Kata Pengantar, Daftar Lampiran, dan halaman pemisah Lampiran (K4) — *catatan: Lembar Pengesahan sudah ada sebelumnya sebagai gambar; surat izin data UGM & lampiran 3–6 (dokumentasi wawancara, tangkapan layar, cuplikan dataset) masih placeholder/TODO, belum ada berkasnya*
+- [x] Masukkan Guntara (2022) ke Daftar Pustaka atau hapus dari Tabel 2.1 (K5) — dihapus dari Tabel 2.1
+- [ ] Verifikasi/ganti referensi [1]–[13], [15], [26] dengan sumber nyata; sesuaikan klaim kuantitatif yang menumpang padanya (K6) — **belum dikerjakan**, butuh keputusan eksplisit karena berdampak ke seluruh penomoran sitasi
+- [x] Rekonsiliasi angka: tanggal awal data, total omzet 501,4 jt vs 471,2 jt, rata-rata 1,586 jt vs 1,505 jt, 316 vs 313 hari (D1–D3)
+- [x] Perbaiki deskripsi `day_of_week`/`is_weekend` di Tabel 3.5 (D4)
+- [x] Samakan jumlah & komposisi baseline; tambahkan Seasonal-Naive (k=4) ke evaluasi; satukan notasi k/m; dasar Mean-4/Mean-3 (D5–D8) — *catatan: notasi disatukan ke k dan penjelasan ditambahkan; baris angka Seasonal-Naive (k=4) di Tabel 4.3 one-step masih perlu data riil dari notebook, belum diisi*
+- [x] Perbaiki rujukan "Subbab 4.2"→4.4 dan "3.9.3"→3.2.10.3 (S1–S2)
+- [x] Selaraskan Rumusan Masalah ↔ Tujuan ↔ Kesimpulan (S3)
+- [x] Tambah teori White Box di Bab 2 (S4)
+- [x] Selesaikan klaim UMKM Lhokseumawe: laporkan buktinya atau revisi klaim (S7) — direvisi jujur di Subbab 3.1.1
+- [x] Sapu bersih item format minor 1–15
