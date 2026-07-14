@@ -1083,6 +1083,8 @@ Penjelasan mengenai kelas-kelas utama dalam sistem adalah sebagai berikut:
     \item \textbf{Activity Diagram Alur Kerja Transaksi Kasir (POS Checkout)} \\
     Gambar \ref{fig:act-checkout} menggambarkan alur kerja kasir atau \textit{owner} dalam memproses transaksi belanja pelanggan di kasir, termasuk opsi penerapan kupon/voucher diskon dan pemisahan tagihan (\textit{split bill}) yang terintegrasi langsung di dalam lembar keranjang belanja dan layar pembayaran, sebelum data disimpan di penyimpanan lokal Isar DB.
     
+% TODO (dilengkapi sebelum sidang): re-ekspor Rancangan/Activity Diagram.md bagian 1
+% (kini format mxGraphModel) melalui draw.io menjadi Rancangan/Mermaid/activity_checkout.png
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.65\textwidth,height=0.45\textheight,keepaspectratio]{activity_checkout.png}
@@ -1093,6 +1095,8 @@ Penjelasan mengenai kelas-kelas utama dalam sistem adalah sebagai berikut:
     \item \textbf{Activity Diagram Sinkronisasi Latar Belakang (Offline-First Sync Engine)} \\
     Gambar \ref{fig:act-sync} menggambarkan logika sinkronisasi data dari \textit{local database} (Isar DB) ke cloud database (Supabase) secara otomatis saat status konektivitas terdeteksi \textit{online}. Alur data dilakukan berdasarkan ketergantungan relasi tabel (kategori, produk, transaksi, riwayat stok) untuk menjaga konsistensi, di mana pengunggahan transaksi dilakukan melalui pemanggilan prosedur RPC \texttt{create\_transaction\_v4} pada PostgreSQL agar pencatatan nota dan pemotongan stok di \textit{cloud} berlangsung dalam satu transaksi basis data yang aman.
     
+% TODO (dilengkapi sebelum sidang): re-ekspor Rancangan/Activity Diagram.md bagian 2
+% (kini format mxGraphModel) melalui draw.io menjadi Rancangan/Mermaid/activity_sync.png
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.65\textwidth,height=0.45\textheight,keepaspectratio]{activity_sync.png}
@@ -1103,11 +1107,28 @@ Penjelasan mengenai kelas-kelas utama dalam sistem adalah sebagai berikut:
     \item \textbf{Activity Diagram Proses AI Smart Analytics} \\
     Gambar \ref{fig:act-ai} menggambarkan alur kerja fitur analitik prediktif: pengguna membuka layar \textit{Smart Analytics}, sistem mengagregasi data penjualan historis dari Isar DB lokal, lalu memanggil \textit{endpoint} model LSTM yang di-\textit{hosting} di Hugging Face secara langsung melalui HTTPS. Selama pemrosesan, sistem menampilkan status pemuatan (termasuk peringatan \textit{cold start} bila \textit{server} inferensi baru aktif dari kondisi \textit{idle}), kemudian merender visualisasi analitik omzet beserta rekomendasi promosi, dan menyimpan hasilnya sebagai \textit{snapshot} riwayat analitik di tabel \textit{smart\_analytics\_snapshots}.
     
+% TODO (dilengkapi sebelum sidang): activity_ai.png SAAT INI MASIH ALUR LAMA
+% (Gemini/PII scrubbing/consent modal) -- sudah TIDAK sesuai teks & kode.
+% Re-ekspor Rancangan/Activity Diagram.md bagian 3 (mxGraphModel, alur baru
+% panggilan langsung ke model LSTM Hugging Face) melalui draw.io menjadi
+% Rancangan/Mermaid/activity_ai.png sebelum sidang.
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.65\textwidth,height=0.45\textheight,keepaspectratio]{activity_ai.png}
         \caption{Activity Diagram Proses AI Smart Analytics}
         \label{fig:act-ai}
+    \end{figure}
+
+    \item \textbf{Activity Diagram Kelola Produk (Tambah/Ubah/Hapus)} \\
+    Gambar \ref{fig:act-produk} menggambarkan alur kerja staf toko dalam mengelola katalog produk yang menjadi sumber data transaksi bagi model peramalan penjualan. Proses tambah/ubah data disimpan terlebih dahulu ke basis data lokal Isar DB (\textit{offline-first}) beserta pencatatan riwayat perubahan stok, sebelum disinkronkan ke Supabase saat koneksi \textit{online} tersedia. Proses hapus produk diterapkan melalui skema \textit{soft delete} lokal (penanda \texttt{isDeleted=true}) yang baru dihapus permanen dari basis data setelah sinkronisasi ke \textit{cloud} berhasil, guna menjaga konsistensi data penjualan yang menjadi masukan pemodelan LSTM.
+
+% TODO (dilengkapi sebelum sidang): ekspor Rancangan/Activity Diagram.md bagian 4
+% (XML mxGraphModel) melalui draw.io menjadi Rancangan/Mermaid/activity_produk.png
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\textwidth,height=0.45\textheight,keepaspectratio]{activity_produk.png}
+        \caption{Activity Diagram Kelola Produk (Tambah/Ubah/Hapus)}
+        \label{fig:act-produk}
     \end{figure}
 \end{enumerate}
 
