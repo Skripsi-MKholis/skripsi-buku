@@ -1078,7 +1078,7 @@ Rincian teknis rumus \textit{log-return}, \textit{cyclical encoding}, dan arsite
 
 \section{Rancangan Sistem}
 
-Perancangan sistem dalam penelitian ini dilakukan menggunakan pendekatan arsitektur terdistribusi dan pemodelan \textit{Unified Modeling Language} (UML) untuk memberikan gambaran yang jelas mengenai arsitektur sistem, alur proses, dan interaksi pengguna. Pemodelan rancangan sistem direpresentasikan melalui arsitektur sistem, \textit{Use Case Diagram}, \textit{Class Diagram}, \textit{Activity Diagram}, \textit{Sequence Diagram}, serta \textit{Entity Relationship Diagram} (ERD).
+Perancangan sistem dalam penelitian ini dilakukan menggunakan pendekatan arsitektur terdistribusi dan pemodelan \textit{Unified Modeling Language} (UML) untuk memberikan gambaran yang jelas mengenai arsitektur sistem, alur proses, dan interaksi pengguna. Pemodelan rancangan sistem direpresentasikan melalui arsitektur sistem, \textit{Use Case Diagram}, \textit{Class Diagram}, \textit{Activity Diagram}, serta \textit{Entity Relationship Diagram} (ERD).
 
 \subsection{Metode Penelitian}
 
@@ -1288,57 +1288,6 @@ Penjelasan mengenai kelas-kelas utama dalam sistem adalah sebagai berikut:
         \caption{Activity Diagram Kelola Produk (Tambah/Ubah/Hapus)}
         \label{fig:act-produk}
     \end{figure}
-\end{enumerate}
-
-\subsection{Sequence Diagram}
-
-\textit{Sequence Diagram} menggambarkan interaksi dinamis antar-objek dalam sistem berdasarkan urutan waktu kejadian. Diagram ini digunakan untuk memvisualisasikan alur pesan (\textit{messages}) yang dikirim dan diterima antar-komponen saat menjalankan fungsi utama. Alur interaksi transaksi kasir pada aplikasi Parzello POS diilustrasikan pada Gambar~\ref{fig:sequence_diagram}.
-
-\begin{figure}[H]
-    \centering
-    \resizebox{\textwidth}{!}{%
-    \begin{tikzpicture}[
-        every node/.style={font=\small},
-        actor/.style={draw, rectangle, fill=white, minimum width=2cm, minimum height=0.8cm},
-        lifeline/.style={draw, dashed},
-        message/.style={->, >=Stealth, thick},
-        reply/.style={->, >=Stealth, dashed, thick}
-    ]
-    % Lifelines
-    \node (Kasir) [actor] {Kasir (User)};
-    \node (App) [actor, right=2.5cm of Kasir] {POS App};
-    \node (Isar) [actor, right=2.5cm of App] {Isar DB};
-    \node (Supa) [actor, right=2.5cm of Isar] {Supabase};
-
-    \draw [lifeline] (Kasir.south) -- +(0,-5.5) coordinate (Kasir_bottom);
-    \draw [lifeline] (App.south) -- +(0,-5.5) coordinate (App_bottom);
-    \draw [lifeline] (Isar.south) -- +(0,-5.5) coordinate (Isar_bottom);
-    \draw [lifeline] (Supa.south) -- +(0,-5.5) coordinate (Supa_bottom);
-
-    % Interactions
-    \draw [message] (Kasir.south |- 0,-1.0) -- (App.south |- 0,-1.0) node[midway, above] {1. inputTransaksi()};
-    \draw [message] (App.south |- 0,-1.8) -- (Isar.south |- 0,-1.8) node[midway, above] {2. writeTransaction(isSynced=false)};
-    \draw [reply] (Isar.south |- 0,-2.4) -- (App.south |- 0,-2.4) node[midway, above] {3. writeSuccess()};
-    \draw [message] (App.south |- 0,-3.0) -- (Isar.south |- 0,-3.0) node[midway, above] {4. updateStockLokal()};
-    \draw [reply] (App.south |- 0,-3.6) -- (Kasir.south |- 0,-3.6) node[midway, above] {5. showCheckoutSuccess()};
-    \draw [message] (App.south |- 0,-4.4) -- (Supa.south |- 0,-4.4) node[midway, above] {6. syncTransaction() (Auto-Sync)};
-    \draw [reply] (Supa.south |- 0,-5.0) -- (Isar.south |- 0,-5.0) node[midway, above] {7. update isSynced=true};
-
-    \end{tikzpicture}%
-    }
-    \caption{Sequence Diagram Alur Transaksi Kasir}
-    \label{fig:sequence_diagram}
-\end{figure}
-
-Penjelasan alur urutan transaksi pada diagram di atas adalah sebagai berikut:
-\begin{enumerate}
-    \item Kasir memasukkan transaksi penjualan melalui antarmuka aplikasi POS (\textit{inputTransaksi()}).
-    \item Aplikasi menyimpan data transaksi secara lokal ke dalam Isar DB dengan status belum tersinkronisasi (\textit{writeTransaction(isSynced=false)}).
-    \item Isar DB mengembalikan respon sukses penulisan data transaksi.
-    \item Aplikasi melakukan pembaruan stok produk secara lokal pada Isar DB.
-    \item Aplikasi menampilkan informasi checkout sukses ke layar kasir.
-    \item \textit{Sync Engine} mendeteksi status internet aktif dan menyinkronkan transaksi ke cloud Supabase melalui pemanggilan RPC \textit{create\_transaction\_v4}.
-    \item Supabase mengembalikan respon sukses, lalu \textit{Sync Engine} memperbarui status transaksi lokal menjadi \textit{isSynced=true}.
 \end{enumerate}
 
 \subsection{\textit{Entity Relationship Diagram} (ERD)}
