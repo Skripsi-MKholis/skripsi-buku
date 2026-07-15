@@ -147,6 +147,12 @@
 %%=============================================================
 \begin{document}
 
+\pagenumbering{roman}
+\setcounter{page}{1}
+\fancyhf{}
+\cfoot{\thepage}
+\pagestyle{fancy}
+
 %%-------------------------------------------------------------
 %% HALAMAN JUDUL
 %%-------------------------------------------------------------
@@ -202,11 +208,14 @@ TAHUN 2026}
 \end{spacing}
 \end{titlepage}
 
+\setcounter{page}{2}
+
 %%-------------------------------------------------------------
 %% HALAMAN PENGESAHAN
 %%-------------------------------------------------------------
 \newpage
-\thispagestyle{empty}
+\phantomsection
+\addcontentsline{toc}{chapter}{PENGESAHAN PEMBIMBING}
 \begin{center}
 {\fontsize{14pt}{16pt}\selectfont\bfseries PENGESAHAN PEMBIMBING}
 \end{center}
@@ -272,7 +281,8 @@ NIP. 197507182002121004
 %% HALAMAN PENGESAHAN PENGUJI
 %%-------------------------------------------------------------
 \newpage
-\thispagestyle{empty}
+\phantomsection
+\addcontentsline{toc}{chapter}{PENGESAHAN PENGUJI}
 \begin{center}
 {\fontsize{14pt}{16pt}\selectfont\bfseries PENGESAHAN PENGUJI}
 \end{center}
@@ -375,7 +385,8 @@ NIP. 197507182002121004
 %% HALAMAN PERNYATAAN
 %%-------------------------------------------------------------
 \newpage
-\thispagestyle{empty}
+\phantomsection
+\addcontentsline{toc}{chapter}{HALAMAN PERNYATAAN}
 \begin{center}
 {\fontsize{14pt}{16pt}\selectfont\bfseries HALAMAN PERNYATAAN}
 \end{center}
@@ -400,12 +411,6 @@ NIM. 2022573010098
 %% KATA PENGANTAR
 %%-------------------------------------------------------------
 \newpage
-\pagenumbering{roman}
-\setcounter{page}{1}
-\fancyhf{}
-\cfoot{\thepage}
-\pagestyle{fancy}
-
 \phantomsection
 \addcontentsline{toc}{chapter}{KATA PENGANTAR}
 \begin{center}
@@ -507,21 +512,6 @@ Penelitian ini bertujuan merancang dan membangun aplikasi \textit{Point of Sale}
 \vspace{20pt}
 \begin{spacing}{1.2}
 \makeatletter\@starttoc{lot}\makeatother
-\end{spacing}
-
-\newpage
-\phantomsection
-\addcontentsline{toc}{chapter}{DAFTAR LAMPIRAN}
-\vspace*{-1cm}
-{\centering\fontsize{14pt}{16pt}\selectfont\bfseries DAFTAR LAMPIRAN\par}
-\vspace{20pt}
-\begin{spacing}{1.5}
-\noindent Lampiran 1. Form Bimbingan Skripsi (Pembimbing I) \\
-Lampiran 2. Form Bimbingan Skripsi (Pembimbing II) \\
-Lampiran 3. Surat Izin Penggunaan Data EatsTEDI DTEDI UGM \\
-Lampiran 4. Dokumentasi Observasi dan Wawancara \\
-Lampiran 5. Tangkapan Layar Implementasi Aplikasi \\
-Lampiran 6. Cuplikan Dataset Transaksi
 \end{spacing}
 
 %%=============================================================
