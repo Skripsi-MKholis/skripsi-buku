@@ -47,48 +47,48 @@
 \contentsline {section}{\numberline {3.2}Rancangan Sistem}{33}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Metode Penelitian}{33}{subsection.3.2.1}%
 \contentsline {subsubsection}{\numberline {3.2.1.1}Alur Penelitian}{34}{subsubsection.3.2.1.1}%
-\contentsline {subsection}{\numberline {3.2.2}Diagram Use Case}{36}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Arsitektur Sistem}{39}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Class Diagram}{42}{subsection.3.2.4}%
-\contentsline {subsection}{\numberline {3.2.5}Activity Diagram}{43}{subsection.3.2.5}%
-\contentsline {subsection}{\numberline {3.2.6}Sequence Diagram}{47}{subsection.3.2.6}%
-\contentsline {subsection}{\numberline {3.2.7}\textit {Entity Relationship Diagram} (ERD)}{48}{subsection.3.2.7}%
-\contentsline {subsection}{\numberline {3.2.8}Rancangan Algoritma \textit {Long Short-Term Memory} (LSTM)}{51}{subsection.3.2.8}%
-\contentsline {subsection}{\numberline {3.2.9}Perancangan \textit {Wireframe}}{56}{subsection.3.2.9}%
-\contentsline {subsection}{\numberline {3.2.10}Teknik Pengujian}{69}{subsection.3.2.10}%
-\contentsline {subsubsection}{\numberline {3.2.10.1}Rancangan Pengujian Evaluasi Model Prediksi}{70}{subsubsection.3.2.10.1}%
-\contentsline {subsubsection}{\numberline {3.2.10.2}Rancangan Analisis Pengujian \textit {Black Box}}{72}{subsubsection.3.2.10.2}%
-\contentsline {subsubsection}{\numberline {3.2.10.3}Rancangan Analisis Pengujian \textit {White Box}}{74}{subsubsection.3.2.10.3}%
-\contentsline {subsection}{\numberline {3.2.11}Indikator Keberhasilan Penelitian}{75}{subsection.3.2.11}%
-\contentsline {chapter}{\numberline {IV}HASIL DAN PEMBAHASAN}{76}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Hasil Implementasi Sistem}{76}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Implementasi Antarmuka (UI)}{76}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Implementasi Backend dan Basis Data Cloud}{78}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}Implementasi Layanan Prediksi (API)}{79}{subsection.4.1.3}%
-\contentsline {section}{\numberline {4.2}Preprocessing Data}{81}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Deskripsi Data dan Eksplorasi Awal}{81}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Pra-pemrosesan dan Pembentukan Sequence}{82}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}Implementasi dan Pelatihan Model Prediksi}{84}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Arsitektur Model dan Skenario Eksperimen}{84}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Hasil Pelatihan Model}{86}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Implementasi Augmentasi Data Sintetis TimeGAN}{87}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Implementasi Prediksi Rekursif ke Depan}{88}{subsection.4.3.4}%
-\contentsline {section}{\numberline {4.4}Evaluasi Model}{90}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Evaluasi Model dan Perbandingan dengan Baseline}{91}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Evaluasi Multi-Seed dan Analisis Kestabilan}{93}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Evaluasi Augmentasi Data Sintetis TimeGAN}{95}{subsection.4.4.3}%
-\contentsline {section}{\numberline {4.5}Hasil Pengujian Sistem}{96}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Skenario Pengujian}{96}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Hasil Black Box Testing}{97}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}Hasil White Box Testing}{99}{subsection.4.5.3}%
-\contentsline {subsection}{\numberline {4.5.4}Evaluasi Kinerja Model}{101}{subsection.4.5.4}%
-\contentsline {section}{\numberline {4.6}Pembahasan}{101}{section.4.6}%
-\contentsline {subsection}{\numberline {4.6.1}Pembahasan Pengujian Fungsional dan Arsitektur Offline-First}{101}{subsection.4.6.1}%
-\contentsline {subsection}{\numberline {4.6.2}Pembahasan Hasil Prediksi Penjualan LSTM}{102}{subsection.4.6.2}%
-\contentsline {section}{\numberline {4.7}Keterbatasan Sistem dan Penelitian}{104}{section.4.7}%
-\contentsline {subsection}{\numberline {4.7.1}Keterbatasan Sistem POS}{104}{subsection.4.7.1}%
-\contentsline {subsection}{\numberline {4.7.2}Keterbatasan Penelitian Model Prediksi}{105}{subsection.4.7.2}%
-\contentsline {chapter}{\numberline {V}KESIMPULAN DAN SARAN}{107}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Kesimpulan}{107}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Saran}{108}{section.5.2}%
-\contentsline {chapter}{LAMPIRAN}{113}{section*.52}%
+\contentsline {subsection}{\numberline {3.2.2}Diagram Use Case}{35}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Arsitektur Sistem}{38}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Class Diagram}{41}{subsection.3.2.4}%
+\contentsline {subsection}{\numberline {3.2.5}Activity Diagram}{42}{subsection.3.2.5}%
+\contentsline {subsection}{\numberline {3.2.6}Sequence Diagram}{46}{subsection.3.2.6}%
+\contentsline {subsection}{\numberline {3.2.7}\textit {Entity Relationship Diagram} (ERD)}{47}{subsection.3.2.7}%
+\contentsline {subsection}{\numberline {3.2.8}Rancangan Algoritma \textit {Long Short-Term Memory} (LSTM)}{50}{subsection.3.2.8}%
+\contentsline {subsection}{\numberline {3.2.9}Perancangan \textit {Wireframe}}{55}{subsection.3.2.9}%
+\contentsline {subsection}{\numberline {3.2.10}Teknik Pengujian}{68}{subsection.3.2.10}%
+\contentsline {subsubsection}{\numberline {3.2.10.1}Rancangan Pengujian Evaluasi Model Prediksi}{69}{subsubsection.3.2.10.1}%
+\contentsline {subsubsection}{\numberline {3.2.10.2}Rancangan Analisis Pengujian \textit {Black Box}}{71}{subsubsection.3.2.10.2}%
+\contentsline {subsubsection}{\numberline {3.2.10.3}Rancangan Analisis Pengujian \textit {White Box}}{73}{subsubsection.3.2.10.3}%
+\contentsline {subsection}{\numberline {3.2.11}Indikator Keberhasilan Penelitian}{74}{subsection.3.2.11}%
+\contentsline {chapter}{\numberline {IV}HASIL DAN PEMBAHASAN}{75}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Hasil Implementasi Sistem}{75}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Implementasi Antarmuka (UI)}{75}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Implementasi Backend dan Basis Data Cloud}{77}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Implementasi Layanan Prediksi (API)}{78}{subsection.4.1.3}%
+\contentsline {section}{\numberline {4.2}Preprocessing Data}{80}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Deskripsi Data dan Eksplorasi Awal}{80}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Pra-pemrosesan dan Pembentukan Sequence}{81}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Implementasi dan Pelatihan Model Prediksi}{83}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Arsitektur Model dan Skenario Eksperimen}{83}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Hasil Pelatihan Model}{85}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Implementasi Augmentasi Data Sintetis TimeGAN}{86}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Implementasi Prediksi Rekursif ke Depan}{87}{subsection.4.3.4}%
+\contentsline {section}{\numberline {4.4}Evaluasi Model}{89}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Evaluasi Model dan Perbandingan dengan Baseline}{90}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Evaluasi Multi-Seed dan Analisis Kestabilan}{91}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Evaluasi Augmentasi Data Sintetis TimeGAN}{94}{subsection.4.4.3}%
+\contentsline {section}{\numberline {4.5}Hasil Pengujian Sistem}{95}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Skenario Pengujian}{95}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Hasil Black Box Testing}{96}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Hasil White Box Testing}{98}{subsection.4.5.3}%
+\contentsline {subsection}{\numberline {4.5.4}Evaluasi Kinerja Model}{100}{subsection.4.5.4}%
+\contentsline {section}{\numberline {4.6}Pembahasan}{100}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Pembahasan Pengujian Fungsional dan Arsitektur Offline-First}{100}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Pembahasan Hasil Prediksi Penjualan LSTM}{101}{subsection.4.6.2}%
+\contentsline {section}{\numberline {4.7}Keterbatasan Sistem dan Penelitian}{103}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Keterbatasan Sistem POS}{103}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Keterbatasan Penelitian Model Prediksi}{104}{subsection.4.7.2}%
+\contentsline {chapter}{\numberline {V}KESIMPULAN DAN SARAN}{106}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Kesimpulan}{106}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Saran}{107}{section.5.2}%
+\contentsline {chapter}{LAMPIRAN}{112}{section*.52}%

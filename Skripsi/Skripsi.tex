@@ -989,67 +989,67 @@ Proses transformasi data mentah dari basis data relasional \textit{dump} SQL men
 
 Proses ekstraksi ini menghasilkan empat berkas dataset utama sebagai berikut:
 \begin{enumerate}
-    \item \textbf{\texttt{raw\_transactions.csv}}: Berisi log transaksi gabungan hasil \textit{join} tabel \textit{invoices}, \textit{product\_sold}, \textit{products}, dan \textit{categories}.
-    \item \textbf{\texttt{daily\_sales.csv}}: Hasil agregasi harian yang menjadi dataset utama untuk model prediksi harian.
-    \item \textbf{\texttt{weekly\_sales.csv}}: Hasil agregasi mingguan untuk visualisasi tren mingguan.
-    \item \textbf{\texttt{monthly\_sales.csv}}: Hasil agregasi bulanan untuk analisis musiman jangka panjang.
+    \item \textbf{\textit{raw\_transactions.csv}}: Berisi log transaksi gabungan hasil \textit{join} tabel \textit{invoices}, \textit{product\_sold}, \textit{products}, dan \textit{categories}.
+    \item \textbf{\textit{daily\_sales.csv}}: Hasil agregasi harian yang menjadi dataset utama untuk model prediksi harian.
+    \item \textbf{\textit{weekly\_sales.csv}}: Hasil agregasi mingguan untuk visualisasi tren mingguan.
+    \item \textbf{\textit{monthly\_sales.csv}}: Hasil agregasi bulanan untuk analisis musiman jangka panjang.
 \end{enumerate}
 
-Struktur skema data dan deskripsi kolom dari berkas \texttt{daily\_sales.csv} sebagai dataset utama pelatihan model LSTM dirinci pada Tabel \ref{tab:daily_sales_schema}.
+Struktur skema data dan deskripsi kolom dari berkas \textit{daily\_sales.csv} sebagai dataset utama pelatihan model LSTM dirinci pada Tabel \ref{tab:daily_sales_schema}.
 
 \begin{table}[H]
 \setstretch{1.2}
 \centering
-\caption{Struktur Skema Dataset \texttt{daily\_sales.csv}}
+\caption{Struktur Skema Dataset \textit{daily\_sales.csv}}
 \label{tab:daily_sales_schema}
 \begin{tabularx}{\textwidth}{|l|l|X|}
 \hline
 \textbf{Nama Kolom} & \textbf{Tipe Data} & \textbf{Deskripsi} \\ \hline
-\texttt{date} & Date & Tanggal transaksi (format YYYY-MM-DD). \\ \hline
-\texttt{revenue} & Float & Total omzet pendapatan harian (nominal Rupiah). \\ \hline
-\texttt{transactions} & Integer & Total volume transaksi/nota lunas harian. \\ \hline
-\texttt{qty\_sold} & Integer & Total kuantitas unit produk terjual harian. \\ \hline
-\texttt{day\_of\_week} & Integer & Indeks hari dalam minggu (0 = Senin s.d. 6 = Minggu). Penyaringan hari kerja aktif (0 s.d. 4) dilakukan pada tahap pemodelan. \\ \hline
-\texttt{week\_of\_year} & Integer & Nomor minggu dalam setahun berdasarkan standar ISO. \\ \hline
-\texttt{month} & Integer & Nomor bulan kalender (1 s.d. 12). \\ \hline
-\texttt{is\_weekend} & Integer & Penanda biner akhir pekan (1 jika Sabtu/Minggu, 0 jika lainnya). \\ \hline
-\texttt{is\_holiday} & Integer & Penanda biner libur akademik (1 jika Januari/Juli, 0 jika aktif). \\ \hline
-\texttt{is\_ramadan} & Integer & Penanda biner bulan Ramadan (1 jika Ramadan, 0 jika lainnya). \\ \hline
+\textit{date} & Date & Tanggal transaksi (format YYYY-MM-DD). \\ \hline
+\textit{revenue} & Float & Total omzet pendapatan harian (nominal Rupiah). \\ \hline
+\textit{transactions} & Integer & Total volume transaksi/nota lunas harian. \\ \hline
+\textit{qty\_sold} & Integer & Total kuantitas unit produk terjual harian. \\ \hline
+\textit{day\_of\_week} & Integer & Indeks hari dalam minggu (0 = Senin s.d. 6 = Minggu). Penyaringan hari kerja aktif (0 s.d. 4) dilakukan pada tahap pemodelan. \\ \hline
+\textit{week\_of\_year} & Integer & Nomor minggu dalam setahun berdasarkan standar ISO. \\ \hline
+\textit{month} & Integer & Nomor bulan kalender (1 s.d. 12). \\ \hline
+\textit{is\_weekend} & Integer & Penanda biner akhir pekan (1 jika Sabtu/Minggu, 0 jika lainnya). \\ \hline
+\textit{is\_holiday} & Integer & Penanda biner libur akademik (1 jika Januari/Juli, 0 jika aktif). \\ \hline
+\textit{is\_ramadan} & Integer & Penanda biner bulan Ramadan (1 jika Ramadan, 0 jika lainnya). \\ \hline
 \end{tabularx}
 \end{table}
 
-Sementara itu, skema data untuk berkas agregasi mingguan \texttt{weekly\_sales.csv} dan agregasi bulanan \texttt{monthly\_sales.csv} masing-masing dijelaskan pada Tabel \ref{tab:weekly_sales_schema} dan Tabel \ref{tab:monthly_sales_schema}.
+Sementara itu, skema data untuk berkas agregasi mingguan \textit{weekly\_sales.csv} dan agregasi bulanan \textit{monthly\_sales.csv} masing-masing dijelaskan pada Tabel \ref{tab:weekly_sales_schema} dan Tabel \ref{tab:monthly_sales_schema}.
 
 \begin{table}[H]
 \setstretch{1.2}
 \centering
-\caption{Struktur Skema Dataset \texttt{weekly\_sales.csv}}
+\caption{Struktur Skema Dataset \textit{weekly\_sales.csv}}
 \label{tab:weekly_sales_schema}
 \begin{tabularx}{\textwidth}{|l|l|X|}
 \hline
 \textbf{Nama Kolom} & \textbf{Tipe Data} & \textbf{Deskripsi} \\ \hline
-\texttt{year\_week} & String & Periode tahun dan nomor minggu ISO (format YYYY-WW). \\ \hline
-\texttt{week\_start} & Date & Tanggal awal hari Senin pada minggu tersebut (format YYYY-MM-DD). \\ \hline
-\texttt{revenue} & Float & Total omzet pendapatan mingguan (nominal Rupiah). \\ \hline
-\texttt{transactions} & Integer & Total volume transaksi/nota lunas mingguan. \\ \hline
-\texttt{qty\_sold} & Integer & Total kuantitas unit produk terjual mingguan. \\ \hline
-\texttt{active\_days} & Integer & Jumlah hari aktif beroperasi dalam minggu tersebut. \\ \hline
+\textit{year\_week} & String & Periode tahun dan nomor minggu ISO (format YYYY-WW). \\ \hline
+\textit{week\_start} & Date & Tanggal awal hari Senin pada minggu tersebut (format YYYY-MM-DD). \\ \hline
+\textit{revenue} & Float & Total omzet pendapatan mingguan (nominal Rupiah). \\ \hline
+\textit{transactions} & Integer & Total volume transaksi/nota lunas mingguan. \\ \hline
+\textit{qty\_sold} & Integer & Total kuantitas unit produk terjual mingguan. \\ \hline
+\textit{active\_days} & Integer & Jumlah hari aktif beroperasi dalam minggu tersebut. \\ \hline
 \end{tabularx}
 \end{table}
 
 \begin{table}[H]
 \setstretch{1.2}
 \centering
-\caption{Struktur Skema Dataset \texttt{monthly\_sales.csv}}
+\caption{Struktur Skema Dataset \textit{monthly\_sales.csv}}
 \label{tab:monthly_sales_schema}
 \begin{tabularx}{\textwidth}{|l|l|X|}
 \hline
 \textbf{Nama Kolom} & \textbf{Tipe Data} & \textbf{Deskripsi} \\ \hline
-\texttt{year\_month} & String & Periode tahun dan bulan kalender (format YYYY-MM). \\ \hline
-\texttt{revenue} & Float & Total omzet pendapatan bulanan (nominal Rupiah). \\ \hline
-\texttt{transactions} & Integer & Total volume transaksi/nota lunas bulanan. \\ \hline
-\texttt{qty\_sold} & Integer & Total kuantitas unit produk terjual bulanan. \\ \hline
-\texttt{active\_days} & Integer & Jumlah hari aktif beroperasi dalam bulan tersebut. \\ \hline
+\textit{year\_month} & String & Periode tahun dan bulan kalender (format YYYY-MM). \\ \hline
+\textit{revenue} & Float & Total omzet pendapatan bulanan (nominal Rupiah). \\ \hline
+\textit{transactions} & Integer & Total volume transaksi/nota lunas bulanan. \\ \hline
+\textit{qty\_sold} & Integer & Total kuantitas unit produk terjual bulanan. \\ \hline
+\textit{active\_days} & Integer & Jumlah hari aktif beroperasi dalam bulan tersebut. \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -1107,7 +1107,7 @@ Pada \textbf{Fase Pengembangan Model Prediksi Penjualan}, data transaksi yang te
 
 \subsection{Diagram Use Case}
 
-Sistem POS melibatkan dua aktor utama, yaitu \textbf{Owner (Pemilik Toko)} dan \textbf{Kasir (Karyawan)}. \textit{Use Case Diagram} menggambarkan fungsi-fungsi yang dapat diakses oleh masing-masing aktor. Pembatasan hak akses berbasis peran (\textit{Role-Based Access Control}/RBAC) ditegakkan pada lapisan navigasi aplikasi (\texttt{router.dart}), di mana hanya rute Manajemen Karyawan dan Pengaturan Profil Toko yang dibatasi eksklusif untuk Owner, sedangkan fungsi operasional lainnya dapat diakses oleh seluruh staf toko. Rancangan \textit{use case} diilustrasikan pada Gambar \ref{fig:use_case}.
+Sistem POS melibatkan dua aktor utama, yaitu \textbf{Owner (Pemilik Toko)} dan \textbf{Kasir (Karyawan)}. \textit{Use Case Diagram} menggambarkan fungsi-fungsi yang dapat diakses oleh masing-masing aktor. Pembatasan hak akses berbasis peran (\textit{Role-Based Access Control}/RBAC) ditegakkan pada lapisan navigasi aplikasi (\textit{router.dart}), di mana hanya rute Manajemen Karyawan dan Pengaturan Profil Toko yang dibatasi eksklusif untuk Owner, sedangkan fungsi operasional lainnya dapat diakses oleh seluruh staf toko. Rancangan \textit{use case} diilustrasikan pada Gambar \ref{fig:use_case}.
 
 \begin{landscape}
 \begin{figure}[p]
@@ -1207,10 +1207,10 @@ Sistem Parzello POS Mobile dirancang menggunakan pendekatan arsitektur \textit{h
 
 Penjelasan mengenai empat komponen utama dalam arsitektur sistem adalah sebagai berikut:
 \begin{enumerate}
-    \item \textbf{Sisi Klien (\textit{Client-Side}):} Aplikasi dibangun menggunakan \textit{framework} Flutter dengan manajemen \textit{state} Riverpod dan navigasi GoRouter. Komponen inti dari sisi klien adalah Isar DB, sebuah database NoSQL lokal yang berperan sebagai \textit{cache offline-first}, memungkinkan kasir tetap dapat melakukan transaksi penuh meskipun koneksi internet terputus. \textit{Sync Engine} kemudian bekerja di latar belakang untuk menyinkronkan data lokal ke \textit{cloud} secara otomatis ketika koneksi terdeteksi kembali aktif, menggunakan penanda \texttt{isSynced} pada setiap \textit{record} untuk menghindari duplikasi data. Selain itu, sisi klien juga mengelola integrasi perangkat keras berupa printer \textit{thermal} Bluetooth/USB untuk mencetak struk dan kamera untuk pemindaian \textit{barcode} produk.
+    \item \textbf{Sisi Klien (\textit{Client-Side}):} Aplikasi dibangun menggunakan \textit{framework} Flutter dengan manajemen \textit{state} Riverpod dan navigasi GoRouter. Komponen inti dari sisi klien adalah Isar DB, sebuah database NoSQL lokal yang berperan sebagai \textit{cache offline-first}, memungkinkan kasir tetap dapat melakukan transaksi penuh meskipun koneksi internet terputus. \textit{Sync Engine} kemudian bekerja di latar belakang untuk menyinkronkan data lokal ke \textit{cloud} secara otomatis ketika koneksi terdeteksi kembali aktif, menggunakan penanda \textit{isSynced} pada setiap \textit{record} untuk menghindari duplikasi data. Selain itu, sisi klien juga mengelola integrasi perangkat keras berupa printer \textit{thermal} Bluetooth/USB untuk mencetak struk dan kamera untuk pemindaian \textit{barcode} produk.
     \item \textbf{Infrastruktur \textit{Cloud} (Supabase):} Sebagai tulang punggung infrastruktur \textit{cloud}, Supabase menyediakan empat layanan utama. Supabase Auth menangani autentikasi pengguna melalui protokol JWT dan Google OAuth. Supabase PostgreSQL menjadi basis data relasional terpusat yang dilengkapi kebijakan \textit{Row Level Security} (RLS) untuk mengisolasi data antar \textit{merchant}, pemicu database (\textit{triggers}), serta prosedur tersimpan (\textit{RPC}) untuk memproses transaksi secara aman. Supabase Storage menyimpan aset media seperti gambar produk dan logo toko. Sedangkan \textit{Edge Functions} digunakan untuk memproses \textit{webhook} basis data yang bersifat sensitif, seperti pemicu pengiriman \textit{push notification} peringatan stok menipis kepada pemilik toko.
     \item \textbf{Telemetri dan Notifikasi (Firebase):} Untuk kebutuhan telemetri dan notifikasi, sistem terintegrasi dengan Firebase. \textit{Firebase Cloud Messaging} (FCM) bertugas menyampaikan \textit{push notification} secara \textit{real-time} kepada pemilik toko, misalnya peringatan stok habis atau pembatalan transaksi oleh kasir. \textit{Firebase Analytics} digunakan untuk mencatat perilaku penggunaan aplikasi, seperti volume transaksi harian, penggunaan fitur \textit{split bill}, dan inisiasi kalibrasi model AI.
-    \item \textbf{Layanan Inferensi Model LSTM (Hugging Face):} Komponen terakhir adalah layanan inferensi untuk mendukung fitur analitik prediktif. Pada penelitian ini, dikembangkan sebuah model \textit{deep learning} berbasis \textbf{Long Short-Term Memory (LSTM)} secara mandiri, yang dirancang khusus untuk memproyeksikan data runtun waktu (\textit{time-series}) penjualan harian pada usaha berskala UMKM. Model prediksi tersebut kemudian dikemas dalam layanan prediksi penjualan berbasis \textit{REST API} (\textit{framework} Flask) yang di-\textit{deploy} pada platform Hugging Face, sehingga dapat diakses oleh sistem secara efisien tanpa memerlukan infrastruktur \textit{server} komputasi tersendiri. Ketika pengguna mengakses fitur \textit{Smart Analytics}, aplikasi Flutter memanggil \textit{endpoint} layanan prediksi tersebut secara langsung melalui protokol HTTPS (dikonfigurasi pada berkas \texttt{env.dart} dan dapat dioverride saat \textit{build} melalui \texttt{--dart-define}), dengan \textit{payload} berupa data agregat penjualan tanpa informasi identitas pelanggan. Model memproses data tersebut dan mengembalikan hasil prediksi dalam format JSON, mencakup estimasi omzet harian, prediksi produk terlaris, serta rekomendasi promosi berbasis stok, yang selanjutnya divisualisasikan melalui antarmuka grafik interaktif menggunakan pustaka \texttt{fl\_chart}. Aplikasi juga menangani kondisi \textit{cold start}, yaitu menampilkan peringatan pemuatan ketika \textit{server} inferensi baru aktif kembali dari kondisi \textit{idle}. Setiap hasil analisis disimpan sebagai \textit{snapshot} pada tabel \textit{smart\_analytics\_snapshots} di Supabase, sehingga riwayat analitik dapat ditinjau kembali tanpa perlu memanggil ulang model.
+    \item \textbf{Layanan Inferensi Model LSTM (Hugging Face):} Komponen terakhir adalah layanan inferensi untuk mendukung fitur analitik prediktif. Pada penelitian ini, dikembangkan sebuah model \textit{deep learning} berbasis \textbf{Long Short-Term Memory (LSTM)} secara mandiri, yang dirancang khusus untuk memproyeksikan data runtun waktu (\textit{time-series}) penjualan harian pada usaha berskala UMKM. Model prediksi tersebut kemudian dikemas dalam layanan prediksi penjualan berbasis \textit{REST API} (\textit{framework} Flask) yang di-\textit{deploy} pada platform Hugging Face, sehingga dapat diakses oleh sistem secara efisien tanpa memerlukan infrastruktur \textit{server} komputasi tersendiri. Ketika pengguna mengakses fitur \textit{Smart Analytics}, aplikasi Flutter memanggil \textit{endpoint} layanan prediksi tersebut secara langsung melalui protokol HTTPS (dikonfigurasi pada berkas \textit{env.dart} dan dapat dioverride saat \textit{build} melalui \textit{--dart-define}), dengan \textit{payload} berupa data agregat penjualan tanpa informasi identitas pelanggan. Model memproses data tersebut dan mengembalikan hasil prediksi dalam format JSON, mencakup estimasi omzet harian, prediksi produk terlaris, serta rekomendasi promosi berbasis stok, yang selanjutnya divisualisasikan melalui antarmuka grafik interaktif menggunakan pustaka \textit{fl\_chart}. Aplikasi juga menangani kondisi \textit{cold start}, yaitu menampilkan peringatan pemuatan ketika \textit{server} inferensi baru aktif kembali dari kondisi \textit{idle}. Setiap hasil analisis disimpan sebagai \textit{snapshot} pada tabel \textit{smart\_analytics\_snapshots} di Supabase, sehingga riwayat analitik dapat ditinjau kembali tanpa perlu memanggil ulang model.
 \end{enumerate}
 
 \subsection{Class Diagram}
@@ -1251,7 +1251,7 @@ Penjelasan mengenai kelas-kelas utama dalam sistem adalah sebagai berikut:
     \end{figure}
 
     \item \textbf{Activity Diagram Sinkronisasi Latar Belakang (Offline-First Sync Engine)} \\
-    Gambar \ref{fig:act-sync} menggambarkan logika sinkronisasi data dari \textit{local database} (Isar DB) ke cloud database (Supabase) secara otomatis saat status konektivitas terdeteksi \textit{online}. Alur data dilakukan berdasarkan ketergantungan relasi tabel (kategori, produk, transaksi, riwayat stok) untuk menjaga konsistensi, di mana pengunggahan transaksi dilakukan melalui pemanggilan prosedur RPC \texttt{create\_transaction\_v4} pada PostgreSQL agar pencatatan nota dan pemotongan stok di \textit{cloud} berlangsung dalam satu transaksi basis data yang aman.
+    Gambar \ref{fig:act-sync} menggambarkan logika sinkronisasi data dari \textit{local database} (Isar DB) ke cloud database (Supabase) secara otomatis saat status konektivitas terdeteksi \textit{online}. Alur data dilakukan berdasarkan ketergantungan relasi tabel (kategori, produk, transaksi, riwayat stok) untuk menjaga konsistensi, di mana pengunggahan transaksi dilakukan melalui pemanggilan prosedur RPC \textit{create\_transaction\_v4} pada PostgreSQL agar pencatatan nota dan pemotongan stok di \textit{cloud} berlangsung dalam satu transaksi basis data yang aman.
     
 % TODO (dilengkapi sebelum sidang): re-ekspor Rancangan/Activity Diagram.md bagian 2
 % (kini format mxGraphModel) melalui draw.io menjadi Rancangan/Mermaid/activity_sync.png
@@ -1278,7 +1278,7 @@ Penjelasan mengenai kelas-kelas utama dalam sistem adalah sebagai berikut:
     \end{figure}
 
     \item \textbf{Activity Diagram Kelola Produk (Tambah/Ubah/Hapus)} \\
-    Gambar \ref{fig:act-produk} menggambarkan alur kerja staf toko dalam mengelola katalog produk yang menjadi sumber data transaksi bagi model prediksi penjualan. Proses tambah/ubah data disimpan terlebih dahulu ke basis data lokal Isar DB (\textit{offline-first}) beserta pencatatan riwayat perubahan stok, sebelum disinkronkan ke Supabase saat koneksi \textit{online} tersedia. Proses hapus produk diterapkan melalui skema \textit{soft delete} lokal (penanda \texttt{isDeleted=true}) yang baru dihapus permanen dari basis data setelah sinkronisasi ke \textit{cloud} berhasil, guna menjaga konsistensi data penjualan yang menjadi masukan pemodelan LSTM.
+    Gambar \ref{fig:act-produk} menggambarkan alur kerja staf toko dalam mengelola katalog produk yang menjadi sumber data transaksi bagi model prediksi penjualan. Proses tambah/ubah data disimpan terlebih dahulu ke basis data lokal Isar DB (\textit{offline-first}) beserta pencatatan riwayat perubahan stok, sebelum disinkronkan ke Supabase saat koneksi \textit{online} tersedia. Proses hapus produk diterapkan melalui skema \textit{soft delete} lokal (penanda \textit{isDeleted=true}) yang baru dihapus permanen dari basis data setelah sinkronisasi ke \textit{cloud} berhasil, guna menjaga konsistensi data penjualan yang menjadi masukan pemodelan LSTM.
 
 % TODO (dilengkapi sebelum sidang): ekspor Rancangan/Activity Diagram.md bagian 4
 % (XML mxGraphModel) melalui draw.io menjadi Rancangan/Mermaid/activity_produk.png
@@ -1332,13 +1332,13 @@ Penjelasan mengenai kelas-kelas utama dalam sistem adalah sebagai berikut:
 
 Penjelasan alur urutan transaksi pada diagram di atas adalah sebagai berikut:
 \begin{enumerate}
-    \item Kasir memasukkan transaksi penjualan melalui antarmuka aplikasi POS (\texttt{inputTransaksi()}).
-    \item Aplikasi menyimpan data transaksi secara lokal ke dalam Isar DB dengan status belum tersinkronisasi (\texttt{writeTransaction(isSynced=false)}).
+    \item Kasir memasukkan transaksi penjualan melalui antarmuka aplikasi POS (\textit{inputTransaksi()}).
+    \item Aplikasi menyimpan data transaksi secara lokal ke dalam Isar DB dengan status belum tersinkronisasi (\textit{writeTransaction(isSynced=false)}).
     \item Isar DB mengembalikan respon sukses penulisan data transaksi.
     \item Aplikasi melakukan pembaruan stok produk secara lokal pada Isar DB.
     \item Aplikasi menampilkan informasi checkout sukses ke layar kasir.
-    \item \textit{Sync Engine} mendeteksi status internet aktif dan menyinkronkan transaksi ke cloud Supabase melalui pemanggilan RPC \texttt{create\_transaction\_v4}.
-    \item Supabase mengembalikan respon sukses, lalu \textit{Sync Engine} memperbarui status transaksi lokal menjadi \texttt{isSynced=true}.
+    \item \textit{Sync Engine} mendeteksi status internet aktif dan menyinkronkan transaksi ke cloud Supabase melalui pemanggilan RPC \textit{create\_transaction\_v4}.
+    \item Supabase mengembalikan respon sukses, lalu \textit{Sync Engine} memperbarui status transaksi lokal menjadi \textit{isSynced=true}.
 \end{enumerate}
 
 \subsection{\textit{Entity Relationship Diagram} (ERD)}
@@ -1773,9 +1773,9 @@ Rancangan skenario pengujian \textit{black box} untuk fitur-fitur utama sistem P
 
 Selain pengujian fungsional \textit{black box}, penelitian ini turut menerapkan pengujian \textit{white box} secara terbatas (\textit{lightweight}) yang berfokus pada verifikasi kebenaran logika internal dan jalur eksekusi kode (\textit{code path}) pada fungsi-fungsi kritis di layanan API prediksi, tanpa memandang antarmuka luarnya. Pengujian ini dilakukan dengan menelusuri (\textit{trace}) jalur logika kode secara manual menggunakan data masukan yang telah diketahui nilai keluarannya, kemudian membandingkan hasil eksekusi aktual terhadap hasil kalkulasi manual sebagai acuan kebenaran (\textit{ground truth}). Tiga fungsi inti yang menjadi target pengujian \textit{white box} adalah:
 \begin{enumerate}
-    \item Fungsi perhitungan \textit{Seasonal-Naive} (\texttt{by\_dow}), untuk memverifikasi jalur percabangan logika ketika jumlah data historis per hari kerja mencukupi ($\geq k$), tidak mencukupi ($<k$), maupun tidak tersedia sama sekali (\textit{fallback}).
+    \item Fungsi perhitungan \textit{Seasonal-Naive} (\textit{by\_dow}), untuk memverifikasi jalur percabangan logika ketika jumlah data historis per hari kerja mencukupi ($\geq k$), tidak mencukupi ($<k$), maupun tidak tersedia sama sekali (\textit{fallback}).
     \item Fungsi metrik evaluasi sMAPE dan MASE, untuk memverifikasi jalur penanganan kasus pembagian dengan nilai penyebut nol atau mendekati nol agar tidak menghasilkan galat pembagian (\textit{division by zero}).
-    \item Fungsi prediksi rekursif ({\small\texttt{forecast\_hybrid\_\allowbreak stable}}), untuk memverifikasi jalur eksekusi tiga mekanisme pengaman secara berurutan, yaitu \textit{clipping} \textit{log-return}, \textit{damping factor}, dan \textit{safety rail} nominal omzet.
+    \item Fungsi prediksi rekursif (\textit{forecast\_hybrid\_stable}), untuk memverifikasi jalur eksekusi tiga mekanisme pengaman secara berurutan, yaitu \textit{clipping} \textit{log-return}, \textit{damping factor}, dan \textit{safety rail} nominal omzet.
 \end{enumerate}
 
 \subsection{Indikator Keberhasilan Penelitian}
@@ -1857,16 +1857,16 @@ Modul kecerdasan buatan untuk kalkulasi prediksi penjualan harian dikembangkan m
 
 Layanan API produksi menyediakan tujuh \textit{endpoint} REST dengan fungsi sebagai berikut:
 \begin{enumerate}
-    \item \textbf{Endpoint Prediksi Penjualan} (\texttt{/api/predict/daily}, \texttt{/api/predict/weekly}, \texttt{/api/predict/monthly}): Meramalkan omzet ke depan dengan tanggal prediksi yang otomatis melewati hari tutup (akhir pekan serta libur semester Januari/Juli). Berdasarkan hasil evaluasi komparatif pada penelitian ini (Subbab 4.4), metode penyaji yang dipilih pada \textit{endpoint} produksi adalah metode statistik paling stabil, yaitu \textit{Seasonal-Naive} ($k=4$, rata-rata empat kemunculan terakhir hari yang sama, kompromi antara responsivitas terhadap tren terbaru dan peredaman fluktuasi acak, setara dengan rentang sekitar satu bulan hari sejenis) untuk harian, \textit{Mean-4} untuk mingguan, dan \textit{Mean-3} untuk bulanan, dengan prediksi \textit{Naive} disertakan sebagai pembanding, sedangkan model LSTM hasil pelatihan didokumentasikan sebagai artefak riset (\texttt{.keras}).
-    \item \textbf{Endpoint Rekomendasi Operasional} (\texttt{/api/recommendations/stock} dan \texttt{/api/recommendations/target}): Menghasilkan rekomendasi alokasi anggaran belanja per kategori produk dan kuantitas stok produk teratas berdasarkan proyeksi omzet (dilengkapi \textit{safety buffer} 15\% dan peringatan khusus produk mudah basi), serta tiga tingkatan target omzet harian (konservatif, moderat, dan agresif) berbasis statistik 15 hari aktif terakhir.
-    \item \textbf{Endpoint Pencatatan dan Status} (\texttt{/api/sales/record} dan \texttt{/api/status}): Menerima rekap penjualan harian dari aplikasi POS dan memperbaruinya ke dataset historis (\textit{upsert} per tanggal) agar dasar prediksi selalu mengikuti data terkini, serta memeriksa kesehatan layanan dan ketersediaan berkas data.
+    \item \textbf{Endpoint Prediksi Penjualan} (\textit{/api/predict/daily}, \textit{/api/predict/weekly}, \textit{/api/predict/monthly}): Meramalkan omzet ke depan dengan tanggal prediksi yang otomatis melewati hari tutup (akhir pekan serta libur semester Januari/Juli). Berdasarkan hasil evaluasi komparatif pada penelitian ini (Subbab 4.4), metode penyaji yang dipilih pada \textit{endpoint} produksi adalah metode statistik paling stabil, yaitu \textit{Seasonal-Naive} ($k=4$, rata-rata empat kemunculan terakhir hari yang sama, kompromi antara responsivitas terhadap tren terbaru dan peredaman fluktuasi acak, setara dengan rentang sekitar satu bulan hari sejenis) untuk harian, \textit{Mean-4} untuk mingguan, dan \textit{Mean-3} untuk bulanan, dengan prediksi \textit{Naive} disertakan sebagai pembanding, sedangkan model LSTM hasil pelatihan didokumentasikan sebagai artefak riset (\textit{.keras}).
+    \item \textbf{Endpoint Rekomendasi Operasional} (\textit{/api/recommendations/stock} dan \textit{/api/recommendations/target}): Menghasilkan rekomendasi alokasi anggaran belanja per kategori produk dan kuantitas stok produk teratas berdasarkan proyeksi omzet (dilengkapi \textit{safety buffer} 15\% dan peringatan khusus produk mudah basi), serta tiga tingkatan target omzet harian (konservatif, moderat, dan agresif) berbasis statistik 15 hari aktif terakhir.
+    \item \textbf{Endpoint Pencatatan dan Status} (\textit{/api/sales/record} dan \textit{/api/status}): Menerima rekap penjualan harian dari aplikasi POS dan memperbaruinya ke dataset historis (\textit{upsert} per tanggal) agar dasar prediksi selalu mengikuti data terkini, serta memeriksa kesehatan layanan dan ketersediaan berkas data.
 \end{enumerate}
 
 Aplikasi Flutter memanggil \textit{endpoint} tersebut secara langsung melalui HTTPS dengan \textit{payload} agregat penjualan tanpa informasi identitas pelanggan, kemudian menyimpan hasil analisis sebagai \textit{snapshot} pada tabel \textit{smart\_analytics\_snapshots} di Supabase.
 
-Inti implementasi \textit{endpoint} prediksi harian pada berkas \texttt{app.py} disajikan pada Kode Program~\ref{lst:flask_daily} (dipersingkat). Metode \textit{Seasonal-Naive} dihitung dengan merata-ratakan $k$ kemunculan terakhir dari setiap hari kerja yang sama, dan tanggal prediksi dihasilkan dengan melewati hari tutup.
+Inti implementasi \textit{endpoint} prediksi harian pada berkas \textit{app.py} disajikan pada Kode Program~\ref{lst:flask_daily} (dipersingkat). Metode \textit{Seasonal-Naive} dihitung dengan merata-ratakan $k$ kemunculan terakhir dari setiap hari kerja yang sama, dan tanggal prediksi dihasilkan dengan melewati hari tutup.
 
-\begin{lstlisting}[caption={Implementasi Endpoint Prediksi Harian Seasonal-Naive (\texttt{app.py})}, label={lst:flask_daily}]
+\begin{lstlisting}[caption={Implementasi Endpoint Prediksi Harian Seasonal-Naive (\textit{app.py})}, label={lst:flask_daily}]
 @app.route('/api/predict/daily', methods=['GET', 'POST'])
 def predict_daily():
     data = request.get_json(silent=True) or {}
@@ -2029,7 +2029,7 @@ Pada konfigurasi akhir model tersederhanakan, proses pelatihan berjalan secara s
 
 Sebagai upaya mitigasi terhadap keterbatasan ukuran dataset yang menjadi akar penyebab ketidakstabilan model LSTM, dilakukan eksperimen augmentasi data sintetis menggunakan \textbf{TimeGAN} (Yoon et al., 2019). Model TimeGAN yang diimplementasikan dengan PyTorch dilatih pada jendela deret waktu sepanjang 24 hari aktif dengan tiga fitur numerik (omzet, jumlah transaksi, dan kuantitas terjual) melalui tiga fase pelatihan (\textit{autoencoder}, \textit{supervised}, dan \textit{joint adversarial training}) masing-masing sebanyak 600 \textit{epoch}, kemudian menghasilkan 200 sekuens data harian sintetis. Pada skenario ini, model LSTM multi-langkah (\textit{look-back} 14 hari aktif, horizon 7 hari) selanjutnya dilatih dalam dua kondisi: hanya menggunakan 219 sekuens data riil (\textit{baseline real-only}), dan menggunakan gabungan data riil dengan 298 sekuens sintetis (rasio augmentasi 1,5). Hasil evaluasi perbandingan kedua kondisi tersebut disajikan pada Subbab 4.4.3.
 
-Cuplikan implementasi dua dari lima jaringan penyusun TimeGAN pada berkas \texttt{TimeGAN.py}, yaitu jaringan \textit{embedder} yang memetakan data riil ke ruang laten dan \textit{generator} yang memetakan derau acak menjadi representasi laten sintetis, disajikan pada Kode Program~\ref{lst:timegan}.
+Cuplikan implementasi dua dari lima jaringan penyusun TimeGAN pada berkas \textit{TimeGAN.py}, yaitu jaringan \textit{embedder} yang memetakan data riil ke ruang laten dan \textit{generator} yang memetakan derau acak menjadi representasi laten sintetis, disajikan pada Kode Program~\ref{lst:timegan}.
 
 \begin{lstlisting}[caption={Implementasi Jaringan \textit{Embedder} dan \textit{Generator} TimeGAN (PyTorch)}, label={lst:timegan}]
 class EmbedderNet(nn.Module):
@@ -2238,7 +2238,7 @@ Pengujian sistem dilakukan untuk memvalidasi fungsionalitas aplikasi dan memerik
 
 \subsection{Skenario Pengujian}
 
-Rancangan skenario pengujian fungsional \textit{black box} disusun untuk 14 kasus penggunaan utama yang melibatkan peran Owner dan Kasir, sebagaimana telah dijabarkan pada Tabel \ref{tab:blackbox} (Bab III), meliputi antara lain registrasi toko, autentikasi pengguna, pengelolaan produk dan kategori, proses \textit{checkout} transaksi, pencetakan struk, sinkronisasi \textit{offline-first}, serta dasbor laporan analitik. Skenario pengujian \textit{white box} disusun secara terpisah dengan menelusuri jalur logika kode pada tiga fungsi kritis di layanan API prediksi, yaitu fungsi \textit{Seasonal-Naive} (\texttt{by\_dow}), fungsi metrik evaluasi sMAPE dan MASE, serta fungsi prediksi rekursif ({\small\texttt{forecast\_hybrid\_\allowbreak stable}}), sebagaimana telah dirancang pada Subbab 3.2.10.3. Kedua rancangan pengujian ini bersifat saling melengkapi: pengujian \textit{black box} memvalidasi kesesuaian antara masukan dan keluaran pada level antarmuka pengguna, sedangkan pengujian \textit{white box} memvalidasi kebenaran perhitungan pada level kode program.
+Rancangan skenario pengujian fungsional \textit{black box} disusun untuk 14 kasus penggunaan utama yang melibatkan peran Owner dan Kasir, sebagaimana telah dijabarkan pada Tabel \ref{tab:blackbox} (Bab III), meliputi antara lain registrasi toko, autentikasi pengguna, pengelolaan produk dan kategori, proses \textit{checkout} transaksi, pencetakan struk, sinkronisasi \textit{offline-first}, serta dasbor laporan analitik. Skenario pengujian \textit{white box} disusun secara terpisah dengan menelusuri jalur logika kode pada tiga fungsi kritis di layanan API prediksi, yaitu fungsi \textit{Seasonal-Naive} (\textit{by\_dow}), fungsi metrik evaluasi sMAPE dan MASE, serta fungsi prediksi rekursif ({\small\textit{forecast\_hybrid\_\allowbreak stable}}), sebagaimana telah dirancang pada Subbab 3.2.10.3. Kedua rancangan pengujian ini bersifat saling melengkapi: pengujian \textit{black box} memvalidasi kesesuaian antara masukan dan keluaran pada level antarmuka pengguna, sedangkan pengujian \textit{white box} memvalidasi kebenaran perhitungan pada level kode program.
 
 \subsection{Hasil Black Box Testing}
 
@@ -2303,7 +2303,7 @@ Sebagai bagian dari skenario \#12 (Sinkronisasi Data), pengujian fitur \textit{o
 \hline
 \textbf{No} & \textbf{Skenario Pengujian} & \textbf{Hasil Pengujian} & \textbf{Status} \\
 \hline
-1 & Melakukan transaksi checkout saat jaringan terputus (Luring). & Transaksi tersimpan di Isar DB lokal dengan status \textit{is\_synced = false} (penanda yang sama dinamai \texttt{isSynced} pada lapisan kode Dart, mengikuti konvensi penamaan masing-masing platform). Stok produk berkurang di lokal. & Berhasil \\
+1 & Melakukan transaksi checkout saat jaringan terputus (Luring). & Transaksi tersimpan di Isar DB lokal dengan status \textit{is\_synced = false} (penanda yang sama dinamai \textit{isSynced} pada lapisan kode Dart, mengikuti konvensi penamaan masing-masing platform). Stok produk berkurang di lokal. & Berhasil \\
 \hline
 2 & Membuka riwayat transaksi kasir saat luring. & Menampilkan daftar transaksi lokal secara instan tanpa memicu error atau halaman kosong. & Berhasil \\
 \hline
@@ -2329,21 +2329,21 @@ Pengujian \textit{white box} dilakukan dengan menelusuri jalur logika (\textit{c
 \hline
 \textbf{No} & \textbf{Fungsi / Jalur Logika} & \textbf{Kondisi Uji} & \textbf{Hasil yang Diharapkan} & \textbf{Status} \\
 \hline
-1 & \texttt{by\_dow} (Seasonal-Naive) & Data historis hari kerja tersedia $\geq k$ (jalur utama) & Nilai prediksi merupakan rata-rata $k$ kemunculan terakhir hari kerja yang sama & Berhasil \\
+1 & \textit{by\_dow} (Seasonal-Naive) & Data historis hari kerja tersedia $\geq k$ (jalur utama) & Nilai prediksi merupakan rata-rata $k$ kemunculan terakhir hari kerja yang sama & Berhasil \\
 \hline
-2 & \texttt{by\_dow} (Seasonal-Naive) & Data historis hari kerja tersedia $<k$ (jalur cabang \textit{partial}) & Nilai prediksi merupakan rata-rata dari seluruh data hari kerja yang tersedia & Berhasil \\
+2 & \textit{by\_dow} (Seasonal-Naive) & Data historis hari kerja tersedia $<k$ (jalur cabang \textit{partial}) & Nilai prediksi merupakan rata-rata dari seluruh data hari kerja yang tersedia & Berhasil \\
 \hline
-3 & \texttt{by\_dow} (Seasonal-Naive) & Data historis hari kerja tidak tersedia sama sekali (jalur \textit{fallback}) & Nilai prediksi menggunakan rata-rata 10 hari aktif terakhir keseluruhan & Berhasil \\
+3 & \textit{by\_dow} (Seasonal-Naive) & Data historis hari kerja tidak tersedia sama sekali (jalur \textit{fallback}) & Nilai prediksi menggunakan rata-rata 10 hari aktif terakhir keseluruhan & Berhasil \\
 \hline
-4 & \texttt{smape} & Nilai aktual dan prediksi sama-sama bernilai 0 (jalur penyebut nol) & Fungsi tidak menghasilkan galat pembagian dengan nol (\textit{division by zero}) & Berhasil \\
+4 & \textit{smape} & Nilai aktual dan prediksi sama-sama bernilai 0 (jalur penyebut nol) & Fungsi tidak menghasilkan galat pembagian dengan nol (\textit{division by zero}) & Berhasil \\
 \hline
-5 & \texttt{mase} & Galat naif \textit{in-sample} bernilai positif normal (jalur utama) & Nilai MASE terhitung sesuai rasio MAE model terhadap MAE naif & Berhasil \\
+5 & \textit{mase} & Galat naif \textit{in-sample} bernilai positif normal (jalur utama) & Nilai MASE terhitung sesuai rasio MAE model terhadap MAE naif & Berhasil \\
 \hline
-6 & {\small\texttt{forecast\_hybrid\_\allowbreak stable}} & Nilai \textit{log-return} mentah melebihi persentil 90 data latih (jalur \textit{clipping}) & Nilai \textit{log-return} dipotong tepat pada batas atas persentil 90 & Berhasil \\
+6 & {\small\textit{forecast\_hybrid\_\allowbreak stable}} & Nilai \textit{log-return} mentah melebihi persentil 90 data latih (jalur \textit{clipping}) & Nilai \textit{log-return} dipotong tepat pada batas atas persentil 90 & Berhasil \\
 \hline
-7 & {\small\texttt{forecast\_hybrid\_\allowbreak stable}} & Iterasi horizon ke-$n$ dengan $n>1$ (jalur \textit{damping}) & Besaran perubahan \textit{log-return} teredam sesuai faktor $\phi^{(n-1)}$ & Berhasil \\
+7 & {\small\textit{forecast\_hybrid\_\allowbreak stable}} & Iterasi horizon ke-$n$ dengan $n>1$ (jalur \textit{damping}) & Besaran perubahan \textit{log-return} teredam sesuai faktor $\phi^{(n-1)}$ & Berhasil \\
 \hline
-8 & {\small\texttt{forecast\_hybrid\_\allowbreak stable}} & Nilai omzet hasil rekonstruksi melampaui nilai maksimum historis (jalur \textit{safety rail}) & Nilai omzet dipotong tepat pada batas \texttt{REV\_CEIL} & Berhasil \\
+8 & {\small\textit{forecast\_hybrid\_\allowbreak stable}} & Nilai omzet hasil rekonstruksi melampaui nilai maksimum historis (jalur \textit{safety rail}) & Nilai omzet dipotong tepat pada batas \textit{REV\_CEIL} & Berhasil \\
 \hline
 \end{tabularx}
 \end{table}
