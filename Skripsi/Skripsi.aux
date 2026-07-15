@@ -15,7 +15,7 @@
 \babel@aux{indonesian}{}
 \@writefile{toc}{\contentsline {chapter}{DAFTAR ISI}{ix}{section*.7}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{DAFTAR GAMBAR}{xii}{section*.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{DAFTAR TABEL}{xiii}{section*.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{DAFTAR TABEL}{xiv}{section*.9}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{\numberline {I}PENDAHULUAN}{1}{chapter.1}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -169,77 +169,129 @@
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {4.1}Hasil Implementasi Sistem}{74}{section.4.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Implementasi Antarmuka (UI)}{74}{subsection.4.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Implementasi Backend dan Basis Data Cloud}{76}{subsection.4.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}Implementasi Layanan Prediksi (API)}{77}{subsection.4.1.3}\protected@file@percent }
-\newlabel{lst:flask_daily}{{IV.1}{78}{Implementasi Endpoint Prediksi Harian Seasonal-Naive (\textit {app.py})}{lstlisting.4.1}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.1}{\ignorespaces Implementasi Endpoint Prediksi Harian Seasonal-Naive (\textit  {app.py})}}{78}{lstlisting.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Preprocessing Data}{79}{section.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Deskripsi Data dan Eksplorasi Awal}{79}{subsection.4.2.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Statistik Ringkas Dataset Pendapatan Harian}}{80}{table.caption.41}\protected@file@percent }
-\newlabel{tab:statistik_revenue_harian}{{4.1}{80}{Statistik Ringkas Dataset Pendapatan Harian}{table.caption.41}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Pra-pemrosesan dan Pembentukan Sequence}{80}{subsection.4.2.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Pembagian Dataset dan Dimensi Sequence}}{81}{table.caption.42}\protected@file@percent }
-\newlabel{tab:pembagian_data_sequence}{{4.2}{81}{Pembagian Dataset dan Dimensi Sequence}{table.caption.42}{}}
-\newlabel{lst:preprocessing}{{IV.2}{81}{Pra-pemrosesan Data: Filter Hari Aktif, Log-Return, dan Fitur Siklik}{lstlisting.4.2}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.2}{\ignorespaces Pra-pemrosesan Data: Filter Hari Aktif, Log-Return, dan Fitur Siklik}}{81}{lstlisting.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}Implementasi dan Pelatihan Model Prediksi}{82}{section.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Arsitektur Model dan Skenario Eksperimen}{82}{subsection.4.3.1}\protected@file@percent }
-\newlabel{lst:build_lstm}{{IV.3}{83}{Konstruksi Arsitektur LSTM Tersederhanakan dan Konfigurasi Pelatihan}{lstlisting.4.3}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.3}{\ignorespaces Konstruksi Arsitektur LSTM Tersederhanakan dan Konfigurasi Pelatihan}}{83}{lstlisting.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Hasil Pelatihan Model}{84}{subsection.4.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Kurva Kerugian Pelatihan (\textit  {Training Loss Curve}) Model LSTM}}{84}{figure.caption.43}\protected@file@percent }
-\newlabel{fig:lstm_kurva_training}{{4.1}{84}{Kurva Kerugian Pelatihan (\textit {Training Loss Curve}) Model LSTM}{figure.caption.43}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}Implementasi Augmentasi Data Sintetis TimeGAN}{85}{subsection.4.3.3}\protected@file@percent }
-\newlabel{lst:timegan}{{IV.4}{85}{Implementasi Jaringan \textit {Embedder} dan \textit {Generator} TimeGAN (PyTorch)}{lstlisting.4.4}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.4}{\ignorespaces Implementasi Jaringan \textit  {Embedder} dan \textit  {Generator} TimeGAN (PyTorch)}}{85}{lstlisting.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.4}Implementasi Prediksi Rekursif ke Depan}{86}{subsection.4.3.4}\protected@file@percent }
-\newlabel{lst:recursive}{{IV.5}{86}{Prediksi Rekursif dengan \textit {Clipping}, \textit {Damping}, dan \textit {Safety Rail}}{lstlisting.4.5}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.5}{\ignorespaces Prediksi Rekursif dengan \textit  {Clipping}, \textit  {Damping}, dan \textit  {Safety Rail}}}{86}{lstlisting.4.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}Evaluasi Model}{88}{section.4.4}\protected@file@percent }
-\newlabel{lst:metrics}{{IV.6}{89}{Implementasi Fungsi Metrik Evaluasi sMAPE dan MASE}{lstlisting.4.6}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.6}{\ignorespaces Implementasi Fungsi Metrik Evaluasi sMAPE dan MASE}}{89}{lstlisting.4.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Evaluasi Model dan Perbandingan dengan Baseline}{89}{subsection.4.4.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces Perbandingan Performa pada Data Uji (\textit  {One-Step-Ahead})}}{90}{table.caption.44}\protected@file@percent }
-\newlabel{tab:eval_baseline_comp}{{4.3}{90}{Perbandingan Performa pada Data Uji (\textit {One-Step-Ahead})}{table.caption.44}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Grafik Pendapatan Aktual vs. Prediksi Model LSTM Hybrid}}{90}{figure.caption.45}\protected@file@percent }
-\newlabel{fig:lstm_actual_predicted}{{4.2}{90}{Grafik Pendapatan Aktual vs. Prediksi Model LSTM Hybrid}{figure.caption.45}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}Evaluasi Multi-Seed dan Analisis Kestabilan}{90}{subsection.4.4.2}\protected@file@percent }
-\newlabel{lst:multiseed}{{IV.7}{91}{Prosedur Evaluasi \textit {Multi-Seed} (10 Kali Pelatihan Ulang)}{lstlisting.4.7}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.7}{\ignorespaces Prosedur Evaluasi \textit  {Multi-Seed} (10 Kali Pelatihan Ulang)}}{91}{lstlisting.4.7}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.4}{\ignorespaces Statistik Performa LSTM Hybrid pada 10 Seed}}{92}{table.caption.46}\protected@file@percent }
-\newlabel{tab:statistik_multiseed}{{4.4}{92}{Statistik Performa LSTM Hybrid pada 10 Seed}{table.caption.46}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Boxplot Distribusi MAE Hasil Pengujian \textit  {Multi-Seed}}}{92}{figure.caption.47}\protected@file@percent }
-\newlabel{fig:boxplot_multiseed}{{4.3}{92}{Boxplot Distribusi MAE Hasil Pengujian \textit {Multi-Seed}}{figure.caption.47}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}Evaluasi Augmentasi Data Sintetis TimeGAN}{93}{subsection.4.4.3}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.5}{\ignorespaces Perbandingan Performa Eksperimen Augmentasi TimeGAN (\textit  {Multi-Step}, Horizon 7)}}{93}{table.caption.48}\protected@file@percent }
-\newlabel{tab:eval_timegan}{{4.5}{93}{Perbandingan Performa Eksperimen Augmentasi TimeGAN (\textit {Multi-Step}, Horizon 7)}{table.caption.48}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.5}Hasil Pengujian Sistem}{94}{section.4.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.1}Skenario Pengujian}{94}{subsection.4.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Implementasi Halaman Registrasi}}{75}{figure.caption.41}\protected@file@percent }
+\newlabel{fig:ui_register}{{4.1}{75}{Implementasi Halaman Registrasi}{figure.caption.41}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Implementasi Halaman \textit  {Login}}}{76}{figure.caption.42}\protected@file@percent }
+\newlabel{fig:ui_login}{{4.2}{76}{Implementasi Halaman \textit {Login}}{figure.caption.42}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Implementasi Halaman Informasi Toko}}{77}{figure.caption.43}\protected@file@percent }
+\newlabel{fig:ui_daftar_toko}{{4.3}{77}{Implementasi Halaman Informasi Toko}{figure.caption.43}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Implementasi Halaman Pilih Toko}}{78}{figure.caption.44}\protected@file@percent }
+\newlabel{fig:ui_pilih_toko}{{4.4}{78}{Implementasi Halaman Pilih Toko}{figure.caption.44}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces Implementasi Halaman Dasbor Owner}}{79}{figure.caption.45}\protected@file@percent }
+\newlabel{fig:ui_dashboard_owner}{{4.5}{79}{Implementasi Halaman Dasbor Owner}{figure.caption.45}{}}
+\newlabel{fig:ui_kelola_produk}{{4.6a}{80}{Katalog Produk}{figure.caption.46}{}}
+\newlabel{sub@fig:ui_kelola_produk}{{a}{80}{Katalog Produk}{figure.caption.46}{}}
+\newlabel{fig:ui_tambah_produk}{{4.6b}{80}{Tambah Produk}{figure.caption.46}{}}
+\newlabel{sub@fig:ui_tambah_produk}{{b}{80}{Tambah Produk}{figure.caption.46}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces Implementasi Halaman Kelola Produk dan Tambah Produk}}{80}{figure.caption.46}\protected@file@percent }
+\newlabel{fig:ui_produk}{{4.6}{80}{Implementasi Halaman Kelola Produk dan Tambah Produk}{figure.caption.46}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces Implementasi Halaman Kelola Kategori}}{81}{figure.caption.47}\protected@file@percent }
+\newlabel{fig:ui_kelola_kategori}{{4.7}{81}{Implementasi Halaman Kelola Kategori}{figure.caption.47}{}}
+\newlabel{fig:ui_kelola_stok}{{4.8a}{82}{Kelola Stok}{figure.caption.48}{}}
+\newlabel{sub@fig:ui_kelola_stok}{{a}{82}{Kelola Stok}{figure.caption.48}{}}
+\newlabel{fig:ui_modal_edit_stok}{{4.8b}{82}{Modal Ubah Stok Produk}{figure.caption.48}{}}
+\newlabel{sub@fig:ui_modal_edit_stok}{{b}{82}{Modal Ubah Stok Produk}{figure.caption.48}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces Implementasi Halaman Kelola Stok dan Ubah Stok Produk}}{82}{figure.caption.48}\protected@file@percent }
+\newlabel{fig:ui_stok}{{4.8}{82}{Implementasi Halaman Kelola Stok dan Ubah Stok Produk}{figure.caption.48}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.9}{\ignorespaces Implementasi Halaman Riwayat Stok}}{83}{figure.caption.49}\protected@file@percent }
+\newlabel{fig:ui_riwayat_stok}{{4.9}{83}{Implementasi Halaman Riwayat Stok}{figure.caption.49}{}}
+\newlabel{fig:ui_kasir_pos}{{4.10a}{84}{Kasir (POS)}{figure.caption.50}{}}
+\newlabel{sub@fig:ui_kasir_pos}{{a}{84}{Kasir (POS)}{figure.caption.50}{}}
+\newlabel{fig:ui_detail_pesanan}{{4.10b}{84}{Detail Pesanan}{figure.caption.50}{}}
+\newlabel{sub@fig:ui_detail_pesanan}{{b}{84}{Detail Pesanan}{figure.caption.50}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.10}{\ignorespaces Implementasi Halaman Kasir (POS) dan Detail Pesanan}}{84}{figure.caption.50}\protected@file@percent }
+\newlabel{fig:ui_kasir}{{4.10}{84}{Implementasi Halaman Kasir (POS) dan Detail Pesanan}{figure.caption.50}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.11}{\ignorespaces Implementasi Halaman Pembayaran}}{85}{figure.caption.51}\protected@file@percent }
+\newlabel{fig:ui_pembayaran}{{4.11}{85}{Implementasi Halaman Pembayaran}{figure.caption.51}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.12}{\ignorespaces Implementasi Halaman Riwayat Transaksi}}{86}{figure.caption.52}\protected@file@percent }
+\newlabel{fig:ui_riwayat_transaksi}{{4.12}{86}{Implementasi Halaman Riwayat Transaksi}{figure.caption.52}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.13}{\ignorespaces Implementasi Halaman Struk Digital}}{87}{figure.caption.53}\protected@file@percent }
+\newlabel{fig:ui_struk_digital}{{4.13}{87}{Implementasi Halaman Struk Digital}{figure.caption.53}{}}
+\newlabel{fig:ui_laporan_a}{{4.14a}{88}{Ringkasan Laporan}{figure.caption.54}{}}
+\newlabel{sub@fig:ui_laporan_a}{{a}{88}{Ringkasan Laporan}{figure.caption.54}{}}
+\newlabel{fig:ui_laporan_b}{{4.14b}{88}{Grafik Tren Penjualan Bulanan}{figure.caption.54}{}}
+\newlabel{sub@fig:ui_laporan_b}{{b}{88}{Grafik Tren Penjualan Bulanan}{figure.caption.54}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.14}{\ignorespaces Implementasi Halaman Laporan Analitik}}{88}{figure.caption.54}\protected@file@percent }
+\newlabel{fig:ui_laporan}{{4.14}{88}{Implementasi Halaman Laporan Analitik}{figure.caption.54}{}}
+\newlabel{fig:ui_smart_analitik_a}{{4.15a}{89}{\textit {Smart Analitik} (Status \textit {Cold Start})}{figure.caption.55}{}}
+\newlabel{sub@fig:ui_smart_analitik_a}{{a}{89}{\textit {Smart Analitik} (Status \textit {Cold Start})}{figure.caption.55}{}}
+\newlabel{fig:ui_smart_analitik_b}{{4.15b}{89}{Grafik \textit {Forecasting} dan Proyeksi Menu}{figure.caption.55}{}}
+\newlabel{sub@fig:ui_smart_analitik_b}{{b}{89}{Grafik \textit {Forecasting} dan Proyeksi Menu}{figure.caption.55}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.15}{\ignorespaces Implementasi Halaman \textit  {Smart Analitik}}}{89}{figure.caption.55}\protected@file@percent }
+\newlabel{fig:ui_smart_analitik}{{4.15}{89}{Implementasi Halaman \textit {Smart Analitik}}{figure.caption.55}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.16}{\ignorespaces Implementasi Halaman Riwayat Analisis}}{90}{figure.caption.56}\protected@file@percent }
+\newlabel{fig:ui_riwayat_analisis}{{4.16}{90}{Implementasi Halaman Riwayat Analisis}{figure.caption.56}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Implementasi Backend dan Basis Data Cloud}{90}{subsection.4.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}Implementasi Layanan Prediksi (API)}{91}{subsection.4.1.3}\protected@file@percent }
+\newlabel{lst:flask_daily}{{IV.1}{92}{Implementasi Endpoint Prediksi Harian Seasonal-Naive (\textit {app.py})}{lstlisting.4.1}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.1}{\ignorespaces Implementasi Endpoint Prediksi Harian Seasonal-Naive (\textit  {app.py})}}{92}{lstlisting.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Preprocessing Data}{94}{section.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Deskripsi Data dan Eksplorasi Awal}{94}{subsection.4.2.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Statistik Ringkas Dataset Pendapatan Harian}}{94}{table.caption.57}\protected@file@percent }
+\newlabel{tab:statistik_revenue_harian}{{4.1}{94}{Statistik Ringkas Dataset Pendapatan Harian}{table.caption.57}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Pra-pemrosesan dan Pembentukan Sequence}{95}{subsection.4.2.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Pembagian Dataset dan Dimensi Sequence}}{95}{table.caption.58}\protected@file@percent }
+\newlabel{tab:pembagian_data_sequence}{{4.2}{95}{Pembagian Dataset dan Dimensi Sequence}{table.caption.58}{}}
+\newlabel{lst:preprocessing}{{IV.2}{96}{Pra-pemrosesan Data: Filter Hari Aktif, Log-Return, dan Fitur Siklik}{lstlisting.4.2}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.2}{\ignorespaces Pra-pemrosesan Data: Filter Hari Aktif, Log-Return, dan Fitur Siklik}}{96}{lstlisting.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Implementasi dan Pelatihan Model Prediksi}{97}{section.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Arsitektur Model dan Skenario Eksperimen}{97}{subsection.4.3.1}\protected@file@percent }
+\newlabel{lst:build_lstm}{{IV.3}{97}{Konstruksi Arsitektur LSTM Tersederhanakan dan Konfigurasi Pelatihan}{lstlisting.4.3}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.3}{\ignorespaces Konstruksi Arsitektur LSTM Tersederhanakan dan Konfigurasi Pelatihan}}{97}{lstlisting.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Hasil Pelatihan Model}{98}{subsection.4.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.17}{\ignorespaces Kurva Kerugian Pelatihan (\textit  {Training Loss Curve}) Model LSTM}}{99}{figure.caption.59}\protected@file@percent }
+\newlabel{fig:lstm_kurva_training}{{4.17}{99}{Kurva Kerugian Pelatihan (\textit {Training Loss Curve}) Model LSTM}{figure.caption.59}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}Implementasi Augmentasi Data Sintetis TimeGAN}{99}{subsection.4.3.3}\protected@file@percent }
+\newlabel{lst:timegan}{{IV.4}{100}{Implementasi Jaringan \textit {Embedder} dan \textit {Generator} TimeGAN (PyTorch)}{lstlisting.4.4}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.4}{\ignorespaces Implementasi Jaringan \textit  {Embedder} dan \textit  {Generator} TimeGAN (PyTorch)}}{100}{lstlisting.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.4}Implementasi Prediksi Rekursif ke Depan}{101}{subsection.4.3.4}\protected@file@percent }
+\newlabel{lst:recursive}{{IV.5}{101}{Prediksi Rekursif dengan \textit {Clipping}, \textit {Damping}, dan \textit {Safety Rail}}{lstlisting.4.5}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.5}{\ignorespaces Prediksi Rekursif dengan \textit  {Clipping}, \textit  {Damping}, dan \textit  {Safety Rail}}}{101}{lstlisting.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Evaluasi Model}{102}{section.4.4}\protected@file@percent }
+\newlabel{lst:metrics}{{IV.6}{103}{Implementasi Fungsi Metrik Evaluasi sMAPE dan MASE}{lstlisting.4.6}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.6}{\ignorespaces Implementasi Fungsi Metrik Evaluasi sMAPE dan MASE}}{103}{lstlisting.4.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Evaluasi Model dan Perbandingan dengan Baseline}{104}{subsection.4.4.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces Perbandingan Performa pada Data Uji (\textit  {One-Step-Ahead})}}{104}{table.caption.60}\protected@file@percent }
+\newlabel{tab:eval_baseline_comp}{{4.3}{104}{Perbandingan Performa pada Data Uji (\textit {One-Step-Ahead})}{table.caption.60}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.18}{\ignorespaces Grafik Pendapatan Aktual vs. Prediksi Model LSTM Hybrid}}{105}{figure.caption.61}\protected@file@percent }
+\newlabel{fig:lstm_actual_predicted}{{4.18}{105}{Grafik Pendapatan Aktual vs. Prediksi Model LSTM Hybrid}{figure.caption.61}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}Evaluasi Multi-Seed dan Analisis Kestabilan}{105}{subsection.4.4.2}\protected@file@percent }
+\newlabel{lst:multiseed}{{IV.7}{105}{Prosedur Evaluasi \textit {Multi-Seed} (10 Kali Pelatihan Ulang)}{lstlisting.4.7}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {IV.7}{\ignorespaces Prosedur Evaluasi \textit  {Multi-Seed} (10 Kali Pelatihan Ulang)}}{105}{lstlisting.4.7}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.4}{\ignorespaces Statistik Performa LSTM Hybrid pada 10 Seed}}{106}{table.caption.62}\protected@file@percent }
+\newlabel{tab:statistik_multiseed}{{4.4}{106}{Statistik Performa LSTM Hybrid pada 10 Seed}{table.caption.62}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.19}{\ignorespaces Boxplot Distribusi MAE Hasil Pengujian \textit  {Multi-Seed}}}{107}{figure.caption.63}\protected@file@percent }
+\newlabel{fig:boxplot_multiseed}{{4.19}{107}{Boxplot Distribusi MAE Hasil Pengujian \textit {Multi-Seed}}{figure.caption.63}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}Evaluasi Augmentasi Data Sintetis TimeGAN}{107}{subsection.4.4.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.5}{\ignorespaces Perbandingan Performa Eksperimen Augmentasi TimeGAN (\textit  {Multi-Step}, Horizon 7)}}{107}{table.caption.64}\protected@file@percent }
+\newlabel{tab:eval_timegan}{{4.5}{107}{Perbandingan Performa Eksperimen Augmentasi TimeGAN (\textit {Multi-Step}, Horizon 7)}{table.caption.64}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Hasil Pengujian Sistem}{108}{section.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.1}Skenario Pengujian}{108}{subsection.4.5.1}\protected@file@percent }
 \gdef \LT@v {\LT@entry 
     {1}{29.87181pt}\LT@entry 
     {1}{97.75826pt}\LT@entry 
     {1}{146.12785pt}\LT@entry 
     {1}{69.3055pt}\LT@entry 
     {1}{69.3055pt}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.2}Hasil Black Box Testing}{95}{subsection.4.5.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.6}{\ignorespaces Hasil Pengujian Black Box}}{95}{table.4.6}\protected@file@percent }
-\newlabel{tab:hasil_blackbox}{{4.6}{95}{Hasil Pengujian Black Box}{table.4.6}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.7}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{97}{table.caption.49}\protected@file@percent }
-\newlabel{tab:hasil_sync}{{4.7}{97}{Hasil Pengujian Mekanisme Sinkronisasi}{table.caption.49}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.3}Hasil White Box Testing}{97}{subsection.4.5.3}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4.8}{\ignorespaces Hasil Pengujian White Box}}{98}{table.caption.50}\protected@file@percent }
-\newlabel{tab:hasil_whitebox}{{4.8}{98}{Hasil Pengujian White Box}{table.caption.50}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.4}Evaluasi Kinerja Model}{99}{subsection.4.5.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.6}Pembahasan}{99}{section.4.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.1}Pembahasan Pengujian Fungsional dan Arsitektur Offline-First}{99}{subsection.4.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.2}Pembahasan Hasil Prediksi Penjualan LSTM}{100}{subsection.4.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.7}Keterbatasan Sistem dan Penelitian}{102}{section.4.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.7.1}Keterbatasan Sistem POS}{102}{subsection.4.7.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.7.2}Keterbatasan Penelitian Model Prediksi}{103}{subsection.4.7.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {V}KESIMPULAN DAN SARAN}{105}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.2}Hasil Black Box Testing}{109}{subsection.4.5.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.6}{\ignorespaces Hasil Pengujian Black Box}}{109}{table.4.6}\protected@file@percent }
+\newlabel{tab:hasil_blackbox}{{4.6}{109}{Hasil Pengujian Black Box}{table.4.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.7}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{111}{table.caption.65}\protected@file@percent }
+\newlabel{tab:hasil_sync}{{4.7}{111}{Hasil Pengujian Mekanisme Sinkronisasi}{table.caption.65}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.3}Hasil White Box Testing}{111}{subsection.4.5.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.8}{\ignorespaces Hasil Pengujian White Box}}{113}{table.caption.66}\protected@file@percent }
+\newlabel{tab:hasil_whitebox}{{4.8}{113}{Hasil Pengujian White Box}{table.caption.66}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.4}Evaluasi Kinerja Model}{114}{subsection.4.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}Pembahasan}{114}{section.4.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.1}Pembahasan Pengujian Fungsional dan Arsitektur Offline-First}{114}{subsection.4.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.2}Pembahasan Hasil Prediksi Penjualan LSTM}{115}{subsection.4.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.7}Keterbatasan Sistem dan Penelitian}{117}{section.4.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7.1}Keterbatasan Sistem POS}{117}{subsection.4.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7.2}Keterbatasan Penelitian Model Prediksi}{118}{subsection.4.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {V}KESIMPULAN DAN SARAN}{120}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Kesimpulan}{105}{section.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Saran}{106}{section.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{LAMPIRAN}{111}{section*.51}\protected@file@percent }
-\gdef \@abspage@last{126}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Kesimpulan}{120}{section.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Saran}{121}{section.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{LAMPIRAN}{126}{section*.67}\protected@file@percent }
+\gdef \@abspage@last{142}

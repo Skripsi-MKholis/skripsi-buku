@@ -1749,38 +1749,240 @@ Bagian ini memaparkan realisasi fisik dari rancangan sistem yang telah disusun p
 
 \subsection{Implementasi Antarmuka (UI)}
 
-Aplikasi mobile dikembangkan menggunakan framework Flutter dengan bahasa pemrograman Dart. Komponen antarmuka pengguna disesuaikan dengan rancangan wireframe untuk menjamin kenyamanan operasional kasir. Berikut adalah penjelasan mengenai implementasi antarmuka layar utama aplikasi:
+Aplikasi \textit{mobile} dikembangkan menggunakan \textit{framework} Flutter dengan bahasa pemrograman Dart, mengacu pada rancangan \textit{wireframe} pada Subbab 3.2.9. Cuplikan hasil implementasi antarmuka diambil langsung dari aplikasi yang berjalan pada data toko mitra EatsTEDI, disusun berurutan mengikuti alur penggunaan aplikasi mulai dari registrasi akun, manajemen toko dan produk, transaksi kasir, hingga laporan analitik.
 
 \begin{enumerate}
-    \item \textbf{Halaman Registrasi Toko Baru}:
-    Halaman ini merupakan langkah awal inisialisasi sistem yang digunakan oleh Owner untuk mendaftarkan akun baru dan meregistrasikan profil outlet toko. Form registrasi memuat kolom input nama lengkap, email, kata sandi, nama toko, alamat outlet, dan nomor telepon.
-    
-    \item \textbf{Halaman Login}:
-    Menyediakan fasilitas autentikasi pengguna menggunakan email dan kata sandi. Keamanan akses diatur melalui layanan autentikasi Supabase. Sistem secara otomatis mengidentifikasi peran akun (Owner atau Kasir) setelah login berhasil untuk menentukan batasan hak akses menu.
-    
-    \item \textbf{Halaman Pemilihan Toko}:
-    Layar ini ditujukan bagi pengguna yang terdaftar di lebih dari satu outlet toko merchant. Pengguna dapat memilih outlet aktif yang ingin dioperasikan sebelum diarahkan ke halaman dasbor utama.
-    
-    \item \textbf{Halaman Dasbor Owner}:
-    Menampilkan visualisasi ringkasan kinerja penjualan toko saat ini, seperti grafik tren omzet penjualan harian, jumlah total transaksi, total nominal omzet harian, dan ringkasan stok produk yang menipis sebagai peringatan restock cepat.
-    
-    \item \textbf{Halaman POS (Pembayaran / Checkout)}:
-    Merupakan layar operasional utama kasir untuk memproses transaksi. Kasir dapat memilih produk, memasukkan jumlah barang ke keranjang belanja, menerapkan diskon atau voucher, memilih metode pembayaran (Tunai, QRIS, atau Transfer), serta menyelesaikan transaksi pembayaran.
-    
-    \item \textbf{Halaman Riwayat Transaksi}:
-    Menampilkan daftar nota transaksi penjualan yang telah diselesaikan. Halaman ini memuat informasi detail nomor invoice, tanggal transaksi, nama kasir, total nominal pembayaran, dan status sinkronisasi cloud.
-    
-    \item \textbf{Halaman Kelola Produk dan Kategori}:
-    Menyediakan antarmuka bagi staf toko untuk mengelola inventaris produk (menambah, mengubah, dan menghapus produk) beserta pengelompokan berdasarkan kategori produk. Form produk memuat nama produk, harga jual, stok fisik, barcode/SKU, dan gambar produk.
-    
-    \item \textbf{Halaman Laporan (Analitik AI \& Prediksi LSTM)}:
-    Menampilkan visualisasi grafik data penjualan aktual historis berdampingan dengan kurva proyeksi penjualan harian untuk 7 hari ke depan yang diperoleh dari layanan API prediksi penjualan.
-    
-    \item \textbf{Halaman Pengaturan dan Profil Toko}:
-    Memungkinkan staf toko untuk mengubah konfigurasi dasar aplikasi, dengan menu pengaturan profil outlet toko (logo, nama, alamat) dan pengelolaan akun karyawan/staf kasir yang khusus tersedia bagi Owner.
-    
-    \item \textbf{Halaman Struk Digital dan Katalog Mandiri}:
-    Halaman struk digital menampilkan pratinjau struk fisik transaksi yang dapat dibagikan langsung ke pelanggan via aplikasi pesan instan. Layar katalog mandiri menyediakan daftar menu produk yang dapat dipindai oleh pelanggan untuk melihat daftar harga barang secara langsung.
+    \item \textbf{Halaman Registrasi}
+
+    Halaman \textit{Buat Akun} merupakan titik masuk awal bagi pengguna baru. Form registrasi memuat kolom Nama Lengkap, Email, \textit{Password}, dan Konfirmasi \textit{Password}, dilengkapi opsi pendaftaran cepat \textit{Lanjutkan dengan Google} serta tautan menuju halaman Login bagi pengguna yang telah memiliki akun.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\textwidth]{ui_01_register}
+        \caption{Implementasi Halaman Registrasi}
+        \label{fig:ui_register}
+    \end{figure}
+
+    \item \textbf{Halaman \textit{Login}}
+
+    Halaman \textit{Selamat Datang Kembali} menyediakan autentikasi menggunakan Email dan \textit{Password}, opsi \textit{Ingat saya} dan \textit{Lupa password}, serta tombol masuk melalui akun Google. Tombol \textit{Masuk sebagai Pelanggan} disediakan sebagai jalur akses terpisah bagi pelanggan yang hendak memindai QR katalog mandiri tanpa memerlukan akun staf toko.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\textwidth]{ui_02_login}
+        \caption{Implementasi Halaman \textit{Login}}
+        \label{fig:ui_login}
+    \end{figure}
+
+    \item \textbf{Halaman Informasi Toko}
+
+    Setelah registrasi, pengguna diarahkan ke halaman \textit{Informasi Toko} untuk membuat outlet pertamanya, memuat kolom Nama Toko/\textit{Outlet}, Provinsi dan Kota/Kabupaten (\textit{dropdown} berjenjang), serta Alamat Lengkap, yang kemudian dikonfirmasi melalui tombol \textit{Konfirmasi \& Mulai}.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\textwidth]{ui_03_daftar_toko}
+        \caption{Implementasi Halaman Informasi Toko}
+        \label{fig:ui_daftar_toko}
+    \end{figure}
+
+    \item \textbf{Halaman Pilih Toko}
+
+    Menampilkan daftar seluruh \textit{outlet} yang terasosiasi dengan akun pengguna beserta peran pada masing-masing \textit{outlet} (Owner atau Karyawan). Pengguna dapat bergabung ke \textit{outlet} lain melalui \textit{Kode Undangan} atau mendaftarkan \textit{outlet} baru sebelum memilih toko aktif yang ingin dioperasikan.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\textwidth]{ui_04_pilih_toko}
+        \caption{Implementasi Halaman Pilih Toko}
+        \label{fig:ui_pilih_toko}
+    \end{figure}
+
+    \item \textbf{Halaman Dasbor Owner}
+
+    Menyajikan \textit{Ringkasan Performa} toko dengan \textit{filter} rentang waktu (Hari Ini, Minggu Ini, Bulan Ini), empat kartu statistik \textit{real-time} (Omzet, Transaksi, Stok Rendah, dan Produk Aktif), serta grafik \textit{Performa Penjualan} yang memvisualisasikan tren omzet tujuh hari terakhir. Navigasi bawah aplikasi (Dasbor, Kasir, Riwayat, Laporan, dan menu lainnya) juga tampak pada halaman ini.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\textwidth]{ui_05_dashboard_owner}
+        \caption{Implementasi Halaman Dasbor Owner}
+        \label{fig:ui_dashboard_owner}
+    \end{figure}
+
+    \item \textbf{Halaman Kelola Produk dan Tambah Produk}
+
+    Halaman \textit{Katalog Produk} menampilkan daftar inventaris beserta foto, kategori, status stok, harga, dan kode SKU, dilengkapi kolom pencarian dan \textit{filter} kategori (Semua, Minuman, Makanan). Formulir \textit{Tambah Produk} memuat unggah foto produk, nama, kategori, SKU/\textit{Barcode} (dapat dipindai atau digenerasi otomatis), harga modal, harga jual, dan stok awal.
+
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{ui_06a_kelola_produk}
+            \caption{Katalog Produk}
+            \label{fig:ui_kelola_produk}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{ui_06b_tambah_produk}
+            \caption{Tambah Produk}
+            \label{fig:ui_tambah_produk}
+        \end{subfigure}
+        \caption{Implementasi Halaman Kelola Produk dan Tambah Produk}
+        \label{fig:ui_produk}
+    \end{figure}
+
+    \item \textbf{Halaman Kelola Kategori}
+
+    Menyediakan pengelompokan produk melalui kategori yang dapat ditambah, disunting, dan dihapus, dilengkapi pencarian kategori dan penghitung jumlah produk pada setiap kategori (misalnya Minuman dan Makanan).
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\textwidth]{ui_07_kelola_kategori}
+        \caption{Implementasi Halaman Kelola Kategori}
+        \label{fig:ui_kelola_kategori}
+    \end{figure}
+
+    \item \textbf{Halaman Kelola Stok dan Ubah Stok Produk}
+
+    Halaman \textit{Kelola Stok} menampilkan daftar produk beserta harga dan jumlah stok terkini, dengan tombol \textit{Ubah} pada setiap baris. Menekan tombol tersebut memunculkan modal \textit{Ubah Stok Produk} berisi \textit{stepper} penambahan/pengurangan stok manual serta pilihan pintasan (\texttt{-10}, \texttt{-5}, \texttt{+5}, \texttt{+10}) sebelum disimpan.
+
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{ui_08_kelola_stok}
+            \caption{Kelola Stok}
+            \label{fig:ui_kelola_stok}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{ui_09_modal_edit_stok}
+            \caption{Modal Ubah Stok Produk}
+            \label{fig:ui_modal_edit_stok}
+        \end{subfigure}
+        \caption{Implementasi Halaman Kelola Stok dan Ubah Stok Produk}
+        \label{fig:ui_stok}
+    \end{figure}
+
+    \item \textbf{Halaman Riwayat Stok}
+
+    Berfungsi sebagai log audit mutasi stok, menampilkan jenis mutasi (Penjualan atau Penyesuaian Manual), perubahan jumlah stok sebelum dan sesudah (misalnya dari 41 menjadi 40 \textit{pcs}), staf yang melakukan perubahan, serta waktu kejadian, dilengkapi \textit{filter} berdasarkan jenis mutasi.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\textwidth]{ui_10_riwayat_stok}
+        \caption{Implementasi Halaman Riwayat Stok}
+        \label{fig:ui_riwayat_stok}
+    \end{figure}
+
+    \item \textbf{Halaman Kasir (POS) dan Detail Pesanan}
+
+    Merupakan layar operasional utama kasir, menampilkan katalog produk dalam bentuk \textit{grid} dengan pencarian dan pemindaian \textit{barcode}. Memilih produk memunculkan modal \textit{Detail Pesanan} yang merinci nama item, harga satuan, kuantitas melalui \textit{stepper}, subtotal, dan total bayar sebelum dilanjutkan ke pembayaran.
+
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{ui_11_kasir_pos}
+            \caption{Kasir (POS)}
+            \label{fig:ui_kasir_pos}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{ui_12_detail_pesanan}
+            \caption{Detail Pesanan}
+            \label{fig:ui_detail_pesanan}
+        \end{subfigure}
+        \caption{Implementasi Halaman Kasir (POS) dan Detail Pesanan}
+        \label{fig:ui_kasir}
+    \end{figure}
+
+    \item \textbf{Halaman Pembayaran}
+
+    Menampilkan total tagihan, pilihan metode pembayaran (Tunai atau QRIS), kolom \textit{Uang Tunai Diterima} beserta pintasan nominal pecahan umum (Rp25rb, Rp50rb, Rp100rb), dan kalkulasi kembalian otomatis sebelum transaksi dikonfirmasi dan disimpan.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\textwidth]{ui_13_pembayaran}
+        \caption{Implementasi Halaman Pembayaran}
+        \label{fig:ui_pembayaran}
+    \end{figure}
+
+    \item \textbf{Halaman Riwayat Transaksi}
+
+    Menampilkan ringkasan kumulatif Omzet dan jumlah Transaksi, \textit{filter} periode (Semua, Hari Ini, Kemarin, Pilih Tanggal) serta status (Berhasil, \textit{Pending}, Batal), dan daftar transaksi yang dikelompokkan per tanggal lengkap dengan nomor invoice, jam, metode bayar, dan nominal.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\textwidth]{ui_14_riwayat_transaksi}
+        \caption{Implementasi Halaman Riwayat Transaksi}
+        \label{fig:ui_riwayat_transaksi}
+    \end{figure}
+
+    \item \textbf{Halaman Struk Digital}
+
+    Menampilkan rincian nomor transaksi, tanggal, metode pembayaran, nama kasir, total belanja, dan kembalian, dilengkapi kode QR yang dapat dipindai pelanggan untuk melihat struk secara \textit{online}, serta tombol \textit{Bagikan} dan \textit{Set Printer} untuk mencetak struk fisik.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\textwidth]{ui_15_struk_digital}
+        \caption{Implementasi Halaman Struk Digital}
+        \label{fig:ui_struk_digital}
+    \end{figure}
+
+    \item \textbf{Halaman Laporan Analitik}
+
+    Menyajikan ringkasan Omzet dan Transaksi Keseluruhan, jumlah Stok Rendah dan Produk Aktif, serta grafik \textit{Tren Penjualan} bulanan yang memvisualisasikan riwayat omzet toko EatsTEDI sejak Agustus 2024 hingga Juni 2026, sejalan dengan rentang data penelitian pada Subbab 3.1.5. Kartu \textit{Smart Analitik} pada bagian atas halaman menjadi pintu masuk menuju fitur prediksi berbasis AI.
+
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{ui_16a_laporan_penjualan}
+            \caption{Ringkasan Laporan}
+            \label{fig:ui_laporan_a}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{ui_16b_laporan_penjualan}
+            \caption{Grafik Tren Penjualan Bulanan}
+            \label{fig:ui_laporan_b}
+        \end{subfigure}
+        \caption{Implementasi Halaman Laporan Analitik}
+        \label{fig:ui_laporan}
+    \end{figure}
+
+    \item \textbf{Halaman \textit{Smart Analitik} dan Riwayat Analisis}
+
+    Halaman \textit{Smart Analitik} memanggil layanan prediksi yang di-\textit{deploy} pada \textit{HuggingFace Space} (\textit{Cloud}) dengan estimasi lokal \textit{on-device} sebagai jalur cadangan apabila layanan \textit{cloud} tidak dapat dijangkau, konsisten dengan strategi \textit{offline-first} yang dibahas pada Subbab 3.2.1. Ketika riwayat transaksi toko masih kurang dari batas minimum sekuens LOOK\_BACK yang disyaratkan model (lihat Subbab 3.2.8), sistem menampilkan peringatan \textit{cold start} dan menyajikan estimasi berbasis pola bisnis retail/kafe umum sebagai gantinya. Halaman ini menampilkan kartu Estimasi Omzet dan Estimasi \textit{Traffic}, grafik \textit{Forecasting} yang membedakan data riil dengan hasil prediksi AI, serta proyeksi menu terlaris untuk hari berikutnya. Setiap analisis yang dijalankan turut dicatat pada halaman \textit{Riwayat Analisis} beserta sumber komputasi (\textit{Cloud} atau Lokal) dan estimasi omzet yang dihasilkan.
+
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{ui_17a_smart_analitik}
+            \caption{\textit{Smart Analitik} (Status \textit{Cold Start})}
+            \label{fig:ui_smart_analitik_a}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{ui_17b_smart_analitik}
+            \caption{Grafik \textit{Forecasting} dan Proyeksi Menu}
+            \label{fig:ui_smart_analitik_b}
+        \end{subfigure}
+        \caption{Implementasi Halaman \textit{Smart Analitik}}
+        \label{fig:ui_smart_analitik}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\textwidth]{ui_18_riwayat_analisis}
+        \caption{Implementasi Halaman Riwayat Analisis}
+        \label{fig:ui_riwayat_analisis}
+    \end{figure}
 \end{enumerate}
 
 \subsection{Implementasi Backend dan Basis Data Cloud}
