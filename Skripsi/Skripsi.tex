@@ -45,7 +45,7 @@
   belowskip=0.8em
 }
 \renewcommand{\lstlistingname}{Kode Program}
-\usepackage[font=small, format=plain, labelfont=bf, up, textfont=up]{caption}
+\usepackage[font=small, format=plain, labelfont=up, up, textfont=up]{caption}
 \usepackage{subcaption}
 \usepackage{geometry}
 \usepackage{fancyhdr}
@@ -456,7 +456,7 @@ NIM. 2022573010098
     \textbf{ABSTRAK}\\[0.5cm]
 \end{center}
 
-Penelitian ini bertujuan merancang dan membangun aplikasi \textit{Point of Sale} (POS) berbasis \textit{mobile} dengan arsitektur \textit{offline-first} yang dilengkapi fitur prediksi penjualan harian menggunakan metode \textit{Long Short-Term Memory} (LSTM), guna membantu pelaku UMKM, dalam hal ini kantin EatsTEDI Universitas Gadjah Mada sebagai mitra penelitian, dalam pengambilan keputusan operasional berbasis data. Sistem dikembangkan menggunakan \textit{framework} Flutter yang terintegrasi dengan basis data lokal Isar DB dan basis data \textit{cloud} Supabase PostgreSQL, sedangkan modul prediksi dibangun menggunakan Python (TensorFlow dan Flask) yang di-\textit{deploy} sebagai layanan API terpisah. Data yang digunakan berupa 313 hari aktif transaksi penjualan harian yang diolah sebagai data deret waktu (\textit{time series}) dengan pendekatan target \textit{log-return}. Kinerja model LSTM dievaluasi menggunakan metrik MAE, RMSE, sMAPE, dan MASE, serta dibandingkan dengan model pembanding \textit{Naive}, \textit{Mean-7}, dan SARIMA melalui pengujian \textit{multi-seed}. Hasil evaluasi menunjukkan bahwa model LSTM \textit{Hybrid} (MAE rata-rata Rp667.718,00; MASE 1,840) belum mampu mengungguli metode \textit{Naive} (MAE Rp519.841,00; MASE 1,432) akibat keterbatasan volume data historis dan dominasi persistensi jangka pendek pada data penjualan. Eksperimen augmentasi data sintetis menggunakan TimeGAN berhasil menurunkan galat model LSTM multi-langkah secara signifikan, namun tetap belum melampaui \textit{baseline Seasonal-Naive}. Berdasarkan temuan tersebut, layanan API produksi menyajikan metode \textit{Seasonal-Naive} sebagai metode penyaji utama peramalan harian. Pengujian fungsional \textit{Black Box} terhadap 14 skenario dan pengujian \textit{White Box} terhadap fungsi kritis layanan prediksi menunjukkan tingkat keberhasilan 100\%, sehingga sistem POS \textit{offline-first} ini terbukti layak dioperasikan secara penuh dalam mendukung operasional UMKM.\\[0.6cm]
+Penelitian ini bertujuan merancang dan membangun aplikasi \textit{Point of Sale} (POS) berbasis \textit{mobile} dengan arsitektur \textit{offline-first} yang dilengkapi fitur prediksi penjualan harian menggunakan metode \textit{Long Short-Term Memory} (LSTM), guna membantu pelaku UMKM, dalam hal ini kantin EatsTEDI Universitas Gadjah Mada sebagai mitra penelitian, dalam pengambilan keputusan operasional berbasis data. Sistem dikembangkan menggunakan \textit{framework} Flutter yang terintegrasi dengan basis data lokal Isar DB dan basis data \textit{cloud} Supabase PostgreSQL, sedangkan modul prediksi dibangun menggunakan Python (TensorFlow dan Flask) yang di-\textit{deploy} sebagai layanan API terpisah. Data yang digunakan berupa 313 hari aktif transaksi penjualan harian yang diolah sebagai data deret waktu (\textit{time series}) dengan pendekatan target \textit{log-return}. Kinerja model LSTM dievaluasi menggunakan metrik MAE, RMSE, sMAPE, dan MASE, serta dibandingkan dengan model pembanding \textit{Naive}, \textit{Mean-7}, dan SARIMA melalui pengujian \textit{multi-seed}. Hasil evaluasi menunjukkan bahwa model LSTM \textit{Hybrid} (MAE rata-rata Rp667.718,00, MASE 1,840) belum mampu mengungguli metode \textit{Naive} (MAE Rp519.841,00, MASE 1,432) akibat keterbatasan volume data historis dan dominasi persistensi jangka pendek pada data penjualan. Eksperimen augmentasi data sintetis menggunakan TimeGAN berhasil menurunkan galat model LSTM multi-langkah secara signifikan, namun tetap belum melampaui \textit{baseline Seasonal-Naive}. Berdasarkan temuan tersebut, layanan API produksi menyajikan metode \textit{Seasonal-Naive} sebagai metode penyaji utama prediksi harian. Pengujian fungsional \textit{Black Box} terhadap 14 skenario dan pengujian \textit{White Box} terhadap fungsi kritis layanan prediksi menunjukkan tingkat keberhasilan 100\%, sehingga sistem POS \textit{offline-first} ini terbukti layak dioperasikan secara penuh dalam mendukung operasional UMKM.\\[0.6cm]
 
 \noindent \textbf{Kata Kunci}: \textit{Point of Sale} (POS), Prediksi Penjualan Harian, \textit{Long Short-Term Memory} (LSTM), \textit{Offline-First}, TimeGAN, UMKM
 \end{spacing}
@@ -470,7 +470,7 @@ Penelitian ini bertujuan merancang dan membangun aplikasi \textit{Point of Sale}
     \textbf{\textit{ABSTRACT}}\\[0.5cm]
 \end{center}
 
-\textit{This study aims to design and develop a mobile-based Point of Sale (POS) application with an offline-first architecture, equipped with a daily sales prediction feature using the Long Short-Term Memory (LSTM) method, to assist MSMEs, in this case the EatsTEDI canteen of Universitas Gadjah Mada as the research partner, in data-driven operational decision-making. The system was developed using the Flutter framework integrated with the local Isar DB database and the Supabase PostgreSQL cloud database, while the prediction module was built using Python (TensorFlow and Flask) deployed as a separate API service. The data used consist of 313 active days of daily sales transactions processed as time-series data using a log-return target approach. The performance of the LSTM model was evaluated using the MAE, RMSE, sMAPE, and MASE metrics, and compared against the Naive, Mean-7, and SARIMA baseline models through multi-seed testing. The evaluation results show that the Hybrid LSTM model (average MAE of IDR 667,718.00; MASE of 1.840) was unable to outperform the Naive method (MAE of IDR 519,841.00; MASE of 1.432) due to the limited volume of historical data and the dominance of short-term persistence in the sales data. A synthetic data augmentation experiment using TimeGAN significantly reduced the error of the multi-step LSTM model, yet still did not surpass the Seasonal-Naive baseline. Based on these findings, the production API service presents the Seasonal-Naive method as the primary forecasting method for daily predictions. Black Box functional testing on 14 scenarios and White Box testing on the critical functions of the prediction service showed a 100\% success rate, proving that this offline-first POS system is fully viable for supporting MSME operations.}\\[0.6cm]
+\textit{This study aims to design and develop a mobile-based Point of Sale (POS) application with an offline-first architecture, equipped with a daily sales prediction feature using the Long Short-Term Memory (LSTM) method, to assist MSMEs, in this case the EatsTEDI canteen of Universitas Gadjah Mada as the research partner, in data-driven operational decision-making. The system was developed using the Flutter framework integrated with the local Isar DB database and the Supabase PostgreSQL cloud database, while the prediction module was built using Python (TensorFlow and Flask) deployed as a separate API service. The data used consist of 313 active days of daily sales transactions processed as time-series data using a log-return target approach. The performance of the LSTM model was evaluated using the MAE, RMSE, sMAPE, and MASE metrics, and compared against the Naive, Mean-7, and SARIMA baseline models through multi-seed testing. The evaluation results show that the Hybrid LSTM model (average MAE of IDR 667,718.00 and MASE of 1.840) was unable to outperform the Naive method (MAE of IDR 519,841.00 and MASE of 1.432) due to the limited volume of historical data and the dominance of short-term persistence in the sales data. A synthetic data augmentation experiment using TimeGAN significantly reduced the error of the multi-step LSTM model, yet still did not surpass the Seasonal-Naive baseline. Based on these findings, the production API service presents the Seasonal-Naive method as the primary forecasting method for daily predictions. Black Box functional testing on 14 scenarios and White Box testing on the critical functions of the prediction service showed a 100\% success rate, proving that this offline-first POS system is fully viable for supporting MSME operations.}\\[0.6cm]
 
 \noindent \textbf{\textit{Keywords}}: \textit{Point of Sale (POS), Daily Sales Prediction, Long Short-Term Memory (LSTM), Offline-First, TimeGAN, MSMEs}
 \end{spacing}
@@ -567,7 +567,7 @@ Untuk menghindari meluasnya materi pembahasan, maka penelitian ini dibatasi pada
     \item Aplikasi dikembangkan menggunakan \textit{framework} Flutter dan difokuskan untuk sistem operasi Android, mengingat dominasi pasar Android pada segmen UMKM lokal.
     \item Basis data yang digunakan adalah Supabase dengan skema relasional untuk menyimpan data produk, transaksi, dan akun pengguna.
     \item Algoritma yang digunakan adalah \textit{Long Short-Term Memory} (LSTM) dengan model \textit{univariate} atau \textit{multivariate} terbatas, dan prediksi dilakukan untuk rentang waktu harian.
-    \item Data uji bersumber dari basis data transaksi riil platform EatsTEDI DTEDI Universitas Gadjah Mada dengan periode lebih dari satu tahun; pola musiman yang diobservasi bersifat kalender akademis (mingguan dan semester), karena cakupan data yang tersedia belum cukup untuk mengamati siklus musiman tahunan penuh secara statistik.
+    \item Data uji bersumber dari basis data transaksi riil platform EatsTEDI DTEDI Universitas Gadjah Mada dengan periode lebih dari satu tahun. Pola musiman yang diobservasi bersifat kalender akademis (mingguan dan semester), karena cakupan data yang tersedia belum cukup untuk mengamati siklus musiman tahunan penuh secara statistik.
     \item Proses pelatihan model dan prediksi dilakukan di sisi \textit{server/cloud} menggunakan bahasa Python, sedangkan aplikasi \textit{mobile} bertugas mengirim data transaksi dan menerima hasil prediksi melalui \textit{REST API}.
 \end{enumerate}
 
@@ -586,13 +586,13 @@ Sistematika penulisan skripsi ini disusun untuk memberikan gambaran secara menye
 Bab ini menguraikan gambaran umum penelitian yang meliputi latar belakang masalah, rumusan masalah, tujuan penelitian, batasan masalah, manfaat penelitian, serta sistematika penulisan. Bab ini menjadi dasar dalam memahami alasan dan arah penelitian yang dilakukan.
 
 \noindent\textbf{BAB II TINJAUAN PUSTAKA}\\
-Bab ini berisi kajian literatur dan landasan teori yang relevan dengan penelitian. Kajian mencakup perbandingan metode peramalan penjualan dan implementasi sistem POS berbasis \textit{mobile}. Landasan teori menyajikan konsep peramalan, arsitektur LSTM, \textit{framework} Flutter, bahasa Dart, serta layanan Supabase yang digunakan sebagai infrastruktur sistem.
+Bab ini berisi kajian literatur dan landasan teori yang relevan dengan penelitian. Kajian mencakup perbandingan metode prediksi penjualan dan implementasi sistem POS berbasis \textit{mobile}. Landasan teori menyajikan konsep prediksi, arsitektur LSTM, \textit{framework} Flutter, bahasa Dart, serta layanan Supabase yang digunakan sebagai infrastruktur sistem.
 
 \noindent\textbf{BAB III METODOLOGI PENELITIAN}\\
 Bab ini menjelaskan tahapan metodologi penelitian yang dilakukan, meliputi jenis dan pendekatan penelitian, teknik pengumpulan data, teknik analisis data, alur penelitian, rancangan sistem menggunakan UML, teknik pengujian, serta indikator keberhasilan penelitian.
 
 \noindent\textbf{BAB IV HASIL DAN PEMBAHASAN}\\
-Bab ini menyajikan hasil implementasi sistem POS \textit{mobile} beserta layanan API prediksi, tahapan \textit{preprocessing} data, implementasi dan pelatihan model peramalan LSTM beserta eksperimen augmentasi TimeGAN, evaluasi komparatif model terhadap \textit{baseline}, hasil pengujian \textit{Black Box} dan \textit{White Box}, pembahasan temuan penelitian, serta keterbatasan sistem dan penelitian.
+Bab ini menyajikan hasil implementasi sistem POS \textit{mobile} beserta layanan API prediksi, tahapan \textit{preprocessing} data, implementasi dan pelatihan model prediksi LSTM beserta eksperimen augmentasi TimeGAN, evaluasi komparatif model terhadap \textit{baseline}, hasil pengujian \textit{Black Box} dan \textit{White Box}, pembahasan temuan penelitian, serta keterbatasan sistem dan penelitian.
 
 \noindent\textbf{BAB V KESIMPULAN DAN SARAN}\\
 Bab ini memuat kesimpulan yang menjawab rumusan masalah dan tujuan penelitian berdasarkan hasil yang diperoleh, serta saran-saran konstruktif untuk pengembangan sistem dan penelitian lanjutan di masa mendatang.
@@ -645,7 +645,7 @@ Abbas dkk.~(2021) [4]. \textit{Sales Forecasting Using LSTM Networks in Retail I
 LSTM, ARIMA &
 LSTM mengungguli ARIMA pada data penjualan non-linier dengan penurunan \textit{error} hingga 15\%. &
 Sama-sama menggunakan LSTM untuk prediksi data penjualan berbasis deret waktu. &
-Model bersifat \textit{standalone} tanpa integrasi sistem kasir nyata; penelitian ini mengintegrasikan LSTM ke dalam aplikasi POS. \\
+Model bersifat \textit{standalone} tanpa integrasi sistem kasir nyata. Penelitian ini mengintegrasikan LSTM ke dalam aplikasi POS. \\
 \hline
 
 2 &
@@ -653,7 +653,7 @@ Setiawan \& Nugroho (2023) [1]. \textit{Development of Cross-Platform POS Applic
 Flutter, Firebase &
 Aplikasi kasir stabil dan mampu mencatat transaksi secara \textit{real-time}. &
 Sama-sama mengembangkan aplikasi POS berbasis Android untuk UMKM. &
-Aplikasi murni deskriptif tanpa fungsi prediksi analitik; penelitian ini menambahkan modul LSTM terintegrasi. \\
+Aplikasi murni deskriptif tanpa fungsi prediksi analitik. Penelitian ini menambahkan modul LSTM terintegrasi. \\
 \hline
 
 3 &
@@ -661,7 +661,7 @@ Martinez \& Silva (2022) [7]. \textit{Architecture Design of Offline-First Mobil
 \textit{Offline-First}, SQLite &
 Data tersinkronisasi aman tanpa tumpang tindih saat kembali \textit{online}. &
 Sama-sama menerapkan arsitektur \textit{offline-first} pada aplikasi \textit{mobile}. &
-Tidak menguji volume data besar dan tidak memiliki komponen AI; penelitian ini mengintegrasikan keduanya. \\
+Tidak menguji volume data besar dan tidak memiliki komponen AI. Penelitian ini mengintegrasikan keduanya. \\
 \hline
 
 4 &
@@ -669,7 +669,7 @@ Zhang \& Liu (2022) [13]. \textit{Comparative Analysis of LSTM and GRU for Time-
 LSTM, GRU &
 LSTM memberikan akurasi lebih stabil pada data tren penjualan multi-tahun. &
 Sama-sama membandingkan model \textit{deep learning} untuk prediksi deret waktu penjualan. &
-Memerlukan daya komputasi tinggi; penelitian ini men-\textit{deploy} model di server \textit{cloud} terpisah agar tidak membebani perangkat. \\
+Memerlukan daya komputasi tinggi. Penelitian ini men-\textit{deploy} model di server \textit{cloud} terpisah agar tidak membebani perangkat. \\
 \hline
 
 5 &
@@ -677,7 +677,7 @@ Fischer \& Weber (2024) [9]. \textit{Evaluating Open-Source BaaS Platforms: A Ca
 Supabase, PostgreSQL &
 RLS Supabase memangkas waktu pengembangan \textit{backend} hingga 40\%. &
 Sama-sama menggunakan Supabase sebagai infrastruktur \textit{backend cloud}. &
-Belum diuji untuk performa \textit{mobile dynamic sync} berskala harian; penelitian ini mengujinya dalam konteks UMKM. \\
+Belum diuji untuk performa \textit{mobile dynamic sync} berskala harian. Penelitian ini mengujinya dalam konteks UMKM. \\
 \hline
 
 6 &
@@ -685,7 +685,7 @@ Choi \& Lee (2022) [6]. \textit{Multivariate Time-Series Forecasting for Retail 
 Multivariate LSTM &
 Akurasi model naik dengan menambahkan variabel kontekstual seperti hari libur. &
 Sama-sama menggunakan variabel transaksi harian sebagai input model LSTM. &
-Bergantung pada data eksternal yang sulit diakses pelaku UMKM kecil; penelitian ini menggunakan data transaksi internal saja. \\
+Bergantung pada data eksternal yang sulit diakses pelaku UMKM kecil. Penelitian ini menggunakan data transaksi internal saja. \\
 \hline
 
 7 &
@@ -693,7 +693,7 @@ Novikov \& Petrov (2023) [8]. \textit{Performance Comparison of Local NoSQL Embe
 Isar DB, Hive, ObjectBox &
 Isar DB tercepat dalam operasi \textit{batch insert} transaksi pada perangkat Android. &
 Sama-sama menggunakan Isar DB sebagai \textit{local storage} pada aplikasi Flutter. &
-Belum diintegrasikan ke arsitektur sinkronisasi \textit{cloud}; penelitian ini mengintegrasikan keduanya secara penuh. \\
+Belum diintegrasikan ke arsitektur sinkronisasi \textit{cloud}. Penelitian ini mengintegrasikan keduanya secara penuh. \\
 \hline
 
 8 &
@@ -701,7 +701,7 @@ Brown \& Green (2021) [3]. \textit{Demand Forecasting for Inventory Management i
 Neural Networks &
 Mampu memprediksi \textit{demand} mingguan dengan MAPE 12\%. &
 Sama-sama menghubungkan prediksi penjualan ke manajemen stok barang. &
-Rentang prediksi mingguan terlalu luas; penelitian ini berfokus pada prediksi harian yang lebih granular. \\
+Rentang prediksi mingguan terlalu luas. Penelitian ini berfokus pada prediksi harian yang lebih granular. \\
 \hline
 \end{longtable}
 }
@@ -709,7 +709,7 @@ Rentang prediksi mingguan terlalu luas; penelitian ini berfokus pada prediksi ha
 
 Berdasarkan kajian terhadap penelitian terdahulu pada Tabel~\ref{tab:sota}, dapat disimpulkan bahwa sebagian besar penelitian prediksi penjualan menggunakan LSTM masih bersifat \textit{standalone}, yakni tidak terintegrasi dengan sistem pencatatan transaksi yang aktif digunakan. Sebaliknya, penelitian pengembangan sistem POS \textit{mobile} yang ada belum dilengkapi kemampuan analitik prediktif berbasis \textit{machine learning}. Selain itu, belum ada sistem POS untuk UMKM yang secara bersamaan menerapkan arsitektur \textit{offline-first} sekaligus menyertakan modul prediksi LSTM terintegrasi.
 
-Oleh karena itu, penelitian ini hadir untuk mengisi celah tersebut dengan mengusulkan sistem yang menggabungkan ketiga aspek sekaligus, yaitu: (1) aplikasi POS \textit{mobile} berbasis Flutter dengan kemampuan operasional \textit{offline-first} menggunakan Isar DB dan sinkronisasi otomatis ke Supabase [8], [9]; (2) modul prediksi penjualan harian berbasis LSTM yang dilatih dari data transaksi riil platform EatsTEDI DTEDI Universitas Gadjah Mada [4]--[6]; dan (3) penyajian hasil prediksi secara langsung kepada pengguna melalui dasbor analitik di dalam aplikasi yang sama [12].
+Oleh karena itu, penelitian ini hadir untuk mengisi celah tersebut dengan mengusulkan sistem yang menggabungkan ketiga aspek sekaligus, yaitu: (1) aplikasi POS \textit{mobile} berbasis Flutter dengan kemampuan operasional \textit{offline-first} menggunakan Isar DB dan sinkronisasi otomatis ke Supabase [8], [9], (2) modul prediksi penjualan harian berbasis LSTM yang dilatih dari data transaksi riil platform EatsTEDI DTEDI Universitas Gadjah Mada [4]--[6], dan (3) penyajian hasil prediksi secara langsung kepada pengguna melalui dasbor analitik di dalam aplikasi yang sama [12].
 
 \section{Sistem \textit{Point of Sale} (POS)}
 
@@ -717,11 +717,11 @@ Sistem \textit{Point of Sale} (POS) merupakan kombinasi perangkat keras dan pera
 
 Sistem POS modern yang dirancang untuk UMKM memerlukan pendekatan yang berbeda dibandingkan sistem ritel skala besar. Fokus utama harus terletak pada kesederhanaan alur kerja kasir, kecepatan proses transaksi, dan kemampuan beroperasi dalam kondisi konektivitas internet yang tidak stabil. Arsitektur \textit{offline-first} menjadi solusi utama untuk memastikan kelancaran operasional, di mana data transaksi disimpan terlebih dahulu secara lokal dan disinkronkan ke \textit{cloud} secara otomatis ketika koneksi tersedia [7].
 
-\section{Peramalan Penjualan (\textit{Forecasting})}
+\section{Prediksi Penjualan (\textit{Forecasting})}
 
-Peramalan penjualan merupakan proyeksi teknis dari permintaan pelanggan potensial untuk periode waktu tertentu berdasarkan asumsi-asumsi yang ditetapkan. Menurut Heizer dan Render [14], peramalan yang akurat sangat krusial dalam manajemen operasi karena mempengaruhi keputusan strategis di bidang pemasaran, keuangan, dan sumber daya manusia. Terdapat empat prinsip utama dalam peramalan: peramalan jarang sekali sempurna, peramalan jangka pendek biasanya lebih akurat daripada jangka panjang, peramalan agregat lebih akurat daripada peramalan item individu, dan pemilihan metode harus disesuaikan dengan pola data (horizontal, tren, musiman, atau siklis).
+Prediksi penjualan merupakan proyeksi teknis dari permintaan pelanggan potensial untuk periode waktu tertentu berdasarkan asumsi-asumsi yang ditetapkan. Menurut Heizer dan Render [14], prediksi yang akurat sangat krusial dalam manajemen operasi karena mempengaruhi keputusan strategis di bidang pemasaran, keuangan, dan sumber daya manusia. Terdapat empat prinsip utama dalam prediksi: prediksi jarang sekali sempurna, prediksi jangka pendek biasanya lebih akurat daripada jangka panjang, prediksi agregat lebih akurat daripada prediksi item individu, dan pemilihan metode harus disesuaikan dengan pola data (horizontal, tren, musiman, atau siklis).
 
-Metode kuantitatif dalam peramalan mengandalkan model matematika untuk memproyeksikan data masa lalu ke masa depan. Dalam konteks ritel, tantangan utama adalah menangani variasi musiman, yaitu fluktuasi yang berulang dalam jangka waktu kurang dari satu tahun, seperti lonjakan penjualan menjelang hari raya atau awal bulan. Pendekatan berbasis \textit{deep learning}, khususnya LSTM, terbukti lebih unggul dibandingkan metode statistik konvensional seperti ARIMA dalam menangkap pola jangka panjang pada data penjualan harian yang bersifat nonlinier [4],[13]. Evaluasi akurasi model peramalan umumnya menggunakan kombinasi metrik MAE (\textit{Mean Absolute Error}), RMSE (\textit{Root Mean Square Error}), dan MAPE (\textit{Mean Absolute Percentage Error}) secara bersamaan untuk menghindari bias pembacaan akurasi akibat lonjakan data [15]. Khusus pada data yang memuat nilai aktual mendekati nol, metrik persentase simetris sMAPE dan metrik galat terskala MASE lebih dianjurkan karena tahan terhadap pembagian dengan nol [16]. Brown dan Green [3] menunjukkan bahwa prediksi berbasis jaringan saraf tiruan dapat mencapai MAPE 12\% pada data permintaan ritel kecil, sementara penggunaan pendekatan multivariate dapat meningkatkan presisi tersebut lebih jauh [6].
+Metode kuantitatif dalam prediksi mengandalkan model matematika untuk memproyeksikan data masa lalu ke masa depan. Dalam konteks ritel, tantangan utama adalah menangani variasi musiman, yaitu fluktuasi yang berulang dalam jangka waktu kurang dari satu tahun, seperti lonjakan penjualan menjelang hari raya atau awal bulan. Pendekatan berbasis \textit{deep learning}, khususnya LSTM, terbukti lebih unggul dibandingkan metode statistik konvensional seperti ARIMA dalam menangkap pola jangka panjang pada data penjualan harian yang bersifat nonlinier [4],[13]. Evaluasi akurasi model prediksi umumnya menggunakan kombinasi metrik MAE (\textit{Mean Absolute Error}), RMSE (\textit{Root Mean Square Error}), dan MAPE (\textit{Mean Absolute Percentage Error}) secara bersamaan untuk menghindari bias pembacaan akurasi akibat lonjakan data [15]. Khusus pada data yang memuat nilai aktual mendekati nol, metrik persentase simetris sMAPE dan metrik galat terskala MASE lebih dianjurkan karena tahan terhadap pembagian dengan nol [16]. Brown dan Green [3] menunjukkan bahwa prediksi berbasis jaringan saraf tiruan dapat mencapai MAPE 12\% pada data permintaan ritel kecil, sementara penggunaan pendekatan multivariate dapat meningkatkan presisi tersebut lebih jauh [6].
 
 \section{Arsitektur \textit{Long Short-Term Memory} (LSTM)}
 
@@ -754,23 +754,23 @@ Secara matematis, ketiga gerbang beserta kandidat status sel pada langkah waktu 
     h_t = o_t \odot \tanh(C_t)
 \end{equation}
 
-\noindent Di mana $f_t$ adalah \textit{output} dari \textit{forget gate}, $i_t$ adalah \textit{output} dari \textit{input gate}, $o_t$ adalah \textit{output} dari \textit{output gate}, dan $\tilde{C}_t$ adalah kandidat nilai baru yang akan ditambahkan ke dalam status sel.
+\noindent di mana $f_t$ adalah \textit{output} dari \textit{forget gate}, $i_t$ adalah \textit{output} dari \textit{input gate}, $o_t$ adalah \textit{output} dari \textit{output gate}, dan $\tilde{C}_t$ adalah kandidat nilai baru yang akan ditambahkan ke dalam status sel.
 
 Dalam praktiknya, pelatihan jaringan LSTM umumnya menggunakan algoritma optimasi \textbf{Adam} (\textit{Adaptive Moment Estimation}), yaitu metode optimasi berbasis gradien stokastik yang menyesuaikan \textit{learning rate} secara adaptif untuk setiap parameter dan terbukti efisien pada berbagai permasalahan \textit{deep learning} [18]. Untuk mencegah \textit{overfitting} pada data latih berukuran kecil, diterapkan teknik regularisasi \textbf{Dropout}, yaitu menonaktifkan sebagian neuron secara acak selama pelatihan agar jaringan tidak bergantung berlebihan pada neuron tertentu [19].
 
-\section{Model Pembanding Peramalan (\textit{Baseline})}
+\section{Model Pembanding Prediksi (\textit{Baseline})}
 
-Dalam penelitian peramalan deret waktu, kinerja sebuah model kompleks harus selalu disandingkan dengan model pembanding sederhana (\textit{baseline}) untuk memvalidasi apakah kompleksitas tambahan benar-benar memberikan nilai tambah akurasi [20]. Beberapa \textit{baseline} standar yang digunakan dalam penelitian ini adalah:
+Dalam penelitian prediksi deret waktu, kinerja sebuah model kompleks harus selalu disandingkan dengan model pembanding sederhana (\textit{baseline}) untuk memvalidasi apakah kompleksitas tambahan benar-benar memberikan nilai tambah akurasi [20]. Beberapa \textit{baseline} standar yang digunakan dalam penelitian ini adalah:
 \begin{enumerate}
-    \item \textbf{\textit{Naive}}: Nilai peramalan disamakan dengan nilai observasi terakhir yang tersedia. Metode ini menjadi tolok ukur minimum yang wajib dikalahkan oleh model yang lebih kompleks [20].
-    \item \textbf{\textit{Seasonal-Naive}}: Nilai peramalan diambil dari observasi terakhir pada musim yang sama, misalnya penjualan hari Senin diprediksi dari rata-rata beberapa hari Senin sebelumnya, sehingga efektif menangkap pola musiman mingguan [20].
-    \item \textbf{\textit{Moving Average} (Rata-rata Bergerak)}: Nilai peramalan berupa rata-rata dari $k$ observasi terakhir, berguna untuk meredam fluktuasi acak jangka pendek [14].
+    \item \textbf{\textit{Naive}}: Nilai prediksi disamakan dengan nilai observasi terakhir yang tersedia. Metode ini menjadi tolok ukur minimum yang wajib dikalahkan oleh model yang lebih kompleks [20].
+    \item \textbf{\textit{Seasonal-Naive}}: Nilai prediksi diambil dari observasi terakhir pada musim yang sama, misalnya penjualan hari Senin diprediksi dari rata-rata beberapa hari Senin sebelumnya, sehingga efektif menangkap pola musiman mingguan [20].
+    \item \textbf{\textit{Moving Average} (Rata-rata Bergerak)}: Nilai prediksi berupa rata-rata dari $k$ observasi terakhir, berguna untuk meredam fluktuasi acak jangka pendek [14].
     \item \textbf{SARIMA} (\textit{Seasonal Autoregressive Integrated Moving Average}): Model statistik klasik dari keluarga Box--Jenkins yang memodelkan komponen autoregresif, diferensiasi, rata-rata bergerak, beserta pola musimannya secara eksplisit [21].
 \end{enumerate}
 
-Temuan pada kompetisi peramalan berskala global M3 dan M4 menunjukkan bahwa metode statistik klasik dan kombinasinya kerap mengungguli metode \textit{machine learning} murni pada deret waktu bisnis, terutama ketika data historis yang tersedia terbatas [22],[23]. Temuan tersebut menjadi dasar metodologis dalam penelitian ini untuk mengevaluasi model LSTM secara jujur terhadap \textit{baseline} sederhana sebelum diputuskan metode mana yang layak disajikan kepada pengguna akhir.
+Temuan pada kompetisi prediksi berskala global M3 dan M4 menunjukkan bahwa metode statistik klasik dan kombinasinya kerap mengungguli metode \textit{machine learning} murni pada deret waktu bisnis, terutama ketika data historis yang tersedia terbatas [22],[23]. Temuan tersebut menjadi dasar metodologis dalam penelitian ini untuk mengevaluasi model LSTM secara jujur terhadap \textit{baseline} sederhana sebelum diputuskan metode mana yang layak disajikan kepada pengguna akhir.
 
-\section{Metrik Evaluasi Peramalan (sMAPE dan MASE)}
+\section{Metrik Evaluasi Prediksi (sMAPE dan MASE)}
 
 Selain MAE dan RMSE, penelitian ini menggunakan dua metrik evaluasi tambahan yang direkomendasikan untuk deret waktu bisnis dengan skala nilai yang bervariasi [16]:
 \begin{enumerate}
@@ -837,6 +837,8 @@ Pengujian \textit{white box} (disebut juga \textit{glass box testing}) adalah te
 
 \section{Data dan Pengumpulan Data}
 
+Bagian ini menguraikan tahapan pengumpulan data yang menjadi dasar perancangan dan pelatihan model prediksi pada penelitian ini, mencakup lokasi dan periode pelaksanaan penelitian, alat serta bahan yang digunakan, variabel dan sumber data yang diolah, hingga proses analisis kebutuhan dan \textit{preprocessing} data sebelum digunakan pada tahap pemodelan.
+
 \subsection{Tempat Penelitian}
 
 Penelitian dan pengembangan sistem \textit{Point of Sale} (POS) dengan fitur prediksi penjualan harian menggunakan metode LSTM ini dilaksanakan pada beberapa lokasi yang mendukung proses perancangan, implementasi, dan pengujian, yaitu:
@@ -899,7 +901,7 @@ Untuk mendukung kelancaran pelaksanaan penelitian dan pengembangan sistem POS mo
 & & Supabase Cloud & Basis data \textit{cloud} terpusat (PostgreSQL) untuk sinkronisasi data transaksi. \\ \cline{2-4}
 & & Isar Database & Basis data lokal terbenam (\textit{embedded}) pada perangkat Android (\textit{offline-first}). \\ \cline{2-4}
 & & Firebase & Layanan Google untuk \textit{push notification} (FCM) dan telemetri (Analytics). \\ \cline{2-4}
-& & Jupyter Notebook & Lingkungan \textit{pipeline} riset untuk eksplorasi data dan pelatihan model peramalan. \\ \cline{2-4}
+& & Jupyter Notebook & Lingkungan \textit{pipeline} riset untuk eksplorasi data dan pelatihan model prediksi. \\ \cline{2-4}
 & & Hugging Face & Platform \textit{hosting} tempat layanan API prediksi Flask di-\textit{deploy}. \\ \cline{2-4}
 & & Draw.io \& Mermaid.js & Alat pemodelan sistem untuk membuat diagram UML, ERD, dan arsitektur. \\ \hline
 3 & Bahan Penelitian & Dataset EatsTEDI UGM & Berkas transaksi riil platform EatsTEDI DTEDI UGM dalam format SQL dump dan CSV (periode Agustus 2024 s.d. Juni 2026). \\ \hline
@@ -919,7 +921,7 @@ Variabel penelitian yang digunakan dalam proses prediksi penjualan harian dikelo
 
 Data utama yang digunakan dalam penelitian ini adalah basis data transaksi penjualan harian yang bersumber dari platform katalog menu digital interaktif \textbf{EatsTEDI} pada Departemen Teknik Elektro dan Informatika (DTEDI) Universitas Gadjah Mada (UGM). \textit{Dataset} ini berupa \textit{dump} basis data relasional dalam format SQL (\textit{eatstedi-20260621-010820.sql}) berukuran 32,15 MB dengan total sekitar 395.090 baris data.
 
-Rentang waktu transaksi riil yang digunakan adalah dari tanggal \textbf{24 Agustus 2024 s.d. 20 Juni 2026} (mencakup periode 666 hari kalender atau sekitar 22 bulan); adapun hari aktif pertama dengan transaksi tercatat setelah penyaringan adalah \textbf{26 Agustus 2024}, sehingga Bab IV menyebut rentang efektif 26 Agustus 2024 s.d. 20 Juni 2026. Data yang diekstrak berfokus pada transaksi dengan status lunas (\textit{is\_paid = 1}) dari tabel \textit{invoices} serta rincian item produk terjual dari tabel \textit{product\_sold} yang dihubungkan dengan tabel master \textit{products} dan \textit{categories}.
+Rentang waktu transaksi riil yang digunakan adalah dari tanggal \textbf{24 Agustus 2024 s.d. 20 Juni 2026} (mencakup periode 666 hari kalender atau sekitar 22 bulan). Adapun hari aktif pertama dengan transaksi tercatat setelah penyaringan adalah \textbf{26 Agustus 2024}, sehingga Bab IV menyebut rentang efektif 26 Agustus 2024 s.d. 20 Juni 2026. Data yang diekstrak berfokus pada transaksi dengan status lunas (\textit{is\_paid = 1}) dari tabel \textit{invoices} serta rincian item produk terjual dari tabel \textit{product\_sold} yang dihubungkan dengan tabel master \textit{products} dan \textit{categories}.
 
 Secara umum, karakteristik data deret waktu (\textit{time series}) EatsTEDI UGM memiliki pola musiman unik yang sangat dipengaruhi oleh kalender akademis kampus, antara lain:
 \begin{enumerate}
@@ -949,7 +951,7 @@ Selain statistik agregat di atas, sebaran penjualan berdasarkan kategori produk 
 \end{tabular}
 \end{table}
 
-Berdasarkan sebaran tersebut, kategori \textbf{Makanan Basah} menyumbang kontribusi terbesar yakni sebesar 48,42\% dari total akumulasi omzet. Karena sifat produk makanan basah yang memiliki masa simpan sangat singkat (\textit{shelf life} pendek) dan cepat basi, ketidakpastian permintaan harian dapat berakibat langsung pada kerugian usaha akibat produk sisa yang terbuang. Oleh karena itu, peramalan penjualan harian dalam penelitian ini diprioritaskan pada kategori tersebut untuk membantu pelaku usaha dalam mengoptimalkan persediaan barang.
+Berdasarkan sebaran tersebut, kategori \textbf{Makanan Basah} menyumbang kontribusi terbesar yakni sebesar 48,42\% dari total akumulasi omzet. Karena sifat produk makanan basah yang memiliki masa simpan sangat singkat (\textit{shelf life} pendek) dan cepat basi, ketidakpastian permintaan harian dapat berakibat langsung pada kerugian usaha akibat produk sisa yang terbuang. Oleh karena itu, prediksi penjualan harian dalam penelitian ini diprioritaskan pada kategori tersebut untuk membantu pelaku usaha dalam mengoptimalkan persediaan barang.
 
 Adapun sepuluh produk terlaris berdasarkan kuantitas penjualan harian pada platform EatsTEDI dirinci pada Tabel \ref{tab:top_products}.
 
@@ -988,7 +990,7 @@ Proses transformasi data mentah dari basis data relasional \textit{dump} SQL men
 Proses ekstraksi ini menghasilkan empat berkas dataset utama sebagai berikut:
 \begin{enumerate}
     \item \textbf{\texttt{raw\_transactions.csv}}: Berisi log transaksi gabungan hasil \textit{join} tabel \textit{invoices}, \textit{product\_sold}, \textit{products}, dan \textit{categories}.
-    \item \textbf{\texttt{daily\_sales.csv}}: Hasil agregasi harian yang menjadi dataset utama untuk model peramalan harian.
+    \item \textbf{\texttt{daily\_sales.csv}}: Hasil agregasi harian yang menjadi dataset utama untuk model prediksi harian.
     \item \textbf{\texttt{weekly\_sales.csv}}: Hasil agregasi mingguan untuk visualisasi tren mingguan.
     \item \textbf{\texttt{monthly\_sales.csv}}: Hasil agregasi bulanan untuk analisis musiman jangka panjang.
 \end{enumerate}
@@ -1007,7 +1009,7 @@ Struktur skema data dan deskripsi kolom dari berkas \texttt{daily\_sales.csv} se
 \texttt{revenue} & Float & Total omzet pendapatan harian (nominal Rupiah). \\ \hline
 \texttt{transactions} & Integer & Total volume transaksi/nota lunas harian. \\ \hline
 \texttt{qty\_sold} & Integer & Total kuantitas unit produk terjual harian. \\ \hline
-\texttt{day\_of\_week} & Integer & Indeks hari dalam minggu (0 = Senin s.d. 6 = Minggu); penyaringan hari kerja aktif (0 s.d. 4) dilakukan pada tahap pemodelan. \\ \hline
+\texttt{day\_of\_week} & Integer & Indeks hari dalam minggu (0 = Senin s.d. 6 = Minggu). Penyaringan hari kerja aktif (0 s.d. 4) dilakukan pada tahap pemodelan. \\ \hline
 \texttt{week\_of\_year} & Integer & Nomor minggu dalam setahun berdasarkan standar ISO. \\ \hline
 \texttt{month} & Integer & Nomor bulan kalender (1 s.d. 12). \\ \hline
 \texttt{is\_weekend} & Integer & Penanda biner akhir pekan (1 jika Sabtu/Minggu, 0 jika lainnya). \\ \hline
@@ -1065,7 +1067,7 @@ Analisis kebutuhan data dilakukan untuk mengidentifikasi karakteristik dan kebut
 
 Data transaksi yang terkumpul dari basis data EatsTEDI melalui beberapa tahap penyiapan berikut sebelum digunakan untuk pelatihan model:
 \begin{enumerate}
-    \item \textbf{Pembersihan dan Penyaringan Hari Aktif:} Menghapus data duplikat dan menyelaraskan format tanggal, serta menyaring hari non-aktif (Sabtu, Minggu, dan libur semester pada Januari dan Juli); pada implementasinya, penyaringan diwujudkan dengan hanya mempertahankan hari kerja aktif yang memiliki pendapatan positif (\textit{revenue} $> 0$). Penyaringan ini mencegah \textit{gap} panjang pada deret waktu yang dapat mengaburkan pola musiman harian.
+    \item \textbf{Pembersihan dan Penyaringan Hari Aktif:} Menghapus data duplikat dan menyelaraskan format tanggal, serta menyaring hari non-aktif (Sabtu, Minggu, dan libur semester pada Januari dan Juli). Pada implementasinya, penyaringan diwujudkan dengan hanya mempertahankan hari kerja aktif yang memiliki pendapatan positif (\textit{revenue} $> 0$). Penyaringan ini mencegah \textit{gap} panjang pada deret waktu yang dapat mengaburkan pola musiman harian.
     \item \textbf{Transformasi Target:} Nilai pendapatan ditransformasikan ke skala logaritma untuk menstabilkan variansi, kemudian diubah menjadi bentuk \textit{log-return} (selisih logaritmik antar hari aktif) agar model mempelajari deviasi pendapatan relatif, bukan nilai nominal mentah.
     \item \textbf{Normalisasi:} Seluruh fitur masukan diskalakan ke rentang $[0, 1]$ menggunakan \textit{Min-Max Scaling}, dengan \textit{fitting} parameter \textit{scaler} hanya pada data latih untuk mencegah kebocoran informasi (\textit{data leakage}).
     \item \textbf{Pembentukan \textit{Sequence} (\textit{Windowing}):} Data diubah ke format \textit{input}--label menggunakan \textit{sliding window} sepanjang 7 hari kerja aktif ($LOOK\_BACK = 7$) untuk memprediksi penjualan hari aktif berikutnya.
@@ -1147,7 +1149,6 @@ Definisi \textit{use case} pada sistem POS diilustrasikan pada Tabel \ref{tab:us
 \textbf{No.} & \textbf{\textit{Use Case}} & \textbf{Deskripsi} \\
 \hline
 \endfirsthead
-\multicolumn{3}{@{}l}{Tabel \thetable\ \textit{(lanjutan)}}\\
 \hline
 \textbf{No.} & \textbf{\textit{Use Case}} & \textbf{Deskripsi} \\
 \hline
@@ -1209,7 +1210,7 @@ Penjelasan mengenai empat komponen utama dalam arsitektur sistem adalah sebagai 
     \item \textbf{Sisi Klien (\textit{Client-Side}):} Aplikasi dibangun menggunakan \textit{framework} Flutter dengan manajemen \textit{state} Riverpod dan navigasi GoRouter. Komponen inti dari sisi klien adalah Isar DB, sebuah database NoSQL lokal yang berperan sebagai \textit{cache offline-first}, memungkinkan kasir tetap dapat melakukan transaksi penuh meskipun koneksi internet terputus. \textit{Sync Engine} kemudian bekerja di latar belakang untuk menyinkronkan data lokal ke \textit{cloud} secara otomatis ketika koneksi terdeteksi kembali aktif, menggunakan penanda \texttt{isSynced} pada setiap \textit{record} untuk menghindari duplikasi data. Selain itu, sisi klien juga mengelola integrasi perangkat keras berupa printer \textit{thermal} Bluetooth/USB untuk mencetak struk dan kamera untuk pemindaian \textit{barcode} produk.
     \item \textbf{Infrastruktur \textit{Cloud} (Supabase):} Sebagai tulang punggung infrastruktur \textit{cloud}, Supabase menyediakan empat layanan utama. Supabase Auth menangani autentikasi pengguna melalui protokol JWT dan Google OAuth. Supabase PostgreSQL menjadi basis data relasional terpusat yang dilengkapi kebijakan \textit{Row Level Security} (RLS) untuk mengisolasi data antar \textit{merchant}, pemicu database (\textit{triggers}), serta prosedur tersimpan (\textit{RPC}) untuk memproses transaksi secara aman. Supabase Storage menyimpan aset media seperti gambar produk dan logo toko. Sedangkan \textit{Edge Functions} digunakan untuk memproses \textit{webhook} basis data yang bersifat sensitif, seperti pemicu pengiriman \textit{push notification} peringatan stok menipis kepada pemilik toko.
     \item \textbf{Telemetri dan Notifikasi (Firebase):} Untuk kebutuhan telemetri dan notifikasi, sistem terintegrasi dengan Firebase. \textit{Firebase Cloud Messaging} (FCM) bertugas menyampaikan \textit{push notification} secara \textit{real-time} kepada pemilik toko, misalnya peringatan stok habis atau pembatalan transaksi oleh kasir. \textit{Firebase Analytics} digunakan untuk mencatat perilaku penggunaan aplikasi, seperti volume transaksi harian, penggunaan fitur \textit{split bill}, dan inisiasi kalibrasi model AI.
-    \item \textbf{Layanan Inferensi Model LSTM (Hugging Face):} Komponen terakhir adalah layanan inferensi untuk mendukung fitur analitik prediktif. Pada penelitian ini, dikembangkan sebuah model \textit{deep learning} berbasis \textbf{Long Short-Term Memory (LSTM)} secara mandiri, yang dirancang khusus untuk memproyeksikan data runtun waktu (\textit{time-series}) penjualan harian pada usaha berskala UMKM. Model peramalan tersebut kemudian dikemas dalam layanan prediksi penjualan berbasis \textit{REST API} (\textit{framework} Flask) yang di-\textit{deploy} pada platform Hugging Face, sehingga dapat diakses oleh sistem secara efisien tanpa memerlukan infrastruktur \textit{server} komputasi tersendiri. Ketika pengguna mengakses fitur \textit{Smart Analytics}, aplikasi Flutter memanggil \textit{endpoint} layanan prediksi tersebut secara langsung melalui protokol HTTPS (dikonfigurasi pada berkas \texttt{env.dart} dan dapat dioverride saat \textit{build} melalui \texttt{--dart-define}), dengan \textit{payload} berupa data agregat penjualan tanpa informasi identitas pelanggan. Model memproses data tersebut dan mengembalikan hasil prediksi dalam format JSON, mencakup estimasi omzet harian, prediksi produk terlaris, serta rekomendasi promosi berbasis stok, yang selanjutnya divisualisasikan melalui antarmuka grafik interaktif menggunakan pustaka \texttt{fl\_chart}. Aplikasi juga menangani kondisi \textit{cold start}, yaitu menampilkan peringatan pemuatan ketika \textit{server} inferensi baru aktif kembali dari kondisi \textit{idle}. Setiap hasil analisis disimpan sebagai \textit{snapshot} pada tabel \textit{smart\_analytics\_snapshots} di Supabase, sehingga riwayat analitik dapat ditinjau kembali tanpa perlu memanggil ulang model.
+    \item \textbf{Layanan Inferensi Model LSTM (Hugging Face):} Komponen terakhir adalah layanan inferensi untuk mendukung fitur analitik prediktif. Pada penelitian ini, dikembangkan sebuah model \textit{deep learning} berbasis \textbf{Long Short-Term Memory (LSTM)} secara mandiri, yang dirancang khusus untuk memproyeksikan data runtun waktu (\textit{time-series}) penjualan harian pada usaha berskala UMKM. Model prediksi tersebut kemudian dikemas dalam layanan prediksi penjualan berbasis \textit{REST API} (\textit{framework} Flask) yang di-\textit{deploy} pada platform Hugging Face, sehingga dapat diakses oleh sistem secara efisien tanpa memerlukan infrastruktur \textit{server} komputasi tersendiri. Ketika pengguna mengakses fitur \textit{Smart Analytics}, aplikasi Flutter memanggil \textit{endpoint} layanan prediksi tersebut secara langsung melalui protokol HTTPS (dikonfigurasi pada berkas \texttt{env.dart} dan dapat dioverride saat \textit{build} melalui \texttt{--dart-define}), dengan \textit{payload} berupa data agregat penjualan tanpa informasi identitas pelanggan. Model memproses data tersebut dan mengembalikan hasil prediksi dalam format JSON, mencakup estimasi omzet harian, prediksi produk terlaris, serta rekomendasi promosi berbasis stok, yang selanjutnya divisualisasikan melalui antarmuka grafik interaktif menggunakan pustaka \texttt{fl\_chart}. Aplikasi juga menangani kondisi \textit{cold start}, yaitu menampilkan peringatan pemuatan ketika \textit{server} inferensi baru aktif kembali dari kondisi \textit{idle}. Setiap hasil analisis disimpan sebagai \textit{snapshot} pada tabel \textit{smart\_analytics\_snapshots} di Supabase, sehingga riwayat analitik dapat ditinjau kembali tanpa perlu memanggil ulang model.
 \end{enumerate}
 
 \subsection{Class Diagram}
@@ -1277,7 +1278,7 @@ Penjelasan mengenai kelas-kelas utama dalam sistem adalah sebagai berikut:
     \end{figure}
 
     \item \textbf{Activity Diagram Kelola Produk (Tambah/Ubah/Hapus)} \\
-    Gambar \ref{fig:act-produk} menggambarkan alur kerja staf toko dalam mengelola katalog produk yang menjadi sumber data transaksi bagi model peramalan penjualan. Proses tambah/ubah data disimpan terlebih dahulu ke basis data lokal Isar DB (\textit{offline-first}) beserta pencatatan riwayat perubahan stok, sebelum disinkronkan ke Supabase saat koneksi \textit{online} tersedia. Proses hapus produk diterapkan melalui skema \textit{soft delete} lokal (penanda \texttt{isDeleted=true}) yang baru dihapus permanen dari basis data setelah sinkronisasi ke \textit{cloud} berhasil, guna menjaga konsistensi data penjualan yang menjadi masukan pemodelan LSTM.
+    Gambar \ref{fig:act-produk} menggambarkan alur kerja staf toko dalam mengelola katalog produk yang menjadi sumber data transaksi bagi model prediksi penjualan. Proses tambah/ubah data disimpan terlebih dahulu ke basis data lokal Isar DB (\textit{offline-first}) beserta pencatatan riwayat perubahan stok, sebelum disinkronkan ke Supabase saat koneksi \textit{online} tersedia. Proses hapus produk diterapkan melalui skema \textit{soft delete} lokal (penanda \texttt{isDeleted=true}) yang baru dihapus permanen dari basis data setelah sinkronisasi ke \textit{cloud} berhasil, guna menjaga konsistensi data penjualan yang menjadi masukan pemodelan LSTM.
 
 % TODO (dilengkapi sebelum sidang): ekspor Rancangan/Activity Diagram.md bagian 4
 % (XML mxGraphModel) melalui draw.io menjadi Rancangan/Mermaid/activity_produk.png
@@ -1465,7 +1466,7 @@ Gambar \ref{fig:lstm_alur} menggambarkan alur kerja model LSTM dari \textit{inpu
     \end{itemize}
 
     \item \textbf{Pembentukan Sequence (Sliding Window):}
-    Dataset deret waktu diubah menjadi bentuk urutan berpasangan (\textit{sequence pairs}) menggunakan metode \textit{sliding window}. Ukuran \textit{window} masukan (\textit{look-back}) ditetapkan sebesar 7 hari aktif terakhir ($LOOK\_BACK = 7$) untuk memprediksi target 1 hari aktif berikutnya ($HORIZON = 1$). Dengan demikian, model dilatih dengan format peramalan satu langkah ke depan (\textit{one-step-ahead prediction}).
+    Dataset deret waktu diubah menjadi bentuk urutan berpasangan (\textit{sequence pairs}) menggunakan metode \textit{sliding window}. Ukuran \textit{window} masukan (\textit{look-back}) ditetapkan sebesar 7 hari aktif terakhir ($LOOK\_BACK = 7$) untuk memprediksi target 1 hari aktif berikutnya ($HORIZON = 1$). Dengan demikian, model dilatih dengan format prediksi satu langkah ke depan (\textit{one-step-ahead prediction}).
 
     \item \textbf{Pembagian Dataset Kronologis:}
     Dataset dibagi secara kronologis (\textit{time-based split}) untuk menjaga integritas temporal deret waktu, dengan proporsi pembagian sebagai berikut:
@@ -1502,12 +1503,12 @@ Gambar \ref{fig:lstm_alur} menggambarkan alur kerja model LSTM dari \textit{inpu
         \item \textit{SARIMA}: Model statistik klasik Seasonal Autoregressive Integrated Moving Average untuk mendeteksi pola autokorelasi deret waktu.
         \item \textit{Seasonal-Naive}: Prediksi berupa rata-rata beberapa kemunculan terakhir dari hari yang sama dalam minggu (Senin dengan Senin, Selasa dengan Selasa, dan seterusnya), untuk menangkap pola musiman mingguan.
     \end{itemize}
-    Dari keempat \textit{baseline} tersebut, \textit{Naive}, \textit{Mean-7}, dan SARIMA dievaluasi pada skema satu langkah ke depan (\textit{one-step-ahead}), sedangkan \textit{Seasonal-Naive} dievaluasi pada skema peramalan multi-langkah dan menjadi kandidat metode penyaji pada layanan API produksi. Notasi parameter \textit{Seasonal-Naive} dilambangkan dengan $k$, yaitu jumlah kemunculan terakhir hari sejenis yang dirata-ratakan. Selain peramalan harian sebagai fokus evaluasi ilmiah, layanan API produksi juga menyajikan angka proyeksi mingguan dan bulanan menggunakan metode rata-rata sederhana (\textit{Mean-4} untuk empat minggu terakhir dan \textit{Mean-3} untuk tiga bulan terakhir); keduanya merupakan fitur pelengkap visualisasi aplikasi di luar lingkup evaluasi ilmiah penelitian ini, sejalan dengan Batasan Masalah yang memfokuskan prediksi pada rentang harian.
+    Dari keempat \textit{baseline} tersebut, \textit{Naive}, \textit{Mean-7}, dan SARIMA dievaluasi pada skema satu langkah ke depan (\textit{one-step-ahead}), sedangkan \textit{Seasonal-Naive} dievaluasi pada skema prediksi multi-langkah dan menjadi kandidat metode penyaji pada layanan API produksi. Notasi parameter \textit{Seasonal-Naive} dilambangkan dengan $k$, yaitu jumlah kemunculan terakhir hari sejenis yang dirata-ratakan. Selain prediksi harian sebagai fokus evaluasi ilmiah, layanan API produksi juga menyajikan angka proyeksi mingguan dan bulanan menggunakan metode rata-rata sederhana (\textit{Mean-4} untuk empat minggu terakhir dan \textit{Mean-3} untuk tiga bulan terakhir). Keduanya merupakan fitur pelengkap visualisasi aplikasi di luar lingkup evaluasi ilmiah penelitian ini, sejalan dengan Batasan Masalah yang memfokuskan prediksi pada rentang harian.
 
     Mengingat inisialisasi bobot awal jaringan saraf bersifat acak dan dapat memengaruhi stabilitas pada data kecil, evaluasi dilakukan menggunakan metode \textbf{\textit{Multi-Seed Evaluation}}. Model dilatih sebanyak 10 kali menggunakan \textit{seed} acak yang berbeda. Hasil evaluasi dilaporkan dalam bentuk rata-rata $\pm$ standar deviasi dari metrik MAE, RMSE, sMAPE, dan MASE guna memperoleh estimasi performa yang kokoh dan dapat dipertanggungjawabkan.
 
     \item \textbf{Eksperimen Augmentasi Data Sintetis (TimeGAN):}
-    Sebagai upaya mitigasi terhadap keterbatasan jumlah data latih, dirancang skenario eksperimen augmentasi data sintetis menggunakan \textbf{TimeGAN} (\textit{Time-series Generative Adversarial Networks}), yaitu arsitektur GAN khusus deret waktu yang diusulkan oleh Yoon et al. (2019). TimeGAN diimplementasikan menggunakan \textit{framework} PyTorch dan terdiri atas lima jaringan saraf (\textit{embedder}, \textit{recovery}, \textit{generator}, \textit{supervisor}, dan \textit{discriminator}) yang dilatih dalam tiga fase: (1) pelatihan \textit{autoencoder} (embedder--recovery), (2) pelatihan \textit{supervised} pada ruang laten, dan (3) pelatihan gabungan (\textit{joint training}) secara \textit{adversarial}. Model dilatih pada jendela deret waktu sepanjang 24 hari aktif dengan tiga fitur numerik (omzet, jumlah transaksi, dan kuantitas terjual), kemudian menghasilkan 200 sekuens data harian sintetis. Data sintetis tersebut digabungkan dengan data riil untuk melatih ulang model LSTM (skenario \textit{augmented}), lalu performanya dibandingkan terhadap model LSTM tanpa augmentasi dan \textit{baseline} \textit{Seasonal-Naive} guna mengukur seberapa besar augmentasi data mampu memperbaiki akurasi peramalan pada data terbatas.
+    Sebagai upaya mitigasi terhadap keterbatasan jumlah data latih, dirancang skenario eksperimen augmentasi data sintetis menggunakan \textbf{TimeGAN} (\textit{Time-series Generative Adversarial Networks}), yaitu arsitektur GAN khusus deret waktu yang diusulkan oleh Yoon et al. (2019). TimeGAN diimplementasikan menggunakan \textit{framework} PyTorch dan terdiri atas lima jaringan saraf (\textit{embedder}, \textit{recovery}, \textit{generator}, \textit{supervisor}, dan \textit{discriminator}) yang dilatih dalam tiga fase: (1) pelatihan \textit{autoencoder} (embedder--recovery), (2) pelatihan \textit{supervised} pada ruang laten, dan (3) pelatihan gabungan (\textit{joint training}) secara \textit{adversarial}. Model dilatih pada jendela deret waktu sepanjang 24 hari aktif dengan tiga fitur numerik (omzet, jumlah transaksi, dan kuantitas terjual), kemudian menghasilkan 200 sekuens data harian sintetis. Data sintetis tersebut digabungkan dengan data riil untuk melatih ulang model LSTM (skenario \textit{augmented}), lalu performanya dibandingkan terhadap model LSTM tanpa augmentasi dan \textit{baseline} \textit{Seasonal-Naive} guna mengukur seberapa besar augmentasi data mampu memperbaiki akurasi prediksi pada data terbatas.
 
     \item \textbf{Rekonstruksi dan Prakiraan Rekursif Multi-Langkah:}
     Output model berupa \textit{log-return} prediksi ($\hat{r}_t$) direkonstruksi kembali ke skala nominal Rupiah ($\hat{Y}_t$) menggunakan nilai penjualan hari sebelumnya ($Y_{t-1}$):
@@ -1701,17 +1702,17 @@ Pengujian model prediksi dilakukan untuk mengukur kinerja dan tingkat akurasi da
     \begin{equation}
         \text{sMAPE} = \frac{1}{n} \sum_{t=1}^{n} \frac{|Y_t - \hat{Y}_t|}{(|Y_t| + |\hat{Y}_t|) / 2} \times 100\%
     \end{equation}
-    Sebagai konvensi implementasi, apabila penyebut bernilai nol (nilai aktual dan prediksi sama-sama nol), penyebut diganti dengan nilai 1 agar tidak terjadi galat pembagian dengan nol (\textit{division by zero}); konvensi inilah yang diverifikasi pada pengujian \textit{white box}.
+    Sebagai konvensi implementasi, apabila penyebut bernilai nol (nilai aktual dan prediksi sama-sama nol), penyebut diganti dengan nilai 1 agar tidak terjadi galat pembagian dengan nol (\textit{division by zero}). Konvensi inilah yang diverifikasi pada pengujian \textit{white box}.
 
     \item \textbf{\textit{Mean Absolute Scaled Error} (MASE):}
-    MASE mengukur kesalahan absolut model prediksi relatif terhadap kesalahan absolut rata-rata dari model peramalan naif sederhana (\textit{one-step naive forecast}) secara \textit{in-sample} pada data latih. Nilai MASE kurang dari 1 menunjukkan bahwa model memiliki kinerja peramalan yang lebih baik dibandingkan metode naif. Formula MASE didefinisikan sebagai berikut:
+    MASE mengukur kesalahan absolut model prediksi relatif terhadap kesalahan absolut rata-rata dari model prediksi naif sederhana (\textit{one-step naive forecast}) secara \textit{in-sample} pada data latih. Nilai MASE kurang dari 1 menunjukkan bahwa model memiliki kinerja prediksi yang lebih baik dibandingkan metode naif. Formula MASE didefinisikan sebagai berikut:
     \begin{equation}
         \text{MASE} = \frac{\frac{1}{n} \sum_{t=1}^{n} |Y_t - \hat{Y}_t|}{\frac{1}{N-1} \sum_{i=2}^{N} |Y^{\text{train}}_i - Y^{\text{train}}_{i-1}|}
     \end{equation}
     di mana $Y^{\text{train}}_i$ adalah nilai aktual pendapatan pada data latih, dan $N$ adalah jumlah data latih aktif.
 \end{enumerate}
 
-Sebagai kriteria keberhasilan model pada diagram alur (Gambar \ref{fig:lstm_alur}), ditetapkan ambang akurasi target berupa nilai \textbf{MASE $< 1$} pada data uji, yaitu model dinyatakan layak apabila galatnya lebih kecil daripada metode naif; apabila kriteria tersebut belum terpenuhi, dilakukan iterasi penyetelan konfigurasi (\textit{hyperparameter tuning}) meliputi jumlah neuron, \textit{learning rate}, \textit{batch size}, dan bentuk target prediksi. Pengujian evaluasi ini dilakukan dengan mengukur kinerja model menggunakan pendekatan \textit{multi-seed evaluation} (10 \textit{seeds} acak) untuk memastikan stabilitas performa model LSTM terhadap variasi inisialisasi bobot awal jaringan saraf. Hasil pengujian akhir tersebut selanjutnya dibandingkan dengan model pembanding (\textit{baselines}) untuk menentukan kelayakan model LSTM. Selain itu, diuji pula skenario perbandingan performa model LSTM yang dilatih dengan dan tanpa tambahan data sintetis hasil augmentasi TimeGAN terhadap \textit{baseline} \textit{Seasonal-Naive}, guna mengukur efektivitas augmentasi data dalam memitigasi keterbatasan ukuran dataset.
+Sebagai kriteria keberhasilan model pada diagram alur (Gambar \ref{fig:lstm_alur}), ditetapkan ambang akurasi target berupa nilai \textbf{MASE $< 1$} pada data uji, yaitu model dinyatakan layak apabila galatnya lebih kecil daripada metode naif. Apabila kriteria tersebut belum terpenuhi, dilakukan iterasi penyetelan konfigurasi (\textit{hyperparameter tuning}) meliputi jumlah neuron, \textit{learning rate}, \textit{batch size}, dan bentuk target prediksi. Pengujian evaluasi ini dilakukan dengan mengukur kinerja model menggunakan pendekatan \textit{multi-seed evaluation} (10 \textit{seeds} acak) untuk memastikan stabilitas performa model LSTM terhadap variasi inisialisasi bobot awal jaringan saraf. Hasil pengujian akhir tersebut selanjutnya dibandingkan dengan model pembanding (\textit{baselines}) untuk menentukan kelayakan model LSTM. Selain itu, diuji pula skenario perbandingan performa model LSTM yang dilatih dengan dan tanpa tambahan data sintetis hasil augmentasi TimeGAN terhadap \textit{baseline} \textit{Seasonal-Naive}, guna mengukur efektivitas augmentasi data dalam memitigasi keterbatasan ukuran dataset.
 
 \subsubsection{Rancangan Analisis Pengujian \textit{Black Box}}
 
@@ -1727,7 +1728,6 @@ Rancangan skenario pengujian \textit{black box} untuk fitur-fitur utama sistem P
 \hline
 \endfirsthead
 
-\multicolumn{4}{@{}l}{Tabel \thetable\ \textit{(lanjutan)}}\\
 \hline
 \textbf{No.} & \textbf{Fitur / Fungsi} & \textbf{Skenario Pengujian} & \textbf{Hasil yang Diharapkan} \\
 \hline
@@ -1762,9 +1762,9 @@ Rancangan skenario pengujian \textit{black box} untuk fitur-fitur utama sistem P
 \hline
 12 & Sinkronisasi \textit{Offline} & Mematikan koneksi internet (luring), membuat transaksi lokal, lalu mengaktifkan internet kembali (daring). & Transaksi disimpan secara lokal di Isar DB (\textit{offline-first}), lalu terunggah otomatis ke Supabase \textit{cloud} saat internet aktif kembali. \\
 \hline
-13 & Kelola Staf Karyawan & Owner menambahkan akun staf kasir baru dan mengubah peran staf. & Akun staf berhasil terdaftar pada toko dengan peran yang sesuai; menu ini tidak dapat diakses oleh Kasir. \\
+13 & Kelola Staf Karyawan & Owner menambahkan akun staf kasir baru dan mengubah peran staf. & Akun staf berhasil terdaftar pada toko dengan peran yang sesuai. Menu ini tidak dapat diakses oleh Kasir. \\
 \hline
-14 & Atur Profil Toko & Owner mengubah nama, alamat, dan logo toko pada menu pengaturan. & Informasi profil toko berhasil diperbarui dan tampil pada struk serta katalog; menu ini eksklusif untuk Owner. \\
+14 & Atur Profil Toko & Owner mengubah nama, alamat, dan logo toko pada menu pengaturan. & Informasi profil toko berhasil diperbarui dan tampil pada struk serta katalog. Menu ini eksklusif untuk Owner. \\
 \hline
 \end{longtable}
 }
@@ -1775,7 +1775,7 @@ Selain pengujian fungsional \textit{black box}, penelitian ini turut menerapkan 
 \begin{enumerate}
     \item Fungsi perhitungan \textit{Seasonal-Naive} (\texttt{by\_dow}), untuk memverifikasi jalur percabangan logika ketika jumlah data historis per hari kerja mencukupi ($\geq k$), tidak mencukupi ($<k$), maupun tidak tersedia sama sekali (\textit{fallback}).
     \item Fungsi metrik evaluasi sMAPE dan MASE, untuk memverifikasi jalur penanganan kasus pembagian dengan nilai penyebut nol atau mendekati nol agar tidak menghasilkan galat pembagian (\textit{division by zero}).
-    \item Fungsi peramalan rekursif (\texttt{forecast\_hybrid\_stable}), untuk memverifikasi jalur eksekusi tiga mekanisme pengaman secara berurutan, yaitu \textit{clipping} \textit{log-return}, \textit{damping factor}, dan \textit{safety rail} nominal omzet.
+    \item Fungsi prediksi rekursif ({\small\texttt{forecast\_hybrid\_\allowbreak stable}}), untuk memverifikasi jalur eksekusi tiga mekanisme pengaman secara berurutan, yaitu \textit{clipping} \textit{log-return}, \textit{damping factor}, dan \textit{safety rail} nominal omzet.
 \end{enumerate}
 
 \subsection{Indikator Keberhasilan Penelitian}
@@ -1792,7 +1792,7 @@ Keberhasilan penelitian ini diukur melalui indikator-indikator berikut, yang pen
 %%=============================================================
 \chapter[HASIL DAN PEMBAHASAN]{\\ HASIL DAN PEMBAHASAN}
 
-Bab ini menyajikan hasil rancang bangun dan pembahasan sistem Point of Sale (POS) dengan fitur prediksi penjualan harian menggunakan metode Long Short-Term Memory (LSTM). Pembahasan dibagi menjadi tujuh bagian utama, yaitu hasil implementasi sistem, \textit{preprocessing} data, implementasi dan pelatihan model peramalan, evaluasi model, hasil pengujian sistem, pembahasan hasil penelitian, serta keterbatasan sistem dan penelitian.
+Bab ini menyajikan hasil rancang bangun dan pembahasan sistem Point of Sale (POS) dengan fitur prediksi penjualan harian menggunakan metode Long Short-Term Memory (LSTM). Pembahasan dibagi menjadi tujuh bagian utama, yaitu hasil implementasi sistem, \textit{preprocessing} data, implementasi dan pelatihan model prediksi, evaluasi model, hasil pengujian sistem, pembahasan hasil penelitian, serta keterbatasan sistem dan penelitian.
 
 \section{Hasil Implementasi Sistem}
 
@@ -1853,13 +1853,13 @@ Keamanan akses data antar-outlet dijamin melalui penerapan kebijakan Row Level S
 
 \subsection{Implementasi Layanan Prediksi (API)}
 
-Modul kecerdasan buatan untuk kalkulasi prediksi penjualan harian dikembangkan menggunakan Python dan terdiri atas dua bagian yang saling melengkapi. Bagian pertama adalah \textit{pipeline} riset berbasis Jupyter Notebook yang melatih model peramalan LSTM (TensorFlow/Keras) pada tiga granularitas waktu (harian, mingguan, dan bulanan) beserta eksperimen augmentasi data sintetis TimeGAN (PyTorch). Bagian kedua adalah layanan API produksi berbasis \textit{framework} Flask yang di-\textit{deploy} pada platform Hugging Face dan diintegrasikan langsung dengan aplikasi POS, sehingga beban komputasi peramalan terpisah dari beban kerja transaksional kasir.
+Modul kecerdasan buatan untuk kalkulasi prediksi penjualan harian dikembangkan menggunakan Python dan terdiri atas dua bagian yang saling melengkapi. Bagian pertama adalah \textit{pipeline} riset berbasis Jupyter Notebook yang melatih model prediksi LSTM (TensorFlow/Keras) pada tiga granularitas waktu (harian, mingguan, dan bulanan) beserta eksperimen augmentasi data sintetis TimeGAN (PyTorch). Bagian kedua adalah layanan API produksi berbasis \textit{framework} Flask yang di-\textit{deploy} pada platform Hugging Face dan diintegrasikan langsung dengan aplikasi POS, sehingga beban komputasi prediksi terpisah dari beban kerja transaksional kasir.
 
 Layanan API produksi menyediakan tujuh \textit{endpoint} REST dengan fungsi sebagai berikut:
 \begin{enumerate}
-    \item \textbf{Endpoint Prediksi Penjualan} (\texttt{/api/predict/daily}, \texttt{/api/predict/weekly}, \texttt{/api/predict/monthly}): Meramalkan omzet ke depan dengan tanggal prediksi yang otomatis melewati hari tutup (akhir pekan serta libur semester Januari/Juli). Berdasarkan hasil evaluasi komparatif pada penelitian ini (Subbab 4.4), metode penyaji yang dipilih pada \textit{endpoint} produksi adalah metode statistik paling stabil, yaitu \textit{Seasonal-Naive} ($k=4$, rata-rata empat kemunculan terakhir hari yang sama, kompromi antara responsivitas terhadap tren terbaru dan peredaman fluktuasi acak, setara dengan rentang sekitar satu bulan hari sejenis) untuk harian, \textit{Mean-4} untuk mingguan, dan \textit{Mean-3} untuk bulanan, dengan prediksi \textit{Naive} disertakan sebagai pembanding; sedangkan model LSTM hasil pelatihan didokumentasikan sebagai artefak riset (\texttt{.keras}).
+    \item \textbf{Endpoint Prediksi Penjualan} (\texttt{/api/predict/daily}, \texttt{/api/predict/weekly}, \texttt{/api/predict/monthly}): Meramalkan omzet ke depan dengan tanggal prediksi yang otomatis melewati hari tutup (akhir pekan serta libur semester Januari/Juli). Berdasarkan hasil evaluasi komparatif pada penelitian ini (Subbab 4.4), metode penyaji yang dipilih pada \textit{endpoint} produksi adalah metode statistik paling stabil, yaitu \textit{Seasonal-Naive} ($k=4$, rata-rata empat kemunculan terakhir hari yang sama, kompromi antara responsivitas terhadap tren terbaru dan peredaman fluktuasi acak, setara dengan rentang sekitar satu bulan hari sejenis) untuk harian, \textit{Mean-4} untuk mingguan, dan \textit{Mean-3} untuk bulanan, dengan prediksi \textit{Naive} disertakan sebagai pembanding, sedangkan model LSTM hasil pelatihan didokumentasikan sebagai artefak riset (\texttt{.keras}).
     \item \textbf{Endpoint Rekomendasi Operasional} (\texttt{/api/recommendations/stock} dan \texttt{/api/recommendations/target}): Menghasilkan rekomendasi alokasi anggaran belanja per kategori produk dan kuantitas stok produk teratas berdasarkan proyeksi omzet (dilengkapi \textit{safety buffer} 15\% dan peringatan khusus produk mudah basi), serta tiga tingkatan target omzet harian (konservatif, moderat, dan agresif) berbasis statistik 15 hari aktif terakhir.
-    \item \textbf{Endpoint Pencatatan dan Status} (\texttt{/api/sales/record} dan \texttt{/api/status}): Menerima rekap penjualan harian dari aplikasi POS dan memperbaruinya ke dataset historis (\textit{upsert} per tanggal) agar dasar peramalan selalu mengikuti data terkini, serta memeriksa kesehatan layanan dan ketersediaan berkas data.
+    \item \textbf{Endpoint Pencatatan dan Status} (\texttt{/api/sales/record} dan \texttt{/api/status}): Menerima rekap penjualan harian dari aplikasi POS dan memperbaruinya ke dataset historis (\textit{upsert} per tanggal) agar dasar prediksi selalu mengikuti data terkini, serta memeriksa kesehatan layanan dan ketersediaan berkas data.
 \end{enumerate}
 
 Aplikasi Flutter memanggil \textit{endpoint} tersebut secara langsung melalui HTTPS dengan \textit{payload} agregat penjualan tanpa informasi identitas pelanggan, kemudian menyimpan hasil analisis sebagai \textit{snapshot} pada tabel \textit{smart\_analytics\_snapshots} di Supabase.
@@ -1904,11 +1904,11 @@ def predict_daily():
 
 \section{Preprocessing Data}
 
-Bagian ini menjelaskan tahapan pengolahan data sebelum digunakan untuk melatih model peramalan, mencakup deskripsi dan eksplorasi awal dataset, serta pra-pemrosesan dan pembentukan sequence data latih.
+Bagian ini menjelaskan tahapan pengolahan data sebelum digunakan untuk melatih model prediksi, mencakup deskripsi dan eksplorasi awal dataset, serta pra-pemrosesan dan pembentukan sequence data latih.
 
 \subsection{Deskripsi Data dan Eksplorasi Awal}
 
-Data yang digunakan dalam pengujian model peramalan ini merupakan rekapitulasi transaksi penjualan harian kantin EatsTEDI UGM pada periode 26 Agustus 2024 hingga 20 Juni 2026. Setelah dilakukan agregasi nilai transaksi per hari dan penyaringan terhadap hari-hari non-aktif (di mana kantin tutup), diperoleh total sebanyak 313 hari aktif bisnis. Statistik ringkas mengenai dataset pendapatan harian ini disajikan pada Tabel \ref{tab:statistik_revenue_harian}.
+Data yang digunakan dalam pengujian model prediksi ini merupakan rekapitulasi transaksi penjualan harian kantin EatsTEDI UGM pada periode 26 Agustus 2024 hingga 20 Juni 2026. Setelah dilakukan agregasi nilai transaksi per hari dan penyaringan terhadap hari-hari non-aktif (di mana kantin tutup), diperoleh total sebanyak 313 hari aktif bisnis. Statistik ringkas mengenai dataset pendapatan harian ini disajikan pada Tabel \ref{tab:statistik_revenue_harian}.
 
 \begin{table}[H]
 \setstretch{1.2}
@@ -1930,9 +1930,9 @@ Hasil eksplorasi awal menunjukkan bahwa deret data pendapatan harian kantin Eats
 
 \subsection{Pra-pemrosesan dan Pembentukan Sequence}
 
-Pemodelan peramalan pada penelitian ini difokuskan pada granularitas harian dengan strategi prediksi satu langkah ke depan (\textit{one-step-ahead prediction}). Untuk mengatasi variansi data yang ekstrem akibat fluktuasi harian yang sangat tajam, target peramalan tidak diprediksi menggunakan bentuk nilai nominal mentah, melainkan menggunakan bentuk \textit{log-return} (selisih logaritmik) pendapatan antar hari aktif yang berurutan. Pendekatan residual ini dirancang agar model cukup mempelajari koreksi atau deviasi nilai pendapatan dari hari aktif sebelumnya, sehingga model secara tidak langsung mewarisi sifat autokorelasi jangka pendek yang kuat pada deret waktu transaksi.
+Pemodelan prediksi pada penelitian ini difokuskan pada granularitas harian dengan strategi prediksi satu langkah ke depan (\textit{one-step-ahead prediction}). Untuk mengatasi variansi data yang ekstrem akibat fluktuasi harian yang sangat tajam, target prediksi tidak diprediksi menggunakan bentuk nilai nominal mentah, melainkan menggunakan bentuk \textit{log-return} (selisih logaritmik) pendapatan antar hari aktif yang berurutan. Pendekatan residual ini dirancang agar model cukup mempelajari koreksi atau deviasi nilai pendapatan dari hari aktif sebelumnya, sehingga model secara tidak langsung mewarisi sifat autokorelasi jangka pendek yang kuat pada deret waktu transaksi.
 
-Variabel masukan (\textit{features}) terdiri atas nilai log-return pendapatan target dan enam fitur kalender yang dikodekan secara siklik (\textit{cyclical encoding} sinus-kosinus untuk nomor minggu dalam setahun, bulan, dan hari kerja aktif) serta variabel biner Ramadan. Variabel jumlah transaksi harian dan kuantitas produk terjual secara sengaja dikeluarkan dari variabel masukan model prediksi untuk menghindari kebocoran data (\textit{data leakage}), karena kedua nilai tersebut belum tersedia saat modul peramalan dijalankan untuk memprediksi hari berikutnya. Proses penskalaan data dilakukan menggunakan metode \textit{Min-Max Scaling} yang dipasang (\textit{fit}) hanya pada data latih untuk mencegah terjadinya kebocoran informasi dari data uji.
+Variabel masukan (\textit{features}) terdiri atas nilai log-return pendapatan target dan enam fitur kalender yang dikodekan secara siklik (\textit{cyclical encoding} sinus-kosinus untuk nomor minggu dalam setahun, bulan, dan hari kerja aktif) serta variabel biner Ramadan. Variabel jumlah transaksi harian dan kuantitas produk terjual secara sengaja dikeluarkan dari variabel masukan model prediksi untuk menghindari kebocoran data (\textit{data leakage}), karena kedua nilai tersebut belum tersedia saat modul prediksi dijalankan untuk memprediksi hari berikutnya. Proses penskalaan data dilakukan menggunakan metode \textit{Min-Max Scaling} yang dipasang (\textit{fit}) hanya pada data latih untuk mencegah terjadinya kebocoran informasi dari data uji.
 
 Pembagian dataset dilakukan secara kronologis (\textit{chronological split}) dengan rasio 70\% untuk data latih (\textit{train set}), 15\% untuk data validasi (\textit{validation set}), dan 15\% untuk data uji (\textit{test set}). Pembentukan urutan temporal (\textit{sequence}) dilakukan menggunakan panjang \textit{look-back} sebesar 7 hari aktif terakhir. Rincian pembagian data serta dimensi sequence disajikan pada Tabel \ref{tab:pembagian_data_sequence}.
 
@@ -1980,13 +1980,13 @@ df_va = dfa.iloc[n_tr:n_tr+n_va]
 df_te = dfa.iloc[n_tr+n_va:]
 \end{lstlisting}
 
-\section{Implementasi dan Pelatihan Model Peramalan}
+\section{Implementasi dan Pelatihan Model Prediksi}
 
-Bagian ini memaparkan implementasi arsitektur model LSTM beserta skenario eksperimen, hasil pelatihan model, implementasi augmentasi data sintetis TimeGAN, dan implementasi mekanisme peramalan rekursif untuk kebutuhan visualisasi jangka pendek pada aplikasi.
+Bagian ini memaparkan implementasi arsitektur model LSTM beserta skenario eksperimen, hasil pelatihan model, implementasi augmentasi data sintetis TimeGAN, dan implementasi mekanisme prediksi rekursif untuk kebutuhan visualisasi jangka pendek pada aplikasi.
 
 \subsection{Arsitektur Model dan Skenario Eksperimen}
 
-Arsitektur model peramalan yang diimplementasikan adalah LSTM satu lapis (\textit{single-layer LSTM}) dengan 24 \textit{hidden units}, diikuti oleh lapisan \textit{Dropout} dengan laju 0,1 untuk regularisasi, satu lapisan \textit{Dense} dengan 16 neuron beraktivasi \textit{Rectified Linear Unit} (ReLU), dan diakhiri oleh satu lapisan keluaran (\textit{output layer}) tunggal beraktivasi linear. Model ini dirancang secara minimalis dengan total parameter terlatih hanya sebanyak 3.585 parameter. Pemilihan model berkapasitas rendah ini didasarkan pada jumlah data latih yang sangat terbatas (212 sampel sequence), sehingga penggunaan model LSTM berkapasitas besar (\textit{stacked layers}) akan berisiko tinggi memicu kegagalan konvergensi pelatihan atau bias \textit{overfitting}. Proses optimasi menggunakan metode Adam dengan \textit{learning rate} awal sebesar $5 \times 10^{-4}$, fungsi kerugian (\textit{loss function}) MSE, serta didukung \textit{callbacks} \textit{EarlyStopping} dan \textit{ReduceLROnPlateau}. Konstruksi arsitektur model beserta konfigurasi pelatihannya disajikan pada Kode Program~\ref{lst:build_lstm}.
+Arsitektur model prediksi yang diimplementasikan adalah LSTM satu lapis (\textit{single-layer LSTM}) dengan 24 \textit{hidden units}, diikuti oleh lapisan \textit{Dropout} dengan laju 0,1 untuk regularisasi, satu lapisan \textit{Dense} dengan 16 neuron beraktivasi \textit{Rectified Linear Unit} (ReLU), dan diakhiri oleh satu lapisan keluaran (\textit{output layer}) tunggal beraktivasi linear. Model ini dirancang secara minimalis dengan total parameter terlatih hanya sebanyak 3.585 parameter. Pemilihan model berkapasitas rendah ini didasarkan pada jumlah data latih yang sangat terbatas (212 sampel sequence), sehingga penggunaan model LSTM berkapasitas besar (\textit{stacked layers}) akan berisiko tinggi memicu kegagalan konvergensi pelatihan atau bias \textit{overfitting}. Proses optimasi menggunakan metode Adam dengan \textit{learning rate} awal sebesar $5 \times 10^{-4}$, fungsi kerugian (\textit{loss function}) MSE, serta didukung \textit{callbacks} \textit{EarlyStopping} dan \textit{ReduceLROnPlateau}. Konstruksi arsitektur model beserta konfigurasi pelatihannya disajikan pada Kode Program~\ref{lst:build_lstm}.
 
 \begin{lstlisting}[caption={Konstruksi Arsitektur LSTM Tersederhanakan dan Konfigurasi Pelatihan}, label={lst:build_lstm}]
 LOOK_BACK = 7   # jendela masukan: 7 hari aktif
@@ -2016,7 +2016,7 @@ hist  = model.fit(X_tr, y_tr, validation_data=(X_va, y_va),
 
 \subsection{Hasil Pelatihan Model}
 
-Pada konfigurasi akhir model tersederhanakan, proses pelatihan berjalan secara stabil di mana galat validasi menunjukkan tren penurunan yang konsisten melampaui \textit{epoch} pertama. Mekanisme \textit{EarlyStopping} berhasil menghentikan proses pelatihan dan mengembalikan bobot terbaik model sebelum terjadi gejala \textit{overfitting}. Hal ini berbanding terbalik dengan uji coba pada konfigurasi awal penelitian yang menggunakan arsitektur jaringan saraf berskala besar dan target berupa nilai nominal mentah, di mana model mengalami kolaps (\textit{model collapse}) dengan galat validasi terbaik yang dicapai langsung pada \textit{epoch} pertama (model tidak melakukan pembelajaran) dan menghasilkan prediksi bernilai rendah yang konstan secara sistematis. Penyederhanaan arsitektur, pemilihan target \textit{log-return}, serta pembatasan horizon menjadi satu langkah ke depan terbukti mampu memperbaiki performa pelatihan secara signifikan, di mana nilai MAE uji terbaik model LSTM mengalami penurunan drastis dari sekitar Rp 1.805.196,00 pada konfigurasi awal menjadi berkisar antara Rp 500.000,00 hingga Rp 600.000,00 pada konfigurasi akhir. Iterasi dari konfigurasi awal (arsitektur besar, target nominal) menuju konfigurasi akhir tersederhanakan inilah yang merupakan realisasi dari \textit{loop} \textit{hyperparameter tuning} dengan kriteria akurasi (MASE $< 1$) pada diagram alur Gambar \ref{fig:lstm_alur}; meskipun kriteria MASE $< 1$ pada akhirnya tidak tercapai oleh konfigurasi manapun, iterasi dihentikan pada konfigurasi terbaik dan keputusan produksi dialihkan ke metode \textit{baseline} sebagaimana dibahas pada Subbab 4.4. Grafik kurva kerugian pelatihan model ditunjukkan pada Gambar \ref{fig:lstm_kurva_training}.
+Pada konfigurasi akhir model tersederhanakan, proses pelatihan berjalan secara stabil di mana galat validasi menunjukkan tren penurunan yang konsisten melampaui \textit{epoch} pertama. Mekanisme \textit{EarlyStopping} berhasil menghentikan proses pelatihan dan mengembalikan bobot terbaik model sebelum terjadi gejala \textit{overfitting}. Hal ini berbanding terbalik dengan uji coba pada konfigurasi awal penelitian yang menggunakan arsitektur jaringan saraf berskala besar dan target berupa nilai nominal mentah, di mana model mengalami kolaps (\textit{model collapse}) dengan galat validasi terbaik yang dicapai langsung pada \textit{epoch} pertama (model tidak melakukan pembelajaran) dan menghasilkan prediksi bernilai rendah yang konstan secara sistematis. Penyederhanaan arsitektur, pemilihan target \textit{log-return}, serta pembatasan horizon menjadi satu langkah ke depan terbukti mampu memperbaiki performa pelatihan secara signifikan, di mana nilai MAE uji terbaik model LSTM mengalami penurunan drastis dari sekitar Rp 1.805.196,00 pada konfigurasi awal menjadi berkisar antara Rp 500.000,00 hingga Rp 600.000,00 pada konfigurasi akhir. Iterasi dari konfigurasi awal (arsitektur besar, target nominal) menuju konfigurasi akhir tersederhanakan inilah yang merupakan realisasi dari \textit{loop} \textit{hyperparameter tuning} dengan kriteria akurasi (MASE $< 1$) pada diagram alur Gambar \ref{fig:lstm_alur}. Meskipun kriteria MASE $< 1$ pada akhirnya tidak tercapai oleh konfigurasi manapun, iterasi dihentikan pada konfigurasi terbaik dan keputusan produksi dialihkan ke metode \textit{baseline} sebagaimana dibahas pada Subbab 4.4. Grafik kurva kerugian pelatihan model ditunjukkan pada Gambar \ref{fig:lstm_kurva_training}.
 
 \begin{figure}[H]
     \centering
@@ -2064,11 +2064,11 @@ class GeneratorNet(nn.Module):
 # 3) train_joint    : pelatihan gabungan adversarial
 \end{lstlisting}
 
-\subsection{Implementasi Peramalan Rekursif ke Depan}
+\subsection{Implementasi Prediksi Rekursif ke Depan}
 
-Untuk kebutuhan penyajian visualisasi ramalan penjualan harian selama 7 hari aktif ke depan secara rekursif (\textit{recursive forecasting}), model LSTM residual yang melakukan iterasi mandiri mengalami kerentanan berupa penumpukan kesalahan (\textit{error propagation}) di mana nilai prediksi meluruh secara eksponensial hingga bernilai sangat kecil dan tidak realistis. Setelah ditambahkan mekanisme pengaman berupa \textit{clipping} pada \textit{log-return} (dijepit antara persentil 10--90 data latih), \textit{damping factor} ($\phi = 0.7$) untuk meredam perubahan pada horizon yang jauh, serta \textit{safety rail} penahan nominal omzet harian aktif, grafik prediksi yang dihasilkan menjadi lebih stabil dan realistis. Implementasi inti dari fungsi peramalan rekursif beserta ketiga mekanisme pengaman tersebut disajikan pada Kode Program~\ref{lst:recursive}.
+Untuk kebutuhan penyajian visualisasi ramalan penjualan harian selama 7 hari aktif ke depan secara rekursif (\textit{recursive forecasting}), model LSTM residual yang melakukan iterasi mandiri mengalami kerentanan berupa penumpukan kesalahan (\textit{error propagation}) di mana nilai prediksi meluruh secara eksponensial hingga bernilai sangat kecil dan tidak realistis. Setelah ditambahkan mekanisme pengaman berupa \textit{clipping} pada \textit{log-return} (dijepit antara persentil 10--90 data latih), \textit{damping factor} ($\phi = 0.7$) untuk meredam perubahan pada horizon yang jauh, serta \textit{safety rail} penahan nominal omzet harian aktif, grafik prediksi yang dihasilkan menjadi lebih stabil dan realistis. Implementasi inti dari fungsi prediksi rekursif beserta ketiga mekanisme pengaman tersebut disajikan pada Kode Program~\ref{lst:recursive}.
 
-\begin{lstlisting}[caption={Peramalan Rekursif dengan \textit{Clipping}, \textit{Damping}, dan \textit{Safety Rail}}, label={lst:recursive}]
+\begin{lstlisting}[caption={Prediksi Rekursif dengan \textit{Clipping}, \textit{Damping}, dan \textit{Safety Rail}}, label={lst:recursive}]
 # Batas clip dari persentil 10-90 log-return data latih
 LR_LO, LR_HI = np.percentile(_train_logret, [10, 90])
 REV_FLOOR = np.percentile(_act_rev, 2)   # rail bawah
@@ -2103,11 +2103,11 @@ def forecast_hybrid_stable(model, dfa, scaler, features,
     return pd.DataFrame(rows)
 \end{lstlisting}
 
-Secara statistik, peramalan rekursif jangka panjang berbasis LSTM pada data terbatas ini akan dengan cepat meredam menuju nilai rata-rata historis (sifat \textit{mean-reverting}) dan menyerupai prediksi naif. Untuk diintegrasikan ke dalam fitur aplikasi riil kasir, metode peramalan statistik \textit{SARIMA} dan \textit{Seasonal-Naive} (rata-rata hari sejenis pada minggu sebelumnya) lebih direkomendasikan karena memberikan hasil peramalan multi-langkah yang jauh lebih stabil dan konsisten. Rekomendasi ini diwujudkan pada layanan API produksi, di mana \textit{endpoint} prediksi menyajikan metode \textit{Seasonal-Naive} ($k=4$) sebagai metode penyaji utama peramalan harian kepada aplikasi POS. Dalam penelitian skripsi ini, hasil evaluasi akurasi ilmiah tetap didasarkan pada pengujian satu langkah ke depan (\textit{one-step-ahead}), sedangkan visualisasi peramalan multi-langkah diposisikan murni sebagai ilustrasi fungsionalitas sistem.
+Secara statistik, prediksi rekursif jangka panjang berbasis LSTM pada data terbatas ini akan dengan cepat meredam menuju nilai rata-rata historis (sifat \textit{mean-reverting}) dan menyerupai prediksi naif. Untuk diintegrasikan ke dalam fitur aplikasi riil kasir, metode prediksi statistik \textit{SARIMA} dan \textit{Seasonal-Naive} (rata-rata hari sejenis pada minggu sebelumnya) lebih direkomendasikan karena memberikan hasil prediksi multi-langkah yang jauh lebih stabil dan konsisten. Rekomendasi ini diwujudkan pada layanan API produksi, di mana \textit{endpoint} prediksi menyajikan metode \textit{Seasonal-Naive} ($k=4$) sebagai metode penyaji utama prediksi harian kepada aplikasi POS. Dalam penelitian skripsi ini, hasil evaluasi akurasi ilmiah tetap didasarkan pada pengujian satu langkah ke depan (\textit{one-step-ahead}), sedangkan visualisasi prediksi multi-langkah diposisikan murni sebagai ilustrasi fungsionalitas sistem.
 
 \section{Evaluasi Model}
 
-Pengukuran akurasi model dilakukan menggunakan empat metrik evaluasi secara simultan, yaitu MAE, RMSE, sMAPE, dan MASE. Penggunaan MAPE konvensional dihindari karena karakteristik dataset transaksi memiliki beberapa hari aktif dengan nilai nominal pendapatan yang sangat rendah (mendekati nol), sehingga pembagian terhadap nilai aktual tersebut akan menyebabkan pembagian dengan nol atau nilai persentase galat yang sangat besar (\textit{exploding MAPE}) yang tidak representatif. Metrik MASE dipilih sebagai acuan performa utama karena ternormalisasi terhadap galat peramalan naif secara \textit{in-sample}, di mana nilai MASE kurang dari satu menandakan bahwa kinerja model prediksi lebih baik dibandingkan model naif sederhana. Sebagai model pembanding (\textit{baselines}) pada skema satu langkah ke depan, digunakan tiga metode pembanding statistik sederhana: (1) \textit{Naive} (kemarin) di mana prediksi hari ini disamakan dengan realisasi hari kemarin, (2) \textit{Mean-7} berupa rata-rata bergerak dari 7 hari aktif terakhir, dan (3) model statistik \textit{SARIMA} dengan skema peramalan \textit{rolling one-step}. Implementasi fungsi metrik evaluasi sMAPE dan MASE yang digunakan pada seluruh pengujian disajikan pada Kode Program~\ref{lst:metrics}.
+Pengukuran akurasi model dilakukan menggunakan empat metrik evaluasi secara simultan, yaitu MAE, RMSE, sMAPE, dan MASE. Penggunaan MAPE konvensional dihindari karena karakteristik dataset transaksi memiliki beberapa hari aktif dengan nilai nominal pendapatan yang sangat rendah (mendekati nol), sehingga pembagian terhadap nilai aktual tersebut akan menyebabkan pembagian dengan nol atau nilai persentase galat yang sangat besar (\textit{exploding MAPE}) yang tidak representatif. Metrik MASE dipilih sebagai acuan performa utama karena ternormalisasi terhadap galat prediksi naif secara \textit{in-sample}, di mana nilai MASE kurang dari satu menandakan bahwa kinerja model prediksi lebih baik dibandingkan model naif sederhana. Sebagai model pembanding (\textit{baselines}) pada skema satu langkah ke depan, digunakan tiga metode pembanding statistik sederhana: (1) \textit{Naive} (kemarin) di mana prediksi hari ini disamakan dengan realisasi hari kemarin, (2) \textit{Mean-7} berupa rata-rata bergerak dari 7 hari aktif terakhir, dan (3) model statistik \textit{SARIMA} dengan skema prediksi \textit{rolling one-step}. Implementasi fungsi metrik evaluasi sMAPE dan MASE yang digunakan pada seluruh pengujian disajikan pada Kode Program~\ref{lst:metrics}.
 
 \begin{lstlisting}[caption={Implementasi Fungsi Metrik Evaluasi sMAPE dan MASE}, label={lst:metrics}]
 def smape(y, yhat):
@@ -2147,7 +2147,7 @@ LSTM Hybrid (Rata-rata) & 667.718 & 897.563 & 38,06\% & 1,840 \\ \hline
 \end{tabular}
 \end{table}
 
-Berdasarkan hasil perbandingan pada Tabel \ref{tab:eval_baseline_comp}, secara rata-rata metode \textit{Naive} sederhana memberikan kesalahan peramalan terkecil dengan MAE sebesar Rp 519.841,00, disusul oleh model statistik \textit{SARIMA} dan \textit{Mean-7}. Model LSTM Hybrid berada di posisi terakhir dengan nilai MAE rata-rata sebesar Rp 667.718,00 dan MASE sebesar 1,840. Temuan ini mengindikasikan karakteristik data pendapatan kantin EatsTEDI UGM yang didominasi oleh persistensi jangka pendek yang kuat (omzet hari ini sangat dekat dengan omzet kemarin). Karakteristik persistensi ini dapat ditangkap secara sangat efisien oleh model naif, sementara model LSTM Hybrid yang dilatih menggunakan ukuran data yang relatif kecil mengalami \textit{over-smoothing} (penghalusan berlebih) sehingga kurang mampu menangkap lonjakan-lonjakan pendapatan harian secara presisi. Visualisasi perbandingan nominal pendapatan aktual terhadap nilai prediksi dari model LSTM Hybrid disajikan pada Gambar \ref{fig:lstm_actual_predicted}.
+Berdasarkan hasil perbandingan pada Tabel \ref{tab:eval_baseline_comp}, secara rata-rata metode \textit{Naive} sederhana memberikan kesalahan prediksi terkecil dengan MAE sebesar Rp 519.841,00, disusul oleh model statistik \textit{SARIMA} dan \textit{Mean-7}. Model LSTM Hybrid berada di posisi terakhir dengan nilai MAE rata-rata sebesar Rp 667.718,00 dan MASE sebesar 1,840. Temuan ini mengindikasikan karakteristik data pendapatan kantin EatsTEDI UGM yang didominasi oleh persistensi jangka pendek yang kuat (omzet hari ini sangat dekat dengan omzet kemarin). Karakteristik persistensi ini dapat ditangkap secara sangat efisien oleh model naif, sementara model LSTM Hybrid yang dilatih menggunakan ukuran data yang relatif kecil mengalami \textit{over-smoothing} (penghalusan berlebih) sehingga kurang mampu menangkap lonjakan-lonjakan pendapatan harian secara presisi. Visualisasi perbandingan nominal pendapatan aktual terhadap nilai prediksi dari model LSTM Hybrid disajikan pada Gambar \ref{fig:lstm_actual_predicted}.
 
 \begin{figure}[H]
     \centering
@@ -2228,17 +2228,17 @@ LSTM Tanpa Augmentasi & 1.750.355 & 1.935.119 & 115,40\% & 4,823 \\ \hline
 \end{tabular}
 \end{table}
 
-Perlu dicatat bahwa nilai galat pada Tabel \ref{tab:eval_timegan} tidak dapat dibandingkan secara langsung dengan Tabel \ref{tab:eval_baseline_comp}, karena eksperimen augmentasi ini menggunakan skema peramalan multi-langkah langsung (\textit{direct multi-step}, horizon 7 hari sekaligus) yang secara inheren lebih sulit daripada skema satu langkah ke depan (\textit{one-step-ahead}).
+Perlu dicatat bahwa nilai galat pada Tabel \ref{tab:eval_timegan} tidak dapat dibandingkan secara langsung dengan Tabel \ref{tab:eval_baseline_comp}, karena eksperimen augmentasi ini menggunakan skema prediksi multi-langkah langsung (\textit{direct multi-step}, horizon 7 hari sekaligus) yang secara inheren lebih sulit daripada skema satu langkah ke depan (\textit{one-step-ahead}).
 
-Hasil eksperimen menunjukkan dua temuan penting. Pertama, augmentasi TimeGAN terbukti efektif memperbaiki kualitas pelatihan LSTM pada data terbatas: nilai MAE model turun drastis dari Rp 1.750.355,00 menjadi Rp 860.695,00 (perbaikan sekitar 50,8\%), dan nilai MASE membaik dari 4,823 menjadi 2,372. Kedua, meskipun mengalami perbaikan signifikan, model LSTM teraugmentasi tetap belum mampu mengungguli \textit{baseline} \textit{Seasonal-Naive} ($k=5$, MAE Rp 755.403,00) yang memanfaatkan pola musiman mingguan secara sederhana. Perlu dicatat bahwa evaluasi multi-langkah ini menguji \textit{Seasonal-Naive} pada konfigurasi $k=5$ dan $k=7$, sedangkan layanan produksi memakai $k=4$ sebagai kompromi responsivitas--stabilitas; ketiganya menunjukkan karakteristik performa yang serupa karena sama-sama merata-ratakan beberapa kemunculan terakhir hari sejenis. Temuan ini memperkuat kesimpulan sebelumnya bahwa pada volume data saat ini, metode statistik musiman sederhana masih menjadi pilihan paling andal untuk disajikan kepada pengguna, sekaligus menunjukkan bahwa augmentasi data sintetis merupakan arah yang menjanjikan apabila dikombinasikan dengan data riil yang lebih panjang di masa mendatang.
+Hasil eksperimen menunjukkan dua temuan penting. Pertama, augmentasi TimeGAN terbukti efektif memperbaiki kualitas pelatihan LSTM pada data terbatas: nilai MAE model turun drastis dari Rp 1.750.355,00 menjadi Rp 860.695,00 (perbaikan sekitar 50,8\%), dan nilai MASE membaik dari 4,823 menjadi 2,372. Kedua, meskipun mengalami perbaikan signifikan, model LSTM teraugmentasi tetap belum mampu mengungguli \textit{baseline} \textit{Seasonal-Naive} ($k=5$, MAE Rp 755.403,00) yang memanfaatkan pola musiman mingguan secara sederhana. Perlu dicatat bahwa evaluasi multi-langkah ini menguji \textit{Seasonal-Naive} pada konfigurasi $k=5$ dan $k=7$, sedangkan layanan produksi memakai $k=4$ sebagai kompromi responsivitas--stabilitas. Ketiganya menunjukkan karakteristik performa yang serupa karena sama-sama merata-ratakan beberapa kemunculan terakhir hari sejenis. Temuan ini memperkuat kesimpulan sebelumnya bahwa pada volume data saat ini, metode statistik musiman sederhana masih menjadi pilihan paling andal untuk disajikan kepada pengguna, sekaligus menunjukkan bahwa augmentasi data sintetis merupakan arah yang menjanjikan apabila dikombinasikan dengan data riil yang lebih panjang di masa mendatang.
 
 \section{Hasil Pengujian Sistem}
 
-Pengujian sistem dilakukan untuk memvalidasi fungsionalitas aplikasi dan memeriksa kebenaran logika internal komponen kritis pada layanan API prediksi yang telah diintegrasikan. Pengujian mencakup uji coba fungsional \textit{Black Box}, uji telusur logika kode \textit{White Box}, serta rekapitulasi evaluasi kinerja model peramalan yang telah dibahas pada Subbab 4.4.
+Pengujian sistem dilakukan untuk memvalidasi fungsionalitas aplikasi dan memeriksa kebenaran logika internal komponen kritis pada layanan API prediksi yang telah diintegrasikan. Pengujian mencakup uji coba fungsional \textit{Black Box}, uji telusur logika kode \textit{White Box}, serta rekapitulasi evaluasi kinerja model prediksi yang telah dibahas pada Subbab 4.4.
 
 \subsection{Skenario Pengujian}
 
-Rancangan skenario pengujian fungsional \textit{black box} disusun untuk 14 kasus penggunaan utama yang melibatkan peran Owner dan Kasir, sebagaimana telah dijabarkan pada Tabel \ref{tab:blackbox} (Bab III), meliputi antara lain registrasi toko, autentikasi pengguna, pengelolaan produk dan kategori, proses \textit{checkout} transaksi, pencetakan struk, sinkronisasi \textit{offline-first}, serta dasbor laporan analitik. Skenario pengujian \textit{white box} disusun secara terpisah dengan menelusuri jalur logika kode pada tiga fungsi kritis di layanan API prediksi, yaitu fungsi \textit{Seasonal-Naive} (\texttt{by\_dow}), fungsi metrik evaluasi sMAPE dan MASE, serta fungsi peramalan rekursif (\texttt{forecast\_hybrid\_stable}), sebagaimana telah dirancang pada Subbab 3.2.10.3. Kedua rancangan pengujian ini bersifat saling melengkapi: pengujian \textit{black box} memvalidasi kesesuaian antara masukan dan keluaran pada level antarmuka pengguna, sedangkan pengujian \textit{white box} memvalidasi kebenaran perhitungan pada level kode program.
+Rancangan skenario pengujian fungsional \textit{black box} disusun untuk 14 kasus penggunaan utama yang melibatkan peran Owner dan Kasir, sebagaimana telah dijabarkan pada Tabel \ref{tab:blackbox} (Bab III), meliputi antara lain registrasi toko, autentikasi pengguna, pengelolaan produk dan kategori, proses \textit{checkout} transaksi, pencetakan struk, sinkronisasi \textit{offline-first}, serta dasbor laporan analitik. Skenario pengujian \textit{white box} disusun secara terpisah dengan menelusuri jalur logika kode pada tiga fungsi kritis di layanan API prediksi, yaitu fungsi \textit{Seasonal-Naive} (\texttt{by\_dow}), fungsi metrik evaluasi sMAPE dan MASE, serta fungsi prediksi rekursif ({\small\texttt{forecast\_hybrid\_\allowbreak stable}}), sebagaimana telah dirancang pada Subbab 3.2.10.3. Kedua rancangan pengujian ini bersifat saling melengkapi: pengujian \textit{black box} memvalidasi kesesuaian antara masukan dan keluaran pada level antarmuka pengguna, sedangkan pengujian \textit{white box} memvalidasi kebenaran perhitungan pada level kode program.
 
 \subsection{Hasil Black Box Testing}
 
@@ -2251,7 +2251,6 @@ Pengujian fungsionalitas sistem menggunakan metode Black Box diterapkan pada 14 
 \textbf{No.} & \textbf{Fitur / Skenario} & \textbf{Hasil yang Diharapkan} & \textbf{Hasil Riil} & \textbf{Status} \\
 \hline
 \endfirsthead
-\multicolumn{5}{@{}l}{Tabel \thetable\ \textit{(lanjutan)}}\\
 \hline
 \textbf{No.} & \textbf{Fitur / Skenario} & \textbf{Hasil yang Diharapkan} & \textbf{Hasil Riil} & \textbf{Status} \\
 \hline
@@ -2340,20 +2339,20 @@ Pengujian \textit{white box} dilakukan dengan menelusuri jalur logika (\textit{c
 \hline
 5 & \texttt{mase} & Galat naif \textit{in-sample} bernilai positif normal (jalur utama) & Nilai MASE terhitung sesuai rasio MAE model terhadap MAE naif & Berhasil \\
 \hline
-6 & \texttt{forecast\_hybrid\_stable} & Nilai \textit{log-return} mentah melebihi persentil 90 data latih (jalur \textit{clipping}) & Nilai \textit{log-return} dipotong tepat pada batas atas persentil 90 & Berhasil \\
+6 & {\small\texttt{forecast\_hybrid\_\allowbreak stable}} & Nilai \textit{log-return} mentah melebihi persentil 90 data latih (jalur \textit{clipping}) & Nilai \textit{log-return} dipotong tepat pada batas atas persentil 90 & Berhasil \\
 \hline
-7 & \texttt{forecast\_hybrid\_stable} & Iterasi horizon ke-$n$ dengan $n>1$ (jalur \textit{damping}) & Besaran perubahan \textit{log-return} teredam sesuai faktor $\phi^{(n-1)}$ & Berhasil \\
+7 & {\small\texttt{forecast\_hybrid\_\allowbreak stable}} & Iterasi horizon ke-$n$ dengan $n>1$ (jalur \textit{damping}) & Besaran perubahan \textit{log-return} teredam sesuai faktor $\phi^{(n-1)}$ & Berhasil \\
 \hline
-8 & \texttt{forecast\_hybrid\_stable} & Nilai omzet hasil rekonstruksi melampaui nilai maksimum historis (jalur \textit{safety rail}) & Nilai omzet dipotong tepat pada batas \texttt{REV\_CEIL} & Berhasil \\
+8 & {\small\texttt{forecast\_hybrid\_\allowbreak stable}} & Nilai omzet hasil rekonstruksi melampaui nilai maksimum historis (jalur \textit{safety rail}) & Nilai omzet dipotong tepat pada batas \texttt{REV\_CEIL} & Berhasil \\
 \hline
 \end{tabularx}
 \end{table}
 
-Berdasarkan hasil pada Tabel \ref{tab:hasil_whitebox}, seluruh jalur logika kritis pada ketiga fungsi yang diuji, yaitu perhitungan \textit{Seasonal-Naive}, metrik evaluasi sMAPE/MASE, dan peramalan rekursif, telah tervalidasi menghasilkan keluaran yang sesuai dengan perhitungan manual, sehingga tidak ditemukan kesalahan logika (\textit{logic error}) pada percabangan kode yang diuji.
+Berdasarkan hasil pada Tabel \ref{tab:hasil_whitebox}, seluruh jalur logika kritis pada ketiga fungsi yang diuji, yaitu perhitungan \textit{Seasonal-Naive}, metrik evaluasi sMAPE/MASE, dan prediksi rekursif, telah tervalidasi menghasilkan keluaran yang sesuai dengan perhitungan manual, sehingga tidak ditemukan kesalahan logika (\textit{logic error}) pada percabangan kode yang diuji.
 
 \subsection{Evaluasi Kinerja Model}
 
-Merujuk pada hasil evaluasi kinerja model peramalan yang telah dipaparkan secara rinci pada Subbab 4.4, secara ringkas model LSTM Hybrid memperoleh MAE rata-rata sebesar Rp 667.718,00 dan MASE sebesar 1,840 pada skema \textit{one-step-ahead}, yang masih berada di bawah performa \textit{baseline Naive} (MAE Rp 519.841,00, MASE 1,432). Pengujian \textit{multi-seed} pada 10 kali pelatihan mengonfirmasi ketidakstabilan performa tersebut (MAE $\pm$Rp 145.024,00), sedangkan eksperimen augmentasi TimeGAN berhasil menurunkan MAE model multi-langkah dari Rp 1.750.355,00 menjadi Rp 860.695,00 namun tetap belum mengungguli \textit{baseline Seasonal-Naive} (MAE Rp 755.403,00). Berdasarkan kinerja tersebut, layanan API produksi diputuskan menyajikan metode statistik \textit{Seasonal-Naive} sebagai metode penyaji utama peramalan harian, sementara model LSTM didokumentasikan sebagai artefak riset.
+Merujuk pada hasil evaluasi kinerja model prediksi yang telah dipaparkan secara rinci pada Subbab 4.4, secara ringkas model LSTM Hybrid memperoleh MAE rata-rata sebesar Rp 667.718,00 dan MASE sebesar 1,840 pada skema \textit{one-step-ahead}, yang masih berada di bawah performa \textit{baseline Naive} (MAE Rp 519.841,00, MASE 1,432). Pengujian \textit{multi-seed} pada 10 kali pelatihan mengonfirmasi ketidakstabilan performa tersebut (MAE $\pm$Rp 145.024,00), sedangkan eksperimen augmentasi TimeGAN berhasil menurunkan MAE model multi-langkah dari Rp 1.750.355,00 menjadi Rp 860.695,00 namun tetap belum mengungguli \textit{baseline Seasonal-Naive} (MAE Rp 755.403,00). Berdasarkan kinerja tersebut, layanan API produksi diputuskan menyajikan metode statistik \textit{Seasonal-Naive} sebagai metode penyaji utama prediksi harian, sementara model LSTM didokumentasikan sebagai artefak riset.
 
 \section{Pembahasan}
 
@@ -2367,7 +2366,7 @@ Penggunaan local database Isar DB juga memberikan performa loading data yang san
 
 \subsection{Pembahasan Hasil Prediksi Penjualan LSTM}
 
-Secara keseluruhan, hasil pengujian menunjukkan bahwa pada dataset transaksi penjualan kantin EatsTEDI UGM dengan 313 hari aktif, model LSTM, termasuk varian hybrid residual yang merupakan konfigurasi terbaik, tidak mengungguli metode pembanding sederhana (\textit{Naive} dan \textit{Mean-7}) maupun model statistik \textit{SARIMA} secara rata-rata, dan hanya mampu kompetitif pada kasus terbaiknya (1 dari 10 percobaan \textit{multi-seed}). Hasil evaluasi ini bukan merupakan suatu kegagalan atau anomali sistem, melainkan sejalan dengan temuan luas dalam berbagai literatur peramalan deret waktu komersial ritel (seperti pada kompetisi peramalan global M3 dan M4). Literatur tersebut membuktikan bahwa metode statistik klasik dan naif kerap mengungguli pendekatan pembelajaran mendalam (\textit{deep learning}) ketika data historis yang tersedia relatif terbatas dan deret waktu didominasi secara kuat oleh komponen persistensi jangka pendek.
+Secara keseluruhan, hasil pengujian menunjukkan bahwa pada dataset transaksi penjualan kantin EatsTEDI UGM dengan 313 hari aktif, model LSTM, termasuk varian hybrid residual yang merupakan konfigurasi terbaik, tidak mengungguli metode pembanding sederhana (\textit{Naive} dan \textit{Mean-7}) maupun model statistik \textit{SARIMA} secara rata-rata, dan hanya mampu kompetitif pada kasus terbaiknya (1 dari 10 percobaan \textit{multi-seed}). Hasil evaluasi ini bukan merupakan suatu kegagalan atau anomali sistem, melainkan sejalan dengan temuan luas dalam berbagai literatur prediksi deret waktu komersial ritel (seperti pada kompetisi prediksi global M3 dan M4). Literatur tersebut membuktikan bahwa metode statistik klasik dan naif kerap mengungguli pendekatan pembelajaran mendalam (\textit{deep learning}) ketika data historis yang tersedia relatif terbatas dan deret waktu didominasi secara kuat oleh komponen persistensi jangka pendek.
 
 Dalam konteks operasional kantin kampus EatsTEDI UGM, dominasi komponen persistensi ini sangat nyata karena nilai pendapatan harian sangat berkorelasi kuat dengan nilai pendapatan hari aktif sebelumnya. Pola ketergantungan jangka pendek ini ditangkap dengan sangat presisi oleh model \textit{Naive} (kemarin) yang memiliki kesalahan MAE terendah sebesar Rp 519.841,00. Di sisi lain, model LSTM Hybrid yang memiliki kapasitas parameter lebih besar cenderung melakukan penghalusan nilai prediksi secara berlebihan (\textit{over-smoothing}) pada data latih yang pendek, sehingga tidak mampu menangkap lonjakan-lonjakan ekstrem omzet harian yang dipicu oleh dinamika aktivitas mahasiswa di lapangan.
 
@@ -2375,13 +2374,13 @@ Sebagai upaya mengatasi akar permasalahan keterbatasan data tersebut, penelitian
 
 Kontribusi ilmiah dari penelitian ini terletak pada ketelitian metodologis evaluasi model yang diterapkan, yaitu:
 \begin{enumerate}
-    \item \textbf{Penggunaan Model Pembanding (\textit{Baselines}) yang Tepat:} Menyandingkan model LSTM dengan metode naif, rata-rata bergerak, dan SARIMA untuk memvalidasi apakah penambahan kompleksitas komputasi model AI memberikan nilai tambah akurasi peramalan yang sepadan.
+    \item \textbf{Penggunaan Model Pembanding (\textit{Baselines}) yang Tepat:} Menyandingkan model LSTM dengan metode naif, rata-rata bergerak, dan SARIMA untuk memvalidasi apakah penambahan kompleksitas komputasi model AI memberikan nilai tambah akurasi prediksi yang sepadan.
     \item \textbf{Pemilihan Metrik Evaluasi yang Valid:} Menggunakan sMAPE dan MASE yang tahan terhadap pembagian bernilai nol atau sangat kecil pada hari-hari libur, menghindari kesalahan \textit{exploding MAPE} yang menyesatkan.
     \item \textbf{Pengujian Kestabilan melalui Multi-Seed:} Melaporkan sebaran nilai performa model dari sepuluh kali pelatihan secara acak, sehingga mengungkap ketidakstabilan model LSTM pada ukuran data yang kecil secara transparan.
-    \item \textbf{Eksplorasi Augmentasi Data Sintetis:} Menguji efektivitas TimeGAN sebagai strategi mitigasi keterbatasan data pada peramalan penjualan UMKM, lengkap dengan kuantifikasi perbaikan galat terhadap model tanpa augmentasi dan posisinya relatif terhadap \textit{baseline} musiman.
+    \item \textbf{Eksplorasi Augmentasi Data Sintetis:} Menguji efektivitas TimeGAN sebagai strategi mitigasi keterbatasan data pada prediksi penjualan UMKM, lengkap dengan kuantifikasi perbaikan galat terhadap model tanpa augmentasi dan posisinya relatif terhadap \textit{baseline} musiman.
 \end{enumerate}
 
-Kerangka evaluasi ini menghasilkan kesimpulan analisis yang jujur, objektif, dan dapat dipertanggungjawabkan secara akademik, sekaligus memberikan rekomendasi praktis bagi pengelola bisnis: untuk skala volume data transaksi harian UMKM saat ini, metode \textit{Naive}, \textit{Seasonal-Naive}, atau \textit{SARIMA} lebih direkomendasikan untuk diintegrasikan sebagai fitur visualisasi dasbor prediksi penjualan harian pada aplikasi POS, sedangkan penerapan algoritma LSTM baru relevan untuk ditinjau kembali di masa depan apabila volume data transaksi historis telah bertambah secara signifikan (mencakup minimal 3--5 tahun operasional). Rekomendasi tersebut telah diimplementasikan secara nyata pada penelitian ini: layanan API prediksi produksi yang terhubung ke aplikasi POS menyajikan metode \textit{Seasonal-Naive} ($k=4$) untuk peramalan harian, \textit{Mean-4} untuk mingguan, dan \textit{Mean-3} untuk bulanan, sementara model LSTM beserta hasil eksperimen augmentasi TimeGAN didokumentasikan sebagai artefak riset yang siap diaktifkan kembali ketika data telah memadai.
+Kerangka evaluasi ini menghasilkan kesimpulan analisis yang jujur, objektif, dan dapat dipertanggungjawabkan secara akademik, sekaligus memberikan rekomendasi praktis bagi pengelola bisnis: untuk skala volume data transaksi harian UMKM saat ini, metode \textit{Naive}, \textit{Seasonal-Naive}, atau \textit{SARIMA} lebih direkomendasikan untuk diintegrasikan sebagai fitur visualisasi dasbor prediksi penjualan harian pada aplikasi POS, sedangkan penerapan algoritma LSTM baru relevan untuk ditinjau kembali di masa depan apabila volume data transaksi historis telah bertambah secara signifikan (mencakup minimal 3--5 tahun operasional). Rekomendasi tersebut telah diimplementasikan secara nyata pada penelitian ini: layanan API prediksi produksi yang terhubung ke aplikasi POS menyajikan metode \textit{Seasonal-Naive} ($k=4$) untuk prediksi harian, \textit{Mean-4} untuk mingguan, dan \textit{Mean-3} untuk bulanan, sementara model LSTM beserta hasil eksperimen augmentasi TimeGAN didokumentasikan sebagai artefak riset yang siap diaktifkan kembali ketika data telah memadai.
 
 
 \section{Keterbatasan Sistem dan Penelitian}
@@ -2399,7 +2398,7 @@ Beberapa keterbatasan operasional dari sistem POS mobile yang dikembangkan melip
     Meskipun operasional transaksi kasir dapat berjalan tanpa internet (offline), kualitas proyeksi modul prediksi LSTM bergantung pada kelengkapan data transaksi aktual yang menjadi \textit{payload} permintaan analisis. Jika data transaksi terbaru belum tercatat atau tersinkronkan, akurasi hasil proyeksi prediksi untuk hari berikutnya dapat menurun karena tidak menangkap tren transaksi paling akhir.
     
     \item \textbf{Ketergantungan Akses Server untuk Hasil Prediksi}:
-    Karena keterbatasan sumber daya komputasi dan konsumsi baterai perangkat mobile, proses kalkulasi peramalan model LSTM yang berat dialihkan sepenuhnya ke layanan inferensi Python yang di-\textit{hosting} pada platform Hugging Face. Akibatnya, meskipun kasir dapat bertransaksi secara offline, pengguna tetap memerlukan koneksi internet aktif untuk memperbarui visualisasi prediksi analitik terbaru dari API inferensi ke dasbor aplikasi. Selain itu, layanan inferensi gratis pada Hugging Face dapat mengalami kondisi \textit{cold start} (jeda pemuatan saat \textit{server} baru aktif kembali dari \textit{idle}) yang memperlambat respons analisis pertama.
+    Karena keterbatasan sumber daya komputasi dan konsumsi baterai perangkat mobile, proses kalkulasi prediksi model LSTM yang berat dialihkan sepenuhnya ke layanan inferensi Python yang di-\textit{hosting} pada platform Hugging Face. Akibatnya, meskipun kasir dapat bertransaksi secara offline, pengguna tetap memerlukan koneksi internet aktif untuk memperbarui visualisasi prediksi analitik terbaru dari API inferensi ke dasbor aplikasi. Selain itu, layanan inferensi gratis pada Hugging Face dapat mengalami kondisi \textit{cold start} (jeda pemuatan saat \textit{server} baru aktif kembali dari \textit{idle}) yang memperlambat respons analisis pertama.
 \end{enumerate}
 
 \subsection{Keterbatasan Penelitian Model Prediksi}
@@ -2426,7 +2425,7 @@ Berdasarkan hasil analisis, perancangan, implementasi, dan pengujian yang telah 
 \begin{enumerate}
     \item Penelitian ini telah berhasil membangun aplikasi \textit{Point of Sale} (POS) \textit{mobile} berbasis Flutter yang terintegrasi dengan basis data cloud Supabase PostgreSQL dan modul AI prediksi penjualan harian berbasis Python (Flask dan TensorFlow).
     \item Penerapan arsitektur \textit{offline-first} menggunakan basis data lokal Isar DB terbukti handal dalam menjaga keberlangsungan transaksi kasir tanpa ketergantungan penuh pada koneksi internet. Operasi baca-tulis lokal sangat responsif (rata-rata di bawah 15 ms), dan sinkronisasi otomatis menggunakan modul \textit{SyncNotifier} berhasil mengunggah data transaksi lokal ke database cloud saat perangkat terhubung kembali ke internet.
-    \item Implementasi metode peramalan \textit{Long Short-Term Memory} (LSTM) dengan pendekatan \textit{hybrid residual} (memprediksi \textit{log-return}) pada dataset harian aktif menghasilkan rata-rata kesalahan prediksi (\textit{multi-seed evaluation}) berupa MAE sebesar Rp 667.718,00 $\pm$ Rp 145.024,00, RMSE sebesar Rp 897.563,00 $\pm$ Rp 165.804,00, sMAPE sebesar 38,06\% $\pm$ 3,96\%, dan MASE sebesar 1,840 $\pm$ 0,400. Hasil ini menunjukkan bahwa model LSTM Hybrid yang dikembangkan belum mampu mengungguli metode pembanding \textit{Naive} (MAE Rp 519.841,00, MASE 1,432) dan \textit{SARIMA} secara rata-rata, dikarenakan deret pendapatan yang pendek serta tingginya persistensi jangka pendek pada data penjualan kantin EatsTEDI UGM. Upaya augmentasi data sintetis menggunakan TimeGAN terbukti menurunkan galat model LSTM multi-langkah secara signifikan (MAE membaik dari Rp 1.750.355,00 menjadi Rp 860.695,00), namun tetap belum mengungguli \textit{baseline} \textit{Seasonal-Naive}, sehingga layanan API prediksi produksi menyajikan metode \textit{Seasonal-Naive} sebagai metode penyaji utama.
+    \item Implementasi metode prediksi \textit{Long Short-Term Memory} (LSTM) dengan pendekatan \textit{hybrid residual} (memprediksi \textit{log-return}) pada dataset harian aktif menghasilkan rata-rata kesalahan prediksi (\textit{multi-seed evaluation}) berupa MAE sebesar Rp 667.718,00 $\pm$ Rp 145.024,00, RMSE sebesar Rp 897.563,00 $\pm$ Rp 165.804,00, sMAPE sebesar 38,06\% $\pm$ 3,96\%, dan MASE sebesar 1,840 $\pm$ 0,400. Hasil ini menunjukkan bahwa model LSTM Hybrid yang dikembangkan belum mampu mengungguli metode pembanding \textit{Naive} (MAE Rp 519.841,00, MASE 1,432) dan \textit{SARIMA} secara rata-rata, dikarenakan deret pendapatan yang pendek serta tingginya persistensi jangka pendek pada data penjualan kantin EatsTEDI UGM. Upaya augmentasi data sintetis menggunakan TimeGAN terbukti menurunkan galat model LSTM multi-langkah secara signifikan (MAE membaik dari Rp 1.750.355,00 menjadi Rp 860.695,00), namun tetap belum mengungguli \textit{baseline} \textit{Seasonal-Naive}, sehingga layanan API prediksi produksi menyajikan metode \textit{Seasonal-Naive} sebagai metode penyaji utama.
     \item Hasil pengujian fungsionalitas menggunakan metode \textit{Black Box Testing} terhadap 14 skenario kasus penggunaan utama yang melibatkan peran Owner dan Kasir berjalan dengan sukses tanpa kegagalan (tingkat keberhasilan 100\%), menunjukkan sistem layak dioperasikan secara penuh pada unit usaha UMKM.
 \end{enumerate}
 
