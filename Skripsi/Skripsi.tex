@@ -397,7 +397,7 @@ NIM. 2022573010098
 \end{flushright}
 
 %%-------------------------------------------------------------
-%% ABSTRAK & ABSTRACT
+%% KATA PENGANTAR
 %%-------------------------------------------------------------
 \newpage
 \pagenumbering{roman}
@@ -406,6 +406,43 @@ NIM. 2022573010098
 \cfoot{\thepage}
 \pagestyle{fancy}
 
+\phantomsection
+\addcontentsline{toc}{chapter}{KATA PENGANTAR}
+\begin{center}
+{\fontsize{14pt}{16pt}\selectfont\bfseries KATA PENGANTAR}
+\end{center}
+\vspace{0.5cm}
+
+\noindent Puji syukur penulis panjatkan kehadirat Allah SWT, karena atas rahmat dan hidayah-Nya, penulis dapat menyelesaikan skripsi ini dengan judul \textit{Rancang Bangun Aplikasi Point of Sale dengan Fitur Prediksi Penjualan Harian Menggunakan Metode Long Short-Term Memory (LSTM)}. Skripsi ini disusun sebagai salah satu syarat untuk memperoleh gelar Sarjana Terapan pada Program Studi Teknik Informatika Politeknik Negeri Lhokseumawe. Penulis menyadari bahwa skripsi ini masih jauh dari sempurna. Oleh karena itu, penulis mengharapkan kritik dan saran yang bersifat membangun dari semua pihak.
+
+\noindent Dalam penulisan Skripsi ini penulis dapat melaksanakannya dengan baik berkat dukungan, bimbingan, dan bantuan dari berbagai pihak. Oleh karena itu, penulis ingin mengucapkan terima kasih yang sebesar-besarnya kepada:
+
+\begin{enumerate}
+    \item Allah SWT atas segala rahmat, nikmat, kesehatan, serta kekuatan yang diberikan kepada penulis sehingga dapat menyelesaikan skripsi ini.
+    \item Keluarga tercinta, terutama Ibunda Jumiati yang selalu memberikan doa, dukungan moral maupun material, serta motivasi kepada penulis selama proses penyelesaian pendidikan.
+    \item Bapak Dr. Ir. Rizal Syahyadi, S.T., M.Eng.Sc., IPM, ASEAN Eng., APEC Eng., selaku Direktur Politeknik Negeri Lhokseumawe.
+    \item Bapak Salahuddin, S.T., M.Sc. selaku Ketua Jurusan Teknologi Informasi dan Komputer, Bapak Fachri Yanuar Rudi F, S.S.T., M.T. selaku Sekretaris Jurusan Teknologi Informasi dan Komputer, dan Bapak M. Khadafi, S.T., M.T. selaku Ketua Program Studi Teknik Informatika atas segala bimbingan dan perhatian selama masa perkuliahan.
+    \item Bapak Zulfan Khairil Simbolon, S.T., M.Eng. selaku Pembimbing Utama dan Bapak Azhar, S.T., M.T. selaku Pembimbing Pendamping yang telah membantu, membimbing, dan mengarahkan penulis dalam proses penyelesaian Skripsi ini.
+    \item Bapak Musta'inul Abdi, S.S.T., M.Kom., Bapak Dr. Rahmad Hidayat, S.Kom., M.Cs., dan Ibu Radhiyatammardhiyyah, S.S.T., M.Sc. selaku penguji yang telah bersedia memberikan arahan dan masukan dalam pengerjaan Skripsi ini.
+    \item Seluruh Dosen Pengajar Program Studi Teknik Informatika yang telah memberikan ilmu dan motivasi kepada penulis selama masa perkuliahan.
+\end{enumerate}
+
+\noindent Penulis menyadari bahwa Skripsi ini masih terdapat kekurangan dan ketidaksempurnaan. Oleh sebab itu, penulis mengharapkan adanya saran dan kritik yang membangun guna dijadikan bahan perbaikan dan pembelajaran untuk ke depannya yang bermanfaat bagi penulis dan rekan-rekan yang membacanya. Semoga bantuan dan kebaikan semua pihak dapat menjadi amal ibadah.
+
+\vspace{1.5cm}
+
+\begin{flushright}
+Lhokseumawe, 16 Juli 2026
+
+\vspace{2cm}
+
+\noindent{\bfseries Muhammad Kholis}\\
+NIM. 2022573010098
+\end{flushright}
+
+%%-------------------------------------------------------------
+%% ABSTRAK & ABSTRACT
+%%-------------------------------------------------------------
 \clearpage
 \phantomsection
 \addcontentsline{toc}{chapter}{ABSTRAK}
@@ -433,38 +470,6 @@ Penelitian ini bertujuan merancang dan membangun aplikasi \textit{Point of Sale}
 \noindent \textbf{\textit{Keywords}}: \textit{Point of Sale (POS), Daily Sales Prediction, Long Short-Term Memory (LSTM), Offline-First, TimeGAN, MSMEs}
 \end{spacing}
 \selectlanguage{indonesian}
-
-%%-------------------------------------------------------------
-%% KATA PENGANTAR
-%%-------------------------------------------------------------
-\newpage
-\phantomsection
-\addcontentsline{toc}{chapter}{KATA PENGANTAR}
-\begin{center}
-{\fontsize{14pt}{16pt}\selectfont\bfseries KATA PENGANTAR}
-\end{center}
-\vspace{0.5cm}
-\begin{spacing}{1.5}
-Puji syukur penulis panjatkan ke hadirat Allah SWT atas segala rahmat dan karunia-Nya sehingga penulis dapat menyelesaikan skripsi yang berjudul \textit{``Rancang Bangun Aplikasi Point of Sale dengan Fitur Prediksi Penjualan Harian Menggunakan Metode Long Short-Term Memory (LSTM)''}. Skripsi ini disusun sebagai salah satu syarat penyelesaian studi pada Program Studi Teknik Informatika, Jurusan Teknologi Informasi dan Komputer, Politeknik Negeri Lhokseumawe.
-
-Dalam proses penyusunan skripsi ini, penulis banyak memperoleh bimbingan, arahan, dan dukungan dari berbagai pihak. Oleh karena itu, penulis mengucapkan terima kasih kepada:
-\begin{enumerate}
-    \item Bapak Zulfan Khairil Simbolon, S.T., M.Eng., selaku Dosen Pembimbing I yang telah memberikan bimbingan dan arahan selama penyusunan skripsi ini.
-    \item Bapak Azhar, S.T., M.T., selaku Dosen Pembimbing II atas segala masukan dan koreksi yang membangun.
-    \item Bapak M. Khadafi, S.T., M.T., selaku Ketua Program Studi Teknik Informatika.
-    \item Pengelola platform EatsTEDI Departemen Teknik Elektro dan Informatika Universitas Gadjah Mada atas izin penggunaan data transaksi sebagai bahan penelitian.
-    \item Kedua orang tua dan keluarga atas doa dan dukungan yang tiada henti, serta rekan-rekan seperjuangan yang telah membantu selama proses penelitian.
-\end{enumerate}
-
-Penulis menyadari bahwa skripsi ini masih jauh dari sempurna. Oleh karena itu, kritik dan saran yang membangun sangat penulis harapkan demi perbaikan di masa mendatang. Semoga skripsi ini bermanfaat bagi pembaca dan pengembangan ilmu pengetahuan.
-
-\begin{flushright}
-\begin{tabular}{@{}c@{}}
-Lhokseumawe, Juli 2026 \\[0.2cm]
-Penulis
-\end{tabular}
-\end{flushright}
-\end{spacing}
 
 %%-------------------------------------------------------------
 %% DAFTAR ISI, DAFTAR GAMBAR, DAFTAR TABEL
