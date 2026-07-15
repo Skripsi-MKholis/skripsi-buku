@@ -608,9 +608,10 @@ Penelitian terkait prediksi penjualan dan pengembangan sistem \textit{Point of S
 
 Meskipun demikian, penelitian yang secara spesifik mengintegrasikan modul prediksi penjualan berbasis LSTM langsung ke dalam sistem POS \textit{mobile} yang beroperasi secara \textit{offline-first} untuk konteks UMKM masih sangat terbatas. Ringkasan penelitian terdahulu tersebut disajikan dalam Tabel~\ref{tab:sota}.
 
+\begin{landscape}
 \setlength{\tabcolsep}{4pt}
 {\small\setstretch{1.1}\hyphenpenalty=50\exhyphenpenalty=50\tolerance=500
-\begin{longtable}{|>{\centering\arraybackslash}p{0.6cm}|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}p{2.8cm}|}
+\begin{longtable}{|>{\centering\arraybackslash}p{0.8cm}|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
 
 \caption{\textit{State Of The Art}} \label{tab:sota} \\
 \hline
@@ -623,7 +624,6 @@ Meskipun demikian, penelitian yang secara spesifik mengintegrasikan modul predik
 \hline
 \endfirsthead
 
-\multicolumn{6}{@{}l}{Tabel \thetable\ \textit{(lanjutan)}}\\
 \hline
 \textbf{No} &
 \textbf{Penulis, Tahun dan Judul Artikel} &
@@ -703,16 +703,9 @@ Mampu memprediksi \textit{demand} mingguan dengan MAPE 12\%. &
 Sama-sama menghubungkan prediksi penjualan ke manajemen stok barang. &
 Rentang prediksi mingguan terlalu luas; penelitian ini berfokus pada prediksi harian yang lebih granular. \\
 \hline
-
-9 &
-\textbf{Penelitian Ini.} Rancang Bangun Aplikasi \textit{Point of Sale} dengan Fitur Prediksi Penjualan Harian Menggunakan Metode LSTM. &
-\textbf{LSTM, Flutter, Supabase, Isar DB} &
-Aplikasi POS \textit{mobile offline-first} terintegrasi dengan prediksi penjualan harian berbasis LSTM menggunakan dataset transaksi riil EatsTEDI UGM. &
--- &
--- \\
-
 \end{longtable}
 }
+\end{landscape}
 
 Berdasarkan kajian terhadap penelitian terdahulu pada Tabel~\ref{tab:sota}, dapat disimpulkan bahwa sebagian besar penelitian prediksi penjualan menggunakan LSTM masih bersifat \textit{standalone}, yakni tidak terintegrasi dengan sistem pencatatan transaksi yang aktif digunakan. Sebaliknya, penelitian pengembangan sistem POS \textit{mobile} yang ada belum dilengkapi kemampuan analitik prediktif berbasis \textit{machine learning}. Selain itu, belum ada sistem POS untuk UMKM yang secara bersamaan menerapkan arsitektur \textit{offline-first} sekaligus menyertakan modul prediksi LSTM terintegrasi.
 
