@@ -3,26 +3,26 @@
 \babel@toc {indonesian}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces \textit {State Of The Art}}}{8}{table.2.1}%
+\contentsline {table}{\numberline {2.1}{\ignorespaces \textit {State Of The Art}}}{10}{table.2.1}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Jadwal Pelaksanaan Penelitian}}{23}{table.caption.10}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Daftar Alat dan Bahan Penelitian}}{24}{table.3.2}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Sebaran Penjualan Berdasarkan Kategori Produk}}{27}{table.caption.11}%
-\contentsline {table}{\numberline {3.4}{\ignorespaces Daftar 10 Produk Terlaris EatsTEDI UGM}}{28}{table.caption.12}%
-\contentsline {table}{\numberline {3.5}{\ignorespaces Struktur Skema Dataset \textit {daily\_sales.csv}}}{30}{table.caption.13}%
-\contentsline {table}{\numberline {3.6}{\ignorespaces Struktur Skema Dataset \textit {weekly\_sales.csv}}}{30}{table.caption.14}%
-\contentsline {table}{\numberline {3.7}{\ignorespaces Struktur Skema Dataset \textit {monthly\_sales.csv}}}{31}{table.caption.15}%
-\contentsline {table}{\numberline {3.8}{\ignorespaces Definisi Aktor}}{37}{table.caption.18}%
-\contentsline {table}{\numberline {3.9}{\ignorespaces Definisi \textit {Use Case}}}{37}{table.3.9}%
-\contentsline {table}{\numberline {3.10}{\ignorespaces Daftar Tabel Basis Data POS}}{48}{table.caption.26}%
-\contentsline {table}{\numberline {3.11}{\ignorespaces Skenario Pengujian \textit {Black Box}}}{70}{table.3.11}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Jadwal Pelaksanaan Penelitian}}{31}{table.caption.10}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Daftar Alat dan Bahan Penelitian}}{31}{table.3.2}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Sebaran Penjualan Berdasarkan Kategori Produk}}{36}{table.caption.11}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Daftar 10 Produk Terlaris EatsTEDI UGM}}{37}{table.caption.12}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces Struktur Skema Dataset \textit {daily\_sales.csv}}}{39}{table.caption.13}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces Struktur Skema Dataset \textit {weekly\_sales.csv}}}{40}{table.caption.14}%
+\contentsline {table}{\numberline {3.7}{\ignorespaces Struktur Skema Dataset \textit {monthly\_sales.csv}}}{40}{table.caption.15}%
+\contentsline {table}{\numberline {3.8}{\ignorespaces Definisi Aktor}}{48}{table.caption.18}%
+\contentsline {table}{\numberline {3.9}{\ignorespaces Definisi \textit {Use Case}}}{48}{table.3.9}%
+\contentsline {table}{\numberline {3.10}{\ignorespaces Daftar Tabel Basis Data POS}}{60}{table.caption.26}%
+\contentsline {table}{\numberline {3.11}{\ignorespaces Skenario Pengujian \textit {Black Box}}}{83}{table.3.11}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Statistik Ringkas Dataset Pendapatan Harian}}{94}{table.caption.57}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Pembagian Dataset dan Dimensi Sequence}}{95}{table.caption.58}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces Perbandingan Performa pada Data Uji (\textit {One-Step-Ahead})}}{104}{table.caption.60}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces Statistik Performa LSTM Hybrid pada 10 Seed}}{106}{table.caption.62}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces Perbandingan Performa Eksperimen Augmentasi TimeGAN (\textit {Multi-Step}, Horizon 7)}}{107}{table.caption.64}%
-\contentsline {table}{\numberline {4.6}{\ignorespaces Hasil Pengujian Black Box}}{109}{table.4.6}%
-\contentsline {table}{\numberline {4.7}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{111}{table.caption.65}%
-\contentsline {table}{\numberline {4.8}{\ignorespaces Hasil Pengujian White Box}}{113}{table.caption.66}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Statistik Ringkas Dataset Pendapatan Harian}}{109}{table.caption.57}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Pembagian Dataset dan Dimensi Sequence}}{111}{table.caption.58}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Perbandingan Performa pada Data Uji (\textit {One-Step-Ahead})}}{122}{table.caption.60}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Statistik Performa LSTM Hybrid pada 10 Seed}}{124}{table.caption.62}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Perbandingan Performa Eksperimen Augmentasi TimeGAN (\textit {Multi-Step}, Horizon 7)}}{126}{table.caption.64}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Hasil Pengujian Black Box}}{128}{table.4.6}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{130}{table.caption.65}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces Hasil Pengujian White Box}}{132}{table.caption.66}%
 \addvspace {10\p@ }
