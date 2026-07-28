@@ -586,22 +586,33 @@ Agar penelitian ini terarah dan terukur, ditetapkan batasan sebagai berikut:
 Penelitian ini diharapkan memberikan manfaat pada dua tataran. Secara teoritis, penelitian ini menyediakan bukti empiris mengenai performa model \textit{Long Short-Term Memory} pada data penjualan harian berskala kecil dengan karakteristik deret tidak sinambung, suatu kondisi yang selama ini kurang terwakili dalam literatur karena sebagian besar penelitian menggunakan \textit{dataset} berskala besar dan sinambung, sekaligus menguji efektivitas augmentasi data sintetis TimeGAN sebagai upaya mengatasi keterbatasan jumlah sampel pelatihan. Penelitian ini juga menegaskan pentingnya penyertaan \textit{baseline} heuristik sederhana seperti \textit{seasonal-naive} sebagai kontrol metodologis dalam penelitian peramalan berbasis \textit{deep learning}, sehingga dapat menjadi rujukan bagi kajian selanjutnya yang mengintegrasikan model peramalan ke dalam aplikasi transaksional. Secara praktis, penelitian ini menghasilkan aplikasi \textit{Point of Sale} yang tidak hanya mencatat transaksi tetapi juga menyajikan estimasi penjualan harian sebagai bahan pertimbangan pengelola dalam menentukan volume produksi, pengadaan bahan baku, dan penjadwalan tenaga kerja; memberikan gambaran mengenai pola permintaan kantin institusional yang terkait dengan ritme kalender akademik; serta menyediakan rujukan teknis bagi pengembang perangkat lunak mengenai arsitektur penyatuan model \textit{machine learning} ke dalam aplikasi \textit{mobile}. Lebih lanjut, hasil perbandingan terhadap \textit{baseline} sederhana diharapkan menjadi rekomendasi berbasis bukti bagi pelaku usaha mikro, kecil, dan menengah mengenai kondisi kelayakan penerapan pendekatan \textit{deep learning} pada skala usaha kecil, sehingga sumber daya pengembangan dapat dialokasikan secara proporsional.
 
 \section{Sistematika Penulisan}
-Sistematika penulisan skripsi ini disusun untuk memberikan gambaran secara menyeluruh mengenai alur pembahasan yang dilakukan. Sistematika penulisan dibagi menjadi lima bab utama yang saling berkaitan, dengan rincian sebagai berikut:
+Sistematika penulisan ini merupakan kebulatan seluruh materi penyusunan yang diungkapkan secara garis besar dan dibagi menjadi lima bab. Masing-masing bab terdiri dari beberapa sub bab. Adapun susunan sistematikanya adalah sebagai berikut:
 
-\noindent\textbf{BAB I PENDAHULUAN}\\
-Bab ini menguraikan gambaran umum penelitian yang meliputi latar belakang masalah, rumusan masalah, tujuan penelitian, batasan masalah, manfaat penelitian, serta sistematika penulisan. Bab ini menjadi dasar dalam memahami alasan dan arah penelitian yang dilakukan.
+% Setiap bab dibuat sebagai blok tabularx terpisah agar dapat berpindah halaman
+% secara alami (tabularx tidak dapat dipecah antarhalaman).
+\newcommand{\babsistematika}[3]{%
+  \par\noindent
+  \begin{tabularx}{\textwidth}{@{}p{2.4cm}@{\hspace{0.5cm}}>{\justifying\arraybackslash\setlength{\parindent}{0pt}}X@{}}
+  \textbf{#1} & \textbf{#2}\newline #3
+  \end{tabularx}\par\vspace{0.2cm}}
+\begin{spacing}{2}
+\vspace{0.4cm}
 
-\noindent\textbf{BAB II TINJAUAN PUSTAKA}\\
-Bab ini berisi kajian literatur dan landasan teori yang relevan dengan penelitian. Kajian mencakup perbandingan metode prediksi penjualan dan implementasi sistem POS berbasis \textit{mobile}. Landasan teori menyajikan konsep prediksi, arsitektur LSTM, \textit{framework} Flutter, bahasa Dart, serta layanan Supabase yang digunakan sebagai infrastruktur sistem.
+\babsistematika{BAB I}{PENDAHULUAN}{%
+Bab ini memuat latar belakang masalah yang menjelaskan urgensi prediksi penjualan harian pada aplikasi \textit{Point of Sale} skala usaha kecil, rumusan masalah, tujuan penelitian, batasan masalah, manfaat penelitian, dan sistematika penulisan.}
 
-\noindent\textbf{BAB III METODOLOGI PENELITIAN}\\
-Bab ini menjelaskan tahapan metodologi penelitian yang dilakukan, meliputi jenis dan pendekatan penelitian, teknik pengumpulan data, teknik analisis data, alur penelitian, rancangan sistem menggunakan UML, teknik pengujian, serta indikator keberhasilan penelitian.
+\babsistematika{BAB II}{TINJAUAN PUSTAKA}{%
+Bab ini menyajikan \textit{state of the art} penelitian terdahulu mengenai peramalan penjualan dan sistem \textit{Point of Sale}, serta landasan teori yang meliputi konsep peramalan deret waktu, arsitektur \textit{Long Short-Term Memory}, model pembanding (\textit{baseline}), metrik evaluasi prediksi, \textit{Generative Adversarial Network} dan TimeGAN, teknologi pengembangan aplikasi, serta metode pemodelan dan pengujian perangkat lunak.}
 
-\noindent\textbf{BAB IV HASIL DAN PEMBAHASAN}\\
-Bab ini menyajikan hasil implementasi sistem POS \textit{mobile} beserta layanan API prediksi, tahapan \textit{preprocessing} data, implementasi dan pelatihan model prediksi LSTM beserta eksperimen augmentasi TimeGAN, evaluasi komparatif model terhadap \textit{baseline}, hasil pengujian \textit{Black Box} dan \textit{White Box}, pembahasan temuan penelitian, serta keterbatasan sistem dan penelitian.
+\babsistematika{BAB III}{METODOLOGI PENELITIAN}{%
+Bab ini membahas metodologi penelitian yang digunakan, mencakup sumber data dan proses pengumpulan \textit{dataset} EatsTEDI, variabel penelitian, \textit{preprocessing} data, rancangan sistem berupa diagram UML dan ERD, perancangan antarmuka, rancangan algoritma \textit{Long Short-Term Memory}, serta teknik pengujian dan indikator keberhasilan penelitian.}
 
-\noindent\textbf{BAB V PENUTUP}\\
-Bab ini memuat kesimpulan yang menjawab rumusan masalah dan tujuan penelitian berdasarkan hasil yang diperoleh, serta saran-saran konstruktif untuk pengembangan sistem dan penelitian lanjutan di masa mendatang.
+\babsistematika{BAB IV}{HASIL DAN PEMBAHASAN}{%
+Bab ini membahas hasil implementasi sistem secara menyeluruh, mencakup tampilan antarmuka aplikasi \textit{Point of Sale} dan layanan API prediksi, tahapan \textit{preprocessing} data, implementasi dan pelatihan model \textit{Long Short-Term Memory}, eksperimen augmentasi data sintetis TimeGAN, hasil evaluasi model terhadap \textit{baseline seasonal-naive}, serta hasil pengujian fungsional sistem beserta pembahasan temuan dan keterbatasan penelitian.}
+
+\babsistematika{BAB V}{PENUTUP}{%
+Bab ini menyajikan simpulan dari seluruh proses penelitian berdasarkan hasil yang diperoleh, serta saran untuk pengembangan sistem dan penelitian lanjutan di bidang peramalan penjualan berbasis \textit{deep learning}.}
+\end{spacing}
 
 %%=============================================================
 %% BAB II - TINJAUAN PUSTAKA
