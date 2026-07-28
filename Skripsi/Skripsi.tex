@@ -553,41 +553,37 @@ Karakteristik demikian menjadikan \textit{dataset} EatsTEDI representatif untuk 
 Berdasarkan uraian tersebut, penelitian ini merancang dan membangun aplikasi \textit{Point of Sale} dengan fitur prediksi penjualan harian menggunakan metode \textit{Long Short-Term Memory}. Kontribusi penelitian mencakup tiga aspek. Pertama, perancangan arsitektur aplikasi POS yang mengintegrasikan modul prediksi ke dalam alur kerja transaksi harian sehingga hasil peramalan dapat langsung dimanfaatkan pengelola. Kedua, evaluasi empiris pengaruh augmentasi data sintetis TimeGAN terhadap performa LSTM pada \textit{dataset} penjualan berskala kecil. Ketiga, pembandingan model terhadap \textit{baseline seasonal-naive} pada beberapa horizon peramalan sebagai kontrol metodologis, guna menghasilkan rekomendasi yang jujur mengenai kondisi di mana pendekatan \textit{deep learning} layak diterapkan pada konteks usaha kuliner berskala kecil di Indonesia.
 
 \section{Rumusan Masalah}
-Berdasarkan latar belakang yang telah diuraikan, maka rumusan masalah dalam penelitian ini adalah sebagai berikut:
+Berdasarkan latar belakang yang telah diuraikan, rumusan masalah dalam penelitian ini adalah sebagai berikut:
 \begin{enumerate}
-    \item Bagaimana merancang dan membangun aplikasi \textit{Point of Sale} (POS) dengan fitur prediksi penjualan harian berbasis \textit{mobile} yang dapat digunakan oleh pelaku usaha secara efektif?
-    \item Bagaimana keandalan arsitektur \textit{offline-first} dalam menjamin keberlangsungan pencatatan transaksi kasir pada kondisi konektivitas internet yang tidak stabil?
-    \item Bagaimana menerapkan metode \textit{Long Short-Term Memory} (LSTM) pada aplikasi \textit{Point of Sale} untuk memprediksi penjualan harian berdasarkan data transaksi historis?
-    \item Bagaimana tingkat akurasi hasil prediksi penjualan harian yang dihasilkan oleh metode \textit{Long Short-Term Memory} (LSTM) berdasarkan evaluasi menggunakan metrik kesalahan prediksi?
+    \item Bagaimana merancang dan membangun aplikasi \textit{Point of Sale} yang mengintegrasikan fitur prediksi penjualan harian ke dalam alur kerja transaksi, sehingga hasil peramalan dapat langsung dimanfaatkan oleh pengelola usaha?
+    \item Bagaimana menerapkan model \textit{Long Short-Term Memory} untuk memprediksi penjualan harian pada \textit{dataset} EatsTEDI yang berjumlah 316 titik pengamatan, serta bagaimana pengaruh augmentasi data sintetis \textit{Time-series Generative Adversarial Network} (TimeGAN) terhadap akurasi model tersebut?
+    \item Bagaimana tingkat akurasi model \textit{Long Short-Term Memory} dibandingkan terhadap \textit{baseline seasonal-naive} pada beberapa horizon peramalan?
 \end{enumerate}
 
 \section{Tujuan Penelitian}
-Berdasarkan rumusan masalah yang telah diuraikan, maka tujuan dalam penelitian ini adalah sebagai berikut:
+Sejalan dengan rumusan masalah tersebut, penelitian ini bertujuan untuk:
 \begin{enumerate}
-    \item Merancang dan membangun aplikasi \textit{Point of Sale} (POS) berbasis \textit{mobile} yang dilengkapi dengan fitur prediksi penjualan harian sebagai alat bantu pengelolaan dan analisis penjualan.
-    \item Menguji keandalan arsitektur \textit{offline-first} berbasis Isar DB dan mekanisme sinkronisasi otomatis ke Supabase dalam menjaga keberlangsungan transaksi kasir pada kondisi jaringan tidak stabil.
-    \item Mengimplementasikan metode \textit{Long Short-Term Memory} (LSTM) pada aplikasi \textit{Point of Sale} untuk memprediksi penjualan harian berdasarkan data transaksi historis.
-    \item Mengevaluasi kinerja dan tingkat akurasi metode \textit{Long Short-Term Memory} (LSTM) dalam menghasilkan prediksi penjualan harian menggunakan metrik evaluasi kesalahan prediksi.
+    \item Merancang dan membangun aplikasi \textit{Point of Sale} berbasis \textit{mobile} yang mengintegrasikan fitur prediksi penjualan harian ke dalam alur kerja transaksi, serta menguji fungsionalitasnya melalui pengujian sistem.
+    \item Menerapkan model \textit{Long Short-Term Memory} untuk prediksi penjualan harian pada \textit{dataset} EatsTEDI dan menganalisis pengaruh augmentasi data sintetis TimeGAN terhadap akurasi model pada kondisi data pelatihan yang terbatas.
+    \item Mengukur tingkat akurasi model \textit{Long Short-Term Memory} terhadap \textit{baseline seasonal-naive} pada beberapa horizon peramalan, guna menghasilkan rekomendasi mengenai kondisi kelayakan penerapan pendekatan \textit{deep learning} pada usaha kuliner berskala kecil.
 \end{enumerate}
 
 \section{Batasan Masalah}
-Untuk menghindari meluasnya materi pembahasan, maka penelitian ini dibatasi pada hal-hal berikut:
+Agar penelitian ini terarah dan terukur, ditetapkan batasan sebagai berikut:
 \begin{enumerate}
-    \item Aplikasi dikembangkan menggunakan \textit{framework} Flutter dan difokuskan untuk sistem operasi Android, mengingat dominasi pasar Android pada segmen UMKM lokal.
-    \item Basis data yang digunakan adalah Supabase dengan skema relasional untuk menyimpan data produk, transaksi, dan akun pengguna.
-    \item Algoritma yang digunakan adalah \textit{Long Short-Term Memory} (LSTM) dengan model \textit{univariate} atau \textit{multivariate} terbatas, dan prediksi dilakukan untuk rentang waktu harian.
-    \item Data uji bersumber dari basis data transaksi riil platform EatsTEDI DTEDI Universitas Gadjah Mada dengan periode lebih dari satu tahun. Pola musiman yang diobservasi bersifat kalender akademis (mingguan dan semester), karena cakupan data yang tersedia belum cukup untuk mengamati siklus musiman tahunan penuh secara statistik.
-    \item Proses pelatihan model dan prediksi dilakukan di sisi \textit{server/cloud} menggunakan bahasa Python, sedangkan aplikasi \textit{mobile} bertugas mengirim data transaksi dan menerima hasil prediksi melalui \textit{REST API}.
-    \item Metode penyaji prediksi pada layanan produksi ditentukan berdasarkan hasil evaluasi komparatif, sehingga dapat berbeda dari metode yang menjadi objek kajian utama.
+    \item Sumber data. Data yang digunakan adalah data transaksi platform EatsTEDI pada Departemen Teknik Elektro dan Informatika (DTEDI), Universitas Gadjah Mada, dengan rentang efektif 26 Agustus 2024 sampai dengan 20 Juni 2026 dan menghasilkan 316 hari dengan transaksi tercatat.
+    \item Cakupan variabel. Pemodelan dilakukan secara \textit{univariat} dengan variabel target berupa total nilai penjualan harian. Variabel eksogen seperti kondisi cuaca, promosi, dan harga tidak disertakan karena tidak tersedia pada \textit{dataset}.
+    \item Granularitas prediksi. Prediksi dilakukan pada tingkat agregat penjualan harian, bukan pada tingkat \textit{item} atau kategori produk secara individual.
+    \item Cakupan metode. Metode peramalan yang diimplementasikan dibatasi pada arsitektur \textit{Long Short-Term Memory} dengan \textit{baseline seasonal-naive} sebagai pembanding. Arsitektur lain seperti \textit{Transformer}, \textit{Temporal Fusion Transformer}, maupun model statistik ARIMA/SARIMA tidak menjadi objek pengujian dalam penelitian ini.
+    \item Metode augmentasi. Augmentasi data sintetis dibatasi pada metode TimeGAN. Metode augmentasi lain seperti \textit{jittering}, \textit{window warping}, atau augmentasi domain frekuensi tidak diuji.
+    \item Metrik evaluasi. Evaluasi performa model menggunakan metrik MAE, RMSE, dan MAPE, serta dibandingkan secara relatif terhadap \textit{baseline} melalui rasio kesalahan.
+    \item Cakupan aplikasi. Aplikasi POS dikembangkan pada platform Android menggunakan \textit{framework} Flutter. Pengembangan untuk platform iOS berada di luar cakupan penelitian.
+    \item Mekanisme pelatihan model. Model dilatih secara luring (\textit{offline}) dan hasil pelatihan diintegrasikan ke dalam aplikasi. Penelitian ini tidak mencakup mekanisme pelatihan ulang otomatis (\textit{online} atau \textit{incremental learning}) seiring bertambahnya data transaksi.
+    \item Cakupan pengujian. Pengujian dibatasi pada pengujian fungsionalitas sistem dan pengujian akurasi model. Pengukuran dampak ekonomi penerapan sistem, seperti penurunan biaya persediaan atau tingkat kepuasan pengguna, tidak termasuk dalam ruang lingkup penelitian.
 \end{enumerate}
 
 \section{Manfaat Penelitian}
-Manfaat yang diharapkan dari penelitian ini adalah sebagai berikut:
-\begin{enumerate}
-    \item \textbf{Bagi Pelaku UMKM}: Memberikan aplikasi \textit{Point of Sale} (POS) berbasis \textit{mobile} yang dapat digunakan untuk pencatatan transaksi penjualan dan pengelolaan stok secara digital, serta menyediakan fitur prediksi penjualan harian berbasis algoritma LSTM sebagai alat bantu dalam pengambilan keputusan \textit{restock} dan pengelolaan persediaan barang.
-    \item \textbf{Bagi Akademisi}: Menjadi referensi dan bahan kajian dalam pengembangan penelitian di bidang sistem informasi dan \textit{machine learning}, khususnya penerapan metode LSTM untuk prediksi penjualan harian pada sistem POS berbasis \textit{mobile} di lingkungan UMKM.
-    \item \textbf{Bagi Peneliti}: Menambah pengetahuan dan pengalaman dalam merancang dan membangun aplikasi POS berbasis \textit{mobile} menggunakan \textit{framework} Flutter serta mengimplementasikan algoritma LSTM untuk menyelesaikan permasalahan prediksi penjualan harian berbasis data transaksi UMKM pada studi kasus nyata.
-\end{enumerate}
+Penelitian ini diharapkan memberikan manfaat pada dua tataran. Secara teoritis, penelitian ini menyediakan bukti empiris mengenai performa model \textit{Long Short-Term Memory} pada data penjualan harian berskala kecil dengan karakteristik deret tidak sinambung, suatu kondisi yang selama ini kurang terwakili dalam literatur karena sebagian besar penelitian menggunakan \textit{dataset} berskala besar dan sinambung, sekaligus menguji efektivitas augmentasi data sintetis TimeGAN sebagai upaya mengatasi keterbatasan jumlah sampel pelatihan. Penelitian ini juga menegaskan pentingnya penyertaan \textit{baseline} heuristik sederhana seperti \textit{seasonal-naive} sebagai kontrol metodologis dalam penelitian peramalan berbasis \textit{deep learning}, sehingga dapat menjadi rujukan bagi kajian selanjutnya yang mengintegrasikan model peramalan ke dalam aplikasi transaksional. Secara praktis, penelitian ini menghasilkan aplikasi \textit{Point of Sale} yang tidak hanya mencatat transaksi tetapi juga menyajikan estimasi penjualan harian sebagai bahan pertimbangan pengelola dalam menentukan volume produksi, pengadaan bahan baku, dan penjadwalan tenaga kerja; memberikan gambaran mengenai pola permintaan kantin institusional yang terkait dengan ritme kalender akademik; serta menyediakan rujukan teknis bagi pengembang perangkat lunak mengenai arsitektur penyatuan model \textit{machine learning} ke dalam aplikasi \textit{mobile}. Lebih lanjut, hasil perbandingan terhadap \textit{baseline} sederhana diharapkan menjadi rekomendasi berbasis bukti bagi pelaku usaha mikro, kecil, dan menengah mengenai kondisi kelayakan penerapan pendekatan \textit{deep learning} pada skala usaha kecil, sehingga sumber daya pengembangan dapat dialokasikan secara proporsional.
 
 \section{Sistematika Penulisan}
 Sistematika penulisan skripsi ini disusun untuk memberikan gambaran secara menyeluruh mengenai alur pembahasan yang dilakukan. Sistematika penulisan dibagi menjadi lima bab utama yang saling berkaitan, dengan rincian sebagai berikut:
