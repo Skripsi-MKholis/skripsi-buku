@@ -1383,60 +1383,176 @@ Tabel~\ref{tab:uc-profil} menunjukkan bahwa identitas toko dapat disesuaikan sew
 
 \noindent\textbf{b.~~\textit{Activity Diagram}}
 
-\textit{Activity Diagram} merupakan gambaran visual yang digunakan untuk menggambarkan serangkaian aktivitas atau proses yang terjadi di dalam sistem. Diagram ini memudahkan penjelasan mengenai logika prosedural, alur kerja, serta titik percabangan keputusan pada aplikasi \textit{Point of Sale} yang dilengkapi fitur prediksi penjualan harian. Pada penelitian ini, pemodelan \textit{activity diagram} difokuskan pada empat alur kerja yang paling representatif terhadap karakteristik sistem, yaitu pengelolaan katalog produk sebagai sumber data penjualan, transaksi kasir sebagai penghasil data utama, penyajian prediksi penjualan harian sebagai inti penelitian, serta sinkronisasi data sebagai penopang keandalan pencatatan. Adapun rincian masing-masing \textit{activity diagram} diuraikan sebagai berikut.
+\textit{Activity Diagram} merupakan gambaran visual yang digunakan untuk menggambarkan serangkaian aktivitas atau proses yang terjadi di dalam sistem. Diagram ini memudahkan penjelasan mengenai logika prosedural, alur kerja, serta titik percabangan keputusan pada aplikasi \textit{Point of Sale} yang dilengkapi fitur prediksi penjualan harian. Pada penelitian ini disusun satu \textit{activity diagram} untuk setiap \textit{use case} yang telah dirancang sebelumnya, sehingga seluruh fungsi sistem memiliki gambaran alur kerja yang lengkap. Adapun rincian masing-masing \textit{activity diagram} diuraikan sebagai berikut.
 
-\noindent 1)~~\textit{Activity Diagram} Mengelola Katalog Produk
+\noindent 1)~~\textit{Activity Diagram} Registrasi Toko Baru
 
-Pengelolaan katalog produk digunakan untuk memelihara data produk dan persediaan yang menjadi sumber masukan bagi pencatatan transaksi penjualan. \textit{Activity diagram} staf toko dalam mengelola katalog produk dapat dilihat pada Gambar~\ref{fig:act-produk}.
+Registrasi toko baru digunakan untuk mendaftarkan identitas toko beserta akun pemilik pada saat sistem pertama kali digunakan. \textit{Activity diagram} tersebut dapat dilihat pada Gambar~\ref{fig:activity-registrasi}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,height=0.62\textheight,keepaspectratio]{activity_registrasi.png}
+    \caption{\textit{Activity Diagram} Registrasi Toko Baru}
+    \label{fig:activity-registrasi}
+\end{figure}
+
+Gambar~\ref{fig:activity-registrasi} menunjukkan proses calon pemilik dalam mendaftarkan toko baru pada sistem. Calon pemilik membuka halaman registrasi dan sistem menampilkan formulir registrasi. Calon pemilik kemudian mengisi data toko beserta data akun pemilik. Sistem memeriksa apakah data yang dimasukkan telah valid. Apabila belum valid, calon pemilik melihat pesan kesalahan dan memperbaiki data masukan. Apabila telah valid, sistem menyimpan data toko dan akun Owner, lalu menampilkan konfirmasi pendaftaran, sehingga calon pemilik dapat mulai menggunakan aplikasi.
+
+\noindent 2)~~\textit{Activity Diagram} \textit{Login} Akun
+
+\textit{Login} akun digunakan untuk memverifikasi identitas pengguna sekaligus menentukan hak akses yang diberikan sesuai perannya. \textit{Activity diagram} tersebut dapat dilihat pada Gambar~\ref{fig:activity-login}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,height=0.62\textheight,keepaspectratio]{activity_login.png}
+    \caption{\textit{Activity Diagram} \textit{Login} Akun}
+    \label{fig:activity-login}
+\end{figure}
+
+Gambar~\ref{fig:activity-login} menunjukkan proses pengguna dalam melakukan autentikasi pada sistem. Pengguna membuka halaman \textit{login} dan sistem menampilkan formulir \textit{login}. Pengguna kemudian memasukkan email dan kata sandi. Sistem memeriksa apakah kredensial yang dimasukkan sesuai. Apabila tidak sesuai, pengguna melihat pesan kesalahan autentikasi dan memasukkan kembali kredensialnya. Apabila sesuai, sistem memuat data toko beserta hak akses peran, lalu menampilkan dasbor sesuai peran, sehingga pengguna dapat mengakses fungsi yang menjadi kewenangannya.
+
+\noindent 3)~~\textit{Activity Diagram} Mengelola Katalog Produk
+
+Pengelolaan katalog produk digunakan untuk memelihara data produk dan persediaan yang menjadi sumber masukan bagi pencatatan transaksi penjualan. \textit{Activity diagram} tersebut dapat dilihat pada Gambar~\ref{fig:activity-produk}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth,height=0.62\textheight,keepaspectratio]{activity_produk.png}
     \caption{\textit{Activity Diagram} Mengelola Katalog Produk}
-    \label{fig:act-produk}
+    \label{fig:activity-produk}
 \end{figure}
 
-Gambar~\ref{fig:act-produk} menunjukkan proses staf toko dalam mengelola katalog produk pada sistem. Staf toko membuka halaman katalog produk dan sistem menampilkan daftar produk. Staf toko kemudian memilih aksi tambah, ubah, atau hapus. Apabila aksi yang dipilih bukan penghapusan, staf toko mengisi data produk pada formulir yang disediakan. Apabila aksi yang dipilih adalah penghapusan, sistem menandai produk tersebut sebagai terhapus melalui skema \textit{soft delete}. Sistem kemudian menyimpan perubahan ke basis data lokal Isar DB dan mencatat mutasi stok, lalu menyinkronkan data ke Supabase ketika koneksi tersedia, sehingga staf toko dapat melihat katalog produk yang telah diperbarui.
+Gambar~\ref{fig:activity-produk} menunjukkan proses staf toko dalam mengelola katalog produk pada sistem. Staf toko membuka halaman katalog produk dan sistem menampilkan daftar produk. Staf toko kemudian memilih aksi tambah, ubah, atau hapus. Apabila aksi yang dipilih bukan penghapusan, staf toko mengisi data produk pada formulir yang disediakan. Apabila aksi yang dipilih adalah penghapusan, sistem menandai produk tersebut sebagai terhapus melalui skema \textit{soft delete}. Sistem kemudian menyimpan perubahan ke basis data lokal Isar DB dan mencatat mutasi stok, lalu menyinkronkan data ke Supabase ketika koneksi tersedia, sehingga staf toko dapat melihat katalog produk yang telah diperbarui.
 
-\noindent 2)~~\textit{Activity Diagram} Melakukan \textit{Checkout}
+\noindent 4)~~\textit{Activity Diagram} Mengelola Kategori
 
-Transaksi \textit{checkout} digunakan untuk memproses penjualan di kasir sekaligus menghasilkan data deret waktu yang menjadi masukan model prediksi. \textit{Activity diagram} kasir dalam melakukan \textit{checkout} dapat dilihat pada Gambar~\ref{fig:act-checkout}.
+Pengelolaan kategori digunakan untuk mengatur pengelompokan produk agar katalog toko lebih mudah ditelusuri saat transaksi berlangsung. \textit{Activity diagram} tersebut dapat dilihat pada Gambar~\ref{fig:activity-kategori}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,height=0.62\textheight,keepaspectratio]{activity_kategori.png}
+    \caption{\textit{Activity Diagram} Mengelola Kategori}
+    \label{fig:activity-kategori}
+\end{figure}
+
+Gambar~\ref{fig:activity-kategori} menunjukkan proses staf toko dalam mengelola kategori produk pada sistem. Staf toko membuka halaman kategori produk dan sistem menampilkan daftar kategori. Staf toko kemudian memilih aksi tambah, ubah, atau hapus, lalu mengisi nama kategori yang dikehendaki. Sistem menyimpan kategori tersebut ke basis data lokal Isar DB dan mengelompokkan produk sesuai kategorinya. Setelah penyimpanan selesai, sistem menyinkronkan data kategori ke Supabase ketika koneksi tersedia, sehingga staf toko dapat melihat katalog produk yang telah terkelompok.
+
+\noindent 5)~~\textit{Activity Diagram} Melakukan \textit{Checkout}
+
+Transaksi \textit{checkout} digunakan untuk memproses penjualan di kasir sekaligus menghasilkan data deret waktu yang menjadi masukan model prediksi. \textit{Activity diagram} tersebut dapat dilihat pada Gambar~\ref{fig:activity-checkout}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth,height=0.62\textheight,keepaspectratio]{activity_checkout.png}
     \caption{\textit{Activity Diagram} Melakukan \textit{Checkout}}
-    \label{fig:act-checkout}
+    \label{fig:activity-checkout}
 \end{figure}
 
-Gambar~\ref{fig:act-checkout} menunjukkan proses kasir dalam melayani transaksi penjualan pada sistem. Kasir membuka layar kasir dan sistem menampilkan katalog produk. Kasir kemudian memilih produk yang dibeli ke dalam keranjang, lalu sistem menghitung subtotal keranjang. Sistem memeriksa apakah keranjang telah selesai disusun. Apabila belum selesai, kasir mengulang pemilihan produk hingga seluruh pesanan pelanggan tercatat. Setelah keranjang dinyatakan selesai, kasir memilih metode pembayaran dan memasukkan nominal yang diterima, lalu sistem menghitung kembalian. Sistem kemudian menyimpan transaksi ke basis data lokal Isar DB, memotong stok produk yang terjual, dan menampilkan konfirmasi, sehingga kasir dapat melihat transaksi yang telah berhasil disimpan.
+Gambar~\ref{fig:activity-checkout} menunjukkan proses kasir dalam melayani transaksi penjualan pada sistem. Kasir membuka layar kasir dan sistem menampilkan katalog produk. Kasir kemudian memilih produk yang dibeli ke dalam keranjang, lalu sistem menghitung subtotal keranjang. Sistem memeriksa apakah keranjang telah selesai disusun. Apabila belum selesai, kasir mengulang pemilihan produk hingga seluruh pesanan pelanggan tercatat. Setelah keranjang dinyatakan selesai, kasir memilih metode pembayaran dan memasukkan nominal yang diterima, lalu sistem menghitung kembalian. Sistem kemudian menyimpan transaksi ke basis data lokal Isar DB, memotong stok produk yang terjual, dan menampilkan konfirmasi, sehingga kasir dapat melihat transaksi yang telah berhasil disimpan.
 
-\noindent 3)~~\textit{Activity Diagram} Melihat Prediksi Penjualan Harian
+\noindent 6)~~\textit{Activity Diagram} Mengaudit Riwayat Stok
 
-Penyajian prediksi penjualan harian digunakan untuk menampilkan hasil peramalan model \textit{Long Short-Term Memory} kepada pengelola di dalam aplikasi. \textit{Activity diagram} pengguna dalam melihat prediksi penjualan harian dapat dilihat pada Gambar~\ref{fig:act-ai}.
+Audit riwayat stok digunakan untuk menelusuri catatan mutasi persediaan sebagai bahan pemeriksaan inventaris toko. \textit{Activity diagram} tersebut dapat dilihat pada Gambar~\ref{fig:activity-stok}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,height=0.62\textheight,keepaspectratio]{activity_stok.png}
+    \caption{\textit{Activity Diagram} Mengaudit Riwayat Stok}
+    \label{fig:activity-stok}
+\end{figure}
+
+Gambar~\ref{fig:activity-stok} menunjukkan proses staf toko dalam mengaudit riwayat stok pada sistem. Staf toko membuka halaman riwayat stok dan sistem mengambil \textit{log} mutasi stok dari basis data. Staf toko kemudian memilih rentang waktu dan produk yang ingin ditelusuri, lalu sistem menyaring data sesuai kriteria tersebut. Sistem menampilkan daftar mutasi stok beserta waktu dan penyebab perubahannya, sehingga staf toko dapat menelaah setiap perubahan persediaan yang pernah terjadi.
+
+\noindent 7)~~\textit{Activity Diagram} Melihat \textit{Dashboard}
+
+Dasbor digunakan untuk menyajikan ringkasan performa penjualan toko dalam satu tampilan yang mudah dipantau. \textit{Activity diagram} tersebut dapat dilihat pada Gambar~\ref{fig:activity-dashboard}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,height=0.62\textheight,keepaspectratio]{activity_dashboard.png}
+    \caption{\textit{Activity Diagram} Melihat \textit{Dashboard}}
+    \label{fig:activity-dashboard}
+\end{figure}
+
+Gambar~\ref{fig:activity-dashboard} menunjukkan proses pengguna dalam memantau ringkasan performa toko pada sistem. Pengguna membuka halaman dasbor dan sistem mengagregasi data transaksi beserta persediaan. Pengguna kemudian memilih rentang waktu laporan, lalu sistem menghitung omzet, jumlah transaksi, dan jumlah produk berstok rendah. Sistem menampilkan hasil perhitungan tersebut dalam bentuk kartu statistik dan grafik penjualan, sehingga pengguna dapat memantau kondisi toko tanpa menelusuri data transaksi satu per satu.
+
+\noindent 8)~~\textit{Activity Diagram} Melihat Prediksi Penjualan Harian
+
+Penyajian prediksi penjualan harian digunakan untuk menampilkan hasil peramalan model \textit{Long Short-Term Memory} kepada pengelola di dalam aplikasi. \textit{Activity diagram} tersebut dapat dilihat pada Gambar~\ref{fig:activity-ai}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth,height=0.62\textheight,keepaspectratio]{activity_ai.png}
     \caption{\textit{Activity Diagram} Melihat Prediksi Penjualan Harian}
-    \label{fig:act-ai}
+    \label{fig:activity-ai}
 \end{figure}
 
-Gambar~\ref{fig:act-ai} menunjukkan proses pengguna dalam memperoleh hasil prediksi penjualan harian pada sistem. Pengguna membuka halaman prediksi penjualan dan sistem mengagregasi riwayat transaksi harian. Sistem kemudian memeriksa apakah panjang sekuens data telah mencukupi syarat minimum model. Apabila belum mencukupi, sistem menampilkan peringatan \textit{cold start} beserta estimasi berbasis pola umum. Apabila telah mencukupi, layanan prediksi memuat model LSTM, menerima data yang dikirimkan, lalu menghasilkan prediksi penjualan harian. Sistem kemudian menyajikan kartu estimasi dan grafik peramalan serta menyimpan \textit{snapshot} riwayat analisis, sehingga pengguna dapat melihat hasil peramalan beserta riwayatnya.
+Gambar~\ref{fig:activity-ai} menunjukkan proses pengguna dalam memperoleh hasil prediksi penjualan harian pada sistem. Pengguna membuka halaman prediksi penjualan dan sistem mengagregasi riwayat transaksi harian. Sistem kemudian memeriksa apakah panjang sekuens data telah mencukupi syarat minimum model. Apabila belum mencukupi, sistem menampilkan peringatan \textit{cold start} beserta estimasi berbasis pola umum. Apabila telah mencukupi, layanan prediksi memuat model LSTM, menerima data yang dikirimkan, lalu menghasilkan prediksi penjualan harian. Sistem kemudian menyajikan kartu estimasi dan grafik peramalan serta menyimpan \textit{snapshot} riwayat analisis, sehingga pengguna dapat melihat hasil peramalan beserta riwayatnya.
 
-\noindent 4)~~\textit{Activity Diagram} Sinkronisasi Data
+\noindent 9)~~\textit{Activity Diagram} Melihat Riwayat Analisis
 
-Sinkronisasi data digunakan untuk menjaga keutuhan pencatatan transaksi ketika perangkat sempat kehilangan koneksi internet. \textit{Activity diagram} proses sinkronisasi data dapat dilihat pada Gambar~\ref{fig:act-sync}.
+Riwayat analisis digunakan untuk menelusuri kembali hasil prediksi yang pernah dijalankan beserta sumber komputasinya. \textit{Activity diagram} tersebut dapat dilihat pada Gambar~\ref{fig:activity-riwayat}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,height=0.62\textheight,keepaspectratio]{activity_riwayat.png}
+    \caption{\textit{Activity Diagram} Melihat Riwayat Analisis}
+    \label{fig:activity-riwayat}
+\end{figure}
+
+Gambar~\ref{fig:activity-riwayat} menunjukkan proses pengguna dalam menelusuri riwayat analisis pada sistem. Pengguna membuka halaman riwayat analisis dan sistem mengambil \textit{snapshot} analisis yang telah tersimpan. Sistem kemudian memeriksa apakah riwayat analisis tersedia. Apabila belum tersedia, pengguna melihat keterangan bahwa riwayat masih kosong. Apabila tersedia, sistem menampilkan daftar riwayat beserta waktu pelaksanaan, estimasi yang dihasilkan, dan sumber komputasinya, sehingga pengguna dapat menelaah hasil analisis sebelumnya tanpa menjalankan ulang prediksi.
+
+\noindent 10)~~\textit{Activity Diagram} Sinkronisasi Data
+
+Sinkronisasi data digunakan untuk menjaga keutuhan pencatatan transaksi ketika perangkat sempat kehilangan koneksi internet. \textit{Activity diagram} tersebut dapat dilihat pada Gambar~\ref{fig:activity-sync}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth,height=0.62\textheight,keepaspectratio]{activity_sync.png}
     \caption{\textit{Activity Diagram} Sinkronisasi Data}
-    \label{fig:act-sync}
+    \label{fig:activity-sync}
 \end{figure}
 
-Gambar~\ref{fig:act-sync} menunjukkan proses sinkronisasi data dari aplikasi klien ke basis data \textit{cloud} pada sistem. Aplikasi klien mendeteksi perubahan status konektivitas, kemudian memeriksa apakah koneksi internet telah tersedia. Apabila belum tersedia, aplikasi klien menunggu hingga koneksi kembali terdeteksi. Setelah koneksi tersedia, aplikasi klien menjalankan sinkronisasi di latar belakang dan menyeleksi data yang belum tersinkron. Aplikasi klien mengunggah data kategori dan produk, lalu basis data \textit{cloud} menyimpannya. Aplikasi klien kemudian memanggil prosedur RPC \textit{create\_transaction\_v4} dan basis data \textit{cloud} mencatat nota beserta pemotongan stok dalam satu transaksi. Setelah pengunggahan selesai, aplikasi klien menandai data lokal telah tersinkron, sehingga data pada perangkat dan \textit{cloud} menjadi selaras.
+Gambar~\ref{fig:activity-sync} menunjukkan proses sinkronisasi data dari aplikasi klien ke basis data \textit{cloud} pada sistem. Aplikasi klien mendeteksi perubahan status konektivitas, kemudian memeriksa apakah koneksi internet telah tersedia. Apabila belum tersedia, aplikasi klien menunggu hingga koneksi kembali terdeteksi. Setelah koneksi tersedia, aplikasi klien menjalankan sinkronisasi di latar belakang dan menyeleksi data yang belum tersinkron. Aplikasi klien mengunggah data kategori dan produk, lalu basis data \textit{cloud} menyimpannya. Aplikasi klien kemudian memanggil prosedur RPC \textit{create\_transaction\_v4} dan basis data \textit{cloud} mencatat nota beserta pemotongan stok dalam satu transaksi. Setelah pengunggahan selesai, aplikasi klien menandai data lokal telah tersinkron, sehingga data pada perangkat dan \textit{cloud} menjadi selaras.
 
+\noindent 11)~~\textit{Activity Diagram} Kirim \textit{Broadcast} Notifikasi
+
+Pengiriman \textit{broadcast} notifikasi digunakan untuk menyampaikan pemberitahuan kepada seluruh staf toko secara serentak. \textit{Activity diagram} tersebut dapat dilihat pada Gambar~\ref{fig:activity-broadcast}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,height=0.62\textheight,keepaspectratio]{activity_broadcast.png}
+    \caption{\textit{Activity Diagram} Kirim \textit{Broadcast} Notifikasi}
+    \label{fig:activity-broadcast}
+\end{figure}
+
+Gambar~\ref{fig:activity-broadcast} menunjukkan proses staf toko dalam mengirimkan notifikasi pada sistem. Staf toko membuka halaman notifikasi dan sistem menampilkan formulir pesan. Staf toko kemudian menyusun isi pesan yang akan disampaikan, lalu sistem mengirimkan pesan tersebut melalui layanan \textit{Firebase Cloud Messaging}. Setelah pengiriman selesai, sistem menampilkan status pengiriman, sehingga staf toko dapat melihat konfirmasi bahwa pesan telah diterima perangkat staf lain.
+
+\noindent 12)~~\textit{Activity Diagram} Mengelola Karyawan
+
+Pengelolaan karyawan digunakan untuk mendaftarkan staf kasir serta mengatur peran yang diberikan kepada masing-masing staf. \textit{Activity diagram} tersebut dapat dilihat pada Gambar~\ref{fig:activity-karyawan}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,height=0.62\textheight,keepaspectratio]{activity_karyawan.png}
+    \caption{\textit{Activity Diagram} Mengelola Karyawan}
+    \label{fig:activity-karyawan}
+\end{figure}
+
+Gambar~\ref{fig:activity-karyawan} menunjukkan proses Owner dalam mengelola data staf toko pada sistem. Owner membuka halaman manajemen karyawan dan sistem menampilkan daftar staf toko. Owner kemudian menambah staf baru atau mengubah peran staf yang sudah ada. Sistem memeriksa apakah data staf yang dimasukkan telah valid. Apabila belum valid, Owner melihat pesan kesalahan dan memperbaiki masukannya. Apabila telah valid, sistem menyimpan data staf beserta perannya, lalu menyinkronkan data tersebut ke Supabase, sehingga Owner dapat melihat daftar staf yang telah diperbarui.
+
+\noindent 13)~~\textit{Activity Diagram} Mengatur Profil Toko
+
+Pengaturan profil toko digunakan untuk memperbarui identitas toko yang ditampilkan pada aplikasi dan bukti transaksi. \textit{Activity diagram} tersebut dapat dilihat pada Gambar~\ref{fig:activity-profil}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,height=0.62\textheight,keepaspectratio]{activity_profil.png}
+    \caption{\textit{Activity Diagram} Mengatur Profil Toko}
+    \label{fig:activity-profil}
+\end{figure}
+
+Gambar~\ref{fig:activity-profil} menunjukkan proses Owner dalam memperbarui identitas toko pada sistem. Owner membuka halaman profil toko dan sistem menampilkan data identitas toko yang berlaku. Owner kemudian mengubah nama, alamat, atau logo toko sesuai kebutuhan, lalu sistem menyimpan perubahan tersebut. Setelah penyimpanan selesai, sistem memperbarui tampilan aplikasi dan format bukti transaksi, sehingga Owner dapat melihat identitas toko yang telah diperbarui pada seluruh halaman aplikasi.
 
 \noindent\textbf{c.~~\textit{Class Diagram}}
 
