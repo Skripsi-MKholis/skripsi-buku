@@ -605,7 +605,7 @@ Bab ini memuat latar belakang masalah yang menjelaskan urgensi prediksi penjuala
 Bab ini menyajikan \textit{state of the art} penelitian terdahulu mengenai peramalan penjualan dan sistem \textit{Point of Sale}, serta landasan teori yang meliputi konsep peramalan deret waktu, arsitektur \textit{Long Short-Term Memory}, model pembanding (\textit{baseline}), metrik evaluasi prediksi, \textit{Generative Adversarial Network} dan TimeGAN, teknologi pengembangan aplikasi, serta metode pemodelan dan pengujian perangkat lunak.}
 
 \babsistematika{BAB III}{METODOLOGI PENELITIAN}{%
-Bab ini membahas metodologi penelitian yang digunakan, mencakup sumber data dan proses pengumpulan \textit{dataset} EatsTEDI, variabel penelitian, \textit{preprocessing} data, rancangan sistem berupa diagram UML dan ERD, perancangan antarmuka, rancangan algoritma \textit{Long Short-Term Memory}, serta teknik pengujian dan indikator keberhasilan penelitian.}
+Bab ini membahas metodologi penelitian yang digunakan, mencakup sumber data dan proses pengumpulan \textit{dataset} EatsTEDI, variabel penelitian, \textit{preprocessing} data, rancangan sistem berupa diagram UML, perancangan antarmuka, rancangan algoritma \textit{Long Short-Term Memory}, serta teknik pengujian dan indikator keberhasilan penelitian.}
 
 \babsistematika{BAB IV}{HASIL DAN PEMBAHASAN}{%
 Bab ini membahas hasil implementasi sistem secara menyeluruh, mencakup tampilan antarmuka aplikasi \textit{Point of Sale} dan layanan API prediksi, tahapan \textit{preprocessing} data, implementasi dan pelatihan model \textit{Long Short-Term Memory}, eksperimen augmentasi data sintetis TimeGAN, hasil evaluasi model terhadap \textit{baseline seasonal-naive}, serta hasil pengujian fungsional sistem beserta pembahasan temuan dan keterbatasan penelitian.}
@@ -1060,7 +1060,7 @@ Perangkat lunak yang digunakan dalam pengembangan dan pengujian sistem ini dapat
 9 & Layanan Notifikasi & Firebase & Pengiriman notifikasi dan pencatatan telemetri aplikasi \\ \hline
 10 & Lingkungan Analisis & Jupyter Notebook & Eksplorasi data dan pelatihan model prediksi \\ \hline
 11 & Platform \textit{Hosting} & Hugging Face & Tempat layanan API prediksi di-\textit{deploy} \\ \hline
-12 & Alat Pemodelan & Draw.io dan Mermaid.js & Pembuatan diagram UML, ERD, dan arsitektur sistem \\ \hline
+12 & Alat Pemodelan & Draw.io dan Mermaid.js & Pembuatan diagram UML dan arsitektur sistem \\ \hline
 \end{xltabular}
 }
 
@@ -1089,7 +1089,7 @@ Penjelasan mengenai empat komponen utama dalam arsitektur sistem adalah sebagai 
 
 \subsection{Pemodelan Sistem \textit{Unified Modeling Language} (UML)}
 
-Pemodelan sistem merupakan tahapan dalam perancangan yang digunakan untuk menggambarkan interaksi antara pengguna dan sistem serta alur proses yang terjadi di dalam aplikasi \textit{Point of Sale}. Pemodelan dilakukan menggunakan pendekatan \textit{Unified Modeling Language} (UML) agar rancangan sistem dapat direpresentasikan secara visual dan terstruktur. Pada penelitian ini, pemodelan sistem meliputi \textit{use case diagram}, \textit{activity diagram}, \textit{class diagram}, serta \textit{entity relationship diagram} (ERD).
+Pemodelan sistem merupakan tahapan dalam perancangan yang digunakan untuk menggambarkan interaksi antara pengguna dan sistem serta alur proses yang terjadi di dalam aplikasi \textit{Point of Sale}. Pemodelan dilakukan menggunakan pendekatan \textit{Unified Modeling Language} (UML) agar rancangan sistem dapat direpresentasikan secara visual dan terstruktur. Pada penelitian ini, pemodelan sistem meliputi \textit{use case diagram} dan \textit{activity diagram}.
 
 \noindent\textbf{a.~~\textit{Use Case Diagram}}
 
@@ -1554,72 +1554,6 @@ Pengaturan profil toko digunakan untuk memperbarui identitas toko yang ditampilk
 
 Gambar~\ref{fig:activity-profil} menunjukkan proses Owner dalam memperbarui identitas toko pada sistem. Owner membuka halaman profil toko dan sistem menampilkan data identitas toko yang berlaku. Owner kemudian mengubah nama, alamat, atau logo toko sesuai kebutuhan, lalu sistem menyimpan perubahan tersebut. Setelah penyimpanan selesai, sistem memperbarui tampilan aplikasi dan format bukti transaksi, sehingga Owner dapat melihat identitas toko yang telah diperbarui pada seluruh halaman aplikasi.
 
-\noindent\textbf{c.~~\textit{Class Diagram}}
-
-
-\textit{Class Diagram} menggambarkan struktur sistem dari segi pendefinisian kelas-kelas yang akan dibangun beserta atribut dan metodenya, serta hubungan relasi asosiasi antar-kelas. Pada aplikasi Parzello POS Mobile, rancangan kelas didasarkan pada koleksi basis data lokal Isar DB yang digunakan untuk mendukung penyimpanan \textit{offline-first}. Struktur kelas-kelas ini disajikan pada Gambar~\ref{fig:class_diagram}.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.92\textwidth]{../Rancangan/Class Diagram/Class Diagram.drawio.png}
-    \caption{Class Diagram Sistem POS}
-    \label{fig:class_diagram}
-\end{figure}
-
-Penjelasan mengenai kelas-kelas utama dalam sistem adalah sebagai berikut:
-\begin{enumerate}
-    \item \textbf{Store}: Merepresentasikan informasi toko/outlet, memiliki relasi satu-ke-banyak dengan Kategori, Produk, dan Transaksi.
-    \item \textbf{Category}: Mengelompokkan produk ke dalam kategori tertentu.
-    \item \textbf{Product}: Menyimpan informasi detail produk termasuk nama, harga jual, harga modal, dan stok.
-    \item \textbf{TransactionLocal}: Menyimpan rangkuman transaksi penjualan kasir di perangkat klien.
-    \item \textbf{TransactionItemLocal}: Menyimpan baris item produk detail dari setiap transaksi belanja.
-\end{enumerate}
-
-\noindent\textbf{d.~~\textit{Entity Relationship Diagram} (ERD)}
-
-
-Basis data sistem POS dirancang secara hibrida menggunakan Supabase PostgreSQL untuk penyimpanan \textit{cloud} dan Isar DB untuk penyimpanan lokal di perangkat \textit{mobile}. Skema basis data \textit{cloud} terdiri dari sembilan entitas utama yang saling berelasi sebagaimana diilustrasikan pada Gambar \ref{fig:erd}.
-\begin{landscape}
-\begin{figure}[p]
-    \centering
-    \includegraphics[width=1.0\linewidth, height=0.92\textheight, keepaspectratio]{erd_new}
-    \caption{\textit{Entity Relationship Diagram} (ERD) Sistem POS}
-    \label{fig:erd}
-\end{figure}
-\end{landscape}
-
-Entitas \textit{stores} menjadi entitas induk yang berelasi dengan seluruh entitas lainnya. Entitas \textit{store\_members} mengelola hak akses berbasis peran (\textit{Role-Based Access Control}/RBAC) untuk Owner dan Kasir. Katalog produk dikelola melalui entitas \textit{products} dan \textit{categories}, sedangkan data transaksi disimpan pada entitas \textit{transactions} dan \textit{transaction\_items}. Riwayat perubahan stok dicatat pada entitas \textit{stock\_history}, sementara entitas \textit{notifications} mendukung sistem notifikasi. Adapun hasil analisis fitur AI \textit{Smart Analytics} disimpan sebagai riwayat \textit{snapshot} pada entitas \textit{smart\_analytics\_snapshots}. Daftar seluruh tabel basis data yang digunakan dirangkum pada Tabel \ref{tab:database}.
-
-\begin{table}[H]
-\setstretch{1.2}
-\centering
-\caption{Daftar Tabel Basis Data POS}
-\label{tab:database}
-\begin{tabularx}{\textwidth}{|c|l|X|}
-\hline
-\textbf{No.} & \textbf{Nama Tabel} & \textbf{Deskripsi} \\
-\hline
-1 & \textit{stores} & Menyimpan data identitas dan konfigurasi outlet toko \textit{merchant}. \\
-\hline
-2 & \textit{store\_members} & Mengelola hak akses dan peran staf (Owner/Kasir) pada setiap toko. \\
-\hline
-3 & \textit{categories} & Menyimpan kategori pengelompokan produk atau menu dagangan. \\
-\hline
-4 & \textit{products} & Menyimpan katalog produk beserta harga, stok, dan data SKU/\textit{barcode}. \\
-\hline
-5 & \textit{transactions} & Menyimpan data nota transaksi penjualan kasir sebagai tabel induk. \\
-\hline
-6 & \textit{transaction\_items} & Menyimpan rincian produk yang dibeli dalam setiap transaksi. \\
-\hline
-7 & \textit{stock\_history} & Mencatat \textit{log} audit perubahan stok masuk dan keluar produk. \\
-\hline
-8 & \textit{notifications} & Menyimpan pesan notifikasi sistem dan \textit{broadcast} antar staf toko. \\
-\hline
-9 & \textit{smart\_analytics\_snapshots} & Menyimpan riwayat \textit{snapshot} hasil analitik prediksi LSTM setiap kali fitur \textit{Smart Analytics} dijalankan. \\
-\hline
-\end{tabularx}
-\end{table}
-
 \subsection{Perancangan Antarmuka Pengguna (\textit{User Interface})}
 
 
@@ -1797,7 +1731,7 @@ Alur penelitian ini dirancang secara sistematis untuk membangun sistem \textit{P
     \label{fig:alur_penelitian}
 \end{figure}
 
-Pada \textbf{Fase Pengembangan dan Implementasi Sistem POS}, penelitian diawali dengan analisis kebutuhan melalui observasi langsung dan identifikasi permasalahan pada mitra EatsTEDI. Selanjutnya dilakukan perancangan sistem meliputi arsitektur \textit{offline-first}, desain basis data relasional (Supabase PostgreSQL dan Isar DB), serta perancangan \textit{Use Case Diagram}, \textit{Activity Diagram}, ERD, dan antarmuka pengguna. Setelah tahap perancangan, sistem POS dikembangkan menggunakan Flutter sebagai \textit{frontend}, Supabase sebagai basis data \textit{cloud}, Isar DB sebagai basis data lokal, dan layanan prediksi penjualan Python berbasis Flask yang di-\textit{deploy} pada platform Hugging Face untuk pengolahan modul AI. Aplikasi yang telah dibangun kemudian diimplementasikan dan diujicobakan secara fungsional pada mitra EatsTEDI untuk menguji kesesuaian alur transaksi kasir dan penyajian hasil prediksi kepada pengguna. Perlu ditegaskan bahwa data yang digunakan untuk melatih dan mengevaluasi model prediksi pada penelitian ini \textbf{bukan} berasal dari aplikasi Parzello POS yang baru dibangun tersebut, melainkan berupa data sekunder historis yang bersumber dari platform EatsTEDI yang telah beroperasi sebelumnya (\textit{dump} SQL \texttt{eatstedi-20260621-010820.sql}), mencakup rentang waktu 24 Agustus 2024 s.d. 20 Juni 2026. Dengan demikian, aplikasi yang dibangun dalam penelitian ini berperan sebagai wadah penyajian hasil prediksi dan objek pengujian fungsional, sedangkan data latih model prediksi diperoleh dari riwayat transaksi mitra yang sudah ada jauh sebelum penelitian ini dimulai.
+Pada \textbf{Fase Pengembangan dan Implementasi Sistem POS}, penelitian diawali dengan analisis kebutuhan melalui observasi langsung dan identifikasi permasalahan pada mitra EatsTEDI. Selanjutnya dilakukan perancangan sistem meliputi arsitektur \textit{offline-first}, desain basis data relasional (Supabase PostgreSQL dan Isar DB), serta perancangan \textit{Use Case Diagram}, \textit{Activity Diagram}, dan antarmuka pengguna. Setelah tahap perancangan, sistem POS dikembangkan menggunakan Flutter sebagai \textit{frontend}, Supabase sebagai basis data \textit{cloud}, Isar DB sebagai basis data lokal, dan layanan prediksi penjualan Python berbasis Flask yang di-\textit{deploy} pada platform Hugging Face untuk pengolahan modul AI. Aplikasi yang telah dibangun kemudian diimplementasikan dan diujicobakan secara fungsional pada mitra EatsTEDI untuk menguji kesesuaian alur transaksi kasir dan penyajian hasil prediksi kepada pengguna. Perlu ditegaskan bahwa data yang digunakan untuk melatih dan mengevaluasi model prediksi pada penelitian ini \textbf{bukan} berasal dari aplikasi Parzello POS yang baru dibangun tersebut, melainkan berupa data sekunder historis yang bersumber dari platform EatsTEDI yang telah beroperasi sebelumnya (\textit{dump} SQL \texttt{eatstedi-20260621-010820.sql}), mencakup rentang waktu 24 Agustus 2024 s.d. 20 Juni 2026. Dengan demikian, aplikasi yang dibangun dalam penelitian ini berperan sebagai wadah penyajian hasil prediksi dan objek pengujian fungsional, sedangkan data latih model prediksi diperoleh dari riwayat transaksi mitra yang sudah ada jauh sebelum penelitian ini dimulai.
 
 Pada \textbf{Fase Pengembangan Model Prediksi Penjualan}, data transaksi historis sekunder tersebut selanjutnya melalui tahap pra-pemrosesan meliputi pembersihan data, agregasi harian, normalisasi, dan pembentukan data deret waktu (\textit{time series}). \textit{Dataset} kemudian dibagi menjadi data latih dan data uji. Model LSTM dilatih menggunakan data latih untuk mempelajari pola penjualan jangka pendek maupun jangka panjang. Setelah pelatihan, model dievaluasi menggunakan metrik regresi deret waktu, yaitu MAE, RMSE, sMAPE, dan MASE, kemudian layanan prediksi produksi diintegrasikan ke dalam sistem POS sehingga aplikasi mampu menampilkan hasil prediksi penjualan harian kepada pengguna melalui \textit{REST API}.
 
