@@ -1383,61 +1383,60 @@ Tabel~\ref{tab:uc-profil} menunjukkan bahwa identitas toko dapat disesuaikan sew
 
 \noindent\textbf{b.~~\textit{Activity Diagram}}
 
+\textit{Activity Diagram} merupakan gambaran visual yang digunakan untuk menggambarkan serangkaian aktivitas atau proses yang terjadi di dalam sistem. Diagram ini memudahkan penjelasan mengenai logika prosedural, alur kerja, serta titik percabangan keputusan pada aplikasi \textit{Point of Sale} yang dilengkapi fitur prediksi penjualan harian. Pada penelitian ini, pemodelan \textit{activity diagram} difokuskan pada empat alur kerja yang paling representatif terhadap karakteristik sistem, yaitu pengelolaan katalog produk sebagai sumber data penjualan, transaksi kasir sebagai penghasil data utama, penyajian prediksi penjualan harian sebagai inti penelitian, serta sinkronisasi data sebagai penopang keandalan pencatatan. Adapun rincian masing-masing \textit{activity diagram} diuraikan sebagai berikut.
 
-\textit{Activity Diagram} merupakan gambaran visual dalam bentuk diagram yang digunakan untuk menggambarkan serangkaian aktivitas atau proses yang terjadi di dalam sistem. Diagram ini memudahkan dalam menjelaskan logika prosedural, proses bisnis, serta alur kerja sistem Parzello POS Mobile yang dilengkapi dengan fitur prediksi penjualan harian. Adapun \textit{Activity Diagram} pada sistem ini dijelaskan sebagai berikut.
+\noindent 1)~~\textit{Activity Diagram} Mengelola Katalog Produk
 
-\begin{enumerate}
-    \item \textbf{Activity Diagram Alur Kerja Transaksi Kasir (POS Checkout)} \\
-    Gambar \ref{fig:act-checkout} menggambarkan alur kerja kasir atau \textit{owner} dalam memproses transaksi belanja pelanggan di kasir, termasuk opsi penerapan kupon/voucher diskon dan pemisahan tagihan (\textit{split bill}) yang terintegrasi langsung di dalam lembar keranjang belanja dan layar pembayaran, sebelum data disimpan di penyimpanan lokal Isar DB.
-    
-% TODO (dilengkapi sebelum sidang): re-ekspor Rancangan/Activity Diagram.md bagian 1
-% (kini format mxGraphModel) melalui draw.io menjadi Rancangan/Mermaid/activity_checkout.png
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.65\textwidth,height=0.45\textheight,keepaspectratio]{activity_checkout.png}
-        \caption{Activity Diagram Alur Kerja Transaksi Kasir}
-        \label{fig:act-checkout}
-    \end{figure}
+Pengelolaan katalog produk digunakan untuk memelihara data produk dan persediaan yang menjadi sumber masukan bagi pencatatan transaksi penjualan. \textit{Activity diagram} staf toko dalam mengelola katalog produk dapat dilihat pada Gambar~\ref{fig:act-produk}.
 
-    \item \textbf{Activity Diagram Sinkronisasi Latar Belakang (Offline-First Sync Engine)} \\
-    Gambar \ref{fig:act-sync} menggambarkan logika sinkronisasi data dari \textit{local database} (Isar DB) ke cloud database (Supabase) secara otomatis saat status konektivitas terdeteksi \textit{online}. Alur data dilakukan berdasarkan ketergantungan relasi tabel (kategori, produk, transaksi, riwayat stok) untuk menjaga konsistensi, di mana pengunggahan transaksi dilakukan melalui pemanggilan prosedur RPC \textit{create\_transaction\_v4} pada PostgreSQL agar pencatatan nota dan pemotongan stok di \textit{cloud} berlangsung dalam satu transaksi basis data yang aman.
-    
-% TODO (dilengkapi sebelum sidang): re-ekspor Rancangan/Activity Diagram.md bagian 2
-% (kini format mxGraphModel) melalui draw.io menjadi Rancangan/Mermaid/activity_sync.png
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.65\textwidth,height=0.45\textheight,keepaspectratio]{activity_sync.png}
-        \caption{Activity Diagram Sinkronisasi Latar Belakang}
-        \label{fig:act-sync}
-    \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,height=0.62\textheight,keepaspectratio]{activity_produk.png}
+    \caption{\textit{Activity Diagram} Mengelola Katalog Produk}
+    \label{fig:act-produk}
+\end{figure}
 
-    \item \textbf{Activity Diagram Proses AI Smart Analytics} \\
-    Gambar \ref{fig:act-ai} menggambarkan alur kerja fitur analitik prediktif: pengguna membuka layar \textit{Smart Analytics}, sistem mengagregasi data penjualan historis dari Isar DB lokal, lalu memanggil \textit{endpoint} model LSTM yang di-\textit{hosting} di Hugging Face secara langsung melalui HTTPS. Selama pemrosesan, sistem menampilkan status pemuatan (termasuk peringatan \textit{cold start} bila \textit{server} inferensi baru aktif dari kondisi \textit{idle}), kemudian merender visualisasi analitik omzet beserta rekomendasi promosi, dan menyimpan hasilnya sebagai \textit{snapshot} riwayat analitik di tabel \textit{smart\_analytics\_snapshots}.
-    
-% TODO (dilengkapi sebelum sidang): activity_ai.png SAAT INI MASIH ALUR LAMA
-% (Gemini/PII scrubbing/consent modal) -- sudah TIDAK sesuai teks & kode.
-% Re-ekspor Rancangan/Activity Diagram.md bagian 3 (mxGraphModel, alur baru
-% panggilan langsung ke model LSTM Hugging Face) melalui draw.io menjadi
-% Rancangan/Mermaid/activity_ai.png sebelum sidang.
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.65\textwidth,height=0.45\textheight,keepaspectratio]{activity_ai.png}
-        \caption{Activity Diagram Proses AI Smart Analytics}
-        \label{fig:act-ai}
-    \end{figure}
+Gambar~\ref{fig:act-produk} menunjukkan proses staf toko dalam mengelola katalog produk pada sistem. Staf toko membuka halaman katalog produk dan sistem menampilkan daftar produk. Staf toko kemudian memilih aksi tambah, ubah, atau hapus. Apabila aksi yang dipilih bukan penghapusan, staf toko mengisi data produk pada formulir yang disediakan. Apabila aksi yang dipilih adalah penghapusan, sistem menandai produk tersebut sebagai terhapus melalui skema \textit{soft delete}. Sistem kemudian menyimpan perubahan ke basis data lokal Isar DB dan mencatat mutasi stok, lalu menyinkronkan data ke Supabase ketika koneksi tersedia, sehingga staf toko dapat melihat katalog produk yang telah diperbarui.
 
-    \item \textbf{Activity Diagram Kelola Produk (Tambah/Ubah/Hapus)} \\
-    Gambar \ref{fig:act-produk} menggambarkan alur kerja staf toko dalam mengelola katalog produk yang menjadi sumber data transaksi bagi model prediksi penjualan. Proses tambah/ubah data disimpan terlebih dahulu ke basis data lokal Isar DB (\textit{offline-first}) beserta pencatatan riwayat perubahan stok, sebelum disinkronkan ke Supabase saat koneksi \textit{online} tersedia. Proses hapus produk diterapkan melalui skema \textit{soft delete} lokal (penanda \textit{isDeleted=true}) yang baru dihapus permanen dari basis data setelah sinkronisasi ke \textit{cloud} berhasil, guna menjaga konsistensi data penjualan yang menjadi masukan pemodelan LSTM.
+\noindent 2)~~\textit{Activity Diagram} Melakukan \textit{Checkout}
 
-% TODO (dilengkapi sebelum sidang): ekspor Rancangan/Activity Diagram.md bagian 4
-% (XML mxGraphModel) melalui draw.io menjadi Rancangan/Mermaid/activity_produk.png
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.65\textwidth,height=0.45\textheight,keepaspectratio]{activity_produk.png}
-        \caption{Activity Diagram Kelola Produk (Tambah/Ubah/Hapus)}
-        \label{fig:act-produk}
-    \end{figure}
-\end{enumerate}
+Transaksi \textit{checkout} digunakan untuk memproses penjualan di kasir sekaligus menghasilkan data deret waktu yang menjadi masukan model prediksi. \textit{Activity diagram} kasir dalam melakukan \textit{checkout} dapat dilihat pada Gambar~\ref{fig:act-checkout}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,height=0.62\textheight,keepaspectratio]{activity_checkout.png}
+    \caption{\textit{Activity Diagram} Melakukan \textit{Checkout}}
+    \label{fig:act-checkout}
+\end{figure}
+
+Gambar~\ref{fig:act-checkout} menunjukkan proses kasir dalam melayani transaksi penjualan pada sistem. Kasir membuka layar kasir dan sistem menampilkan katalog produk. Kasir kemudian memilih produk yang dibeli ke dalam keranjang, lalu sistem menghitung subtotal keranjang. Sistem memeriksa apakah keranjang telah selesai disusun. Apabila belum selesai, kasir mengulang pemilihan produk hingga seluruh pesanan pelanggan tercatat. Setelah keranjang dinyatakan selesai, kasir memilih metode pembayaran dan memasukkan nominal yang diterima, lalu sistem menghitung kembalian. Sistem kemudian menyimpan transaksi ke basis data lokal Isar DB, memotong stok produk yang terjual, dan menampilkan konfirmasi, sehingga kasir dapat melihat transaksi yang telah berhasil disimpan.
+
+\noindent 3)~~\textit{Activity Diagram} Melihat Prediksi Penjualan Harian
+
+Penyajian prediksi penjualan harian digunakan untuk menampilkan hasil peramalan model \textit{Long Short-Term Memory} kepada pengelola di dalam aplikasi. \textit{Activity diagram} pengguna dalam melihat prediksi penjualan harian dapat dilihat pada Gambar~\ref{fig:act-ai}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,height=0.62\textheight,keepaspectratio]{activity_ai.png}
+    \caption{\textit{Activity Diagram} Melihat Prediksi Penjualan Harian}
+    \label{fig:act-ai}
+\end{figure}
+
+Gambar~\ref{fig:act-ai} menunjukkan proses pengguna dalam memperoleh hasil prediksi penjualan harian pada sistem. Pengguna membuka halaman prediksi penjualan dan sistem mengagregasi riwayat transaksi harian. Sistem kemudian memeriksa apakah panjang sekuens data telah mencukupi syarat minimum model. Apabila belum mencukupi, sistem menampilkan peringatan \textit{cold start} beserta estimasi berbasis pola umum. Apabila telah mencukupi, layanan prediksi memuat model LSTM, menerima data yang dikirimkan, lalu menghasilkan prediksi penjualan harian. Sistem kemudian menyajikan kartu estimasi dan grafik peramalan serta menyimpan \textit{snapshot} riwayat analisis, sehingga pengguna dapat melihat hasil peramalan beserta riwayatnya.
+
+\noindent 4)~~\textit{Activity Diagram} Sinkronisasi Data
+
+Sinkronisasi data digunakan untuk menjaga keutuhan pencatatan transaksi ketika perangkat sempat kehilangan koneksi internet. \textit{Activity diagram} proses sinkronisasi data dapat dilihat pada Gambar~\ref{fig:act-sync}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,height=0.62\textheight,keepaspectratio]{activity_sync.png}
+    \caption{\textit{Activity Diagram} Sinkronisasi Data}
+    \label{fig:act-sync}
+\end{figure}
+
+Gambar~\ref{fig:act-sync} menunjukkan proses sinkronisasi data dari aplikasi klien ke basis data \textit{cloud} pada sistem. Aplikasi klien mendeteksi perubahan status konektivitas, kemudian memeriksa apakah koneksi internet telah tersedia. Apabila belum tersedia, aplikasi klien menunggu hingga koneksi kembali terdeteksi. Setelah koneksi tersedia, aplikasi klien menjalankan sinkronisasi di latar belakang dan menyeleksi data yang belum tersinkron. Aplikasi klien mengunggah data kategori dan produk, lalu basis data \textit{cloud} menyimpannya. Aplikasi klien kemudian memanggil prosedur RPC \textit{create\_transaction\_v4} dan basis data \textit{cloud} mencatat nota beserta pemotongan stok dalam satu transaksi. Setelah pengunggahan selesai, aplikasi klien menandai data lokal telah tersinkron, sehingga data pada perangkat dan \textit{cloud} menjadi selaras.
+
 
 \noindent\textbf{c.~~\textit{Class Diagram}}
 
