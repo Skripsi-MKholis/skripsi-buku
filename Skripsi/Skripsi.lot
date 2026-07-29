@@ -5,24 +5,20 @@
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {2.1}{\ignorespaces \textit {State of the Art} Penelitian Terdahulu}}{15}{table.2.1}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Jadwal Pelaksanaan Penelitian}}{34}{table.caption.10}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Daftar Alat dan Bahan Penelitian}}{34}{table.3.2}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Sebaran Penjualan Berdasarkan Kategori Produk}}{39}{table.caption.11}%
-\contentsline {table}{\numberline {3.4}{\ignorespaces Daftar 10 Produk Terlaris EatsTEDI UGM}}{40}{table.caption.12}%
-\contentsline {table}{\numberline {3.5}{\ignorespaces Struktur Skema Dataset \textit {daily\_sales.csv}}}{42}{table.caption.13}%
-\contentsline {table}{\numberline {3.6}{\ignorespaces Struktur Skema Dataset \textit {weekly\_sales.csv}}}{43}{table.caption.14}%
-\contentsline {table}{\numberline {3.7}{\ignorespaces Struktur Skema Dataset \textit {monthly\_sales.csv}}}{43}{table.caption.15}%
-\contentsline {table}{\numberline {3.8}{\ignorespaces Definisi Aktor}}{52}{table.caption.18}%
-\contentsline {table}{\numberline {3.9}{\ignorespaces Definisi \textit {Use Case}}}{52}{table.3.9}%
-\contentsline {table}{\numberline {3.10}{\ignorespaces Daftar Tabel Basis Data POS}}{64}{table.caption.26}%
-\contentsline {table}{\numberline {3.11}{\ignorespaces Skenario Pengujian \textit {Black Box}}}{87}{table.3.11}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Struktur Data \textit {Dataset} Final Penelitian}}{33}{table.caption.10}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Spesifikasi Perangkat Keras}}{37}{table.caption.11}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Spesifikasi Perangkat Lunak}}{38}{table.3.3}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Definisi Aktor}}{45}{table.caption.14}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces Definisi \textit {Use Case}}}{45}{table.3.5}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces Daftar Tabel Basis Data POS}}{57}{table.caption.22}%
+\contentsline {table}{\numberline {3.7}{\ignorespaces Skenario Pengujian \textit {Black Box}}}{80}{table.3.7}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Statistik Ringkas Dataset Pendapatan Harian}}{114}{table.caption.57}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Pembagian Dataset dan Dimensi Sequence}}{116}{table.caption.58}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces Perbandingan Performa pada Data Uji (\textit {One-Step-Ahead})}}{127}{table.caption.60}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces Statistik Performa LSTM Hybrid pada 10 Seed}}{130}{table.caption.62}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces Perbandingan Performa Eksperimen Augmentasi TimeGAN (\textit {Multi-Step}, Horizon 7)}}{132}{table.caption.64}%
-\contentsline {table}{\numberline {4.6}{\ignorespaces Hasil Pengujian Black Box}}{134}{table.4.6}%
-\contentsline {table}{\numberline {4.7}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{136}{table.caption.65}%
-\contentsline {table}{\numberline {4.8}{\ignorespaces Hasil Pengujian White Box}}{138}{table.caption.66}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Statistik Ringkas Dataset Pendapatan Harian}}{107}{table.caption.53}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Pembagian Dataset dan Dimensi Sequence}}{109}{table.caption.54}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Perbandingan Performa pada Data Uji (\textit {One-Step-Ahead})}}{120}{table.caption.56}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Statistik Performa LSTM Hybrid pada 10 Seed}}{123}{table.caption.58}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Perbandingan Performa Eksperimen Augmentasi TimeGAN (\textit {Multi-Step}, Horizon 7)}}{125}{table.caption.60}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Hasil Pengujian Black Box}}{127}{table.4.6}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{129}{table.caption.61}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces Hasil Pengujian White Box}}{131}{table.caption.62}%
 \addvspace {10\p@ }

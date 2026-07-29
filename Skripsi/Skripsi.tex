@@ -934,52 +934,113 @@ Pengujian \textit{black box}, atau disebut juga \textit{behavioral testing}, ada
 
 \section{Data dan Pengumpulan Data}
 
-Bagian ini menguraikan tahapan pengumpulan data yang menjadi dasar perancangan dan pelatihan model prediksi pada penelitian ini, mencakup lokasi dan periode pelaksanaan penelitian, alat serta bahan yang digunakan, variabel dan sumber data yang diolah, hingga proses analisis kebutuhan dan \textit{preprocessing} data sebelum digunakan pada tahap pemodelan.
+Penelitian ini menggunakan data sekunder yang bersumber dari basis data transaksi platform katalog menu digital \textbf{EatsTEDI} pada Departemen Teknik Elektro dan Informatika (DTEDI), Universitas Gadjah Mada. Data diperoleh dalam bentuk \textit{dump} basis data relasional berformat SQL (\texttt{eatstedi-20260621-010820.sql}) berukuran 32,15 MB dengan total sekitar 395.090 baris, mencakup rentang transaksi 24 Agustus 2024 sampai dengan 20 Juni 2026 atau 666 hari kalender secara inklusif. Data tersebut merupakan riwayat transaksi riil yang telah terhimpun jauh sebelum penelitian ini dimulai, bukan data yang dihasilkan oleh aplikasi yang dibangun dalam penelitian ini.
 
-\subsection{Tempat Penelitian}
+Penggunaan data EatsTEDI dipilih karena merepresentasikan karakteristik usaha kuliner berskala kecil pada lingkungan institusional yang menjadi fokus penelitian. Rentang 22 bulan tersebut mencakup empat semester berturut-turut, yakni semester gasal dan genap tahun akademik 2024/2025 serta 2025/2026, sehingga pola musiman berbasis kalender akademik teramati secara berulang. Di sisi lain, jumlah pengamatannya tetap tergolong terbatas, sehingga sesuai untuk menguji kelayakan penerapan model \textit{Long Short-Term Memory} pada kondisi data yang tidak melimpah.
 
-Penelitian dan pengembangan sistem \textit{Point of Sale} (POS) dengan fitur prediksi penjualan harian menggunakan metode LSTM ini dilaksanakan pada beberapa lokasi yang mendukung proses perancangan, implementasi, dan pengujian, yaitu:
-\begin{enumerate}
-    \item \textbf{Jurusan Teknologi Informasi dan Komputer, Politeknik Negeri Lhokseumawe:} Menjadi lokasi utama dalam perancangan arsitektur sistem, penulisan kode program (aplikasi mobile Flutter dan REST API Python), pelatihan model LSTM, serta penyusunan laporan skripsi.
-    \item \textbf{Departemen Teknik Elektro dan Informatika (DTEDI), Universitas Gadjah Mada:} Sebagai penyedia dataset transaksi riil platform EatsTEDI UGM yang digunakan sebagai data latih dan data uji utama untuk mengevaluasi performa model prediksi LSTM.
-    \item \textbf{Pelaku UMKM di Kota Lhokseumawe:} Sebagai konteks sasaran pengguna yang melatarbelakangi analisis kebutuhan awal aplikasi kasir. Adapun pengumpulan data empiris (observasi, wawancara, dan dataset transaksi) serta pengujian sistem dilakukan pada mitra EatsTEDI DTEDI UGM, yang karakteristik operasionalnya (usaha kuliner skala mikro) dipandang merepresentasikan kebutuhan UMKM sejenis.
-\end{enumerate}
-
-\subsection{Waktu Penelitian}
-
-Penelitian ini dilaksanakan selama 4 (empat) bulan, terhitung mulai bulan Maret 2026 sampai dengan bulan Juni 2026. Alokasi waktu pelaksanaan untuk setiap tahapan penelitian disajikan pada Tabel~\ref{tab:jadwal_penelitian}.
+Data tidak digunakan secara langsung dalam bentuk mentah, melainkan melalui tahap penyaringan dan agregasi terlebih dahulu. Transaksi yang diambil dibatasi pada nota berstatus lunas (\texttt{is\_paid = 1}) dari tabel \textit{invoices}, kemudian diagregasi menurut tanggal untuk membentuk deret waktu pendapatan harian. Setelah penyaringan, hari aktif pertama dengan transaksi tercatat adalah 26 Agustus 2024, sehingga rentang efektif yang digunakan adalah 26 Agustus 2024 sampai dengan 20 Juni 2026 dan menghasilkan 316 hari dengan transaksi tercatat. Sesuai batasan penelitian, pemodelan dilakukan secara univariat dengan total nilai penjualan harian sebagai satu-satunya variabel target, tanpa menyertakan variabel eksogen. Adapun struktur data yang digunakan dalam penelitian ini ditunjukkan pada Tabel~\ref{tab:struktur_data}.
 
 \begin{table}[H]
 \setstretch{1.2}
 \centering
-\caption{Jadwal Pelaksanaan Penelitian}
-\label{tab:jadwal_penelitian}
-\begin{tabularx}{\textwidth}{|c|X|c|c|c|c|}
+\caption{Struktur Data \textit{Dataset} Final Penelitian}
+\label{tab:struktur_data}
+\begin{tabularx}{\textwidth}{|c|l|p{3.0cm}|X|}
 \hline
-\textbf{No} & \textbf{Kegiatan} & \textbf{Maret 2026} & \textbf{April 2026} & \textbf{Mei 2026} & \textbf{Juni 2026} \\ \hline
-1 & Persiapan dan Studi Literatur & \checkmark & & & \\ \hline
-2 & Pengumpulan dan Analisis Data & \checkmark & \checkmark & & \\ \hline
-3 & Perancangan Sistem dan UI/UX & & \checkmark & & \\ \hline
-4 & Pengembangan Aplikasi POS Mobile & & \checkmark & \checkmark & \\ \hline
-5 & Pelatihan dan Optimasi Model LSTM & & & \checkmark & \\ \hline
-6 & Integrasi Sistem dan Pengujian & & & \checkmark & \checkmark \\ \hline
-7 & Evaluasi dan Penyusunan Laporan & & & & \checkmark \\ \hline
+\textbf{No} & \textbf{Nama Data} & \textbf{Sumber} & \textbf{Keterangan} \\ \hline
+1 & \textit{invoice\_id} & Basis data EatsTEDI & Identitas unik setiap nota transaksi \\ \hline
+2 & \textit{created\_at} & Basis data EatsTEDI & Waktu pencatatan transaksi pada sistem \\ \hline
+3 & \textit{is\_paid} & Basis data EatsTEDI & Penanda status pelunasan, digunakan untuk menyaring transaksi sah \\ \hline
+4 & \textit{total} & Basis data EatsTEDI & Nilai nominal penjualan pada setiap nota transaksi \\ \hline
+5 & \textit{date} & Hasil praproses & Tanggal transaksi (format YYYY-MM-DD) hasil normalisasi \textit{created\_at}, berfungsi sebagai penanda urutan deret waktu \\ \hline
+6 & \textit{revenue} & Hasil praproses & Total nilai penjualan harian dalam Rupiah hasil agregasi seluruh nota lunas pada tanggal yang sama; menjadi variabel target pemodelan \\ \hline
 \end{tabularx}
 \end{table}
 
-\subsection{Alat dan Bahan}
+Berdasarkan Tabel~\ref{tab:struktur_data}, kolom \textit{invoice\_id}, \textit{created\_at}, \textit{is\_paid}, dan \textit{total} merupakan atribut asli yang tersedia pada basis data EatsTEDI dan berperan sebagai bahan mentah penyaringan serta agregasi. Adapun kolom \textit{date} dan \textit{revenue} bukan merupakan bagian dari basis data asli, melainkan dihasilkan pada tahap praproses. Kolom \textit{revenue} inilah yang menjadi satu-satunya variabel yang dimodelkan, sehingga \textit{dataset} final penelitian berbentuk deret waktu univariat dengan 316 titik pengamatan. Pembagian data latih dan data uji dilakukan secara kronologis, yaitu data terawal sebagai data latih dan data terakhir sebagai data uji, bukan secara acak, guna menghindari kebocoran informasi masa depan (\textit{data leakage}) sebagaimana dijelaskan pada Subbab 2.2.7.
 
-Untuk mendukung kelancaran pelaksanaan penelitian dan pengembangan sistem POS mobile, dibutuhkan alat (perangkat keras dan perangkat lunak) serta bahan penelitian dengan rincian yang disajikan pada Tabel~\ref{tab:alat_bahan}.
+Metode pengumpulan data dalam penelitian ini dilakukan melalui tahapan berikut:
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Studi Literatur}
+
+    Studi literatur dilakukan untuk mengkaji penelitian terdahulu yang berkaitan dengan peramalan penjualan ritel berbasis \textit{Long Short-Term Memory}, augmentasi data sintetis menggunakan TimeGAN, serta penggunaan \textit{baseline} sederhana sebagai kontrol metodologis. Hasil studi ini menjadi dasar dalam perancangan metode penelitian dan penetapan metrik evaluasi.
+
+    \item \textbf{Observasi dan Wawancara}
+
+    Observasi dan wawancara dilakukan terhadap pengelola divisi kewirausahaan mahasiswa platform EatsTEDI di DTEDI Universitas Gadjah Mada. Kegiatan ini bertujuan memahami alur operasional kasir, pencatatan menu harian, pengelolaan stok, serta kendala dalam mengantisipasi sisa produk, sehingga kebutuhan fitur prediksi pada aplikasi dapat dirumuskan sesuai kondisi lapangan.
+
+    \item \textbf{Akuisisi Data}
+
+    Data transaksi diperoleh langsung dari pengelola platform EatsTEDI dalam bentuk berkas \textit{dump} SQL. Berkas tersebut memuat tabel \textit{invoices} yang menjadi sumber utama nilai transaksi, beserta tabel pendukung \textit{product\_sold}, \textit{products}, dan \textit{categories}. Data digunakan sebagai data utama penelitian karena merupakan catatan transaksi riil yang berkesinambungan selama dua tahun akademik penuh.
+
+    \item \textbf{Praproses Data}
+
+    Tahap praproses dilakukan untuk menyesuaikan data dengan kebutuhan pemodelan deret waktu, yang meliputi:
+    \begin{enumerate}[label=\arabic*)]
+        \item Penyaringan transaksi berdasarkan status pelunasan;
+        \item Agregasi nilai transaksi menurut tanggal menjadi pendapatan harian;
+        \item Normalisasi nilai menggunakan \textit{Min-Max Scaling};
+        \item Pembentukan sampel pembelajaran terbimbing melalui teknik \textit{sliding window}.
+    \end{enumerate}
+    Hasil dari tahap ini adalah \textit{dataset} final berupa deret waktu univariat yang digunakan sebagai masukan dalam proses pelatihan dan evaluasi model.
+\end{enumerate}
+
+\section{Analisis Kebutuhan Sistem}
+
+Analisis kebutuhan sistem merupakan tahap identifikasi terhadap fungsi-fungsi yang harus disediakan oleh sistem serta sumber daya pendukung yang diperlukan agar sistem dapat berjalan sebagaimana mestinya. Analisis ini dibagi menjadi kebutuhan fungsional dan kebutuhan non-fungsional.
+
+\subsection{Analisis Kebutuhan Fungsional}
+
+Kebutuhan fungsional menggambarkan fungsi utama yang harus dimiliki oleh aplikasi \textit{Point of Sale} dengan fitur prediksi penjualan harian.
+\begin{enumerate}
+    \item Sistem dapat melakukan registrasi toko dan pendaftaran akun pengguna baru.
+    \item Sistem dapat melakukan autentikasi pengguna menggunakan email dan kata sandi, serta membedakan hak akses berdasarkan peran Pemilik (\textit{Owner}) dan Kasir.
+    \item Sistem dapat mengelola data produk dan kategori produk, meliputi penambahan, pengubahan, dan penghapusan data.
+    \item Sistem dapat mencatat transaksi penjualan melalui alur \textit{checkout} kasir.
+    \item Sistem dapat mencatat dan menampilkan riwayat mutasi stok produk.
+    \item Sistem dapat menampilkan dasbor ringkasan yang memuat omzet, jumlah transaksi, dan status persediaan produk.
+    \item Sistem dapat menampilkan hasil prediksi penjualan harian yang dihasilkan model \textit{Long Short-Term Memory} melalui layanan \textit{REST API}.
+    \item Sistem dapat menyimpan dan menampilkan riwayat analisis prediksi yang telah dijalankan.
+    \item Sistem dapat menyinkronkan data transaksi pada perangkat dengan basis data \textit{cloud}.
+    \item Sistem dapat mengirimkan notifikasi kepada staf toko.
+    \item Sistem dapat mengelola data staf karyawan dan pengaturan profil toko.
+    \item Sistem dapat menghitung performa model prediksi menggunakan metrik evaluasi MAE, RMSE, MAPE, dan MASE.
+\end{enumerate}
+
+\subsection{Analisis Kebutuhan Non-Fungsional}
+
+Kebutuhan non-fungsional merupakan kebutuhan pendukung yang berkaitan dengan spesifikasi perangkat keras (\textit{hardware}) dan perangkat lunak (\textit{software}) yang digunakan agar sistem dapat berjalan dengan optimal. Kebutuhan ini tidak berhubungan langsung dengan fungsi utama sistem, namun berperan penting dalam mendukung performa, stabilitas, dan keandalan sistem.
+
+\noindent a. \quad Perangkat Keras (\textit{Hardware})
+
+Perangkat keras yang digunakan dalam penelitian ini dapat dilihat pada Tabel~\ref{tab:spek_hardware} berikut.
+
+\begin{table}[H]
+\setstretch{1.2}
+\centering
+\caption{Spesifikasi Perangkat Keras}
+\label{tab:spek_hardware}
+\begin{tabularx}{\textwidth}{|c|p{3.0cm}|p{4.5cm}|X|}
+\hline
+\textbf{No} & \textbf{Nama} & \textbf{Spesifikasi} & \textbf{Keterangan} \\ \hline
+1 & Laptop & Acer Nitro 5, Intel Core i5 Gen 12, RAM 16 GB, SSD 512 GB, NVIDIA GeForce RTX 3050 & Perangkat pengembangan aplikasi dan pelatihan model prediksi \\ \hline
+2 & \textit{Smartphone} & Android 11 & Perangkat pengujian aplikasi \textit{mobile} \\ \hline
+\end{tabularx}
+\end{table}
+
+\noindent b. \quad Perangkat Lunak (\textit{Software})
+
+Perangkat lunak yang digunakan dalam pengembangan dan pengujian sistem ini dapat dilihat pada Tabel~\ref{tab:spek_software} berikut.
 
 {\setstretch{1.15}
-\begin{xltabular}{\textwidth}{|c|p{2.8cm}|p{3.5cm}|X|}
-\caption{Daftar Alat dan Bahan Penelitian} \label{tab:alat_bahan} \\
+\begin{xltabular}{\textwidth}{|c|p{3.4cm}|p{3.6cm}|X|}
+\caption{Spesifikasi Perangkat Lunak} \label{tab:spek_software} \\
 \hline
-\textbf{No} & \textbf{Kategori} & \textbf{Nama Alat/Bahan} & \textbf{Spesifikasi / Deskripsi} \\ \hline
+\textbf{No} & \textbf{Nama} & \textbf{Spesifikasi} & \textbf{Keterangan} \\ \hline
 \endfirsthead
 
 \hline
-\textbf{No} & \textbf{Kategori} & \textbf{Nama Alat/Bahan} & \textbf{Spesifikasi / Deskripsi} \\ \hline
+\textbf{No} & \textbf{Nama} & \textbf{Spesifikasi} & \textbf{Keterangan} \\ \hline
 \endhead
 
 \hline
@@ -988,192 +1049,20 @@ Untuk mendukung kelancaran pelaksanaan penelitian dan pengembangan sistem POS mo
 \hline
 \endlastfoot
 
-1 & Perangkat Keras (\textit{Hardware}) & Laptop Acer Nitro 5 & Intel Core i5 Gen 12, RAM 16 GB, SSD 512 GB, NVIDIA GeForce RTX 3050. Digunakan sebagai perangkat utama pengembangan aplikasi dan pelatihan model. \\ \cline{2-4}
-& & Smartphone Android & OS Android 11. Digunakan untuk pengujian operasional aplikasi POS secara langsung di perangkat mobile. \\ \cline{2-4}
-& & Printer Thermal & Bluetooth 58mm. Digunakan untuk menguji fungsionalitas cetak struk transaksi fisik. \\ \hline
-2 & Perangkat Lunak (\textit{Software}) & Windows 11 & Sistem Operasi Laptop (Home Single Language). \\ \cline{2-4}
-& & VS Code \& Android Studio & \textit{Integrated Development Environment} (IDE) utama untuk penulisan kode program. \\ \cline{2-4}
-& & Flutter SDK (Dart) & \textit{Framework} lintas platform untuk membangun aplikasi kasir mobile. \\ \cline{2-4}
-& & Python 3.10 & Bahasa pemrograman dengan TensorFlow, Keras, PyTorch, Pandas, NumPy, Scikit-Learn, dan Flask untuk melatih model LSTM, membangun modul augmentasi data sintetis TimeGAN, dan membuat REST API prediksi. \\ \cline{2-4}
-& & Supabase Cloud & Basis data \textit{cloud} terpusat (PostgreSQL) untuk sinkronisasi data transaksi. \\ \cline{2-4}
-& & Isar Database & Basis data lokal terbenam (\textit{embedded}) pada perangkat Android (\textit{offline-first}). \\ \cline{2-4}
-& & Firebase & Layanan Google untuk \textit{push notification} (FCM) dan telemetri (Analytics). \\ \cline{2-4}
-& & Jupyter Notebook & Lingkungan \textit{pipeline} riset untuk eksplorasi data dan pelatihan model prediksi. \\ \cline{2-4}
-& & Hugging Face & Platform \textit{hosting} tempat layanan API prediksi Flask di-\textit{deploy}. \\ \cline{2-4}
-& & Draw.io \& Mermaid.js & Alat pemodelan sistem untuk membuat diagram UML, ERD, dan arsitektur. \\ \hline
-3 & Bahan Penelitian & Dataset EatsTEDI UGM & Berkas transaksi riil platform EatsTEDI DTEDI UGM dalam format SQL dump dan CSV (periode Agustus 2024 s.d. Juni 2026). \\ \hline
+1 & Sistem Operasi & Windows 11 \textit{Home Single Language} & Sistem operasi perangkat pengembangan \\ \hline
+2 & \textit{Code Editor} & VS Code dan Android Studio & Lingkungan penulisan kode program \\ \hline
+3 & \textit{Framework Mobile} & Flutter SDK (bahasa Dart) & Membangun aplikasi \textit{Point of Sale} lintas platform \\ \hline
+4 & Bahasa Pemrograman & Python 3.10 & Melatih model LSTM, membangun modul augmentasi TimeGAN, dan menyusun layanan \textit{REST API} prediksi \\ \hline
+5 & Pustaka \textit{Machine Learning} & TensorFlow, Keras, PyTorch, Pandas, NumPy, Scikit-Learn & Pemrosesan data dan pembangunan model prediksi \\ \hline
+6 & \textit{Framework} API & Flask & Menyajikan hasil prediksi kepada aplikasi \textit{mobile} \\ \hline
+7 & Basis Data \textit{Cloud} & Supabase (PostgreSQL) & Penyimpanan terpusat data transaksi \\ \hline
+8 & Basis Data Lokal & Isar Database & Penyimpanan data pada perangkat \\ \hline
+9 & Layanan Notifikasi & Firebase & Pengiriman notifikasi dan pencatatan telemetri aplikasi \\ \hline
+10 & Lingkungan Analisis & Jupyter Notebook & Eksplorasi data dan pelatihan model prediksi \\ \hline
+11 & Platform \textit{Hosting} & Hugging Face & Tempat layanan API prediksi di-\textit{deploy} \\ \hline
+12 & Alat Pemodelan & Draw.io dan Mermaid.js & Pembuatan diagram UML, ERD, dan arsitektur sistem \\ \hline
 \end{xltabular}
 }
-
-\subsection{Variabel Data}
-
-Variabel penelitian yang digunakan dalam proses prediksi penjualan harian dikelompokkan menjadi tiga:
-\begin{enumerate}
-    \item \textbf{Variabel \textit{Input} (Fitur):} Deret waktu transaksi harian EatsTEDI yang terdiri atas \textit{log-return} pendapatan, pengodean siklik (sinus--kosinus) untuk hari, minggu, dan bulan, serta penanda biner periode Ramadan. Variabel jumlah transaksi (\textit{transactions}) dan kuantitas terjual (\textit{qty\_sold}) sengaja tidak digunakan sebagai fitur untuk menghindari kebocoran data (\textit{data leakage}), karena keduanya belum tersedia saat memprediksi hari mendatang.
-    \item \textbf{Variabel \textit{Output} (Target):} Nilai prediksi \textit{log-return} pendapatan, yang direkonstruksi kembali ke nominal Rupiah sebagai acuan estimasi omzet harian dan kebutuhan stok produk.
-    \item \textbf{Variabel Evaluasi:} Kinerja model diukur dengan empat metrik evaluasi (MAE, RMSE, sMAPE, dan MASE). MAPE konvensional dihindari karena menghasilkan nilai tak terhingga saat dihadapkan pada hari dengan pendapatan mendekati nol. Rincian formula masing-masing metrik dijabarkan pada Subbab 2.6.
-\end{enumerate}
-
-\subsection{Sumber Data}
-
-Data utama yang digunakan dalam penelitian ini adalah basis data transaksi penjualan harian yang bersumber dari platform katalog menu digital interaktif \textbf{EatsTEDI} pada Departemen Teknik Elektro dan Informatika (DTEDI) Universitas Gadjah Mada (UGM). \textit{Dataset} ini berupa \textit{dump} basis data relasional dalam format SQL (\textit{eatstedi-20260621-010820.sql}) berukuran 32,15 MB dengan total sekitar 395.090 baris data.
-
-Rentang waktu transaksi riil yang digunakan adalah dari tanggal \textbf{24 Agustus 2024 s.d. 20 Juni 2026} (mencakup periode 666 hari kalender secara inklusif, atau sekitar 22 bulan). Adapun hari aktif pertama dengan transaksi tercatat setelah penyaringan adalah \textbf{26 Agustus 2024}, sehingga Bab IV menyebut rentang efektif 26 Agustus 2024 s.d. 20 Juni 2026. Data yang diekstrak berfokus pada transaksi dengan status lunas (\textit{is\_paid = 1}) dari tabel \textit{invoices} serta rincian item produk terjual dari tabel \textit{product\_sold} yang dihubungkan dengan tabel master \textit{products} dan \textit{categories}.
-
-Secara umum, karakteristik data deret waktu (\textit{time series}) EatsTEDI UGM memiliki pola musiman unik yang sangat dipengaruhi oleh kalender akademis kampus, antara lain:
-\begin{enumerate}
-    \item \textbf{Pola Mingguan (\textit{weekly profile}):} Penjualan aktif hampir 100\% terkonsentrasi pada hari kerja (Senin s.d. Jumat) dengan rata-rata 195,41 transaksi per hari aktif. Sedangkan pada hari Sabtu dan Minggu, transaksi umumnya bernilai Rp 0 karena kantin kampus tutup, dengan pengecualian sejumlah kecil transaksi insidental pada hari non-kerja.
-    \item \textbf{Pola Libur Akademis (\textit{academic holiday profile}):} Pada masa libur semester mahasiswa (sepanjang bulan Januari dan Juli), transaksi bernilai Rp 0 karena aktivitas perkuliahan dan operasional kantin berhenti total.
-    \item \textbf{Pola Bulan Ramadan:} Omzet harian merosot tajam secara signifikan karena penutupan atau pembatasan jam operasional kantin selama bulan puasa (misalnya total omzet Maret 2025 hanya Rp 1.427.000,00 dan Maret 2026 sebesar Rp 3.531.000,00).
-\end{enumerate}
-
-Selama periode transaksi tersebut, tercatat sebanyak \textbf{61.749 transaksi} lunas dengan total produk terjual sebanyak \textbf{150.709 unit} dan menghasilkan total akumulasi omzet sebesar \textbf{Rp 501.440.492,00}. Statistik agregat tersebut dihitung dari seluruh transaksi mentah pada rentang penuh, sebelum penyaringan kalender hari kerja diterapkan. Setelah penyaringan hanya pada hari kerja aktif (tanpa akhir pekan dan libur semester Januari/Juli), analisis model pada Bab IV menggunakan \textbf{313 hari aktif} dengan total omzet sebesar \textbf{Rp 471.200.494,00} dan rata-rata pendapatan sebesar \textbf{Rp 1.505.433,00 per hari aktif}. Selisih total omzet sebesar Rp 30.239.998,00 berasal dari transaksi insidental yang terjadi pada hari-hari di luar kalender hari kerja aktif (misalnya akhir pekan atau masa libur semester yang tetap mencatat penjualan), yang ikut tereliminasi oleh penyaringan kalender pada tahap pemodelan.
-
-Selain statistik agregat di atas, sebaran penjualan berdasarkan kategori produk pada platform EatsTEDI disajikan pada Tabel \ref{tab:kategori_sales}.
-
-\begin{table}[H]
-\setstretch{1.2}
-\centering
-\caption{Sebaran Penjualan Berdasarkan Kategori Produk}
-\label{tab:kategori_sales}
-\begin{tabular}{|c|l|r|c|c|}
-\hline
-\textbf{No} & \textbf{Kategori} & \textbf{Total Penjualan (Rp)} & \textbf{Total Unit} & \textbf{Kontribusi (\%)} \\ \hline
-1 & Makanan Basah & 242.770.500,00 & 82.134 & 48,42\% \\ \hline
-2 & Minuman & 82.122.500,00 & 16.861 & 16,38\% \\ \hline
-3 & Makanan Kering & 41.969.500,00 & 10.361 & 8,37\% \\ \hline
-4 & Ice Cream & 33.802.500,00 & 10.942 & 6,74\% \\ \hline
-5 & Snacks & 26.671.500,00 & 10.847 & 5,32\% \\ \hline
-6 & Merch & 496.000,00 & 110 & 0,10\% \\ \hline
-7 & Lainnya\footnote{Produk tanpa \texttt{category\_id} pada basis data transaksi (mis. produk yang telah dihapus dari katalog kategori namun riwayat transaksinya tetap tercatat).} & 73.607.992,00 & 19.454 & 14,68\% \\ \hline
-\textbf{} & \textbf{Total} & \textbf{501.440.492,00} & \textbf{150.709} & \textbf{100,00\%} \\ \hline
-\end{tabular}
-\end{table}
-
-Berdasarkan sebaran tersebut, kategori \textbf{Makanan Basah} menyumbang kontribusi terbesar yakni sebesar 48,42\% dari total akumulasi omzet. Karena sifat produk makanan basah yang memiliki masa simpan sangat singkat (\textit{shelf life} pendek) dan cepat basi, ketidakpastian permintaan harian dapat berakibat langsung pada kerugian usaha akibat produk sisa yang terbuang. Oleh karena itu, prediksi penjualan harian dalam penelitian ini diprioritaskan pada kategori tersebut untuk membantu pelaku usaha dalam mengoptimalkan persediaan barang.
-
-Adapun sepuluh produk terlaris berdasarkan kuantitas penjualan harian pada platform EatsTEDI dirinci pada Tabel \ref{tab:top_products}.
-
-\begin{table}[H]
-\setstretch{1.2}
-\centering
-\caption{Daftar 10 Produk Terlaris EatsTEDI UGM}
-\label{tab:top_products}
-\begin{tabular}{|c|l|c|r|}
-\hline
-\textbf{No} & \textbf{Nama Produk} & \textbf{Kuantitas Terjual (Unit)} & \textbf{Total Omzet (Rp)} \\ \hline
-1 & Tahu Bakso & 23.097 & 57.742.500,00 \\ \hline
-2 & Tahu Bakso Balado & 16.688 & 42.020.500,00 \\ \hline
-3 & Risol Mayo \& Sosis & 8.489 & 21.717.000,00 \\ \hline
-4 & Cheese/Banana Roll & 3.417 & 3.417.000,00 \\ \hline
-5 & Larist Air Mineral & 3.020 & 12.080.000,00 \\ \hline
-6 & Sandwich Crispy & 2.796 & 11.184.000,00 \\ \hline
-7 & Piscok & 2.524 & 7.572.000,00 \\ \hline
-8 & Ayam Krispi & 2.495 & 6.237.500,00 \\ \hline
-9 & Nasi Rames/Uduk & 2.382 & 11.910.000,00 \\ \hline
-10 & Donat & 2.233 & 5.582.500,00 \\ \hline
-\end{tabular}
-\end{table}
-
-Adapun data dikumpulkan melalui tiga saluran utama:
-\begin{enumerate}
-    \item \textbf{Observasi dan Wawancara:} Dilakukan terhadap pengelola divisi kewirausahaan mahasiswa platform EatsTEDI di Departemen Teknik Elektro dan Informatika UGM untuk memahami alur operasional kasir fisik, pencatatan menu harian, status stok, serta tantangan dalam mengantisipasi sisa stok makanan.
-    \item \textbf{Dokumentasi Transaksi:} Mengunduh dan mengekstrak basis data transaksi digital EatsTEDI dari file \textit{dump} SQL untuk tabel \textit{invoices}, \textit{product\_sold}, \textit{products}, dan \textit{categories} sebagai data latihan (\textit{training data}) dan data uji (\textit{testing data}) model prediksi LSTM.
-    \item \textbf{Studi Pustaka:} Mengkaji referensi jurnal ilmiah, buku manajemen operasi (Heizer \& Render), serta dokumentasi teknis \textit{framework} Flutter, TensorFlow LSTM, dan layanan Supabase sebagai landasan implementasi.
-\end{enumerate}
-
-\subsubsection{Ekstraksi dan Agregasi Data (Format CSV)}
-
-Proses transformasi data mentah dari basis data relasional \textit{dump} SQL menjadi berkas terstruktur siap latih disebut sebagai proses \textbf{\textit{Extract, Transform, and Load} (ETL)} atau \textbf{Ekstraksi dan Agregasi Data}. Tahapan ini dilakukan untuk mengubah granularitas data dari log transaksi individu (tingkat item terjual) menjadi deret waktu pendapatan harian, mingguan, dan bulanan yang sesuai dengan karakteristik input jaringan saraf LSTM.
-
-Proses ekstraksi ini menghasilkan empat berkas dataset utama sebagai berikut:
-\begin{enumerate}
-    \item \textbf{\textit{raw\_transactions.csv}}: Berisi log transaksi gabungan hasil \textit{join} tabel \textit{invoices}, \textit{product\_sold}, \textit{products}, dan \textit{categories}.
-    \item \textbf{\textit{daily\_sales.csv}}: Hasil agregasi harian yang menjadi dataset utama untuk model prediksi harian.
-    \item \textbf{\textit{weekly\_sales.csv}}: Hasil agregasi mingguan untuk visualisasi tren mingguan.
-    \item \textbf{\textit{monthly\_sales.csv}}: Hasil agregasi bulanan untuk analisis musiman jangka panjang.
-\end{enumerate}
-
-Struktur skema data dan deskripsi kolom dari berkas \textit{daily\_sales.csv} sebagai dataset utama pelatihan model LSTM dirinci pada Tabel \ref{tab:daily_sales_schema}.
-
-\begin{table}[H]
-\setstretch{1.2}
-\centering
-\caption{Struktur Skema Dataset \textit{daily\_sales.csv}}
-\label{tab:daily_sales_schema}
-\begin{tabularx}{\textwidth}{|l|l|X|}
-\hline
-\textbf{Nama Kolom} & \textbf{Tipe Data} & \textbf{Deskripsi} \\ \hline
-\textit{date} & Date & Tanggal transaksi (format YYYY-MM-DD). \\ \hline
-\textit{revenue} & Float & Total omzet pendapatan harian (nominal Rupiah). \\ \hline
-\textit{transactions} & Integer & Total volume transaksi/nota lunas harian. \\ \hline
-\textit{qty\_sold} & Integer & Total kuantitas unit produk terjual harian. \\ \hline
-\textit{day\_of\_week} & Integer & Indeks hari dalam minggu (0 = Senin s.d. 6 = Minggu). Penyaringan hari kerja aktif (0 s.d. 4) dilakukan pada tahap pemodelan. \\ \hline
-\textit{week\_of\_year} & Integer & Nomor minggu dalam setahun berdasarkan standar ISO. \\ \hline
-\textit{month} & Integer & Nomor bulan kalender (1 s.d. 12). \\ \hline
-\textit{is\_weekend} & Integer & Penanda biner akhir pekan (1 jika Sabtu/Minggu, 0 jika lainnya). \\ \hline
-\textit{is\_holiday} & Integer & Penanda biner libur akademik (1 jika Januari/Juli, 0 jika aktif). \\ \hline
-\textit{is\_ramadan} & Integer & Penanda biner bulan Ramadan (1 jika Ramadan, 0 jika lainnya). \\ \hline
-\end{tabularx}
-\end{table}
-
-Sementara itu, skema data untuk berkas agregasi mingguan \textit{weekly\_sales.csv} dan agregasi bulanan \textit{monthly\_sales.csv} masing-masing dijelaskan pada Tabel \ref{tab:weekly_sales_schema} dan Tabel \ref{tab:monthly_sales_schema}.
-
-\begin{table}[H]
-\setstretch{1.2}
-\centering
-\caption{Struktur Skema Dataset \textit{weekly\_sales.csv}}
-\label{tab:weekly_sales_schema}
-\begin{tabularx}{\textwidth}{|l|l|X|}
-\hline
-\textbf{Nama Kolom} & \textbf{Tipe Data} & \textbf{Deskripsi} \\ \hline
-\textit{year\_week} & String & Periode tahun dan nomor minggu ISO (format YYYY-WW). \\ \hline
-\textit{week\_start} & Date & Tanggal awal hari Senin pada minggu tersebut (format YYYY-MM-DD). \\ \hline
-\textit{revenue} & Float & Total omzet pendapatan mingguan (nominal Rupiah). \\ \hline
-\textit{transactions} & Integer & Total volume transaksi/nota lunas mingguan. \\ \hline
-\textit{qty\_sold} & Integer & Total kuantitas unit produk terjual mingguan. \\ \hline
-\textit{active\_days} & Integer & Jumlah hari aktif beroperasi dalam minggu tersebut. \\ \hline
-\end{tabularx}
-\end{table}
-
-\begin{table}[H]
-\setstretch{1.2}
-\centering
-\caption{Struktur Skema Dataset \textit{monthly\_sales.csv}}
-\label{tab:monthly_sales_schema}
-\begin{tabularx}{\textwidth}{|l|l|X|}
-\hline
-\textbf{Nama Kolom} & \textbf{Tipe Data} & \textbf{Deskripsi} \\ \hline
-\textit{year\_month} & String & Periode tahun dan bulan kalender (format YYYY-MM). \\ \hline
-\textit{revenue} & Float & Total omzet pendapatan bulanan (nominal Rupiah). \\ \hline
-\textit{transactions} & Integer & Total volume transaksi/nota lunas bulanan. \\ \hline
-\textit{qty\_sold} & Integer & Total kuantitas unit produk terjual bulanan. \\ \hline
-\textit{active\_days} & Integer & Jumlah hari aktif beroperasi dalam bulan tersebut. \\ \hline
-\end{tabularx}
-\end{table}
-
-\subsection{Analisis Kebutuhan Data}
-
-Analisis kebutuhan data dilakukan untuk mengidentifikasi karakteristik dan kebutuhan pemrosesan data agar model prediksi LSTM dan aplikasi POS dapat berintegrasi secara optimal:
-\begin{enumerate}
-    \item \textbf{Volume Data Minimum (\textit{Cold Start Mitigation}):} Model LSTM memerlukan data runtun waktu yang kontinu. Penelitian ini membedakan dua ambang batas yang berbeda tujuan: (1) \textbf{7 hari aktif} merupakan syarat teknis minimum agar model dapat dijalankan sama sekali, sesuai panjang \textit{sequence} \texttt{LOOK\_BACK} pada arsitektur LSTM (lihat Subbab 3.2.7); dan (2) \textbf{30 hari aktif} merupakan ambang batas kualitas (\textit{warm-up period}) agar hasil prediksi dianggap cukup andal untuk ditampilkan tanpa peringatan \textit{cold start} kepada pengguna. Toko dengan riwayat transaksi kurang dari 7 hari tidak dapat memperoleh estimasi model sama sekali dan diberikan estimasi berbasis pola bisnis retail/kafe umum, sedangkan toko dengan riwayat antara 7--30 hari tetap memperoleh estimasi namun disertai peringatan \textit{cold start} bahwa keandalannya masih terbatas.
-    \item \textbf{Pembersihan dan Imputasi Data:} Karena data mentah transaksi sering kali memiliki hari luring atau libur, diperlukan aturan pembersihan data. Hari non-aktif (Sabtu, Minggu, dan libur semester) disaring agar tidak mengacaukan analisis pola musiman bisnis harian.
-    \item \textbf{Keamanan Data (Minimalisasi Data):} \textit{Payload} yang dikirimkan ke layanan REST API prediksi secara desain hanya berisi data agregat numerik penjualan (total omzet harian, kuantitas terjual, dan indeks waktu kalender) tanpa menyertakan informasi identitas pelanggan seperti nama, nomor telepon, maupun detail pembayaran spesifik, sehingga privasi pelanggan tetap terjaga.
-    \item \textbf{Struktur Payload Data API:} Data runtun waktu harus dikirimkan dalam format terstruktur JSON melalui protokol HTTPS. Payload berisi larik nominal omzet harian 7 hari terakhir beserta indeks waktu kalender yang relevan.
-\end{enumerate}
-
-\subsection{Preprocessing Data}
-
-Data transaksi yang terkumpul dari basis data EatsTEDI melalui beberapa tahap penyiapan berikut sebelum digunakan untuk pelatihan model:
-\begin{enumerate}
-    \item \textbf{Pembersihan dan Penyaringan Hari Aktif:} Menghapus data duplikat dan menyelaraskan format tanggal, serta menyaring hari non-aktif (Sabtu, Minggu, dan libur semester pada Januari dan Juli). Pada implementasinya, penyaringan diwujudkan dengan hanya mempertahankan hari kerja aktif yang memiliki pendapatan positif (\textit{revenue} $> 0$). Penyaringan ini mencegah \textit{gap} panjang pada deret waktu yang dapat mengaburkan pola musiman harian.
-    \item \textbf{Transformasi Target:} Nilai pendapatan ditransformasikan ke skala logaritma untuk menstabilkan variansi, kemudian diubah menjadi bentuk \textit{log-return} (selisih logaritmik antar hari aktif) agar model mempelajari deviasi pendapatan relatif, bukan nilai nominal mentah.
-    \item \textbf{Normalisasi:} Seluruh fitur masukan diskalakan ke rentang $[0, 1]$ menggunakan \textit{Min-Max Scaling}, dengan \textit{fitting} parameter \textit{scaler} hanya pada data latih untuk mencegah kebocoran informasi (\textit{data leakage}).
-    \item \textbf{Pembentukan \textit{Sequence} (\textit{Windowing}):} Data diubah ke format \textit{input}--label menggunakan \textit{sliding window} sepanjang 7 hari kerja aktif ($LOOK\_BACK = 7$) untuk memprediksi penjualan hari aktif berikutnya.
-    \item \textbf{Pembagian Data (\textit{Time-Based Split}):} Dataset dibagi secara kronologis agar urutan temporal terjaga dan tidak terjadi kebocoran data masa depan ke masa lalu.
-\end{enumerate}
-
-Rincian teknis rumus \textit{log-return}, \textit{cyclical encoding}, dan arsitektur model dijabarkan secara lengkap pada Subbagian~\ref{subsec:lstm_alg}.
 
 \section{Rancangan Sistem}
 
