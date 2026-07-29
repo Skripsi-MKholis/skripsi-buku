@@ -538,17 +538,17 @@ NIM. 2022573010098
 \section{Latar Belakang Masalah}
 Transformasi digital pada sektor ritel dan usaha mikro, kecil, dan menengah (UMKM) telah menjadikan aplikasi \textit{Point of Sale} (POS) sebagai infrastruktur transaksi yang tidak lagi bersifat opsional. Aplikasi POS modern tidak hanya mencatat transaksi penjualan, tetapi juga menghasilkan data transaksional harian yang bersifat deret waktu (\textit{time series}) secara terus-menerus. Namun demikian, sebagian besar aplikasi POS yang beredar, khususnya pada skala usaha kecil seperti kantin institusi, masih memposisikan data tersebut sebatas sebagai arsip pelaporan dan belum memanfaatkannya sebagai basis pengambilan keputusan yang bersifat prediktif. Akibatnya, keputusan operasional seperti penentuan volume produksi harian, pengadaan bahan baku, dan penjadwalan tenaga kerja masih banyak ditentukan berdasarkan intuisi pengelola, yang berisiko menimbulkan kelebihan persediaan (\textit{overstock}) maupun kehabisan persediaan (\textit{stockout}).
 
-Ketidakakuratan estimasi permintaan harian berdampak langsung pada efisiensi biaya dan tingkat layanan. Peramalan penjualan yang akurat berperan penting dalam menyeimbangkan permintaan dan pasokan serta meningkatkan profitabilitas pada sektor ritel~[36]. Karakteristik data penjualan harian pada usaha kuliner institusional bersifat kompleks: terdapat musiman mingguan berupa perbedaan volume antara hari kerja dan akhir pekan, pengaruh kalender akademik, hari libur nasional, serta fluktuasi yang tidak beraturan. Metode statistik konvensional seperti \textit{moving average} dan ARIMA memiliki keterbatasan dalam menangkap pola non-linear dan ketergantungan temporal jangka panjang pada data dengan karakteristik semacam ini.
+Ketidakakuratan estimasi permintaan harian berdampak langsung pada efisiensi biaya dan tingkat layanan. Peramalan penjualan yang akurat berperan penting dalam menyeimbangkan permintaan dan pasokan serta meningkatkan profitabilitas pada sektor ritel~[1]. Karakteristik data penjualan harian pada usaha kuliner institusional bersifat kompleks: terdapat musiman mingguan berupa perbedaan volume antara hari kerja dan akhir pekan, pengaruh kalender akademik, hari libur nasional, serta fluktuasi yang tidak beraturan. Metode statistik konvensional seperti \textit{moving average} dan ARIMA memiliki keterbatasan dalam menangkap pola non-linear dan ketergantungan temporal jangka panjang pada data dengan karakteristik semacam ini.
 
-Untuk mengatasi keterbatasan tersebut, pendekatan \textit{deep learning} berbasis \textit{Recurrent Neural Network} (RNN), khususnya \textit{Long Short-Term Memory} (LSTM), telah menjadi salah satu metode mutakhir dalam peramalan deret waktu penjualan. LSTM memanfaatkan mekanisme gerbang (\textit{gating mechanism}) untuk mempertahankan informasi lintas rentang waktu yang panjang sekaligus mengatasi masalah \textit{vanishing gradient} yang melekat pada RNN tradisional~[17]. Sejumlah penelitian terkini menunjukkan keunggulan pendekatan berbasis LSTM. Optimasi \textit{hyperparameter} menggunakan Keras Tuner pada LSTM untuk prediksi penjualan harian \textit{dataset} ritel Walmart menghasilkan peningkatan akurasi yang signifikan dibandingkan metode peramalan tradisional~[37]. De Castro Moraes dkk.~[38] mengembangkan arsitektur hibrida CNN-LSTM bertumpuk (\textit{stacked}) dan paralel untuk menangani pola musiman yang bervariasi serta korelasi antarproduk pada 500 deret waktu ritel. Sementara itu, Mansur dkk.~[36] menunjukkan bahwa model hibrida CNN-LSTM yang diperkaya variabel eksogen berupa hari libur, hari gajian, aksi unjuk rasa, dan kondisi cuaca mampu mencapai MAPE sebesar 4,16\%, mengungguli model ANN, CNN, dan LSTM tunggal. Perkembangan ini memperkuat posisi LSTM sebagai metode yang relevan untuk diintegrasikan ke dalam sistem POS.
+Untuk mengatasi keterbatasan tersebut, pendekatan \textit{deep learning} berbasis \textit{Recurrent Neural Network} (RNN), khususnya \textit{Long Short-Term Memory} (LSTM), telah menjadi salah satu metode mutakhir dalam peramalan deret waktu penjualan. LSTM memanfaatkan mekanisme gerbang (\textit{gating mechanism}) untuk mempertahankan informasi lintas rentang waktu yang panjang sekaligus mengatasi masalah \textit{vanishing gradient} yang melekat pada RNN tradisional~[2]. Sejumlah penelitian terkini menunjukkan keunggulan pendekatan berbasis LSTM. Optimasi \textit{hyperparameter} menggunakan Keras Tuner pada LSTM untuk prediksi penjualan harian \textit{dataset} ritel Walmart menghasilkan peningkatan akurasi yang signifikan dibandingkan metode peramalan tradisional~[3]. De Castro Moraes dkk.~[4] mengembangkan arsitektur hibrida CNN-LSTM bertumpuk (\textit{stacked}) dan paralel untuk menangani pola musiman yang bervariasi serta korelasi antarproduk pada 500 deret waktu ritel. Sementara itu, Mansur dkk.~[1] menunjukkan bahwa model hibrida CNN-LSTM yang diperkaya variabel eksogen berupa hari libur, hari gajian, aksi unjuk rasa, dan kondisi cuaca mampu mencapai MAPE sebesar 4,16\%, mengungguli model ANN, CNN, dan LSTM tunggal. Perkembangan ini memperkuat posisi LSTM sebagai metode yang relevan untuk diintegrasikan ke dalam sistem POS.
 
-Kendati demikian, terdapat dua kondisi yang membatasi keterbukaan hasil tersebut untuk direplikasi pada usaha berskala kecil. Pertama, model \textit{deep learning} bersifat \textit{data-hungry}, yaitu performanya sangat bergantung pada ukuran \textit{dataset}, sehingga pelatihan dengan data yang tidak memadai secara nyata membatasi kegunaannya~[39]. Beberapa penelitian yang melaporkan akurasi tinggi memang menggunakan data berskala besar, seperti~[38] yang memanfaatkan riwayat transaksi lima tahun. Kedua, ketika akurasi tinggi berhasil dicapai pada data berukuran kecil, keberhasilan tersebut umumnya bertumpu pada ketersediaan variabel eksogen yang kaya dan bukan pada panjang deret waktunya semata. Penelitian~[36] mencapai MAPE 4,16\% hanya dengan enam bulan data harian dari satu gerai, namun dengan tambahan tujuh variabel cuaca dan peristiwa, sementara penulisnya sendiri mencatat adanya indikasi \textit{overfitting} pada kurva \textit{validation loss}. Kondisi ini menyisakan persoalan bagi kasus di mana variabel eksogen semacam itu tidak tersedia. Sebagai jalan keluar, augmentasi data sintetis menggunakan \textit{Time-series Generative Adversarial Network} (TimeGAN)~[25] diusulkan untuk memperkaya sampel pelatihan dan terbukti menurunkan RMSE serta MAE pada beberapa domain~[40]. Namun literatur juga mencatat bahwa manfaat augmentasi semakin tidak signifikan seiring bertambahnya ukuran data awal~[41], sehingga efektivitas TimeGAN pada data penjualan harian berskala kecil masih merupakan pertanyaan terbuka yang layak diuji secara empiris.
+Kendati demikian, terdapat dua kondisi yang membatasi keterbukaan hasil tersebut untuk direplikasi pada usaha berskala kecil. Pertama, model \textit{deep learning} bersifat \textit{data-hungry}, yaitu performanya sangat bergantung pada ukuran \textit{dataset}, sehingga pelatihan dengan data yang tidak memadai secara nyata membatasi kegunaannya~[5]. Beberapa penelitian yang melaporkan akurasi tinggi memang menggunakan data berskala besar, seperti~[4] yang memanfaatkan riwayat transaksi lima tahun. Kedua, ketika akurasi tinggi berhasil dicapai pada data berukuran kecil, keberhasilan tersebut umumnya bertumpu pada ketersediaan variabel eksogen yang kaya dan bukan pada panjang deret waktunya semata. Penelitian~[1] mencapai MAPE 4,16\% hanya dengan enam bulan data harian dari satu gerai, namun dengan tambahan tujuh variabel cuaca dan peristiwa, sementara penulisnya sendiri mencatat adanya indikasi \textit{overfitting} pada kurva \textit{validation loss}. Kondisi ini menyisakan persoalan bagi kasus di mana variabel eksogen semacam itu tidak tersedia. Sebagai jalan keluar, augmentasi data sintetis menggunakan \textit{Time-series Generative Adversarial Network} (TimeGAN)~[6] diusulkan untuk memperkaya sampel pelatihan dan terbukti menurunkan RMSE serta MAE pada beberapa domain~[7]. Namun literatur juga mencatat bahwa manfaat augmentasi semakin tidak signifikan seiring bertambahnya ukuran data awal~[8], sehingga efektivitas TimeGAN pada data penjualan harian berskala kecil masih merupakan pertanyaan terbuka yang layak diuji secara empiris.
 
-Celah kedua bersifat metodologis. Sebagian besar penelitian peramalan penjualan berbasis LSTM membandingkan modelnya dengan sesama model \textit{machine learning}, tetapi jarang mengujinya secara ketat terhadap \textit{baseline} heuristik sederhana seperti \textit{seasonal-naive}, padahal pada data dengan musiman mingguan yang kuat \textit{baseline} semacam ini kerap sangat kompetitif. Pengalaman kompetisi peramalan berskala besar menunjukkan bahwa metode sederhana masih menjadi pembanding yang sulit dikalahkan dan karenanya wajib disertakan sebagai kontrol metodologis~[42]. Celah ketiga bersifat implementatif: kajian yang ada umumnya berhenti pada tahap eksperimen model dan belum sampai pada penyatuan model ke dalam aplikasi POS yang benar-benar digunakan pengguna akhir, sehingga jarak antara riset akademik dan penerapan praktis di ritel masih lebar~[43]. Penelitian ini menempatkan diri tepat pada ketiga celah tersebut, yaitu membangun aplikasi POS yang di dalamnya tertanam fitur prediksi penjualan harian berbasis LSTM, mengevaluasi kontribusi augmentasi TimeGAN, serta menguji model secara jujur terhadap \textit{baseline seasonal-naive}.
+Celah kedua bersifat metodologis. Sebagian besar penelitian peramalan penjualan berbasis LSTM membandingkan modelnya dengan sesama model \textit{machine learning}, tetapi jarang mengujinya secara ketat terhadap \textit{baseline} heuristik sederhana seperti \textit{seasonal-naive}, padahal pada data dengan musiman mingguan yang kuat \textit{baseline} semacam ini kerap sangat kompetitif. Pengalaman kompetisi peramalan berskala besar menunjukkan bahwa metode sederhana masih menjadi pembanding yang sulit dikalahkan dan karenanya wajib disertakan sebagai kontrol metodologis~[9]. Celah ketiga bersifat implementatif: kajian yang ada umumnya berhenti pada tahap eksperimen model dan belum sampai pada penyatuan model ke dalam aplikasi POS yang benar-benar digunakan pengguna akhir, sehingga jarak antara riset akademik dan penerapan praktis di ritel masih lebar~[10]. Penelitian ini menempatkan diri tepat pada ketiga celah tersebut, yaitu membangun aplikasi POS yang di dalamnya tertanam fitur prediksi penjualan harian berbasis LSTM, mengevaluasi kontribusi augmentasi TimeGAN, serta menguji model secara jujur terhadap \textit{baseline seasonal-naive}.
 
 Studi kasus penelitian ini menggunakan data transaksi platform EatsTEDI pada Departemen Teknik Elektro dan Informatika (DTEDI), Universitas Gadjah Mada. Data mentah terhimpun dalam rentang 24 Agustus 2024 sampai dengan 20 Juni 2026, mencakup 666 hari kalender atau sekitar 22 bulan operasional. Setelah proses penyaringan, hari aktif pertama dengan transaksi tercatat adalah 26 Agustus 2024, sehingga rentang efektif yang digunakan adalah 26 Agustus 2024 sampai dengan 20 Juni 2026 dan menghasilkan 316 hari dengan transaksi tercatat. Rentang efektif tersebut memuat 475 hari kerja secara kalender, sehingga terdapat sejumlah hari tanpa transaksi yang berasal dari masa libur antarsemester, hari libur nasional, serta penutupan operasional kantin. Ketimpangan ini bukan merupakan kehilangan data yang bersifat acak, melainkan cerminan langsung dari ritme institusional yang justru menjadi objek pemodelan dalam penelitian ini.
 
-Karakteristik demikian menjadikan \textit{dataset} EatsTEDI representatif untuk persoalan yang diangkat. Secara temporal, rentang 22 bulan mencakup empat semester berturut-turut, yakni semester gasal dan genap tahun akademik 2024/2025 serta semester gasal dan genap tahun akademik 2025/2026. Cakupan dua tahun akademik penuh ini memungkinkan pola musiman berbasis kalender akademik, meliputi periode perkuliahan normal, minggu ujian tengah semester, minggu ujian akhir semester, dan masa libur antarsemester, teramati secara berulang dan bukan hanya sekali, sehingga model memiliki peluang mempelajarinya sebagai pola dan bukan sebagai anomali. Secara struktural, data juga memuat musiman mingguan berupa perbedaan volume transaksi antara hari kerja dan akhir pekan. Namun demikian, dengan hanya 316 titik pengamatan, jumlah sampel pelatihan yang tersedia bagi model LSTM tetap tergolong sangat terbatas apabila dibandingkan dengan penelitian sejenis yang menggunakan ribuan hingga jutaan catatan transaksi~[37],~[38]. Kondisi inilah yang menempatkan \textit{dataset} EatsTEDI sebagai lingkungan uji yang tepat, yaitu cukup kaya secara pola musiman untuk menjadi persoalan peramalan yang bermakna, namun cukup terbatas secara volume untuk menguji secara jujur apakah kompleksitas LSTM dan augmentasi sintetis TimeGAN benar-benar memberikan nilai tambah dibandingkan pendekatan sederhana pada skala usaha kecil.
+Karakteristik demikian menjadikan \textit{dataset} EatsTEDI representatif untuk persoalan yang diangkat. Secara temporal, rentang 22 bulan mencakup empat semester berturut-turut, yakni semester gasal dan genap tahun akademik 2024/2025 serta semester gasal dan genap tahun akademik 2025/2026. Cakupan dua tahun akademik penuh ini memungkinkan pola musiman berbasis kalender akademik, meliputi periode perkuliahan normal, minggu ujian tengah semester, minggu ujian akhir semester, dan masa libur antarsemester, teramati secara berulang dan bukan hanya sekali, sehingga model memiliki peluang mempelajarinya sebagai pola dan bukan sebagai anomali. Secara struktural, data juga memuat musiman mingguan berupa perbedaan volume transaksi antara hari kerja dan akhir pekan. Namun demikian, dengan hanya 316 titik pengamatan, jumlah sampel pelatihan yang tersedia bagi model LSTM tetap tergolong sangat terbatas apabila dibandingkan dengan penelitian sejenis yang menggunakan ribuan hingga jutaan catatan transaksi~[3],~[4]. Kondisi inilah yang menempatkan \textit{dataset} EatsTEDI sebagai lingkungan uji yang tepat, yaitu cukup kaya secara pola musiman untuk menjadi persoalan peramalan yang bermakna, namun cukup terbatas secara volume untuk menguji secara jujur apakah kompleksitas LSTM dan augmentasi sintetis TimeGAN benar-benar memberikan nilai tambah dibandingkan pendekatan sederhana pada skala usaha kecil.
 
 Berdasarkan uraian tersebut, penelitian ini merancang dan membangun aplikasi \textit{Point of Sale} dengan fitur prediksi penjualan harian menggunakan metode \textit{Long Short-Term Memory}. Kontribusi penelitian mencakup tiga aspek. Pertama, perancangan arsitektur aplikasi POS yang mengintegrasikan modul prediksi ke dalam alur kerja transaksi harian sehingga hasil peramalan dapat langsung dimanfaatkan pengelola. Kedua, evaluasi empiris pengaruh augmentasi data sintetis TimeGAN terhadap performa LSTM pada \textit{dataset} penjualan berskala kecil. Ketiga, pembandingan model terhadap \textit{baseline seasonal-naive} pada beberapa horizon peramalan sebagai kontrol metodologis, guna menghasilkan rekomendasi yang jujur mengenai kondisi di mana pendekatan \textit{deep learning} layak diterapkan pada konteks usaha kuliner berskala kecil di Indonesia.
 
@@ -668,7 +668,7 @@ Ringkasan penelitian terdahulu beserta persamaan dan perbedaannya dengan penelit
 \endlastfoot
 
 1 &
-T. de Castro Moraes, X.-M. Yuan, E. P. Chew (2024) [38] &
+T. de Castro Moraes, X.-M. Yuan, E. P. Chew (2024) [4] &
 \textit{Hybrid Convolutional Long Short-Term Memory Models for Sales Forecasting in Retail} &
 Hibrida CNN-LSTM bertumpuk (S-CNN-LSTM) dan paralel (P-CNN-LSTM) &
 MAPE 14,15\% (bertumpuk) dan 14,76\% (paralel) pada 500 deret waktu ritel selama 5 tahun &
@@ -677,7 +677,7 @@ Menggunakan data berskala besar (5 tahun, 500 deret); penelitian ini hanya 316 t
 \hline
 
 2 &
-S. Mansur dkk. (2025) [36] &
+S. Mansur dkk. (2025) [1] &
 \textit{Sales Forecasting for Retail Stores Using Hybrid Neural Networks and Sales-Affecting Variables} &
 Hibrida CNN-LSTM dengan variabel eksogen (cuaca, hari libur, hari gajian, unjuk rasa) &
 MAPE 4,16\%, mengungguli ANN (19,74\%), CNN (13,90\%), dan LSTM tunggal (10,39\%) &
@@ -686,7 +686,7 @@ Keberhasilan bertumpu pada tujuh variabel eksogen yang tidak tersedia pada \text
 \hline
 
 3 &
-M. Mitra dkk. (2024) [37] &
+M. Mitra dkk. (2024) [3] &
 \textit{Harnessing LSTM Neural Networks and Hyperparameter Optimization for Precise Sales Forecasting in Retail} &
 LSTM dengan optimasi \textit{hyperparameter} menggunakan Keras Tuner &
 Peningkatan akurasi signifikan dibanding metode peramalan tradisional pada \textit{dataset} Walmart &
@@ -695,7 +695,7 @@ Menggunakan \textit{dataset} hierarkis berskala besar dengan variabel harga, pro
 \hline
 
 4 &
-P. Yadav, C. R. Barde (2025) [43] &
+P. Yadav, C. R. Barde (2025) [10] &
 \textit{Retail Real-Time Sales Prediction System Using LSTM and XGBoost} &
 LSTM untuk pemodelan deret waktu dikombinasikan dengan XGBoost, terintegrasi dengan sistem POS &
 Sistem prediksi penjualan waktu nyata yang terhubung dengan POS untuk penyerapan data dinamis &
@@ -704,7 +704,7 @@ Menggunakan pendekatan hibrida LSTM-XGBoost berbasis \textit{web}; penelitian in
 \hline
 
 5 &
-J. Yoon, D. Jarrett, M. van der Schaar (2019) [25] &
+J. Yoon, D. Jarrett, M. van der Schaar (2019) [6] &
 \textit{Time-series Generative Adversarial Networks} &
 TimeGAN, yaitu GAN dengan pembelajaran swa-penyeliaan berbasis \textit{autoencoder} untuk deret waktu &
 Menghasilkan data sintetis yang mempertahankan dinamika temporal data asli secara lebih baik dibanding GAN konvensional &
@@ -713,7 +713,7 @@ Berfokus pada kualitas pembangkitan data secara umum, bukan pada dampaknya terha
 \hline
 
 6 &
-P. Tang, Z. Li, X. Wang, X. Liu, P. Mou (2025) [40] &
+P. Tang, Z. Li, X. Wang, X. Liu, P. Mou (2025) [7] &
 \textit{Time Series Data Augmentation for Energy Consumption Data Based on Improved TimeGAN} &
 TimeGAN yang ditingkatkan dengan \textit{multi-head self-attention}, model prediksi hibrida CNN-GRU &
 Penurunan RMSE dan MAE serta peningkatan $R^2$ setelah augmentasi data &
@@ -722,7 +722,7 @@ Diterapkan pada domain konsumsi energi manufaktur dengan model CNN-GRU; peneliti
 \hline
 
 7 &
-A.-A. Semenoglou, E. Spiliotis, V. Assimakopoulos (2023) [41] &
+A.-A. Semenoglou, E. Spiliotis, V. Assimakopoulos (2023) [8] &
 \textit{Data Augmentation for Univariate Time Series Forecasting with Neural Networks} &
 Perbandingan sistematis beberapa teknik augmentasi data pada peramalan deret waktu univariat &
 Manfaat augmentasi lebih signifikan pada jaringan yang lebih dalam, namun menurun seiring bertambahnya ukuran data awal &
@@ -731,7 +731,7 @@ Bersifat studi perbandingan lintas \textit{dataset} tanpa membangun aplikasi; ti
 \hline
 
 8 &
-S. Makridakis, E. Spiliotis, V. Assimakopoulos (2022) [42] &
+S. Makridakis, E. Spiliotis, V. Assimakopoulos (2022) [9] &
 \textit{The M5 Competition: Background, Organization, and Implementation} &
 Kompetisi peramalan berskala besar dengan pembanding metode statistik, \textit{machine learning}, dan \textit{deep learning} &
 Metode sederhana dan kombinasi statistik tetap menjadi pembanding yang kompetitif terhadap model kompleks &
@@ -740,7 +740,7 @@ Berupa kajian kompetisi lintas ribuan deret waktu; penelitian ini menerapkan pri
 \hline
 
 9 &
-R. A. Sembiring \& Y. Sary (2025), \textit{Jurnal Ilmiah Teknik Mesin, Elektro dan Komputer} [44] &
+R. A. Sembiring \& Y. Sary (2025), \textit{Jurnal Ilmiah Teknik Mesin, Elektro dan Komputer} [11] &
 \textit{Analisa dan Implementasi Long Short-Term Memory (LSTM) dalam Kebutuhan Persediaan Barang di PT. Gunung Sari Indonesia} &
 LSTM dengan \textit{window size} 14, 30, dan 60 hari, dibandingkan dengan \textit{Moving Average}; evaluasi MAD, MSE, MAPE &
 MAPE LSTM 102--106\%, sedangkan \textit{Moving Average} 85--88\%; LSTM lebih adaptif pada pola fluktuatif, \textit{Moving Average} lebih stabil pada pola konsisten &
@@ -749,7 +749,7 @@ Pembanding berupa \textit{Moving Average}, bukan \textit{seasonal-naive}; tidak 
 \hline
 
 10 &
-U. M. Jannah dkk. (2025), \textit{Jurnal Teknologi Informasi dan Multimedia} [45] &
+U. M. Jannah dkk. (2025), \textit{Jurnal Teknologi Informasi dan Multimedia} [12] &
 \textit{Analisis Prediksi Penjualan Isi Ulang Air Galon Menggunakan Metode LSTM dan SARIMA} &
 Perbandingan LSTM dengan SARIMA pada data penjualan usaha kecil &
 Perbandingan akurasi kedua metode pada data penjualan harian usaha berskala kecil &
@@ -758,7 +758,7 @@ Pembanding berupa SARIMA, bukan \textit{baseline} heuristik; tidak mengkaji kete
 \hline
 
 11 &
-R. Verdiyanto, D. Hartanti, E. Purwanto (2025), \textit{Infotek: Jurnal Informatika dan Teknologi} [46] &
+R. Verdiyanto, D. Hartanti, E. Purwanto (2025), \textit{Infotek: Jurnal Informatika dan Teknologi} [13] &
 \textit{Pengembangan Aplikasi Point of Sales untuk Prediksi Penjualan Harian Usaha Minuman Menggunakan Algoritma Random Forest Regression} &
 \textit{Random Forest Regression} yang diintegrasikan ke dalam aplikasi \textit{Point of Sales} &
 Aplikasi POS dengan fitur prediksi penjualan harian untuk usaha minuman &
@@ -775,47 +775,47 @@ Berdasarkan pemetaan pada Tabel~\ref{tab:sota}, dapat diidentifikasi bahwa belum
 
 \subsection{\textit{Point of Sale} (POS)}
 
-\textit{Point of Sale} (POS) adalah sistem yang digunakan untuk mencatat, memproses, dan mendokumentasikan transaksi penjualan pada titik terjadinya transaksi. Dalam perkembangannya, aplikasi POS tidak lagi berfungsi semata sebagai mesin kasir digital, melainkan juga sebagai sistem informasi yang mengelola data produk, persediaan, pelanggan, dan pelaporan keuangan. Penerapan aplikasi POS pada usaha mikro, kecil, dan menengah terbukti membantu proses pencatatan transaksi menjadi lebih cepat, akurat, dan terdokumentasi, meskipun tingkat penerimaan penggunanya masih dipengaruhi oleh persepsi kemudahan dan kemanfaatan sistem [47]. Secara arsitektural, sistem POS umumnya terdiri atas modul autentikasi pengguna, modul manajemen produk, modul transaksi, modul persediaan, dan modul pelaporan [48].
+\textit{Point of Sale} (POS) adalah sistem yang digunakan untuk mencatat, memproses, dan mendokumentasikan transaksi penjualan pada titik terjadinya transaksi. Dalam perkembangannya, aplikasi POS tidak lagi berfungsi semata sebagai mesin kasir digital, melainkan juga sebagai sistem informasi yang mengelola data produk, persediaan, pelanggan, dan pelaporan keuangan. Penerapan aplikasi POS pada usaha mikro, kecil, dan menengah terbukti membantu proses pencatatan transaksi menjadi lebih cepat, akurat, dan terdokumentasi, meskipun tingkat penerimaan penggunanya masih dipengaruhi oleh persepsi kemudahan dan kemanfaatan sistem [14]. Secara arsitektural, sistem POS umumnya terdiri atas modul autentikasi pengguna, modul manajemen produk, modul transaksi, modul persediaan, dan modul pelaporan [15].
 
-Data transaksi yang dihasilkan aplikasi POS secara berkelanjutan memiliki sifat deret waktu, yakni terurut berdasarkan waktu dan memiliki ketergantungan antarpengamatan. Sifat inilah yang membuka peluang pemanfaatan data POS untuk keperluan peramalan, sehingga sistem tidak hanya bersifat \textit{descriptive} (mencatat apa yang telah terjadi) tetapi juga \textit{predictive} (memperkirakan apa yang akan terjadi).
+Data transaksi yang dihasilkan aplikasi POS secara berkelanjutan memiliki sifat deret waktu, yakni terurut berdasarkan waktu dan memiliki ketergantungan antarpengamatan [16]. Sifat inilah yang membuka peluang pemanfaatan data POS untuk keperluan peramalan, sehingga sistem tidak hanya bersifat \textit{descriptive} (mencatat apa yang telah terjadi) tetapi juga \textit{predictive} (memperkirakan apa yang akan terjadi), sebagaimana telah diterapkan pada sistem POS ritel yang menyertakan modul prediksi penjualan [10], [13].
 
 \subsection{Peramalan Deret Waktu (\textit{Time Series Forecasting})}
 
-Deret waktu adalah rangkaian pengamatan suatu variabel yang dicatat secara berurutan dalam interval waktu yang tetap. Peramalan deret waktu bertujuan memperkirakan nilai pengamatan pada periode mendatang berdasarkan pola yang terkandung pada pengamatan historisnya [20]. Secara umum, sebuah deret waktu dapat diuraikan menjadi empat komponen, yaitu tren (\textit{trend}), musiman (\textit{seasonality}), siklus (\textit{cyclical}), dan komponen tak beraturan (\textit{irregular} atau \textit{noise}).
+Deret waktu adalah rangkaian pengamatan suatu variabel yang dicatat secara berurutan dalam interval waktu yang tetap. Peramalan deret waktu bertujuan memperkirakan nilai pengamatan pada periode mendatang berdasarkan pola yang terkandung pada pengamatan historisnya [16]. Secara umum, sebuah deret waktu dapat diuraikan menjadi empat komponen, yaitu tren (\textit{trend}), musiman (\textit{seasonality}), siklus (\textit{cyclical}), dan komponen tak beraturan (\textit{irregular} atau \textit{noise}) [16], [17].
 
-Pada data penjualan harian kantin institusional, komponen musiman muncul dalam dua tingkatan. Musiman mingguan (periode $m = 7$) tampak dari perbedaan volume transaksi antara hari kerja dan akhir pekan, sedangkan musiman berbasis kalender akademik muncul dari perbedaan antara masa perkuliahan, minggu ujian, dan masa libur antarsemester.
+Suatu deret waktu dapat memuat lebih dari satu periode musiman sekaligus, sehingga pemodelannya perlu memperhitungkan setiap periode yang relevan [16]. Pada data penjualan harian kantin institusional, komponen musiman muncul dalam dua tingkatan. Musiman mingguan (periode $m = 7$) tampak dari perbedaan volume transaksi antara hari kerja dan akhir pekan, sedangkan musiman berbasis kalender akademik muncul dari perbedaan antara masa perkuliahan, minggu ujian, dan masa libur antarsemester. Pola musiman berbasis kalender semacam ini juga dilaporkan berpengaruh nyata terhadap volume penjualan ritel harian [1].
 
-Pendekatan peramalan secara garis besar terbagi menjadi tiga kelompok. \textit{Pertama}, pendekatan statistik klasik seperti \textit{moving average}, \textit{exponential smoothing}, ARIMA, dan SARIMA, yang mengasumsikan hubungan linear antarpengamatan [21]. \textit{Kedua}, pendekatan \textit{machine learning} seperti \textit{Random Forest}, \textit{Support Vector Regression}, dan \textit{Gradient Boosting}, yang memperlakukan peramalan sebagai persoalan regresi dengan fitur temporal yang direkayasa secara manual. \textit{Ketiga}, pendekatan \textit{deep learning} seperti RNN, LSTM, dan GRU, yang mampu mempelajari representasi temporal secara otomatis tanpa rekayasa fitur eksplisit.
+Pendekatan peramalan secara garis besar terbagi menjadi tiga kelompok. \textit{Pertama}, pendekatan statistik klasik seperti \textit{moving average}, \textit{exponential smoothing}, ARIMA, dan SARIMA, yang mengasumsikan hubungan linear antarpengamatan [17]. \textit{Kedua}, pendekatan \textit{machine learning} seperti \textit{Random Forest}, \textit{Support Vector Regression}, dan \textit{Gradient Boosting}, yang memperlakukan peramalan sebagai persoalan regresi dengan fitur temporal yang direkayasa secara manual [13]. \textit{Ketiga}, pendekatan \textit{deep learning} seperti RNN, LSTM, dan GRU, yang mampu mempelajari representasi temporal secara otomatis tanpa rekayasa fitur eksplisit [2], [4]. Perbandingan lintas ketiga kelompok pendekatan tersebut pada kompetisi peramalan berskala besar menunjukkan bahwa tidak ada satu kelompok yang unggul secara mutlak, sehingga pemilihannya bergantung pada karakteristik dan ukuran data yang tersedia [9].
 
 \subsection{\textit{Baseline Seasonal-Naive}}
 
-\textit{Seasonal-naive} adalah metode peramalan paling sederhana untuk data bermusiman, yang memperkirakan nilai suatu periode sama dengan nilai pada periode musiman terakhir yang bersesuaian [20]. Secara matematis, prediksi untuk waktu $t+h$ dirumuskan sebagai:
+\textit{Seasonal-naive} adalah metode peramalan paling sederhana untuk data bermusiman, yang memperkirakan nilai suatu periode sama dengan nilai pada periode musiman terakhir yang bersesuaian [16]. Secara matematis, prediksi untuk waktu $t+h$ dirumuskan sebagai:
 \begin{equation}
     \hat{y}_{t+h} = y_{t+h-m\lfloor (h-1)/m \rfloor - m}
 \end{equation}
 
 \noindent dengan $m$ adalah panjang periode musiman. Untuk data penjualan harian dengan musiman mingguan, $m = 7$, sehingga prediksi hari Senin depan adalah nilai penjualan hari Senin sebelumnya.
 
-Meskipun sederhana, metode ini memiliki peran metodologis yang penting. Hyndman dan Koehler menegaskan bahwa metode naif berfungsi sebagai penyebut normalisasi dalam pengukuran akurasi peramalan, sehingga akurasi suatu model hanya bermakna apabila dinyatakan secara relatif terhadap metode naif tersebut [16]. Pengalaman kompetisi peramalan berskala besar juga menunjukkan bahwa metode sederhana kerap sulit dikalahkan oleh model kompleks, terutama pada deret waktu yang pendek atau sangat bergejolak [42]. Karena itu, penyertaan \textit{baseline seasonal-naive} dalam penelitian ini berfungsi sebagai kontrol metodologis untuk memastikan bahwa keunggulan model LSTM, apabila ada, benar-benar berasal dari kemampuan pemodelan dan bukan sekadar dari pola musiman yang telah dapat ditangkap oleh heuristik sederhana.
+Meskipun sederhana, metode ini memiliki peran metodologis yang penting. Hyndman dan Koehler menegaskan bahwa metode naif berfungsi sebagai penyebut normalisasi dalam pengukuran akurasi peramalan, sehingga akurasi suatu model hanya bermakna apabila dinyatakan secara relatif terhadap metode naif tersebut [18]. Pengalaman kompetisi peramalan berskala besar juga menunjukkan bahwa metode sederhana kerap sulit dikalahkan oleh model kompleks, terutama pada deret waktu yang pendek atau sangat bergejolak [9]. Karena itu, penyertaan \textit{baseline seasonal-naive} dalam penelitian ini berfungsi sebagai kontrol metodologis untuk memastikan bahwa keunggulan model LSTM, apabila ada, benar-benar berasal dari kemampuan pemodelan dan bukan sekadar dari pola musiman yang telah dapat ditangkap oleh heuristik sederhana.
 
 \subsection{\textit{Recurrent Neural Network} (RNN)}
 
-\textit{Recurrent Neural Network} adalah arsitektur jaringan saraf tiruan yang dirancang untuk memproses data sekuensial dengan cara mempertahankan keadaan tersembunyi (\textit{hidden state}) yang diperbarui pada setiap langkah waktu. Pada langkah waktu $t$, keadaan tersembunyi dihitung sebagai:
+\textit{Recurrent Neural Network} adalah arsitektur jaringan saraf tiruan yang dirancang untuk memproses data sekuensial dengan cara mempertahankan keadaan tersembunyi (\textit{hidden state}) yang diperbarui pada setiap langkah waktu [2]. Pada langkah waktu $t$, keadaan tersembunyi dihitung sebagai [2]:
 \begin{equation}
     h_t = \tanh(W_{xh} x_t + W_{hh} h_{t-1} + b_h)
 \end{equation}
 
 \noindent dengan $x_t$ sebagai masukan pada waktu $t$, $h_{t-1}$ sebagai keadaan tersembunyi sebelumnya, serta $W$ dan $b$ sebagai bobot dan bias yang dipelajari.
 
-Kelemahan utama RNN konvensional adalah masalah \textit{vanishing gradient}, yaitu mengecilnya nilai gradien secara eksponensial ketika dipropagasikan mundur melintasi banyak langkah waktu. Akibatnya, RNN kesulitan mempelajari ketergantungan jangka panjang [17].
+Kelemahan utama RNN konvensional adalah masalah \textit{vanishing gradient}, yaitu mengecilnya nilai gradien secara eksponensial ketika dipropagasikan mundur melintasi banyak langkah waktu. Akibatnya, RNN kesulitan mempelajari ketergantungan jangka panjang [2].
 
 \subsection{\textit{Long Short-Term Memory} (LSTM)}
 
-\textit{Long Short-Term Memory} diperkenalkan oleh Hochreiter dan Schmidhuber sebagai pengembangan RNN yang mengatasi masalah \textit{vanishing gradient} melalui penambahan sel memori (\textit{cell state}) dan tiga mekanisme gerbang (\textit{gating mechanism}) [17]. Sel memori berfungsi sebagai jalur informasi yang memungkinkan gradien mengalir tanpa mengalami peluruhan berlebih, sedangkan gerbang mengendalikan informasi mana yang dibuang, disimpan, dan dikeluarkan.
+\textit{Long Short-Term Memory} diperkenalkan oleh Hochreiter dan Schmidhuber sebagai pengembangan RNN yang mengatasi masalah \textit{vanishing gradient} melalui penambahan sel memori (\textit{cell state}) dan tiga mekanisme gerbang (\textit{gating mechanism}) [2]. Sel memori berfungsi sebagai jalur informasi yang memungkinkan gradien mengalir tanpa mengalami peluruhan berlebih, sedangkan gerbang mengendalikan informasi mana yang dibuang, disimpan, dan dikeluarkan.
 
 \noindent\textbf{a. Gerbang Lupa (\textit{Forget Gate})}
 
-Gerbang lupa menentukan proporsi informasi dari sel memori sebelumnya yang akan dipertahankan:
+Gerbang lupa menentukan proporsi informasi dari sel memori sebelumnya yang akan dipertahankan [2]:
 \begin{equation}
     f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)
 \end{equation}
@@ -824,7 +824,7 @@ Gerbang lupa menentukan proporsi informasi dari sel memori sebelumnya yang akan 
 
 \noindent\textbf{b. Gerbang Masukan (\textit{Input Gate})}
 
-Gerbang masukan menentukan informasi baru yang akan disimpan ke dalam sel memori. Tahap ini terdiri atas dua bagian, yaitu penentuan proporsi pembaruan dan pembentukan kandidat nilai baru:
+Gerbang masukan menentukan informasi baru yang akan disimpan ke dalam sel memori. Tahap ini terdiri atas dua bagian, yaitu penentuan proporsi pembaruan dan pembentukan kandidat nilai baru [2]:
 \begin{equation}
     i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)
 \end{equation}
@@ -834,7 +834,7 @@ Gerbang masukan menentukan informasi baru yang akan disimpan ke dalam sel memori
 
 \noindent\textbf{c. Pembaruan Sel Memori (\textit{Cell State Update})}
 
-Sel memori diperbarui dengan menggabungkan informasi lama yang dipertahankan dan informasi baru yang diterima:
+Sel memori diperbarui dengan menggabungkan informasi lama yang dipertahankan dan informasi baru yang diterima [2]:
 \begin{equation}
     C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t
 \end{equation}
@@ -843,7 +843,7 @@ Sel memori diperbarui dengan menggabungkan informasi lama yang dipertahankan dan
 
 \noindent\textbf{d. Gerbang Keluaran (\textit{Output Gate})}
 
-Gerbang keluaran menentukan bagian sel memori yang akan diteruskan sebagai keadaan tersembunyi:
+Gerbang keluaran menentukan bagian sel memori yang akan diteruskan sebagai keadaan tersembunyi [2]:
 \begin{equation}
     o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)
 \end{equation}
@@ -851,16 +851,16 @@ Gerbang keluaran menentukan bagian sel memori yang akan diteruskan sebagai keada
     h_t = o_t \odot \tanh(C_t)
 \end{equation}
 
-Melalui mekanisme tersebut, LSTM mampu mempelajari pola berulang berjangka panjang seperti musiman mingguan pada data penjualan. Sejumlah penelitian membuktikan efektivitasnya pada peramalan penjualan ritel, baik dalam bentuk LSTM tunggal dengan optimasi \textit{hyperparameter} [37] maupun dalam bentuk arsitektur hibrida dengan CNN [36], [38].
+Melalui mekanisme tersebut, LSTM mampu mempelajari pola berulang berjangka panjang seperti musiman mingguan pada data penjualan. Sejumlah penelitian membuktikan efektivitasnya pada peramalan penjualan ritel, baik dalam bentuk LSTM tunggal dengan optimasi \textit{hyperparameter} [3] maupun dalam bentuk arsitektur hibrida dengan CNN [1], [4].
 
 \subsection{\textit{Generative Adversarial Network} (GAN) dan TimeGAN}
 
-\textit{Generative Adversarial Network} (GAN) adalah kerangka pemodelan generatif yang melatih dua jaringan secara bersamaan dalam skema permainan minimaks, yaitu \textit{generator} $G$ yang menghasilkan data sintetis dan \textit{discriminator} $D$ yang membedakan data asli dari data sintetis [24]. Fungsi objektifnya dirumuskan sebagai:
+\textit{Generative Adversarial Network} (GAN) adalah kerangka pemodelan generatif yang melatih dua jaringan secara bersamaan dalam skema permainan minimaks, yaitu \textit{generator} $G$ yang menghasilkan data sintetis dan \textit{discriminator} $D$ yang membedakan data asli dari data sintetis [19]. Fungsi objektifnya dirumuskan sebagai:
 \begin{equation}
     \min_G \max_D V(D,G) = \mathbb{E}_{x \sim p_{data}(x)}[\log D(x)] + \mathbb{E}_{z \sim p_z(z)}[\log(1 - D(G(z)))]
 \end{equation}
 
-GAN konvensional dirancang untuk data yang tidak memiliki urutan, sehingga kurang mampu mempertahankan dinamika temporal ketika diterapkan pada deret waktu. Untuk mengatasi hal tersebut, Yoon dkk. mengusulkan \textit{Time-series Generative Adversarial Network} (TimeGAN), yang memadukan kerangka \textit{adversarial} dengan pembelajaran swa-penyeliaan (\textit{self-supervised learning}) berbasis \textit{autoencoder} [25]. Arsitektur TimeGAN terdiri atas empat komponen:
+GAN konvensional dirancang untuk data yang tidak memiliki urutan, sehingga kurang mampu mempertahankan dinamika temporal ketika diterapkan pada deret waktu. Untuk mengatasi hal tersebut, Yoon dkk. mengusulkan \textit{Time-series Generative Adversarial Network} (TimeGAN), yang memadukan kerangka \textit{adversarial} dengan pembelajaran swa-penyeliaan (\textit{self-supervised learning}) berbasis \textit{autoencoder} [6]. Arsitektur TimeGAN terdiri atas empat komponen [6]:
 \begin{enumerate}
     \item \textbf{\textit{Embedding function}}, memetakan data asli dari ruang fitur ke ruang laten.
     \item \textbf{\textit{Recovery function}}, merekonstruksi data dari ruang laten kembali ke ruang fitur.
@@ -868,30 +868,30 @@ GAN konvensional dirancang untuk data yang tidak memiliki urutan, sehingga kuran
     \item \textbf{\textit{Discriminator}}, membedakan barisan laten asli dari barisan laten sintetis.
 \end{enumerate}
 
-Keempat komponen dilatih menggunakan kombinasi tiga fungsi galat, yaitu \textit{reconstruction loss}, \textit{unsupervised adversarial loss}, dan \textit{supervised loss}. Komponen \textit{supervised loss} inilah yang secara khusus memaksa \textit{generator} mempelajari transisi antarlangkah waktu, sehingga dinamika temporal data asli dapat dipertahankan pada data sintetis yang dihasilkan.
+Keempat komponen dilatih menggunakan kombinasi tiga fungsi galat, yaitu \textit{reconstruction loss}, \textit{unsupervised adversarial loss}, dan \textit{supervised loss} [6]. Komponen \textit{supervised loss} inilah yang secara khusus memaksa \textit{generator} mempelajari transisi antarlangkah waktu, sehingga dinamika temporal data asli dapat dipertahankan pada data sintetis yang dihasilkan.
 
-Dalam konteks penelitian ini, TimeGAN digunakan sebagai metode augmentasi data untuk memperbanyak sampel pelatihan pada \textit{dataset} yang berjumlah terbatas. Penerapan serupa telah dilaporkan berhasil menurunkan RMSE dan MAE pada domain konsumsi energi [40]. Namun demikian, perlu dicatat bahwa manfaat augmentasi tidak bersifat universal; kajian perbandingan sistematis menunjukkan bahwa keuntungan augmentasi cenderung menurun seiring bertambahnya ukuran data awal maupun berkurangnya kedalaman arsitektur jaringan [41].
+Dalam konteks penelitian ini, TimeGAN digunakan sebagai metode augmentasi data untuk memperbanyak sampel pelatihan pada \textit{dataset} yang berjumlah terbatas. Penerapan serupa telah dilaporkan berhasil menurunkan RMSE dan MAE pada domain konsumsi energi [7]. Namun demikian, perlu dicatat bahwa manfaat augmentasi tidak bersifat universal; kajian perbandingan sistematis menunjukkan bahwa keuntungan augmentasi cenderung menurun seiring bertambahnya ukuran data awal maupun berkurangnya kedalaman arsitektur jaringan [8].
 
 \subsection{Praproses Data}
 
 \noindent\textbf{a. Normalisasi}
 
-Normalisasi diperlukan agar seluruh nilai masukan berada pada rentang yang seragam, sehingga mempercepat konvergensi pelatihan dan mencegah dominasi fitur bernilai besar. Metode yang umum digunakan pada LSTM adalah \textit{Min-Max Scaling}:
+Normalisasi diperlukan agar seluruh nilai masukan berada pada rentang yang seragam, sehingga mempercepat konvergensi pelatihan dan mencegah dominasi fitur bernilai besar. Metode yang umum digunakan pada LSTM adalah \textit{Min-Max Scaling} [3], [4]:
 \begin{equation}
     x' = \frac{x - x_{min}}{x_{max} - x_{min}}
 \end{equation}
 
 \noindent\textbf{b. Pembentukan Jendela Geser (\textit{Sliding Window})}
 
-Data deret waktu univariat perlu diubah menjadi format pembelajaran terbimbing melalui teknik \textit{sliding window}. Dengan panjang jendela $w$, setiap sampel pelatihan terdiri atas masukan $[y_{t-w+1}, \dots, y_t]$ dan target $y_{t+1}$. Jumlah sampel yang terbentuk adalah $N - w$, dengan $N$ sebagai jumlah pengamatan. Konsekuensinya, semakin panjang jendela yang digunakan, semakin sedikit sampel pelatihan yang tersedia, yaitu pertimbangan yang menjadi kritis pada \textit{dataset} berukuran terbatas seperti pada penelitian ini.
+Data deret waktu univariat perlu diubah menjadi format pembelajaran terbimbing melalui teknik \textit{sliding window} [8]. Dengan panjang jendela $w$, setiap sampel pelatihan terdiri atas masukan $[y_{t-w+1}, \dots, y_t]$ dan target $y_{t+1}$. Jumlah sampel yang terbentuk adalah $N - w$, dengan $N$ sebagai jumlah pengamatan. Konsekuensinya, semakin panjang jendela yang digunakan, semakin sedikit sampel pelatihan yang tersedia, yaitu pertimbangan yang menjadi kritis pada \textit{dataset} berukuran terbatas seperti pada penelitian ini.
 
 \noindent\textbf{c. Pembagian Data}
 
-Berbeda dengan data yang tidak berurutan, pembagian data deret waktu tidak boleh dilakukan secara acak karena akan menimbulkan kebocoran informasi masa depan (\textit{data leakage}). Pembagian dilakukan secara kronologis, dengan data terawal sebagai data latih dan data terakhir sebagai data uji [20].
+Berbeda dengan data yang tidak berurutan, pembagian data deret waktu tidak boleh dilakukan secara acak karena akan menimbulkan kebocoran informasi masa depan (\textit{data leakage}). Pembagian dilakukan secara kronologis, dengan data terawal sebagai data latih dan data terakhir sebagai data uji [16].
 
 \subsection{Metrik Evaluasi}
 
-Evaluasi akurasi model peramalan dalam penelitian ini menggunakan metrik berikut, dengan $y_i$ sebagai nilai aktual, $\hat{y}_i$ sebagai nilai prediksi, dan $n$ sebagai jumlah pengamatan.
+Evaluasi akurasi model peramalan dalam penelitian ini menggunakan metrik berikut, yang mengacu pada tinjauan Hyndman dan Koehler mengenai ukuran akurasi peramalan [18], dengan $y_i$ sebagai nilai aktual, $\hat{y}_i$ sebagai nilai prediksi, dan $n$ sebagai jumlah pengamatan.
 
 \noindent\textbf{a. \textit{Mean Absolute Error} (MAE)}
 \begin{equation}
@@ -908,11 +908,11 @@ Evaluasi akurasi model peramalan dalam penelitian ini menggunakan metrik berikut
     \text{MAPE} = \frac{100\%}{n}\sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right|
 \end{equation}
 
-MAPE memudahkan interpretasi karena dinyatakan dalam persentase, namun tidak terdefinisi ketika terdapat nilai aktual sama dengan nol dan bersifat asimetris terhadap galat berlebih maupun kurang [16]. Keterbatasan ini relevan bagi penelitian ini mengingat \textit{dataset} memuat hari-hari tanpa transaksi.
+MAPE memudahkan interpretasi karena dinyatakan dalam persentase, namun tidak terdefinisi ketika terdapat nilai aktual sama dengan nol dan bersifat asimetris terhadap galat berlebih maupun kurang [18]. Keterbatasan ini relevan bagi penelitian ini mengingat \textit{dataset} memuat hari-hari tanpa transaksi.
 
 \noindent\textbf{d. \textit{Mean Absolute Scaled Error} (MASE)}
 
-Untuk mengatasi keterbatasan MAPE sekaligus memungkinkan perbandingan langsung terhadap \textit{baseline}, digunakan metrik MASE yang diusulkan Hyndman dan Koehler [16]:
+Untuk mengatasi keterbatasan MAPE sekaligus memungkinkan perbandingan langsung terhadap \textit{baseline}, digunakan metrik MASE yang diusulkan Hyndman dan Koehler [18]:
 \begin{equation}
     \text{MASE} = \frac{\frac{1}{n}\sum_{i=1}^{n} |y_i - \hat{y}_i|}{\frac{1}{N-m}\sum_{t=m+1}^{N} |y_t - y_{t-m}|}
 \end{equation}
@@ -921,11 +921,11 @@ Untuk mengatasi keterbatasan MAPE sekaligus memungkinkan perbandingan langsung t
 
 \subsection{Flutter}
 
-Flutter adalah \textit{framework} pengembangan aplikasi lintas platform yang dikembangkan Google, menggunakan bahasa pemrograman Dart dan menerapkan pendekatan berbasis \textit{widget} dengan mesin perenderan tersendiri [49]. Pemilihan Flutter dalam penelitian ini didasarkan pada kemampuannya menghasilkan aplikasi dengan basis kode tunggal, performa mendekati aplikasi asli (\textit{native}), serta dukungan ekosistem pustaka yang memadai untuk integrasi dengan layanan basis data dan antarmuka pemrograman aplikasi (API).
+Flutter adalah \textit{framework} pengembangan aplikasi lintas platform yang dikembangkan Google, menggunakan bahasa pemrograman Dart dan menerapkan pendekatan berbasis \textit{widget} dengan mesin perenderan tersendiri [20]. Pemilihan Flutter dalam penelitian ini didasarkan pada kemampuannya menghasilkan aplikasi dengan basis kode tunggal, performa mendekati aplikasi asli (\textit{native}), serta dukungan ekosistem pustaka yang memadai untuk integrasi dengan layanan basis data dan antarmuka pemrograman aplikasi (API).
 
 \subsection{Pengujian \textit{Black Box}}
 
-Pengujian \textit{black box}, atau disebut juga \textit{behavioral testing}, adalah metode pengujian yang berfokus pada kesesuaian antara masukan dan keluaran sistem berdasarkan spesifikasi fungsional, tanpa memperhatikan struktur kode maupun logika internal program [32]. Pengujian ini diarahkan untuk menemukan kesalahan berupa fungsi yang tidak benar atau tidak tersedia, kesalahan antarmuka, kesalahan akses basis data, serta kesalahan perilaku dan kinerja sistem [32], dengan teknik perancangan kasus uji yang lazim digunakan meliputi \textit{equivalence partitioning} dan \textit{boundary value analysis} [50], [51]. Dalam penelitian ini, pengujian \textit{black box} diterapkan untuk memverifikasi fungsionalitas aplikasi \textit{Point of Sale} yang dibangun, meliputi modul autentikasi pengguna, manajemen produk, transaksi penjualan, pengelolaan persediaan, pelaporan, serta modul prediksi penjualan harian, dengan setiap kasus uji mencantumkan skenario pengujian, masukan, hasil yang diharapkan, hasil yang diperoleh, dan simpulan berupa ``berhasil'' atau ``gagal''. Metode ini dipilih karena tujuan pengujian adalah memastikan seluruh fungsi aplikasi berperilaku sesuai spesifikasi kebutuhan dari sudut pandang pengguna akhir, sehingga penilaian akurasi model prediksi tidak termasuk dalam cakupan pengujian ini melainkan dilakukan secara terpisah menggunakan metrik yang telah diuraikan pada Subbab 2.2.8.
+Pengujian \textit{black box}, atau disebut juga \textit{behavioral testing}, adalah metode pengujian yang berfokus pada kesesuaian antara masukan dan keluaran sistem berdasarkan spesifikasi fungsional, tanpa memperhatikan struktur kode maupun logika internal program [21]. Pengujian ini diarahkan untuk menemukan kesalahan berupa fungsi yang tidak benar atau tidak tersedia, kesalahan antarmuka, kesalahan akses basis data, serta kesalahan perilaku dan kinerja sistem [21], dengan teknik perancangan kasus uji yang lazim digunakan meliputi \textit{equivalence partitioning} dan \textit{boundary value analysis} [22], [23]. Dalam penelitian ini, pengujian \textit{black box} diterapkan untuk memverifikasi fungsionalitas aplikasi \textit{Point of Sale} yang dibangun, meliputi modul autentikasi pengguna, manajemen produk, transaksi penjualan, pengelolaan persediaan, pelaporan, serta modul prediksi penjualan harian, dengan setiap kasus uji mencantumkan skenario pengujian, masukan, hasil yang diharapkan, hasil yang diperoleh, dan simpulan berupa ``berhasil'' atau ``gagal''. Metode ini dipilih karena tujuan pengujian adalah memastikan seluruh fungsi aplikasi berperilaku sesuai spesifikasi kebutuhan dari sudut pandang pengguna akhir, sehingga penilaian akurasi model prediksi tidak termasuk dalam cakupan pengujian ini melainkan dilakukan secara terpisah menggunakan metrik yang telah diuraikan pada Subbab 2.2.8.
 
 %%=============================================================
 %% BAB III - METODOLOGI PENELITIAN
@@ -2688,207 +2688,95 @@ Berdasarkan keterbatasan sistem yang diidentifikasi selama proses pengembangan d
 \begin{spacing}{1.0}
 
 \noindent\hangindent=1.5cm
-{[1]} A. Setiawan and B. T. Nugroho, ``Development of Cross-Platform Point of Sale Application using Flutter Framework for Small and Medium Enterprises,'' \textit{International Journal of Advanced Computer Science and Applications}, vol. 14, no. 5, pp. 320--329, 2023.
+{[1]} S. Mansur, K. Sattar, S. E. Hosseini, S. Pervez, I. Ahmad, K. Saleem, and A. Z. Elhendi, ``Sales Forecasting for Retail Stores Using Hybrid Neural Networks and Sales-Affecting Variables,'' \textit{PeerJ Computer Science}, vol. 11, e3058, 2025, doi: 10.7717/peerj-cs.3058.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[2]} R. Pratama and S. Handayani, ``Digital Transformation of Indonesian SMEs: Implementation of Smart Point of Sales Systems,'' \textit{Jurnal Sistem Informasi (JSI)}, vol. 21, no. 1, pp. 12--25, 2025.
+{[2]} S. Hochreiter and J. Schmidhuber, ``Long Short-Term Memory,'' \textit{Neural Computation}, vol. 9, no. 8, pp. 1735--1780, 1997.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[3]} T. Brown and M. Green, ``Demand Forecasting for Inventory Management in Small Retail Stores Using Neural Networks,'' \textit{Journal of Retailing and Consumer Services}, vol. 58, pp. 102--115, 2021.
+{[3]} M. Mitra, S. Roy, S. De, S. Bhattacharyya, J. Platos, and V. Snasel, ``Harnessing LSTM Neural Networks and Hyperparameter Optimization for Precise Sales Forecasting in Retail,'' in \textit{Proc. 10th International Conference on Advanced Intelligent Systems and Informatics (AISI 2024)}, Lecture Notes on Data Engineering and Communications Technologies, vol. 220. Cham, Switzerland: Springer, 2024, doi: 10.1007/978-3-031-71619-5\_11.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[4]} S. Abbas, M. A. Khan, and A. Tariq, ``Sales Forecasting Using Long Short-Term Memory (LSTM) Networks in Retail Industry,'' \textit{IEEE Access}, vol. 9, pp. 30900--30912, 2021.
+{[4]} T. de Castro Moraes, X.-M. Yuan, and E. P. Chew, ``Hybrid Convolutional Long Short-Term Memory Models for Sales Forecasting in Retail,'' \textit{Journal of Forecasting}, vol. 43, no. 5, pp. 1278--1293, 2024, doi: 10.1002/for.3073.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[5]} E. Wilson and M. Davies, ``Application of LSTM Networks to Solve Long-Term Memory Retention in Highly Seasonal Sales Data,'' \textit{Neural Networks}, vol. 148, pp. 45--56, 2022.
+{[5]} ``Financial Time Series Augmentation Using Transformer Based GAN Architecture,'' \textit{arXiv preprint} arXiv:2602.17865, 2026. [\textit{Preprint}, belum melalui \textit{peer-review}].
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[6]} H. Choi and J. Lee, ``Multivariate Time-Series Forecasting for Retail Sales Using LSTM with Economic Indicators,'' \textit{International Journal of Forecasting}, vol. 38, no. 3, pp. 890--905, 2022.
+{[6]} J. Yoon, D. Jarrett, and M. van der Schaar, ``Time-series Generative Adversarial Networks,'' in \textit{Advances in Neural Information Processing Systems (NeurIPS)}, vol. 32, pp. 5508--5518, 2019.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[7]} J. Martinez and R. Silva, ``Architecture Design of Offline-First Mobile Application using Local Embedded Database and Remote Sync Server,'' \textit{IEEE Transactions on Software Engineering}, vol. 48, no. 8, pp. 2840--2852, 2022.
+{[7]} P. Tang, Z. Li, X. Wang, X. Liu, and P. Mou, ``Time Series Data Augmentation for Energy Consumption Data Based on Improved TimeGAN,'' \textit{Sensors}, vol. 25, no. 2, 2025, doi: 10.3390/s25020493.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[8]} A. Novikov and I. Petrov, ``Performance Comparison of Local NoSQL Embedded Databases in Flutter Framework: Hive, ObjectBox, and Isar,'' \textit{Communications in Computer and Information Science}, vol. 1780, pp. 112--126, 2023.
+{[8]} A.-A. Semenoglou, E. Spiliotis, and V. Assimakopoulos, ``Data Augmentation for Univariate Time Series Forecasting with Neural Networks,'' \textit{Pattern Recognition}, vol. 134, art. no. 109132, 2023, doi: 10.1016/j.patcog.2022.109132.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[9]} M. Fischer and L. Weber, ``Evaluating Open-Source Backend-as-a-Service (BaaS) Platforms: A Case Study on Supabase and PostgreSQL,'' \textit{International Journal of Computer Science \& Information Technology}, vol. 16, no. 1, pp. 45--58, 2024.
+{[9]} S. Makridakis, E. Spiliotis, and V. Assimakopoulos, ``The M5 Competition: Background, Organization, and Implementation,'' \textit{International Journal of Forecasting}, vol. 38, no. 4, pp. 1325--1336, 2022, doi: 10.1016/j.ijforecast.2021.07.007.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[10]} P. Kumar and R. Sharma, ``Integrating Predictive Machine Learning Models into Enterprise Resource Planning and Point of Sales Systems,'' \textit{Journal of Systems and Software}, vol. 195, pp. 111--125, 2023.
+{[10]} P. Yadav and C. R. Barde, ``Retail Real-Time Sales Prediction System Using LSTM and XGBoost,'' \textit{International Journal of Advanced Research in Computer and Communication Engineering (IJARCCE)}, vol. 14, no. 4, 2025.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[11]} H. Nguyen and V. Tran, ``Decoupling Core Transact Systems and Analytical Machine Learning Frameworks inside Microservice Architectures,'' \textit{Journal of Systems Architecture}, vol. 134, pp. 102--118, 2023.
+{[11]} R. A. Sembiring and Y. Sary, ``Analisa dan Implementasi \textit{Long Short-Term Memory} (LSTM) dalam Kebutuhan Persediaan Barang di PT. Gunung Sari Indonesia,'' \textit{Jurnal Ilmiah Teknik Mesin, Elektro dan Komputer}, 2025.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[12]} D. Roberts and K. Thomas, ``Designing Smart Mobile Applications with Server-Side Artificial Intelligence Models via RESTful Web Services,'' \textit{International Journal of Mobile Computing and Multimedia Communications}, vol. 13, no. 2, pp. 1--18, 2024.
+{[12]} U. M. Jannah dkk., ``Analisis Prediksi Penjualan Isi Ulang Air Galon Menggunakan Metode LSTM dan SARIMA,'' \textit{Jurnal Teknologi Informasi dan Multimedia}, 2025.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[13]} Y. Zhang and X. Liu, ``Comparative Analysis of LSTM and GRU for Time-Series Sales Forecasting,'' \textit{Applied Soft Computing}, vol. 115, pp. 108--122, 2022.
+{[13]} R. Verdiyanto, D. Hartanti, and E. Purwanto, ``Pengembangan Aplikasi \textit{Point of Sales} untuk Prediksi Penjualan Harian Usaha Minuman Menggunakan Algoritma \textit{Random Forest Regression},'' \textit{Infotek: Jurnal Informatika dan Teknologi}, vol. 8, no. 2, 2025.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[14]} J. Heizer, B. Render, and C. Munson, \textit{Operations Management: Sustainability and Supply Chain Management}, 12th ed. Boston, MA, USA: Pearson, 2017.
+{[14]} E. M. Sipayung, C. Fiarni, and Wawan, ``Evaluasi Penggunaan Aplikasi \textit{Point of Sale} Menggunakan \textit{Technology Acceptance Model} pada UMKM,'' \textit{Jurnal Nasional Teknik Elektro dan Teknologi Informasi (JNTETI)}, vol. 9, no. 1, pp. 18--24, 2020, doi: 10.22146/jnteti.v9i1.116.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[15]} G. Thompson, ``A Review of Evaluation Metrics for Time-Series Forecasting in Commercial Retail,'' \textit{Journal of Business Forecasting}, vol. 40, no. 2, pp. 75--88, 2021.
+{[15]} M. Siddik and S. Samsir, ``Rancang Bangun Sistem Informasi POS (\textit{Point of Sale}) untuk Kasir Menggunakan Konsep Bahasa Pemrograman Orientasi Objek,'' \textit{JOISIE (Journal of Information Systems and Informatics Engineering)}, vol. 4, no. 1, p. 43, 2020, doi: 10.35145/joisie.v4i1.607.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[16]} R. J. Hyndman and A. B. Koehler, ``Another Look at Measures of Forecast Accuracy,'' \textit{International Journal of Forecasting}, vol. 22, no. 4, pp. 679--688, 2006.
+{[16]} R. J. Hyndman and G. Athanasopoulos, \textit{Forecasting: Principles and Practice}, 3rd ed. Melbourne, Australia: OTexts, 2021.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[17]} S. Hochreiter and J. Schmidhuber, ``Long Short-Term Memory,'' \textit{Neural Computation}, vol. 9, no. 8, pp. 1735--1780, 1997.
+{[17]} G. E. P. Box, G. M. Jenkins, G. C. Reinsel, and G. M. Ljung, \textit{Time Series Analysis: Forecasting and Control}, 5th ed. Hoboken, NJ, USA: John Wiley \& Sons, 2015.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[18]} D. P. Kingma and J. Ba, ``Adam: A Method for Stochastic Optimization,'' in \textit{Proc. 3rd International Conference on Learning Representations (ICLR)}, San Diego, CA, USA, 2015.
+{[18]} R. J. Hyndman and A. B. Koehler, ``Another Look at Measures of Forecast Accuracy,'' \textit{International Journal of Forecasting}, vol. 22, no. 4, pp. 679--688, 2006.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[19]} N. Srivastava, G. Hinton, A. Krizhevsky, I. Sutskever, and R. Salakhutdinov, ``Dropout: A Simple Way to Prevent Neural Networks from Overfitting,'' \textit{Journal of Machine Learning Research}, vol. 15, no. 1, pp. 1929--1958, 2014.
+{[19]} I. Goodfellow, J. Pouget-Abadie, M. Mirza, B. Xu, D. Warde-Farley, S. Ozair, A. Courville, and Y. Bengio, ``Generative Adversarial Nets,'' in \textit{Advances in Neural Information Processing Systems (NeurIPS)}, vol. 27, pp. 2672--2680, 2014.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[20]} R. J. Hyndman and G. Athanasopoulos, \textit{Forecasting: Principles and Practice}, 3rd ed. Melbourne, Australia: OTexts, 2021.
+{[20]} Google LLC, ``Flutter Documentation,'' 2026. [Daring]. Tersedia: https://docs.flutter.dev/ [Diakses: 29 Juli 2026].
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[21]} G. E. P. Box, G. M. Jenkins, G. C. Reinsel, and G. M. Ljung, \textit{Time Series Analysis: Forecasting and Control}, 5th ed. Hoboken, NJ, USA: John Wiley \& Sons, 2015.
+{[21]} R. S. Pressman and B. R. Maxim, \textit{Software Engineering: A Practitioner's Approach}, 9th ed. New York, NY, USA: McGraw-Hill Education, 2020.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[22]} S. Makridakis, E. Spiliotis, and V. Assimakopoulos, ``Statistical and Machine Learning Forecasting Methods: Concerns and Ways Forward,'' \textit{PLoS ONE}, vol. 13, no. 3, e0194889, 2018.
+{[22]} G. J. Myers, C. Sandler, and T. Badgett, \textit{The Art of Software Testing}, 3rd ed. Hoboken, NJ, USA: John Wiley \& Sons, 2011.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[23]} S. Makridakis, E. Spiliotis, and V. Assimakopoulos, ``The M4 Competition: 100,000 Time Series and 61 Forecasting Methods,'' \textit{International Journal of Forecasting}, vol. 36, no. 1, pp. 54--74, 2020.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[24]} I. Goodfellow, J. Pouget-Abadie, M. Mirza, B. Xu, D. Warde-Farley, S. Ozair, A. Courville, and Y. Bengio, ``Generative Adversarial Nets,'' in \textit{Advances in Neural Information Processing Systems (NeurIPS)}, vol. 27, pp. 2672--2680, 2014.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[25]} J. Yoon, D. Jarrett, and M. van der Schaar, ``Time-series Generative Adversarial Networks,'' in \textit{Advances in Neural Information Processing Systems (NeurIPS)}, vol. 32, pp. 5508--5518, 2019.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[26]} L. White and J. Black, ``Privacy-Preserving Machine Learning for Small Business Analytics: Scrubbing Personal Identifiable Information,'' \textit{Security and Privacy in Communication Networks}, vol. 512, pp. 200--215, 2025.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[27]} M. Abadi et al., ``TensorFlow: A System for Large-Scale Machine Learning,'' in \textit{Proc. 12th USENIX Symposium on Operating Systems Design and Implementation (OSDI)}, Savannah, GA, USA, pp. 265--283, 2016.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[28]} A. Paszke et al., ``PyTorch: An Imperative Style, High-Performance Deep Learning Library,'' in \textit{Advances in Neural Information Processing Systems (NeurIPS)}, vol. 32, pp. 8024--8035, 2019.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[29]} M. Grinberg, \textit{Flask Web Development: Developing Web Applications with Python}, 2nd ed. Sebastopol, CA, USA: O'Reilly Media, 2018.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[30]} R. T. Fielding, ``Architectural Styles and the Design of Network-based Software Architectures,'' Ph.D. dissertation, University of California, Irvine, CA, USA, 2000.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[31]} L. Moroney, \textit{The Definitive Guide to Firebase: Build Android Apps on Google's Mobile Platform}. New York, NY, USA: Apress, 2017.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[32]} R. S. Pressman and B. R. Maxim, \textit{Software Engineering: A Practitioner's Approach}, 9th ed. New York, NY, USA: McGraw-Hill Education, 2020.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[33]} M. Poppendieck and T. Poppendieck, \textit{Lean Software Development: An Agile Toolkit}. Boston, MA, USA: Addison-Wesley, 2003.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[34]} G. Booch, J. Rumbaugh, and I. Jacobson, \textit{The Unified Modeling Language User Guide}, 2nd ed. Boston, MA, USA: Addison-Wesley, 2005.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[35]} P. P.-S. Chen, ``The Entity-Relationship Model---Toward a Unified View of Data,'' \textit{ACM Transactions on Database Systems}, vol. 1, no. 1, pp. 9--36, 1976.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[36]} S. Mansur, K. Sattar, S. E. Hosseini, S. Pervez, I. Ahmad, K. Saleem, and A. Z. Elhendi, ``Sales Forecasting for Retail Stores Using Hybrid Neural Networks and Sales-Affecting Variables,'' \textit{PeerJ Computer Science}, vol. 11, e3058, 2025, doi: 10.7717/peerj-cs.3058.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[37]} M. Mitra, S. Roy, S. De, S. Bhattacharyya, J. Platos, and V. Snasel, ``Harnessing LSTM Neural Networks and Hyperparameter Optimization for Precise Sales Forecasting in Retail,'' in \textit{Proc. 10th International Conference on Advanced Intelligent Systems and Informatics (AISI 2024)}, Lecture Notes on Data Engineering and Communications Technologies, vol. 220. Cham, Switzerland: Springer, 2024, doi: 10.1007/978-3-031-71619-5\_11.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[38]} T. de Castro Moraes, X.-M. Yuan, and E. P. Chew, ``Hybrid Convolutional Long Short-Term Memory Models for Sales Forecasting in Retail,'' \textit{Journal of Forecasting}, vol. 43, no. 5, pp. 1278--1293, 2024, doi: 10.1002/for.3073.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[39]} ``Financial Time Series Augmentation Using Transformer Based GAN Architecture,'' \textit{arXiv preprint} arXiv:2602.17865, 2026. [\textit{Preprint}, belum melalui \textit{peer-review}].
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[40]} P. Tang, Z. Li, X. Wang, X. Liu, and P. Mou, ``Time Series Data Augmentation for Energy Consumption Data Based on Improved TimeGAN,'' \textit{Sensors}, vol. 25, no. 2, 2025, doi: 10.3390/s25020493.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[41]} A.-A. Semenoglou, E. Spiliotis, and V. Assimakopoulos, ``Data Augmentation for Univariate Time Series Forecasting with Neural Networks,'' \textit{Pattern Recognition}, vol. 134, art. no. 109132, 2023, doi: 10.1016/j.patcog.2022.109132.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[42]} S. Makridakis, E. Spiliotis, and V. Assimakopoulos, ``The M5 Competition: Background, Organization, and Implementation,'' \textit{International Journal of Forecasting}, vol. 38, no. 4, pp. 1325--1336, 2022, doi: 10.1016/j.ijforecast.2021.07.007.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[43]} P. Yadav and C. R. Barde, ``Retail Real-Time Sales Prediction System Using LSTM and XGBoost,'' \textit{International Journal of Advanced Research in Computer and Communication Engineering (IJARCCE)}, vol. 14, no. 4, 2025.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[44]} R. A. Sembiring and Y. Sary, ``Analisa dan Implementasi \textit{Long Short-Term Memory} (LSTM) dalam Kebutuhan Persediaan Barang di PT. Gunung Sari Indonesia,'' \textit{Jurnal Ilmiah Teknik Mesin, Elektro dan Komputer}, 2025.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[45]} U. M. Jannah dkk., ``Analisis Prediksi Penjualan Isi Ulang Air Galon Menggunakan Metode LSTM dan SARIMA,'' \textit{Jurnal Teknologi Informasi dan Multimedia}, 2025.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[46]} R. Verdiyanto, D. Hartanti, and E. Purwanto, ``Pengembangan Aplikasi \textit{Point of Sales} untuk Prediksi Penjualan Harian Usaha Minuman Menggunakan Algoritma \textit{Random Forest Regression},'' \textit{Infotek: Jurnal Informatika dan Teknologi}, vol. 8, no. 2, 2025.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[47]} E. M. Sipayung, C. Fiarni, and Wawan, ``Evaluasi Penggunaan Aplikasi \textit{Point of Sale} Menggunakan \textit{Technology Acceptance Model} pada UMKM,'' \textit{Jurnal Nasional Teknik Elektro dan Teknologi Informasi (JNTETI)}, vol. 9, no. 1, pp. 18--24, 2020, doi: 10.22146/jnteti.v9i1.116.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[48]} M. Siddik and S. Samsir, ``Rancang Bangun Sistem Informasi POS (\textit{Point of Sale}) untuk Kasir Menggunakan Konsep Bahasa Pemrograman Orientasi Objek,'' \textit{JOISIE (Journal of Information Systems and Informatics Engineering)}, vol. 4, no. 1, p. 43, 2020, doi: 10.35145/joisie.v4i1.607.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[49]} Google LLC, ``Flutter Documentation,'' 2026. [Daring]. Tersedia: https://docs.flutter.dev/ [Diakses: 29 Juli 2026].
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[50]} G. J. Myers, C. Sandler, and T. Badgett, \textit{The Art of Software Testing}, 3rd ed. Hoboken, NJ, USA: John Wiley \& Sons, 2011.
-
-\vspace{0.3cm}
-\noindent\hangindent=1.5cm
-{[51]} ISO/IEC/IEEE 29119-4:2021, \textit{Software and Systems Engineering --- Software Testing --- Part 4: Test Techniques}, International Organization for Standardization, Geneva, Switzerland, 2021.
+{[23]} ISO/IEC/IEEE 29119-4:2021, \textit{Software and Systems Engineering --- Software Testing --- Part 4: Test Techniques}, International Organization for Standardization, Geneva, Switzerland, 2021.
 
 \end{spacing}
 
