@@ -619,21 +619,30 @@ Bab ini menyajikan simpulan dari seluruh proses penelitian berdasarkan hasil yan
 %%=============================================================
 \chapter[TINJAUAN PUSTAKA]{\\ TINJAUAN PUSTAKA}
 
-\section{\textit{State Of The Art}}
+\section{\textit{State of the Art}}
 
-Penelitian terkait prediksi penjualan dan pengembangan sistem \textit{Point of Sale} berbasis \textit{mobile} telah mengalami perkembangan signifikan seiring meningkatnya pemanfaatan teknologi \textit{deep learning} dan komputasi awan. Abbas dkk.~[4] dan Zhang dan Liu [13] membuktikan keunggulan LSTM dibandingkan model statistik konvensional maupun arsitektur \textit{Gated Recurrent Unit} (GRU) dalam menangkap pola non-linier pada data penjualan ritel. Choi dan Lee [6] memperluas pendekatan ini dengan menggunakan model multivariate yang menggabungkan variabel kontekstual seperti frekuensi transaksi harian. Di sisi pengembangan sistem, Setiawan dan Nugroho [1] serta Pratama dan Handayani [2] mengembangkan aplikasi POS berbasis Android untuk UMKM, namun keduanya bersifat murni deskriptif tanpa komponen prediksi analitik.
+Kajian \textit{state of the art} pada subbab ini disusun untuk memetakan posisi penelitian yang dilakukan terhadap penelitian-penelitian terdahulu yang relevan. Penelusuran literatur difokuskan pada empat kelompok kajian yang saling berkaitan.
 
-Meskipun demikian, penelitian yang secara spesifik mengintegrasikan modul prediksi penjualan berbasis LSTM langsung ke dalam sistem POS \textit{mobile} yang beroperasi secara \textit{offline-first} untuk konteks UMKM masih sangat terbatas. Ringkasan penelitian terdahulu tersebut disajikan dalam Tabel~\ref{tab:sota}.
+Kelompok pertama adalah penelitian yang menerapkan \textit{Long Short-Term Memory} dan variannya untuk peramalan penjualan ritel. Kelompok kajian ini menunjukkan kecenderungan yang konsisten, yaitu bahwa arsitektur berbasis LSTM mampu menangkap ketergantungan temporal dan pola musiman pada data penjualan secara lebih baik dibandingkan metode statistik konvensional. Namun demikian, sebagian besar penelitian pada kelompok ini menggunakan \textit{dataset} berskala besar dengan rentang pengamatan bertahun-tahun, sehingga hasilnya belum tentu dapat direplikasi pada skala usaha kecil.
+
+Kelompok kedua adalah penelitian yang mengkaji augmentasi data sintetis, khususnya menggunakan \textit{Time-series Generative Adversarial Network} (TimeGAN), sebagai upaya mengatasi keterbatasan jumlah sampel pelatihan. Kelompok ini memperlihatkan hasil yang belum sepenuhnya konvergen: sebagian penelitian melaporkan penurunan galat yang signifikan, sementara sebagian lain mencatat bahwa manfaat augmentasi menurun seiring bertambahnya ukuran data awal.
+
+Kelompok ketiga adalah penelitian yang menyoroti pentingnya \textit{baseline} sederhana sebagai kontrol metodologis dalam evaluasi model peramalan. Kelompok ini menjadi penting karena beberapa penelitian menunjukkan bahwa metode sederhana masih dapat mengungguli model \textit{deep learning} pada kondisi data tertentu.
+
+Kelompok keempat adalah penelitian yang mengintegrasikan modul peramalan ke dalam aplikasi \textit{Point of Sale}. Kelompok ini masih relatif terbatas jumlahnya, dan sebagian besar penelitian di Indonesia pada kelompok ini menggunakan metode statistik atau \textit{machine learning} konvensional, bukan \textit{deep learning}.
+
+Ringkasan penelitian terdahulu beserta persamaan dan perbedaannya dengan penelitian ini disajikan pada Tabel~\ref{tab:sota}.
 
 \begin{landscape}
-\setlength{\tabcolsep}{4pt}
-{\small\setstretch{1.1}\hyphenpenalty=50\exhyphenpenalty=50\tolerance=500
-\begin{longtable}{|>{\centering\arraybackslash}p{0.8cm}|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}p{4.4cm}|}
+\setlength{\tabcolsep}{3pt}
+{\small\setstretch{1.05}\hyphenpenalty=50\exhyphenpenalty=50\tolerance=500
+\begin{longtable}{|>{\centering\arraybackslash}p{0.7cm}|>{\raggedright\arraybackslash}p{2.9cm}|>{\raggedright\arraybackslash}p{3.7cm}|>{\raggedright\arraybackslash}p{3.1cm}|>{\raggedright\arraybackslash}p{3.4cm}|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}p{3.5cm}|}
 
-\caption{\textit{State Of The Art}} \label{tab:sota} \\
+\caption{\textit{State of the Art} Penelitian Terdahulu} \label{tab:sota} \\
 \hline
 \textbf{No} &
-\textbf{Penulis, Tahun dan Judul Artikel} &
+\textbf{Penulis / Tahun} &
+\textbf{Judul Artikel} &
 \textbf{Metode yang Digunakan} &
 \textbf{Hasil yang Diperoleh} &
 \textbf{Persamaan} &
@@ -643,7 +652,8 @@ Meskipun demikian, penelitian yang secara spesifik mengintegrasikan modul predik
 
 \hline
 \textbf{No} &
-\textbf{Penulis, Tahun dan Judul Artikel} &
+\textbf{Penulis / Tahun} &
+\textbf{Judul Artikel} &
 \textbf{Metode yang Digunakan} &
 \textbf{Hasil yang Diperoleh} &
 \textbf{Persamaan} &
@@ -658,75 +668,108 @@ Meskipun demikian, penelitian yang secara spesifik mengintegrasikan modul predik
 \endlastfoot
 
 1 &
-Fischer \& Weber (2024) [9]. \textit{Evaluating Open-Source BaaS Platforms: A Case Study on Supabase and PostgreSQL}. &
-Supabase, PostgreSQL &
-RLS Supabase memangkas waktu pengembangan \textit{backend} hingga 40\%. &
-Sama-sama menggunakan Supabase sebagai infrastruktur \textit{backend cloud}. &
-Belum diuji untuk performa \textit{mobile dynamic sync} berskala harian. Penelitian ini mengujinya dalam konteks UMKM. \\
+T. de Castro Moraes, X.-M. Yuan, E. P. Chew (2024) [38] &
+\textit{Hybrid Convolutional Long Short-Term Memory Models for Sales Forecasting in Retail} &
+Hibrida CNN-LSTM bertumpuk (S-CNN-LSTM) dan paralel (P-CNN-LSTM) &
+MAPE 14,15\% (bertumpuk) dan 14,76\% (paralel) pada 500 deret waktu ritel selama 5 tahun &
+Sama-sama menggunakan LSTM untuk peramalan penjualan ritel harian &
+Menggunakan data berskala besar (5 tahun, 500 deret); penelitian ini hanya 316 titik pengamatan. Tidak menguji augmentasi data maupun integrasi ke aplikasi \\
 \hline
 
 2 &
-Setiawan \& Nugroho (2023) [1]. \textit{Development of Cross-Platform POS Application using Flutter for SMEs}. &
-Flutter, Firebase &
-Aplikasi kasir stabil dan mampu mencatat transaksi secara \textit{real-time}. &
-Sama-sama mengembangkan aplikasi POS berbasis Android untuk UMKM. &
-Aplikasi murni deskriptif tanpa fungsi prediksi analitik. Penelitian ini menambahkan modul LSTM terintegrasi. \\
+S. Mansur dkk. (2025) [36] &
+\textit{Sales Forecasting for Retail Stores Using Hybrid Neural Networks and Sales-Affecting Variables} &
+Hibrida CNN-LSTM dengan variabel eksogen (cuaca, hari libur, hari gajian, unjuk rasa) &
+MAPE 4,16\%, mengungguli ANN (19,74\%), CNN (13,90\%), dan LSTM tunggal (10,39\%) &
+Menggunakan LSTM pada data penjualan harian berskala kecil (6 bulan) dari satu gerai &
+Keberhasilan bertumpu pada tujuh variabel eksogen yang tidak tersedia pada \textit{dataset} penelitian ini; penulis mencatat indikasi \textit{overfitting}. Tidak menguji \textit{baseline} sederhana \\
 \hline
 
 3 &
-Novikov \& Petrov (2023) [8]. \textit{Performance Comparison of Local NoSQL Embedded Databases in Flutter: Hive, ObjectBox, and Isar}. &
-Isar DB, Hive, ObjectBox &
-Isar DB tercepat dalam operasi \textit{batch insert} transaksi pada perangkat Android. &
-Sama-sama menggunakan Isar DB sebagai \textit{local storage} pada aplikasi Flutter. &
-Belum diintegrasikan ke arsitektur sinkronisasi \textit{cloud}. Penelitian ini mengintegrasikan keduanya secara penuh. \\
+M. Mitra dkk. (2024) [37] &
+\textit{Harnessing LSTM Neural Networks and Hyperparameter Optimization for Precise Sales Forecasting in Retail} &
+LSTM dengan optimasi \textit{hyperparameter} menggunakan Keras Tuner &
+Peningkatan akurasi signifikan dibanding metode peramalan tradisional pada \textit{dataset} Walmart &
+Sama-sama menerapkan LSTM untuk prediksi penjualan harian &
+Menggunakan \textit{dataset} hierarkis berskala besar dengan variabel harga, promosi, dan hari besar; tidak mengkaji keterbatasan data maupun augmentasi sintetis \\
 \hline
 
 4 &
-Martinez \& Silva (2022) [7]. \textit{Architecture Design of Offline-First Mobile Application using Local Embedded Database}. &
-\textit{Offline-First}, SQLite &
-Data tersinkronisasi aman tanpa tumpang tindih saat kembali \textit{online}. &
-Sama-sama menerapkan arsitektur \textit{offline-first} pada aplikasi \textit{mobile}. &
-Tidak menguji volume data besar dan tidak memiliki komponen AI. Penelitian ini mengintegrasikan keduanya. \\
+P. Yadav, C. R. Barde (2025) [43] &
+\textit{Retail Real-Time Sales Prediction System Using LSTM and XGBoost} &
+LSTM untuk pemodelan deret waktu dikombinasikan dengan XGBoost, terintegrasi dengan sistem POS &
+Sistem prediksi penjualan waktu nyata yang terhubung dengan POS untuk penyerapan data dinamis &
+Sama-sama mengintegrasikan model peramalan ke dalam sistem \textit{Point of Sale} &
+Menggunakan pendekatan hibrida LSTM-XGBoost berbasis \textit{web}; penelitian ini menggunakan LSTM murni pada aplikasi \textit{mobile} dan menguji augmentasi TimeGAN \\
 \hline
 
 5 &
-Zhang \& Liu (2022) [13]. \textit{Comparative Analysis of LSTM and GRU for Time-Series Sales Forecasting}. &
-LSTM, GRU &
-LSTM memberikan akurasi lebih stabil pada data tren penjualan multi-tahun. &
-Sama-sama membandingkan model \textit{deep learning} untuk prediksi deret waktu penjualan. &
-Memerlukan daya komputasi tinggi. Penelitian ini men-\textit{deploy} model di server \textit{cloud} terpisah agar tidak membebani perangkat. \\
+J. Yoon, D. Jarrett, M. van der Schaar (2019) [25] &
+\textit{Time-series Generative Adversarial Networks} &
+TimeGAN, yaitu GAN dengan pembelajaran swa-penyeliaan berbasis \textit{autoencoder} untuk deret waktu &
+Menghasilkan data sintetis yang mempertahankan dinamika temporal data asli secara lebih baik dibanding GAN konvensional &
+Menggunakan TimeGAN sebagai metode pembangkitan data sintetis &
+Berfokus pada kualitas pembangkitan data secara umum, bukan pada dampaknya terhadap akurasi peramalan penjualan pada data berskala kecil \\
 \hline
 
 6 &
-Choi \& Lee (2022) [6]. \textit{Multivariate Time-Series Forecasting for Retail Sales Using LSTM with Economic Indicators}. &
-Multivariate LSTM &
-Akurasi model naik dengan menambahkan variabel kontekstual seperti hari libur. &
-Sama-sama menggunakan variabel transaksi harian sebagai input model LSTM. &
-Bergantung pada data eksternal yang sulit diakses pelaku UMKM kecil. Penelitian ini menggunakan data transaksi internal saja. \\
+P. Tang, Z. Li, X. Wang, X. Liu, P. Mou (2025) [40] &
+\textit{Time Series Data Augmentation for Energy Consumption Data Based on Improved TimeGAN} &
+TimeGAN yang ditingkatkan dengan \textit{multi-head self-attention}, model prediksi hibrida CNN-GRU &
+Penurunan RMSE dan MAE serta peningkatan $R^2$ setelah augmentasi data &
+Sama-sama menerapkan augmentasi TimeGAN untuk mengatasi keterbatasan jumlah data pelatihan &
+Diterapkan pada domain konsumsi energi manufaktur dengan model CNN-GRU; penelitian ini pada domain penjualan kantin dengan model LSTM \\
 \hline
 
 7 &
-Abbas dkk.~(2021) [4]. \textit{Sales Forecasting Using LSTM Networks in Retail Industry}. &
-LSTM, ARIMA &
-LSTM mengungguli ARIMA pada data penjualan non-linier dengan penurunan \textit{error} hingga 15\%. &
-Sama-sama menggunakan LSTM untuk prediksi data penjualan berbasis deret waktu. &
-Model bersifat \textit{standalone} tanpa integrasi sistem kasir nyata. Penelitian ini mengintegrasikan LSTM ke dalam aplikasi POS. \\
+A.-A. Semenoglou, E. Spiliotis, V. Assimakopoulos (2023) [41] &
+\textit{Data Augmentation for Univariate Time Series Forecasting with Neural Networks} &
+Perbandingan sistematis beberapa teknik augmentasi data pada peramalan deret waktu univariat &
+Manfaat augmentasi lebih signifikan pada jaringan yang lebih dalam, namun menurun seiring bertambahnya ukuran data awal &
+Sama-sama mengkaji efektivitas augmentasi data pada peramalan deret waktu univariat &
+Bersifat studi perbandingan lintas \textit{dataset} tanpa membangun aplikasi; tidak menggunakan TimeGAN sebagai metode augmentasi utama \\
 \hline
 
 8 &
-Brown \& Green (2021) [3]. \textit{Demand Forecasting for Inventory Management in Small Retail Stores Using Neural Networks}. &
-Neural Networks &
-Mampu memprediksi \textit{demand} mingguan dengan MAPE 12\%. &
-Sama-sama menghubungkan prediksi penjualan ke manajemen stok barang. &
-Rentang prediksi mingguan terlalu luas. Penelitian ini berfokus pada prediksi harian yang lebih granular. \\
+S. Makridakis, E. Spiliotis, V. Assimakopoulos (2022) [42] &
+\textit{The M5 Competition: Background, Organization, and Implementation} &
+Kompetisi peramalan berskala besar dengan pembanding metode statistik, \textit{machine learning}, dan \textit{deep learning} &
+Metode sederhana dan kombinasi statistik tetap menjadi pembanding yang kompetitif terhadap model kompleks &
+Menekankan pentingnya \textit{baseline} sederhana sebagai kontrol metodologis dalam evaluasi peramalan &
+Berupa kajian kompetisi lintas ribuan deret waktu; penelitian ini menerapkan prinsip tersebut pada satu studi kasus dengan \textit{baseline seasonal-naive} \\
+\hline
+
+9 &
+R. A. Sembiring \& Y. Sary (2025), \textit{Jurnal Ilmiah Teknik Mesin, Elektro dan Komputer} [44] &
+\textit{Analisa dan Implementasi Long Short-Term Memory (LSTM) dalam Kebutuhan Persediaan Barang di PT. Gunung Sari Indonesia} &
+LSTM dengan \textit{window size} 14, 30, dan 60 hari, dibandingkan dengan \textit{Moving Average}; evaluasi MAD, MSE, MAPE &
+MAPE LSTM 102--106\%, sedangkan \textit{Moving Average} 85--88\%; LSTM lebih adaptif pada pola fluktuatif, \textit{Moving Average} lebih stabil pada pola konsisten &
+Sama-sama menerapkan LSTM pada data transaksi penjualan Indonesia dan membandingkannya dengan metode sederhana &
+Pembanding berupa \textit{Moving Average}, bukan \textit{seasonal-naive}; tidak menguji augmentasi data sintetis maupun membangun aplikasi POS \\
+\hline
+
+10 &
+U. M. Jannah dkk. (2025), \textit{Jurnal Teknologi Informasi dan Multimedia} [45] &
+\textit{Analisis Prediksi Penjualan Isi Ulang Air Galon Menggunakan Metode LSTM dan SARIMA} &
+Perbandingan LSTM dengan SARIMA pada data penjualan usaha kecil &
+Perbandingan akurasi kedua metode pada data penjualan harian usaha berskala kecil &
+Sama-sama membandingkan LSTM dengan metode pembanding pada konteks usaha kecil di Indonesia &
+Pembanding berupa SARIMA, bukan \textit{baseline} heuristik; tidak mengkaji keterbatasan jumlah data maupun integrasi ke aplikasi POS \\
+\hline
+
+11 &
+R. Verdiyanto, D. Hartanti, E. Purwanto (2025), \textit{Infotek: Jurnal Informatika dan Teknologi} [46] &
+\textit{Pengembangan Aplikasi Point of Sales untuk Prediksi Penjualan Harian Usaha Minuman Menggunakan Algoritma Random Forest Regression} &
+\textit{Random Forest Regression} yang diintegrasikan ke dalam aplikasi \textit{Point of Sales} &
+Aplikasi POS dengan fitur prediksi penjualan harian untuk usaha minuman &
+Sama-sama membangun aplikasi POS dengan fitur prediksi penjualan harian pada konteks usaha kecil Indonesia &
+Menggunakan \textit{Random Forest Regression} yang tidak memodelkan ketergantungan temporal secara eksplisit; penelitian ini menggunakan LSTM dan menguji augmentasi TimeGAN \\
 \hline
 \end{longtable}
 }
 \end{landscape}
 
-Berdasarkan kajian terhadap penelitian terdahulu pada Tabel~\ref{tab:sota}, dapat disimpulkan bahwa sebagian besar penelitian prediksi penjualan menggunakan LSTM masih bersifat \textit{standalone}, yakni tidak terintegrasi dengan sistem pencatatan transaksi yang aktif digunakan. Sebaliknya, penelitian pengembangan sistem POS \textit{mobile} yang ada belum dilengkapi kemampuan analitik prediktif berbasis \textit{machine learning}. Selain itu, belum ada sistem POS untuk UMKM yang secara bersamaan menerapkan arsitektur \textit{offline-first} sekaligus menyertakan modul prediksi LSTM terintegrasi.
-
-Oleh karena itu, penelitian ini hadir untuk mengisi celah tersebut dengan mengusulkan sistem yang menggabungkan ketiga aspek sekaligus, yaitu: (1) aplikasi POS \textit{mobile} berbasis Flutter dengan kemampuan operasional \textit{offline-first} menggunakan Isar DB dan sinkronisasi otomatis ke Supabase [8], [9], (2) modul prediksi penjualan harian berbasis LSTM yang dilatih dari data transaksi riil platform EatsTEDI DTEDI Universitas Gadjah Mada [4]--[6], dan (3) penyajian hasil prediksi secara langsung kepada pengguna melalui dasbor analitik di dalam aplikasi yang sama [12].
+Berdasarkan pemetaan pada Tabel~\ref{tab:sota}, dapat diidentifikasi bahwa belum terdapat penelitian yang secara bersamaan melakukan tiga hal berikut: menerapkan LSTM untuk prediksi penjualan harian pada \textit{dataset} berskala kecil dengan karakteristik deret tidak sinambung, menguji kontribusi augmentasi sintetis TimeGAN pada kondisi tersebut, serta mengintegrasikan model hasil pelatihan ke dalam aplikasi \textit{Point of Sale} yang benar-benar digunakan pengguna akhir dan mengevaluasinya terhadap \textit{baseline seasonal-naive}. Ketiga aspek inilah yang menjadi kebaruan penelitian ini.
 
 \section{Sistem \textit{Point of Sale} (POS)}
 
@@ -2797,7 +2840,7 @@ Berdasarkan keterbatasan sistem yang diidentifikasi selama proses pengembangan d
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
-{[40]} Y. Wang, X. Liu, and J. Zhang, ``Time Series Data Augmentation for Energy Consumption Data Based on Improved TimeGAN,'' \textit{Sensors}, vol. 25, no. 2, 2025, doi: 10.3390/s25020493.
+{[40]} P. Tang, Z. Li, X. Wang, X. Liu, and P. Mou, ``Time Series Data Augmentation for Energy Consumption Data Based on Improved TimeGAN,'' \textit{Sensors}, vol. 25, no. 2, 2025, doi: 10.3390/s25020493.
 
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
@@ -2810,6 +2853,18 @@ Berdasarkan keterbatasan sistem yang diidentifikasi selama proses pengembangan d
 \vspace{0.3cm}
 \noindent\hangindent=1.5cm
 {[43]} P. Yadav and C. R. Barde, ``Retail Real-Time Sales Prediction System Using LSTM and XGBoost,'' \textit{International Journal of Advanced Research in Computer and Communication Engineering (IJARCCE)}, vol. 14, no. 4, 2025.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[44]} R. A. Sembiring and Y. Sary, ``Analisa dan Implementasi \textit{Long Short-Term Memory} (LSTM) dalam Kebutuhan Persediaan Barang di PT. Gunung Sari Indonesia,'' \textit{Jurnal Ilmiah Teknik Mesin, Elektro dan Komputer}, 2025.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[45]} U. M. Jannah dkk., ``Analisis Prediksi Penjualan Isi Ulang Air Galon Menggunakan Metode LSTM dan SARIMA,'' \textit{Jurnal Teknologi Informasi dan Multimedia}, 2025.
+
+\vspace{0.3cm}
+\noindent\hangindent=1.5cm
+{[46]} R. Verdiyanto, D. Hartanti, and E. Purwanto, ``Pengembangan Aplikasi \textit{Point of Sales} untuk Prediksi Penjualan Harian Usaha Minuman Menggunakan Algoritma \textit{Random Forest Regression},'' \textit{Infotek: Jurnal Informatika dan Teknologi}, 2025.
 
 \end{spacing}
 
