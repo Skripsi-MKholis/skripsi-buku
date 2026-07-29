@@ -1094,16 +1094,16 @@ Pemodelan sistem merupakan tahapan dalam perancangan yang digunakan untuk mengga
 \noindent\textbf{a.~~\textit{Use Case Diagram}}
 
 
-Sistem POS melibatkan dua aktor utama, yaitu \textbf{Owner (Pemilik Toko)} dan \textbf{Kasir (Karyawan)}. \textit{Use Case Diagram} menggambarkan fungsi-fungsi yang dapat diakses oleh masing-masing aktor. Pembatasan hak akses berbasis peran (\textit{Role-Based Access Control}/RBAC) ditegakkan pada lapisan navigasi aplikasi (\textit{router.dart}), di mana hanya rute Manajemen Karyawan dan Pengaturan Profil Toko yang dibatasi eksklusif untuk Owner, sedangkan fungsi operasional lainnya dapat diakses oleh seluruh staf toko. Rancangan \textit{use case} diilustrasikan pada Gambar \ref{fig:use_case}.
+Sistem POS melibatkan dua aktor utama, yaitu \textbf{Owner (Pemilik Toko)} dan \textbf{Kasir (Karyawan)}. \textit{Use Case Diagram} menggambarkan fungsi-fungsi yang dapat diakses oleh masing-masing aktor. Pembatasan hak akses berbasis peran (\textit{Role-Based Access Control}/RBAC) ditegakkan pada lapisan navigasi aplikasi (\textit{router.dart}), di mana hanya rute Manajemen Karyawan dan Pengaturan Profil Toko yang dibatasi eksklusif untuk Owner, sedangkan fungsi operasional lainnya dapat diakses oleh seluruh staf toko. Hubungan hak akses tersebut digambarkan menggunakan relasi generalisasi aktor, yaitu Owner merupakan spesialisasi dari Kasir sehingga mewarisi seluruh \textit{use case} operasional yang berasosiasi dengan Kasir, ditambah tiga \textit{use case} yang bersifat eksklusif. Adapun ketentuan bahwa pengguna harus terautentikasi lebih dahulu dinyatakan sebagai prasyarat (\textit{precondition}) pada setiap \textit{use case}, bukan sebagai relasi \textit{include}, agar tidak terjadi duplikasi penggambaran. Rancangan \textit{use case} diilustrasikan pada Gambar \ref{fig:use_case}.
 
-\begin{landscape}
-\begin{figure}[p]
+\clearpage
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\linewidth]{use_case_drawio}
+    \includegraphics[height=0.86\textheight]{use_case_drawio}
     \caption{\textit{Use Case Diagram} Sistem POS}
     \label{fig:use_case}
 \end{figure}
-\end{landscape}
+\clearpage
 
 Gambar~\ref{fig:use_case} menggambarkan interaksi antara kedua aktor dengan fungsi-fungsi yang tersedia pada sistem. Adapun penjelasan mengenai masing-masing \textit{use case} diuraikan pada bagian berikut.
 
@@ -1149,112 +1149,7 @@ Deskripsi & Proses autentikasi pengguna menggunakan email dan kata sandi \\ \hli
 
 Tabel~\ref{tab:uc-login} menunjukkan bahwa sistem membedakan hak akses Owner dan Kasir sejak tahap autentikasi.
 
-\noindent 3)~~\textit{Use Case} Melakukan \textit{Checkout}
-
-Rancangan \textit{use case} melakukan \textit{checkout} merupakan fungsi inti aplikasi kasir yang digunakan untuk memproses transaksi penjualan. Data yang dihasilkan dari \textit{use case} ini menjadi sumber utama bagi pencatatan omzet dan bahan masukan fitur prediksi penjualan. Rancangan \textit{use case} ini dapat dilihat pada Tabel~\ref{tab:uc-checkout}.
-
-\begin{table}[H]
-\setstretch{1.2}
-\centering
-\caption{\textit{Use Case} Melakukan \textit{Checkout}}
-\label{tab:uc-checkout}
-\begin{tabularx}{\textwidth}{|p{3.2cm}|X|}
-\hline
-\textbf{\textit{Use Case}} & \textbf{Melakukan \textit{Checkout}} \\ \hline
-Deskripsi & Proses pemilihan produk ke dalam keranjang hingga penyelesaian pembayaran \\ \hline
-\textit{Actor} & Owner dan Kasir \\ \hline
-\textit{Precondition} & 1.~Pengguna telah masuk ke dalam sistem \newline 2.~Terdapat produk aktif pada katalog toko \\ \hline
-\textit{Postcondition} & Transaksi tersimpan dan stok produk terbarui secara otomatis \\ \hline
-\end{tabularx}
-\end{table}
-
-Tabel~\ref{tab:uc-checkout} menunjukkan bahwa transaksi penjualan tercatat beserta pembaruan stok produk yang terkait.
-
-\noindent 4)~~\textit{Use Case} Menerapkan \textit{Voucher}/Diskon
-
-Rancangan \textit{use case} menerapkan \textit{voucher} atau diskon digunakan untuk memberikan potongan harga pada transaksi yang sedang berjalan. Rancangan \textit{use case} ini dapat dilihat pada Tabel~\ref{tab:uc-diskon}.
-
-\begin{table}[H]
-\setstretch{1.2}
-\centering
-\caption{\textit{Use Case} Menerapkan \textit{Voucher}/Diskon}
-\label{tab:uc-diskon}
-\begin{tabularx}{\textwidth}{|p{3.2cm}|X|}
-\hline
-\textbf{\textit{Use Case}} & \textbf{Menerapkan \textit{Voucher}/Diskon} \\ \hline
-Deskripsi & Proses pemberian potongan harga pada total tagihan transaksi \\ \hline
-\textit{Actor} & Owner dan Kasir \\ \hline
-\textit{Precondition} & 1.~Terdapat transaksi aktif pada keranjang \newline 2.~Pengguna memasukkan kode promosi yang berlaku \\ \hline
-\textit{Postcondition} & Total tagihan transaksi terpotong sesuai nilai diskon \\ \hline
-\end{tabularx}
-\end{table}
-
-Tabel~\ref{tab:uc-diskon} menunjukkan bahwa sistem dapat menyesuaikan nilai tagihan berdasarkan potongan harga yang diterapkan.
-
-\noindent 5)~~\textit{Use Case} Melakukan \textit{Split Bill}
-
-Rancangan \textit{use case} melakukan \textit{split bill} digunakan untuk memecah satu nota belanja menjadi beberapa bagian tagihan yang dibayarkan secara terpisah. Rancangan \textit{use case} ini dapat dilihat pada Tabel~\ref{tab:uc-splitbill}.
-
-\begin{table}[H]
-\setstretch{1.2}
-\centering
-\caption{\textit{Use Case} Melakukan \textit{Split Bill}}
-\label{tab:uc-splitbill}
-\begin{tabularx}{\textwidth}{|p{3.2cm}|X|}
-\hline
-\textbf{\textit{Use Case}} & \textbf{Melakukan \textit{Split Bill}} \\ \hline
-Deskripsi & Proses pemecahan satu nota belanja menjadi beberapa bagian tagihan \\ \hline
-\textit{Actor} & Owner dan Kasir \\ \hline
-\textit{Precondition} & 1.~Terdapat transaksi aktif pada keranjang \newline 2.~Pengguna memilih menu pemecahan tagihan \\ \hline
-\textit{Postcondition} & Tagihan terbagi dan masing-masing bagian dapat diselesaikan pembayarannya \\ \hline
-\end{tabularx}
-\end{table}
-
-Tabel~\ref{tab:uc-splitbill} menunjukkan bahwa sistem mengakomodasi pembayaran terpisah dalam satu nota belanja.
-
-\noindent 6)~~\textit{Use Case} Mencetak Struk
-
-Rancangan \textit{use case} mencetak struk digunakan untuk menghasilkan bukti transaksi fisik bagi pelanggan setelah pembayaran diselesaikan. Rancangan \textit{use case} ini dapat dilihat pada Tabel~\ref{tab:uc-struk}.
-
-\begin{table}[H]
-\setstretch{1.2}
-\centering
-\caption{\textit{Use Case} Mencetak Struk}
-\label{tab:uc-struk}
-\begin{tabularx}{\textwidth}{|p{3.2cm}|X|}
-\hline
-\textbf{\textit{Use Case}} & \textbf{Mencetak Struk} \\ \hline
-Deskripsi & Proses pencetakan bukti transaksi melalui \textit{printer thermal} \\ \hline
-\textit{Actor} & Owner dan Kasir \\ \hline
-\textit{Precondition} & 1.~Transaksi telah diselesaikan pembayarannya \newline 2.~Perangkat \textit{printer thermal} telah terhubung \\ \hline
-\textit{Postcondition} & Struk transaksi berhasil tercetak \\ \hline
-\end{tabularx}
-\end{table}
-
-Tabel~\ref{tab:uc-struk} menunjukkan bahwa sistem menyediakan bukti transaksi tercetak bagi pelanggan.
-
-\noindent 7)~~\textit{Use Case} Memonitor Status Meja
-
-Rancangan \textit{use case} memonitor status meja digunakan untuk memantau keterisian meja secara visual selama layanan berlangsung. Rancangan \textit{use case} ini dapat dilihat pada Tabel~\ref{tab:uc-meja}.
-
-\begin{table}[H]
-\setstretch{1.2}
-\centering
-\caption{\textit{Use Case} Memonitor Status Meja}
-\label{tab:uc-meja}
-\begin{tabularx}{\textwidth}{|p{3.2cm}|X|}
-\hline
-\textbf{\textit{Use Case}} & \textbf{Memonitor Status Meja} \\ \hline
-Deskripsi & Proses pemantauan status keterisian meja pada alur layanan \\ \hline
-\textit{Actor} & Owner dan Kasir \\ \hline
-\textit{Precondition} & 1.~Pengguna telah masuk ke dalam sistem \newline 2.~Pengguna membuka tampilan status meja pada halaman kasir \\ \hline
-\textit{Postcondition} & Status keterisian meja tersaji secara terbarui \\ \hline
-\end{tabularx}
-\end{table}
-
-Tabel~\ref{tab:uc-meja} menunjukkan bahwa pengguna dapat mengetahui ketersediaan meja tanpa keluar dari alur transaksi.
-
-\noindent 8)~~\textit{Use Case} Mengelola Katalog Produk
+\noindent 3)~~\textit{Use Case} Mengelola Katalog Produk
 
 Rancangan \textit{use case} mengelola katalog produk digunakan untuk memelihara data produk yang dijual beserta jumlah persediaannya. Rancangan \textit{use case} ini dapat dilihat pada Tabel~\ref{tab:uc-produk}.
 
@@ -1275,7 +1170,7 @@ Deskripsi & Proses penambahan, penyuntingan, dan penghapusan data produk serta s
 
 Tabel~\ref{tab:uc-produk} menunjukkan bahwa katalog produk dapat dipelihara secara mandiri oleh pengelola toko.
 
-\noindent 9)~~\textit{Use Case} Mengelola Kategori
+\noindent 4)~~\textit{Use Case} Mengelola Kategori
 
 Rancangan \textit{use case} mengelola kategori digunakan untuk mengatur pengelompokan produk agar katalog lebih mudah ditelusuri. Rancangan \textit{use case} ini dapat dilihat pada Tabel~\ref{tab:uc-kategori}.
 
@@ -1296,7 +1191,28 @@ Deskripsi & Proses pengaturan pengelompokan produk pada katalog toko \\ \hline
 
 Tabel~\ref{tab:uc-kategori} menunjukkan bahwa produk dapat dikelompokkan sehingga memudahkan pencarian saat transaksi.
 
-\noindent 10)~~\textit{Use Case} Mengaudit Riwayat Stok
+\noindent 5)~~\textit{Use Case} Melakukan \textit{Checkout}
+
+Rancangan \textit{use case} melakukan \textit{checkout} merupakan fungsi inti aplikasi kasir yang digunakan untuk memproses transaksi penjualan. Data yang dihasilkan dari \textit{use case} ini menjadi sumber utama bagi pencatatan omzet sekaligus bahan masukan fitur prediksi penjualan. Rancangan \textit{use case} ini dapat dilihat pada Tabel~\ref{tab:uc-checkout}.
+
+\begin{table}[H]
+\setstretch{1.2}
+\centering
+\caption{\textit{Use Case} Melakukan \textit{Checkout}}
+\label{tab:uc-checkout}
+\begin{tabularx}{\textwidth}{|p{3.2cm}|X|}
+\hline
+\textbf{\textit{Use Case}} & \textbf{Melakukan \textit{Checkout}} \\ \hline
+Deskripsi & Proses pemilihan produk ke dalam keranjang hingga penyelesaian pembayaran \\ \hline
+\textit{Actor} & Owner dan Kasir \\ \hline
+\textit{Precondition} & 1.~Pengguna telah masuk ke dalam sistem \newline 2.~Terdapat produk aktif pada katalog toko \\ \hline
+\textit{Postcondition} & Transaksi tersimpan dan stok produk terbarui secara otomatis \\ \hline
+\end{tabularx}
+\end{table}
+
+Tabel~\ref{tab:uc-checkout} menunjukkan bahwa transaksi penjualan tercatat beserta pembaruan stok produk yang terkait.
+
+\noindent 6)~~\textit{Use Case} Mengaudit Riwayat Stok
 
 Rancangan \textit{use case} mengaudit riwayat stok digunakan untuk menelusuri catatan mutasi persediaan sebagai bahan pemeriksaan inventaris. Rancangan \textit{use case} ini dapat dilihat pada Tabel~\ref{tab:uc-stok}.
 
@@ -1317,7 +1233,7 @@ Deskripsi & Proses penelusuran \textit{log} mutasi stok produk \\ \hline
 
 Tabel~\ref{tab:uc-stok} menunjukkan bahwa setiap perubahan stok dapat ditelusuri untuk keperluan audit persediaan.
 
-\noindent 11)~~\textit{Use Case} Melihat \textit{Dashboard}
+\noindent 7)~~\textit{Use Case} Melihat \textit{Dashboard}
 
 Rancangan \textit{use case} melihat \textit{dashboard} digunakan untuk menyajikan ringkasan performa penjualan toko dalam satu tampilan. Rancangan \textit{use case} ini dapat dilihat pada Tabel~\ref{tab:uc-dashboard}.
 
@@ -1338,49 +1254,49 @@ Deskripsi & Proses penyajian ringkasan omzet, jumlah transaksi, dan status perse
 
 Tabel~\ref{tab:uc-dashboard} menunjukkan bahwa pengelola memperoleh gambaran menyeluruh kondisi toko tanpa menelusuri data satu per satu.
 
-\noindent 12)~~\textit{Use Case} Melihat AI \textit{Smart Analytics}
+\noindent 8)~~\textit{Use Case} Melihat Prediksi Penjualan Harian
 
-Rancangan \textit{use case} melihat AI \textit{Smart Analytics} digunakan untuk menyajikan hasil prediksi penjualan harian yang dihasilkan model \textit{Long Short-Term Memory} melalui layanan \textit{REST API}. Rancangan \textit{use case} ini dapat dilihat pada Tabel~\ref{tab:uc-analytics}.
+Rancangan \textit{use case} melihat prediksi penjualan harian merupakan fungsi yang menjadi inti penelitian ini. Melalui \textit{use case} ini, hasil peramalan yang dihasilkan model \textit{Long Short-Term Memory} disajikan langsung kepada pengelola di dalam alur kerja aplikasi \textit{Point of Sale}. Rancangan \textit{use case} ini dapat dilihat pada Tabel~\ref{tab:uc-prediksi}.
 
 \begin{table}[H]
 \setstretch{1.2}
 \centering
-\caption{\textit{Use Case} Melihat AI \textit{Smart Analytics}}
-\label{tab:uc-analytics}
+\caption{\textit{Use Case} Melihat Prediksi Penjualan Harian}
+\label{tab:uc-prediksi}
 \begin{tabularx}{\textwidth}{|p{3.2cm}|X|}
 \hline
-\textbf{\textit{Use Case}} & \textbf{Melihat AI \textit{Smart Analytics}} \\ \hline
-Deskripsi & Proses penyajian hasil prediksi penjualan harian beserta riwayat analisisnya \\ \hline
+\textbf{\textit{Use Case}} & \textbf{Melihat Prediksi Penjualan Harian} \\ \hline
+Deskripsi & Proses permintaan dan penyajian hasil prediksi penjualan harian dari layanan \textit{REST API} \\ \hline
 \textit{Actor} & Owner dan Kasir \\ \hline
 \textit{Precondition} & 1.~Pengguna telah masuk ke dalam sistem \newline 2.~Riwayat transaksi telah memenuhi panjang sekuens minimum yang disyaratkan model \\ \hline
-\textit{Postcondition} & Hasil prediksi penjualan harian tersaji dan tersimpan pada riwayat analisis \\ \hline
+\textit{Postcondition} & Hasil prediksi penjualan harian tersaji dalam bentuk kartu estimasi dan grafik peramalan \\ \hline
 \end{tabularx}
 \end{table}
 
-Tabel~\ref{tab:uc-analytics} menunjukkan bahwa hasil peramalan dapat langsung dimanfaatkan pengelola di dalam aplikasi yang sama.
+Tabel~\ref{tab:uc-prediksi} menunjukkan bahwa hasil peramalan dapat langsung dimanfaatkan pengelola sebagai bahan pertimbangan penentuan volume produksi harian.
 
-\noindent 13)~~\textit{Use Case} Kirim \textit{Broadcast} Notifikasi
+\noindent 9)~~\textit{Use Case} Melihat Riwayat Analisis
 
-Rancangan \textit{use case} kirim \textit{broadcast} notifikasi digunakan untuk menyampaikan pemberitahuan kepada seluruh staf toko secara serentak. Rancangan \textit{use case} ini dapat dilihat pada Tabel~\ref{tab:uc-broadcast}.
+Rancangan \textit{use case} melihat riwayat analisis digunakan untuk menelusuri kembali hasil prediksi yang pernah dijalankan beserta sumber komputasinya. Rancangan \textit{use case} ini dapat dilihat pada Tabel~\ref{tab:uc-riwayatanalisis}.
 
 \begin{table}[H]
 \setstretch{1.2}
 \centering
-\caption{\textit{Use Case} Kirim \textit{Broadcast} Notifikasi}
-\label{tab:uc-broadcast}
+\caption{\textit{Use Case} Melihat Riwayat Analisis}
+\label{tab:uc-riwayatanalisis}
 \begin{tabularx}{\textwidth}{|p{3.2cm}|X|}
 \hline
-\textbf{\textit{Use Case}} & \textbf{Kirim \textit{Broadcast} Notifikasi} \\ \hline
-Deskripsi & Proses pengiriman pemberitahuan kepada staf toko \\ \hline
+\textbf{\textit{Use Case}} & \textbf{Melihat Riwayat Analisis} \\ \hline
+Deskripsi & Proses penyajian daftar analisis prediksi yang telah dijalankan sebelumnya \\ \hline
 \textit{Actor} & Owner dan Kasir \\ \hline
-\textit{Precondition} & 1.~Pengguna telah masuk ke dalam sistem \newline 2.~Pengguna menyusun isi pesan yang akan dikirimkan \\ \hline
-\textit{Postcondition} & Notifikasi diterima oleh perangkat staf toko yang dituju \\ \hline
+\textit{Precondition} & 1.~Pengguna telah masuk ke dalam sistem \newline 2.~Terdapat analisis prediksi yang pernah dijalankan \\ \hline
+\textit{Postcondition} & Riwayat analisis tersaji beserta waktu pelaksanaan dan estimasi yang dihasilkan \\ \hline
 \end{tabularx}
 \end{table}
 
-Tabel~\ref{tab:uc-broadcast} menunjukkan bahwa informasi operasional dapat disebarkan tanpa memerlukan saluran komunikasi terpisah.
+Tabel~\ref{tab:uc-riwayatanalisis} menunjukkan bahwa pengelola dapat membandingkan hasil peramalan antarwaktu tanpa menjalankan ulang analisis.
 
-\noindent 14)~~\textit{Use Case} Sinkronisasi Data
+\noindent 10)~~\textit{Use Case} Sinkronisasi Data
 
 Rancangan \textit{use case} sinkronisasi data digunakan untuk menyelaraskan data transaksi pada perangkat dengan basis data \textit{cloud}. Rancangan \textit{use case} ini dapat dilihat pada Tabel~\ref{tab:uc-sinkron}.
 
@@ -1401,7 +1317,28 @@ Deskripsi & Proses penyelarasan data transaksi perangkat dengan basis data \text
 
 Tabel~\ref{tab:uc-sinkron} menunjukkan bahwa pencatatan transaksi tetap utuh meskipun koneksi sempat terputus.
 
-\noindent 15)~~\textit{Use Case} Mengelola Karyawan
+\noindent 11)~~\textit{Use Case} Kirim \textit{Broadcast} Notifikasi
+
+Rancangan \textit{use case} kirim \textit{broadcast} notifikasi digunakan untuk menyampaikan pemberitahuan kepada seluruh staf toko secara serentak. Rancangan \textit{use case} ini dapat dilihat pada Tabel~\ref{tab:uc-broadcast}.
+
+\begin{table}[H]
+\setstretch{1.2}
+\centering
+\caption{\textit{Use Case} Kirim \textit{Broadcast} Notifikasi}
+\label{tab:uc-broadcast}
+\begin{tabularx}{\textwidth}{|p{3.2cm}|X|}
+\hline
+\textbf{\textit{Use Case}} & \textbf{Kirim \textit{Broadcast} Notifikasi} \\ \hline
+Deskripsi & Proses pengiriman pemberitahuan kepada staf toko \\ \hline
+\textit{Actor} & Owner dan Kasir \\ \hline
+\textit{Precondition} & 1.~Pengguna telah masuk ke dalam sistem \newline 2.~Pengguna menyusun isi pesan yang akan dikirimkan \\ \hline
+\textit{Postcondition} & Notifikasi diterima oleh perangkat staf toko yang dituju \\ \hline
+\end{tabularx}
+\end{table}
+
+Tabel~\ref{tab:uc-broadcast} menunjukkan bahwa informasi operasional dapat disebarkan tanpa memerlukan saluran komunikasi terpisah.
+
+\noindent 12)~~\textit{Use Case} Mengelola Karyawan
 
 Rancangan \textit{use case} mengelola karyawan digunakan untuk mendaftarkan staf kasir serta mengatur peran yang diberikan kepada masing-masing staf. Rancangan \textit{use case} ini dapat dilihat pada Tabel~\ref{tab:uc-karyawan}.
 
@@ -1422,7 +1359,7 @@ Deskripsi & Proses pendaftaran dan pengaturan peran staf toko \\ \hline
 
 Tabel~\ref{tab:uc-karyawan} menunjukkan bahwa pengaturan hak akses staf sepenuhnya berada pada kewenangan Owner.
 
-\noindent 16)~~\textit{Use Case} Mengatur Profil Toko
+\noindent 13)~~\textit{Use Case} Mengatur Profil Toko
 
 Rancangan \textit{use case} mengatur profil toko digunakan untuk memperbarui identitas toko yang ditampilkan pada aplikasi dan bukti transaksi. Rancangan \textit{use case} ini dapat dilihat pada Tabel~\ref{tab:uc-profil}.
 

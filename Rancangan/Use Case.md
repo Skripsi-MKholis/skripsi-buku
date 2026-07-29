@@ -1,182 +1,158 @@
-# Dokumentasi Use Case Diagram & Skenario Sistem
-**Aplikasi: Parzello POS Mobile (ZelloPOS)**  
-**Tanggal Penyusunan: 1 Juni 2026**
+# Dokumentasi Use Case Diagram
+**Aplikasi: Parzello POS Mobile (ZelloPOS)**
+**Versi: 4 — tata letak potret, relasi disederhanakan, disesuaikan dengan Skripsi Bab III (Subbab 3.2.1 dan 3.3.2)**
+**Tanggal Pemutakhiran: 29 Juli 2026**
 
 ---
 
 ## Pendahuluan
 
-Dokumen ini merinci model **Use Case Diagram** beserta skenario spesifikasi fungsional untuk aplikasi **Parzello POS Mobile**. Pemodelan ini bertujuan untuk menjabarkan batasan sistem (*system boundary*), interaksi antara aktor (pengguna) dengan fungsionalitas sistem, serta relasi dependensi antar-fungsi (`<<include>>` dan `<<extend>>`).
+Dokumen ini memuat rancangan **Use Case Diagram** aplikasi **Parzello POS Mobile** beserta kamus *use case*-nya. Pemodelan ini menjabarkan batasan sistem (*system boundary*) serta interaksi antara aktor dengan fungsionalitas yang tersedia di dalam sistem.
 
-Dokumen ini disusun menggunakan standar pemodelan perangkat lunak untuk mendukung penyusunan dokumen skripsi/akademis yang terstruktur dan siap uji.
+Diagram memuat **13 use case**, selaras dengan daftar kebutuhan fungsional pada Subbab 3.2.1 skripsi.
+
+### Pilihan Tata Letak dan Pemodelan
+
+Tata letak disusun dalam orientasi **potret** dengan satu kolom *use case*, mengikuti pola pada dokumen pembanding. Tiga keputusan diambil agar diagram tetap terbaca dan konsisten secara semantik meskipun memuat 13 *use case*:
+
+1. **Generalisasi aktor.** Owner mewarisi seluruh kemampuan Kasir, sehingga digambarkan dengan relasi generalisasi (`Owner ──▷ Kasir`). Owner cukup memiliki 3 asosiasi eksklusif, bukan 13. Jumlah garis asosiasi turun dari 23 menjadi 13, tanpa mengubah makna hak akses.
+2. **Pengelompokan menurut aktor.** Sepuluh *use case* operasional dikelompokkan di bagian atas (diakses Kasir dan diwarisi Owner), tiga *use case* eksklusif Owner di bagian bawah. Pengelompokan ini menghilangkan persilangan garis asosiasi.
+3. **Autentikasi dimodelkan sebagai prasyarat, bukan `«include»`.** Seluruh *use case* operasional sama-sama mensyaratkan pengguna telah masuk ke dalam sistem. Persyaratan tersebut telah dinyatakan pada baris *Precondition* di setiap tabel *use case* (Subbab 3.3.2), sehingga penggambarannya kembali sebagai relasi `«include»` bersifat duplikatif dan berisiko tidak konsisten apabila hanya diterapkan pada sebagian *use case*. Atas dasar itu, diagram ini tidak menggunakan relasi `«include»` maupun `«extend»`, dan hanya memuat asosiasi serta generalisasi aktor.
 
 ---
 
 ## Aktor Sistem (System Actors)
 
-Sistem Parzello POS mengidentifikasi tiga aktor utama yang berinteraksi dengan aplikasi:
-
-1.  **Owner (Pemilik Toko)**: 
-    Aktor dengan hak istimewa tertinggi (*super-user*). Owner mengontrol seluruh konfigurasi toko, manajemen katalog produk, data karyawan, laporan keuangan mendalam, audit stok, serta fitur proyeksi penjualan berbasis kecerdasan buatan (**AI Smart Analytics**).
-2.  **Karyawan / Kasir**:
-    Staf operasional harian toko. Staf kasir memiliki akses terbatas yang difokuskan pada pelayanan penjualan (POS), pencetakan struk belanja, monitoring status meja, penginputan mutasi stok barang, dan melihat ringkasan omzet harian terbatas khusus untuk shift hari ini saja.
-3.  **Pelanggan (Customer - Opsional / Masa Depan)**:
-    Aktor eksternal (diusulkan pada model masa depan) yang dapat memesan menu mandiri melalui pemindaian QR Code meja restoran dan melakukan pembayaran elektronik (*self-checkout*).
+| Aktor | Deskripsi |
+| :--- | :--- |
+| **Kasir (Staf)** | Staf operasional harian toko. Memiliki akses ke seluruh fungsi operasional aplikasi. |
+| **Owner (Pemilik)** | Aktor dengan hak akses penuh. Mewarisi seluruh fungsi Kasir, ditambah tiga fungsi eksklusif: registrasi toko, manajemen karyawan, dan pengaturan profil toko. |
 
 ---
 
-## Diagram Use Case Utama (Mermaid Flowchart)
+## Visualisasi mxGraphModel (draw.io)
 
-Mermaid diagram berikut memodelkan sistem batas (*system boundary*) Parzello POS dengan memetakan asosiasi aktor ke setiap lingkaran *use case*, termasuk relasi ketergantungan `include` (fungsi yang wajib dijalankan) dan `extend` (fungsi opsional di bawah syarat tertentu).
+Kode XML berikut dapat diimpor langsung ke draw.io/diagrams.net melalui menu *Extras → Edit Diagram* atau *File → Import From → Device*.
 
-```mermaid
-flowchart LR
-    %% Aktor di luar Batas Sistem (Owner di kiri, Kasir di kanan)
-    Owner["Owner (Pemilik)"]
-    Kasir["Kasir (Staf)"]
+```xml
+<mxfile host="app.diagrams.net">
+  <diagram id="useCaseParzelloPOS" name="Use Case Diagram - Parzello POS">
+    <mxGraphModel dx="900" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="790" pageHeight="1450" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
 
-    %% Batas Sistem
-    subgraph System_Boundary [Batas Sistem Parzello POS]
-        %% Kolom 1: Autentikasi & Administrasi (Owner-Only)
-        UC_Register(["Registrasi Toko Baru"])
-        UC_StoreConfig(["Mengatur Profil Toko"])
-        UC_ManageStaff(["Mengelola Anggota Karyawan"])
-        UC_BroadcastNotif(["Kirim Broadcast Notifikasi"])
-        
-        %% Kolom 2: Katalog & Stok (Owner-Only)
-        UC_ManageCatalog(["Mengelola Katalog Produk"])
-        UC_ManageCategory(["Mengelola Kategori"])
-        UC_AuditStock(["Mengaudit Riwayat Stok"])
-        UC_AIAnalytics(["Melihat AI Smart Analytics"])
-        
-        %% Kolom 3: Fitur Utama & Transaksi (Shared & POS)
-        UC_Login(["Login Akun"])
-        UC_SyncLocal(["Sinkronisasi Data Offline-First"])
-        UC_Dashboard(["Melihat Dashboard Penjualan"])
-        UC_Checkout(["Melakukan Checkout Transaksi"])
-        
-        %% Kolom 4: Relasi Detail Checkout
-        UC_Discount(["Menerapkan Voucher/Diskon"])
-        UC_PrintReceipt(["Mencetak Struk Belanja"])
+        <!-- ==================== BATAS SISTEM ==================== -->
+        <mxCell id="bnd" value="Batas Sistem Parzello POS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=2;dashed=1;dashPattern=8 8;verticalAlign=top;fontSize=15;fontStyle=1;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="250" y="60" width="450" height="1330" as="geometry" />
+        </mxCell>
 
-        %% Invisible Links untuk merapikan tata letak grid (kolom-kolom)
-        UC_Register ~~~ UC_ManageCatalog ~~~ UC_Login
-        UC_StoreConfig ~~~ UC_ManageCategory ~~~ UC_SyncLocal
-        UC_ManageStaff ~~~ UC_AuditStock ~~~ UC_Dashboard
-        UC_BroadcastNotif ~~~ UC_AIAnalytics ~~~ UC_Checkout
-    end
+        <!-- ==================== AKTOR ==================== -->
+        <mxCell id="actKasir" value="Kasir (Staf)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;strokeColor=#000000;strokeWidth=2;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="460" width="60" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="actOwner" value="Owner (Pemilik)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;strokeColor=#000000;strokeWidth=2;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="1080" width="60" height="120" as="geometry" />
+        </mxCell>
 
-    %% Hubungan Aktor ke Use Case (Owner - Asosiasi Kiri)
-    Owner --- UC_Register
-    Owner --- UC_StoreConfig
-    Owner --- UC_ManageStaff
-    Owner --- UC_BroadcastNotif
-    Owner --- UC_ManageCatalog
-    Owner --- UC_ManageCategory
-    Owner --- UC_AuditStock
-    Owner --- UC_AIAnalytics
-    Owner --- UC_Login
-    Owner --- UC_SyncLocal
-    Owner --- UC_Dashboard
-    Owner --- UC_Checkout
+        <!-- Generalisasi: Owner mewarisi seluruh fungsi Kasir -->
+        <mxCell id="gen1" style="endArrow=block;endFill=0;endSize=14;html=1;strokeColor=#000000;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="actOwner" target="actKasir">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
 
-    %% Hubungan Use Case ke Aktor (Kasir - Asosiasi Kanan)
-    UC_Login --- Kasir
-    UC_SyncLocal --- Kasir
-    UC_Dashboard --- Kasir
-    UC_Checkout --- Kasir
+        <!-- ========== KELOMPOK 1 : fungsi operasional (Kasir + Owner) ========== -->
+        <mxCell id="uc02" value="Login Akun" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="300" y="100" width="380" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="uc03" value="Mengelola Katalog Produk" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="300" y="196" width="380" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="uc04" value="Mengelola Kategori" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="300" y="292" width="380" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="uc05" value="Melakukan Checkout" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="300" y="388" width="380" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="uc06" value="Mengaudit Riwayat Stok" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="300" y="484" width="380" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="uc07" value="Melihat Dashboard" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="300" y="580" width="380" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="uc08" value="Melihat Prediksi Penjualan Harian" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=2;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="676" width="380" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="uc09" value="Melihat Riwayat Analisis" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="300" y="772" width="380" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="uc10" value="Sinkronisasi Data" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="300" y="868" width="380" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="uc11" value="Kirim Broadcast Notifikasi" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="300" y="964" width="380" height="74" as="geometry" />
+        </mxCell>
 
-    %% Hubungan Dependensi antar Use Case (include / extend)
-    UC_Checkout -.->|"<<include>>"| UC_Login
-    UC_Checkout -.->|"<<extend>>"| UC_Discount
-    UC_Checkout -.->|"<<include>>"| UC_PrintReceipt
-    
-    UC_ManageCatalog -.->|"<<include>>"| UC_Login
-    UC_AIAnalytics -.->|"<<include>>"| UC_Login
-    UC_ManageStaff -.->|"<<include>>"| UC_Login
+        <!-- ========== KELOMPOK 2 : fungsi eksklusif Owner ========== -->
+        <mxCell id="uc01" value="Registrasi Toko Baru" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="300" y="1090" width="380" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="uc12" value="Mengelola Karyawan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="300" y="1186" width="380" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="uc13" value="Mengatur Profil Toko" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="300" y="1282" width="380" height="74" as="geometry" />
+        </mxCell>
 
-    %% Style Sederhana Hitam Putih (seperti Draw.io)
-    classDef default fill:#ffffff,stroke:#000000,stroke-width:1.5px,color:#000000;
-    classDef actor fill:#ffffff,stroke:#000000,stroke-width:2px,color:#000000;
-    class Owner,Kasir actor;
-    
-    style System_Boundary fill:#ffffff,stroke:#000000,stroke-width:2px,stroke-dasharray: 5 5,color:#000000;
-    
-    linkStyle default stroke:#000000,stroke-width:1.2px,fill:none;
+        <!-- ==================== ASOSIASI KASIR (10) ==================== -->
+        <mxCell id="ka01" style="endArrow=none;html=1;strokeColor=#000000;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="actKasir" target="uc02"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ka02" style="endArrow=none;html=1;strokeColor=#000000;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="actKasir" target="uc03"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ka03" style="endArrow=none;html=1;strokeColor=#000000;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="actKasir" target="uc04"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ka04" style="endArrow=none;html=1;strokeColor=#000000;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="actKasir" target="uc05"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ka05" style="endArrow=none;html=1;strokeColor=#000000;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="actKasir" target="uc06"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ka06" style="endArrow=none;html=1;strokeColor=#000000;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="actKasir" target="uc07"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ka07" style="endArrow=none;html=1;strokeColor=#000000;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="actKasir" target="uc08"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ka08" style="endArrow=none;html=1;strokeColor=#000000;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="actKasir" target="uc09"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ka09" style="endArrow=none;html=1;strokeColor=#000000;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="actKasir" target="uc10"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ka10" style="endArrow=none;html=1;strokeColor=#000000;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="actKasir" target="uc11"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- ==================== ASOSIASI OWNER (3 eksklusif) ==================== -->
+        <mxCell id="ow01" style="endArrow=none;html=1;strokeColor=#000000;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="actOwner" target="uc01"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ow02" style="endArrow=none;html=1;strokeColor=#000000;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="actOwner" target="uc12"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ow03" style="endArrow=none;html=1;strokeColor=#000000;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="actOwner" target="uc13"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
 ```
 
 ---
 
-## Spesifikasi Use Case (Kamus Use Case)
+## Kamus Use Case
 
-Daftar berikut merinci fungsi dari masing-masing *use case* yang digambarkan pada diagram di atas:
+| ID | Nama Use Case | Aktor | Kebutuhan Fungsional (3.2.1) | Deskripsi Singkat |
+| :--- | :--- | :--- | :---: | :--- |
+| **UC-01** | Registrasi Toko Baru | Owner | 1 | Mendaftarkan akun toko baru pada saat inisialisasi awal sistem. |
+| **UC-02** | Login Akun | Kasir, Owner | 2 | Autentikasi pengguna menggunakan email dan kata sandi serta penentuan hak akses peran. |
+| **UC-03** | Mengelola Katalog Produk | Kasir, Owner | 3 | Menambah, menyunting, dan menghapus data produk beserta stok. |
+| **UC-04** | Mengelola Kategori | Kasir, Owner | 3 | Mengatur pengelompokan produk pada katalog toko. |
+| **UC-05** | Melakukan Checkout | Kasir, Owner | 4 | Memasukkan produk ke keranjang dan memproses transaksi pembayaran. |
+| **UC-06** | Mengaudit Riwayat Stok | Kasir, Owner | 5 | Menelusuri *log* mutasi stok produk untuk keperluan audit persediaan. |
+| **UC-07** | Melihat Dashboard | Kasir, Owner | 6 | Memantau ringkasan omzet, jumlah transaksi, dan status persediaan. |
+| **UC-08** | Melihat Prediksi Penjualan Harian | Kasir, Owner | 7 | Menampilkan hasil peramalan model LSTM melalui layanan REST API. |
+| **UC-09** | Melihat Riwayat Analisis | Kasir, Owner | 8 | Menelusuri hasil prediksi yang pernah dijalankan beserta sumber komputasinya. |
+| **UC-10** | Sinkronisasi Data | Kasir, Owner | 9 | Menyelaraskan data transaksi perangkat dengan basis data *cloud*. |
+| **UC-11** | Kirim Broadcast Notifikasi | Kasir, Owner | 10 | Mengirim pemberitahuan kepada seluruh staf toko. |
+| **UC-12** | Mengelola Karyawan | Owner | 11 | Mendaftarkan staf kasir dan mengatur peran yang diberikan. |
+| **UC-13** | Mengatur Profil Toko | Owner | 11 | Mengubah nama, alamat, dan logo toko. |
 
-| ID | Nama Use Case | Aktor Utama | Deskripsi Singkat |
-| :--- | :--- | :--- | :--- |
-| **UC-01** | Registrasi Toko Baru | Owner | Mendaftarkan akun toko baru saat inisialisasi awal sistem. |
-| **UC-02** | Login Akun | Owner, Kasir | Autentikasi pengguna menggunakan email dan kata sandi. |
-| **UC-03** | Melakukan Checkout | Owner, Kasir | Memasukkan pesanan ke keranjang dan memproses transaksi bayar. |
-| **UC-04** | Menerapkan Voucher | Owner, Kasir | Memasukkan kode promosi voucher belanja untuk memotong tagihan. |
-| **UC-05** | Mencetak Struk Belanja | Owner, Kasir | Mencetak struk transaksi fisik melalui printer thermal Bluetooth. |
-| **UC-06** | Mengelola Katalog | Owner | Menambah, menyunting, dan menghapus produk atau stok barang. |
-| **UC-07** | Mengelola Kategori | Owner | Mengatur pengelompokan menu katalog produk toko. |
-| **UC-08** | Mengaudit Riwayat Stok | Owner | Melihat log keluar-masuk mutasi barang untuk mencegah fraud. |
-| **UC-09** | Melihat Dashboard | Owner, Kasir | Memantau performa keuangan (Kasir dibatasi khusus hari ini). |
-| **UC-10** | Melihat AI Analytics | Owner | Melihat proyeksi omzet cerdas berbasis Gemini AI (*simulated*). |
-| **UC-11** | Kirim Broadcast Notif | Owner | Mengirim pesan push pemberitahuan real-time ke semua kasir. |
-| **UC-12** | Sinkronisasi Data | Owner, Kasir | Menyinkronkan antrean transaksi offline lokal ke cloud Supabase. |
-| **UC-13** | Mengelola Karyawan | Owner | Mendaftarkan, menangguhkan, atau mengubah peran staf kasir. |
-| **UC-14** | Mengatur Profil Toko | Owner | Mengubah identitas nama toko, alamat, dan logo outlet. |
-
----
-
-## Skenario Deskriptif Use Case (Use Case Scenarios)
-
-Berikut adalah skenario alur kejadian (*flow of events*) rinci untuk tiga fungsionalitas paling krusial di dalam sistem Parzello POS:
-
-### Skenario 1: Melayani Transaksi POS Kasir (UC-03)
-*   **Aktor Utama**: Kasir / Owner
-*   **Kondisi Awal (Pre-Condition)**: Kasir sudah berhasil masuk (login) ke aplikasi dan keranjang belanja dalam keadaan kosong.
-*   **Kondisi Akhir (Post-Condition)**: Transaksi tersimpan secara lokal di database Isar, struk belanja dicetak, dan stok produk berkurang.
-
-| Alur Utama (Normal Flow) - Aksi Aktor | Reaksi Sistem |
-| :--- | :--- |
-| 1. Kasir membuka modul Kasir (POS Screen). | 2. Sistem menampilkan katalog produk per kategori. |
-| 3. Kasir mengetik SKU/nama produk di pencarian atau memindai barcode SKU menggunakan kamera native. | 4. Sistem menyaring katalog dan menampilkan produk yang dicari secara instan. |
-| 5. Kasir mengetuk produk untuk dimasukkan ke keranjang belanja. | 6. Sistem menambahkan produk ke keranjang, mengalkulasi subtotal, dan memperbarui angka lencana keranjang belanja. |
-| 7. Kasir membuka lembar keranjang belanja (*Cart Sheet*). | 8. Sistem menampilkan detail item belanjaan kasir. |
-| 9. (Opsional) Kasir memasukkan voucher belanja. | 10. Sistem memotong nilai total tagihan sesuai kalkulasi voucher. |
-| 11. Kasir menekan tombol "Bayar" dan memilih metode pembayaran (Tunai). | 12. Sistem membuka layar pembayaran dan meminta kasir memasukkan nominal uang diterima. |
-| 13. Kasir memasukkan jumlah uang tunai yang diterima dan menekan "Konfirmasi Pembayaran". | 14. Sistem menghitung kembalian, menyimpan transaksi di Isar DB lokal, mengurangi stok produk di database lokal, dan menampilkan dialog transaksi sukses. |
-| 15. Kasir menekan tombol "Cetak Struk". | 16. Sistem menyusun layout nota dan mengirimkannya ke printer Bluetooth thermal yang terhubung. |
+> Akses Owner terhadap UC-02 sampai UC-11 diperoleh melalui relasi generalisasi `Owner ──▷ Kasir`, bukan melalui asosiasi langsung.
 
 ---
 
-### Skenario 2: Kalibrasi & Latihan AI Smart Analytics (UC-10)
-*   **Aktor Utama**: Owner
-*   **Kondisi Awal**: Owner berada di halaman laporan keuangan dan data transaksi toko memiliki minimal 20 entri riwayat penjualan baru.
-*   **Kondisi Akhir**: Model forecasting Gemini AI terkalibrasi secara cloud dan grafik peramalan omzet terbaru tersaji secara lokal.
+## Catatan Relasi
 
-| Alur Utama (Normal Flow) - Aksi Aktor | Reaksi Sistem |
-| :--- | :--- |
-| 1. Owner menekan menu "Smart Analytics". | 2. Sistem mendeteksi halaman terkunci (*Locked Backdrop Blur*), lalu menampilkan pop-up persetujuan privasi data latihan AI (*Agreement Dialog*). |
-| 3. Owner menekan tombol "Setuju & Mulai Latihan". | 4. Sistem menampilkan proses bar kalibrasi AI. |
-| | 5. Sistem memproses data tren secara lokal, mengaburkan informasi pribadi pelanggan (PII), mengunggah rangkuman histori transaksi terenkripsi ke API cloud, memicu model Gemini Pro, menyimpan cache proyeksi di penyimpanan lokal, dan menampilkan status "Kalibrasi Sukses!". |
-| | 6. Sistem menyajikan visualisasi grafik fluktuasi peramalan omzet harian/mingguan/bulanan, jam sibuk pelanggan, rekomendasi harga dinamis (*smart pricing*), dan estimasi menu terlaris. |
-
----
-
-### Skenario 3: Sinkronisasi Data Otomatis di Latar Belakang (UC-12)
-*   **Aktor Utama**: Owner / Kasir (Tidak sadar/Latar Belakang) atau dipicu Manual
-*   **Kondisi Awal**: Perangkat sebelumnya dalam keadaan luring (*offline*) dan baru saja mendapatkan kembali koneksi internet (*online*).
-*   **Kondisi Akhir**: Seluruh data transaksi lokal tersinkronkan ke Supabase Cloud dan status produk lokal diperbarui ke cloud.
-
-| Alur Utama (Normal Flow) - Aksi Aktor | Reaksi Sistem |
-| :--- | :--- |
-| | 1. Sensor konektivitas mendeteksi status beralih ke *Online*. |
-| | 2. Sistem meluncurkan modul `SyncNotifier` secara otomatis di latar belakang. |
-| | 3. Sistem menyeleksi antrean kategori lokal yang bertanda `isSynced = false`, lalu melakukan *upsert* ke Supabase Cloud. Setelah sukses, disusul dengan sinkronisasi data produk luring. |
-| | 4. Sistem menyeleksi transaksi luring lokal di Isar DB, menyusun payload RPC SQL, dan mengunggahnya ke tabel `transactions` dan `transaction_items` di Supabase. |
-| | 5. Sistem menandai baris transaksi lokal dengan bendera `isSynced = true`. |
-| | 6. Sistem memperbarui log mutasi stok produk di tabel `stock_histories` cloud agar audit stok tetap sinkron. |
-| | 7. Sistem memicu pemberitahuan Toast sukses di layar perangkat: *"Sinkronisasi selesai! Data offline berhasil diunggah ke cloud."* |
+- **Generalisasi aktor** — Owner mewarisi seluruh *use case* yang berasosiasi dengan Kasir. Relasi ini menggantikan sepuluh garis asosiasi langsung dari Owner.
+- **Autentikasi** — UC-02 (Login Akun) merupakan prasyarat bagi seluruh *use case* operasional. Ketentuan ini dinyatakan pada baris *Precondition* di setiap tabel *use case* pada Subbab 3.3.2, sehingga tidak digambarkan ulang sebagai relasi `«include»` pada diagram.
+- **Tanpa `«include»` dan `«extend»`** — Diagram sengaja dibatasi pada asosiasi dan generalisasi. Penambahan relasi dependensi hanya pada sebagian *use case* akan menimbulkan pertanyaan mengapa *use case* lain yang bersyarat sama tidak digambarkan serupa.
+- Kebutuhan fungsional nomor 12 pada Subbab 3.2.1 (perhitungan metrik evaluasi model) **tidak dipetakan** menjadi *use case* karena merupakan prosedur evaluasi penelitian, bukan fungsi yang diakses pengguna akhir melalui antarmuka aplikasi.
