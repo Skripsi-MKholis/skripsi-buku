@@ -27,12 +27,14 @@
 \contentsline {table}{\numberline {3.20}{\ignorespaces Skenario 4: Pengujian Horizon Prakiraan Rekursif}}{94}{table.caption.61}%
 \contentsline {table}{\numberline {3.21}{\ignorespaces Skenario Pengujian \textit {Black Box}}}{95}{table.3.21}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Statistik Ringkas Dataset Pendapatan Harian}}{121}{table.caption.78}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Pembagian Dataset dan Dimensi Sequence}}{123}{table.caption.79}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Statistik Ringkas Dataset Pendapatan Harian}}{120}{table.caption.78}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Pembagian Dataset dan Dimensi Sequence}}{122}{table.caption.79}%
 \contentsline {table}{\numberline {4.3}{\ignorespaces Perbandingan Performa pada Data Uji (\textit {One-Step-Ahead})}}{134}{table.caption.81}%
 \contentsline {table}{\numberline {4.4}{\ignorespaces Statistik Performa LSTM Hybrid pada 10 Seed}}{137}{table.caption.83}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces Perbandingan Performa Eksperimen Augmentasi TimeGAN (\textit {Multi-Step}, Horizon 7)}}{139}{table.caption.85}%
-\contentsline {table}{\numberline {4.6}{\ignorespaces Hasil Pengujian Black Box}}{141}{table.4.6}%
-\contentsline {table}{\numberline {4.7}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{143}{table.caption.86}%
-\contentsline {table}{\numberline {4.8}{\ignorespaces Hasil Pengujian White Box}}{145}{table.caption.87}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Perbandingan Performa Eksperimen Augmentasi TimeGAN (\textit {Multi-Step}, Horizon 7)}}{138}{table.caption.85}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Galat Prediksi Rekursif per Horizon Prakiraan}}{140}{table.caption.86}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces Rekapitulasi Hasil Pengujian Keempat Skenario}}{142}{table.caption.87}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces Hasil Pengujian Black Box}}{143}{table.4.8}%
+\contentsline {table}{\numberline {4.9}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{145}{table.caption.88}%
+\contentsline {table}{\numberline {4.10}{\ignorespaces Hasil Pengujian White Box}}{147}{table.caption.89}%
 \addvspace {10\p@ }

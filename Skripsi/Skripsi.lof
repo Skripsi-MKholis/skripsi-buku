@@ -38,22 +38,22 @@
 \contentsline {figure}{\numberline {3.32}{\ignorespaces Alur Kerja Algoritma \textit {Long Short-Term Memory} (LSTM)}}{85}{figure.caption.56}%
 \contentsline {figure}{\numberline {3.33}{\ignorespaces \textit {Flowchart} Perhitungan Sel \textit {Long Short-Term Memory}}}{88}{figure.caption.57}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Implementasi Halaman Registrasi}}{101}{figure.caption.62}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Implementasi Halaman \textit {Login}}}{102}{figure.caption.63}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Implementasi Halaman Informasi Toko}}{103}{figure.caption.64}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Implementasi Halaman Pilih Toko}}{104}{figure.caption.65}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Implementasi Halaman Dasbor Owner}}{105}{figure.caption.66}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Implementasi Halaman Kelola Produk dan Tambah Produk}}{106}{figure.caption.67}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Implementasi Halaman Kelola Kategori}}{107}{figure.caption.68}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Implementasi Halaman Kelola Stok dan Ubah Stok Produk}}{108}{figure.caption.69}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Implementasi Halaman Riwayat Stok}}{109}{figure.caption.70}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Implementasi Halaman Kasir (POS) dan Detail Pesanan}}{110}{figure.caption.71}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Implementasi Halaman Pembayaran}}{111}{figure.caption.72}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Implementasi Halaman Riwayat Transaksi}}{112}{figure.caption.73}%
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Implementasi Halaman Struk Digital}}{113}{figure.caption.74}%
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Implementasi Halaman Laporan Analitik}}{114}{figure.caption.75}%
-\contentsline {figure}{\numberline {4.15}{\ignorespaces Implementasi Halaman \textit {Smart Analitik}}}{115}{figure.caption.76}%
-\contentsline {figure}{\numberline {4.16}{\ignorespaces Implementasi Halaman Riwayat Analisis}}{116}{figure.caption.77}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Implementasi Halaman Registrasi}}{100}{figure.caption.62}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Implementasi Halaman \textit {Login}}}{101}{figure.caption.63}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Implementasi Halaman Informasi Toko}}{102}{figure.caption.64}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Implementasi Halaman Pilih Toko}}{103}{figure.caption.65}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Implementasi Halaman Dasbor Owner}}{104}{figure.caption.66}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Implementasi Halaman Kelola Produk dan Tambah Produk}}{105}{figure.caption.67}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Implementasi Halaman Kelola Kategori}}{106}{figure.caption.68}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Implementasi Halaman Kelola Stok dan Ubah Stok Produk}}{107}{figure.caption.69}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Implementasi Halaman Riwayat Stok}}{108}{figure.caption.70}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Implementasi Halaman Kasir (POS) dan Detail Pesanan}}{109}{figure.caption.71}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Implementasi Halaman Pembayaran}}{110}{figure.caption.72}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Implementasi Halaman Riwayat Transaksi}}{111}{figure.caption.73}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Implementasi Halaman Struk Digital}}{112}{figure.caption.74}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Implementasi Halaman Laporan Analitik}}{113}{figure.caption.75}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Implementasi Halaman \textit {Smart Analitik}}}{114}{figure.caption.76}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Implementasi Halaman Riwayat Analisis}}{115}{figure.caption.77}%
 \contentsline {figure}{\numberline {4.17}{\ignorespaces Kurva Kerugian Pelatihan (\textit {Training Loss Curve}) Model LSTM}}{127}{figure.caption.80}%
 \contentsline {figure}{\numberline {4.18}{\ignorespaces Grafik Pendapatan Aktual vs. Prediksi Model LSTM Hybrid}}{135}{figure.caption.82}%
 \contentsline {figure}{\numberline {4.19}{\ignorespaces Boxplot Distribusi MAE Hasil Pengujian \textit {Multi-Seed}}}{138}{figure.caption.84}%
