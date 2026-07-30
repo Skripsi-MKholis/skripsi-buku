@@ -1568,18 +1568,18 @@ Perancangan antarmuka pengguna (\textit{user interface}) dilakukan untuk memberi
 
 Antarmuka sistem dirancang dengan tata letak yang rapi, navigasi yang mudah dipahami, serta penyajian informasi yang mendukung alur penggunaan sistem mulai dari registrasi toko, autentikasi pengguna, pengelolaan katalog produk, transaksi kasir, hingga penyajian prediksi penjualan harian. Rancangan halaman disusun mengikuti \textit{use case} yang telah dimodelkan pada Subbab sebelumnya, sehingga setiap fungsi sistem memiliki rancangan antarmukanya masing-masing. Adapun rancangan halaman pada aplikasi \textit{Point of Sale} adalah sebagai berikut:
 
-\noindent a.~~\textbf{Perancangan Halaman Registrasi Toko Baru}
+\noindent a.~~\textbf{Perancangan Halaman \textit{Register}}
 
-Halaman registrasi toko baru dirancang sebagai titik masuk awal sistem, yaitu tempat calon pemilik mendaftarkan identitas toko sekaligus akun pemiliknya. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-registrasi}.
+Halaman \textit{register} dirancang sebagai titik masuk awal sistem, yaitu tempat pengguna baru membuat akun sebelum mendaftarkan atau bergabung ke sebuah toko. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-registrasi}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.34\textwidth]{wireframe_register}
-    \caption{Desain Halaman Registrasi Toko Baru}
+    \caption{Desain Halaman \textit{Register}}
     \label{fig:ui-registrasi}
 \end{figure}
 
-Gambar~\ref{fig:ui-registrasi} menunjukkan formulir pendaftaran yang memuat kolom nama lengkap, email, kata sandi, dan konfirmasi kata sandi, disertai kolom identitas toko. Bagian bawah halaman menyediakan tautan menuju halaman \textit{login} bagi pengguna yang telah memiliki akun.
+Gambar~\ref{fig:ui-registrasi} menunjukkan formulir \textit{Buat Akun} yang memuat kolom nama lengkap, email, kata sandi, dan konfirmasi kata sandi. Selain tombol Daftar, disediakan opsi pendaftaran cepat melalui akun Google serta tautan menuju halaman \textit{login} bagi pengguna yang telah memiliki akun.
 
 \noindent b.~~\textbf{Perancangan Halaman \textit{Login} dan Pemilihan Toko}
 
@@ -1663,20 +1663,7 @@ Halaman pembayaran dirancang untuk menyelesaikan transaksi setelah keranjang bel
 
 Gambar~\ref{fig:ui-pembayaran} menunjukkan rincian item belanja beserta total tagihan, pilihan metode pembayaran, dan kolom nominal uang yang diterima. Sistem menghitung kembalian sebelum transaksi disimpan ke basis data lokal.
 
-\noindent f.~~\textbf{Perancangan Halaman Riwayat Stok}
-
-Halaman riwayat stok dirancang untuk menelusuri catatan mutasi persediaan sebagai bahan pemeriksaan inventaris toko. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-stok}.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.34\textwidth]{wireframe_stock_history}
-    \caption{Desain Halaman Riwayat Stok}
-    \label{fig:ui-stok}
-\end{figure}
-
-Gambar~\ref{fig:ui-stok} menunjukkan penyaring rentang waktu dan produk, serta daftar mutasi stok yang memuat waktu perubahan, jumlah yang berubah, penyebab perubahan, dan saldo stok berjalan.
-
-\noindent g.~~\textbf{Perancangan Halaman Dasbor dan Laporan}
+\noindent f.~~\textbf{Perancangan Halaman Dasbor dan Laporan}
 
 \noindent 1)~~Perancangan Halaman Dasbor
 
@@ -1704,7 +1691,7 @@ Halaman laporan dirancang untuk menyajikan rekapitulasi penjualan pada rentang w
 
 Gambar~\ref{fig:ui-laporan} menunjukkan penyaring rentang waktu beserta ringkasan penjualan dalam bentuk tabel dan grafik, sehingga pengguna dapat menelaah performa toko secara lebih rinci daripada tampilan dasbor.
 
-\noindent h.~~\textbf{Perancangan Halaman Prediksi Penjualan Harian}
+\noindent g.~~\textbf{Perancangan Halaman Prediksi Penjualan Harian}
 
 Halaman prediksi penjualan harian dirancang sebagai antarmuka fitur inti penelitian, yaitu tempat hasil peramalan model \textit{Long Short-Term Memory} disajikan kepada pengelola. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-prediksi}.
 
@@ -1715,9 +1702,9 @@ Halaman prediksi penjualan harian dirancang sebagai antarmuka fitur inti penelit
     \label{fig:ui-prediksi}
 \end{figure}
 
-Gambar~\ref{fig:ui-prediksi} menunjukkan kartu estimasi omzet dan estimasi jumlah transaksi untuk hari berikutnya, grafik peramalan yang membedakan data aktual dengan hasil prediksi, serta area peringatan \textit{cold start} yang muncul ketika panjang sekuens data belum memenuhi syarat minimum model.
+Gambar~\ref{fig:ui-prediksi} menunjukkan kartu kendali analisis yang memuat pemilihan sumber komputasi (\textit{cloud} atau lokal) dan tombol penyegaran, tab granularitas prakiraan, kartu estimasi omzet dan estimasi jumlah transaksi untuk hari aktif berikutnya, grafik peramalan yang membedakan data aktual dengan hasil prediksi, serta area peringatan \textit{cold start} yang muncul ketika panjang sekuens data belum memenuhi syarat minimum model.
 
-\noindent i.~~\textbf{Perancangan Halaman Riwayat Analisis}
+\noindent h.~~\textbf{Perancangan Halaman Riwayat Analisis}
 
 Halaman riwayat analisis dirancang untuk menelusuri kembali hasil prediksi yang pernah dijalankan beserta sumber komputasinya. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-riwayat-analisis}.
 
@@ -1730,20 +1717,7 @@ Halaman riwayat analisis dirancang untuk menelusuri kembali hasil prediksi yang 
 
 Gambar~\ref{fig:ui-riwayat-analisis} menunjukkan daftar analisis yang telah tersimpan beserta waktu pelaksanaan, estimasi omzet yang dihasilkan, dan keterangan sumber komputasi, sehingga hasil peramalan antarwaktu dapat dibandingkan.
 
-\noindent j.~~\textbf{Perancangan Halaman Manajemen Karyawan}
-
-Halaman manajemen karyawan dirancang sebagai halaman eksklusif Owner untuk mendaftarkan staf kasir dan mengatur peran yang diberikan. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-karyawan}.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.34\textwidth]{wireframe_staff}
-    \caption{Desain Halaman Manajemen Karyawan}
-    \label{fig:ui-karyawan}
-\end{figure}
-
-Gambar~\ref{fig:ui-karyawan} menunjukkan daftar staf toko beserta nama dan perannya, formulir penambahan staf baru, serta pilihan pengubahan peran staf yang telah terdaftar.
-
-\noindent k.~~\textbf{Perancangan Halaman Profil Toko dan Pengaturan}
+\noindent i.~~\textbf{Perancangan Halaman Profil Toko dan Pengaturan}
 
 \noindent 1)~~Perancangan Halaman Profil Toko
 
@@ -2138,7 +2112,7 @@ Bagian ini memaparkan realisasi fisik dari rancangan sistem yang telah disusun p
 
 \subsection{Implementasi Antarmuka Aplikasi Mobile}
 
-Aplikasi \textit{mobile} dikembangkan menggunakan \textit{framework} Flutter dengan bahasa pemrograman Dart, mengacu pada rancangan \textit{wireframe} pada Subbab~3.3.3. Cuplikan hasil implementasi antarmuka diambil langsung dari aplikasi yang berjalan pada data toko mitra EatsTEDI, disusun berurutan mengikuti alur penggunaan aplikasi mulai dari registrasi akun, manajemen toko dan produk, transaksi kasir, hingga laporan analitik. Seluruh halaman yang dirancang pada Subbab~3.3.3 telah terimplementasi, namun cuplikan yang ditampilkan pada subbab ini dibatasi pada halaman alur operasional utama. Halaman administratif yang bersifat eksklusif bagi Owner, yaitu Manajemen Karyawan serta Profil Toko dan Pengaturan, tidak ditampilkan cuplikannya karena tidak termasuk alur transaksi harian; kebenaran fungsinya diverifikasi melalui kasus uji nomor 11 dan 12 pada Tabel~\ref{tab:hasil_blackbox}.
+Aplikasi \textit{mobile} dikembangkan menggunakan \textit{framework} Flutter dengan bahasa pemrograman Dart, mengacu pada rancangan \textit{wireframe} pada Subbab~3.3.3. Cuplikan hasil implementasi antarmuka diambil langsung dari aplikasi yang berjalan pada data toko mitra EatsTEDI, disusun berurutan mengikuti alur penggunaan aplikasi mulai dari registrasi akun, manajemen toko dan produk, transaksi kasir, hingga laporan analitik. Seluruh halaman yang dirancang pada Subbab~3.3.3 telah terimplementasi, namun cuplikan yang ditampilkan pada subbab ini dibatasi pada halaman alur operasional utama. Halaman administratif yang bersifat eksklusif bagi Owner, yaitu Manajemen Karyawan serta Profil Toko dan Pengaturan, tidak ditampilkan cuplikannya karena berada di luar alur transaksi harian; kebenaran fungsinya diverifikasi melalui kasus uji nomor 11 dan 12 pada Tabel~\ref{tab:hasil_blackbox}.
 
 \begin{enumerate}
     \item \textbf{Halaman Registrasi}
@@ -3032,42 +3006,34 @@ Keterbatasan utama dalam pemodelan prediksi pada penelitian ini meliputi:
 %%=============================================================
 \chapter[PENUTUP]{\\ PENUTUP}
 
-Bab ini menyajikan kesimpulan dari hasil perancangan, implementasi, dan pengujian sistem Point of Sale (POS) mobile dengan fitur prediksi penjualan harian menggunakan metode Long Short-Term Memory (LSTM) dan arsitektur offline-first, serta saran-saran untuk pengembangan sistem lebih lanjut di masa mendatang.
+Bab ini menyajikan kesimpulan penelitian yang disusun mengikuti tujuan penelitian pada Subbab~1.3, serta saran bagi pengembangan penelitian selanjutnya.
 
 \section{Kesimpulan}
 
-Berdasarkan hasil analisis, perancangan, implementasi, dan pengujian yang telah dilakukan pada penelitian ini, maka dapat ditarik beberapa kesimpulan sebagai berikut:
+Berdasarkan hasil perancangan, implementasi, dan pengujian yang telah dilakukan, diperoleh kesimpulan sebagai berikut.
 \begin{enumerate}
-    \item Penelitian ini telah berhasil membangun aplikasi \textit{Point of Sale} (POS) \textit{mobile} berbasis Flutter yang terintegrasi dengan basis data cloud Supabase PostgreSQL dan layanan API prediksi penjualan harian berbasis Python dan Flask. Modul riset LSTM berbasis TensorFlow/Keras dikembangkan dan didokumentasikan secara lengkap sebagai artefak penelitian, sedangkan layanan API produksi yang benar-benar dipanggil aplikasi menyajikan metode \textit{Seasonal-Naive} berdasarkan hasil evaluasi komparatif, melalui arsitektur \textit{prediction service} yang bersifat \textit{model-agnostic} dan siap menyajikan model \texttt{.keras} begitu data mencukupi.
-    \item Penerapan arsitektur \textit{offline-first} menggunakan basis data lokal Isar DB terbukti handal dalam menjaga keberlangsungan transaksi kasir tanpa ketergantungan penuh pada koneksi internet. Secara observasi, operasi baca-tulis lokal terasa jauh lebih responsif dibandingkan operasi yang bergantung pada jaringan (belum diukur secara kuantitatif dan terstruktur), dan sinkronisasi otomatis menggunakan modul \textit{SyncNotifier} berhasil mengunggah data transaksi lokal ke database cloud saat perangkat terhubung kembali ke internet.
-    \item Implementasi metode prediksi \textit{Long Short-Term Memory} (LSTM) dengan pendekatan \textit{hybrid residual} (memprediksi \textit{log-return}) pada dataset harian aktif menghasilkan rata-rata kesalahan prediksi (\textit{multi-seed evaluation}) berupa MAE sebesar Rp 667.718,00 $\pm$ Rp 145.024,00, RMSE sebesar Rp 897.563,00 $\pm$ Rp 165.804,00, sMAPE sebesar 38,06\% $\pm$ 3,96\%, dan MASE sebesar 1,840 $\pm$ 0,400. Hasil ini menunjukkan bahwa model LSTM Hybrid yang dikembangkan belum mampu mengungguli metode pembanding \textit{Naive} (MAE Rp 519.841,00, MASE 1,432) dan \textit{SARIMA} secara rata-rata, dikarenakan deret pendapatan yang pendek serta tingginya persistensi jangka pendek pada data penjualan kantin EatsTEDI UGM. Upaya augmentasi data sintetis menggunakan TimeGAN terbukti menurunkan galat model LSTM multi-langkah secara signifikan (MAE membaik dari Rp 1.750.355,00 menjadi Rp 860.695,00), namun tetap belum mengungguli \textit{baseline} \textit{Seasonal-Naive}, sehingga layanan API prediksi produksi menyajikan metode \textit{Seasonal-Naive} sebagai metode penyaji utama.
-    \item Hasil pengujian fungsionalitas menggunakan metode \textit{Black Box Testing} terhadap 12 skenario kasus penggunaan utama yang melibatkan peran Owner dan Kasir berjalan dengan sukses tanpa kegagalan (tingkat keberhasilan 100\%), menunjukkan sistem layak dioperasikan secara penuh pada unit usaha UMKM.
+    \item Aplikasi \textit{Point of Sale} berbasis \textit{mobile} dengan fitur prediksi penjualan harian berhasil dibangun menggunakan \textit{framework} Flutter, basis data lokal Isar DB, layanan \textit{cloud} Supabase, serta layanan prediksi berbasis Flask yang di-\textit{deploy} pada Hugging Face. Fitur prediksi terintegrasi ke dalam alur kerja transaksi melalui halaman \textit{Smart Analytics}, sehingga hasil peramalan dapat langsung diakses pengelola tanpa keluar dari aplikasi. Arsitektur \textit{offline-first} memungkinkan kasir tetap bertransaksi tanpa koneksi internet, dengan sinkronisasi otomatis ketika koneksi kembali aktif. Pengujian \textit{black box} terhadap 12 kasus penggunaan utama berhasil seluruhnya, pengujian \textit{white box} terhadap tiga fungsi kritis pada layanan prediksi sesuai dengan hasil perhitungan manual, dan pengujian mekanisme sinkronisasi membuktikan tidak terjadi kehilangan maupun duplikasi data transaksi.
+
+    \item Model \textit{Long Short-Term Memory} dengan pendekatan \textit{hybrid residual} berhasil diterapkan pada \textit{dataset} EatsTEDI yang berjumlah 313 hari aktif. Evaluasi \textit{multi-seed} menghasilkan MAE sebesar Rp667.718,00 $\pm$ Rp145.024,00, RMSE sebesar Rp897.563,00 $\pm$ Rp165.804,00, sMAPE sebesar 38,06\% $\pm$ 3,96\%, dan MASE sebesar 1,840 $\pm$ 0,400, dengan sebaran MAE yang lebar (Rp495.527,00--Rp1.048.967,00) sehingga model belum stabil pada ukuran data tersebut. Augmentasi data sintetis TimeGAN menurunkan MAE model pada skema multi-langkah dari Rp1.750.355,00 menjadi Rp860.695,00, yaitu perbaikan sekitar 50,8\%. Temuan ini menunjukkan bahwa keterbatasan performa model bersumber dari kelangkaan data, bukan dari kesalahan arsitektur, namun augmentasi sintetis berperan sebagai pelengkap dan belum dapat menggantikan akumulasi data transaksi riil.
+
+    \item Pada skema satu langkah ke depan, model LSTM (MASE 1,840) belum mengungguli \textit{baseline} \textit{Naive} yang mencatat galat terkecil dengan MAE Rp519.841,00 dan MASE 1,432, maupun \textit{SARIMA} dan \textit{Mean-7}. Pada pengujian horizon prakiraan $h = 1$ sampai $h = 7$ hari aktif, mekanisme \textit{clipping}, peredaman $\varphi = 0{,}7$, dan \textit{safety rail} berhasil menjaga galat model tetap stabil pada MASE 2,124--2,505 tanpa degradasi seiring bertambahnya horizon, tetapi \textit{baseline} \textit{Seasonal-Naive} tetap lebih akurat pada seluruh horizon (MASE 2,012--2,140). Dengan demikian, pada volume data setara penelitian ini pendekatan \textit{deep learning} belum memberikan nilai tambah akurasi yang sepadan dengan kompleksitasnya, sehingga metode statistik sederhana lebih layak digunakan sebagai penyaji prediksi. Penerapan LSTM baru relevan ditinjau kembali apabila data historis telah mencakup sekitar tiga sampai lima tahun operasional, dan hal tersebut dapat dilakukan tanpa mengubah aplikasi karena arsitektur layanan prediksi bersifat \textit{model-agnostic}.
 \end{enumerate}
 
 \section{Saran}
 
-Berdasarkan keterbatasan sistem yang diidentifikasi selama proses pengembangan dan pengujian, berikut adalah beberapa saran konstruktif untuk pengembangan sistem lebih lanjut:
+Beberapa saran yang dapat diajukan untuk pengembangan penelitian selanjutnya adalah sebagai berikut.
 \begin{enumerate}
-    \item \textbf{Penerapan Metode Prediksi Hybrid}:
-    Untuk meningkatkan akurasi proyeksi penjualan pada data yang memiliki volatilitas tinggi atau tren musiman yang sangat dinamis, disarankan untuk menggabungkan model LSTM dengan model \textit{Gated Recurrent Unit} (GRU) atau model statistik klasik ARIMA menjadi model \textit{hybrid} (seperti ARIMA-LSTM atau LSTM-GRU).
-    
-    \item \textbf{Mengatasi Masalah Cold Start}:
-    Untuk memfasilitasi toko baru yang belum memiliki riwayat transaksi selama 30 hari, disarankan mengimplementasikan teknik \textit{transfer learning} atau melatih model \textit{global} awal menggunakan data transaksi historis dari toko sejenis sebelum melatih model secara spesifik menggunakan data toko tersebut.
-    
-    \item \textbf{Penguatan Keamanan Data Lokal}:
-    Guna melindungi data transaksi sensitif pelaku UMKM yang disimpan secara lokal pada perangkat fisik, disarankan untuk mengaktifkan fitur enkripsi basis data lokal pada Isar DB dengan menggunakan kunci enkripsi dinamis yang dikelola secara aman oleh perangkat.
-    
-    \item \textbf{Penyediaan Skalabilitas Tinggi (High Availability)}:
-    Untuk menghadapi potensi ekspansi multi-outlet dengan ribuan kasir aktif, arsitektur modul AI berbasis Flask disarankan dimigrasikan ke infrastruktur cloud dengan konfigurasi \textit{load balancer}, \textit{Docker container clusters}, dan replikasi basis data Supabase PostgreSQL untuk meminimalisasi \textit{single point of failure}.
-    
-    \item \textbf{Notifikasi Multi-Kanal Otomatis}:
-    Mengembangkan fitur integrasi notifikasi dengan layanan pihak ketiga seperti WhatsApp API atau SMS Gateway untuk mengirimkan laporan ringkasan omzet harian secara langsung ke nomor WhatsApp Owner, serta memberikan peringatan dini jika terdapat stok produk tertentu yang berada di bawah ambang batas minimum (\textit{safety stock}).
-    
-    \item \textbf{Integrasi Sistem Pembayaran Digital (E-Wallet \& QRIS Dynamic)}:
-    Menambahkan integrasi langsung dengan penyedia gerbang pembayaran (\textit{payment gateway}) lokal untuk menghasilkan kode QRIS dinamis secara real-time pada layar transaksi kasir, sehingga mempermudah pembukuan dan meminimalkan kesalahan input nominal transaksi nontunai oleh kasir.
+    \item Penelitian lanjutan disarankan menggunakan rentang data yang lebih panjang, yaitu sekitar tiga sampai lima tahun operasional, agar model dapat mempelajari pola musiman tahunan secara berulang dan hipotesis keunggulan \textit{deep learning} dapat diuji pada kondisi data yang memadai.
 
-    \item \textbf{Penambahan Fitur \texttt{gap\_days} pada Variabel Masukan Model}:
-    Untuk mengurangi dampak ketidakseragaman interval waktu antar hari aktif akibat penyaringan \texttt{revenue > 0} (lihat Subbab 4.7.2), disarankan menyertakan fitur \texttt{gap\_days} (jarak hari kalender terhadap hari aktif sebelumnya) sebagai variabel masukan tambahan pada model prediksi, sehingga model dapat mempelajari secara eksplisit pengaruh jeda waktu antar observasi terhadap besaran perubahan pendapatan.
+    \item Variabel masukan model dapat ditambah dengan fitur \texttt{gap\_days}, yaitu jarak hari kalender terhadap hari aktif sebelumnya, untuk mengurangi dampak ketidakseragaman interval waktu akibat penyaringan hari aktif sebagaimana dibahas pada Subbab~4.7.2.
+
+    \item Permasalahan \textit{cold start} pada toko baru dapat diatasi menggunakan \textit{transfer learning} atau pelatihan model \textit{global} dari data toko sejenis, sehingga prediksi dapat disajikan sebelum riwayat transaksi toko mencukupi.
+
+    \item Pendekatan pemodelan dapat dikembangkan menjadi model \textit{hybrid}, misalnya ARIMA-LSTM atau LSTM-GRU, guna menggabungkan kemampuan model statistik dalam menangkap komponen musiman dengan kemampuan jaringan saraf dalam menangkap pola non-linear.
+
+    \item Keamanan data transaksi yang tersimpan pada perangkat dapat ditingkatkan dengan mengaktifkan enkripsi basis data lokal Isar DB menggunakan kunci yang dikelola secara aman oleh perangkat.
+
+    \item Fungsionalitas aplikasi dapat diperluas dengan integrasi gerbang pembayaran untuk menghasilkan kode QRIS dinamis, serta notifikasi multi-kanal seperti WhatsApp API untuk menyampaikan ringkasan omzet harian dan peringatan stok menipis kepada pemilik toko.
 \end{enumerate}
 
 \end{spacing}

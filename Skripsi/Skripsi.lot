@@ -21,20 +21,20 @@
 \contentsline {table}{\numberline {3.14}{\ignorespaces \textit {Use Case} Kirim \textit {Broadcast} Notifikasi}}{46}{table.caption.24}%
 \contentsline {table}{\numberline {3.15}{\ignorespaces \textit {Use Case} Mengelola Karyawan}}{47}{table.caption.25}%
 \contentsline {table}{\numberline {3.16}{\ignorespaces \textit {Use Case} Mengatur Profil Toko}}{47}{table.caption.26}%
-\contentsline {table}{\numberline {3.17}{\ignorespaces Skenario 1: Pengujian Model LSTM terhadap \textit {Baseline}}}{90}{table.caption.58}%
-\contentsline {table}{\numberline {3.18}{\ignorespaces Skenario 2: Pengujian Stabilitas \textit {Multi-Seed}}}{90}{table.caption.59}%
-\contentsline {table}{\numberline {3.19}{\ignorespaces Skenario 3: Pengujian Augmentasi Data Sintetis TimeGAN}}{91}{table.caption.60}%
-\contentsline {table}{\numberline {3.20}{\ignorespaces Skenario 4: Pengujian Horizon Prakiraan Rekursif}}{91}{table.caption.61}%
-\contentsline {table}{\numberline {3.21}{\ignorespaces Skenario Pengujian \textit {Black Box}}}{92}{table.3.21}%
+\contentsline {table}{\numberline {3.17}{\ignorespaces Skenario 1: Pengujian Model LSTM terhadap \textit {Baseline}}}{88}{table.caption.56}%
+\contentsline {table}{\numberline {3.18}{\ignorespaces Skenario 2: Pengujian Stabilitas \textit {Multi-Seed}}}{88}{table.caption.57}%
+\contentsline {table}{\numberline {3.19}{\ignorespaces Skenario 3: Pengujian Augmentasi Data Sintetis TimeGAN}}{89}{table.caption.58}%
+\contentsline {table}{\numberline {3.20}{\ignorespaces Skenario 4: Pengujian Horizon Prakiraan Rekursif}}{89}{table.caption.59}%
+\contentsline {table}{\numberline {3.21}{\ignorespaces Skenario Pengujian \textit {Black Box}}}{90}{table.3.21}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Statistik Ringkas Dataset Pendapatan Harian}}{118}{table.caption.78}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Pembagian Dataset dan Dimensi Sequence}}{120}{table.caption.79}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces Perbandingan Performa pada Data Uji (\textit {One-Step-Ahead})}}{131}{table.caption.81}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces Statistik Performa LSTM Hybrid pada 10 Seed}}{133}{table.caption.83}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces Perbandingan Performa Eksperimen Augmentasi TimeGAN (\textit {Multi-Step}, Horizon 7)}}{135}{table.caption.85}%
-\contentsline {table}{\numberline {4.6}{\ignorespaces Galat Prediksi Rekursif per Horizon Prakiraan}}{136}{table.caption.86}%
-\contentsline {table}{\numberline {4.7}{\ignorespaces Rekapitulasi Hasil Pengujian Keempat Skenario}}{139}{table.caption.87}%
-\contentsline {table}{\numberline {4.8}{\ignorespaces Hasil Pengujian Black Box}}{140}{table.4.8}%
-\contentsline {table}{\numberline {4.9}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{142}{table.caption.88}%
-\contentsline {table}{\numberline {4.10}{\ignorespaces Hasil Pengujian White Box}}{144}{table.caption.89}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Statistik Ringkas Dataset Pendapatan Harian}}{116}{table.caption.76}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Pembagian Dataset dan Dimensi Sequence}}{118}{table.caption.77}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Perbandingan Performa pada Data Uji (\textit {One-Step-Ahead})}}{129}{table.caption.79}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Statistik Performa LSTM Hybrid pada 10 Seed}}{131}{table.caption.81}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Perbandingan Performa Eksperimen Augmentasi TimeGAN (\textit {Multi-Step}, Horizon 7)}}{133}{table.caption.83}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Galat Prediksi Rekursif per Horizon Prakiraan}}{134}{table.caption.84}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces Rekapitulasi Hasil Pengujian Keempat Skenario}}{137}{table.caption.85}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces Hasil Pengujian Black Box}}{138}{table.4.8}%
+\contentsline {table}{\numberline {4.9}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{140}{table.caption.86}%
+\contentsline {table}{\numberline {4.10}{\ignorespaces Hasil Pengujian White Box}}{142}{table.caption.87}%
 \addvspace {10\p@ }
