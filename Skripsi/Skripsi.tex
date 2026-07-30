@@ -2063,15 +2063,11 @@ Skenario keempat bertujuan mengamati konsistensi kinerja model pada horizon prak
 Keempat skenario tersebut berfokus pada prediksi harian sebagai lingkup evaluasi ilmiah penelitian ini. Adapun proyeksi mingguan dan bulanan yang turut disajikan layanan API produksi menggunakan metode rata-rata sederhana dan berada di luar lingkup evaluasi, sejalan dengan Batasan Masalah yang memfokuskan prediksi pada rentang harian.
 \section{Perancangan Pengujian Sistem}
 
-\subsection{Teknik Pengujian}
+Pengujian sistem dilakukan untuk memastikan kualitas fungsional aplikasi yang dibangun. Penelitian ini menggunakan dua pendekatan, yaitu \textit{black box testing} untuk memverifikasi kesesuaian perilaku fitur terhadap spesifikasi kebutuhan, dan \textit{white box testing} secara terbatas untuk memverifikasi kebenaran logika pada fungsi kritis layanan prediksi.
 
-Pengujian sistem pada penelitian ini dilakukan untuk memastikan kualitas fungsional aplikasi yang dibangun. Pengujian menggunakan dua pendekatan, yaitu \textit{black box testing} untuk memverifikasi kesesuaian perilaku fitur terhadap spesifikasi kebutuhan, dan \textit{white box testing} secara terbatas untuk memverifikasi kebenaran logika pada fungsi kritis layanan prediksi.
+\subsection{Perancangan Pengujian \textit{Black Box}}
 
-\subsubsection{Rancangan Analisis Pengujian \textit{Black Box}}
-
-Pengujian fungsional sistem pada penelitian ini menggunakan metode \textit{black box testing}, yaitu metode pengujian perangkat lunak yang berfokus pada validasi fungsional sistem dengan mengamati kesesuaian antara masukan (\textit{input}) dan keluaran (\textit{output}) yang dihasilkan, tanpa memperhatikan struktur internal kode program. Pengujian diterapkan pada fitur-fitur utama sistem untuk memastikan aplikasi berjalan sesuai dengan kebutuhan operasional pengguna.
-
-Rancangan skenario pengujian \textit{black box} untuk fitur-fitur utama sistem POS ini dijabarkan pada Tabel \ref{tab:blackbox} berikut:
+Pengujian \textit{black box} bertujuan menguji fungsi-fungsi sistem berdasarkan masukan dan keluaran yang dihasilkan, tanpa memeriksa struktur kode program. Pengujian diterapkan pada empat belas fungsi utama aplikasi \textit{Point of Sale}, mulai dari registrasi toko hingga penyajian prediksi penjualan harian, untuk memastikan seluruhnya berjalan sesuai kebutuhan pengguna. Adapun skenario pengujian \textit{black box} dapat dilihat pada Tabel~\ref{tab:blackbox}.
 
 {\setstretch{1.15}
 \begin{longtable}{|>{\centering\arraybackslash}p{0.6cm}|>{\raggedright\arraybackslash}p{3.0cm}|>{\raggedright\arraybackslash}p{4.7cm}|>{\raggedright\arraybackslash}p{4.7cm}|}
@@ -2122,9 +2118,9 @@ Rancangan skenario pengujian \textit{black box} untuk fitur-fitur utama sistem P
 \end{longtable}
 }
 
-\subsubsection{Rancangan Analisis Pengujian \textit{White Box}}
+\subsection{Perancangan Pengujian \textit{White Box}}
 
-Selain pengujian fungsional \textit{black box}, penelitian ini turut menerapkan pengujian \textit{white box} secara terbatas (\textit{lightweight}) yang berfokus pada verifikasi kebenaran logika internal dan jalur eksekusi kode (\textit{code path}) pada fungsi-fungsi kritis di layanan API prediksi, tanpa memandang antarmuka luarnya. Pengujian ini dilakukan dengan menelusuri (\textit{trace}) jalur logika kode secara manual menggunakan data masukan yang telah diketahui nilai keluarannya, kemudian membandingkan hasil eksekusi aktual terhadap hasil kalkulasi manual sebagai acuan kebenaran (\textit{ground truth}). Tiga fungsi inti yang menjadi target pengujian \textit{white box} adalah:
+Pengujian \textit{white box} bertujuan memverifikasi kebenaran logika internal dan jalur eksekusi kode pada fungsi kritis layanan API prediksi. Pengujian dilakukan dengan menelusuri jalur logika secara manual menggunakan masukan yang keluarannya telah dihitung lebih dahulu sebagai acuan kebenaran. Tiga fungsi yang diuji adalah sebagai berikut.
 \begin{enumerate}
     \item Fungsi perhitungan \textit{Seasonal-Naive} (\textit{by\_dow}), untuk memverifikasi jalur percabangan logika ketika jumlah data historis per hari kerja mencukupi ($\geq k$), tidak mencukupi ($<k$), maupun tidak tersedia sama sekali (\textit{fallback}).
     \item Fungsi metrik evaluasi sMAPE dan MASE, untuk memverifikasi jalur penanganan kasus pembagian dengan nilai penyebut nol atau mendekati nol agar tidak menghasilkan galat pembagian (\textit{division by zero}).
@@ -2133,11 +2129,11 @@ Selain pengujian fungsional \textit{black box}, penelitian ini turut menerapkan 
 
 \subsection{Indikator Keberhasilan Penelitian}
 
-Keberhasilan penelitian ini diukur melalui indikator-indikator berikut, yang pencapaiannya dijawab pada Bab IV dan Bab V:
+Keberhasilan penelitian diukur melalui tiga indikator berikut, yang pencapaiannya dijawab pada Bab IV dan Bab V.
 \begin{enumerate}
-    \item Aplikasi \textit{Point of Sale} (POS) \textit{mobile} berfungsi membantu pelaku UMKM dalam mengelola transaksi penjualan, inventaris produk, dan laporan keuangan secara efisien dengan kemampuan operasional \textit{offline-first}, yang divalidasi melalui pengujian fungsional \textit{Black Box}.
-    \item Metode LSTM terimplementasi pada sistem dan kinerjanya terukur secara objektif menggunakan metrik evaluasi kesalahan prediksi terhadap model pembanding (\textit{baseline}).
-    \item Sistem mampu menyajikan informasi prediksi dan laporan penjualan dalam bentuk visualisasi grafik yang mudah dipahami oleh pengguna, khususnya pelaku UMKM.
+    \item Aplikasi \textit{Point of Sale} berfungsi mengelola transaksi penjualan, katalog produk, dan pelaporan penjualan, yang divalidasi melalui pengujian \textit{black box}.
+    \item Model \textit{Long Short-Term Memory} terimplementasi pada sistem dan kinerjanya terukur secara objektif menggunakan metrik MAE, RMSE, sMAPE, dan MASE terhadap \textit{baseline}.
+    \item Sistem menyajikan hasil prediksi dan laporan penjualan dalam bentuk visualisasi yang mudah dipahami pengguna.
 \end{enumerate}
 
 %%=============================================================
