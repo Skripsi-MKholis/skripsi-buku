@@ -818,6 +818,7 @@ Kelemahan utama RNN konvensional adalah masalah \textit{vanishing gradient}, yai
 Gerbang lupa menentukan proporsi informasi dari sel memori sebelumnya yang akan dipertahankan [2]:
 \begin{equation}
     f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)
+    \label{eq:gerbang-lupa}
 \end{equation}
 
 \noindent dengan $\sigma$ adalah fungsi aktivasi sigmoid yang menghasilkan nilai pada rentang $[0, 1]$. Nilai mendekati 0 berarti informasi dibuang, sedangkan nilai mendekati 1 berarti informasi dipertahankan.
@@ -827,9 +828,11 @@ Gerbang lupa menentukan proporsi informasi dari sel memori sebelumnya yang akan 
 Gerbang masukan menentukan informasi baru yang akan disimpan ke dalam sel memori. Tahap ini terdiri atas dua bagian, yaitu penentuan proporsi pembaruan dan pembentukan kandidat nilai baru [2]:
 \begin{equation}
     i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)
+    \label{eq:gerbang-masukan}
 \end{equation}
 \begin{equation}
     \tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)
+    \label{eq:kandidat-sel}
 \end{equation}
 
 \noindent\textbf{c. Pembaruan Sel Memori (\textit{Cell State Update})}
@@ -837,6 +840,7 @@ Gerbang masukan menentukan informasi baru yang akan disimpan ke dalam sel memori
 Sel memori diperbarui dengan menggabungkan informasi lama yang dipertahankan dan informasi baru yang diterima [2]:
 \begin{equation}
     C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t
+    \label{eq:pembaruan-sel}
 \end{equation}
 
 \noindent dengan $\odot$ menyatakan perkalian elemen per elemen (\textit{Hadamard product}).
@@ -846,9 +850,11 @@ Sel memori diperbarui dengan menggabungkan informasi lama yang dipertahankan dan
 Gerbang keluaran menentukan bagian sel memori yang akan diteruskan sebagai keadaan tersembunyi [2]:
 \begin{equation}
     o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)
+    \label{eq:gerbang-keluaran}
 \end{equation}
 \begin{equation}
     h_t = o_t \odot \tanh(C_t)
+    \label{eq:keadaan-tersembunyi}
 \end{equation}
 
 Melalui mekanisme tersebut, LSTM mampu mempelajari pola berulang berjangka panjang seperti musiman mingguan pada data penjualan. Sejumlah penelitian membuktikan efektivitasnya pada peramalan penjualan ritel, baik dalam bentuk LSTM tunggal dengan optimasi \textit{hyperparameter} [3] maupun dalam bentuk arsitektur hibrida dengan CNN [1], [4].
@@ -910,9 +916,18 @@ Evaluasi akurasi model peramalan dalam penelitian ini menggunakan metrik berikut
 
 MAPE memudahkan interpretasi karena dinyatakan dalam persentase, namun tidak terdefinisi ketika terdapat nilai aktual sama dengan nol dan bersifat asimetris terhadap galat berlebih maupun kurang [18]. Keterbatasan ini relevan bagi penelitian ini mengingat \textit{dataset} memuat hari-hari tanpa transaksi.
 
-\noindent\textbf{d. \textit{Mean Absolute Scaled Error} (MASE)}
+\noindent\textbf{d. \textit{symmetric Mean Absolute Percentage Error} (sMAPE)}
 
-Untuk mengatasi keterbatasan MAPE sekaligus memungkinkan perbandingan langsung terhadap \textit{baseline}, digunakan metrik MASE yang diusulkan Hyndman dan Koehler [18]:
+Untuk mengatasi keterbatasan MAPE tersebut digunakan varian simetrisnya, yaitu sMAPE, yang membagi galat absolut terhadap rata-rata nilai aktual dan nilai prediksi sehingga tidak meledak ketika nilai aktual mendekati nol dan memiliki batas atas galat sebesar 200\% [18].
+\begin{equation}
+    \text{sMAPE} = \frac{100\%}{n}\sum_{i=1}^{n} \frac{|y_i - \hat{y}_i|}{(|y_i| + |\hat{y}_i|)/2}
+\end{equation}
+
+Sebagai konvensi implementasi, apabila penyebut bernilai nol karena nilai aktual dan nilai prediksi sama-sama nol, penyebut diganti dengan nilai 1 agar tidak terjadi galat pembagian dengan nol (\textit{division by zero}).
+
+\noindent\textbf{e. \textit{Mean Absolute Scaled Error} (MASE)}
+
+Berbeda dengan ketiga metrik sebelumnya yang berdiri sendiri, MASE memungkinkan perbandingan langsung terhadap \textit{baseline} karena galat model dinormalisasi terhadap galat metode naif. Metrik ini diusulkan Hyndman dan Koehler [18] dan dirumuskan sebagai berikut:
 \begin{equation}
     \text{MASE} = \frac{\frac{1}{n}\sum_{i=1}^{n} |y_i - \hat{y}_i|}{\frac{1}{N-m}\sum_{t=m+1}^{N} |y_t - y_{t-m}|}
 \end{equation}
@@ -1765,9 +1780,9 @@ Gambar~\ref{fig:ui-pengaturan} menunjukkan daftar menu konfigurasi aplikasi dan 
 
 \section{Perancangan Metode Penelitian}
 
-Bagian ini menjelaskan tahapan perancangan metode yang digunakan dalam penelitian ini. Penelitian dilaksanakan sebagai penelitian pengembangan (\textit{Research and Development}) dengan pendekatan kuantitatif untuk pengujian model prediksi, sedangkan pengembangan aplikasi dilakukan secara iteratif dan bertahap dengan memprioritaskan fitur inti kasir sebelum fitur analitik prediktif ditambahkan. Tahapan yang dirancang meliputi alur penelitian secara menyeluruh serta rancangan algoritma \textit{Long Short-Term Memory} yang digunakan untuk memprediksi penjualan harian.
+Bagian ini menjelaskan tahapan perancangan metode yang digunakan dalam penelitian ini. Penelitian dilaksanakan sebagai penelitian pengembangan (\textit{Research and Development}) dengan pendekatan kuantitatif untuk pengujian model prediksi, sedangkan pengembangan aplikasi dilakukan secara iteratif dan bertahap dengan memprioritaskan fitur inti kasir sebelum fitur analitik prediktif ditambahkan. Perancangan metode diuraikan menjadi empat bagian, yaitu perancangan alur penelitian, \textit{flowchart} penerapan metode \textit{Long Short-Term Memory} (LSTM), \textit{flowchart} perhitungan sel LSTM, serta perhitungan metrik evaluasi pengujian.
 
-\subsection{Alur Penelitian}
+\subsection{Perancangan Alur Penelitian}
 
 Alur penelitian dirancang secara sistematis untuk membangun aplikasi \textit{Point of Sale} yang dilengkapi fitur prediksi penjualan harian. Alur penelitian tersebut dapat dilihat pada Gambar~\ref{fig:alur_penelitian}.
 
@@ -1786,12 +1801,12 @@ Fase ini diawali dengan analisis kebutuhan melalui observasi pada mitra EatsTEDI
 
 \noindent b.~~Fase Pengembangan Model Prediksi Penjualan
 
-Fase ini menggunakan data sekunder berupa riwayat transaksi platform EatsTEDI yang telah beroperasi sebelum penelitian dimulai, bukan data dari aplikasi yang baru dibangun. Data tersebut melalui tahap pra-pemrosesan, pembentukan deret waktu, serta pembagian data latih dan data uji. Model \textit{Long Short-Term Memory} kemudian dilatih, dievaluasi menggunakan metrik MAE, RMSE, sMAPE, dan MASE, lalu diintegrasikan ke dalam aplikasi melalui \textit{REST API} sehingga hasil prediksi dapat ditampilkan kepada pengguna.
+Fase ini menggunakan data sekunder berupa riwayat transaksi platform EatsTEDI yang telah beroperasi sebelum penelitian dimulai, bukan data dari aplikasi yang baru dibangun. Data tersebut melalui tahap pra-pemrosesan, pembentukan deret waktu, serta pembagian data latih dan data uji. Model LSTM kemudian dilatih, dievaluasi menggunakan metrik MAE, RMSE, sMAPE, dan MASE, lalu diintegrasikan ke dalam aplikasi melalui \textit{REST API} sehingga hasil prediksi dapat ditampilkan kepada pengguna.
 
-\subsection{Rancangan Algoritma \textit{Long Short-Term Memory} (LSTM)}
+\subsection{\textit{Flowchart} Penerapan Metode \textit{Long Short-Term Memory}}
 \label{subsec:lstm_alg}
 
-Rancangan algoritma LSTM menggambarkan alur kerja model yang digunakan untuk memprediksi penjualan harian, mulai dari pra-pemrosesan data hingga evaluasi. Alur kerja tersebut dapat dilihat pada Gambar~\ref{fig:lstm_alur}.
+\textit{Flowchart} penerapan metode LSTM ditunjukkan pada Gambar~\ref{fig:lstm_alur}. \textit{Flowchart} ini menggambarkan alur implementasi metode LSTM dalam sistem prediksi penjualan harian, mulai dari penarikan data transaksi hingga penyajian hasil prakiraan kepada pengguna.
 
 \begin{figure}[H]
     \centering
@@ -1852,82 +1867,215 @@ Rancangan algoritma LSTM menggambarkan alur kerja model yang digunakan untuk mem
     \label{fig:lstm_alur}
 \end{figure}
 
-Gambar~\ref{fig:lstm_alur} menunjukkan delapan tahapan pemodelan, mulai dari penarikan data transaksi harian hingga rekonstruksi hasil prediksi ke skala nominal. Adapun rincian setiap tahapan dijelaskan sebagai berikut. Adapun penjelasan rinci mengenai tahapan algoritma LSTM yang dirancang dalam penelitian ini adalah sebagai berikut:
+Gambar~\ref{fig:lstm_alur} menunjukkan proses penerapan metode yang dimulai dari penarikan data transaksi harian pada basis data Supabase sebagai masukan sistem. Adapun tahapan proses tersebut dijelaskan sebagai berikut.
+
+\noindent a.~~\textbf{Input Data Transaksi Harian.} Sistem menarik data riwayat transaksi harian mitra EatsTEDI dari basis data \textit{cloud} Supabase sebagai data masukan proses pemodelan.
+
+\noindent b.~~\textbf{\textit{Filtering} Hari Non-Aktif.} Sistem menghapus hari Sabtu, Minggu, serta bulan Januari dan Juli (libur semester kampus) untuk menghindari distorsi \textit{gap} panjang pada deret waktu, sehingga model dilatih murni menggunakan indeks hari kerja aktif (\textit{business days}).
+
+\noindent c.~~\textbf{Transformasi Logaritma.} Data nominal pendapatan $Y_t$ ditransformasikan ke skala logaritma menggunakan $Y'_t = \log(Y_t + 1)$ untuk menstabilkan variansi.
+
+\noindent d.~~\textbf{Transformasi Target \textit{Log-Return}.} Sistem mengubah target prediksi dari nilai pendapatan menjadi perubahan pendapatan relatif (\textit{log-return}) $r_t$ dengan pendekatan \textit{hybrid residual}, agar model mewarisi sifat autokorelasi jangka pendek yang dominan pada data penjualan. Transformasi tersebut dirumuskan sebagai berikut.
+
+\begin{equation}
+    r_t = Y'_t - Y'_{t-1} = \log(Y_t + 1) - \log(Y_{t-1} + 1)
+    \label{eq:log-return}
+\end{equation}
+
+\noindent e.~~\textbf{Pengodean Siklik dan Normalisasi.} Fitur waktu (\textit{day of week}, \textit{week of year}, \textit{month}) diubah menjadi nilai sinus dan kosinus untuk merepresentasikan sifat periodik kalender. Seluruh fitur masukan kemudian dinormalisasi menggunakan \textit{Min-Max Scaling} ke rentang $[0,1]$, dengan pemasangan (\textit{fitting}) parameter \textit{scaler} hanya dilakukan pada data latih untuk mencegah kebocoran informasi (\textit{data leakage}).
+
+\noindent f.~~\textbf{Pembentukan \textit{Sequence}.} Deret waktu diubah menjadi pasangan urutan (\textit{sequence pairs}) menggunakan metode \textit{sliding window}. Ukuran \textit{window} masukan ditetapkan sebesar 7 hari aktif terakhir untuk memprediksi target 1 hari aktif berikutnya, sehingga model dilatih dalam format \textit{one-step-ahead prediction}.
+
+\noindent g.~~\textbf{Pembagian \textit{Dataset} Kronologis.} \textit{Dataset} dibagi secara kronologis (\textit{time-based split}) untuk menjaga integritas temporal, yaitu 70\% data latih (Agustus 2024 s.d. Agustus 2025), 15\% data validasi (September s.d. Desember 2025) untuk pemantauan proses latih dan \textit{early stopping}, serta 15\% data uji (efektif Februari s.d. Juni 2026 karena Januari tersaring sebagai libur semester).
+
+\noindent h.~~\textbf{Pembangunan Arsitektur LSTM.} Untuk menghindari \textit{overfitting} dan \textit{model collapse} pada \textit{dataset} yang relatif kecil, arsitektur dirancang secara minimalis (\textit{shallow network}), terdiri atas \textit{input layer} berukuran $7 \times 8$, satu \textit{LSTM layer} dengan 24 \textit{hidden units}, \textit{dropout layer} dengan laju 0,1, \textit{dense layer} 16 neuron dengan aktivasi \textit{Rectified Linear Unit} (ReLU), dan \textit{output layer} satu neuron dengan aktivasi linear untuk memprediksi nilai $\hat{r}_t$. Total parameter terlatih sebanyak 3.585 parameter, sebanding dengan ukuran data latih.
+
+\noindent i.~~\textbf{Pelatihan Model.} Model dilatih menggunakan algoritma optimasi Adam dengan \textit{learning rate} awal $5 \times 10^{-4}$ dan fungsi kerugian \textit{Mean Squared Error} (MSE), ukuran \textit{batch} 16, dan maksimum 200 \textit{epoch}. Diterapkan dua mekanisme \textit{callback}, yaitu \textit{Early Stopping} yang menghentikan pelatihan apabila \textit{loss} validasi tidak membaik selama 20 \textit{epoch} berturut-turut disertai pengembalian bobot terbaik, dan \textit{Reduce Learning Rate on Plateau} yang mengurangi \textit{learning rate} sebesar faktor 0,5 apabila \textit{loss} validasi mendatar selama 8 \textit{epoch}.
+
+\noindent j.~~\textbf{Evaluasi Model.} Sistem menghitung tingkat kesalahan prediksi pada data uji menggunakan metrik MAE, RMSE, sMAPE, dan MASE sebagaimana dijabarkan pada Subbab~3.4.4.
+
+\noindent k.~~\textbf{Pemeriksaan Kriteria Kelayakan.} Sistem memeriksa apakah model telah memenuhi kriteria kelayakan yang ditetapkan, yaitu nilai MASE model lebih kecil daripada MASE \textit{baseline Naive} pada data uji. Apabila kriteria belum terpenuhi, dilakukan \textit{hyperparameter tuning} terhadap jumlah \textit{epoch}, \textit{batch size}, jumlah neuron, dan \textit{learning rate}, kemudian proses pelatihan diulang.
+
+\noindent l.~~\textbf{Rekonstruksi ke Skala Nominal.} \textit{Output} model berupa \textit{log-return} prediksi $\hat{r}_t$ direkonstruksi kembali ke skala nominal Rupiah $\hat{Y}_t$ menggunakan nilai penjualan hari sebelumnya $Y_{t-1}$, sebagaimana dirumuskan berikut ini.
+
+\begin{equation}
+    \hat{Y}_{t} = \exp\left(\log(Y_{t-1} + 1) + \hat{r}_{t}\right) - 1
+    \label{eq:rekonstruksi}
+\end{equation}
+
+\noindent m.~~\textbf{Prakiraan Rekursif Multi-Langkah.} Untuk menyajikan proyeksi 7 hari aktif ke depan, diterapkan metode \textit{recursive forecasting} dengan memasukkan hasil prediksi langkah sebelumnya sebagai masukan langkah berikutnya. Guna mencegah akumulasi bias (\textit{error propagation}), diimplementasikan tiga teknik pengaman, yaitu \textit{clipping log-return} pada rentang persentil 10--90 data pelatihan untuk mencegah nilai ekstrem, \textit{damping factor} yang meredam prediksi perubahan \textit{log-return} pada langkah ke-$h$ menuju nol dengan faktor $\varphi^h$ (dengan $\varphi = 0{,}7$) sehingga ramalan bersifat \textit{mean-reverting}, serta \textit{safety rail} yang membatasi hasil akhir nominal pendapatan pada rentang pendapatan terkecil dan terbesar yang pernah tercatat secara historis pada hari aktif.
+
+\noindent n.~~\textbf{Integrasi dan Penyajian Hasil.} Model yang telah dinyatakan layak diintegrasikan ke sistem POS melalui \textit{REST API} berbasis \textit{framework} Flask yang di-\textit{deploy} pada platform Hugging Face, sehingga hasil prediksi harian dan prakiraan tujuh hari ke depan dapat ditampilkan kepada pengguna pada halaman prediksi penjualan harian.
+
+Proses tersebut dilakukan secara berulang hingga model memenuhi kriteria kelayakan yang ditetapkan. \textit{Flowchart} ini menunjukkan bahwa metode LSTM diterapkan sebagai model prediksi deret waktu dengan target berupa \textit{log-return}, yang hasil prediksinya direkonstruksi kembali ke skala nominal sebelum disajikan pada aplikasi \textit{Point of Sale}.
+
+\subsection{\textit{Flowchart} Perhitungan Sel \textit{Long Short-Term Memory}}
+
+\textit{Flowchart} perhitungan sel LSTM ditunjukkan pada Gambar~\ref{fig:sel_lstm}. \textit{Flowchart} ini menggambarkan proses komputasi yang terjadi di dalam satu sel LSTM pada setiap langkah waktu, mulai dari penerimaan masukan hingga penghasilan \textit{hidden state} yang diteruskan ke langkah waktu berikutnya.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,height=0.6\textheight,keepaspectratio]{flowchart_sel_lstm.png}
+    \caption{\textit{Flowchart} Perhitungan Sel \textit{Long Short-Term Memory}}
+    \label{fig:sel_lstm}
+\end{figure}
+
+Gambar~\ref{fig:sel_lstm} menunjukkan proses perhitungan yang dilakukan untuk memperbarui \textit{cell state} dan \textit{hidden state} pada setiap langkah waktu. Proses ini diulang sebanyak panjang \textit{sequence} masukan, yaitu 7 langkah waktu. Adapun tahapan proses tersebut dijelaskan sebagai berikut.
+
+\noindent a.~~\textbf{Input Vektor Fitur dan \textit{State} Sebelumnya.} Sel menerima tiga masukan, yaitu vektor fitur pada langkah waktu ke-$t$ yaitu $x_t$, \textit{hidden state} langkah sebelumnya $h_{t-1}$, serta \textit{cell state} langkah sebelumnya $C_{t-1}$.
+
+\noindent b.~~\textbf{Inisialisasi \textit{State} Awal.} Pada langkah waktu pertama ($t = 1$), nilai $h_0$ dan $C_0$ diinisialisasi sebagai vektor nol berdimensi 24 sesuai jumlah \textit{hidden units} yang ditetapkan.
+
+\noindent c.~~\textbf{Penggabungan Vektor Masukan.} Sistem menggabungkan (\textit{concatenate}) vektor $h_{t-1}$ dan $x_t$ menjadi satu vektor gabungan yang digunakan bersama oleh seluruh gerbang.
+
+\noindent d.~~\textbf{Perhitungan \textit{Forget Gate}.} Sistem menghitung nilai \textit{forget gate} $f_t$ menggunakan fungsi aktivasi sigmoid berdasarkan Persamaan~\ref{eq:gerbang-lupa}. Nilai $f_t$ berada pada rentang 0 sampai 1 dan menentukan proporsi informasi pada \textit{cell state} sebelumnya yang dipertahankan.
+
+\noindent e.~~\textbf{Perhitungan \textit{Input Gate}.} Sistem menghitung nilai \textit{input gate} $i_t$ menggunakan fungsi aktivasi sigmoid berdasarkan Persamaan~\ref{eq:gerbang-masukan}. Nilai ini menentukan seberapa besar informasi baru diizinkan masuk ke dalam \textit{cell state}.
+
+\noindent f.~~\textbf{Perhitungan Kandidat \textit{Cell State}.} Sistem menghitung kandidat nilai baru $\tilde{C}_t$ menggunakan fungsi aktivasi \textit{hyperbolic tangent} berdasarkan Persamaan~\ref{eq:kandidat-sel}, sehingga nilai kandidat berada pada rentang $-1$ sampai $1$.
+
+\noindent g.~~\textbf{Pembaruan \textit{Cell State}.} Sistem memperbarui \textit{cell state} menggunakan Persamaan~\ref{eq:pembaruan-sel}, yaitu penjumlahan antara hasil perkalian elemen $f_t \odot C_{t-1}$ dengan $i_t \odot \tilde{C}_t$. Mekanisme penjumlahan inilah yang memungkinkan LSTM mempertahankan informasi jangka panjang dan mengatasi masalah \textit{vanishing gradient}.
+
+\noindent h.~~\textbf{Perhitungan \textit{Output Gate}.} Sistem menghitung nilai \textit{output gate} $o_t$ menggunakan fungsi aktivasi sigmoid berdasarkan Persamaan~\ref{eq:gerbang-keluaran} untuk menentukan bagian \textit{cell state} yang akan dikeluarkan sebagai keluaran sel.
+
+\noindent i.~~\textbf{Perhitungan \textit{Hidden State}.} Sistem menghitung \textit{hidden state} $h_t$ melalui perkalian elemen antara $o_t$ dan $\tanh(C_t)$ berdasarkan Persamaan~\ref{eq:keadaan-tersembunyi}.
+
+\noindent j.~~\textbf{Pemeriksaan Langkah Waktu.} Sistem memeriksa apakah seluruh langkah waktu pada \textit{sequence} telah diproses. Apabila belum, nilai $h_t$ dan $C_t$ diteruskan sebagai masukan langkah waktu berikutnya dan proses kembali ke tahap penggabungan vektor masukan.
+
+\noindent k.~~\textbf{Pengambilan \textit{Hidden State} Akhir.} Setelah seluruh langkah waktu selesai diproses, sistem mengambil \textit{hidden state} pada langkah waktu terakhir $h_T$ sebagai representasi ringkas dari keseluruhan \textit{sequence} masukan.
+
+\noindent l.~~\textbf{Regularisasi \textit{Dropout}.} Nilai $h_T$ dilewatkan melalui \textit{dropout layer} dengan laju 0,1 untuk mencegah ketergantungan berlebih antar-node selama proses pelatihan.
+
+\noindent m.~~\textbf{Pemrosesan \textit{Dense Layer}.} Hasil \textit{dropout} diproses oleh \textit{dense layer} berisi 16 neuron dengan fungsi aktivasi ReLU untuk mempelajari kombinasi non-linear dari representasi \textit{sequence}.
+
+\noindent n.~~\textbf{Penghasilan Prediksi \textit{Log-Return}.} \textit{Output layer} berisi satu neuron dengan aktivasi linear menghasilkan nilai prediksi $\hat{r}_t$ berupa \textit{log-return} penjualan hari aktif berikutnya, yang selanjutnya direkonstruksi ke skala nominal Rupiah.
+
+\textit{Flowchart} ini menunjukkan proses perhitungan pada sel LSTM yang bekerja melalui tiga gerbang, yaitu \textit{forget gate}, \textit{input gate}, dan \textit{output gate}, dalam mengatur aliran informasi antar-langkah waktu. Mekanisme gerbang tersebut memungkinkan model mempelajari pola autokorelasi jangka pendek pada deret waktu penjualan harian yang menjadi dasar prediksi.
+
+\subsection{Perhitungan Metrik Evaluasi Pengujian}
+
+Proses evaluasi menghasilkan nilai kesalahan prediksi untuk setiap data uji berdasarkan perbandingan antara nilai aktual $Y_t$ dan nilai prediksi $\hat{Y}_t$ pada skala nominal Rupiah. Penelitian ini menggunakan empat metrik evaluasi, yaitu \textit{Mean Absolute Error} (MAE), \textit{Root Mean Squared Error} (RMSE), \textit{symmetric Mean Absolute Percentage Error} (sMAPE), dan \textit{Mean Absolute Scaled Error} (MASE), yang landasan teorinya telah dijabarkan pada Subbab~2.2.8. Perhitungan keempat metrik tersebut dirumuskan sebagai berikut.
+
+\begin{equation}
+    \text{MAE} = \frac{1}{N}\sum_{t=1}^{N}\left|Y_t - \hat{Y}_t\right|
+\end{equation}
+
+\begin{equation}
+    \text{RMSE} = \sqrt{\frac{1}{N}\sum_{t=1}^{N}\left(Y_t - \hat{Y}_t\right)^2}
+\end{equation}
+
+\begin{equation}
+    \text{sMAPE} = \frac{100\%}{N}\sum_{t=1}^{N}\frac{\left|Y_t - \hat{Y}_t\right|}{\left(\left|Y_t\right| + \left|\hat{Y}_t\right|\right)/2}
+\end{equation}
+
+\begin{equation}
+    \text{MASE} = \frac{\dfrac{1}{N}\sum_{t=1}^{N}\left|Y_t - \hat{Y}_t\right|}{\dfrac{1}{N-1}\sum_{t=2}^{N}\left|Y_t - Y_{t-1}\right|}
+\end{equation}
+
+\noindent Keterangan:
+
 \begin{enumerate}
-    \item \textbf{Pra-pemrosesan Data dan Transformasi Target:}
-    Data transaksi harian ditarik dari database cloud Supabase. Langkah-langkah pra-pemrosesan yang dilakukan meliputi:
-    \begin{itemize}
-        \item \textit{Filtering hari non-aktif (Zero Days)}: Menghapus hari Sabtu, Minggu, serta bulan Januari dan Juli (libur semester kampus) untuk menghindari distorsi gap yang panjang pada deret waktu. Model dilatih murni menggunakan indeks hari kerja aktif (\textit{business days}).
-        \item \textit{Transformasi Logaritma}: Data nominal pendapatan $Y_t$ ditransformasikan ke skala logaritma menggunakan $Y'_t = \log(Y_t + 1)$ untuk menstabilkan variansi.
-        \item \textit{Transformasi Target (Log-Return)}: Model tidak memprediksi pendapatan logaritmik secara langsung, melainkan memprediksi perubahan pendapatan relatif (\textit{log-return}) $r_t$ menggunakan pendekatan \textit{hybrid residual} sebagaimana dirumuskan pada Subbab 2.4.1, agar model mewarisi sifat autokorelasi jangka pendek yang dominan pada data penjualan.
-        \item \textit{Pengodean Siklik}: Fitur waktu (\textit{day of week}, \textit{week of year}, \textit{month}) diubah menjadi nilai sinus dan kosinus untuk merepresentasikan sifat periodik kalender.
-        \item \textit{Normalisasi}: Fitur-fitur masukan dinormalisasi menggunakan \textit{Min-Max Scaling} ke rentang $[0, 1]$, di mana proses pemasangan (\textit{fitting}) parameter \textit{scaler} hanya dilakukan pada data latih (\textit{training set}) untuk mencegah kebocoran informasi (\textit{data leakage}).
-    \end{itemize}
-
-    \item \textbf{Pembentukan Sequence (Sliding Window):}
-    Dataset deret waktu diubah menjadi bentuk urutan berpasangan (\textit{sequence pairs}) menggunakan metode \textit{sliding window}. Ukuran \textit{window} masukan (\textit{look-back}) ditetapkan sebesar 7 hari aktif terakhir ($LOOK\_BACK = 7$) untuk memprediksi target 1 hari aktif berikutnya ($HORIZON = 1$). Dengan demikian, model dilatih dengan format prediksi satu langkah ke depan (\textit{one-step-ahead prediction}).
-
-    \item \textbf{Pembagian Dataset Kronologis:}
-    Dataset dibagi secara kronologis (\textit{time-based split}) untuk menjaga integritas temporal deret waktu, dengan proporsi pembagian sebagai berikut:
-    \begin{itemize}
-        \item \textit{Data Latih (Training Set)}: Sebesar 70\% dari total data aktif (periode Agustus 2024 s.d. Agustus 2025).
-        \item \textit{Data Validasi (Validation Set)}: Sebesar 15\% (periode September s.d. Desember 2025) digunakan untuk pemantauan proses latih dan \textit{early stopping}.
-        \item \textit{Data Uji (Testing Set)}: Sebesar 15\% (efektif periode Februari s.d. Juni 2026, karena Januari tersaring sebagai libur semester) digunakan untuk pengujian akhir model.
-    \end{itemize}
-
-    \item \textbf{Pembangunan Arsitektur LSTM Tersederhanakan:}
-    Untuk menghindari masalah \textit{overfitting} dan \textit{model collapse} pada dataset yang relatif kecil, arsitektur LSTM dirancang secara minimalis (\textit{shallow network}):
-    \begin{itemize}
-        \item \textit{Input Layer}: Menerima matriks berukuran $7 \times 8$ (panjang \textit{sequence} 7 dan total 8 fitur masukan).
-        \item \textit{LSTM Layer}: Terdiri atas 1 \textit{layer} LSTM dengan 24 \textit{hidden units}.
-        \item \textit{Dropout Layer}: Dengan laju 0,1 untuk mencegah ketergantungan berlebih antar-node.
-        \item \textit{Dense Layer}: Terdiri atas 16 neuron dengan fungsi aktivasi \textit{Rectified Linear Unit} (ReLU).
-        \item \textit{Output Layer}: Terdiri atas 1 neuron (\textit{Dense} dengan aktivasi linear) untuk memprediksi nilai \textit{log-return} $\hat{r}_t$.
-    \end{itemize}
-    Model ini memiliki total parameter terlatih sebanyak 3.585 parameter, yang sebanding dengan ukuran data latih.
-
-    \item \textbf{Pelatihan Model:}
-    Model dilatih menggunakan algoritma optimasi Adam dengan \textit{learning rate} awal sebesar $5 \times 10^{-4}$ dan fungsi kerugian (\textit{loss function}) \textit{Mean Squared Error} (MSE). Untuk mengoptimalkan konvergensi, diterapkan dua mekanisme \textit{callback}:
-    \begin{itemize}
-        \item \textit{Early Stopping}: Menghentikan pelatihan jika loss validasi tidak membaik selama 20 \textit{epoch} berturut-turut untuk mencegah \textit{overfitting}, serta mengembalikan bobot terbaik (\textit{restore best weights}).
-        \item \textit{Reduce Learning Rate on Plateau}: Mengurangi \textit{learning rate} sebesar faktor 0,5 jika loss validasi mendatar selama 8 \textit{epoch}.
-    \end{itemize}
-    Ukuran \textit{batch} pelatihan diatur sebesar 16 dengan jumlah maksimum pelatihan 200 \textit{epoch}.
-
-    \item \textbf{Evaluasi Komparatif dan Multi-Seed:}
-    Untuk membuktikan keandalan model LSTM, kinerjanya dibandingkan dengan empat model pembanding (\textit{baseline}):
-    \begin{itemize}
-        \item \textit{Naive (Kemarin)}: Prediksi hari ini dianggap sama dengan nilai penjualan riil hari aktif sebelumnya.
-        \item \textit{Mean-7}: Prediksi berupa rata-rata bergerak dari 7 hari aktif terakhir.
-        \item \textit{SARIMA}: Model statistik klasik Seasonal Autoregressive Integrated Moving Average untuk mendeteksi pola autokorelasi deret waktu.
-        \item \textit{Seasonal-Naive}: Prediksi berupa rata-rata beberapa kemunculan terakhir dari hari yang sama dalam minggu (Senin dengan Senin, Selasa dengan Selasa, dan seterusnya), untuk menangkap pola musiman mingguan.
-    \end{itemize}
-    Dari keempat \textit{baseline} tersebut, \textit{Naive}, \textit{Mean-7}, dan SARIMA dievaluasi pada skema satu langkah ke depan (\textit{one-step-ahead}), sedangkan \textit{Seasonal-Naive} dievaluasi pada skema prediksi multi-langkah dan menjadi kandidat metode penyaji pada layanan API produksi. Notasi parameter \textit{Seasonal-Naive} dilambangkan dengan $k$, yaitu jumlah kemunculan terakhir hari sejenis yang dirata-ratakan. Selain prediksi harian sebagai fokus evaluasi ilmiah, layanan API produksi juga menyajikan angka proyeksi mingguan dan bulanan menggunakan metode rata-rata sederhana (\textit{Mean-4} untuk empat minggu terakhir dan \textit{Mean-3} untuk tiga bulan terakhir). Keduanya merupakan fitur pelengkap visualisasi aplikasi di luar lingkup evaluasi ilmiah penelitian ini, sejalan dengan Batasan Masalah yang memfokuskan prediksi pada rentang harian.
-
-    Mengingat inisialisasi bobot awal jaringan saraf bersifat acak dan dapat memengaruhi stabilitas pada data kecil, evaluasi dilakukan menggunakan metode \textbf{\textit{Multi-Seed Evaluation}}. Model dilatih sebanyak 10 kali menggunakan \textit{seed} acak yang berbeda. Hasil evaluasi dilaporkan dalam bentuk rata-rata $\pm$ standar deviasi dari metrik MAE, RMSE, sMAPE, dan MASE guna memperoleh estimasi performa yang kokoh dan dapat dipertanggungjawabkan.
-
-    \item \textbf{Eksperimen Augmentasi Data Sintetis (TimeGAN):}
-    Sebagai upaya mitigasi terhadap keterbatasan jumlah data latih, dirancang skenario eksperimen augmentasi data sintetis menggunakan \textbf{TimeGAN} (\textit{Time-series Generative Adversarial Networks}), yaitu arsitektur GAN khusus deret waktu yang diusulkan oleh Yoon et al. (2019). TimeGAN diimplementasikan menggunakan \textit{framework} PyTorch dan terdiri atas lima jaringan saraf (\textit{embedder}, \textit{recovery}, \textit{generator}, \textit{supervisor}, dan \textit{discriminator}) yang dilatih dalam tiga fase: (1) pelatihan \textit{autoencoder} (embedder--recovery), (2) pelatihan \textit{supervised} pada ruang laten, dan (3) pelatihan gabungan (\textit{joint training}) secara \textit{adversarial}. Model dilatih pada jendela deret waktu sepanjang 24 hari aktif dengan tiga fitur numerik (omzet, jumlah transaksi, dan kuantitas terjual), kemudian menghasilkan 298 sekuens data harian sintetis dari 199 sekuens data riil (rasio augmentasi 1,5). Data sintetis tersebut digabungkan dengan data riil untuk melatih ulang model LSTM (skenario \textit{augmented}), lalu performanya dibandingkan terhadap model LSTM tanpa augmentasi dan \textit{baseline} \textit{Seasonal-Naive} guna mengukur seberapa besar augmentasi data mampu memperbaiki akurasi prediksi pada data terbatas.
-
-    \item \textbf{Rekonstruksi dan Prakiraan Rekursif Multi-Langkah:}
-    Output model berupa \textit{log-return} prediksi ($\hat{r}_t$) direkonstruksi kembali ke skala nominal Rupiah ($\hat{Y}_t$) menggunakan nilai penjualan hari sebelumnya ($Y_{t-1}$) sesuai formula rekonstruksi pada Subbab 2.4.1. Untuk menyajikan proyeksi 7 hari aktif ke depan pada aplikasi POS, diterapkan metode \textbf{\textit{Recursive Forecasting}} (memasukkan hasil prediksi langkah sebelumnya sebagai input untuk langkah berikutnya). Untuk mencegah masalah akumulasi bias (\textit{error propagation}) yang dapat menyebabkan nilai prediksi meluruh atau meledak, diimplementasikan tiga teknik pengaman:
-    \begin{itemize}
-        \item \textit{Clipping log-return}: Membatasi nilai prediksi \textit{log-return} pada rentang persentil 10--90 dari data pelatihan untuk mencegah nilai ekstrem.
-        \item \textit{Damping factor}: Meredam prediksi perubahan \textit{log-return} pada langkah ke-$h$ menuju nilai 0 dengan faktor peredam $\phi^h$ (di mana $\phi = 0.7$). Hal ini membuat ramalan jangka panjang stabil dan kembali ke nilai rata-rata historis (sifat \textit{mean-reverting}).
-        \item \textit{Safety rail}: Membatasi hasil akhir nominal pendapatan berada dalam rentang pendapatan terkecil dan terbesar yang pernah tercatat secara historis pada hari aktif.
-    \end{itemize}
+    \item $Y_t$ merupakan nilai penjualan aktual pada hari aktif ke-$t$.
+    \item $\hat{Y}_t$ merupakan nilai penjualan hasil prediksi model pada hari aktif ke-$t$.
+    \item $N$ merupakan jumlah seluruh data pengujian.
+    \item Penyebut pada persamaan MASE merupakan MAE dari \textit{baseline Naive}, yaitu prediksi yang menyamakan nilai hari ini dengan nilai hari aktif sebelumnya.
 \end{enumerate}
-\section{Perancangan Pengujian}
+
+Nilai MAE dan RMSE dinyatakan dalam satuan Rupiah dan menunjukkan besaran kesalahan absolut prediksi, dengan RMSE memberikan penalti lebih besar terhadap kesalahan berskala ekstrem. Nilai sMAPE dinyatakan dalam persen sehingga memudahkan interpretasi kesalahan secara relatif. Sebagai konvensi implementasi metrik sMAPE, apabila penyebut bernilai nol (nilai aktual dan prediksi sama-sama nol), penyebut diganti dengan nilai 1 agar tidak terjadi galat pembagian dengan nol (\textit{division by zero}). Konvensi inilah yang diverifikasi pada pengujian \textit{white box}.
+
+Nilai MASE digunakan sebagai metrik utama penentuan kelayakan model karena bersifat bebas skala dan membandingkan kinerja model secara langsung terhadap \textit{baseline Naive}. Model dinyatakan layak apabila nilai MASE model lebih kecil daripada MASE \textit{baseline Naive} pada data uji yang sama, yang berarti kesalahan prediksi model lebih kecil daripada kesalahan metode pembanding sederhana tersebut.
+
+\section{Skenario Pengujian Model}
+
+Penelitian ini melakukan pengujian terhadap model LSTM untuk mengevaluasi akurasi prediksi penjualan harian yang dihasilkan. Pengujian dilakukan menggunakan data historis transaksi mitra EatsTEDI sebanyak 316 hari kerja aktif, dengan hasil prediksi dibandingkan terhadap nilai aktual menggunakan metrik MAE, RMSE, sMAPE, dan MASE.
+
+Skenario pengujian dirancang untuk menganalisis kinerja model LSTM terhadap metode pembanding, mengamati stabilitas model terhadap inisialisasi bobot acak, serta mengukur pengaruh augmentasi data sintetis pada kondisi data latih terbatas.
+
+\subsection{Skenario 1: Pengujian Model LSTM terhadap \textit{Baseline}}
+
+Skenario pertama bertujuan mengetahui kinerja model LSTM dibandingkan empat metode pembanding (\textit{baseline}). Adapun rincian skenario dapat dilihat pada Tabel~\ref{tab:skenario1}.
+
+\begin{table}[H]
+\setstretch{1.2}
+\centering
+\caption{Skenario Pengujian Model LSTM terhadap \textit{Baseline}}
+\label{tab:skenario1}
+\begin{tabularx}{\textwidth}{|c|l|l|X|}
+\hline
+\textbf{No} & \textbf{Metode} & \textbf{Skema Prediksi} & \textbf{Keterangan} \\ \hline
+1 & LSTM & \textit{one-step-ahead} & Model usulan penelitian \\ \hline
+2 & \textit{Naive} (Kemarin) & \textit{one-step-ahead} & Nilai hari aktif sebelumnya \\ \hline
+3 & \textit{Mean}-7 & \textit{one-step-ahead} & Rata-rata bergerak 7 hari aktif terakhir \\ \hline
+4 & SARIMA & \textit{one-step-ahead} & Model statistik klasik deret waktu \\ \hline
+5 & \textit{Seasonal-Naive} & \textit{multi-step} & Rata-rata $k$ kemunculan terakhir hari sejenis \\ \hline
+\end{tabularx}
+\end{table}
+
+Notasi parameter \textit{Seasonal-Naive} dilambangkan dengan $k$, yaitu jumlah kemunculan terakhir hari sejenis (Senin dengan Senin, Selasa dengan Selasa, dan seterusnya) yang dirata-ratakan untuk menangkap pola musiman mingguan. \textit{Seasonal-Naive} dievaluasi pada skema prediksi multi-langkah dan menjadi kandidat metode penyaji pada layanan API produksi.
+
+\subsection{Skenario 2: Pengujian Stabilitas \textit{Multi-Seed}}
+
+Skenario kedua bertujuan mengukur stabilitas kinerja model mengingat inisialisasi bobot awal jaringan saraf bersifat acak dan dapat memengaruhi hasil pada \textit{dataset} berukuran kecil. Model dilatih sebanyak 10 kali menggunakan \textit{seed} acak yang berbeda, dan hasil evaluasi dilaporkan dalam bentuk rata-rata beserta standar deviasi dari metrik MAE, RMSE, sMAPE, dan MASE. Adapun rincian skenario dapat dilihat pada Tabel~\ref{tab:skenario2}.
+
+\begin{table}[H]
+\setstretch{1.2}
+\centering
+\caption{Skenario Pengujian Stabilitas \textit{Multi-Seed}}
+\label{tab:skenario2}
+\begin{tabularx}{\textwidth}{|l|l|X|}
+\hline
+\textbf{Metode} & \textbf{Jumlah Pengulangan} & \textbf{Bentuk Pelaporan} \\ \hline
+LSTM & 10 \textit{seed} & Rata-rata $\pm$ standar deviasi \\ \hline
+\end{tabularx}
+\end{table}
+
+\subsection{Skenario 3: Pengujian Augmentasi Data Sintetis TimeGAN}
+
+Skenario ketiga bertujuan mengukur pengaruh augmentasi data sintetis terhadap akurasi prediksi pada kondisi data latih terbatas. Augmentasi dilakukan menggunakan TimeGAN yang diimplementasikan menggunakan \textit{framework} PyTorch dan terdiri atas lima jaringan saraf, yaitu \textit{embedder}, \textit{recovery}, \textit{generator}, \textit{supervisor}, dan \textit{discriminator}, yang dilatih dalam tiga fase, yaitu pelatihan \textit{autoencoder}, pelatihan \textit{supervised} pada ruang laten, dan pelatihan gabungan secara adversarial.
+
+Model TimeGAN dilatih pada jendela deret waktu sepanjang 24 hari aktif dengan tiga fitur numerik, yaitu omzet, jumlah transaksi, dan kuantitas terjual, kemudian menghasilkan 298 sekuens data harian sintetis dari 199 sekuens data riil. Data sintetis digabungkan dengan data riil untuk melatih ulang model LSTM, lalu kinerjanya dibandingkan terhadap model LSTM tanpa augmentasi. Adapun rincian skenario dapat dilihat pada Tabel~\ref{tab:skenario3}.
+
+\begin{table}[H]
+\setstretch{1.2}
+\centering
+\caption{Skenario Pengujian Augmentasi Data Sintetis TimeGAN}
+\label{tab:skenario3}
+\begin{tabularx}{\textwidth}{|c|X|c|c|c|}
+\hline
+\textbf{No} & \textbf{Skenario Data Latih} & \textbf{Sekuens Riil} & \textbf{Sekuens Sintetis} & \textbf{Rasio Augmentasi} \\ \hline
+1 & Tanpa augmentasi & 199 & 0 & -- \\ \hline
+2 & Dengan augmentasi TimeGAN & 199 & 298 & 1,5 \\ \hline
+\end{tabularx}
+\end{table}
+
+\subsection{Skenario 4: Pengujian Horizon Prakiraan Rekursif}
+
+Skenario keempat bertujuan mengamati konsistensi kinerja model pada horizon prakiraan yang berbeda, mengingat metode \textit{recursive forecasting} berpotensi mengalami akumulasi bias pada langkah yang semakin jauh. Pengujian dilakukan pada horizon 1, 3, 5, dan 7 hari aktif ke depan. Adapun rincian skenario dapat dilihat pada Tabel~\ref{tab:skenario4}.
+
+\begin{table}[H]
+\setstretch{1.2}
+\centering
+\caption{Skenario Pengujian Horizon Prakiraan Rekursif}
+\label{tab:skenario4}
+\begin{tabularx}{\textwidth}{|c|l|X|}
+\hline
+\textbf{No} & \textbf{Horizon Prakiraan} & \textbf{Metode Dibandingkan} \\ \hline
+1 & 1 hari aktif & LSTM dan \textit{Seasonal-Naive} \\ \hline
+2 & 3 hari aktif & LSTM dan \textit{Seasonal-Naive} \\ \hline
+3 & 5 hari aktif & LSTM dan \textit{Seasonal-Naive} \\ \hline
+4 & 7 hari aktif & LSTM dan \textit{Seasonal-Naive} \\ \hline
+\end{tabularx}
+\end{table}
+
+Hasil keempat skenario pengujian tersebut kemudian dibandingkan untuk mengetahui kinerja relatif model LSTM terhadap metode pembanding, stabilitas model terhadap inisialisasi acak, kontribusi augmentasi data sintetis, serta konsistensi kinerja pada berbagai horizon prakiraan.
+
+Selain prediksi harian sebagai fokus evaluasi ilmiah, layanan API produksi juga menyajikan angka proyeksi mingguan dan bulanan menggunakan metode rata-rata sederhana, yaitu \textit{Mean}-4 untuk empat minggu terakhir dan \textit{Mean}-3 untuk tiga bulan terakhir. Keduanya merupakan fitur pelengkap visualisasi aplikasi di luar lingkup evaluasi ilmiah penelitian ini, sejalan dengan Batasan Masalah yang memfokuskan prediksi pada rentang harian.
+
+\section{Perancangan Pengujian Sistem}
 
 \subsection{Teknik Pengujian}
 
-Pengujian sistem pada penelitian ini mencakup dua pendekatan utama untuk memastikan kualitas fungsional aplikasi dan keandalan model prediksi yang diintegrasikan. Pendekatan pengujian tersebut dibagi menjadi pengujian evaluasi model prediksi penjualan dan pengujian fungsionalitas sistem secara keseluruhan menggunakan metode \textit{black box testing}.
-
-\subsubsection{Rancangan Pengujian Evaluasi Model Prediksi}
-
-Pengujian model prediksi dilakukan untuk mengukur kinerja dan tingkat akurasi dari algoritma \textit{Long Short-Term Memory} (LSTM) yang dikembangkan. Pengujian ini menggunakan data pengujian (\textit{testing data}) yang diambil dari data histori transaksi penjualan harian mitra UMKM. Evaluasi akurasi model diukur berdasarkan tingkat kesalahan (\textit{error}) prediksi menggunakan empat metrik utama, yaitu MAE, RMSE, sMAPE, dan MASE, yang formula lengkapnya telah dijabarkan pada Subbab 2.6. Sebagai konvensi implementasi metrik sMAPE, apabila penyebut bernilai nol (nilai aktual dan prediksi sama-sama nol), penyebut diganti dengan nilai 1 agar tidak terjadi galat pembagian dengan nol (\textit{division by zero}). Konvensi inilah yang diverifikasi pada pengujian \textit{white box}.
-
-Sebagai kriteria keberhasilan model pada diagram alur (Gambar \ref{fig:lstm_alur}), ditetapkan kriteria kelayakan yang bersifat \textbf{relatif terhadap baseline}, yaitu model dinyatakan layak apabila \textbf{MASE model $<$ MASE \textit{baseline} \textit{Naive}} pada data uji yang sama. Kriteria relatif ini dipilih karena nilai MASE dinormalisasi terhadap galat naif satu langkah pada data latih (\textit{in-sample}), sehingga nilai MASE $> 1$ pada data uji hanya menandakan bahwa periode uji lebih bergejolak dibandingkan periode latih, bukan berarti model secara otomatis lebih buruk daripada metode naif; perbandingan yang bermakna secara metodologis adalah antar metode pada data uji yang identik. Apabila kriteria tersebut belum terpenuhi, dilakukan iterasi penyetelan konfigurasi (\textit{hyperparameter tuning}) meliputi jumlah neuron, \textit{learning rate}, \textit{batch size}, dan bentuk target prediksi. Pengujian evaluasi ini dilakukan dengan mengukur kinerja model menggunakan pendekatan \textit{multi-seed evaluation} (10 \textit{seeds} acak) untuk memastikan stabilitas performa model LSTM terhadap variasi inisialisasi bobot awal jaringan saraf. Hasil pengujian akhir tersebut selanjutnya dibandingkan dengan model pembanding (\textit{baselines}) untuk menentukan kelayakan model LSTM. Selain itu, diuji pula skenario perbandingan performa model LSTM yang dilatih dengan dan tanpa tambahan data sintetis hasil augmentasi TimeGAN terhadap \textit{baseline} \textit{Seasonal-Naive}, guna mengukur efektivitas augmentasi data dalam memitigasi keterbatasan ukuran dataset.
+Pengujian sistem pada penelitian ini dilakukan untuk memastikan kualitas fungsional aplikasi yang dibangun. Pengujian menggunakan dua pendekatan, yaitu \textit{black box testing} untuk memverifikasi kesesuaian perilaku fitur terhadap spesifikasi kebutuhan, dan \textit{white box testing} secara terbatas untuk memverifikasi kebenaran logika pada fungsi kritis layanan prediksi.
 
 \subsubsection{Rancangan Analisis Pengujian \textit{Black Box}}
 
