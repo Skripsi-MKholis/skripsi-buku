@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Sidang Skripsi — Muhammad Kholis</title>
+<style>
+  :root{
+    --bg:#f2ede6; --panel:#f7f4ef; --ink:#221f1c; --accent:#c0392b;
+    --brown:#c99a6c; --brown-dark:#a97c4f; --line:#221f1c;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:#3a3733;font-family:'Segoe UI',Arial,sans-serif;color:var(--ink);}
+  .deck{max-width:1280px;margin:0 auto;padding:24px 0 80px;}
+  .slide{
+    background:var(--panel);
+    width:100%;
+    aspect-ratio:16/9;
+    margin:24px auto;
+    padding:44px 56px;
+    position:relative;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
+  .slide.cover{background:var(--brown);}
+  .topbar{display:flex;align-items:center;gap:14px;border-bottom:2px solid var(--line);padding-bottom:10px;margin-bottom:18px;}
+  .topbar img.logo{height:36px;}
+  .topbar .inst{font-size:17px;letter-spacing:1px;font-weight:600;color:#3a3733;text-transform:uppercase;}
+  .pagenum{position:absolute;top:20px;right:32px;font-size:38px;font-weight:800;color:var(--brown-dark);opacity:.85;}
+  h1.title{font-size:32px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin:0 0 18px;}
+  .cover h1.title{font-size:40px;text-align:center;max-width:900px;margin:10px auto 6px;}
+  .cover{align-items:center;justify-content:center;text-align:center;}
+  .cover .kicker{letter-spacing:3px;font-size:20px;text-transform:uppercase;margin-bottom:8px;color:#3a3733;}
+  .cover .author{margin-top:20px;font-size:22px;font-weight:700;}
+  .cover .nim{font-size:17px;}
+  .cover table{margin:26px auto 0;border-collapse:collapse;font-size:16px;}
+  .cover table td{padding:6px 18px;text-align:left;border-top:1px solid rgba(0,0,0,.25);}
+  .cover table td.role{font-weight:700;text-transform:uppercase;font-size:14px;color:#3a3733;opacity:.8;}
+  .cover .arrow{position:absolute;top:26px;right:32px;font-size:38px;color:#3a3733;}
+  .cols{display:flex;gap:36px;flex:1;}
+  .col{flex:1;min-width:0;}
+  .col h2{font-size:23px;font-weight:800;text-transform:uppercase;margin:0 0 8px;}
+  .col h2.masalah{color:var(--ink);}
+  .col h2.dampak{color:var(--ink);}
+  .col p{font-size:17px;line-height:1.5;margin:0;}
+  .solusi{margin-top:14px;}
+  .solusi h2{font-size:23px;font-weight:800;text-transform:uppercase;margin:0 0 8px;}
+  .solusi ol{margin:0;padding-left:20px;font-size:16px;line-height:1.45;}
+  .solusi li{margin-bottom:6px;}
+  .solusi li::marker{color:var(--accent);font-weight:800;}
+  .numlist{display:flex;flex-direction:column;gap:16px;flex:1;justify-content:center;}
+  .numitem{display:flex;gap:18px;align-items:flex-start;}
+  .numitem .num{font-size:38px;font-weight:900;color:var(--accent);min-width:56px;}
+  .numitem .txt{font-size:18px;line-height:1.5;padding-top:6px;}
+  .numitem .txt b{display:block;font-size:16px;text-transform:uppercase;letter-spacing:.5px;color:var(--brown-dark);margin-bottom:2px;}
+  table.data{width:100%;border-collapse:collapse;font-size:16px;margin-top:10px;}
+  table.data th,table.data td{border:1px solid #999;padding:6px 8px;text-align:center;}
+  table.data th{background:var(--brown);color:#fff;font-weight:700;}
+  table.data td.rowlabel{text-align:left;font-weight:600;}
+  table.data tr.highlight td{background:#fdf1e6;font-weight:700;}
+  .note{margin-top:12px;font-size:15px;line-height:1.5;background:#eee3d3;border-left:4px solid var(--accent);padding:8px 12px;}
+  .imgwrap{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .imgwrap img{max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 4px 14px rgba(0,0,0,.25);border:1px solid #ccc;}
+  .imgrow{display:flex;gap:18px;flex:1;min-height:0;}
+  .imgrow figure{flex:1;display:flex;flex-direction:column;margin:0;min-width:0;}
+  .imgrow figure img{flex:1;object-fit:contain;max-width:100%;max-height:100%;border:1px solid #ccc;box-shadow:0 4px 10px rgba(0,0,0,.2);}
+  .imgrow figcaption{font-size:14px;text-align:center;margin-top:6px;color:#555;}
+  .grid2{display:flex;gap:30px;flex:1;min-height:0;}
+  .grid2 .left, .grid2 .right{flex:1;min-width:0;display:flex;flex-direction:column;}
+  .bullets{font-size:16.5px;line-height:1.55;margin:0;padding-left:18px;}
+  .bullets li{margin-bottom:6px;}
+  .sota-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1;}
+  .sota-card{background:#fff;border:1px solid #ddd;border-radius:6px;padding:12px 14px;}
+  .sota-card h3{margin:0 0 6px;font-size:17px;color:var(--accent);}
+  .sota-card p{margin:0;font-size:15px;line-height:1.45;}
+  .kesimpulan-grid{display:flex;gap:30px;flex:1;min-height:0;}
+  .kcol{flex:1;display:flex;flex-direction:column;}
+  .kcol h2{font-size:20px;font-weight:800;text-transform:uppercase;margin:0 0 8px;color:var(--brown-dark);}
+  .kcol ol,.kcol ul{font-size:15px;line-height:1.45;margin:0;padding-left:16px;}
+  .kcol li{margin-bottom:6px;}
+  .closing{align-items:center;justify-content:center;}
+  .closing h1{font-size:64px;text-align:left;width:100%;text-transform:uppercase;font-weight:900;}
+  .subtable{font-size:15px;margin-top:6px;}
+  @media (max-width:900px){
+    .slide{aspect-ratio:auto;min-height:auto;}
+    .cols,.grid2,.imgrow,.kesimpulan-grid{flex-direction:column;}
+  }
+  @media print{
+    body{background:#fff;}
+    .slide{box-shadow:none;page-break-after:always;margin:0;}
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- SLIDE 1 : COVER -->
+  <section class="slide cover">
+    <div class="arrow">&#8599;</div>
+    <img class="logo" style="height:60px;margin-bottom:6px;" src="../Project/gambar/logo-pnl-skripsi.png" alt="Logo PNL">
+    <div class="kicker">Sidang Skripsi</div>
+    <h1 class="title">Rancang Bangun Aplikasi Point of Sale dengan Fitur Prediksi Penjualan Harian Menggunakan Metode Long Short-Term Memory (LSTM)</h1>
+    <div class="author">Muhammad Kholis</div>
+    <div class="nim">2022573010098 &middot; Teknik Informatika &middot; Politeknik Negeri Lhokseumawe</div>
+    <table>
+      <tr><td class="role">Pembimbing 1</td><td>Zulfan Khairil Simbolon, S.T., M.Eng.</td></tr>
+      <tr><td class="role">Pembimbing 2</td><td>Azhar, S.T., M.T.</td></tr>
+      <tr><td class="role">Penguji 1</td><td>Muhammad Arhami, S.Si., M.Kom.</td></tr>
+      <tr><td class="role">Penguji 2</td><td>Mahdi, S.T., M.Cs.</td></tr>
+      <tr><td class="role">Penguji 3</td><td>Hendrawaty, S.T., M.T.</td></tr>
+    </table>
+  </section>
+
+  <!-- SLIDE 2 : LATAR BELAKANG -->
+  <section class="slide">
+    <div class="pagenum">02</div>
+    <div class="topbar"><span class="inst">Politeknik Negeri Lhokseumawe</span></div>
+    <h1 class="title">Latar Belakang</h1>
+    <div class="cols">
+      <div class="col">
+        <h2 class="masalah">Masalah Utama</h2>
+        <p>Aplikasi POS pada usaha kecil seperti kantin institusi umumnya hanya mencatat transaksi; data harian yang terkumpul diposisikan sebatas arsip pelaporan, belum menjadi basis keputusan prediktif. Penentuan produksi, bahan baku, dan tenaga kerja masih bertumpu pada intuisi. Penelitian LSTM yang akurat pada literatur umumnya bertumpu pada data bertahun-tahun atau variabel eksogen yang tidak selalu tersedia, jarang diuji terhadap baseline sederhana, dan belum menyatu ke aplikasi POS yang benar-benar dipakai.</p>
+      </div>
+      <div class="col">
+        <h2 class="dampak">Dampak</h2>
+        <p>Ketidakpastian estimasi penjualan memicu ketidakseimbangan stok dan permintaan: produksi terlalu sedikit menimbulkan <i>stockout</i>, terlalu banyak menimbulkan <i>overstock</i> dan kerugian bahan baku. Klaim keunggulan <i>deep learning</i> tanpa kontrol baseline berisiko menyesatkan, dan jarak antara riset akademik dengan penerapan praktis pada aplikasi POS nyata masih lebar.</p>
+      </div>
+    </div>
+    <div class="solusi">
+      <h2>Solusi</h2>
+      <ol>
+        <li>Merancang dan membangun aplikasi Point of Sale berbasis <i>mobile</i> yang mengintegrasikan fitur prediksi penjualan harian menggunakan LSTM ke dalam alur kerja transaksi.</li>
+        <li>Mengevaluasi secara empiris pengaruh augmentasi data sintetis TimeGAN terhadap performa LSTM pada dataset penjualan berskala kecil.</li>
+        <li>Membandingkan model terhadap <i>baseline seasonal-naive</i> pada beberapa horizon peramalan sebagai kontrol metodologis — studi kasus EatsTEDI, DTEDI, Universitas Gadjah Mada.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- SLIDE 3 : RUMUSAN MASALAH -->
+  <section class="slide">
+    <div class="pagenum">03</div>
+    <div class="topbar"><span class="inst">Politeknik Negeri Lhokseumawe</span></div>
+    <h1 class="title">Rumusan Masalah</h1>
+    <div class="numlist">
+      <div class="numitem"><div class="num">01.</div><div class="txt">Bagaimana merancang dan membangun aplikasi Point of Sale yang mengintegrasikan fitur prediksi penjualan harian ke dalam alur kerja transaksi, sehingga hasil peramalan dapat langsung dimanfaatkan oleh pengelola usaha?</div></div>
+      <div class="numitem"><div class="num">02.</div><div class="txt">Bagaimana menerapkan model Long Short-Term Memory untuk memprediksi penjualan harian pada dataset EatsTEDI yang berjumlah 313 titik pengamatan, serta bagaimana pengaruh augmentasi data sintetis TimeGAN terhadap akurasi model tersebut?</div></div>
+      <div class="numitem"><div class="num">03.</div><div class="txt">Bagaimana tingkat akurasi model Long Short-Term Memory dibandingkan terhadap <i>baseline seasonal-naive</i> pada beberapa horizon peramalan?</div></div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4 : TUJUAN PENELITIAN -->
+  <section class="slide">
+    <div class="pagenum">04</div>
+    <div class="topbar"><span class="inst">Politeknik Negeri Lhokseumawe</span></div>
+    <h1 class="title">Tujuan Penelitian</h1>
+    <div class="numlist">
+      <div class="numitem"><div class="num">01.</div><div class="txt"><b>Membangun Sistem</b>Merancang dan membangun aplikasi Point of Sale berbasis <i>mobile</i> yang mengintegrasikan fitur prediksi penjualan harian ke dalam alur kerja transaksi, serta menguji fungsionalitasnya melalui pengujian sistem.</div></div>
+      <div class="numitem"><div class="num">02.</div><div class="txt"><b>Menerapkan Model</b>Menerapkan model Long Short-Term Memory untuk prediksi penjualan harian pada dataset EatsTEDI dan menganalisis pengaruh augmentasi data sintetis TimeGAN pada kondisi data pelatihan terbatas.</div></div>
+      <div class="numitem"><div class="num">03.</div><div class="txt"><b>Mengukur Secara Jujur</b>Mengukur akurasi LSTM terhadap <i>baseline seasonal-naive</i> pada beberapa horizon peramalan, guna menghasilkan rekomendasi kelayakan penerapan <i>deep learning</i> pada usaha kuliner berskala kecil.</div></div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5 : BATASAN MASALAH 1/2 -->
+  <section class="slide">
+    <div class="pagenum">05</div>
+    <div class="topbar"><span class="inst">Politeknik Negeri Lhokseumawe</span></div>
+    <h1 class="title">Batasan Masalah (1/2)</h1>
+    <div class="numlist">
+      <div class="numitem"><div class="num">01.</div><div class="txt"><b>Sumber dan cakupan data</b>Data transaksi EatsTEDI, DTEDI UGM, rentang efektif 26 Agustus 2024–20 Juni 2026, 313 hari transaksi tercatat. Pemodelan univariat (total penjualan harian), tanpa variabel eksogen (cuaca, promosi, harga).</div></div>
+      <div class="numitem"><div class="num">02.</div><div class="txt"><b>Granularitas prediksi</b>Prediksi pada tingkat agregat penjualan harian, bukan per item atau kategori produk.</div></div>
+      <div class="numitem"><div class="num">03.</div><div class="txt"><b>Cakupan metode</b>LSTM + augmentasi TimeGAN, dibandingkan terhadap Naive, Mean-7, Seasonal-Naive, dan SARIMA. Transformer, TFT, <i>jittering</i>, dan <i>window warping</i> di luar cakupan.</div></div>
+    </div>
+  </section>
+
+  <!-- SLIDE 6 : BATASAN MASALAH 2/2 -->
+  <section class="slide">
+    <div class="pagenum">06</div>
+    <div class="topbar"><span class="inst">Politeknik Negeri Lhokseumawe</span></div>
+    <h1 class="title">Batasan Masalah (2/2)</h1>
+    <div class="numlist">
+      <div class="numitem"><div class="num">04.</div><div class="txt"><b>Metrik evaluasi</b>MAE, RMSE, sMAPE, dan MASE. MAPE konvensional tidak digunakan karena rentan menghasilkan galat persentase tidak representatif pada hari berpendapatan sangat rendah.</div></div>
+      <div class="numitem"><div class="num">05.</div><div class="txt"><b>Cakupan aplikasi dan pengujian</b>Aplikasi POS pada Android (Flutter), model dilatih luring dan diintegrasikan sebagai layanan prediksi. iOS dan <i>online/incremental learning</i> di luar cakupan. Pengujian dibatasi pada fungsional, struktural, dan akurasi model — tanpa pengukuran dampak ekonomi.</div></div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7 : STATE OF THE ART -->
+  <section class="slide">
+    <div class="pagenum">07</div>
+    <div class="topbar"><span class="inst">Politeknik Negeri Lhokseumawe</span></div>
+    <h1 class="title">State of the Art</h1>
+    <div class="cols" style="gap:44px;">
+      <div class="col">
+        <div class="numitem" style="margin-bottom:10px;"><div class="num" style="font-size:34px;">01.</div></div>
+        <p style="font-size:16px;line-height:1.5;margin:0 0 8px;">Penelitian oleh <b>S. Mansur dkk.</b> (2025) &ldquo;<i>Sales Forecasting for Retail Stores Using Hybrid Neural Networks and Sales-Affecting Variables</i>&rdquo;.</p>
+        <ul class="bullets">
+          <li>Menggunakan hibrida CNN-LSTM dengan variabel eksogen (cuaca, hari libur, hari gajian, unjuk rasa) pada data penjualan harian 6 bulan satu gerai.</li>
+          <li>Hasil penelitian mencapai MAPE 4,16%, mengungguli ANN, CNN, dan LSTM tunggal.</li>
+          <li>Keberhasilan bertumpu pada tujuh variabel eksogen yang tidak tersedia pada dataset penelitian ini, dan penulis mencatat indikasi <i>overfitting</i>; tidak menguji <i>baseline</i> sederhana.</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="numitem" style="margin-bottom:10px;"><div class="num" style="font-size:34px;">02.</div></div>
+        <p style="font-size:16px;line-height:1.5;margin:0 0 8px;">Penelitian oleh <b>P. Yadav &amp; C. R. Barde</b> (2025) &ldquo;<i>Retail Real-Time Sales Prediction System Using LSTM and XGBoost</i>&rdquo;.</p>
+        <ul class="bullets">
+          <li>Menggunakan LSTM untuk pemodelan deret waktu dikombinasikan dengan XGBoost, terintegrasi langsung dengan sistem Point of Sale berbasis web.</li>
+          <li>Hasil penelitian menunjukkan sistem prediksi penjualan waktu nyata yang terhubung dengan POS untuk penyerapan data dinamis.</li>
+          <li>Hanya berfokus pada pendekatan hibrida LSTM-XGBoost berbasis web; penelitian ini menggunakan LSTM murni pada aplikasi <i>mobile</i> dan menguji augmentasi TimeGAN.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note"><b>Kebaruan penelitian ini:</b> menerapkan LSTM pada dataset berskala kecil dengan deret tidak sinambung, menguji kontribusi augmentasi TimeGAN, sekaligus mengintegrasikan model ke aplikasi POS nyata dan mengevaluasinya terhadap <i>baseline seasonal-naive</i> — ketiganya belum pernah dilakukan bersamaan pada penelitian terdahulu.</div>
+  </section>
+
+  <!-- SLIDE 8 : ALUR PENELITIAN -->
+  <section class="slide">
+    <div class="pagenum">08</div>
+    <div class="topbar"><span class="inst">Politeknik Negeri Lhokseumawe</span></div>
+    <h1 class="title">Alur Penelitian</h1>
+    <div class="imgwrap">
+      <img src="../Project/gambar/alur_penelitian.png" alt="Alur Penelitian">
+    </div>
+  </section>
+
+  <!-- SLIDE 9 : ARSITEKTUR SISTEM -->
+  <section class="slide">
+    <div class="pagenum">09</div>
+    <div class="topbar"><span class="inst">Politeknik Negeri Lhokseumawe</span></div>
+    <h1 class="title">Arsitektur Sistem</h1>
+    <div class="grid2">
+      <div class="left" style="flex:1.3;">
+        <div class="imgwrap"><img src="../Skripsi/Gambar/arsitektur_sistem.png" alt="Arsitektur Sistem"></div>
+      </div>
+      <div class="right">
+        <ul class="bullets">
+          <li><b>Aplikasi POS (Flutter, Android)</b> — arsitektur <i>offline-first</i>, kasir tetap dapat bertransaksi tanpa internet.</li>
+          <li><b>Isar DB</b> — penyimpanan lokal selama offline.</li>
+          <li><b>Supabase PostgreSQL</b> — basis data cloud, sinkronisasi otomatis saat koneksi aktif.</li>
+          <li><b>Layanan prediksi terpisah</b> — Python (TensorFlow + Flask), model dilatih luring lalu di-<i>deploy</i> sebagai API di Hugging Face.</li>
+          <li><b>Halaman Smart Analytics</b> — akses hasil prediksi langsung dari aplikasi.</li>
+          <li><b>Model-agnostic</b> — penggantian metode prediksi tidak memerlukan perubahan aplikasi.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 10 : DATA DAN PENGUMPULAN DATA -->
+  <section class="slide">
+    <div class="pagenum">10</div>
+    <div class="topbar"><span class="inst">Politeknik Negeri Lhokseumawe</span></div>
+    <h1 class="title">Data dan Pengumpulan Data</h1>
+    <div class="numlist">
+      <div class="numitem"><div class="num">01.</div><div class="txt"><b>Sumber Data</b>Dump SQL platform EatsTEDI, DTEDI UGM (<code>eatstedi-20260621-010820.sql</code>) — 32,15 MB, &plusmn;395.090 baris, rentang 24 Agustus 2024–20 Juni 2026 (666 hari kalender).</div></div>
+      <div class="numitem"><div class="num">02.</div><div class="txt"><b>Dataset Final</b>Setelah filter status lunas (<code>is_paid = 1</code>) &amp; agregasi harian: rentang efektif 26 Agustus 2024–20 Juni 2026, <b>313 hari dengan transaksi tercatat</b> dari 475 hari kerja kalender. Pemodelan univariat (revenue harian).</div></div>
+      <div class="numitem"><div class="num">03.</div><div class="txt"><b>Mengapa EatsTEDI?</b>Mencakup empat semester berturut-turut (dua tahun akademik) — cukup kaya pola musiman (perkuliahan, UTS, UAS, libur antarsemester), namun cukup terbatas volumenya untuk menguji secara jujur nilai tambah LSTM &amp; TimeGAN.</div></div>
+    </div>
+  </section>
+
+  <!-- SLIDE 11 : TEKNIK PENGUMPULAN DATA -->
+  <section class="slide">
+    <div class="pagenum">11</div>
+    <div class="topbar"><span class="inst">Politeknik Negeri Lhokseumawe</span></div>
+    <h1 class="title">Teknik Pengumpulan Data</h1>
+    <div class="numlist">
+      <div class="numitem"><div class="num">01.</div><div class="txt"><b>Studi Literatur</b>Mengkaji penelitian terdahulu tentang LSTM, augmentasi TimeGAN, dan baseline sebagai kontrol metodologis.</div></div>
+      <div class="numitem"><div class="num">02.</div><div class="txt"><b>Observasi &amp; Wawancara</b>Terhadap pengelola divisi kewirausahaan mahasiswa platform EatsTEDI DTEDI UGM: alur kasir, pencatatan menu, pengelolaan stok.</div></div>
+      <div class="numitem"><div class="num">03.</div><div class="txt"><b>Akuisisi Data</b>Dump SQL berisi tabel <i>invoices</i> (utama) beserta <i>product_sold</i>, <i>products</i>, dan <i>categories</i>.</div></div>
+      <div class="numitem"><div class="num">04.</div><div class="txt"><b>Praproses Data</b>Penyaringan status lunas, agregasi harian, normalisasi Min-Max Scaling, pembentukan sampel <i>sliding window</i>.</div></div>
+    </div>
+  </section>
+
+  <!-- SLIDE 12 : APLIKASI & SAMPLE DATA -->
+  <section class="slide">
+    <div class="pagenum">12</div>
+    <div class="topbar"><span class="inst">Politeknik Negeri Lhokseumawe</span></div>
+    <h1 class="title">Aplikasi &amp; Sample Data</h1>
+    <div class="imgrow">
+      <figure>
+        <img src="../Skripsi/Gambar/ui_11_kasir_pos.png" alt="Tampilan Kasir POS">
+        <figcaption>Tampilan Kasir POS (Flutter) — sumber transaksi harian aplikasi</figcaption>
+      </figure>
+      <figure>
+        <img src="../Skripsi/Gambar/ui_17a_smart_analitik.png" alt="Smart Analytics">
+        <figcaption>Halaman Smart Analytics — hasil prediksi penjualan harian</figcaption>
+      </figure>
+    </div>
+    <div class="note">Data historis pelatihan model berasal dari dump SQL EatsTEDI (32,15 MB, &plusmn;395.090 baris, 24 Agustus 2024–20 Juni 2026), difilter status lunas dan diagregasi per tanggal menjadi 313 hari aktif sebagai dataset final.</div>
+  </section>
+
+  <!-- SLIDE 13 : PREVIEW SEKILAS DATASET -->
+  <section class="slide">
+    <div class="pagenum">13</div>
+    <div class="topbar"><span class="inst">Politeknik Negeri Lhokseumawe</span></div>
+    <h1 class="title">Preview Sekilas Dataset</h1>
+    <p style="font-size:15px;margin:0 0 8px;font-style:italic;">ModelLSTM/Data/Ekstrak/daily_sales.csv — hasil agregasi harian dari dump SQL EatsTEDI, dataset final untuk pelatihan model</p>
+    <table class="data subtable">
+      <tr><th>date</th><th>revenue</th><th>transactions</th><th>qty_sold</th><th>day_of_week</th><th>is_weekend</th><th>is_holiday</th><th>is_ramadan</th></tr>
+      <tr><td class="rowlabel">2024-08-26</td><td>1.701.500</td><td>113</td><td>585</td><td>0 (Sen)</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td class="rowlabel">2024-08-27</td><td>1.746.500</td><td>245</td><td>611</td><td>1 (Sel)</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td class="rowlabel">2024-08-28</td><td>1.650.500</td><td>179</td><td>570</td><td>2 (Rab)</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td class="rowlabel">2024-08-29</td><td>1.814.500</td><td>219</td><td>646</td><td>3 (Kam)</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td class="rowlabel">2024-08-30</td><td>1.233.500</td><td>167</td><td>453</td><td>4 (Jum)</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td class="rowlabel">&hellip;</td><td>&hellip;</td><td>&hellip;</td><td>&hellip;</td><td>&hellip;</td><td>&hellip;</td><td>&hellip;</td><td>&hellip;</td></tr>
+      <tr><td class="rowlabel">2026-06-19</td><td>1.159.000</td><td>151</td><td>326</td><td>4 (Jum)</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td class="rowlabel">2026-06-20</td><td>68.500</td><td>1</td><td>24</td><td>5 (Sab)</td><td>1</td><td>0</td><td>0</td></tr>
+    </table>
+    <div class="grid2" style="margin-top:14px;">
+      <div class="left">
+        <ul class="bullets">
+          <li><b>313 baris</b> hari aktif (revenue &gt; 0) dipakai sebagai dataset final pemodelan, dari rentang 26 Agustus 2024 &ndash; 20 Juni 2026.</li>
+          <li>Kolom target: <code>revenue</code> (total penjualan harian, Rupiah) &mdash; dimodelkan univariat.</li>
+          <li>Kolom pendukung fitur: <code>transactions</code>, <code>qty_sold</code>, <code>day_of_week</code>, <code>week_of_year</code>, <code>month</code>, <code>is_weekend</code>, <code>is_holiday</code>, <code>is_ramadan</code> &mdash; diolah menjadi pengodean siklik sinus-kosinus dan penanda biner Ramadan.</li>
+        </ul>
+      </div>
+      <div class="right">
+        <ul class="bullets">
+          <li>Total omzet periode: &plusmn; Rp471,2 juta.</li>
+          <li>Rata-rata: &plusmn; Rp1.505.433 per hari aktif.</li>
+          <li>Hari tanpa transaksi (revenue = 0, mis. akhir pekan, libur akademik) disaring &mdash; bukan diisi nol, sesuai batasan pemodelan hari aktif.</li>
+          <li>Sumber mentah: <code>eatstedi-20260621-010820.sql</code> (32,15 MB, &plusmn;395.090 baris) &rarr; diparser &amp; diagregasi menjadi berkas ini.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 14 : HASIL DAN PEMBAHASAN 1/2 -->
+  <section class="slide">
+    <div class="pagenum">14</div>
+    <div class="topbar"><span class="inst">Politeknik Negeri Lhokseumawe</span></div>
+    <h1 class="title">Hasil dan Pembahasan (1/2)</h1>
+    <p style="font-size:15px;margin:0 0 4px;font-style:italic;">Skenario 1 — Perbandingan LSTM terhadap baseline statistik (one-step-ahead, rata-rata 10 seed)</p>
+    <table class="data">
+      <tr><th>Model</th><th>MAE (Rp)</th><th>RMSE (Rp)</th><th>sMAPE</th><th>MASE</th></tr>
+      <tr class="highlight"><td class="rowlabel">Naive (kemarin)</td><td>519.841</td><td>697.253</td><td>30,77%</td><td>1,432</td></tr>
+      <tr><td class="rowlabel">SARIMA</td><td>586.083</td><td>751.408</td><td>33,80%</td><td>1,615</td></tr>
+      <tr><td class="rowlabel">Mean-7</td><td>647.263</td><td>791.746</td><td>36,25%</td><td>1,784</td></tr>
+      <tr><td class="rowlabel"><b>LSTM Hybrid (rata-rata)</b></td><td>667.718</td><td>897.563</td><td>38,06%</td><td>1,840</td></tr>
+      <tr><td class="rowlabel">Seasonal-Naive (k=4)</td><td>775.451</td><td>975.701</td><td>44,97%</td><td>2,137</td></tr>
+    </table>
+    <div class="imgrow" style="margin-top:10px;">
+      <figure>
+        <img src="../Skripsi/Gambar/lstm_harian_hybrid_residual_plot_1.png" alt="Aktual vs Prediksi LSTM Hybrid">
+        <figcaption>Pendapatan Aktual vs. Prediksi — LSTM Hybrid Residual</figcaption>
+      </figure>
+      <figure>
+        <img src="../Skripsi/Gambar/evaluasi_multiseed_standalone_plot_1.png" alt="Stabilitas Multi-Seed">
+        <figcaption>Skenario 2 — Sebaran MAE Multi-Seed (10x)</figcaption>
+      </figure>
+    </div>
+    <div class="note">Naive mencatat galat terkecil — pendapatan kantin didominasi persistensi jangka pendek. Multi-seed: MAE Rp667.718 &plusmn; Rp145.024, MASE 1,840 &plusmn; 0,400; hanya 1 dari 10 percobaan (seed ke-7, MAE Rp495.527) mengungguli Naive &amp; SARIMA — model belum stabil pada ukuran data ini.</div>
+  </section>
+
+  <!-- SLIDE 15 : HASIL 2/2, KESIMPULAN, REKOMENDASI, PENUTUP -->
+  <section class="slide">
+    <div class="pagenum">15</div>
+    <div class="topbar"><span class="inst">Politeknik Negeri Lhokseumawe</span></div>
+    <h1 class="title">Hasil (2/2), Kesimpulan &amp; Rekomendasi</h1>
+    <p style="font-size:14.5px;margin:0 0 4px;font-style:italic;">Skenario 3 (TimeGAN, multi-langkah): MAE turun 50,8% (Rp1.750.355 &rarr; Rp860.695). Skenario 4 (horizon h=1&ndash;7): MASE LSTM stabil 2,124&ndash;2,505, namun Seasonal-Naive tetap unggul (2,012&ndash;2,140). Pengujian sistem: 12/12 black box, 3/3 white box, 0 kehilangan/duplikasi data sinkronisasi.</p>
+    <div class="kesimpulan-grid">
+      <div class="kcol">
+        <h2>Kesimpulan</h2>
+        <ol>
+          <li>Aplikasi POS <i>mobile</i> dengan fitur prediksi berhasil dibangun (Flutter, Isar DB, Supabase, Flask di Hugging Face), terintegrasi lewat Smart Analytics dengan arsitektur <i>offline-first</i>; seluruh pengujian berhasil.</li>
+          <li>LSTM <i>hybrid residual</i> diterapkan pada 313 hari aktif; augmentasi TimeGAN memperbaiki MAE multi-langkah 50,8% — keterbatasan performa bersumber dari kelangkaan data, bukan arsitektur.</li>
+          <li>LSTM belum mengungguli baseline (Naive &amp; Seasonal-Naive) pada volume data ini; metode statistik sederhana lebih layak. LSTM relevan ditinjau ulang bila data mencakup 3&ndash;5 tahun operasional — tanpa mengubah aplikasi karena layanan bersifat <i>model-agnostic</i>.</li>
+        </ol>
+      </div>
+      <div class="kcol">
+        <h2>Rekomendasi</h2>
+        <ul>
+          <li>Perpanjang data ke 3&ndash;5 tahun operasional.</li>
+          <li>Tambahkan fitur <code>gap_days</code> pada model.</li>
+          <li>Atasi <i>cold start</i> dengan <i>transfer learning</i> / model global.</li>
+          <li>Kembangkan model hybrid (ARIMA-LSTM / LSTM-GRU).</li>
+          <li>Aktifkan enkripsi basis data lokal Isar DB.</li>
+          <li>Integrasi QRIS dinamis &amp; notifikasi WhatsApp API.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 16 : PENUTUP -->
+  <section class="slide closing">
+    <div class="topbar" style="width:100%;position:absolute;top:26px;left:56px;right:56px;width:calc(100% - 112px);"><span class="inst">Politeknik Negeri Lhokseumawe</span></div>
+    <h1>Terima Kasih</h1>
+    <div style="width:100%;border-top:2px solid var(--line);margin-top:14px;padding-top:10px;font-size:14px;">
+      Muhammad Kholis &middot; 2022573010098 &middot; Teknik Informatika &middot; Politeknik Negeri Lhokseumawe
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
