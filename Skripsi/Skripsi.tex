@@ -1556,157 +1556,212 @@ Gambar~\ref{fig:activity-profil} menunjukkan proses Owner dalam memperbarui iden
 
 \subsection{Perancangan Antarmuka Pengguna (\textit{User Interface})}
 
+Perancangan antarmuka pengguna (\textit{user interface}) dilakukan untuk memberikan gambaran tampilan serta interaksi pengguna dengan sistem dalam proses pencatatan transaksi dan penyajian prediksi penjualan harian. Perancangan ini bertujuan menghasilkan antarmuka yang mudah digunakan, terstruktur, dan sesuai dengan kebutuhan fungsional sistem.
 
-Perancangan \textit{wireframe} dalam penelitian ini mencakup rancangan antarmuka pengguna untuk semua layar utama yang menjadi bagian dari alur operasional aplikasi POS. \textit{Wireframe} dirancang dengan mempertimbangkan kebutuhan pengguna, aksesibilitas, dan alur kerja yang efisien. Terdapat 13 rancangan layar yang melayani kebutuhan berbeda sesuai dengan peran pengguna, sebagaimana diuraikan berikut ini.
+Antarmuka sistem dirancang dengan tata letak yang rapi, navigasi yang mudah dipahami, serta penyajian informasi yang mendukung alur penggunaan sistem mulai dari registrasi toko, autentikasi pengguna, pengelolaan katalog produk, transaksi kasir, hingga penyajian prediksi penjualan harian. Rancangan halaman disusun mengikuti \textit{use case} yang telah dimodelkan pada Subbab sebelumnya, sehingga setiap fungsi sistem memiliki rancangan antarmukanya masing-masing. Adapun rancangan halaman pada aplikasi \textit{Point of Sale} adalah sebagai berikut:
 
-\begin{enumerate}
+\noindent a.~~\textbf{Perancangan Halaman Registrasi Toko Baru}
 
-    \item \textbf{Halaman Registrasi Toko Baru}
+Halaman registrasi toko baru dirancang sebagai titik masuk awal sistem, yaitu tempat calon pemilik mendaftarkan identitas toko sekaligus akun pemiliknya. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-registrasi}.
 
-    Halaman pendaftaran akun dan toko baru yang digunakan saat inisialisasi awal sistem oleh Owner, mencakup pengisian data identitas pengguna dan informasi outlet toko.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.34\textwidth]{wireframe_register}
+    \caption{Desain Halaman Registrasi Toko Baru}
+    \label{fig:ui-registrasi}
+\end{figure}
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.35\textwidth]{wireframe_register}
-        \caption{\textit{Wireframe} Halaman Registrasi Toko Baru}
-        \label{fig:wf_register}
-    \end{figure}
+Gambar~\ref{fig:ui-registrasi} menunjukkan formulir pendaftaran yang memuat kolom nama lengkap, email, kata sandi, dan konfirmasi kata sandi, disertai kolom identitas toko. Bagian bawah halaman menyediakan tautan menuju halaman \textit{login} bagi pengguna yang telah memiliki akun.
 
-    \newpage
+\noindent b.~~\textbf{Perancangan Halaman \textit{Login} dan Pemilihan Toko}
 
-    \item \textbf{Halaman \textit{Login}}
+\noindent 1)~~Perancangan Halaman \textit{Login}
 
-    Halaman masuk akun untuk Owner maupun Kasir dengan autentikasi berbasis email dan kata sandi melalui Supabase Auth.
+Halaman \textit{login} dirancang untuk memverifikasi identitas pengguna sebelum mengakses fungsi sistem, sekaligus menentukan hak akses sesuai perannya. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-login}.
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.45\textwidth]{wireframe_login}
-        \caption{\textit{Wireframe} Halaman \textit{Login}}
-        \label{fig:wf_login}
-    \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.34\textwidth]{wireframe_login}
+    \caption{Desain Halaman \textit{Login}}
+    \label{fig:ui-login}
+\end{figure}
 
-    \item \textbf{Halaman Pemilihan Toko}
+Gambar~\ref{fig:ui-login} menunjukkan kolom email dan kata sandi beserta tombol masuk. Halaman ini juga menyediakan tautan lupa kata sandi serta tautan menuju halaman registrasi bagi pengguna baru.
 
-    Memungkinkan pengguna yang telah \textit{login} untuk memilih toko aktif yang akan dioperasikan, terutama bagi pengguna yang terdaftar di lebih dari satu outlet.
+\noindent 2)~~Perancangan Halaman Pemilihan Toko
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.45\textwidth]{wireframe_store_list}
-        \caption{\textit{Wireframe} Halaman Pemilihan Toko}
-        \label{fig:wf_store_list}
-    \end{figure}
+Halaman pemilihan toko dirancang sebagai kelanjutan proses \textit{login} bagi pengguna yang terdaftar pada lebih dari satu toko. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-pilih-toko}.
 
-    \item \textbf{Halaman Dasbor Owner}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.34\textwidth]{wireframe_store_list}
+    \caption{Desain Halaman Pemilihan Toko}
+    \label{fig:ui-pilih-toko}
+\end{figure}
 
-    Ringkasan performa toko yang menampilkan statistik penjualan harian, grafik tren omzet, pintasan fitur penting, dan akses cepat ke modul utama khusus Owner.
+Gambar~\ref{fig:ui-pilih-toko} menunjukkan daftar toko yang dapat dioperasikan pengguna beserta peran yang dimilikinya pada masing-masing toko. Pengguna memilih satu toko aktif sebelum masuk ke dasbor.
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.45\textwidth]{wireframe_dashboard_owner}
-        \caption{\textit{Wireframe} Halaman Dasbor Owner}
-        \label{fig:wf_dashboard_owner}
-    \end{figure}
+\noindent c.~~\textbf{Perancangan Halaman Kelola Katalog Produk}
 
-    \item \textbf{Halaman POS (Pembayaran)}
+Halaman kelola katalog produk dirancang untuk memelihara data produk dan persediaan yang menjadi sumber masukan bagi pencatatan transaksi penjualan. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-produk}.
 
-    Layar utama kasir untuk mencari produk, menyusun keranjang pesanan, menerapkan \textit{voucher} diskon, memilih metode pembayaran, dan memproses transaksi.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.34\textwidth]{wireframe_add_product}
+    \caption{Desain Halaman Kelola Katalog Produk}
+    \label{fig:ui-produk}
+\end{figure}
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.45\textwidth]{wireframe_payment}
-        \caption{\textit{Wireframe} Halaman POS (Pembayaran)}
-        \label{fig:wf_payment}
-    \end{figure}
+Gambar~\ref{fig:ui-produk} menunjukkan formulir data produk yang memuat nama, harga, jumlah stok, SKU atau \textit{barcode}, kategori, dan gambar produk. Halaman ini digunakan untuk menambah maupun menyunting data produk, sedangkan penghapusan produk diterapkan melalui skema \textit{soft delete}.
 
-    \item \textbf{Halaman Riwayat Transaksi}
+\noindent d.~~\textbf{Perancangan Halaman Kelola Kategori}
 
-    Menampilkan daftar transaksi yang telah dilakukan lengkap dengan fitur pencarian dan \textit{filter} berdasarkan tanggal, berguna untuk keperluan verifikasi dan audit oleh semua staf toko.
+Halaman kelola kategori dirancang untuk mengatur pengelompokan produk agar katalog toko lebih mudah ditelusuri saat transaksi berlangsung. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-kategori}.
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.45\textwidth]{wireframe_transaction_history}
-        \caption{\textit{Wireframe} Halaman Riwayat Transaksi}
-        \label{fig:wf_transaction_history}
-    \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.34\textwidth]{wireframe_manage_categories}
+    \caption{Desain Halaman Kelola Kategori}
+    \label{fig:ui-kategori}
+\end{figure}
 
-    \item \textbf{Halaman Kelola Produk}
+Gambar~\ref{fig:ui-kategori} menunjukkan daftar kategori yang telah dibuat beserta jumlah produk pada masing-masing kategori. Halaman ini menyediakan aksi tambah, ubah, dan hapus kategori.
 
-    Memungkinkan staf toko untuk menambah, menyunting, dan menghapus produk yang dijual, lengkap dengan harga, stok, SKU/\textit{barcode}, gambar produk, dan kategori.
+\noindent e.~~\textbf{Perancangan Halaman Kasir dan Pembayaran}
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.45\textwidth]{wireframe_add_product}
-        \caption{\textit{Wireframe} Halaman Kelola Produk}
-        \label{fig:wf_add_product}
-    \end{figure}
+\noindent 1)~~Perancangan Halaman Kasir
 
-    \item \textbf{Halaman Kelola Kategori}
+Halaman kasir dirancang sebagai layar utama pelayanan transaksi, yaitu tempat kasir menyusun keranjang belanja pelanggan. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-kasir}.
 
-    Memungkinkan staf toko untuk membuat, mengedit, dan menghapus kategori produk guna mengorganisasi katalog dagangan toko dengan lebih terstruktur.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.34\textwidth]{wireframe_product_catalog}
+    \caption{Desain Halaman Kasir}
+    \label{fig:ui-kasir}
+\end{figure}
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.45\textwidth]{wireframe_manage_categories}
-        \caption{\textit{Wireframe} Halaman Kelola Kategori}
-        \label{fig:wf_manage_categories}
-    \end{figure}
+Gambar~\ref{fig:ui-kasir} menunjukkan katalog produk yang dikelompokkan menurut kategori, kolom pencarian produk, serta lencana keranjang yang menampilkan jumlah item dan subtotal belanja.
 
-    \item \textbf{Halaman Laporan}
+\noindent 2)~~Perancangan Halaman Pembayaran
 
-    Layar yang dapat diakses seluruh staf toko untuk menampilkan laporan penjualan, tren bisnis, proyeksi penjualan harian berbasis model LSTM, dan ringkasan performa operasional toko.
+Halaman pembayaran dirancang untuk menyelesaikan transaksi setelah keranjang belanja dinyatakan selesai disusun. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-pembayaran}.
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.45\textwidth]{wireframe_reports}
-        \caption{\textit{Wireframe} Halaman Laporan}
-        \label{fig:wf_reports}
-    \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.34\textwidth]{wireframe_payment}
+    \caption{Desain Halaman Pembayaran}
+    \label{fig:ui-pembayaran}
+\end{figure}
 
-    \item \textbf{Halaman Pengaturan}
+Gambar~\ref{fig:ui-pembayaran} menunjukkan rincian item belanja beserta total tagihan, pilihan metode pembayaran, dan kolom nominal uang yang diterima. Sistem menghitung kembalian sebelum transaksi disimpan ke basis data lokal.
 
-    Pusat konfigurasi aplikasi dan toko yang dapat diakses oleh semua staf, dengan sejumlah menu yang hanya tersedia bagi Owner seperti pengaturan profil toko dan integrasi pembayaran.
+\noindent f.~~\textbf{Perancangan Halaman Riwayat Stok}
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.45\textwidth]{wireframe_settings}
-        \caption{\textit{Wireframe} Halaman Pengaturan}
-        \label{fig:wf_settings}
-    \end{figure}
+Halaman riwayat stok dirancang untuk menelusuri catatan mutasi persediaan sebagai bahan pemeriksaan inventaris toko. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-stok}.
 
-    \item \textbf{Halaman Informasi Toko}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.34\textwidth]{wireframe_stock_history}
+    \caption{Desain Halaman Riwayat Stok}
+    \label{fig:ui-stok}
+\end{figure}
 
-    Memungkinkan Owner untuk mengubah nama toko, alamat, logo outlet, dan informasi operasional lainnya yang ditampilkan kepada pelanggan.
+Gambar~\ref{fig:ui-stok} menunjukkan penyaring rentang waktu dan produk, serta daftar mutasi stok yang memuat waktu perubahan, jumlah yang berubah, penyebab perubahan, dan saldo stok berjalan.
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.45\textwidth]{wireframe_store_info}
-        \caption{\textit{Wireframe} Halaman Informasi Toko}
-        \label{fig:wf_store_info}
-    \end{figure}
+\noindent g.~~\textbf{Perancangan Halaman Dasbor dan Laporan}
 
-    \item \textbf{Halaman Struk Digital}
+\noindent 1)~~Perancangan Halaman Dasbor
 
-    Menampilkan pratinjau struk transaksi dalam format digital yang dapat dibagikan kepada pelanggan, mencakup rincian produk, total pembayaran, dan informasi toko.
+Halaman dasbor dirancang sebagai halaman utama yang ditampilkan setelah pengguna berhasil masuk ke dalam sistem. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-dasbor}.
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.45\textwidth]{wireframe_digital_receipt}
-        \caption{\textit{Wireframe} Halaman Struk Digital}
-        \label{fig:wf_digital_receipt}
-    \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.34\textwidth]{wireframe_dashboard_owner}
+    \caption{Desain Halaman Dasbor}
+    \label{fig:ui-dasbor}
+\end{figure}
 
-    \item \textbf{Halaman Katalog Produk}
+Gambar~\ref{fig:ui-dasbor} menunjukkan kartu statistik omzet, jumlah transaksi, jumlah produk berstok rendah, dan jumlah produk aktif, disertai grafik tren penjualan serta pintasan menuju modul utama aplikasi.
 
-    Beranda mode pelanggan yang menampilkan katalog produk toko beserta kategori menu, informasi harga, dan fitur pencarian produk secara mandiri.
+\noindent 2)~~Perancangan Halaman Laporan
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.45\textwidth]{wireframe_product_catalog}
-        \caption{\textit{Wireframe} Halaman Katalog Produk}
-        \label{fig:wf_product_catalog}
-    \end{figure}
+Halaman laporan dirancang untuk menyajikan rekapitulasi penjualan pada rentang waktu yang dipilih pengguna. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-laporan}.
 
-\end{enumerate}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.34\textwidth]{wireframe_reports}
+    \caption{Desain Halaman Laporan}
+    \label{fig:ui-laporan}
+\end{figure}
+
+Gambar~\ref{fig:ui-laporan} menunjukkan penyaring rentang waktu beserta ringkasan penjualan dalam bentuk tabel dan grafik, sehingga pengguna dapat menelaah performa toko secara lebih rinci daripada tampilan dasbor.
+
+\noindent h.~~\textbf{Perancangan Halaman Prediksi Penjualan Harian}
+
+Halaman prediksi penjualan harian dirancang sebagai antarmuka fitur inti penelitian, yaitu tempat hasil peramalan model \textit{Long Short-Term Memory} disajikan kepada pengelola. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-prediksi}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.34\textwidth]{wireframe_smart_analytics}
+    \caption{Desain Halaman Prediksi Penjualan Harian}
+    \label{fig:ui-prediksi}
+\end{figure}
+
+Gambar~\ref{fig:ui-prediksi} menunjukkan kartu estimasi omzet dan estimasi jumlah transaksi untuk hari berikutnya, grafik peramalan yang membedakan data aktual dengan hasil prediksi, serta area peringatan \textit{cold start} yang muncul ketika panjang sekuens data belum memenuhi syarat minimum model.
+
+\noindent i.~~\textbf{Perancangan Halaman Riwayat Analisis}
+
+Halaman riwayat analisis dirancang untuk menelusuri kembali hasil prediksi yang pernah dijalankan beserta sumber komputasinya. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-riwayat-analisis}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.34\textwidth]{wireframe_analytics_history}
+    \caption{Desain Halaman Riwayat Analisis}
+    \label{fig:ui-riwayat-analisis}
+\end{figure}
+
+Gambar~\ref{fig:ui-riwayat-analisis} menunjukkan daftar analisis yang telah tersimpan beserta waktu pelaksanaan, estimasi omzet yang dihasilkan, dan keterangan sumber komputasi, sehingga hasil peramalan antarwaktu dapat dibandingkan.
+
+\noindent j.~~\textbf{Perancangan Halaman Manajemen Karyawan}
+
+Halaman manajemen karyawan dirancang sebagai halaman eksklusif Owner untuk mendaftarkan staf kasir dan mengatur peran yang diberikan. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-karyawan}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.34\textwidth]{wireframe_staff}
+    \caption{Desain Halaman Manajemen Karyawan}
+    \label{fig:ui-karyawan}
+\end{figure}
+
+Gambar~\ref{fig:ui-karyawan} menunjukkan daftar staf toko beserta nama dan perannya, formulir penambahan staf baru, serta pilihan pengubahan peran staf yang telah terdaftar.
+
+\noindent k.~~\textbf{Perancangan Halaman Profil Toko dan Pengaturan}
+
+\noindent 1)~~Perancangan Halaman Profil Toko
+
+Halaman profil toko dirancang sebagai halaman eksklusif Owner untuk memperbarui identitas toko yang ditampilkan pada aplikasi dan bukti transaksi. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-profil}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.34\textwidth]{wireframe_store_info}
+    \caption{Desain Halaman Profil Toko}
+    \label{fig:ui-profil}
+\end{figure}
+
+Gambar~\ref{fig:ui-profil} menunjukkan kolom nama toko, alamat, logo \textit{outlet}, dan informasi operasional lainnya yang ditampilkan kepada pelanggan.
+
+\noindent 2)~~Perancangan Halaman Pengaturan
+
+Halaman pengaturan dirancang sebagai pusat konfigurasi aplikasi yang menghimpun menu-menu pendukung dalam satu tempat. Desain halaman tersebut dapat dilihat pada Gambar~\ref{fig:ui-pengaturan}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.34\textwidth]{wireframe_settings}
+    \caption{Desain Halaman Pengaturan}
+    \label{fig:ui-pengaturan}
+\end{figure}
+
+Gambar~\ref{fig:ui-pengaturan} menunjukkan daftar menu konfigurasi aplikasi dan toko, dengan sebagian menu hanya tersedia bagi Owner, yaitu manajemen karyawan dan pengaturan profil toko.
 
 \section{Perancangan Metode Penelitian}
 
