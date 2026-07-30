@@ -1869,43 +1869,43 @@ Fase ini menggunakan data sekunder berupa riwayat transaksi platform EatsTEDI ya
 
 Gambar~\ref{fig:lstm_alur} menunjukkan proses penerapan metode yang dimulai dari penarikan data transaksi harian pada basis data Supabase sebagai masukan sistem. Adapun tahapan proses tersebut dijelaskan sebagai berikut.
 
-\noindent a.~~\textbf{Input Data Transaksi Harian.} Sistem menarik riwayat transaksi harian mitra EatsTEDI dari basis data \textit{cloud} Supabase sebagai masukan proses pemodelan.
+\noindent a.~~Input Data Transaksi Harian: Sistem menarik riwayat transaksi harian mitra EatsTEDI dari basis data \textit{cloud} Supabase sebagai masukan proses pemodelan.
 
-\noindent b.~~\textbf{\textit{Filtering} Hari Non-Aktif.} Sistem menghapus hari Sabtu, Minggu, serta bulan Januari dan Juli agar model dilatih murni pada indeks hari kerja aktif tanpa distorsi \textit{gap} panjang.
+\noindent b.~~\textit{Filtering} Hari Non-Aktif: Sistem menghapus hari Sabtu, Minggu, serta bulan Januari dan Juli agar model dilatih murni pada indeks hari kerja aktif tanpa distorsi \textit{gap} panjang.
 
-\noindent c.~~\textbf{Transformasi Logaritma.} Nominal pendapatan $Y_t$ ditransformasikan ke skala logaritma menggunakan $Y'_t = \log(Y_t + 1)$ untuk menstabilkan variansi.
+\noindent c.~~Transformasi Logaritma: Nominal pendapatan $Y_t$ ditransformasikan ke skala logaritma menggunakan $Y'_t = \log(Y_t + 1)$ untuk menstabilkan variansi.
 
-\noindent d.~~\textbf{Transformasi Target \textit{Log-Return}.} Target prediksi diubah dari nilai pendapatan menjadi perubahan relatif (\textit{log-return}) $r_t$ agar model mewarisi autokorelasi jangka pendek data penjualan, sebagaimana Persamaan~\ref{eq:log-return}.
+\noindent d.~~Transformasi Target \textit{Log-Return}: Target prediksi diubah dari nilai pendapatan menjadi perubahan relatif (\textit{log-return}) $r_t$ agar model mewarisi autokorelasi jangka pendek data penjualan, sebagaimana Persamaan~\ref{eq:log-return}.
 
 \begin{equation}
     r_t = Y'_t - Y'_{t-1} = \log(Y_t + 1) - \log(Y_{t-1} + 1)
     \label{eq:log-return}
 \end{equation}
 
-\noindent e.~~\textbf{Pengodean Siklik dan Normalisasi.} Fitur waktu diubah menjadi nilai sinus dan kosinus, lalu seluruh fitur dinormalisasi dengan \textit{Min-Max Scaling} ke rentang $[0,1]$. Parameter \textit{scaler} dipasang hanya pada data latih untuk mencegah \textit{data leakage}.
+\noindent e.~~Pengodean Siklik dan Normalisasi: Fitur waktu diubah menjadi nilai sinus dan kosinus, lalu seluruh fitur dinormalisasi dengan \textit{Min-Max Scaling} ke rentang $[0,1]$. Parameter \textit{scaler} dipasang hanya pada data latih untuk mencegah \textit{data leakage}.
 
-\noindent f.~~\textbf{Pembentukan \textit{Sequence}.} Deret waktu diubah menjadi pasangan urutan melalui \textit{sliding window} sepanjang 7 hari aktif untuk memprediksi 1 hari aktif berikutnya (\textit{one-step-ahead}).
+\noindent f.~~Pembentukan \textit{Sequence}: Deret waktu diubah menjadi pasangan urutan melalui \textit{sliding window} sepanjang 7 hari aktif untuk memprediksi 1 hari aktif berikutnya (\textit{one-step-ahead}).
 
-\noindent g.~~\textbf{Pembagian \textit{Dataset} Kronologis.} \textit{Dataset} dibagi secara \textit{time-based split}, yaitu 70\% data latih, 15\% data validasi untuk \textit{early stopping}, dan 15\% data uji.
+\noindent g.~~Pembagian \textit{Dataset} Kronologis: \textit{Dataset} dibagi secara \textit{time-based split}, yaitu 70\% data latih, 15\% data validasi untuk \textit{early stopping}, dan 15\% data uji.
 
-\noindent h.~~\textbf{Pembangunan Arsitektur LSTM.} Arsitektur dirancang minimalis untuk menghindari \textit{overfitting}, terdiri atas \textit{input layer} $7 \times 8$, satu \textit{LSTM layer} 24 \textit{hidden units}, \textit{dropout} 0,1, \textit{dense layer} 16 neuron ReLU, dan \textit{output layer} satu neuron linear, dengan total 3.585 parameter terlatih.
+\noindent h.~~Pembangunan Arsitektur LSTM: Arsitektur dirancang minimalis untuk menghindari \textit{overfitting}, terdiri atas \textit{input layer} $7 \times 8$, satu \textit{LSTM layer} 24 \textit{hidden units}, \textit{dropout} 0,1, \textit{dense layer} 16 neuron ReLU, dan \textit{output layer} satu neuron linear, dengan total 3.585 parameter terlatih.
 
-\noindent i.~~\textbf{Pelatihan Model.} Model dilatih menggunakan optimasi Adam (\textit{learning rate} $5 \times 10^{-4}$), fungsi kerugian MSE, \textit{batch} 16, dan maksimum 200 \textit{epoch}, disertai \textit{Early Stopping} 20 \textit{epoch} dan \textit{Reduce Learning Rate on Plateau} faktor 0,5.
+\noindent i.~~Pelatihan Model: Model dilatih menggunakan optimasi Adam (\textit{learning rate} $5 \times 10^{-4}$), fungsi kerugian MSE, \textit{batch} 16, dan maksimum 200 \textit{epoch}, disertai \textit{Early Stopping} 20 \textit{epoch} dan \textit{Reduce Learning Rate on Plateau} faktor 0,5.
 
-\noindent j.~~\textbf{Evaluasi Model.} Sistem menghitung MAE, RMSE, sMAPE, dan MASE pada data uji sebagaimana dijabarkan pada Subbab~3.4.4.
+\noindent j.~~Evaluasi Model: Sistem menghitung MAE, RMSE, sMAPE, dan MASE pada data uji sebagaimana dijabarkan pada Subbab~3.4.4.
 
-\noindent k.~~\textbf{Pemeriksaan Kriteria Kelayakan.} Model dinyatakan layak apabila MASE-nya lebih kecil daripada MASE \textit{baseline Naive}. Apabila belum, dilakukan \textit{hyperparameter tuning} dan pelatihan diulang.
+\noindent k.~~Pemeriksaan Kriteria Kelayakan: Model dinyatakan layak apabila MASE-nya lebih kecil daripada MASE \textit{baseline Naive}. Apabila belum, dilakukan \textit{hyperparameter tuning} dan pelatihan diulang.
 
-\noindent l.~~\textbf{Rekonstruksi ke Skala Nominal.} \textit{Output} berupa \textit{log-return} $\hat{r}_t$ dikembalikan ke skala Rupiah $\hat{Y}_t$ menggunakan nilai penjualan hari sebelumnya, sesuai Persamaan~\ref{eq:rekonstruksi}.
+\noindent l.~~Rekonstruksi ke Skala Nominal: \textit{Output} berupa \textit{log-return} $\hat{r}_t$ dikembalikan ke skala Rupiah $\hat{Y}_t$ menggunakan nilai penjualan hari sebelumnya, sesuai Persamaan~\ref{eq:rekonstruksi}.
 
 \begin{equation}
     \hat{Y}_{t} = \exp\left(\log(Y_{t-1} + 1) + \hat{r}_{t}\right) - 1
     \label{eq:rekonstruksi}
 \end{equation}
 
-\noindent m.~~\textbf{Prakiraan Rekursif Multi-Langkah.} Proyeksi 7 hari aktif ke depan dihasilkan secara rekursif dengan tiga pengaman, yaitu \textit{clipping log-return} pada persentil 10--90, \textit{damping factor} $\varphi^h$ dengan $\varphi = 0{,}7$, dan \textit{safety rail} pada rentang pendapatan historis.
+\noindent m.~~Prakiraan Rekursif Multi-Langkah: Proyeksi 7 hari aktif ke depan dihasilkan secara rekursif dengan tiga pengaman, yaitu \textit{clipping log-return} pada persentil 10--90, \textit{damping factor} $\varphi^h$ dengan $\varphi = 0{,}7$, dan \textit{safety rail} pada rentang pendapatan historis.
 
-\noindent n.~~\textbf{Integrasi dan Penyajian Hasil.} Model yang layak diintegrasikan ke sistem POS melalui \textit{REST API} berbasis Flask pada Hugging Face, sehingga hasil prediksi dapat ditampilkan pada halaman prediksi penjualan harian.
+\noindent n.~~Integrasi dan Penyajian Hasil: Model yang layak diintegrasikan ke sistem POS melalui \textit{REST API} berbasis Flask pada Hugging Face, sehingga hasil prediksi dapat ditampilkan pada halaman prediksi penjualan harian.
 
 Proses tersebut diulang hingga model memenuhi kriteria kelayakan. \textit{Flowchart} ini menunjukkan bahwa LSTM diterapkan sebagai model prediksi deret waktu bertarget \textit{log-return}, yang hasilnya direkonstruksi ke skala nominal sebelum disajikan pada aplikasi \textit{Point of Sale}.
 
@@ -1922,33 +1922,33 @@ Proses tersebut diulang hingga model memenuhi kriteria kelayakan. \textit{Flowch
 
 Gambar~\ref{fig:sel_lstm} menunjukkan proses pembaruan \textit{cell state} dan \textit{hidden state} yang diulang sebanyak panjang \textit{sequence} masukan, yaitu 7 langkah waktu. Adapun tahapan proses tersebut dijelaskan sebagai berikut.
 
-\noindent a.~~\textbf{Input Vektor Fitur dan \textit{State} Sebelumnya.} Sel menerima vektor fitur $x_t$, \textit{hidden state} $h_{t-1}$, dan \textit{cell state} $C_{t-1}$.
+\noindent a.~~Input Vektor Fitur dan \textit{State} Sebelumnya: Sel menerima vektor fitur $x_t$, \textit{hidden state} $h_{t-1}$, dan \textit{cell state} $C_{t-1}$.
 
-\noindent b.~~\textbf{Inisialisasi \textit{State} Awal.} Pada langkah waktu pertama, $h_0$ dan $C_0$ diinisialisasi sebagai vektor nol berdimensi 24 sesuai jumlah \textit{hidden units}.
+\noindent b.~~Inisialisasi \textit{State} Awal: Pada langkah waktu pertama, $h_0$ dan $C_0$ diinisialisasi sebagai vektor nol berdimensi 24 sesuai jumlah \textit{hidden units}.
 
-\noindent c.~~\textbf{Penggabungan Vektor Masukan.} Vektor $h_{t-1}$ dan $x_t$ digabungkan menjadi satu vektor yang digunakan bersama oleh seluruh gerbang.
+\noindent c.~~Penggabungan Vektor Masukan: Vektor $h_{t-1}$ dan $x_t$ digabungkan menjadi satu vektor yang digunakan bersama oleh seluruh gerbang.
 
-\noindent d.~~\textbf{Perhitungan \textit{Forget Gate}.} Nilai $f_t$ dihitung dengan Persamaan~\ref{eq:gerbang-lupa} untuk menentukan proporsi informasi \textit{cell state} sebelumnya yang dipertahankan.
+\noindent d.~~Perhitungan \textit{Forget Gate}: Nilai $f_t$ dihitung dengan Persamaan~\ref{eq:gerbang-lupa} untuk menentukan proporsi informasi \textit{cell state} sebelumnya yang dipertahankan.
 
-\noindent e.~~\textbf{Perhitungan \textit{Input Gate}.} Nilai $i_t$ dihitung dengan Persamaan~\ref{eq:gerbang-masukan} untuk menentukan besar informasi baru yang masuk ke \textit{cell state}.
+\noindent e.~~Perhitungan \textit{Input Gate}: Nilai $i_t$ dihitung dengan Persamaan~\ref{eq:gerbang-masukan} untuk menentukan besar informasi baru yang masuk ke \textit{cell state}.
 
-\noindent f.~~\textbf{Perhitungan Kandidat \textit{Cell State}.} Kandidat $\tilde{C}_t$ dihitung dengan Persamaan~\ref{eq:kandidat-sel} menggunakan fungsi aktivasi tanh.
+\noindent f.~~Perhitungan Kandidat \textit{Cell State}: Kandidat $\tilde{C}_t$ dihitung dengan Persamaan~\ref{eq:kandidat-sel} menggunakan fungsi aktivasi tanh.
 
-\noindent g.~~\textbf{Pembaruan \textit{Cell State}.} \textit{Cell state} diperbarui dengan Persamaan~\ref{eq:pembaruan-sel}, yaitu penjumlahan $f_t \odot C_{t-1}$ dan $i_t \odot \tilde{C}_t$.
+\noindent g.~~Pembaruan \textit{Cell State}: \textit{Cell state} diperbarui dengan Persamaan~\ref{eq:pembaruan-sel}, yaitu penjumlahan $f_t \odot C_{t-1}$ dan $i_t \odot \tilde{C}_t$.
 
-\noindent h.~~\textbf{Perhitungan \textit{Output Gate}.} Nilai $o_t$ dihitung dengan Persamaan~\ref{eq:gerbang-keluaran} untuk menentukan bagian \textit{cell state} yang dikeluarkan.
+\noindent h.~~Perhitungan \textit{Output Gate}: Nilai $o_t$ dihitung dengan Persamaan~\ref{eq:gerbang-keluaran} untuk menentukan bagian \textit{cell state} yang dikeluarkan.
 
-\noindent i.~~\textbf{Perhitungan \textit{Hidden State}.} \textit{Hidden state} $h_t$ dihitung dengan Persamaan~\ref{eq:keadaan-tersembunyi} melalui perkalian elemen $o_t$ dan $\tanh(C_t)$.
+\noindent i.~~Perhitungan \textit{Hidden State}: \textit{Hidden state} $h_t$ dihitung dengan Persamaan~\ref{eq:keadaan-tersembunyi} melalui perkalian elemen $o_t$ dan $\tanh(C_t)$.
 
-\noindent j.~~\textbf{Pemeriksaan Langkah Waktu.} Apabila masih terdapat langkah waktu tersisa, nilai $h_t$ dan $C_t$ diteruskan ke langkah berikutnya dan proses kembali ke tahap penggabungan.
+\noindent j.~~Pemeriksaan Langkah Waktu: Apabila masih terdapat langkah waktu tersisa, nilai $h_t$ dan $C_t$ diteruskan ke langkah berikutnya dan proses kembali ke tahap penggabungan.
 
-\noindent k.~~\textbf{Pengambilan \textit{Hidden State} Akhir.} Setelah seluruh langkah waktu selesai, \textit{hidden state} terakhir $h_T$ diambil sebagai representasi ringkas \textit{sequence} masukan.
+\noindent k.~~Pengambilan \textit{Hidden State} Akhir: Setelah seluruh langkah waktu selesai, \textit{hidden state} terakhir $h_T$ diambil sebagai representasi ringkas \textit{sequence} masukan.
 
-\noindent l.~~\textbf{Regularisasi \textit{Dropout}.} Nilai $h_T$ dilewatkan melalui \textit{dropout layer} berlaju 0,1 untuk mencegah ketergantungan berlebih antar-node.
+\noindent l.~~Regularisasi \textit{Dropout}: Nilai $h_T$ dilewatkan melalui \textit{dropout layer} berlaju 0,1 untuk mencegah ketergantungan berlebih antar-node.
 
-\noindent m.~~\textbf{Pemrosesan \textit{Dense Layer}.} Hasil \textit{dropout} diproses \textit{dense layer} 16 neuron beraktivasi ReLU untuk mempelajari kombinasi non-linear representasi \textit{sequence}.
+\noindent m.~~Pemrosesan \textit{Dense Layer}: Hasil \textit{dropout} diproses \textit{dense layer} 16 neuron beraktivasi ReLU untuk mempelajari kombinasi non-linear representasi \textit{sequence}.
 
-\noindent n.~~\textbf{Penghasilan Prediksi \textit{Log-Return}.} \textit{Output layer} satu neuron beraktivasi linear menghasilkan prediksi $\hat{r}_t$, yang selanjutnya direkonstruksi ke skala nominal Rupiah.
+\noindent n.~~Penghasilan Prediksi \textit{Log-Return}: \textit{Output layer} satu neuron beraktivasi linear menghasilkan prediksi $\hat{r}_t$, yang selanjutnya direkonstruksi ke skala nominal Rupiah.
 
 \textit{Flowchart} ini menunjukkan bahwa sel LSTM bekerja melalui tiga gerbang dalam mengatur aliran informasi antar-langkah waktu, sehingga model mampu mempelajari pola autokorelasi jangka pendek pada deret waktu penjualan harian.
 \subsection{Perhitungan Metrik Evaluasi Pengujian}
