@@ -21,18 +21,18 @@
 \contentsline {table}{\numberline {3.14}{\ignorespaces \textit {Use Case} Kirim \textit {Broadcast} Notifikasi}}{51}{table.caption.24}%
 \contentsline {table}{\numberline {3.15}{\ignorespaces \textit {Use Case} Mengelola Karyawan}}{52}{table.caption.25}%
 \contentsline {table}{\numberline {3.16}{\ignorespaces \textit {Use Case} Mengatur Profil Toko}}{52}{table.caption.26}%
-\contentsline {table}{\numberline {3.17}{\ignorespaces Skenario Pengujian Model LSTM terhadap \textit {Baseline}}}{95}{table.caption.58}%
-\contentsline {table}{\numberline {3.18}{\ignorespaces Skenario Pengujian Stabilitas \textit {Multi-Seed}}}{95}{table.caption.59}%
-\contentsline {table}{\numberline {3.19}{\ignorespaces Skenario Pengujian Augmentasi Data Sintetis TimeGAN}}{96}{table.caption.60}%
-\contentsline {table}{\numberline {3.20}{\ignorespaces Skenario Pengujian Horizon Prakiraan Rekursif}}{97}{table.caption.61}%
+\contentsline {table}{\numberline {3.17}{\ignorespaces Skenario 1: Pengujian Model LSTM terhadap \textit {Baseline}}}{95}{table.caption.58}%
+\contentsline {table}{\numberline {3.18}{\ignorespaces Skenario 2: Pengujian Stabilitas \textit {Multi-Seed}}}{95}{table.caption.59}%
+\contentsline {table}{\numberline {3.19}{\ignorespaces Skenario 3: Pengujian Augmentasi Data Sintetis TimeGAN}}{96}{table.caption.60}%
+\contentsline {table}{\numberline {3.20}{\ignorespaces Skenario 4: Pengujian Horizon Prakiraan Rekursif}}{96}{table.caption.61}%
 \contentsline {table}{\numberline {3.21}{\ignorespaces Skenario Pengujian \textit {Black Box}}}{98}{table.3.21}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Statistik Ringkas Dataset Pendapatan Harian}}{125}{table.caption.78}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Pembagian Dataset dan Dimensi Sequence}}{127}{table.caption.79}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces Perbandingan Performa pada Data Uji (\textit {One-Step-Ahead})}}{138}{table.caption.81}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces Statistik Performa LSTM Hybrid pada 10 Seed}}{141}{table.caption.83}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces Perbandingan Performa Eksperimen Augmentasi TimeGAN (\textit {Multi-Step}, Horizon 7)}}{143}{table.caption.85}%
-\contentsline {table}{\numberline {4.6}{\ignorespaces Hasil Pengujian Black Box}}{145}{table.4.6}%
-\contentsline {table}{\numberline {4.7}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{147}{table.caption.86}%
-\contentsline {table}{\numberline {4.8}{\ignorespaces Hasil Pengujian White Box}}{149}{table.caption.87}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Statistik Ringkas Dataset Pendapatan Harian}}{124}{table.caption.78}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Pembagian Dataset dan Dimensi Sequence}}{126}{table.caption.79}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Perbandingan Performa pada Data Uji (\textit {One-Step-Ahead})}}{137}{table.caption.81}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Statistik Performa LSTM Hybrid pada 10 Seed}}{140}{table.caption.83}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Perbandingan Performa Eksperimen Augmentasi TimeGAN (\textit {Multi-Step}, Horizon 7)}}{142}{table.caption.85}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Hasil Pengujian Black Box}}{144}{table.4.6}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{146}{table.caption.86}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces Hasil Pengujian White Box}}{148}{table.caption.87}%
 \addvspace {10\p@ }

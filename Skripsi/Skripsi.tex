@@ -1986,58 +1986,52 @@ Nilai MASE digunakan sebagai metrik utama penentuan kelayakan model karena bersi
 
 \section{Skenario Pengujian Model}
 
-Penelitian ini melakukan pengujian terhadap model LSTM untuk mengevaluasi akurasi prediksi penjualan harian yang dihasilkan. Pengujian dilakukan menggunakan data historis transaksi mitra EatsTEDI sebanyak 316 hari kerja aktif, dengan hasil prediksi dibandingkan terhadap nilai aktual menggunakan metrik MAE, RMSE, sMAPE, dan MASE.
-
-Skenario pengujian dirancang untuk menganalisis kinerja model LSTM terhadap metode pembanding, mengamati stabilitas model terhadap inisialisasi bobot acak, serta mengukur pengaruh augmentasi data sintetis pada kondisi data latih terbatas.
+Penelitian ini melakukan pengujian terhadap model \textit{Long Short-Term Memory} untuk mengevaluasi akurasi prediksi penjualan harian yang dihasilkan. Pengujian menggunakan data historis transaksi mitra EatsTEDI sebanyak 316 hari kerja aktif, dengan hasil prediksi dibandingkan terhadap nilai aktual menggunakan metrik MAE, RMSE, sMAPE, dan MASE. Skenario pengujian dirancang untuk menganalisis kinerja model terhadap metode pembanding, mengamati stabilitasnya terhadap inisialisasi bobot acak, mengukur pengaruh augmentasi data sintetis, serta menguji konsistensi kinerja pada horizon prakiraan yang berbeda.
 
 \subsection{Skenario 1: Pengujian Model LSTM terhadap \textit{Baseline}}
 
-Skenario pertama bertujuan mengetahui kinerja model LSTM dibandingkan empat metode pembanding (\textit{baseline}). Adapun rincian skenario dapat dilihat pada Tabel~\ref{tab:skenario1}.
+Skenario pertama bertujuan mengetahui kinerja model LSTM dibandingkan empat metode pembanding. Pengujian dilakukan pada data uji yang sama untuk seluruh metode, dengan tiga \textit{baseline} dievaluasi pada skema satu langkah ke depan dan \textit{Seasonal-Naive} pada skema multi-langkah. Parameter $k$ pada \textit{Seasonal-Naive} menyatakan jumlah kemunculan terakhir hari sejenis yang dirata-ratakan. Adapun skenario pengujian tersebut dapat dilihat pada Tabel~\ref{tab:skenario1}.
 
 \begin{table}[H]
 \setstretch{1.2}
 \centering
-\caption{Skenario Pengujian Model LSTM terhadap \textit{Baseline}}
+\caption{Skenario 1: Pengujian Model LSTM terhadap \textit{Baseline}}
 \label{tab:skenario1}
 \begin{tabularx}{\textwidth}{|c|l|l|X|}
 \hline
 \textbf{No} & \textbf{Metode} & \textbf{Skema Prediksi} & \textbf{Keterangan} \\ \hline
 1 & LSTM & \textit{one-step-ahead} & Model usulan penelitian \\ \hline
-2 & \textit{Naive} (Kemarin) & \textit{one-step-ahead} & Nilai hari aktif sebelumnya \\ \hline
-3 & \textit{Mean}-7 & \textit{one-step-ahead} & Rata-rata bergerak 7 hari aktif terakhir \\ \hline
+2 & \textit{Naive} & \textit{one-step-ahead} & Nilai hari aktif sebelumnya \\ \hline
+3 & \textit{Mean}-7 & \textit{one-step-ahead} & Rata-rata 7 hari aktif terakhir \\ \hline
 4 & SARIMA & \textit{one-step-ahead} & Model statistik klasik deret waktu \\ \hline
 5 & \textit{Seasonal-Naive} & \textit{multi-step} & Rata-rata $k$ kemunculan terakhir hari sejenis \\ \hline
 \end{tabularx}
 \end{table}
 
-Notasi parameter \textit{Seasonal-Naive} dilambangkan dengan $k$, yaitu jumlah kemunculan terakhir hari sejenis (Senin dengan Senin, Selasa dengan Selasa, dan seterusnya) yang dirata-ratakan untuk menangkap pola musiman mingguan. \textit{Seasonal-Naive} dievaluasi pada skema prediksi multi-langkah dan menjadi kandidat metode penyaji pada layanan API produksi.
-
 \subsection{Skenario 2: Pengujian Stabilitas \textit{Multi-Seed}}
 
-Skenario kedua bertujuan mengukur stabilitas kinerja model mengingat inisialisasi bobot awal jaringan saraf bersifat acak dan dapat memengaruhi hasil pada \textit{dataset} berukuran kecil. Model dilatih sebanyak 10 kali menggunakan \textit{seed} acak yang berbeda, dan hasil evaluasi dilaporkan dalam bentuk rata-rata beserta standar deviasi dari metrik MAE, RMSE, sMAPE, dan MASE. Adapun rincian skenario dapat dilihat pada Tabel~\ref{tab:skenario2}.
+Skenario kedua bertujuan mengukur stabilitas kinerja model, mengingat inisialisasi bobot awal jaringan saraf bersifat acak dan berpengaruh besar pada \textit{dataset} berukuran kecil. Model dilatih sebanyak 10 kali menggunakan \textit{seed} acak yang berbeda, kemudian hasil evaluasi dilaporkan sebagai rata-rata beserta standar deviasinya. Adapun skenario pengujian tersebut dapat dilihat pada Tabel~\ref{tab:skenario2}.
 
 \begin{table}[H]
 \setstretch{1.2}
 \centering
-\caption{Skenario Pengujian Stabilitas \textit{Multi-Seed}}
+\caption{Skenario 2: Pengujian Stabilitas \textit{Multi-Seed}}
 \label{tab:skenario2}
-\begin{tabularx}{\textwidth}{|l|l|X|}
+\begin{tabularx}{\textwidth}{|c|l|l|X|}
 \hline
-\textbf{Metode} & \textbf{Jumlah Pengulangan} & \textbf{Bentuk Pelaporan} \\ \hline
-LSTM & 10 \textit{seed} & Rata-rata $\pm$ standar deviasi \\ \hline
+\textbf{No} & \textbf{Metode} & \textbf{Jumlah Pengulangan} & \textbf{Bentuk Pelaporan} \\ \hline
+1 & LSTM & 10 \textit{seed} acak & Rata-rata $\pm$ standar deviasi MAE, RMSE, sMAPE, dan MASE \\ \hline
 \end{tabularx}
 \end{table}
 
 \subsection{Skenario 3: Pengujian Augmentasi Data Sintetis TimeGAN}
 
-Skenario ketiga bertujuan mengukur pengaruh augmentasi data sintetis terhadap akurasi prediksi pada kondisi data latih terbatas. Augmentasi dilakukan menggunakan TimeGAN yang diimplementasikan menggunakan \textit{framework} PyTorch dan terdiri atas lima jaringan saraf, yaitu \textit{embedder}, \textit{recovery}, \textit{generator}, \textit{supervisor}, dan \textit{discriminator}, yang dilatih dalam tiga fase, yaitu pelatihan \textit{autoencoder}, pelatihan \textit{supervised} pada ruang laten, dan pelatihan gabungan secara adversarial.
-
-Model TimeGAN dilatih pada jendela deret waktu sepanjang 24 hari aktif dengan tiga fitur numerik, yaitu omzet, jumlah transaksi, dan kuantitas terjual, kemudian menghasilkan 298 sekuens data harian sintetis dari 199 sekuens data riil. Data sintetis digabungkan dengan data riil untuk melatih ulang model LSTM, lalu kinerjanya dibandingkan terhadap model LSTM tanpa augmentasi. Adapun rincian skenario dapat dilihat pada Tabel~\ref{tab:skenario3}.
+Skenario ketiga bertujuan mengukur pengaruh augmentasi data sintetis terhadap akurasi prediksi pada kondisi data latih terbatas. TimeGAN dilatih pada jendela deret waktu sepanjang 24 hari aktif dengan tiga fitur numerik, yaitu omzet, jumlah transaksi, dan kuantitas terjual. Data sintetis yang dihasilkan digabungkan dengan data riil untuk melatih ulang model LSTM, lalu kinerjanya dibandingkan terhadap model tanpa augmentasi. Adapun skenario pengujian tersebut dapat dilihat pada Tabel~\ref{tab:skenario3}.
 
 \begin{table}[H]
 \setstretch{1.2}
 \centering
-\caption{Skenario Pengujian Augmentasi Data Sintetis TimeGAN}
+\caption{Skenario 3: Pengujian Augmentasi Data Sintetis TimeGAN}
 \label{tab:skenario3}
 \begin{tabularx}{\textwidth}{|c|X|c|c|c|}
 \hline
@@ -2049,12 +2043,12 @@ Model TimeGAN dilatih pada jendela deret waktu sepanjang 24 hari aktif dengan ti
 
 \subsection{Skenario 4: Pengujian Horizon Prakiraan Rekursif}
 
-Skenario keempat bertujuan mengamati konsistensi kinerja model pada horizon prakiraan yang berbeda, mengingat metode \textit{recursive forecasting} berpotensi mengalami akumulasi bias pada langkah yang semakin jauh. Pengujian dilakukan pada horizon 1, 3, 5, dan 7 hari aktif ke depan. Adapun rincian skenario dapat dilihat pada Tabel~\ref{tab:skenario4}.
+Skenario keempat bertujuan mengamati konsistensi kinerja model pada horizon prakiraan yang berbeda, mengingat metode \textit{recursive forecasting} berpotensi mengalami akumulasi bias pada langkah yang semakin jauh. Pengujian dilakukan pada empat horizon, yaitu 1, 3, 5, dan 7 hari aktif ke depan, dengan model LSTM dibandingkan terhadap \textit{baseline Seasonal-Naive}. Adapun skenario pengujian tersebut dapat dilihat pada Tabel~\ref{tab:skenario4}.
 
 \begin{table}[H]
 \setstretch{1.2}
 \centering
-\caption{Skenario Pengujian Horizon Prakiraan Rekursif}
+\caption{Skenario 4: Pengujian Horizon Prakiraan Rekursif}
 \label{tab:skenario4}
 \begin{tabularx}{\textwidth}{|c|l|X|}
 \hline
@@ -2066,10 +2060,7 @@ Skenario keempat bertujuan mengamati konsistensi kinerja model pada horizon prak
 \end{tabularx}
 \end{table}
 
-Hasil keempat skenario pengujian tersebut kemudian dibandingkan untuk mengetahui kinerja relatif model LSTM terhadap metode pembanding, stabilitas model terhadap inisialisasi acak, kontribusi augmentasi data sintetis, serta konsistensi kinerja pada berbagai horizon prakiraan.
-
-Selain prediksi harian sebagai fokus evaluasi ilmiah, layanan API produksi juga menyajikan angka proyeksi mingguan dan bulanan menggunakan metode rata-rata sederhana, yaitu \textit{Mean}-4 untuk empat minggu terakhir dan \textit{Mean}-3 untuk tiga bulan terakhir. Keduanya merupakan fitur pelengkap visualisasi aplikasi di luar lingkup evaluasi ilmiah penelitian ini, sejalan dengan Batasan Masalah yang memfokuskan prediksi pada rentang harian.
-
+Keempat skenario tersebut berfokus pada prediksi harian sebagai lingkup evaluasi ilmiah penelitian ini. Adapun proyeksi mingguan dan bulanan yang turut disajikan layanan API produksi menggunakan metode rata-rata sederhana dan berada di luar lingkup evaluasi, sejalan dengan Batasan Masalah yang memfokuskan prediksi pada rentang harian.
 \section{Perancangan Pengujian Sistem}
 
 \subsection{Teknik Pengujian}
