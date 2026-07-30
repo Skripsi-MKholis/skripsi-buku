@@ -1765,19 +1765,11 @@ Gambar~\ref{fig:ui-pengaturan} menunjukkan daftar menu konfigurasi aplikasi dan 
 
 \section{Perancangan Metode Penelitian}
 
-\subsection{Metode Penelitian}
+Bagian ini menjelaskan tahapan perancangan metode yang digunakan dalam penelitian ini. Penelitian dilaksanakan sebagai penelitian pengembangan (\textit{Research and Development}) dengan pendekatan kuantitatif untuk pengujian model prediksi, sedangkan pengembangan aplikasi dilakukan secara iteratif dan bertahap dengan memprioritaskan fitur inti kasir sebelum fitur analitik prediktif ditambahkan. Tahapan yang dirancang meliputi alur penelitian secara menyeluruh serta rancangan algoritma \textit{Long Short-Term Memory} yang digunakan untuk memprediksi penjualan harian.
 
-Penelitian ini merupakan jenis penelitian pengembangan (\textit{Research and Development}) dengan pendekatan kuantitatif untuk pengujian model prediksi dan kualitatif untuk analisis kebutuhan pengguna. Model pengembangan yang digunakan adalah \textbf{\textit{Agile} (Tangkas)} dengan pendekatan kombinasi antara \textbf{\textit{Iterative} (Berulang)} dan \textbf{\textit{Incremental} (Bertahap)}, serta mengadopsi prinsip \textbf{\textit{Lean Software Development}}. Metode ini diterapkan melalui fase-fase berikut:
-\begin{enumerate}
-    \item \textbf{Fokus pada \textit{Minimum Viable Product} (MVP):} Pengembangan difokuskan pada penyelesaian fitur inti sistem kasir terlebih dahulu (\textit{Core POS}, autentikasi pengguna, manajemen produk, dan integrasi \textit{hardware} printer) agar produk minimal dapat segera berfungsi untuk mempercepat waktu rilis ke pasar (\textit{time-to-market}). Fitur lanjutan seperti analisis cerdas (\textit{Smart Analytics}) dan notifikasi \textit{push} direncanakan pada fase pasca-MVP.
-    \item \textbf{Pengembangan Berbasis Sesi/Iterasi Pendek (\textit{sprints}):} Proses pengembangan dipecah menjadi siklus iterasi pendek dalam bentuk sesi-sesi harian terfokus. Setiap sesi ditujukan untuk menambahkan fungsionalitas baru (\textit{increment}) secara bertahap atau melakukan optimasi spesifik, seperti perbaikan antarmuka dasbor, optimasi navigasi \textit{sidebar}, dan penataan ulang modul \textit{database}.
-    \item \textbf{Refaktorisasi Kode dan Adaptasi Perubahan:} Pengembangan bersifat adaptif dan responsif terhadap kendala teknis atau perubahan kebutuhan yang ditemui di tengah proses pengembangan. Siklus mencakup proses refaktorisasi kode mengikuti pembaruan standar \textit{framework} Flutter, penyelarasan skema \textit{database} (\textit{schema alignment}), optimasi sinkronisasi data lokal-\textit{cloud}, serta mitigasi kebocoran memori (\textit{memory leaks}).
-    \item \textbf{Uji Coba Berulang (\textit{Iterative Testing}):} Melakukan pengujian fungsionalitas menggunakan metode \textit{Black Box Testing} secara berkala untuk setiap penambahan fitur baru untuk memastikan integritas dan stabilitas aplikasi kasir serta modul prediksi penjualan berbasis LSTM tetap terjaga.
-\end{enumerate}
+\subsection{Alur Penelitian}
 
-\subsubsection{Alur Penelitian}
-
-Alur penelitian ini dirancang secara sistematis untuk membangun sistem \textit{Point of Sale} (POS) berbasis \textit{mobile} yang dilengkapi fitur prediksi penjualan harian menggunakan metode LSTM. Sebagaimana diilustrasikan pada Gambar \ref{fig:alur_penelitian}, tahapan penelitian dibagi menjadi dua fase utama yang saling berkaitan.
+Alur penelitian dirancang secara sistematis untuk membangun aplikasi \textit{Point of Sale} yang dilengkapi fitur prediksi penjualan harian. Alur penelitian tersebut dapat dilihat pada Gambar~\ref{fig:alur_penelitian}.
 
 \begin{figure}[H]
     \centering
@@ -1786,14 +1778,20 @@ Alur penelitian ini dirancang secara sistematis untuk membangun sistem \textit{P
     \label{fig:alur_penelitian}
 \end{figure}
 
-Pada \textbf{Fase Pengembangan dan Implementasi Sistem POS}, penelitian diawali dengan analisis kebutuhan melalui observasi langsung dan identifikasi permasalahan pada mitra EatsTEDI. Selanjutnya dilakukan perancangan sistem meliputi arsitektur \textit{offline-first}, desain basis data relasional (Supabase PostgreSQL dan Isar DB), serta perancangan \textit{Use Case Diagram}, \textit{Activity Diagram}, dan antarmuka pengguna. Setelah tahap perancangan, sistem POS dikembangkan menggunakan Flutter sebagai \textit{frontend}, Supabase sebagai basis data \textit{cloud}, Isar DB sebagai basis data lokal, dan layanan prediksi penjualan Python berbasis Flask yang di-\textit{deploy} pada platform Hugging Face untuk pengolahan modul AI. Aplikasi yang telah dibangun kemudian diimplementasikan dan diujicobakan secara fungsional pada mitra EatsTEDI untuk menguji kesesuaian alur transaksi kasir dan penyajian hasil prediksi kepada pengguna. Perlu ditegaskan bahwa data yang digunakan untuk melatih dan mengevaluasi model prediksi pada penelitian ini \textbf{bukan} berasal dari aplikasi Parzello POS yang baru dibangun tersebut, melainkan berupa data sekunder historis yang bersumber dari platform EatsTEDI yang telah beroperasi sebelumnya (\textit{dump} SQL \texttt{eatstedi-20260621-010820.sql}), mencakup rentang waktu 24 Agustus 2024 s.d. 20 Juni 2026. Dengan demikian, aplikasi yang dibangun dalam penelitian ini berperan sebagai wadah penyajian hasil prediksi dan objek pengujian fungsional, sedangkan data latih model prediksi diperoleh dari riwayat transaksi mitra yang sudah ada jauh sebelum penelitian ini dimulai.
+Gambar~\ref{fig:alur_penelitian} menunjukkan tahapan penelitian yang terbagi menjadi dua fase yang saling berkaitan, yaitu pengembangan sistem \textit{Point of Sale} dan pengembangan model prediksi penjualan. Adapun rincian kedua fase tersebut dijelaskan sebagai berikut.
 
-Pada \textbf{Fase Pengembangan Model Prediksi Penjualan}, data transaksi historis sekunder tersebut selanjutnya melalui tahap pra-pemrosesan meliputi pembersihan data, agregasi harian, normalisasi, dan pembentukan data deret waktu (\textit{time series}). \textit{Dataset} kemudian dibagi menjadi data latih dan data uji. Model LSTM dilatih menggunakan data latih untuk mempelajari pola penjualan jangka pendek maupun jangka panjang. Setelah pelatihan, model dievaluasi menggunakan metrik regresi deret waktu, yaitu MAE, RMSE, sMAPE, dan MASE, kemudian layanan prediksi produksi diintegrasikan ke dalam sistem POS sehingga aplikasi mampu menampilkan hasil prediksi penjualan harian kepada pengguna melalui \textit{REST API}.
+\noindent a.~~Fase Pengembangan Sistem \textit{Point of Sale}
+
+Fase ini diawali dengan analisis kebutuhan melalui observasi pada mitra EatsTEDI, dilanjutkan dengan perancangan sistem dan antarmuka pengguna. Aplikasi kemudian dikembangkan menggunakan \textit{framework} Flutter dengan Supabase sebagai basis data \textit{cloud} dan Isar DB sebagai basis data lokal, sedangkan layanan prediksi dibangun menggunakan Python dan di-\textit{deploy} pada platform Hugging Face. Aplikasi yang telah dibangun selanjutnya diujicobakan secara fungsional pada mitra.
+
+\noindent b.~~Fase Pengembangan Model Prediksi Penjualan
+
+Fase ini menggunakan data sekunder berupa riwayat transaksi platform EatsTEDI yang telah beroperasi sebelum penelitian dimulai, bukan data dari aplikasi yang baru dibangun. Data tersebut melalui tahap pra-pemrosesan, pembentukan deret waktu, serta pembagian data latih dan data uji. Model \textit{Long Short-Term Memory} kemudian dilatih, dievaluasi menggunakan metrik MAE, RMSE, sMAPE, dan MASE, lalu diintegrasikan ke dalam aplikasi melalui \textit{REST API} sehingga hasil prediksi dapat ditampilkan kepada pengguna.
 
 \subsection{Rancangan Algoritma \textit{Long Short-Term Memory} (LSTM)}
 \label{subsec:lstm_alg}
 
-Desain metode LSTM memberikan gambaran mengenai alur kerja algoritma yang digunakan dalam proses prediksi penjualan harian pada sistem POS. Alur kerja algoritma diilustrasikan pada Gambar \ref{fig:lstm_alur}.
+Rancangan algoritma LSTM menggambarkan alur kerja model yang digunakan untuk memprediksi penjualan harian, mulai dari pra-pemrosesan data hingga evaluasi. Alur kerja tersebut dapat dilihat pada Gambar~\ref{fig:lstm_alur}.
 
 \begin{figure}[H]
     \centering
@@ -1854,7 +1852,7 @@ Desain metode LSTM memberikan gambaran mengenai alur kerja algoritma yang diguna
     \label{fig:lstm_alur}
 \end{figure}
 
-Gambar \ref{fig:lstm_alur} menggambarkan alur kerja model LSTM dari \textit{input} data transaksi harian hingga proses evaluasi model. Adapun penjelasan rinci mengenai tahapan algoritma LSTM yang dirancang dalam penelitian ini adalah sebagai berikut:
+Gambar~\ref{fig:lstm_alur} menunjukkan delapan tahapan pemodelan, mulai dari penarikan data transaksi harian hingga rekonstruksi hasil prediksi ke skala nominal. Adapun rincian setiap tahapan dijelaskan sebagai berikut. Adapun penjelasan rinci mengenai tahapan algoritma LSTM yang dirancang dalam penelitian ini adalah sebagai berikut:
 \begin{enumerate}
     \item \textbf{Pra-pemrosesan Data dan Transformasi Target:}
     Data transaksi harian ditarik dari database cloud Supabase. Langkah-langkah pra-pemrosesan yang dilakukan meliputi:
