@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.26)  30 JUL 2026 13:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.26)  30 JUL 2026 13:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1760,7 +1760,7 @@ Here is how much of TeX's memory you used:
  59445 multiletter control sequences out of 15000+600000
  708843 words of font info for 159 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 88i,17n,94p,2044b,2593s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 88i,17n,94p,2110b,2593s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Progra
 m Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKT
 eX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type
@@ -1772,7 +1772,7 @@ type1/urw/symbol/usyr.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmb8a
 .pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Fil
 es/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX/fonts/type1
 /urw/times/utmri8a.pfb>
-Output written on Skripsi.pdf (176 pages, 11230547 bytes).
+Output written on Skripsi.pdf (176 pages, 11230923 bytes).
 PDF statistics:
  2129 PDF objects out of 2487 (max. 8388607)
  665 named destinations out of 1000 (max. 500000)
