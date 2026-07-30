@@ -953,7 +953,7 @@ Penelitian ini menggunakan data sekunder yang bersumber dari basis data transaks
 
 Penggunaan data EatsTEDI dipilih karena merepresentasikan karakteristik usaha kuliner berskala kecil pada lingkungan institusional yang menjadi fokus penelitian. Rentang 22 bulan tersebut mencakup empat semester berturut-turut, yakni semester gasal dan genap tahun akademik 2024/2025 serta 2025/2026, sehingga pola musiman berbasis kalender akademik teramati secara berulang. Di sisi lain, jumlah pengamatannya tetap tergolong terbatas, sehingga sesuai untuk menguji kelayakan penerapan model \textit{Long Short-Term Memory} pada kondisi data yang tidak melimpah.
 
-Data tidak digunakan secara langsung dalam bentuk mentah, melainkan melalui tahap penyaringan dan agregasi terlebih dahulu. Transaksi yang diambil dibatasi pada nota berstatus lunas (\texttt{is\_paid = 1}) dari tabel \textit{invoices}, kemudian diagregasi menurut tanggal untuk membentuk deret waktu pendapatan harian. Setelah penyaringan, hari aktif pertama dengan transaksi tercatat adalah 26 Agustus 2024, sehingga rentang efektif yang digunakan adalah 26 Agustus 2024 sampai dengan 20 Juni 2026 dan menghasilkan 316 hari dengan transaksi tercatat. Sesuai batasan penelitian, pemodelan dilakukan secara univariat dengan total nilai penjualan harian sebagai satu-satunya variabel target, tanpa menyertakan variabel eksogen. Adapun struktur data yang digunakan dalam penelitian ini ditunjukkan pada Tabel~\ref{tab:struktur_data}.
+Data tidak digunakan dalam bentuk mentah, melainkan melalui penyaringan dan agregasi terlebih dahulu. Transaksi dibatasi pada nota berstatus lunas (\texttt{is\_paid = 1}) dari tabel \textit{invoices}, lalu diagregasi menurut tanggal untuk membentuk deret waktu pendapatan harian. Rentang efektif yang diperoleh adalah 26 Agustus 2024 sampai 20 Juni 2026, menghasilkan 316 hari dengan transaksi tercatat. Sesuai batasan penelitian, pemodelan bersifat univariat dengan total penjualan harian sebagai satu-satunya variabel target. Adapun struktur data penelitian ditunjukkan pada Tabel~\ref{tab:struktur_data}.
 
 \begin{table}[H]
 \setstretch{1.2}
@@ -972,7 +972,7 @@ Data tidak digunakan secara langsung dalam bentuk mentah, melainkan melalui taha
 \end{tabularx}
 \end{table}
 
-Berdasarkan Tabel~\ref{tab:struktur_data}, kolom \textit{invoice\_id}, \textit{created\_at}, \textit{is\_paid}, dan \textit{total} merupakan atribut asli yang tersedia pada basis data EatsTEDI dan berperan sebagai bahan mentah penyaringan serta agregasi. Adapun kolom \textit{date} dan \textit{revenue} bukan merupakan bagian dari basis data asli, melainkan dihasilkan pada tahap praproses. Kolom \textit{revenue} inilah yang menjadi satu-satunya variabel yang dimodelkan, sehingga \textit{dataset} final penelitian berbentuk deret waktu univariat dengan 316 titik pengamatan. Pembagian data latih dan data uji dilakukan secara kronologis, yaitu data terawal sebagai data latih dan data terakhir sebagai data uji, bukan secara acak, guna menghindari kebocoran informasi masa depan (\textit{data leakage}) sebagaimana dijelaskan pada Subbab 2.2.7.
+Berdasarkan Tabel~\ref{tab:struktur_data}, kolom \textit{invoice\_id}, \textit{created\_at}, \textit{is\_paid}, dan \textit{total} merupakan atribut asli basis data EatsTEDI yang menjadi bahan penyaringan dan agregasi, sedangkan kolom \textit{date} dan \textit{revenue} dihasilkan pada tahap praproses. Kolom \textit{revenue} menjadi satu-satunya variabel yang dimodelkan, sehingga \textit{dataset} final berbentuk deret waktu univariat dengan 316 titik pengamatan. Pembagian data latih dan uji dilakukan secara kronologis, bukan acak, guna menghindari kebocoran informasi masa depan sebagaimana dijelaskan pada Subbab~2.2.7.
 
 Metode pengumpulan data dalam penelitian ini dilakukan melalui tahapan berikut:
 \begin{enumerate}[label=\alph*.]
@@ -1039,7 +1039,7 @@ Perangkat keras yang digunakan dalam penelitian ini dapat dilihat pada Tabel~\re
 \hline
 \textbf{No} & \textbf{Nama} & \textbf{Spesifikasi} & \textbf{Keterangan} \\ \hline
 1 & Laptop & Acer Nitro 5, Intel Core i5 Gen 12, RAM 16 GB, SSD 512 GB, NVIDIA GeForce RTX 3050 & Perangkat pengembangan aplikasi dan pelatihan model prediksi \\ \hline
-2 & \textit{Smartphone} & Android 11 & Perangkat pengujian aplikasi \textit{mobile} \\ \hline
+2 & \textit{Smartphone} & Android 16 & Perangkat pengujian aplikasi \textit{mobile} \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -1065,17 +1065,18 @@ Perangkat lunak yang digunakan dalam pengembangan dan pengujian sistem ini dapat
 \endlastfoot
 
 1 & Sistem Operasi & Windows 11 \textit{Home Single Language} & Sistem operasi perangkat pengembangan \\ \hline
-2 & \textit{Code Editor} & VS Code dan Android Studio & Lingkungan penulisan kode program \\ \hline
-3 & \textit{Framework Mobile} & Flutter SDK (bahasa Dart) & Membangun aplikasi \textit{Point of Sale} lintas platform \\ \hline
-4 & Bahasa Pemrograman & Python 3.10 & Melatih model LSTM, membangun modul augmentasi TimeGAN, dan menyusun layanan \textit{REST API} prediksi \\ \hline
-5 & Pustaka \textit{Machine Learning} & TensorFlow, Keras, PyTorch, Pandas, NumPy, Scikit-Learn & Pemrosesan data dan pembangunan model prediksi \\ \hline
-6 & \textit{Framework} API & Flask & Menyajikan hasil prediksi kepada aplikasi \textit{mobile} \\ \hline
-7 & Basis Data \textit{Cloud} & Supabase (PostgreSQL) & Penyimpanan terpusat data transaksi \\ \hline
-8 & Basis Data Lokal & Isar Database & Penyimpanan data pada perangkat \\ \hline
-9 & Layanan Notifikasi & Firebase & Pengiriman notifikasi dan pencatatan telemetri aplikasi \\ \hline
-10 & Lingkungan Analisis & Jupyter Notebook & Eksplorasi data dan pelatihan model prediksi \\ \hline
-11 & Platform \textit{Hosting} & Hugging Face & Tempat layanan API prediksi di-\textit{deploy} \\ \hline
-12 & Alat Pemodelan & Draw.io dan Mermaid.js & Pembuatan diagram UML dan arsitektur sistem \\ \hline
+2 & \textit{Code Editor} & Antigravity & Lingkungan penulisan kode program \\ \hline
+3 & \textit{Emulator} & LDPlayer 9 & Menjalankan dan menguji aplikasi Android pada perangkat pengembangan \\ \hline
+4 & \textit{Framework Mobile} & Flutter SDK (bahasa Dart) & Membangun aplikasi \textit{Point of Sale} lintas platform \\ \hline
+5 & Bahasa Pemrograman & Python 3.10 & Melatih model LSTM, membangun modul augmentasi TimeGAN, dan menyusun layanan \textit{REST API} prediksi \\ \hline
+6 & Pustaka \textit{Machine Learning} & TensorFlow, Keras, PyTorch, Pandas, NumPy, Scikit-Learn & Pemrosesan data dan pembangunan model prediksi \\ \hline
+7 & \textit{Framework} API & Flask & Menyajikan hasil prediksi kepada aplikasi \textit{mobile} \\ \hline
+8 & Basis Data \textit{Cloud} & Supabase (PostgreSQL) & Penyimpanan terpusat data transaksi \\ \hline
+9 & Basis Data Lokal & Isar Database & Penyimpanan data pada perangkat \\ \hline
+10 & Layanan Notifikasi & Firebase & Pengiriman notifikasi dan pencatatan telemetri aplikasi \\ \hline
+11 & Lingkungan Analisis & Jupyter Notebook & Eksplorasi data dan pelatihan model prediksi \\ \hline
+12 & Platform \textit{Hosting} & Hugging Face & Tempat layanan API prediksi di-\textit{deploy} \\ \hline
+13 & Alat Pemodelan & Draw.io dan Mermaid.js & Pembuatan diagram UML dan arsitektur sistem \\ \hline
 \end{xltabular}
 }
 
@@ -1096,10 +1097,10 @@ Sistem Parzello POS Mobile dirancang menggunakan pendekatan arsitektur \textit{h
 
 Penjelasan mengenai empat komponen utama dalam arsitektur sistem adalah sebagai berikut:
 \begin{enumerate}
-    \item \textbf{Sisi Klien (\textit{Client-Side}):} Aplikasi dibangun menggunakan \textit{framework} Flutter dengan manajemen \textit{state} Riverpod dan navigasi GoRouter. Komponen inti dari sisi klien adalah Isar DB, sebuah database NoSQL lokal yang berperan sebagai \textit{cache offline-first}, memungkinkan kasir tetap dapat melakukan transaksi penuh meskipun koneksi internet terputus. \textit{Sync Engine} kemudian bekerja di latar belakang untuk menyinkronkan data lokal ke \textit{cloud} secara otomatis ketika koneksi terdeteksi kembali aktif, menggunakan penanda \textit{isSynced} pada setiap \textit{record} untuk menghindari duplikasi data. Selain itu, sisi klien juga mengelola integrasi perangkat keras berupa printer \textit{thermal} Bluetooth/USB untuk mencetak struk dan kamera untuk pemindaian \textit{barcode} produk.
-    \item \textbf{Infrastruktur \textit{Cloud} (Supabase):} Sebagai tulang punggung infrastruktur \textit{cloud}, Supabase menyediakan empat layanan utama. Supabase Auth menangani autentikasi pengguna melalui protokol JWT dan Google OAuth. Supabase PostgreSQL menjadi basis data relasional terpusat yang dilengkapi kebijakan \textit{Row Level Security} (RLS) untuk mengisolasi data antar \textit{merchant}, pemicu database (\textit{triggers}), serta prosedur tersimpan (\textit{RPC}) untuk memproses transaksi secara aman. Supabase Storage menyimpan aset media seperti gambar produk dan logo toko. Sedangkan \textit{Edge Functions} digunakan untuk memproses \textit{webhook} basis data yang bersifat sensitif, seperti pemicu pengiriman \textit{push notification} peringatan stok menipis kepada pemilik toko.
-    \item \textbf{Telemetri dan Notifikasi (Firebase):} Untuk kebutuhan telemetri dan notifikasi, sistem terintegrasi dengan Firebase. \textit{Firebase Cloud Messaging} (FCM) bertugas menyampaikan \textit{push notification} secara \textit{real-time} kepada pemilik toko, misalnya peringatan stok habis atau pembatalan transaksi oleh kasir. \textit{Firebase Analytics} digunakan untuk mencatat perilaku penggunaan aplikasi, seperti volume transaksi harian, penggunaan fitur \textit{split bill}, dan inisiasi kalibrasi model AI.
-    \item \textbf{Layanan Inferensi Model LSTM (Hugging Face):} Komponen terakhir adalah layanan inferensi untuk mendukung fitur analitik prediktif. Pada penelitian ini, dikembangkan sebuah model \textit{deep learning} berbasis \textbf{Long Short-Term Memory (LSTM)} secara mandiri, yang dirancang khusus untuk memproyeksikan data runtun waktu (\textit{time-series}) penjualan harian pada usaha berskala UMKM. Model prediksi tersebut kemudian dikemas dalam layanan prediksi penjualan berbasis \textit{REST API} (\textit{framework} Flask) yang di-\textit{deploy} pada platform Hugging Face, sehingga dapat diakses oleh sistem secara efisien tanpa memerlukan infrastruktur \textit{server} komputasi tersendiri. Ketika pengguna mengakses fitur \textit{Smart Analytics}, aplikasi Flutter memanggil \textit{endpoint} layanan prediksi tersebut secara langsung melalui protokol HTTPS (dikonfigurasi pada berkas \textit{env.dart} dan dapat dioverride saat \textit{build} melalui \textit{--dart-define}), dengan \textit{payload} berupa data agregat penjualan tanpa informasi identitas pelanggan. Model memproses data tersebut dan mengembalikan hasil prediksi dalam format JSON, mencakup estimasi omzet harian, prediksi produk terlaris, serta rekomendasi promosi berbasis stok, yang selanjutnya divisualisasikan melalui antarmuka grafik interaktif menggunakan pustaka \textit{fl\_chart}. Aplikasi juga menangani kondisi \textit{cold start}, yaitu menampilkan peringatan pemuatan ketika \textit{server} inferensi baru aktif kembali dari kondisi \textit{idle}. Setiap hasil analisis disimpan sebagai \textit{snapshot} pada tabel \textit{smart\_analytics\_snapshots} di Supabase, sehingga riwayat analitik dapat ditinjau kembali tanpa perlu memanggil ulang model.
+    \item \textbf{Sisi Klien (\textit{Client-Side}):} Aplikasi dibangun menggunakan \textit{framework} Flutter dengan manajemen \textit{state} Riverpod dan navigasi GoRouter. Isar DB berperan sebagai basis data lokal agar kasir tetap dapat bertransaksi meskipun koneksi terputus, sedangkan \textit{sync engine} menyinkronkan data ke \textit{cloud} menggunakan penanda \textit{isSynced} untuk menghindari duplikasi.
+    \item \textbf{Infrastruktur \textit{Cloud} (Supabase):} Supabase menjadi tulang punggung infrastruktur \textit{cloud} melalui empat layanan. Supabase Auth menangani autentikasi pengguna, sedangkan Supabase PostgreSQL berperan sebagai basis data relasional terpusat yang dilengkapi kebijakan \textit{Row Level Security} untuk mengisolasi data antartoko serta prosedur tersimpan (\textit{RPC}) untuk memproses transaksi secara aman. Supabase Storage menyimpan aset media, dan \textit{Edge Functions} memproses \textit{webhook} basis data seperti pemicu notifikasi stok menipis.
+    \item \textbf{Telemetri dan Notifikasi (Firebase):} Sistem terintegrasi dengan Firebase untuk telemetri dan notifikasi. \textit{Firebase Cloud Messaging} menyampaikan \textit{push notification} kepada staf toko, misalnya peringatan stok menipis, sedangkan \textit{Firebase Analytics} mencatat perilaku penggunaan aplikasi seperti volume transaksi harian dan frekuensi pemakaian fitur prediksi.
+    \item \textbf{Layanan Inferensi Model LSTM (Hugging Face):} Model \textit{Long Short-Term Memory} dikemas sebagai layanan \textit{REST API} berbasis Flask yang di-\textit{deploy} pada platform Hugging Face, sehingga dapat diakses tanpa infrastruktur \textit{server} tersendiri. Aplikasi memanggil \textit{endpoint} tersebut melalui HTTPS dengan \textit{payload} berupa data agregat penjualan, lalu menerima hasil prediksi dalam format JSON yang disimpan sebagai \textit{snapshot} pada Supabase.
 \end{enumerate}
 
 \subsection{Pemodelan Sistem \textit{Unified Modeling Language} (UML)}
@@ -1109,7 +1110,7 @@ Pemodelan sistem merupakan tahapan dalam perancangan yang digunakan untuk mengga
 \noindent\textbf{a.~~\textit{Use Case Diagram}}
 
 
-Sistem POS melibatkan dua aktor utama, yaitu \textbf{Owner (Pemilik Toko)} dan \textbf{Kasir (Karyawan)}. \textit{Use Case Diagram} menggambarkan fungsi-fungsi yang dapat diakses oleh masing-masing aktor. Pembatasan hak akses berbasis peran (\textit{Role-Based Access Control}/RBAC) ditegakkan pada lapisan navigasi aplikasi (\textit{router.dart}), di mana hanya rute Manajemen Karyawan dan Pengaturan Profil Toko yang dibatasi eksklusif untuk Owner, sedangkan fungsi operasional lainnya dapat diakses oleh seluruh staf toko. Hubungan hak akses tersebut digambarkan menggunakan relasi generalisasi aktor, yaitu Owner merupakan spesialisasi dari Kasir sehingga mewarisi seluruh \textit{use case} operasional yang berasosiasi dengan Kasir, ditambah tiga \textit{use case} yang bersifat eksklusif. Adapun ketentuan bahwa pengguna harus terautentikasi lebih dahulu dinyatakan sebagai prasyarat (\textit{precondition}) pada setiap \textit{use case}, bukan sebagai relasi \textit{include}, agar tidak terjadi duplikasi penggambaran. Rancangan \textit{use case} diilustrasikan pada Gambar \ref{fig:use_case}.
+Sistem melibatkan dua aktor, yaitu Owner (Pemilik Toko) dan Kasir (Karyawan). Pembatasan hak akses berbasis peran ditegakkan pada lapisan navigasi aplikasi, di mana hanya Manajemen Karyawan, Pengaturan Profil Toko, dan Registrasi Toko yang eksklusif bagi Owner, sedangkan fungsi operasional lainnya dapat diakses seluruh staf. Hubungan tersebut digambarkan melalui relasi generalisasi aktor, yaitu Owner mewarisi seluruh \textit{use case} Kasir. Adapun keharusan pengguna terautentikasi dinyatakan sebagai prasyarat pada setiap \textit{use case}, bukan relasi \textit{include}, agar tidak terjadi duplikasi. Rancangan \textit{use case} diilustrasikan pada Gambar~\ref{fig:use_case}.
 
 \clearpage
 \begin{figure}[H]
