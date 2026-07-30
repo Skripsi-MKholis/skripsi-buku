@@ -1797,11 +1797,11 @@ Gambar~\ref{fig:alur_penelitian} menunjukkan tahapan penelitian yang terbagi men
 
 \noindent a.~~Fase Pengembangan Sistem \textit{Point of Sale}
 
-Fase ini diawali dengan analisis kebutuhan melalui observasi pada mitra EatsTEDI, dilanjutkan dengan perancangan sistem dan antarmuka pengguna. Aplikasi kemudian dikembangkan menggunakan \textit{framework} Flutter dengan Supabase sebagai basis data \textit{cloud} dan Isar DB sebagai basis data lokal, sedangkan layanan prediksi dibangun menggunakan Python dan di-\textit{deploy} pada platform Hugging Face. Aplikasi yang telah dibangun selanjutnya diujicobakan secara fungsional pada mitra.
+Fase ini diawali dengan analisis kebutuhan melalui observasi pada mitra EatsTEDI, dilanjutkan perancangan sistem dan antarmuka. Aplikasi dikembangkan menggunakan Flutter dengan Supabase dan Isar DB, sedangkan layanan prediksi dibangun menggunakan Python pada Hugging Face, lalu diujicobakan secara fungsional pada mitra.
 
 \noindent b.~~Fase Pengembangan Model Prediksi Penjualan
 
-Fase ini menggunakan data sekunder berupa riwayat transaksi platform EatsTEDI yang telah beroperasi sebelum penelitian dimulai, bukan data dari aplikasi yang baru dibangun. Data tersebut melalui tahap pra-pemrosesan, pembentukan deret waktu, serta pembagian data latih dan data uji. Model LSTM kemudian dilatih, dievaluasi menggunakan metrik MAE, RMSE, sMAPE, dan MASE, lalu diintegrasikan ke dalam aplikasi melalui \textit{REST API} sehingga hasil prediksi dapat ditampilkan kepada pengguna.
+Fase ini menggunakan data sekunder berupa riwayat transaksi platform EatsTEDI yang telah beroperasi sebelum penelitian dimulai, bukan data dari aplikasi yang baru dibangun. Data tersebut melalui pra-pemrosesan, pembentukan deret waktu, dan pembagian data latih serta uji. Model LSTM kemudian dilatih, dievaluasi, lalu diintegrasikan ke aplikasi melalui \textit{REST API}.
 
 \subsection{\textit{Flowchart} Penerapan Metode \textit{Long Short-Term Memory}}
 \label{subsec:lstm_alg}
@@ -1869,49 +1869,49 @@ Fase ini menggunakan data sekunder berupa riwayat transaksi platform EatsTEDI ya
 
 Gambar~\ref{fig:lstm_alur} menunjukkan proses penerapan metode yang dimulai dari penarikan data transaksi harian pada basis data Supabase sebagai masukan sistem. Adapun tahapan proses tersebut dijelaskan sebagai berikut.
 
-\noindent a.~~\textbf{Input Data Transaksi Harian.} Sistem menarik data riwayat transaksi harian mitra EatsTEDI dari basis data \textit{cloud} Supabase sebagai data masukan proses pemodelan.
+\noindent a.~~\textbf{Input Data Transaksi Harian.} Sistem menarik riwayat transaksi harian mitra EatsTEDI dari basis data \textit{cloud} Supabase sebagai masukan proses pemodelan.
 
-\noindent b.~~\textbf{\textit{Filtering} Hari Non-Aktif.} Sistem menghapus hari Sabtu, Minggu, serta bulan Januari dan Juli (libur semester kampus) untuk menghindari distorsi \textit{gap} panjang pada deret waktu, sehingga model dilatih murni menggunakan indeks hari kerja aktif (\textit{business days}).
+\noindent b.~~\textbf{\textit{Filtering} Hari Non-Aktif.} Sistem menghapus hari Sabtu, Minggu, serta bulan Januari dan Juli agar model dilatih murni pada indeks hari kerja aktif tanpa distorsi \textit{gap} panjang.
 
-\noindent c.~~\textbf{Transformasi Logaritma.} Data nominal pendapatan $Y_t$ ditransformasikan ke skala logaritma menggunakan $Y'_t = \log(Y_t + 1)$ untuk menstabilkan variansi.
+\noindent c.~~\textbf{Transformasi Logaritma.} Nominal pendapatan $Y_t$ ditransformasikan ke skala logaritma menggunakan $Y'_t = \log(Y_t + 1)$ untuk menstabilkan variansi.
 
-\noindent d.~~\textbf{Transformasi Target \textit{Log-Return}.} Sistem mengubah target prediksi dari nilai pendapatan menjadi perubahan pendapatan relatif (\textit{log-return}) $r_t$ dengan pendekatan \textit{hybrid residual}, agar model mewarisi sifat autokorelasi jangka pendek yang dominan pada data penjualan. Transformasi tersebut dirumuskan sebagai berikut.
+\noindent d.~~\textbf{Transformasi Target \textit{Log-Return}.} Target prediksi diubah dari nilai pendapatan menjadi perubahan relatif (\textit{log-return}) $r_t$ agar model mewarisi autokorelasi jangka pendek data penjualan, sebagaimana Persamaan~\ref{eq:log-return}.
 
 \begin{equation}
     r_t = Y'_t - Y'_{t-1} = \log(Y_t + 1) - \log(Y_{t-1} + 1)
     \label{eq:log-return}
 \end{equation}
 
-\noindent e.~~\textbf{Pengodean Siklik dan Normalisasi.} Fitur waktu (\textit{day of week}, \textit{week of year}, \textit{month}) diubah menjadi nilai sinus dan kosinus untuk merepresentasikan sifat periodik kalender. Seluruh fitur masukan kemudian dinormalisasi menggunakan \textit{Min-Max Scaling} ke rentang $[0,1]$, dengan pemasangan (\textit{fitting}) parameter \textit{scaler} hanya dilakukan pada data latih untuk mencegah kebocoran informasi (\textit{data leakage}).
+\noindent e.~~\textbf{Pengodean Siklik dan Normalisasi.} Fitur waktu diubah menjadi nilai sinus dan kosinus, lalu seluruh fitur dinormalisasi dengan \textit{Min-Max Scaling} ke rentang $[0,1]$. Parameter \textit{scaler} dipasang hanya pada data latih untuk mencegah \textit{data leakage}.
 
-\noindent f.~~\textbf{Pembentukan \textit{Sequence}.} Deret waktu diubah menjadi pasangan urutan (\textit{sequence pairs}) menggunakan metode \textit{sliding window}. Ukuran \textit{window} masukan ditetapkan sebesar 7 hari aktif terakhir untuk memprediksi target 1 hari aktif berikutnya, sehingga model dilatih dalam format \textit{one-step-ahead prediction}.
+\noindent f.~~\textbf{Pembentukan \textit{Sequence}.} Deret waktu diubah menjadi pasangan urutan melalui \textit{sliding window} sepanjang 7 hari aktif untuk memprediksi 1 hari aktif berikutnya (\textit{one-step-ahead}).
 
-\noindent g.~~\textbf{Pembagian \textit{Dataset} Kronologis.} \textit{Dataset} dibagi secara kronologis (\textit{time-based split}) untuk menjaga integritas temporal, yaitu 70\% data latih (Agustus 2024 s.d. Agustus 2025), 15\% data validasi (September s.d. Desember 2025) untuk pemantauan proses latih dan \textit{early stopping}, serta 15\% data uji (efektif Februari s.d. Juni 2026 karena Januari tersaring sebagai libur semester).
+\noindent g.~~\textbf{Pembagian \textit{Dataset} Kronologis.} \textit{Dataset} dibagi secara \textit{time-based split}, yaitu 70\% data latih, 15\% data validasi untuk \textit{early stopping}, dan 15\% data uji.
 
-\noindent h.~~\textbf{Pembangunan Arsitektur LSTM.} Untuk menghindari \textit{overfitting} dan \textit{model collapse} pada \textit{dataset} yang relatif kecil, arsitektur dirancang secara minimalis (\textit{shallow network}), terdiri atas \textit{input layer} berukuran $7 \times 8$, satu \textit{LSTM layer} dengan 24 \textit{hidden units}, \textit{dropout layer} dengan laju 0,1, \textit{dense layer} 16 neuron dengan aktivasi \textit{Rectified Linear Unit} (ReLU), dan \textit{output layer} satu neuron dengan aktivasi linear untuk memprediksi nilai $\hat{r}_t$. Total parameter terlatih sebanyak 3.585 parameter, sebanding dengan ukuran data latih.
+\noindent h.~~\textbf{Pembangunan Arsitektur LSTM.} Arsitektur dirancang minimalis untuk menghindari \textit{overfitting}, terdiri atas \textit{input layer} $7 \times 8$, satu \textit{LSTM layer} 24 \textit{hidden units}, \textit{dropout} 0,1, \textit{dense layer} 16 neuron ReLU, dan \textit{output layer} satu neuron linear, dengan total 3.585 parameter terlatih.
 
-\noindent i.~~\textbf{Pelatihan Model.} Model dilatih menggunakan algoritma optimasi Adam dengan \textit{learning rate} awal $5 \times 10^{-4}$ dan fungsi kerugian \textit{Mean Squared Error} (MSE), ukuran \textit{batch} 16, dan maksimum 200 \textit{epoch}. Diterapkan dua mekanisme \textit{callback}, yaitu \textit{Early Stopping} yang menghentikan pelatihan apabila \textit{loss} validasi tidak membaik selama 20 \textit{epoch} berturut-turut disertai pengembalian bobot terbaik, dan \textit{Reduce Learning Rate on Plateau} yang mengurangi \textit{learning rate} sebesar faktor 0,5 apabila \textit{loss} validasi mendatar selama 8 \textit{epoch}.
+\noindent i.~~\textbf{Pelatihan Model.} Model dilatih menggunakan optimasi Adam (\textit{learning rate} $5 \times 10^{-4}$), fungsi kerugian MSE, \textit{batch} 16, dan maksimum 200 \textit{epoch}, disertai \textit{Early Stopping} 20 \textit{epoch} dan \textit{Reduce Learning Rate on Plateau} faktor 0,5.
 
-\noindent j.~~\textbf{Evaluasi Model.} Sistem menghitung tingkat kesalahan prediksi pada data uji menggunakan metrik MAE, RMSE, sMAPE, dan MASE sebagaimana dijabarkan pada Subbab~3.4.4.
+\noindent j.~~\textbf{Evaluasi Model.} Sistem menghitung MAE, RMSE, sMAPE, dan MASE pada data uji sebagaimana dijabarkan pada Subbab~3.4.4.
 
-\noindent k.~~\textbf{Pemeriksaan Kriteria Kelayakan.} Sistem memeriksa apakah model telah memenuhi kriteria kelayakan yang ditetapkan, yaitu nilai MASE model lebih kecil daripada MASE \textit{baseline Naive} pada data uji. Apabila kriteria belum terpenuhi, dilakukan \textit{hyperparameter tuning} terhadap jumlah \textit{epoch}, \textit{batch size}, jumlah neuron, dan \textit{learning rate}, kemudian proses pelatihan diulang.
+\noindent k.~~\textbf{Pemeriksaan Kriteria Kelayakan.} Model dinyatakan layak apabila MASE-nya lebih kecil daripada MASE \textit{baseline Naive}. Apabila belum, dilakukan \textit{hyperparameter tuning} dan pelatihan diulang.
 
-\noindent l.~~\textbf{Rekonstruksi ke Skala Nominal.} \textit{Output} model berupa \textit{log-return} prediksi $\hat{r}_t$ direkonstruksi kembali ke skala nominal Rupiah $\hat{Y}_t$ menggunakan nilai penjualan hari sebelumnya $Y_{t-1}$, sebagaimana dirumuskan berikut ini.
+\noindent l.~~\textbf{Rekonstruksi ke Skala Nominal.} \textit{Output} berupa \textit{log-return} $\hat{r}_t$ dikembalikan ke skala Rupiah $\hat{Y}_t$ menggunakan nilai penjualan hari sebelumnya, sesuai Persamaan~\ref{eq:rekonstruksi}.
 
 \begin{equation}
     \hat{Y}_{t} = \exp\left(\log(Y_{t-1} + 1) + \hat{r}_{t}\right) - 1
     \label{eq:rekonstruksi}
 \end{equation}
 
-\noindent m.~~\textbf{Prakiraan Rekursif Multi-Langkah.} Untuk menyajikan proyeksi 7 hari aktif ke depan, diterapkan metode \textit{recursive forecasting} dengan memasukkan hasil prediksi langkah sebelumnya sebagai masukan langkah berikutnya. Guna mencegah akumulasi bias (\textit{error propagation}), diimplementasikan tiga teknik pengaman, yaitu \textit{clipping log-return} pada rentang persentil 10--90 data pelatihan untuk mencegah nilai ekstrem, \textit{damping factor} yang meredam prediksi perubahan \textit{log-return} pada langkah ke-$h$ menuju nol dengan faktor $\varphi^h$ (dengan $\varphi = 0{,}7$) sehingga ramalan bersifat \textit{mean-reverting}, serta \textit{safety rail} yang membatasi hasil akhir nominal pendapatan pada rentang pendapatan terkecil dan terbesar yang pernah tercatat secara historis pada hari aktif.
+\noindent m.~~\textbf{Prakiraan Rekursif Multi-Langkah.} Proyeksi 7 hari aktif ke depan dihasilkan secara rekursif dengan tiga pengaman, yaitu \textit{clipping log-return} pada persentil 10--90, \textit{damping factor} $\varphi^h$ dengan $\varphi = 0{,}7$, dan \textit{safety rail} pada rentang pendapatan historis.
 
-\noindent n.~~\textbf{Integrasi dan Penyajian Hasil.} Model yang telah dinyatakan layak diintegrasikan ke sistem POS melalui \textit{REST API} berbasis \textit{framework} Flask yang di-\textit{deploy} pada platform Hugging Face, sehingga hasil prediksi harian dan prakiraan tujuh hari ke depan dapat ditampilkan kepada pengguna pada halaman prediksi penjualan harian.
+\noindent n.~~\textbf{Integrasi dan Penyajian Hasil.} Model yang layak diintegrasikan ke sistem POS melalui \textit{REST API} berbasis Flask pada Hugging Face, sehingga hasil prediksi dapat ditampilkan pada halaman prediksi penjualan harian.
 
-Proses tersebut dilakukan secara berulang hingga model memenuhi kriteria kelayakan yang ditetapkan. \textit{Flowchart} ini menunjukkan bahwa metode LSTM diterapkan sebagai model prediksi deret waktu dengan target berupa \textit{log-return}, yang hasil prediksinya direkonstruksi kembali ke skala nominal sebelum disajikan pada aplikasi \textit{Point of Sale}.
+Proses tersebut diulang hingga model memenuhi kriteria kelayakan. \textit{Flowchart} ini menunjukkan bahwa LSTM diterapkan sebagai model prediksi deret waktu bertarget \textit{log-return}, yang hasilnya direkonstruksi ke skala nominal sebelum disajikan pada aplikasi \textit{Point of Sale}.
 
 \subsection{\textit{Flowchart} Perhitungan Sel \textit{Long Short-Term Memory}}
 
-\textit{Flowchart} perhitungan sel LSTM ditunjukkan pada Gambar~\ref{fig:sel_lstm}. \textit{Flowchart} ini menggambarkan proses komputasi yang terjadi di dalam satu sel LSTM pada setiap langkah waktu, mulai dari penerimaan masukan hingga penghasilan \textit{hidden state} yang diteruskan ke langkah waktu berikutnya.
+\textit{Flowchart} perhitungan sel LSTM ditunjukkan pada Gambar~\ref{fig:sel_lstm}. \textit{Flowchart} ini menggambarkan komputasi di dalam satu sel LSTM pada setiap langkah waktu, mulai dari penerimaan masukan hingga penghasilan prediksi.
 
 \begin{figure}[H]
     \centering
@@ -1920,38 +1920,37 @@ Proses tersebut dilakukan secara berulang hingga model memenuhi kriteria kelayak
     \label{fig:sel_lstm}
 \end{figure}
 
-Gambar~\ref{fig:sel_lstm} menunjukkan proses perhitungan yang dilakukan untuk memperbarui \textit{cell state} dan \textit{hidden state} pada setiap langkah waktu. Proses ini diulang sebanyak panjang \textit{sequence} masukan, yaitu 7 langkah waktu. Adapun tahapan proses tersebut dijelaskan sebagai berikut.
+Gambar~\ref{fig:sel_lstm} menunjukkan proses pembaruan \textit{cell state} dan \textit{hidden state} yang diulang sebanyak panjang \textit{sequence} masukan, yaitu 7 langkah waktu. Adapun tahapan proses tersebut dijelaskan sebagai berikut.
 
-\noindent a.~~\textbf{Input Vektor Fitur dan \textit{State} Sebelumnya.} Sel menerima tiga masukan, yaitu vektor fitur pada langkah waktu ke-$t$ yaitu $x_t$, \textit{hidden state} langkah sebelumnya $h_{t-1}$, serta \textit{cell state} langkah sebelumnya $C_{t-1}$.
+\noindent a.~~\textbf{Input Vektor Fitur dan \textit{State} Sebelumnya.} Sel menerima vektor fitur $x_t$, \textit{hidden state} $h_{t-1}$, dan \textit{cell state} $C_{t-1}$.
 
-\noindent b.~~\textbf{Inisialisasi \textit{State} Awal.} Pada langkah waktu pertama ($t = 1$), nilai $h_0$ dan $C_0$ diinisialisasi sebagai vektor nol berdimensi 24 sesuai jumlah \textit{hidden units} yang ditetapkan.
+\noindent b.~~\textbf{Inisialisasi \textit{State} Awal.} Pada langkah waktu pertama, $h_0$ dan $C_0$ diinisialisasi sebagai vektor nol berdimensi 24 sesuai jumlah \textit{hidden units}.
 
-\noindent c.~~\textbf{Penggabungan Vektor Masukan.} Sistem menggabungkan (\textit{concatenate}) vektor $h_{t-1}$ dan $x_t$ menjadi satu vektor gabungan yang digunakan bersama oleh seluruh gerbang.
+\noindent c.~~\textbf{Penggabungan Vektor Masukan.} Vektor $h_{t-1}$ dan $x_t$ digabungkan menjadi satu vektor yang digunakan bersama oleh seluruh gerbang.
 
-\noindent d.~~\textbf{Perhitungan \textit{Forget Gate}.} Sistem menghitung nilai \textit{forget gate} $f_t$ menggunakan fungsi aktivasi sigmoid berdasarkan Persamaan~\ref{eq:gerbang-lupa}. Nilai $f_t$ berada pada rentang 0 sampai 1 dan menentukan proporsi informasi pada \textit{cell state} sebelumnya yang dipertahankan.
+\noindent d.~~\textbf{Perhitungan \textit{Forget Gate}.} Nilai $f_t$ dihitung dengan Persamaan~\ref{eq:gerbang-lupa} untuk menentukan proporsi informasi \textit{cell state} sebelumnya yang dipertahankan.
 
-\noindent e.~~\textbf{Perhitungan \textit{Input Gate}.} Sistem menghitung nilai \textit{input gate} $i_t$ menggunakan fungsi aktivasi sigmoid berdasarkan Persamaan~\ref{eq:gerbang-masukan}. Nilai ini menentukan seberapa besar informasi baru diizinkan masuk ke dalam \textit{cell state}.
+\noindent e.~~\textbf{Perhitungan \textit{Input Gate}.} Nilai $i_t$ dihitung dengan Persamaan~\ref{eq:gerbang-masukan} untuk menentukan besar informasi baru yang masuk ke \textit{cell state}.
 
-\noindent f.~~\textbf{Perhitungan Kandidat \textit{Cell State}.} Sistem menghitung kandidat nilai baru $\tilde{C}_t$ menggunakan fungsi aktivasi \textit{hyperbolic tangent} berdasarkan Persamaan~\ref{eq:kandidat-sel}, sehingga nilai kandidat berada pada rentang $-1$ sampai $1$.
+\noindent f.~~\textbf{Perhitungan Kandidat \textit{Cell State}.} Kandidat $\tilde{C}_t$ dihitung dengan Persamaan~\ref{eq:kandidat-sel} menggunakan fungsi aktivasi tanh.
 
-\noindent g.~~\textbf{Pembaruan \textit{Cell State}.} Sistem memperbarui \textit{cell state} menggunakan Persamaan~\ref{eq:pembaruan-sel}, yaitu penjumlahan antara hasil perkalian elemen $f_t \odot C_{t-1}$ dengan $i_t \odot \tilde{C}_t$. Mekanisme penjumlahan inilah yang memungkinkan LSTM mempertahankan informasi jangka panjang dan mengatasi masalah \textit{vanishing gradient}.
+\noindent g.~~\textbf{Pembaruan \textit{Cell State}.} \textit{Cell state} diperbarui dengan Persamaan~\ref{eq:pembaruan-sel}, yaitu penjumlahan $f_t \odot C_{t-1}$ dan $i_t \odot \tilde{C}_t$.
 
-\noindent h.~~\textbf{Perhitungan \textit{Output Gate}.} Sistem menghitung nilai \textit{output gate} $o_t$ menggunakan fungsi aktivasi sigmoid berdasarkan Persamaan~\ref{eq:gerbang-keluaran} untuk menentukan bagian \textit{cell state} yang akan dikeluarkan sebagai keluaran sel.
+\noindent h.~~\textbf{Perhitungan \textit{Output Gate}.} Nilai $o_t$ dihitung dengan Persamaan~\ref{eq:gerbang-keluaran} untuk menentukan bagian \textit{cell state} yang dikeluarkan.
 
-\noindent i.~~\textbf{Perhitungan \textit{Hidden State}.} Sistem menghitung \textit{hidden state} $h_t$ melalui perkalian elemen antara $o_t$ dan $\tanh(C_t)$ berdasarkan Persamaan~\ref{eq:keadaan-tersembunyi}.
+\noindent i.~~\textbf{Perhitungan \textit{Hidden State}.} \textit{Hidden state} $h_t$ dihitung dengan Persamaan~\ref{eq:keadaan-tersembunyi} melalui perkalian elemen $o_t$ dan $\tanh(C_t)$.
 
-\noindent j.~~\textbf{Pemeriksaan Langkah Waktu.} Sistem memeriksa apakah seluruh langkah waktu pada \textit{sequence} telah diproses. Apabila belum, nilai $h_t$ dan $C_t$ diteruskan sebagai masukan langkah waktu berikutnya dan proses kembali ke tahap penggabungan vektor masukan.
+\noindent j.~~\textbf{Pemeriksaan Langkah Waktu.} Apabila masih terdapat langkah waktu tersisa, nilai $h_t$ dan $C_t$ diteruskan ke langkah berikutnya dan proses kembali ke tahap penggabungan.
 
-\noindent k.~~\textbf{Pengambilan \textit{Hidden State} Akhir.} Setelah seluruh langkah waktu selesai diproses, sistem mengambil \textit{hidden state} pada langkah waktu terakhir $h_T$ sebagai representasi ringkas dari keseluruhan \textit{sequence} masukan.
+\noindent k.~~\textbf{Pengambilan \textit{Hidden State} Akhir.} Setelah seluruh langkah waktu selesai, \textit{hidden state} terakhir $h_T$ diambil sebagai representasi ringkas \textit{sequence} masukan.
 
-\noindent l.~~\textbf{Regularisasi \textit{Dropout}.} Nilai $h_T$ dilewatkan melalui \textit{dropout layer} dengan laju 0,1 untuk mencegah ketergantungan berlebih antar-node selama proses pelatihan.
+\noindent l.~~\textbf{Regularisasi \textit{Dropout}.} Nilai $h_T$ dilewatkan melalui \textit{dropout layer} berlaju 0,1 untuk mencegah ketergantungan berlebih antar-node.
 
-\noindent m.~~\textbf{Pemrosesan \textit{Dense Layer}.} Hasil \textit{dropout} diproses oleh \textit{dense layer} berisi 16 neuron dengan fungsi aktivasi ReLU untuk mempelajari kombinasi non-linear dari representasi \textit{sequence}.
+\noindent m.~~\textbf{Pemrosesan \textit{Dense Layer}.} Hasil \textit{dropout} diproses \textit{dense layer} 16 neuron beraktivasi ReLU untuk mempelajari kombinasi non-linear representasi \textit{sequence}.
 
-\noindent n.~~\textbf{Penghasilan Prediksi \textit{Log-Return}.} \textit{Output layer} berisi satu neuron dengan aktivasi linear menghasilkan nilai prediksi $\hat{r}_t$ berupa \textit{log-return} penjualan hari aktif berikutnya, yang selanjutnya direkonstruksi ke skala nominal Rupiah.
+\noindent n.~~\textbf{Penghasilan Prediksi \textit{Log-Return}.} \textit{Output layer} satu neuron beraktivasi linear menghasilkan prediksi $\hat{r}_t$, yang selanjutnya direkonstruksi ke skala nominal Rupiah.
 
-\textit{Flowchart} ini menunjukkan proses perhitungan pada sel LSTM yang bekerja melalui tiga gerbang, yaitu \textit{forget gate}, \textit{input gate}, dan \textit{output gate}, dalam mengatur aliran informasi antar-langkah waktu. Mekanisme gerbang tersebut memungkinkan model mempelajari pola autokorelasi jangka pendek pada deret waktu penjualan harian yang menjadi dasar prediksi.
-
+\textit{Flowchart} ini menunjukkan bahwa sel LSTM bekerja melalui tiga gerbang dalam mengatur aliran informasi antar-langkah waktu, sehingga model mampu mempelajari pola autokorelasi jangka pendek pada deret waktu penjualan harian.
 \subsection{Perhitungan Metrik Evaluasi Pengujian}
 
 Proses evaluasi menghasilkan nilai kesalahan prediksi untuk setiap data uji berdasarkan perbandingan antara nilai aktual $Y_t$ dan nilai prediksi $\hat{Y}_t$ pada skala nominal Rupiah. Penelitian ini menggunakan empat metrik evaluasi, yaitu \textit{Mean Absolute Error} (MAE), \textit{Root Mean Squared Error} (RMSE), \textit{symmetric Mean Absolute Percentage Error} (sMAPE), dan \textit{Mean Absolute Scaled Error} (MASE), yang landasan teorinya telah dijabarkan pada Subbab~2.2.8. Perhitungan keempat metrik tersebut dirumuskan sebagai berikut.
