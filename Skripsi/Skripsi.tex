@@ -945,58 +945,26 @@ Pengujian \textit{black box}, atau disebut juga \textit{behavioral testing}, ada
 %%=============================================================
 \chapter[METODOLOGI PENELITIAN]{\\ METODOLOGI PENELITIAN}
 
-\section{Data dan Pengumpulan Data}
+\section{Alur Penelitian}
 
-Penelitian ini menggunakan data sekunder yang bersumber dari basis data transaksi platform katalog menu digital \textbf{EatsTEDI} pada Departemen Teknik Elektro dan Informatika (DTEDI), Universitas Gadjah Mada. Data diperoleh dalam bentuk \textit{dump} basis data relasional berformat SQL (\texttt{eatstedi-20260621-010820.sql}) berukuran 32,15 MB dengan total sekitar 395.090 baris, mencakup rentang transaksi 24 Agustus 2024 sampai dengan 20 Juni 2026 atau 666 hari kalender secara inklusif. Data tersebut merupakan riwayat transaksi riil yang telah terhimpun jauh sebelum penelitian ini dimulai, bukan data yang dihasilkan oleh aplikasi yang dibangun dalam penelitian ini.
+Alur penelitian dirancang secara sistematis untuk membangun aplikasi \textit{Point of Sale} yang dilengkapi fitur prediksi penjualan harian. Alur penelitian tersebut dapat dilihat pada Gambar~\ref{fig:alur_penelitian}.
 
-Penggunaan data EatsTEDI dipilih karena merepresentasikan karakteristik usaha kuliner berskala kecil pada lingkungan institusional yang menjadi fokus penelitian. Rentang 22 bulan tersebut mencakup empat semester berturut-turut, yakni semester gasal dan genap tahun akademik 2024/2025 serta 2025/2026, sehingga pola musiman berbasis kalender akademik teramati secara berulang. Di sisi lain, jumlah pengamatannya tetap tergolong terbatas, sehingga sesuai untuk menguji kelayakan penerapan model \textit{Long Short-Term Memory} pada kondisi data yang tidak melimpah.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{alur_penelitian}
+    \caption{Alur Penelitian}
+    \label{fig:alur_penelitian}
+\end{figure}
 
-Data tidak digunakan dalam bentuk mentah, melainkan melalui penyaringan dan agregasi terlebih dahulu. Transaksi dibatasi pada nota berstatus lunas (\texttt{is\_paid = 1}) dari tabel \textit{invoices}, lalu diagregasi menurut tanggal untuk membentuk deret waktu pendapatan harian. Rentang efektif yang diperoleh adalah 26 Agustus 2024 sampai 20 Juni 2026, menghasilkan 313 hari dengan transaksi tercatat. Sesuai batasan penelitian, pemodelan bersifat univariat dengan total penjualan harian sebagai satu-satunya variabel target. Adapun struktur data penelitian ditunjukkan pada Tabel~\ref{tab:struktur_data}.
+Gambar~\ref{fig:alur_penelitian} menunjukkan tahapan penelitian yang terbagi menjadi dua fase yang saling berkaitan, yaitu pengembangan sistem \textit{Point of Sale} dan pengembangan model prediksi penjualan. Adapun rincian kedua fase tersebut dijelaskan sebagai berikut.
 
-\begin{table}[H]
-\setstretch{1.2}
-\centering
-\caption{Struktur Data \textit{Dataset} Final Penelitian}
-\label{tab:struktur_data}
-\begin{tabularx}{\textwidth}{|c|l|p{3.0cm}|X|}
-\hline
-\textbf{No} & \textbf{Nama Data} & \textbf{Sumber} & \textbf{Keterangan} \\ \hline
-1 & \textit{invoice\_id} & Basis data EatsTEDI & Identitas unik setiap nota transaksi \\ \hline
-2 & \textit{created\_at} & Basis data EatsTEDI & Waktu pencatatan transaksi pada sistem \\ \hline
-3 & \textit{is\_paid} & Basis data EatsTEDI & Penanda status pelunasan, digunakan untuk menyaring transaksi sah \\ \hline
-4 & \textit{total} & Basis data EatsTEDI & Nilai nominal penjualan pada setiap nota transaksi \\ \hline
-5 & \textit{date} & Hasil praproses & Tanggal transaksi (format YYYY-MM-DD) hasil normalisasi \textit{created\_at}, berfungsi sebagai penanda urutan deret waktu \\ \hline
-6 & \textit{revenue} & Hasil praproses & Total nilai penjualan harian dalam Rupiah hasil agregasi seluruh nota lunas pada tanggal yang sama; menjadi variabel target pemodelan \\ \hline
-\end{tabularx}
-\end{table}
+\noindent a.~~Fase Pengembangan Sistem \textit{Point of Sale}
 
-Berdasarkan Tabel~\ref{tab:struktur_data}, kolom \textit{invoice\_id}, \textit{created\_at}, \textit{is\_paid}, dan \textit{total} merupakan atribut asli basis data EatsTEDI yang menjadi bahan penyaringan dan agregasi, sedangkan kolom \textit{date} dan \textit{revenue} dihasilkan pada tahap praproses. Kolom \textit{revenue} menjadi satu-satunya variabel yang dimodelkan, sehingga \textit{dataset} final berbentuk deret waktu univariat dengan 313 titik pengamatan. Pembagian data latih dan uji dilakukan secara kronologis, bukan acak, guna menghindari kebocoran informasi masa depan sebagaimana dijelaskan pada Subbab~2.2.7.
+Fase ini diawali dengan analisis kebutuhan melalui observasi pada mitra EatsTEDI, dilanjutkan perancangan sistem dan antarmuka. Aplikasi dikembangkan menggunakan Flutter dengan Supabase dan Isar DB, sedangkan layanan prediksi dibangun menggunakan Python pada Hugging Face, lalu diujicobakan secara fungsional pada mitra.
 
-Metode pengumpulan data dalam penelitian ini dilakukan melalui tahapan berikut:
-\begin{enumerate}[label=\alph*.]
-    \item \textbf{Studi Literatur}
+\noindent b.~~Fase Pengembangan Model Prediksi Penjualan
 
-    Studi literatur dilakukan untuk mengkaji penelitian terdahulu yang berkaitan dengan peramalan penjualan ritel berbasis \textit{Long Short-Term Memory}, augmentasi data sintetis menggunakan TimeGAN, serta penggunaan \textit{baseline} sederhana sebagai kontrol metodologis. Hasil studi ini menjadi dasar dalam perancangan metode penelitian dan penetapan metrik evaluasi.
-
-    \item \textbf{Observasi dan Wawancara}
-
-    Observasi dan wawancara dilakukan terhadap pengelola divisi kewirausahaan mahasiswa platform EatsTEDI di DTEDI Universitas Gadjah Mada. Kegiatan ini bertujuan memahami alur operasional kasir, pencatatan menu harian, pengelolaan stok, serta kendala dalam mengantisipasi sisa produk, sehingga kebutuhan fitur prediksi pada aplikasi dapat dirumuskan sesuai kondisi lapangan.
-
-    \item \textbf{Akuisisi Data}
-
-    Data transaksi diperoleh langsung dari pengelola platform EatsTEDI dalam bentuk berkas \textit{dump} SQL. Berkas tersebut memuat tabel \textit{invoices} yang menjadi sumber utama nilai transaksi, beserta tabel pendukung \textit{product\_sold}, \textit{products}, dan \textit{categories}. Data digunakan sebagai data utama penelitian karena merupakan catatan transaksi riil yang berkesinambungan selama dua tahun akademik penuh.
-
-    \item \textbf{Praproses Data}
-
-    Tahap praproses dilakukan untuk menyesuaikan data dengan kebutuhan pemodelan deret waktu, yang meliputi:
-    \begin{enumerate}[label=\arabic*)]
-        \item Penyaringan transaksi berdasarkan status pelunasan;
-        \item Agregasi nilai transaksi menurut tanggal menjadi pendapatan harian;
-        \item Normalisasi nilai menggunakan \textit{Min-Max Scaling};
-        \item Pembentukan sampel pembelajaran terbimbing melalui teknik \textit{sliding window}.
-    \end{enumerate}
-    Hasil dari tahap ini adalah \textit{dataset} final berupa deret waktu univariat yang digunakan sebagai masukan dalam proses pelatihan dan evaluasi model.
-\end{enumerate}
+Fase ini menggunakan data sekunder berupa riwayat transaksi platform EatsTEDI yang telah beroperasi sebelum penelitian dimulai, bukan data dari aplikasi yang baru dibangun. Data tersebut melalui pra-pemrosesan, pembentukan deret waktu, dan pembagian data latih serta uji. Model LSTM kemudian dilatih, dievaluasi, lalu diintegrasikan ke aplikasi melalui \textit{REST API}.
 
 \section{Analisis Kebutuhan Sistem}
 
@@ -1077,27 +1045,6 @@ Perangkat lunak yang digunakan dalam pengembangan dan pengujian sistem ini dapat
 13 & Alat Pemodelan & Draw.io dan Mermaid.js & Pembuatan diagram UML dan arsitektur sistem \\ \hline
 \end{xltabular}
 }
-
-\section{Alur Penelitian}
-
-Alur penelitian dirancang secara sistematis untuk membangun aplikasi \textit{Point of Sale} yang dilengkapi fitur prediksi penjualan harian. Alur penelitian tersebut dapat dilihat pada Gambar~\ref{fig:alur_penelitian}.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\textwidth]{alur_penelitian}
-    \caption{Alur Penelitian}
-    \label{fig:alur_penelitian}
-\end{figure}
-
-Gambar~\ref{fig:alur_penelitian} menunjukkan tahapan penelitian yang terbagi menjadi dua fase yang saling berkaitan, yaitu pengembangan sistem \textit{Point of Sale} dan pengembangan model prediksi penjualan. Adapun rincian kedua fase tersebut dijelaskan sebagai berikut.
-
-\noindent a.~~Fase Pengembangan Sistem \textit{Point of Sale}
-
-Fase ini diawali dengan analisis kebutuhan melalui observasi pada mitra EatsTEDI, dilanjutkan perancangan sistem dan antarmuka. Aplikasi dikembangkan menggunakan Flutter dengan Supabase dan Isar DB, sedangkan layanan prediksi dibangun menggunakan Python pada Hugging Face, lalu diujicobakan secara fungsional pada mitra.
-
-\noindent b.~~Fase Pengembangan Model Prediksi Penjualan
-
-Fase ini menggunakan data sekunder berupa riwayat transaksi platform EatsTEDI yang telah beroperasi sebelum penelitian dimulai, bukan data dari aplikasi yang baru dibangun. Data tersebut melalui pra-pemrosesan, pembentukan deret waktu, dan pembagian data latih serta uji. Model LSTM kemudian dilatih, dievaluasi, lalu diintegrasikan ke aplikasi melalui \textit{REST API}.
 
 \section{Perancangan Sistem}
 
@@ -1772,9 +1719,62 @@ Halaman pengaturan dirancang sebagai pusat konfigurasi aplikasi yang menghimpun 
 
 Gambar~\ref{fig:ui-pengaturan} menunjukkan daftar menu konfigurasi aplikasi dan toko, dengan sebagian menu hanya tersedia bagi Owner, yaitu manajemen karyawan dan pengaturan profil toko.
 
+\section{Data dan Pengumpulan Data}
+
+Penelitian ini menggunakan data sekunder yang bersumber dari basis data transaksi platform katalog menu digital \textbf{EatsTEDI} pada Departemen Teknik Elektro dan Informatika (DTEDI), Universitas Gadjah Mada. Data diperoleh dalam bentuk \textit{dump} basis data relasional berformat SQL (\texttt{eatstedi-20260621-010820.sql}) berukuran 32,15 MB dengan total sekitar 395.090 baris, mencakup rentang transaksi 24 Agustus 2024 sampai dengan 20 Juni 2026 atau 666 hari kalender secara inklusif. Data tersebut merupakan riwayat transaksi riil yang telah terhimpun jauh sebelum penelitian ini dimulai, bukan data yang dihasilkan oleh aplikasi yang dibangun dalam penelitian ini.
+
+Penggunaan data EatsTEDI dipilih karena merepresentasikan karakteristik usaha kuliner berskala kecil pada lingkungan institusional yang menjadi fokus penelitian. Rentang 22 bulan tersebut mencakup empat semester berturut-turut, yakni semester gasal dan genap tahun akademik 2024/2025 serta 2025/2026, sehingga pola musiman berbasis kalender akademik teramati secara berulang. Di sisi lain, jumlah pengamatannya tetap tergolong terbatas, sehingga sesuai untuk menguji kelayakan penerapan model \textit{Long Short-Term Memory} pada kondisi data yang tidak melimpah.
+
+Data tidak digunakan dalam bentuk mentah, melainkan melalui penyaringan dan agregasi terlebih dahulu. Transaksi dibatasi pada nota berstatus lunas (\texttt{is\_paid = 1}) dari tabel \textit{invoices}, lalu diagregasi menurut tanggal untuk membentuk deret waktu pendapatan harian. Rentang efektif yang diperoleh adalah 26 Agustus 2024 sampai 20 Juni 2026, menghasilkan 313 hari dengan transaksi tercatat. Sesuai batasan penelitian, pemodelan bersifat univariat dengan total penjualan harian sebagai satu-satunya variabel target. Adapun struktur data penelitian ditunjukkan pada Tabel~\ref{tab:struktur_data}.
+
+\begin{table}[H]
+\setstretch{1.2}
+\centering
+\caption{Struktur Data \textit{Dataset} Final Penelitian}
+\label{tab:struktur_data}
+\begin{tabularx}{\textwidth}{|c|l|p{3.0cm}|X|}
+\hline
+\textbf{No} & \textbf{Nama Data} & \textbf{Sumber} & \textbf{Keterangan} \\ \hline
+1 & \textit{invoice\_id} & Basis data EatsTEDI & Identitas unik setiap nota transaksi \\ \hline
+2 & \textit{created\_at} & Basis data EatsTEDI & Waktu pencatatan transaksi pada sistem \\ \hline
+3 & \textit{is\_paid} & Basis data EatsTEDI & Penanda status pelunasan, digunakan untuk menyaring transaksi sah \\ \hline
+4 & \textit{total} & Basis data EatsTEDI & Nilai nominal penjualan pada setiap nota transaksi \\ \hline
+5 & \textit{date} & Hasil praproses & Tanggal transaksi (format YYYY-MM-DD) hasil normalisasi \textit{created\_at}, berfungsi sebagai penanda urutan deret waktu \\ \hline
+6 & \textit{revenue} & Hasil praproses & Total nilai penjualan harian dalam Rupiah hasil agregasi seluruh nota lunas pada tanggal yang sama; menjadi variabel target pemodelan \\ \hline
+\end{tabularx}
+\end{table}
+
+Berdasarkan Tabel~\ref{tab:struktur_data}, kolom \textit{invoice\_id}, \textit{created\_at}, \textit{is\_paid}, dan \textit{total} merupakan atribut asli basis data EatsTEDI yang menjadi bahan penyaringan dan agregasi, sedangkan kolom \textit{date} dan \textit{revenue} dihasilkan pada tahap praproses. Kolom \textit{revenue} menjadi satu-satunya variabel yang dimodelkan, sehingga \textit{dataset} final berbentuk deret waktu univariat dengan 313 titik pengamatan. Pembagian data latih dan uji dilakukan secara kronologis, bukan acak, guna menghindari kebocoran informasi masa depan sebagaimana dijelaskan pada Subbab~2.2.7.
+
+Metode pengumpulan data dalam penelitian ini dilakukan melalui tahapan berikut:
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Studi Literatur}
+
+    Studi literatur dilakukan untuk mengkaji penelitian terdahulu yang berkaitan dengan peramalan penjualan ritel berbasis \textit{Long Short-Term Memory}, augmentasi data sintetis menggunakan TimeGAN, serta penggunaan \textit{baseline} sederhana sebagai kontrol metodologis. Hasil studi ini menjadi dasar dalam perancangan metode penelitian dan penetapan metrik evaluasi.
+
+    \item \textbf{Observasi dan Wawancara}
+
+    Observasi dan wawancara dilakukan terhadap pengelola divisi kewirausahaan mahasiswa platform EatsTEDI di DTEDI Universitas Gadjah Mada. Kegiatan ini bertujuan memahami alur operasional kasir, pencatatan menu harian, pengelolaan stok, serta kendala dalam mengantisipasi sisa produk, sehingga kebutuhan fitur prediksi pada aplikasi dapat dirumuskan sesuai kondisi lapangan.
+
+    \item \textbf{Akuisisi Data}
+
+    Data transaksi diperoleh langsung dari pengelola platform EatsTEDI dalam bentuk berkas \textit{dump} SQL. Berkas tersebut memuat tabel \textit{invoices} yang menjadi sumber utama nilai transaksi, beserta tabel pendukung \textit{product\_sold}, \textit{products}, dan \textit{categories}. Data digunakan sebagai data utama penelitian karena merupakan catatan transaksi riil yang berkesinambungan selama dua tahun akademik penuh.
+
+    \item \textbf{Praproses Data}
+
+    Tahap praproses dilakukan untuk menyesuaikan data dengan kebutuhan pemodelan deret waktu, yang meliputi:
+    \begin{enumerate}[label=\arabic*)]
+        \item Penyaringan transaksi berdasarkan status pelunasan;
+        \item Agregasi nilai transaksi menurut tanggal menjadi pendapatan harian;
+        \item Normalisasi nilai menggunakan \textit{Min-Max Scaling};
+        \item Pembentukan sampel pembelajaran terbimbing melalui teknik \textit{sliding window}.
+    \end{enumerate}
+    Hasil dari tahap ini adalah \textit{dataset} final berupa deret waktu univariat yang digunakan sebagai masukan dalam proses pelatihan dan evaluasi model.
+\end{enumerate}
+
 \section{Perancangan Metode Penelitian}
 
-Bagian ini menjelaskan tahapan perancangan metode prediksi yang digunakan dalam penelitian ini, meliputi \textit{flowchart} penerapan metode \textit{Long Short-Term Memory} (LSTM), \textit{flowchart} perhitungan sel LSTM, serta perhitungan metrik evaluasi pengujian. Penelitian dilaksanakan sebagai penelitian pengembangan (\textit{Research and Development}) dengan pendekatan kuantitatif untuk pengujian model prediksi, sedangkan pengembangan aplikasi dilakukan secara iteratif dan bertahap dengan memprioritaskan fitur inti kasir sebelum fitur analitik prediktif ditambahkan, sebagaimana diuraikan pada alur penelitian Subbab~3.2.
+Bagian ini menjelaskan tahapan perancangan metode prediksi yang digunakan dalam penelitian ini, meliputi \textit{flowchart} penerapan metode \textit{Long Short-Term Memory} (LSTM), \textit{flowchart} perhitungan sel LSTM, serta perhitungan metrik evaluasi pengujian. Penelitian dilaksanakan sebagai penelitian pengembangan (\textit{Research and Development}) dengan pendekatan kuantitatif untuk pengujian model prediksi, sedangkan pengembangan aplikasi dilakukan secara iteratif dan bertahap dengan memprioritaskan fitur inti kasir sebelum fitur analitik prediktif ditambahkan, sebagaimana diuraikan pada alur penelitian Subbab~3.1.
 
 \subsection{\textit{Flowchart} Penerapan Metode \textit{Long Short-Term Memory}}
 \label{subsec:lstm_alg}
@@ -2293,7 +2293,7 @@ Aplikasi \textit{mobile} dikembangkan menggunakan \textit{framework} Flutter den
 
     \item \textbf{Halaman Laporan Analitik}
 
-    Menyajikan ringkasan Omzet dan Transaksi Keseluruhan, jumlah Stok Rendah dan Produk Aktif, serta grafik \textit{Tren Penjualan} bulanan yang memvisualisasikan riwayat omzet toko EatsTEDI sejak Agustus 2024 hingga Juni 2026, sejalan dengan rentang data penelitian pada Subbab~3.5. Kartu \textit{Smart Analitik} pada bagian atas halaman menjadi pintu masuk menuju fitur prediksi berbasis AI.
+    Menyajikan ringkasan Omzet dan Transaksi Keseluruhan, jumlah Stok Rendah dan Produk Aktif, serta grafik \textit{Tren Penjualan} bulanan yang memvisualisasikan riwayat omzet toko EatsTEDI sejak Agustus 2024 hingga Juni 2026, sejalan dengan rentang data penelitian pada Subbab~3.4. Kartu \textit{Smart Analitik} pada bagian atas halaman menjadi pintu masuk menuju fitur prediksi berbasis AI.
 
     \begin{figure}[H]
         \centering
@@ -2316,7 +2316,7 @@ Aplikasi \textit{mobile} dikembangkan menggunakan \textit{framework} Flutter den
 
     \item \textbf{Halaman Prediksi Penjualan Harian (\textit{Smart Analytics}) dan Riwayat Analisis}
 
-    Halaman \textit{Smart Analitik} memanggil layanan prediksi yang di-\textit{deploy} pada \textit{HuggingFace Space} (\textit{Cloud}) dengan estimasi lokal \textit{on-device} sebagai jalur cadangan apabila layanan \textit{cloud} tidak dapat dijangkau, konsisten dengan strategi \textit{offline-first} yang dibahas pada Subbab 3.2.1. Ketika riwayat transaksi toko masih kurang dari batas minimum sekuens LOOK\_BACK yang disyaratkan model (lihat Subbab~3.3.2), sistem menampilkan peringatan \textit{cold start} dan menyajikan estimasi berbasis pola bisnis retail/kafe umum sebagai gantinya. Halaman ini menampilkan kartu Estimasi Omzet dan Estimasi \textit{Traffic}, grafik \textit{Forecasting} yang membedakan data riil dengan hasil prediksi AI, serta proyeksi menu terlaris untuk hari berikutnya. Setiap analisis yang dijalankan turut dicatat pada halaman \textit{Riwayat Analisis} beserta sumber komputasi (\textit{Cloud} atau Lokal) dan estimasi omzet yang dihasilkan.
+    Halaman \textit{Smart Analitik} memanggil layanan prediksi yang di-\textit{deploy} pada \textit{HuggingFace Space} (\textit{Cloud}) dengan estimasi lokal \textit{on-device} sebagai jalur cadangan apabila layanan \textit{cloud} tidak dapat dijangkau, konsisten dengan strategi \textit{offline-first} yang dibahas pada Subbab~3.3.1. Ketika riwayat transaksi toko masih kurang dari batas minimum sekuens LOOK\_BACK yang disyaratkan model (lihat Subbab~3.5.1), sistem menampilkan peringatan \textit{cold start} dan menyajikan estimasi berbasis pola bisnis retail/kafe umum sebagai gantinya. Halaman ini menampilkan kartu Estimasi Omzet dan Estimasi \textit{Traffic}, grafik \textit{Forecasting} yang membedakan data riil dengan hasil prediksi AI, serta proyeksi menu terlaris untuk hari berikutnya. Setiap analisis yang dijalankan turut dicatat pada halaman \textit{Riwayat Analisis} beserta sumber komputasi (\textit{Cloud} atau Lokal) dan estimasi omzet yang dihasilkan.
 
     \begin{figure}[H]
         \centering
@@ -2618,7 +2618,7 @@ def forecast_hybrid_stable(model, dfa, scaler, features,
 Secara statistik, prediksi rekursif jangka panjang berbasis LSTM pada data terbatas ini akan dengan cepat meredam menuju nilai rata-rata historis (sifat \textit{mean-reverting}) dan menyerupai prediksi naif. Untuk diintegrasikan ke dalam fitur aplikasi riil kasir, metode prediksi statistik \textit{SARIMA} dan \textit{Seasonal-Naive} (rata-rata hari sejenis pada minggu sebelumnya) lebih direkomendasikan karena memberikan hasil prediksi multi-langkah yang jauh lebih stabil dan konsisten. Rekomendasi ini diwujudkan pada layanan API produksi, di mana \textit{endpoint} prediksi menyajikan metode \textit{Seasonal-Naive} ($k=4$) sebagai metode penyaji utama prediksi harian kepada aplikasi POS. Dalam penelitian skripsi ini, hasil evaluasi akurasi ilmiah tetap didasarkan pada pengujian satu langkah ke depan (\textit{one-step-ahead}), sedangkan visualisasi prediksi multi-langkah diposisikan murni sebagai ilustrasi fungsionalitas sistem.
 
 \subsection{Implementasi Fungsi Metrik Evaluasi}
-Sesuai rancangan pada Subbab~3.4.4, akurasi model diukur menggunakan empat metrik secara simultan, yaitu MAE, RMSE, sMAPE, dan MASE, dengan MASE sebagai acuan performa utama karena ternormalisasi terhadap galat naif \textit{in-sample}. MAPE konvensional tidak digunakan karena \textit{dataset} memuat hari aktif dengan pendapatan mendekati nol, yang menyebabkan galat persentase membesar tidak wajar (\textit{exploding MAPE}). Sebagai pembanding pada skema satu langkah ke depan digunakan \textit{Naive} (realisasi hari sebelumnya), \textit{Mean-7} (rata-rata tujuh hari aktif terakhir), \textit{Seasonal-Naive}, dan \textit{SARIMA} dengan skema \textit{rolling one-step}. Implementasi fungsi sMAPE dan MASE disajikan pada Kode Program~\ref{lst:metrics}.
+Sesuai rancangan pada Subbab~3.5.3, akurasi model diukur menggunakan empat metrik secara simultan, yaitu MAE, RMSE, sMAPE, dan MASE, dengan MASE sebagai acuan performa utama karena ternormalisasi terhadap galat naif \textit{in-sample}. MAPE konvensional tidak digunakan karena \textit{dataset} memuat hari aktif dengan pendapatan mendekati nol, yang menyebabkan galat persentase membesar tidak wajar (\textit{exploding MAPE}). Sebagai pembanding pada skema satu langkah ke depan digunakan \textit{Naive} (realisasi hari sebelumnya), \textit{Mean-7} (rata-rata tujuh hari aktif terakhir), \textit{Seasonal-Naive}, dan \textit{SARIMA} dengan skema \textit{rolling one-step}. Implementasi fungsi sMAPE dan MASE disajikan pada Kode Program~\ref{lst:metrics}.
 
 \begin{lstlisting}[caption={Implementasi Fungsi Metrik Evaluasi sMAPE dan MASE}, label={lst:metrics}]
 def smape(y, yhat):
@@ -2983,7 +2983,7 @@ Keterbatasan utama dalam pemodelan prediksi pada penelitian ini meliputi:
     
     \item \textbf{Deret Waktu yang Terputus-putus}: Banyaknya hari non-aktif transaksi akibat libur kalender akademik kampus (seperti sepanjang bulan Januari dan Juli) serta akhir pekan menyebabkan deret waktu menjadi patah dan terputus-putus, yang menyulitkan jaringan saraf dalam mempelajari dependensi keterkaitan temporal jangka panjang secara kontinu.
 
-    \item \textbf{Bias Penyaringan Hari Aktif (\texttt{revenue > 0})}: Penyaringan data pada tahap \textit{preprocessing} hanya mempertahankan hari kerja yang memiliki pendapatan positif (\texttt{revenue > 0}), sebagaimana dijelaskan pada Subbab~3.1. Konsekuensinya, hari kerja aktif dengan penjualan nol yang sebenarnya nyata turut terbuang dari dataset, bukan hanya akhir pekan atau libur kalender akademik. Akibat lanjutannya, deret \textit{log-return} $r_t$ yang menjadi target model dihitung antar hari aktif berurutan yang jarak kalender riilnya tidak seragam -- dapat berupa 1 hari, namun juga dapat mencapai lebih dari 10 hari setelah masa libur panjang. Ketidakseragaman interval waktu ini melanggar sebagian asumsi keteraturan deret waktu (\textit{regular time-series}) yang mendasari arsitektur LSTM, dan diduga turut menjadi salah satu faktor yang memperberat kesulitan model dalam mempelajari pola dependensi temporal secara konsisten.
+    \item \textbf{Bias Penyaringan Hari Aktif (\texttt{revenue > 0})}: Penyaringan data pada tahap \textit{preprocessing} hanya mempertahankan hari kerja yang memiliki pendapatan positif (\texttt{revenue > 0}), sebagaimana dijelaskan pada Subbab~3.4. Konsekuensinya, hari kerja aktif dengan penjualan nol yang sebenarnya nyata turut terbuang dari dataset, bukan hanya akhir pekan atau libur kalender akademik. Akibat lanjutannya, deret \textit{log-return} $r_t$ yang menjadi target model dihitung antar hari aktif berurutan yang jarak kalender riilnya tidak seragam -- dapat berupa 1 hari, namun juga dapat mencapai lebih dari 10 hari setelah masa libur panjang. Ketidakseragaman interval waktu ini melanggar sebagian asumsi keteraturan deret waktu (\textit{regular time-series}) yang mendasari arsitektur LSTM, dan diduga turut menjadi salah satu faktor yang memperberat kesulitan model dalam mempelajari pola dependensi temporal secara konsisten.
 \end{enumerate}
 
 %%=============================================================

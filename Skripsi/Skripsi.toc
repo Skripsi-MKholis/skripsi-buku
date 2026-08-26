@@ -31,60 +31,60 @@
 \contentsline {subsection}{\numberline {2.2.9}Flutter}{26}{subsection.2.2.9}%
 \contentsline {subsection}{\numberline {2.2.10}Pengujian \textit {Black Box}}{27}{subsection.2.2.10}%
 \contentsline {chapter}{\numberline {III}METODOLOGI PENELITIAN}{28}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Data dan Pengumpulan Data}{28}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Analisis Kebutuhan Sistem}{31}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Analisis Kebutuhan Fungsional}{31}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Analisis Kebutuhan Non-Fungsional}{33}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3}Alur Penelitian}{34}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Perancangan Sistem}{36}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Arsitektur Sistem}{36}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Pemodelan Sistem \textit {Unified Modeling Language} (UML)}{38}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Perancangan Antarmuka Pengguna (\textit {User Interface})}{64}{subsection.3.4.3}%
+\contentsline {section}{\numberline {3.1}Alur Penelitian}{28}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Analisis Kebutuhan Sistem}{29}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Analisis Kebutuhan Fungsional}{29}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Analisis Kebutuhan Non-Fungsional}{30}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Perancangan Sistem}{32}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Arsitektur Sistem}{33}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Pemodelan Sistem \textit {Unified Modeling Language} (UML)}{35}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Perancangan Antarmuka Pengguna (\textit {User Interface})}{60}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.4}Data dan Pengumpulan Data}{74}{section.3.4}%
 \contentsline {section}{\numberline {3.5}Perancangan Metode Penelitian}{78}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}\textit {Flowchart} Penerapan Metode \textit {Long Short-Term Memory}}{79}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}\textit {Flowchart} Perhitungan Sel \textit {Long Short-Term Memory}}{83}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}Perhitungan Metrik Evaluasi Pengujian}{85}{subsection.3.5.3}%
-\contentsline {section}{\numberline {3.6}Skenario Pengujian Model}{87}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Skenario 1: Pengujian Model LSTM terhadap \textit {Baseline}}{87}{subsection.3.6.1}%
-\contentsline {subsection}{\numberline {3.6.2}Skenario 2: Pengujian Stabilitas \textit {Multi-Seed}}{88}{subsection.3.6.2}%
-\contentsline {subsection}{\numberline {3.6.3}Skenario 3: Pengujian Augmentasi Data Sintetis TimeGAN}{88}{subsection.3.6.3}%
-\contentsline {subsection}{\numberline {3.6.4}Skenario 4: Pengujian Horizon Prakiraan Rekursif}{89}{subsection.3.6.4}%
-\contentsline {section}{\numberline {3.7}Perancangan Pengujian Sistem}{90}{section.3.7}%
-\contentsline {subsection}{\numberline {3.7.1}Perancangan Pengujian \textit {Black Box}}{90}{subsection.3.7.1}%
-\contentsline {subsection}{\numberline {3.7.2}Perancangan Pengujian \textit {White Box}}{92}{subsection.3.7.2}%
-\contentsline {chapter}{\numberline {IV}HASIL DAN PEMBAHASAN}{94}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Hasil Implementasi Sistem}{94}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Implementasi Antarmuka Aplikasi Mobile}{94}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Implementasi Backend dan Basis Data Cloud}{111}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}Implementasi Layanan Prediksi (API)}{112}{subsection.4.1.3}%
-\contentsline {section}{\numberline {4.2}Hasil Implementasi Praproses Data}{116}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Deskripsi dan Eksplorasi Awal Dataset EatsTEDI}{116}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Penyaringan Hari Aktif dan Transformasi Target Log-Return}{117}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Pembentukan Sequence dan Pembagian Dataset}{118}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}Hasil Implementasi Mekanisme Prediksi}{120}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Implementasi Arsitektur Model LSTM}{120}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Hasil Pelatihan Model}{122}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Implementasi Augmentasi Data Sintetis TimeGAN}{122}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Implementasi Prediksi Rekursif Multi-Langkah}{125}{subsection.4.3.4}%
-\contentsline {subsection}{\numberline {4.3.5}Implementasi Fungsi Metrik Evaluasi}{127}{subsection.4.3.5}%
-\contentsline {section}{\numberline {4.4}Hasil Pengujian Model terhadap Skenario Pengujian}{128}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Skenario 1: Pengujian Model LSTM terhadap Baseline Statistik}{129}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Skenario 2: Pengujian Stabilitas Model melalui Multi-Seed}{131}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Skenario 3: Pengujian Augmentasi Data Sintetis TimeGAN}{134}{subsection.4.4.3}%
-\contentsline {subsection}{\numberline {4.4.4}Skenario 4: Pengujian Horizon Prakiraan Rekursif}{136}{subsection.4.4.4}%
-\contentsline {subsection}{\numberline {4.4.5}Rekapitulasi Hasil Keempat Skenario}{138}{subsection.4.4.5}%
-\contentsline {section}{\numberline {4.5}Hasil Pengujian Sistem}{140}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Hasil Pengujian Black Box}{140}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Hasil Pengujian Mekanisme Sinkronisasi Offline-First}{142}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}Hasil Pengujian White Box}{143}{subsection.4.5.3}%
-\contentsline {section}{\numberline {4.6}Pembahasan Umum dan Posisi Temuan}{146}{section.4.6}%
-\contentsline {subsection}{\numberline {4.6.1}Analisis Keputusan Metode Penyaji pada Layanan Produksi}{146}{subsection.4.6.1}%
-\contentsline {subsection}{\numberline {4.6.2}Posisi Temuan terhadap Penelitian Terdahulu}{147}{subsection.4.6.2}%
-\contentsline {section}{\numberline {4.7}Keterbatasan Sistem dan Penelitian}{148}{section.4.7}%
-\contentsline {subsection}{\numberline {4.7.1}Keterbatasan Sistem POS}{149}{subsection.4.7.1}%
-\contentsline {subsection}{\numberline {4.7.2}Keterbatasan Penelitian Model Prediksi}{150}{subsection.4.7.2}%
-\contentsline {chapter}{\numberline {V}PENUTUP}{152}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Kesimpulan}{152}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Saran}{153}{section.5.2}%
-\contentsline {chapter}{DAFTAR PUSTAKA}{155}{section*.88}%
-\contentsline {chapter}{LAMPIRAN}{158}{section*.89}%
+\contentsline {subsection}{\numberline {3.5.1}\textit {Flowchart} Penerapan Metode \textit {Long Short-Term Memory}}{78}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}\textit {Flowchart} Perhitungan Sel \textit {Long Short-Term Memory}}{82}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Perhitungan Metrik Evaluasi Pengujian}{84}{subsection.3.5.3}%
+\contentsline {section}{\numberline {3.6}Skenario Pengujian Model}{86}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Skenario 1: Pengujian Model LSTM terhadap \textit {Baseline}}{86}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Skenario 2: Pengujian Stabilitas \textit {Multi-Seed}}{87}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.6.3}Skenario 3: Pengujian Augmentasi Data Sintetis TimeGAN}{87}{subsection.3.6.3}%
+\contentsline {subsection}{\numberline {3.6.4}Skenario 4: Pengujian Horizon Prakiraan Rekursif}{88}{subsection.3.6.4}%
+\contentsline {section}{\numberline {3.7}Perancangan Pengujian Sistem}{89}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Perancangan Pengujian \textit {Black Box}}{89}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}Perancangan Pengujian \textit {White Box}}{91}{subsection.3.7.2}%
+\contentsline {chapter}{\numberline {IV}HASIL DAN PEMBAHASAN}{93}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Hasil Implementasi Sistem}{93}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Implementasi Antarmuka Aplikasi Mobile}{93}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Implementasi Backend dan Basis Data Cloud}{110}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Implementasi Layanan Prediksi (API)}{111}{subsection.4.1.3}%
+\contentsline {section}{\numberline {4.2}Hasil Implementasi Praproses Data}{115}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Deskripsi dan Eksplorasi Awal Dataset EatsTEDI}{115}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Penyaringan Hari Aktif dan Transformasi Target Log-Return}{116}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Pembentukan Sequence dan Pembagian Dataset}{117}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Hasil Implementasi Mekanisme Prediksi}{119}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Implementasi Arsitektur Model LSTM}{119}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Hasil Pelatihan Model}{121}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Implementasi Augmentasi Data Sintetis TimeGAN}{121}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Implementasi Prediksi Rekursif Multi-Langkah}{124}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}Implementasi Fungsi Metrik Evaluasi}{126}{subsection.4.3.5}%
+\contentsline {section}{\numberline {4.4}Hasil Pengujian Model terhadap Skenario Pengujian}{127}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Skenario 1: Pengujian Model LSTM terhadap Baseline Statistik}{128}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Skenario 2: Pengujian Stabilitas Model melalui Multi-Seed}{130}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Skenario 3: Pengujian Augmentasi Data Sintetis TimeGAN}{133}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Skenario 4: Pengujian Horizon Prakiraan Rekursif}{135}{subsection.4.4.4}%
+\contentsline {subsection}{\numberline {4.4.5}Rekapitulasi Hasil Keempat Skenario}{137}{subsection.4.4.5}%
+\contentsline {section}{\numberline {4.5}Hasil Pengujian Sistem}{139}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Hasil Pengujian Black Box}{139}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Hasil Pengujian Mekanisme Sinkronisasi Offline-First}{141}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Hasil Pengujian White Box}{142}{subsection.4.5.3}%
+\contentsline {section}{\numberline {4.6}Pembahasan Umum dan Posisi Temuan}{145}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Analisis Keputusan Metode Penyaji pada Layanan Produksi}{145}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Posisi Temuan terhadap Penelitian Terdahulu}{146}{subsection.4.6.2}%
+\contentsline {section}{\numberline {4.7}Keterbatasan Sistem dan Penelitian}{147}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Keterbatasan Sistem POS}{148}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Keterbatasan Penelitian Model Prediksi}{149}{subsection.4.7.2}%
+\contentsline {chapter}{\numberline {V}PENUTUP}{151}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Kesimpulan}{151}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Saran}{152}{section.5.2}%
+\contentsline {chapter}{DAFTAR PUSTAKA}{154}{section*.88}%
+\contentsline {chapter}{LAMPIRAN}{157}{section*.89}%

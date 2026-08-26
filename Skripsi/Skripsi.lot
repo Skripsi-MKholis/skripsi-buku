@@ -5,36 +5,36 @@
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {2.1}{\ignorespaces \textit {State of the Art} Penelitian Terdahulu}}{11}{table.2.1}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Struktur Data \textit {Dataset} Final Penelitian}}{29}{table.caption.10}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Spesifikasi Perangkat Keras}}{33}{table.caption.11}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Spesifikasi Perangkat Lunak}}{33}{table.3.3}%
-\contentsline {table}{\numberline {3.4}{\ignorespaces \textit {Use Case} Registrasi Toko Baru}}{41}{table.caption.15}%
-\contentsline {table}{\numberline {3.5}{\ignorespaces \textit {Use Case} \textit {Login} Akun}}{42}{table.caption.16}%
-\contentsline {table}{\numberline {3.6}{\ignorespaces \textit {Use Case} Mengelola Katalog Produk}}{42}{table.caption.17}%
-\contentsline {table}{\numberline {3.7}{\ignorespaces \textit {Use Case} Mengelola Kategori}}{43}{table.caption.18}%
-\contentsline {table}{\numberline {3.8}{\ignorespaces \textit {Use Case} Melakukan \textit {Checkout}}}{44}{table.caption.19}%
-\contentsline {table}{\numberline {3.9}{\ignorespaces \textit {Use Case} Mengaudit Riwayat Stok}}{44}{table.caption.20}%
-\contentsline {table}{\numberline {3.10}{\ignorespaces \textit {Use Case} Melihat \textit {Dashboard}}}{45}{table.caption.21}%
-\contentsline {table}{\numberline {3.11}{\ignorespaces \textit {Use Case} Melihat Prediksi Penjualan Harian}}{45}{table.caption.22}%
-\contentsline {table}{\numberline {3.12}{\ignorespaces \textit {Use Case} Melihat Riwayat Analisis}}{46}{table.caption.23}%
-\contentsline {table}{\numberline {3.13}{\ignorespaces \textit {Use Case} Sinkronisasi Data}}{47}{table.caption.24}%
-\contentsline {table}{\numberline {3.14}{\ignorespaces \textit {Use Case} Kirim \textit {Broadcast} Notifikasi}}{47}{table.caption.25}%
-\contentsline {table}{\numberline {3.15}{\ignorespaces \textit {Use Case} Mengelola Karyawan}}{48}{table.caption.26}%
-\contentsline {table}{\numberline {3.16}{\ignorespaces \textit {Use Case} Mengatur Profil Toko}}{48}{table.caption.27}%
-\contentsline {table}{\numberline {3.17}{\ignorespaces Skenario 1: Pengujian Model LSTM terhadap \textit {Baseline}}}{88}{table.caption.56}%
-\contentsline {table}{\numberline {3.18}{\ignorespaces Skenario 2: Pengujian Stabilitas \textit {Multi-Seed}}}{88}{table.caption.57}%
-\contentsline {table}{\numberline {3.19}{\ignorespaces Skenario 3: Pengujian Augmentasi Data Sintetis TimeGAN}}{89}{table.caption.58}%
-\contentsline {table}{\numberline {3.20}{\ignorespaces Skenario 4: Pengujian Horizon Prakiraan Rekursif}}{89}{table.caption.59}%
-\contentsline {table}{\numberline {3.21}{\ignorespaces Skenario Pengujian \textit {Black Box}}}{90}{table.3.21}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Spesifikasi Perangkat Keras}}{31}{table.caption.11}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Spesifikasi Perangkat Lunak}}{31}{table.3.2}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces \textit {Use Case} Registrasi Toko Baru}}{37}{table.caption.14}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces \textit {Use Case} \textit {Login} Akun}}{38}{table.caption.15}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces \textit {Use Case} Mengelola Katalog Produk}}{38}{table.caption.16}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces \textit {Use Case} Mengelola Kategori}}{39}{table.caption.17}%
+\contentsline {table}{\numberline {3.7}{\ignorespaces \textit {Use Case} Melakukan \textit {Checkout}}}{40}{table.caption.18}%
+\contentsline {table}{\numberline {3.8}{\ignorespaces \textit {Use Case} Mengaudit Riwayat Stok}}{40}{table.caption.19}%
+\contentsline {table}{\numberline {3.9}{\ignorespaces \textit {Use Case} Melihat \textit {Dashboard}}}{41}{table.caption.20}%
+\contentsline {table}{\numberline {3.10}{\ignorespaces \textit {Use Case} Melihat Prediksi Penjualan Harian}}{41}{table.caption.21}%
+\contentsline {table}{\numberline {3.11}{\ignorespaces \textit {Use Case} Melihat Riwayat Analisis}}{42}{table.caption.22}%
+\contentsline {table}{\numberline {3.12}{\ignorespaces \textit {Use Case} Sinkronisasi Data}}{43}{table.caption.23}%
+\contentsline {table}{\numberline {3.13}{\ignorespaces \textit {Use Case} Kirim \textit {Broadcast} Notifikasi}}{43}{table.caption.24}%
+\contentsline {table}{\numberline {3.14}{\ignorespaces \textit {Use Case} Mengelola Karyawan}}{44}{table.caption.25}%
+\contentsline {table}{\numberline {3.15}{\ignorespaces \textit {Use Case} Mengatur Profil Toko}}{44}{table.caption.26}%
+\contentsline {table}{\numberline {3.16}{\ignorespaces Struktur Data \textit {Dataset} Final Penelitian}}{76}{table.caption.53}%
+\contentsline {table}{\numberline {3.17}{\ignorespaces Skenario 1: Pengujian Model LSTM terhadap \textit {Baseline}}}{87}{table.caption.56}%
+\contentsline {table}{\numberline {3.18}{\ignorespaces Skenario 2: Pengujian Stabilitas \textit {Multi-Seed}}}{87}{table.caption.57}%
+\contentsline {table}{\numberline {3.19}{\ignorespaces Skenario 3: Pengujian Augmentasi Data Sintetis TimeGAN}}{88}{table.caption.58}%
+\contentsline {table}{\numberline {3.20}{\ignorespaces Skenario 4: Pengujian Horizon Prakiraan Rekursif}}{88}{table.caption.59}%
+\contentsline {table}{\numberline {3.21}{\ignorespaces Skenario Pengujian \textit {Black Box}}}{89}{table.3.21}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Statistik Ringkas Dataset Pendapatan Harian}}{116}{table.caption.76}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Pembagian Dataset dan Dimensi Sequence}}{118}{table.caption.77}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces Perbandingan Performa pada Data Uji (\textit {One-Step-Ahead})}}{129}{table.caption.79}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces Statistik Performa LSTM Hybrid pada 10 Seed}}{133}{table.caption.81}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces Perbandingan Performa Eksperimen Augmentasi TimeGAN (\textit {Multi-Step}, Horizon 7)}}{135}{table.caption.83}%
-\contentsline {table}{\numberline {4.6}{\ignorespaces Galat Prediksi Rekursif per Horizon Prakiraan}}{137}{table.caption.84}%
-\contentsline {table}{\numberline {4.7}{\ignorespaces Rekapitulasi Hasil Pengujian Keempat Skenario}}{139}{table.caption.85}%
-\contentsline {table}{\numberline {4.8}{\ignorespaces Hasil Pengujian Black Box}}{140}{table.4.8}%
-\contentsline {table}{\numberline {4.9}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{142}{table.caption.86}%
-\contentsline {table}{\numberline {4.10}{\ignorespaces Hasil Pengujian White Box}}{144}{table.caption.87}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Statistik Ringkas Dataset Pendapatan Harian}}{115}{table.caption.76}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Pembagian Dataset dan Dimensi Sequence}}{117}{table.caption.77}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Perbandingan Performa pada Data Uji (\textit {One-Step-Ahead})}}{128}{table.caption.79}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Statistik Performa LSTM Hybrid pada 10 Seed}}{132}{table.caption.81}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Perbandingan Performa Eksperimen Augmentasi TimeGAN (\textit {Multi-Step}, Horizon 7)}}{134}{table.caption.83}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Galat Prediksi Rekursif per Horizon Prakiraan}}{136}{table.caption.84}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces Rekapitulasi Hasil Pengujian Keempat Skenario}}{138}{table.caption.85}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces Hasil Pengujian Black Box}}{139}{table.4.8}%
+\contentsline {table}{\numberline {4.9}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{141}{table.caption.86}%
+\contentsline {table}{\numberline {4.10}{\ignorespaces Hasil Pengujian White Box}}{143}{table.caption.87}%
 \addvspace {10\p@ }
