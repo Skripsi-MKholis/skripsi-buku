@@ -97,6 +97,15 @@
 \newlength\mylen
 \settowidth\mylen{\bfseries BAB III :\ }
 \cftsetindents{chap}{0pt}{\mylen}
+\newlength\secindentlen
+\setlength\secindentlen{\mylen}
+\newlength\subsecindentlen
+\setlength\subsecindentlen{\dimexpr\mylen+2.5em\relax}
+\newlength\subsubsecindentlen
+\setlength\subsubsecindentlen{\dimexpr\mylen+2.5em+4em\relax}
+\cftsetindents{sec}{\secindentlen}{2.5em}
+\cftsetindents{subsec}{\subsecindentlen}{4em}
+\cftsetindents{subsubsec}{\subsubsecindentlen}{4.8em}
 
 %%=============================================================
 %% CHAPTER & SECTION FORMAT
@@ -214,6 +223,7 @@ TAHUN 2026}
 \end{center}
 \end{spacing}
 \end{titlepage}
+\setcounter{page}{2}
 
 %%-------------------------------------------------------------
 %% HALAMAN PENGESAHAN

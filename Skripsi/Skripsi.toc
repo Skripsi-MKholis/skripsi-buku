@@ -1,15 +1,15 @@
 \babel@toc {indonesian}{}\relax 
-\contentsline {chapter}{PENGESAHAN PEMBIMBING}{i}{section*.1}%
-\contentsline {chapter}{PENGESAHAN PENGUJI}{ii}{section*.2}%
-\contentsline {chapter}{HALAMAN PERNYATAAN}{iii}{section*.3}%
-\contentsline {chapter}{KATA PENGANTAR}{iv}{section*.4}%
-\contentsline {chapter}{ABSTRAK}{vi}{section*.5}%
+\contentsline {chapter}{PENGESAHAN PEMBIMBING}{ii}{section*.1}%
+\contentsline {chapter}{PENGESAHAN PENGUJI}{iii}{section*.2}%
+\contentsline {chapter}{HALAMAN PERNYATAAN}{iv}{section*.3}%
+\contentsline {chapter}{KATA PENGANTAR}{v}{section*.4}%
+\contentsline {chapter}{ABSTRAK}{vii}{section*.5}%
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{ABSTRACT}{vii}{section*.6}%
+\contentsline {chapter}{ABSTRACT}{viii}{section*.6}%
 \babel@toc {indonesian}{}\relax 
-\contentsline {chapter}{DAFTAR ISI}{viii}{section*.7}%
-\contentsline {chapter}{DAFTAR GAMBAR}{xi}{section*.8}%
-\contentsline {chapter}{DAFTAR TABEL}{xiii}{section*.9}%
+\contentsline {chapter}{DAFTAR ISI}{ix}{section*.7}%
+\contentsline {chapter}{DAFTAR GAMBAR}{xii}{section*.8}%
+\contentsline {chapter}{DAFTAR TABEL}{xiv}{section*.9}%
 \contentsline {chapter}{\numberline {I}PENDAHULUAN}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Latar Belakang Masalah}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Rumusan Masalah}{3}{section.1.2}%
