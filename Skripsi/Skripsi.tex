@@ -750,15 +750,13 @@ Menggunakan \textit{Random Forest Regression} yang tidak memodelkan ketergantung
 
 Berdasarkan pemetaan pada Tabel~\ref{tab:sota}, dapat diidentifikasi bahwa belum terdapat penelitian yang secara bersamaan melakukan dua hal berikut: menerapkan LSTM untuk prediksi penjualan harian pada \textit{dataset} berskala kecil dengan karakteristik deret tidak sinambung, serta mengintegrasikan model hasil pelatihan ke dalam aplikasi \textit{Point of Sale} yang benar-benar digunakan pengguna akhir dan mengevaluasi kelayakannya terhadap ambang akurasi praktis. Kedua aspek inilah yang menjadi kebaruan penelitian ini.
 
-\section{Tinjauan Teoritis}
-
-\subsection{\textit{Point of Sale} (POS)}
+\section{\textit{Point of Sale} (POS)}
 
 \textit{Point of Sale} (POS) adalah sistem yang digunakan untuk mencatat, memproses, dan mendokumentasikan transaksi penjualan pada titik terjadinya transaksi. Dalam perkembangannya, aplikasi POS tidak lagi berfungsi semata sebagai mesin kasir digital, melainkan juga sebagai sistem informasi yang mengelola data produk, persediaan, pelanggan, dan pelaporan keuangan. Penerapan aplikasi POS pada usaha mikro, kecil, dan menengah terbukti membantu proses pencatatan transaksi menjadi lebih cepat, akurat, dan terdokumentasi, meskipun tingkat penerimaan penggunanya masih dipengaruhi oleh persepsi kemudahan dan kemanfaatan sistem [14]. Secara arsitektural, sistem POS umumnya terdiri atas modul autentikasi pengguna, modul manajemen produk, modul transaksi, modul persediaan, dan modul pelaporan [15].
 
 Data transaksi yang dihasilkan aplikasi POS secara berkelanjutan memiliki sifat deret waktu, yakni terurut berdasarkan waktu dan memiliki ketergantungan antarpengamatan [16]. Sifat inilah yang membuka peluang pemanfaatan data POS untuk keperluan peramalan, sehingga sistem tidak hanya bersifat \textit{descriptive} (mencatat apa yang telah terjadi) tetapi juga \textit{predictive} (memperkirakan apa yang akan terjadi), sebagaimana telah diterapkan pada sistem POS ritel yang menyertakan modul prediksi penjualan [10], [13].
 
-\subsection{Peramalan Deret Waktu (\textit{Time Series Forecasting})}
+\section{Peramalan Deret Waktu (\textit{Time Series Forecasting})}
 
 Deret waktu adalah rangkaian pengamatan suatu variabel yang dicatat secara berurutan dalam interval waktu yang tetap. Peramalan deret waktu bertujuan memperkirakan nilai pengamatan pada periode mendatang berdasarkan pola yang terkandung pada pengamatan historisnya [16]. Secara umum, sebuah deret waktu dapat diuraikan menjadi empat komponen, yaitu tren (\textit{trend}), musiman (\textit{seasonality}), siklus (\textit{cyclical}), dan komponen tak beraturan (\textit{irregular} atau \textit{noise}) [16], [17].
 
@@ -766,7 +764,7 @@ Suatu deret waktu dapat memuat lebih dari satu periode musiman sekaligus, sehing
 
 Pendekatan peramalan secara garis besar terbagi menjadi tiga kelompok. \textit{Pertama}, pendekatan statistik klasik seperti \textit{moving average}, \textit{exponential smoothing}, ARIMA, dan SARIMA, yang mengasumsikan hubungan linear antarpengamatan [17]. \textit{Kedua}, pendekatan \textit{machine learning} seperti \textit{Random Forest}, \textit{Support Vector Regression}, dan \textit{Gradient Boosting}, yang memperlakukan peramalan sebagai persoalan regresi dengan fitur temporal yang direkayasa secara manual [13]. \textit{Ketiga}, pendekatan \textit{deep learning} seperti RNN, LSTM, dan GRU, yang mampu mempelajari representasi temporal secara otomatis tanpa rekayasa fitur eksplisit [2], [4]. Perbandingan lintas ketiga kelompok pendekatan tersebut pada kompetisi peramalan berskala besar menunjukkan bahwa tidak ada satu kelompok yang unggul secara mutlak, sehingga pemilihannya bergantung pada karakteristik dan ukuran data yang tersedia [9].
 
-\subsection{Metode \textit{Seasonal-Naive}}
+\section{Metode \textit{Seasonal-Naive}}
 
 \textit{Seasonal-naive} adalah metode peramalan paling sederhana untuk data bermusiman, yang memperkirakan nilai suatu periode sama dengan nilai pada periode musiman terakhir yang bersesuaian [12]. Secara matematis, prediksi untuk waktu $t+h$ dirumuskan sebagai:
 \begin{equation}
@@ -777,7 +775,7 @@ Pendekatan peramalan secara garis besar terbagi menjadi tiga kelompok. \textit{P
 
 Meskipun sederhana, metode ini terbukti kompetitif pada deret waktu pendek atau sangat bergejolak, sebagaimana ditunjukkan pengalaman kompetisi peramalan berskala besar [9]. Pada penelitian ini, metode \textit{Seasonal-Naive} menjadi metode penyaji pada layanan API produksi (Subbab~4.3.3).
 
-\subsection{\textit{Recurrent Neural Network} (RNN)}
+\section{\textit{Recurrent Neural Network} (RNN)}
 
 \textit{Recurrent Neural Network} adalah arsitektur jaringan saraf tiruan yang dirancang untuk memproses data sekuensial dengan cara mempertahankan keadaan tersembunyi (\textit{hidden state}) yang diperbarui pada setiap langkah waktu [2]. Pada langkah waktu $t$, keadaan tersembunyi dihitung sebagai [2]:
 \begin{equation}
@@ -788,7 +786,7 @@ Meskipun sederhana, metode ini terbukti kompetitif pada deret waktu pendek atau 
 
 Kelemahan utama RNN konvensional adalah masalah \textit{vanishing gradient}, yaitu mengecilnya nilai gradien secara eksponensial ketika dipropagasikan mundur melintasi banyak langkah waktu. Akibatnya, RNN kesulitan mempelajari ketergantungan jangka panjang [2].
 
-\subsection{\textit{Long Short-Term Memory} (LSTM)}
+\section{\textit{Long Short-Term Memory} (LSTM)}
 
 \textit{Long Short-Term Memory} diperkenalkan oleh Hochreiter dan Schmidhuber sebagai pengembangan RNN yang mengatasi masalah \textit{vanishing gradient} melalui penambahan sel memori (\textit{cell state}) dan tiga mekanisme gerbang (\textit{gating mechanism}) [2]. Sel memori berfungsi sebagai jalur informasi yang memungkinkan gradien mengalir tanpa mengalami peluruhan berlebih, sedangkan gerbang mengendalikan informasi mana yang dibuang, disimpan, dan dikeluarkan.
 
@@ -838,7 +836,7 @@ Gerbang keluaran menentukan bagian sel memori yang akan diteruskan sebagai keada
 
 Melalui mekanisme tersebut, LSTM mampu mempelajari pola berulang berjangka panjang seperti musiman mingguan pada data penjualan. Sejumlah penelitian membuktikan efektivitasnya pada peramalan penjualan ritel, baik dalam bentuk LSTM tunggal dengan optimasi \textit{hyperparameter} [3] maupun dalam bentuk arsitektur hibrida dengan CNN [1], [4].
 
-\subsection{Praproses Data}
+\section{Praproses Data}
 
 \noindent\textbf{a. Normalisasi}
 
@@ -855,7 +853,7 @@ Data deret waktu univariat perlu diubah menjadi format pembelajaran terbimbing m
 
 Berbeda dengan data yang tidak berurutan, pembagian data deret waktu tidak boleh dilakukan secara acak karena akan menimbulkan kebocoran informasi masa depan (\textit{data leakage}). Pembagian dilakukan secara kronologis, dengan data terawal sebagai data latih dan data terakhir sebagai data uji [12].
 
-\subsection{Metrik Evaluasi}
+\section{Metrik Evaluasi}
 
 Evaluasi akurasi model peramalan dalam penelitian ini menggunakan metrik berikut, yang mengacu pada tinjauan Hyndman dan Koehler mengenai ukuran akurasi peramalan [14], dengan $y_i$ sebagai nilai aktual, $\hat{y}_i$ sebagai nilai prediksi, dan $n$ sebagai jumlah pengamatan.
 
@@ -889,13 +887,13 @@ Sebagai konvensi implementasi, apabila penyebut bernilai nol karena nilai aktual
 
 Selain ketiga metrik di atas, penelitian ini menetapkan ambang kelayakan praktis sMAPE~$<$~20\% sebagai kriteria kelayakan operasional model. Ambang ini merepresentasikan toleransi galat prediksi yang masih dapat diterima untuk mendukung keputusan operasional harian (volume produksi, pengadaan bahan baku) pada usaha berskala kecil; model dengan sMAPE di atas ambang tersebut dianggap belum cukup akurat untuk dijadikan dasar keputusan produksi secara langsung.
 
-\subsection{Flutter}
+\section{Flutter}
 
 Flutter adalah \textit{framework} pengembangan aplikasi lintas platform yang dikembangkan Google, menggunakan bahasa pemrograman Dart dan menerapkan pendekatan berbasis \textit{widget} dengan mesin perenderan tersendiri [20]. Pemilihan Flutter dalam penelitian ini didasarkan pada kemampuannya menghasilkan aplikasi dengan basis kode tunggal, performa mendekati aplikasi asli (\textit{native}), serta dukungan ekosistem pustaka yang memadai untuk integrasi dengan layanan basis data dan antarmuka pemrograman aplikasi (API).
 
-\subsection{Pengujian \textit{Black Box}}
+\section{Pengujian \textit{Black Box}}
 
-Pengujian \textit{black box}, atau disebut juga \textit{behavioral testing}, adalah metode pengujian yang berfokus pada kesesuaian antara masukan dan keluaran sistem berdasarkan spesifikasi fungsional, tanpa memperhatikan struktur kode maupun logika internal program [21]. Pengujian ini diarahkan untuk menemukan kesalahan berupa fungsi yang tidak benar atau tidak tersedia, kesalahan antarmuka, kesalahan akses basis data, serta kesalahan perilaku dan kinerja sistem [21], dengan teknik perancangan kasus uji yang lazim digunakan meliputi \textit{equivalence partitioning} dan \textit{boundary value analysis} [22], [23]. Dalam penelitian ini, pengujian \textit{black box} diterapkan untuk memverifikasi fungsionalitas aplikasi \textit{Point of Sale} yang dibangun, meliputi modul autentikasi pengguna, manajemen produk, transaksi penjualan, pengelolaan persediaan, pelaporan, serta modul prediksi penjualan harian, dengan setiap kasus uji mencantumkan skenario pengujian, masukan, hasil yang diharapkan, hasil yang diperoleh, dan simpulan berupa ``berhasil'' atau ``gagal''. Metode ini dipilih karena tujuan pengujian adalah memastikan seluruh fungsi aplikasi berperilaku sesuai spesifikasi kebutuhan dari sudut pandang pengguna akhir, sehingga penilaian akurasi model prediksi tidak termasuk dalam cakupan pengujian ini melainkan dilakukan secara terpisah menggunakan metrik yang telah diuraikan pada Subbab 2.2.8.
+Pengujian \textit{black box}, atau disebut juga \textit{behavioral testing}, adalah metode pengujian yang berfokus pada kesesuaian antara masukan dan keluaran sistem berdasarkan spesifikasi fungsional, tanpa memperhatikan struktur kode maupun logika internal program [21]. Pengujian ini diarahkan untuk menemukan kesalahan berupa fungsi yang tidak benar atau tidak tersedia, kesalahan antarmuka, kesalahan akses basis data, serta kesalahan perilaku dan kinerja sistem [21], dengan teknik perancangan kasus uji yang lazim digunakan meliputi \textit{equivalence partitioning} dan \textit{boundary value analysis} [22], [23]. Dalam penelitian ini, pengujian \textit{black box} diterapkan untuk memverifikasi fungsionalitas aplikasi \textit{Point of Sale} yang dibangun, meliputi modul autentikasi pengguna, manajemen produk, transaksi penjualan, pengelolaan persediaan, pelaporan, serta modul prediksi penjualan harian, dengan setiap kasus uji mencantumkan skenario pengujian, masukan, hasil yang diharapkan, hasil yang diperoleh, dan simpulan berupa ``berhasil'' atau ``gagal''. Metode ini dipilih karena tujuan pengujian adalah memastikan seluruh fungsi aplikasi berperilaku sesuai spesifikasi kebutuhan dari sudut pandang pengguna akhir, sehingga penilaian akurasi model prediksi tidak termasuk dalam cakupan pengujian ini melainkan dilakukan secara terpisah menggunakan metrik yang telah diuraikan pada Subbab 2.8.
 
 %%=============================================================
 %% BAB III - METODOLOGI PENELITIAN
@@ -1701,7 +1699,7 @@ Data tidak digunakan dalam bentuk mentah, melainkan melalui penyaringan dan agre
 \end{tabularx}
 \end{table}
 
-Berdasarkan Tabel~\ref{tab:struktur_data}, kolom \textit{invoice\_id}, \textit{created\_at}, \textit{is\_paid}, dan \textit{total} merupakan atribut asli basis data EatsTEDI yang menjadi bahan penyaringan dan agregasi, sedangkan kolom \textit{date} dan \textit{revenue} dihasilkan pada tahap praproses. Kolom \textit{revenue} menjadi satu-satunya variabel yang dimodelkan, sehingga \textit{dataset} final berbentuk deret waktu univariat dengan 313 titik pengamatan. Pembagian data latih dan uji dilakukan secara kronologis, bukan acak, guna menghindari kebocoran informasi masa depan sebagaimana dijelaskan pada Subbab~2.2.6.
+Berdasarkan Tabel~\ref{tab:struktur_data}, kolom \textit{invoice\_id}, \textit{created\_at}, \textit{is\_paid}, dan \textit{total} merupakan atribut asli basis data EatsTEDI yang menjadi bahan penyaringan dan agregasi, sedangkan kolom \textit{date} dan \textit{revenue} dihasilkan pada tahap praproses. Kolom \textit{revenue} menjadi satu-satunya variabel yang dimodelkan, sehingga \textit{dataset} final berbentuk deret waktu univariat dengan 313 titik pengamatan. Pembagian data latih dan uji dilakukan secara kronologis, bukan acak, guna menghindari kebocoran informasi masa depan sebagaimana dijelaskan pada Subbab~2.7.
 
 Metode pengumpulan data dalam penelitian ini dilakukan melalui tahapan berikut:
 \begin{enumerate}[label=\alph*.]
@@ -1879,7 +1877,7 @@ Gambar~\ref{fig:sel_lstm} menunjukkan proses pembaruan \textit{cell state} dan \
 \textit{Flowchart} ini menunjukkan bahwa sel LSTM bekerja melalui tiga gerbang dalam mengatur aliran informasi antar-langkah waktu, sehingga model mampu mempelajari pola autokorelasi jangka pendek pada deret waktu penjualan harian.
 \subsection{Perhitungan Metrik Evaluasi Pengujian}
 
-Proses evaluasi menghasilkan nilai kesalahan prediksi untuk setiap data uji berdasarkan perbandingan antara nilai aktual $Y_t$ dan nilai prediksi $\hat{Y}_t$ pada skala nominal Rupiah. Penelitian ini menggunakan tiga metrik evaluasi, yaitu \textit{Mean Absolute Error} (MAE), \textit{Root Mean Squared Error} (RMSE), dan \textit{symmetric Mean Absolute Percentage Error} (sMAPE), yang landasan teorinya telah dijabarkan pada Subbab~2.2.7. Perhitungan ketiga metrik tersebut dirumuskan sebagai berikut.
+Proses evaluasi menghasilkan nilai kesalahan prediksi untuk setiap data uji berdasarkan perbandingan antara nilai aktual $Y_t$ dan nilai prediksi $\hat{Y}_t$ pada skala nominal Rupiah. Penelitian ini menggunakan tiga metrik evaluasi, yaitu \textit{Mean Absolute Error} (MAE), \textit{Root Mean Squared Error} (RMSE), dan \textit{symmetric Mean Absolute Percentage Error} (sMAPE), yang landasan teorinya telah dijabarkan pada Subbab~2.8. Perhitungan ketiga metrik tersebut dirumuskan sebagai berikut.
 
 \begin{equation}
     \text{MAE} = \frac{1}{N}\sum_{t=1}^{N}\left|Y_t - \hat{Y}_t\right|
