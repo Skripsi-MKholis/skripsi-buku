@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.26)  27 AUG 2026 08:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.26)  27 AUG 2026 08:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1325,85 +1325,49 @@ Package pdftex.def Info: gambar/ui_18_riwayat_analisis.png  used on input line 2
 (pdftex.def)             Requested size: 159.32532pt x 354.05626pt.
  [104 <./gambar/ui_17a_smart_analitik.png> <./gambar/ui_17b_smart_analitik.png>] [105 <./gambar/ui_18_riwayat_analisis.png>] [106] [107]
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <10> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 2311.
- [108] [109]
-
-Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2337.
-See the caption package documentation for explanation.
-
-[110] [111] [112]
-
-Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2418.
-See the caption package documentation for explanation.
-
-[113] [114]
-
-Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2454.
-See the caption package documentation for explanation.
-
-[115]
-<Gambar/lstm_harian_disederhanakan_plot_kurva_training.png, id=1501, 931.5603pt x 281.853pt>
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 2312.
+ [108] [109] [110] [111] [112] [113] [114]
+<Gambar/lstm_harian_disederhanakan_plot_kurva_training.png, id=1500, 931.5603pt x 281.853pt>
 File: Gambar/lstm_harian_disederhanakan_plot_kurva_training.png Graphic file (type png)
 <use Gambar/lstm_harian_disederhanakan_plot_kurva_training.png>
-Package pdftex.def Info: Gambar/lstm_harian_disederhanakan_plot_kurva_training.png  used on input line 2463.
+Package pdftex.def Info: Gambar/lstm_harian_disederhanakan_plot_kurva_training.png  used on input line 2469.
 (pdftex.def)             Requested size: 278.83578pt x 84.363pt.
- [116 <./Gambar/lstm_harian_disederhanakan_plot_kurva_training.png>] [117]
-
-Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2506.
-See the caption package documentation for explanation.
-
-[118]
-
-Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2532.
-See the caption package documentation for explanation.
-
-[119] [120]
-<Gambar/lstm_harian_hybrid_residual_plot_1.png, id=1579, 1004.553pt x 281.853pt>
+ [115 <./Gambar/lstm_harian_disederhanakan_plot_kurva_training.png>] [116] [117] [118]
+<Gambar/lstm_harian_hybrid_residual_plot_1.png, id=1575, 1004.553pt x 281.853pt>
 File: Gambar/lstm_harian_hybrid_residual_plot_1.png Graphic file (type png)
 <use Gambar/lstm_harian_hybrid_residual_plot_1.png>
-Package pdftex.def Info: Gambar/lstm_harian_hybrid_residual_plot_1.png  used on input line 2561.
+Package pdftex.def Info: Gambar/lstm_harian_hybrid_residual_plot_1.png  used on input line 2571.
 (pdftex.def)             Requested size: 338.59023pt x 94.9987pt.
- [121 <./Gambar/lstm_harian_hybrid_residual_plot_1.png>] [122]
-
-Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2598.
-See the caption package documentation for explanation.
-
-[123]
-<Gambar/evaluasi_multiseed_standalone_plot_1.png, id=1620, 570.933pt x 354.123pt>
+ [119 <./Gambar/lstm_harian_hybrid_residual_plot_1.png>] [120] [121]
+<Gambar/evaluasi_multiseed_standalone_plot_1.png, id=1619, 570.933pt x 354.123pt>
 File: Gambar/evaluasi_multiseed_standalone_plot_1.png Graphic file (type png)
 <use Gambar/evaluasi_multiseed_standalone_plot_1.png>
-Package pdftex.def Info: Gambar/evaluasi_multiseed_standalone_plot_1.png  used on input line 2620.
+Package pdftex.def Info: Gambar/evaluasi_multiseed_standalone_plot_1.png  used on input line 2632.
 (pdftex.def)             Requested size: 298.75394pt x 185.30675pt.
- [124] [125 <./Gambar/evaluasi_multiseed_standalone_plot_1.png>] [126]
-Overfull \hbox (0.59213pt too wide) in paragraph at lines 2664--2664
+ [122] [123 <./Gambar/evaluasi_multiseed_standalone_plot_1.png>] [124]
+Overfull \hbox (0.59213pt too wide) in paragraph at lines 2676--2676
  []|\T1/ptm/b/n/12 No.| 
  []
 
 
-Overfull \hbox (0.59213pt too wide) in paragraph at lines 2668--2668
+Overfull \hbox (0.59213pt too wide) in paragraph at lines 2680--2680
  []|\T1/ptm/b/n/12 No.| 
  []
 
-e:/SKRIPSI/Kholis/skripsi-buku/Skripsi/Skripsi.tex:2699: ignored error: Infinite glue shrinkage found in box being split [127] [128] [129] [130]
+e:/SKRIPSI/Kholis/skripsi-buku/Skripsi/Skripsi.tex:2711: ignored error: Infinite glue shrinkage found in box being split [125] [126] [127] [128]
 Overfull \vbox (32.04378pt too high) has occurred while \output is active []
 
- [131] [132] [133] [134] [135] [136] [137] [138]
+ [129] [130] [131] [132] [133] [134] [135] [136]
 Bab V.
-[139
+[137
 
-] [140] [141] [142] [143] [144]
+] [138] [139] [140] [141] [142]
 
 pdfTeX warning: pdflatex (file ../Lampiran/Form Revisi Sempro.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<../Lampiran/Form Revisi Sempro.pdf, id=1738, 597.23125pt x 844.15375pt>
+<../Lampiran/Form Revisi Sempro.pdf, id=1743, 597.23125pt x 844.15375pt>
 File: ../Lampiran/Form Revisi Sempro.pdf Graphic file (type pdf)
 <use ../Lampiran/Form Revisi Sempro.pdf>
-Package pdftex.def Info: ../Lampiran/Form Revisi Sempro.pdf  used on input line 2952.
+Package pdftex.def Info: ../Lampiran/Form Revisi Sempro.pdf  used on input line 2964.
 (pdftex.def)             Requested size: 597.22978pt x 844.15169pt.
 
 
@@ -1411,67 +1375,119 @@ pdfTeX warning: pdflatex (file ../Lampiran/Form Revisi Sempro.pdf): PDF inclusio
 
 
 pdfTeX warning: pdflatex (file ../Lampiran/Form Revisi Sempro.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<../Lampiran/Form Revisi Sempro.pdf, id=1740, page=1, 597.23125pt x 844.15375pt>
+<../Lampiran/Form Revisi Sempro.pdf, id=1745, page=1, 597.23125pt x 844.15375pt>
 File: ../Lampiran/Form Revisi Sempro.pdf Graphic file (type pdf)
 <use ../Lampiran/Form Revisi Sempro.pdf, page 1>
-Package pdftex.def Info: ../Lampiran/Form Revisi Sempro.pdf , page1 used on input line 2952.
+Package pdftex.def Info: ../Lampiran/Form Revisi Sempro.pdf , page1 used on input line 2964.
 (pdftex.def)             Requested size: 597.54874pt x 845.06621pt.
 File: ../Lampiran/Form Revisi Sempro.pdf Graphic file (type pdf)
 <use ../Lampiran/Form Revisi Sempro.pdf, page 1>
-Package pdftex.def Info: ../Lampiran/Form Revisi Sempro.pdf , page1 used on input line 2952.
+Package pdftex.def Info: ../Lampiran/Form Revisi Sempro.pdf , page1 used on input line 2964.
 (pdftex.def)             Requested size: 597.25711pt x 844.19032pt.
 File: ../Lampiran/Form Revisi Sempro.pdf Graphic file (type pdf)
 <use ../Lampiran/Form Revisi Sempro.pdf, page 1>
-Package pdftex.def Info: ../Lampiran/Form Revisi Sempro.pdf , page1 used on input line 2952.
+Package pdftex.def Info: ../Lampiran/Form Revisi Sempro.pdf , page1 used on input line 2964.
 (pdftex.def)             Requested size: 597.25711pt x 844.19032pt.
 File: ../Lampiran/Form Revisi Sempro.pdf Graphic file (type pdf)
 <use ../Lampiran/Form Revisi Sempro.pdf, page 1>
-Package pdftex.def Info: ../Lampiran/Form Revisi Sempro.pdf , page1 used on input line 2952.
+Package pdftex.def Info: ../Lampiran/Form Revisi Sempro.pdf , page1 used on input line 2964.
 (pdftex.def)             Requested size: 597.25711pt x 844.19032pt.
 File: ../Lampiran/Form Revisi Sempro.pdf Graphic file (type pdf)
 <use ../Lampiran/Form Revisi Sempro.pdf, page 1>
-Package pdftex.def Info: ../Lampiran/Form Revisi Sempro.pdf , page1 used on input line 2952.
+Package pdftex.def Info: ../Lampiran/Form Revisi Sempro.pdf , page1 used on input line 2964.
 (pdftex.def)             Requested size: 597.25711pt x 844.19032pt.
-[145
+[143
 
  <../Lampiran/Form Revisi Sempro.pdf>]
 
 pdfTeX warning: pdflatex (file ../Lampiran/Form Revisi Sempro.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<../Lampiran/Form Revisi Sempro.pdf, id=1756, page=2, 597.23125pt x 844.15375pt>
+<../Lampiran/Form Revisi Sempro.pdf, id=1762, page=2, 597.23125pt x 844.15375pt>
 File: ../Lampiran/Form Revisi Sempro.pdf Graphic file (type pdf)
 <use ../Lampiran/Form Revisi Sempro.pdf, page 2>
-Package pdftex.def Info: ../Lampiran/Form Revisi Sempro.pdf , page2 used on input line 2952.
+Package pdftex.def Info: ../Lampiran/Form Revisi Sempro.pdf , page2 used on input line 2964.
 (pdftex.def)             Requested size: 597.25711pt x 844.19032pt.
 File: ../Lampiran/Form Revisi Sempro.pdf Graphic file (type pdf)
 <use ../Lampiran/Form Revisi Sempro.pdf, page 2>
-Package pdftex.def Info: ../Lampiran/Form Revisi Sempro.pdf , page2 used on input line 2952.
+Package pdftex.def Info: ../Lampiran/Form Revisi Sempro.pdf , page2 used on input line 2964.
 (pdftex.def)             Requested size: 597.25711pt x 844.19032pt.
 File: ../Lampiran/Form Revisi Sempro.pdf Graphic file (type pdf)
 <use ../Lampiran/Form Revisi Sempro.pdf, page 2>
-Package pdftex.def Info: ../Lampiran/Form Revisi Sempro.pdf , page2 used on input line 2952.
+Package pdftex.def Info: ../Lampiran/Form Revisi Sempro.pdf , page2 used on input line 2964.
 (pdftex.def)             Requested size: 597.25711pt x 844.19032pt.
-[146
+[144
 
  <../Lampiran/Form Revisi Sempro.pdf>] (Skripsi.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
-Package rerunfilecheck Info: File `Skripsi.out' has not changed.
-(rerunfilecheck)             Checksum: 4B67DC2EE917240A5AA94E37DD1FF1B6;16411.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `Skripsi.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Skripsi.out':
+(rerunfilecheck)             Before: 4B67DC2EE917240A5AA94E37DD1FF1B6;16411
+(rerunfilecheck)             After:  405F110C3BAFFBF7BDCDDF9602AFCF1E;16411.
  ) 
 Here is how much of TeX's memory you used:
- 31745 strings out of 467871
- 591900 string characters out of 5428443
- 1080329 words of memory out of 5000000
+ 31757 strings out of 467871
+ 592105 string characters out of 5428443
+ 1107337 words of memory out of 5000000
  59402 multiletter control sequences out of 15000+600000
  707018 words of font info for 156 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 88i,17n,94p,1900b,2546s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 88i,17n,94p,1900b,1884s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{table.caption.83} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{table.caption.81} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{table.caption.79} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{table.caption.77} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{table.caption.74} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{figure.4.24} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{figure.4.22} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{figure.4.21} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{figure.caption.76} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{figure.4.19} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{figure.4.18} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{figure.4.17} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section*.85} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{section*.84} has been referenced but does not exist, replaced by a fixed one
+
 <C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/courier/ucrb8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/courier/ucrro8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/symbol/usyr.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Skripsi.pdf (160 pages, 11171970 bytes).
+Output written on Skripsi.pdf (158 pages, 11171646 bytes).
 PDF statistics:
- 1943 PDF objects out of 2073 (max. 8388607)
- 602 named destinations out of 1000 (max. 500000)
+ 1952 PDF objects out of 2073 (max. 8388607)
+ 614 named destinations out of 1000 (max. 500000)
  976 words of extra memory for PDF output out of 10000 (max. 10000000)
 

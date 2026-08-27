@@ -52,13 +52,13 @@
 \contentsline {figure}{\numberline {4.14}{\ignorespaces Implementasi Halaman Laporan Analitik}}{103}{figure.caption.71}%
 \contentsline {figure}{\numberline {4.15}{\ignorespaces Implementasi Halaman Prediksi Penjualan Harian (\textit {Smart Analytics})}}{104}{figure.caption.72}%
 \contentsline {figure}{\numberline {4.16}{\ignorespaces Implementasi Halaman Riwayat Analisis}}{105}{figure.caption.73}%
-\contentsline {figure}{\numberline {4.17}{\ignorespaces Implementasi Endpoint Prediksi Harian Seasonal-Naive (\textit {app.py})}}{110}{figure.4.17}%
-\contentsline {figure}{\numberline {4.18}{\ignorespaces Pra-pemrosesan Data: Filter Hari Aktif, Log-Return, dan Fitur Siklik}}{113}{figure.4.18}%
-\contentsline {figure}{\numberline {4.19}{\ignorespaces Konstruksi Arsitektur LSTM Tersederhanakan dan Konfigurasi Pelatihan}}{115}{figure.4.19}%
-\contentsline {figure}{\numberline {4.20}{\ignorespaces Kurva Kerugian Pelatihan (\textit {Training Loss Curve}) Model LSTM}}{116}{figure.caption.76}%
-\contentsline {figure}{\numberline {4.21}{\ignorespaces Prediksi Rekursif dengan \textit {Clipping}, \textit {Damping}, dan \textit {Safety Rail}}}{118}{figure.4.21}%
-\contentsline {figure}{\numberline {4.22}{\ignorespaces Implementasi Fungsi Metrik Evaluasi sMAPE dan MASE}}{119}{figure.4.22}%
-\contentsline {figure}{\numberline {4.23}{\ignorespaces Grafik Pendapatan Aktual vs. Prediksi Model LSTM Hybrid}}{121}{figure.caption.78}%
-\contentsline {figure}{\numberline {4.24}{\ignorespaces Prosedur Evaluasi \textit {Multi-Seed} (10 Kali Pelatihan Ulang)}}{123}{figure.4.24}%
-\contentsline {figure}{\numberline {4.25}{\ignorespaces Boxplot Distribusi MAE Hasil Pengujian \textit {Multi-Seed}}}{125}{figure.caption.80}%
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Implementasi Endpoint Prediksi Harian Seasonal-Naive (\textit {app.py})}}{109}{figure.caption.74}%
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Pra-pemrosesan Data: Filter Hari Aktif, Log-Return, dan Fitur Siklik}}{113}{figure.caption.77}%
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Konstruksi Arsitektur LSTM Tersederhanakan dan Konfigurasi Pelatihan}}{114}{figure.caption.78}%
+\contentsline {figure}{\numberline {4.20}{\ignorespaces Kurva Kerugian Pelatihan (\textit {Training Loss Curve}) Model LSTM}}{115}{figure.caption.79}%
+\contentsline {figure}{\numberline {4.21}{\ignorespaces Prediksi Rekursif dengan \textit {Clipping}, \textit {Damping}, dan \textit {Safety Rail}}}{116}{figure.caption.80}%
+\contentsline {figure}{\numberline {4.22}{\ignorespaces Implementasi Fungsi Metrik Evaluasi sMAPE dan MASE}}{118}{figure.caption.81}%
+\contentsline {figure}{\numberline {4.23}{\ignorespaces Grafik Pendapatan Aktual vs. Prediksi Model LSTM Hybrid}}{119}{figure.caption.83}%
+\contentsline {figure}{\numberline {4.24}{\ignorespaces Prosedur Evaluasi \textit {Multi-Seed} (10 Kali Pelatihan Ulang)}}{121}{figure.caption.84}%
+\contentsline {figure}{\numberline {4.25}{\ignorespaces Boxplot Distribusi MAE Hasil Pengujian \textit {Multi-Seed}}}{123}{figure.caption.86}%
 \addvspace {10\p@ }

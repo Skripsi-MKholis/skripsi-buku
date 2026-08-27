@@ -25,12 +25,12 @@
 \contentsline {table}{\numberline {3.18}{\ignorespaces Skenario 2: Pengujian Stabilitas \textit {Multi-Seed}}}{83}{table.caption.57}%
 \contentsline {table}{\numberline {3.19}{\ignorespaces Skenario Pengujian \textit {Black Box}}}{84}{table.3.19}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Statistik Ringkas Dataset Pendapatan Harian}}{110}{table.caption.74}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Pembagian Dataset dan Dimensi Sequence}}{112}{table.caption.75}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces Perbandingan Performa pada Data Uji (\textit {One-Step-Ahead})}}{120}{table.caption.77}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces Statistik Performa LSTM Hybrid pada 10 Seed}}{124}{table.caption.79}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces Rekapitulasi Hasil Pengujian Kedua Skenario}}{126}{table.caption.81}%
-\contentsline {table}{\numberline {4.6}{\ignorespaces Hasil Pengujian Black Box}}{127}{table.4.6}%
-\contentsline {table}{\numberline {4.7}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{129}{table.caption.82}%
-\contentsline {table}{\numberline {4.8}{\ignorespaces Hasil Pengujian White Box}}{131}{table.caption.83}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Statistik Ringkas Dataset Pendapatan Harian}}{110}{table.caption.75}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Pembagian Dataset dan Dimensi Sequence}}{112}{table.caption.76}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Perbandingan Performa pada Data Uji (\textit {One-Step-Ahead})}}{119}{table.caption.82}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Statistik Performa LSTM Hybrid pada 10 Seed}}{122}{table.caption.85}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Rekapitulasi Hasil Pengujian Kedua Skenario}}{124}{table.caption.87}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Hasil Pengujian Black Box}}{125}{table.4.6}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces Hasil Pengujian Mekanisme Sinkronisasi}}{127}{table.caption.88}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces Hasil Pengujian White Box}}{129}{table.caption.89}%
 \addvspace {10\p@ }
