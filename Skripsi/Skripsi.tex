@@ -2297,9 +2297,9 @@ Layanan API produksi menyediakan tujuh \textit{endpoint} REST dengan fungsi seba
 
 Aplikasi Flutter memanggil \textit{endpoint} tersebut secara langsung melalui HTTPS dengan \textit{payload} agregat penjualan tanpa informasi identitas pelanggan, kemudian menyimpan hasil analisis sebagai \textit{snapshot} pada tabel \textit{smart\_analytics\_snapshots} di Supabase.
 
-Inti implementasi \textit{endpoint} prediksi harian pada berkas \textit{app.py} disajikan pada Kode Program~\ref{lst:flask_daily} (dipersingkat). Metode \textit{Seasonal-Naive} dihitung dengan merata-ratakan $k$ kemunculan terakhir dari setiap hari kerja yang sama, dan tanggal prediksi dihasilkan dengan melewati hari tutup.
+Inti implementasi \textit{endpoint} prediksi harian pada berkas \textit{app.py} disajikan pada Gambar~\ref{fig:flask_daily} (dipersingkat). Metode \textit{Seasonal-Naive} dihitung dengan merata-ratakan $k$ kemunculan terakhir dari setiap hari kerja yang sama, dan tanggal prediksi dihasilkan dengan melewati hari tutup.
 
-\begin{lstlisting}[caption={Implementasi Endpoint Prediksi Harian Seasonal-Naive (\textit{app.py})}, label={lst:flask_daily}]
+\begin{lstlisting}
 @app.route('/api/predict/daily', methods=['GET', 'POST'])
 def predict_daily():
     data = request.get_json(silent=True) or {}
@@ -2334,6 +2334,8 @@ def predict_daily():
             "predicted_revenue_naive": int(round(naive_value))})
     return jsonify({"predictions": predictions}), 200
 \end{lstlisting}
+\captionof{figure}{Implementasi Endpoint Prediksi Harian Seasonal-Naive (\textit{app.py})}
+\label{fig:flask_daily}
 
 \section{Hasil Implementasi Praproses Data}
 
@@ -2384,9 +2386,9 @@ Uji (\textit{test}) & 48 & 41 & (41, 7, 8) \\ \hline
 \end{tabular}
 \end{table}
 
-Implementasi pra-pemrosesan data, meliputi penyaringan hari aktif, transformasi target \textit{log-return}, dan pengodean siklik fitur kalender, disajikan pada Kode Program~\ref{lst:preprocessing}.
+Implementasi pra-pemrosesan data, meliputi penyaringan hari aktif, transformasi target \textit{log-return}, dan pengodean siklik fitur kalender, disajikan pada Gambar~\ref{fig:preprocessing}.
 
-\begin{lstlisting}[caption={Pra-pemrosesan Data: Filter Hari Aktif, Log-Return, dan Fitur Siklik}, label={lst:preprocessing}]
+\begin{lstlisting}
 df = pd.read_csv(DAILY_CSV, parse_dates=['date'])
 # Hanya hari aktif (revenue > 0) yang dilatih ke model
 dfa = df[df['revenue'] > 0].copy() \
@@ -2413,6 +2415,8 @@ df_tr = dfa.iloc[:n_tr]
 df_va = dfa.iloc[n_tr:n_tr+n_va]
 df_te = dfa.iloc[n_tr+n_va:]
 \end{lstlisting}
+\captionof{figure}{Pra-pemrosesan Data: Filter Hari Aktif, Log-Return, dan Fitur Siklik}
+\label{fig:preprocessing}
 
 \section{Hasil Implementasi Mekanisme Prediksi}
 
@@ -2420,9 +2424,9 @@ Bagian ini memaparkan implementasi arsitektur model LSTM beserta skenario eksper
 
 \subsection{Implementasi Arsitektur Model LSTM}
 
-Arsitektur model prediksi yang diimplementasikan adalah LSTM satu lapis (\textit{single-layer LSTM}) dengan 24 \textit{hidden units}, diikuti oleh lapisan \textit{Dropout} dengan laju 0,1 untuk regularisasi, satu lapisan \textit{Dense} dengan 16 neuron beraktivasi \textit{Rectified Linear Unit} (ReLU), dan diakhiri oleh satu lapisan keluaran (\textit{output layer}) tunggal beraktivasi linear. Model ini dirancang secara minimalis dengan total parameter terlatih hanya sebanyak 3.585 parameter. Pemilihan model berkapasitas rendah ini didasarkan pada jumlah data latih yang sangat terbatas (212 sampel sequence), sehingga penggunaan model LSTM berkapasitas besar (\textit{stacked layers}) akan berisiko tinggi memicu kegagalan konvergensi pelatihan atau bias \textit{overfitting}. Proses optimasi menggunakan metode Adam dengan \textit{learning rate} awal sebesar $5 \times 10^{-4}$, fungsi kerugian (\textit{loss function}) MSE, serta didukung \textit{callbacks} \textit{EarlyStopping} dan \textit{ReduceLROnPlateau}. Konstruksi arsitektur model beserta konfigurasi pelatihannya disajikan pada Kode Program~\ref{lst:build_lstm}.
+Arsitektur model prediksi yang diimplementasikan adalah LSTM satu lapis (\textit{single-layer LSTM}) dengan 24 \textit{hidden units}, diikuti oleh lapisan \textit{Dropout} dengan laju 0,1 untuk regularisasi, satu lapisan \textit{Dense} dengan 16 neuron beraktivasi \textit{Rectified Linear Unit} (ReLU), dan diakhiri oleh satu lapisan keluaran (\textit{output layer}) tunggal beraktivasi linear. Model ini dirancang secara minimalis dengan total parameter terlatih hanya sebanyak 3.585 parameter. Pemilihan model berkapasitas rendah ini didasarkan pada jumlah data latih yang sangat terbatas (212 sampel sequence), sehingga penggunaan model LSTM berkapasitas besar (\textit{stacked layers}) akan berisiko tinggi memicu kegagalan konvergensi pelatihan atau bias \textit{overfitting}. Proses optimasi menggunakan metode Adam dengan \textit{learning rate} awal sebesar $5 \times 10^{-4}$, fungsi kerugian (\textit{loss function}) MSE, serta didukung \textit{callbacks} \textit{EarlyStopping} dan \textit{ReduceLROnPlateau}. Konstruksi arsitektur model beserta konfigurasi pelatihannya disajikan pada Gambar~\ref{fig:build_lstm}.
 
-\begin{lstlisting}[caption={Konstruksi Arsitektur LSTM Tersederhanakan dan Konfigurasi Pelatihan}, label={lst:build_lstm}]
+\begin{lstlisting}
 LOOK_BACK = 7   # jendela masukan: 7 hari aktif
 HORIZON   = 1   # prediksi 1 langkah ke depan
 UNITS     = 24
@@ -2447,6 +2451,8 @@ model = build_lstm()
 hist  = model.fit(X_tr, y_tr, validation_data=(X_va, y_va),
                   epochs=200, batch_size=16, callbacks=cb)
 \end{lstlisting}
+\captionof{figure}{Konstruksi Arsitektur LSTM Tersederhanakan dan Konfigurasi Pelatihan}
+\label{fig:build_lstm}
 
 \subsection{Hasil Pelatihan Model}
 
@@ -2461,9 +2467,9 @@ Pada konfigurasi akhir, pelatihan berjalan stabil dengan galat validasi menurun 
 
 \subsection{Implementasi Prediksi Rekursif Multi-Langkah}
 
-Untuk kebutuhan penyajian visualisasi ramalan penjualan harian selama 7 hari aktif ke depan secara rekursif (\textit{recursive forecasting}), model LSTM residual yang melakukan iterasi mandiri mengalami kerentanan berupa penumpukan kesalahan (\textit{error propagation}) di mana nilai prediksi meluruh secara eksponensial hingga bernilai sangat kecil dan tidak realistis. Setelah ditambahkan mekanisme pengaman berupa \textit{clipping} pada \textit{log-return} (dijepit antara persentil 10--90 data latih), \textit{damping factor} ($\phi = 0.7$) untuk meredam perubahan pada horizon yang jauh, serta \textit{safety rail} penahan nominal omzet harian aktif, grafik prediksi yang dihasilkan menjadi lebih stabil dan realistis. Implementasi inti dari fungsi prediksi rekursif beserta ketiga mekanisme pengaman tersebut disajikan pada Kode Program~\ref{lst:recursive}.
+Untuk kebutuhan penyajian visualisasi ramalan penjualan harian selama 7 hari aktif ke depan secara rekursif (\textit{recursive forecasting}), model LSTM residual yang melakukan iterasi mandiri mengalami kerentanan berupa penumpukan kesalahan (\textit{error propagation}) di mana nilai prediksi meluruh secara eksponensial hingga bernilai sangat kecil dan tidak realistis. Setelah ditambahkan mekanisme pengaman berupa \textit{clipping} pada \textit{log-return} (dijepit antara persentil 10--90 data latih), \textit{damping factor} ($\phi = 0.7$) untuk meredam perubahan pada horizon yang jauh, serta \textit{safety rail} penahan nominal omzet harian aktif, grafik prediksi yang dihasilkan menjadi lebih stabil dan realistis. Implementasi inti dari fungsi prediksi rekursif beserta ketiga mekanisme pengaman tersebut disajikan pada Gambar~\ref{fig:recursive}.
 
-\begin{lstlisting}[caption={Prediksi Rekursif dengan \textit{Clipping}, \textit{Damping}, dan \textit{Safety Rail}}, label={lst:recursive}]
+\begin{lstlisting}
 # Batas clip dari persentil 10-90 log-return data latih
 LR_LO, LR_HI = np.percentile(_train_logret, [10, 90])
 REV_FLOOR = np.percentile(_act_rev, 2)   # rail bawah
@@ -2497,13 +2503,15 @@ def forecast_hybrid_stable(model, dfa, scaler, features,
                      'prediksi_revenue': int(round(rev))})
     return pd.DataFrame(rows)
 \end{lstlisting}
+\captionof{figure}{Prediksi Rekursif dengan \textit{Clipping}, \textit{Damping}, dan \textit{Safety Rail}}
+\label{fig:recursive}
 
 Secara statistik, prediksi rekursif jangka panjang berbasis LSTM pada data terbatas ini akan dengan cepat meredam menuju nilai rata-rata historis (sifat \textit{mean-reverting}) dan menyerupai prediksi naif. Untuk diintegrasikan ke dalam fitur aplikasi riil kasir, metode prediksi statistik \textit{SARIMA} dan \textit{Seasonal-Naive} (rata-rata hari sejenis pada minggu sebelumnya) lebih direkomendasikan karena memberikan hasil prediksi multi-langkah yang jauh lebih stabil dan konsisten. Rekomendasi ini diwujudkan pada layanan API produksi, di mana \textit{endpoint} prediksi menyajikan metode \textit{Seasonal-Naive} ($k=4$) sebagai metode penyaji utama prediksi harian kepada aplikasi POS. Dalam penelitian skripsi ini, hasil evaluasi akurasi ilmiah tetap didasarkan pada pengujian satu langkah ke depan (\textit{one-step-ahead}), sedangkan visualisasi prediksi multi-langkah diposisikan murni sebagai ilustrasi fungsionalitas sistem.
 
 \subsection{Implementasi Fungsi Metrik Evaluasi}
-Sesuai rancangan pada Subbab~3.5.3, akurasi model diukur menggunakan empat metrik secara simultan, yaitu MAE, RMSE, sMAPE, dan MASE, dengan MASE sebagai acuan performa utama karena ternormalisasi terhadap galat naif \textit{in-sample}. MAPE konvensional tidak digunakan karena \textit{dataset} memuat hari aktif dengan pendapatan mendekati nol, yang menyebabkan galat persentase membesar tidak wajar (\textit{exploding MAPE}). Sebagai pembanding pada skema satu langkah ke depan digunakan \textit{Naive} (realisasi hari sebelumnya), \textit{Mean-7} (rata-rata tujuh hari aktif terakhir), \textit{Seasonal-Naive}, dan \textit{SARIMA} dengan skema \textit{rolling one-step}. Implementasi fungsi sMAPE dan MASE disajikan pada Kode Program~\ref{lst:metrics}.
+Sesuai rancangan pada Subbab~3.5.3, akurasi model diukur menggunakan empat metrik secara simultan, yaitu MAE, RMSE, sMAPE, dan MASE, dengan MASE sebagai acuan performa utama karena ternormalisasi terhadap galat naif \textit{in-sample}. MAPE konvensional tidak digunakan karena \textit{dataset} memuat hari aktif dengan pendapatan mendekati nol, yang menyebabkan galat persentase membesar tidak wajar (\textit{exploding MAPE}). Sebagai pembanding pada skema satu langkah ke depan digunakan \textit{Naive} (realisasi hari sebelumnya), \textit{Mean-7} (rata-rata tujuh hari aktif terakhir), \textit{Seasonal-Naive}, dan \textit{SARIMA} dengan skema \textit{rolling one-step}. Implementasi fungsi sMAPE dan MASE disajikan pada Gambar~\ref{fig:metrics}.
 
-\begin{lstlisting}[caption={Implementasi Fungsi Metrik Evaluasi sMAPE dan MASE}, label={lst:metrics}]
+\begin{lstlisting}
 def smape(y, yhat):
     # sMAPE: galat dibagi rata-rata |aktual| dan |prediksi|
     d = (np.abs(y) + np.abs(yhat)) / 2
@@ -2521,6 +2529,8 @@ def report(y, yhat, naive_mae, label):
             'smape': smape(y, yhat),
             'mase': mase(y, yhat, naive_mae)}
 \end{lstlisting}
+\captionof{figure}{Implementasi Fungsi Metrik Evaluasi sMAPE dan MASE}
+\label{fig:metrics}
 
 \section{Hasil Pengujian Model terhadap Skenario Pengujian}
 Subbab ini melaporkan hasil pengujian model prediksi terhadap kedua skenario pengujian yang telah dirancang pada Subbab~3.6. Seluruh pengukuran menggunakan metrik MAE, RMSE, sMAPE, dan MASE sebagaimana diimplementasikan pada Subbab~4.3.4.
@@ -2559,9 +2569,9 @@ Secara keseluruhan, hasil ini menunjukkan bahwa pada \textit{dataset} 313 hari a
 
 \subsection{Skenario 2: Pengujian Stabilitas Model melalui Multi-Seed}
 
-Meningkatnya sensitivitas performa model LSTM terhadap inisialisasi bobot acak awal pada data kecil mengharuskan pengujian dilakukan menggunakan pendekatan \textit{multi-seed evaluation} dengan melatih model sebanyak sepuluh kali menggunakan nilai \textit{seed} acak yang berbeda. Prosedur pengujian diimplementasikan sebagai perulangan pelatihan dengan pengaturan \textit{seed} eksplisit pada seluruh sumber keacakan (Python, NumPy, dan TensorFlow) sebagaimana disajikan pada Kode Program~\ref{lst:multiseed}. Ringkasan statistik hasil pengujian sepuluh \textit{seeds} tersebut disajikan pada Tabel \ref{tab:statistik_multiseed}.
+Meningkatnya sensitivitas performa model LSTM terhadap inisialisasi bobot acak awal pada data kecil mengharuskan pengujian dilakukan menggunakan pendekatan \textit{multi-seed evaluation} dengan melatih model sebanyak sepuluh kali menggunakan nilai \textit{seed} acak yang berbeda. Prosedur pengujian diimplementasikan sebagai perulangan pelatihan dengan pengaturan \textit{seed} eksplisit pada seluruh sumber keacakan (Python, NumPy, dan TensorFlow) sebagaimana disajikan pada Gambar~\ref{fig:multiseed}. Ringkasan statistik hasil pengujian sepuluh \textit{seeds} tersebut disajikan pada Tabel \ref{tab:statistik_multiseed}.
 
-\begin{lstlisting}[caption={Prosedur Evaluasi \textit{Multi-Seed} (10 Kali Pelatihan Ulang)}, label={lst:multiseed}]
+\begin{lstlisting}
 def set_seed(s):
     os.environ['PYTHONHASHSEED'] = str(s)
     random.seed(s); np.random.seed(s); tf.random.set_seed(s)
@@ -2585,6 +2595,8 @@ for s in range(N_SEEDS):   # N_SEEDS = 10
 
 res = pd.DataFrame(rows)   # rata-rata +- deviasi per metrik
 \end{lstlisting}
+\captionof{figure}{Prosedur Evaluasi \textit{Multi-Seed} (10 Kali Pelatihan Ulang)}
+\label{fig:multiseed}
 
 \begin{table}[H]
 \setstretch{1.2}
