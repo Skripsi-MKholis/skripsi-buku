@@ -579,7 +579,7 @@ Agar penelitian ini terarah dan terukur, ditetapkan batasan sebagai berikut:
 \begin{enumerate}
     \item Data yang digunakan adalah data transaksi platform EatsTEDI (DTEDI, Universitas Gadjah Mada) dengan rentang efektif 26 Agustus 2024--20 Juni 2026 (313 hari transaksi tercatat), dimodelkan secara \textit{univariat} pada total penjualan harian tanpa variabel eksogen (cuaca, promosi, harga) karena tidak tersedia pada \textit{dataset}.
     \item Prediksi dilakukan pada tingkat agregat penjualan harian, bukan pada tingkat \textit{item} atau kategori produk individual.
-    \item Metode peramalan dibatasi pada arsitektur LSTM; arsitektur lain (\textit{Transformer}, \textit{Temporal Fusion Transformer}) maupun teknik augmentasi data tidak diuji.
+    \item Metode peramalan dibatasi pada arsitektur LSTM, arsitektur lain (\textit{Transformer}, \textit{Temporal Fusion Transformer}) maupun teknik augmentasi data tidak diuji.
     \item Evaluasi performa menggunakan MAE, RMSE, dan sMAPE terhadap ambang kelayakan praktis sMAPE~$<$~20\%; MAPE konvensional tidak digunakan karena rentan menghasilkan galat persentase tidak representatif pada hari berpendapatan sangat rendah.
     \item Aplikasi POS dikembangkan untuk platform Android (Flutter), dengan model dilatih luring dan diintegrasikan sebagai layanan prediksi; pengembangan iOS dan pelatihan ulang otomatis (\textit{online}/\textit{incremental learning}) di luar cakupan. Pengujian dibatasi pada fungsional, struktural, dan akurasi model, tanpa pengukuran dampak ekonomi.
 \end{enumerate}
@@ -613,7 +613,7 @@ Bab ini memuat latar belakang masalah yang menjelaskan urgensi prediksi penjuala
 Bab ini menyajikan \textit{state of the art} penelitian terdahulu mengenai peramalan penjualan dan sistem \textit{Point of Sale}, serta landasan teori yang meliputi konsep peramalan deret waktu, arsitektur \textit{Long Short-Term Memory}, metrik evaluasi prediksi, teknologi pengembangan aplikasi, serta metode pemodelan dan pengujian perangkat lunak.}
 
 \babsistematika{BAB III}{METODOLOGI PENELITIAN}{%
-Bab ini membahas metodologi penelitian yang digunakan, mencakup sumber data dan proses pengumpulan \textit{dataset} EatsTEDI, variabel penelitian, \textit{preprocessing} data, rancangan sistem berupa diagram UML, perancangan antarmuka, rancangan algoritma \textit{Long Short-Term Memory}, serta teknik pengujian dan indikator keberhasilan penelitian.}
+Dalam bab ini berisi penjelasan mengenai tahapan penelitian serta perancangan aplikasi \textit{Point of Sale} dengan fitur prediksi penjualan harian yang akan dibangun. Perancangan aplikasi meliputi diagram \textit{use case}, diagram aktivitas, dan perancangan antarmuka pengguna, serta perancangan metode penelitian yang mencakup sumber data dan proses pengumpulan \textit{dataset} EatsTEDI, \textit{preprocessing} data, perancangan algoritma \textit{Long Short-Term Memory}, serta teknik pengujian dan indikator keberhasilan penelitian.}
 
 \babsistematika{BAB IV}{HASIL DAN PEMBAHASAN}{%
 Bab ini membahas hasil implementasi sistem secara menyeluruh, mencakup tampilan antarmuka aplikasi \textit{Point of Sale} dan layanan API prediksi, tahapan \textit{preprocessing} data, implementasi dan pelatihan model \textit{Long Short-Term Memory}, hasil evaluasi model terhadap ambang kelayakan praktis, serta hasil pengujian fungsional sistem beserta pembahasan temuan dan keterbatasan penelitian.}
