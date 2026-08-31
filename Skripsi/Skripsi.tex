@@ -860,11 +860,13 @@ Evaluasi akurasi model peramalan dalam penelitian ini menggunakan metrik berikut
 \noindent\textbf{a. \textit{Mean Absolute Error} (MAE)}
 \begin{equation}
     \text{MAE} = \frac{1}{n}\sum_{i=1}^{n} |y_i - \hat{y}_i|
+    \label{eq:mae}
 \end{equation}
 
 \noindent\textbf{b. \textit{Root Mean Squared Error} (RMSE)}
 \begin{equation}
     \text{RMSE} = \sqrt{\frac{1}{n}\sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
+    \label{eq:rmse}
 \end{equation}
 
 \noindent\textbf{c. \textit{Mean Absolute Percentage Error} (MAPE)}
@@ -879,6 +881,7 @@ MAPE memudahkan interpretasi karena dinyatakan dalam persentase, namun tidak ter
 Untuk mengatasi keterbatasan MAPE tersebut digunakan varian simetrisnya, yaitu sMAPE, yang membagi galat absolut terhadap rata-rata nilai aktual dan nilai prediksi sehingga tidak meledak ketika nilai aktual mendekati nol dan memiliki batas atas galat sebesar 200\% [14].
 \begin{equation}
     \text{sMAPE} = \frac{100\%}{n}\sum_{i=1}^{n} \frac{|y_i - \hat{y}_i|}{(|y_i| + |\hat{y}_i|)/2}
+    \label{eq:smape}
 \end{equation}
 
 Sebagai konvensi implementasi, apabila penyebut bernilai nol karena nilai aktual dan nilai prediksi sama-sama nol, penyebut diganti dengan nilai 1 agar tidak terjadi galat pembagian dengan nol (\textit{division by zero}).
@@ -1904,29 +1907,9 @@ Keempat tahap tersebut diulang untuk setiap langkah waktu, dengan $h_t$ dan $C_t
 \textit{Flowchart} ini menunjukkan bahwa sel LSTM bekerja melalui empat tahap gerbang -- identik dengan uraian teori pada Subbab~2.6 -- dalam mengatur aliran informasi antar-langkah waktu, sehingga model mampu mempelajari pola autokorelasi jangka pendek pada deret waktu penjualan harian.
 \subsection{Perhitungan Metrik Evaluasi Pengujian}
 
-Proses evaluasi menghasilkan nilai kesalahan prediksi untuk setiap data uji berdasarkan perbandingan antara nilai aktual $Y_t$ dan nilai prediksi $\hat{Y}_t$ pada skala nominal Rupiah. Penelitian ini menggunakan tiga metrik evaluasi, yaitu \textit{Mean Absolute Error} (MAE), \textit{Root Mean Squared Error} (RMSE), dan \textit{symmetric Mean Absolute Percentage Error} (sMAPE), yang landasan teorinya telah dijabarkan pada Subbab~2.8. Perhitungan ketiga metrik tersebut dirumuskan sebagai berikut.
+Proses evaluasi menghasilkan nilai kesalahan prediksi untuk setiap data uji berdasarkan perbandingan antara nilai aktual $Y_t$ dan nilai prediksi $\hat{Y}_t$ pada skala nominal Rupiah, dengan $Y_t$ sebagai nilai penjualan aktual pada hari aktif ke-$t$, $\hat{Y}_t$ sebagai nilai penjualan hasil prediksi model pada hari aktif ke-$t$, dan $N$ sebagai jumlah seluruh data pengujian. Penelitian ini menggunakan tiga metrik evaluasi, yaitu \textit{Mean Absolute Error} (MAE), \textit{Root Mean Squared Error} (RMSE), dan \textit{symmetric Mean Absolute Percentage Error} (sMAPE), yang rumus dan landasan teorinya telah dijabarkan pada Subbab~2.8, sedangkan perhitungannya pada tahap pengujian mengikuti Persamaan~\ref{eq:mae}, \ref{eq:rmse}, dan~\ref{eq:smape}, dengan variabel $y_i$ dan $\hat{y}_i$ pada persamaan tersebut merepresentasikan $Y_t$ dan $\hat{Y}_t$ pada konteks pengujian ini.
 
-\begin{equation}
-    \text{MAE} = \frac{1}{N}\sum_{t=1}^{N}\left|Y_t - \hat{Y}_t\right|
-\end{equation}
-
-\begin{equation}
-    \text{RMSE} = \sqrt{\frac{1}{N}\sum_{t=1}^{N}\left(Y_t - \hat{Y}_t\right)^2}
-\end{equation}
-
-\begin{equation}
-    \text{sMAPE} = \frac{100\%}{N}\sum_{t=1}^{N}\frac{\left|Y_t - \hat{Y}_t\right|}{\left(\left|Y_t\right| + \left|\hat{Y}_t\right|\right)/2}
-\end{equation}
-
-\noindent Keterangan:
-
-\begin{enumerate}
-    \item $Y_t$ merupakan nilai penjualan aktual pada hari aktif ke-$t$.
-    \item $\hat{Y}_t$ merupakan nilai penjualan hasil prediksi model pada hari aktif ke-$t$.
-    \item $N$ merupakan jumlah seluruh data pengujian.
-\end{enumerate}
-
-Nilai MAE dan RMSE dinyatakan dalam satuan Rupiah dan menunjukkan besaran kesalahan absolut prediksi, dengan RMSE memberikan penalti lebih besar terhadap kesalahan berskala ekstrem. Nilai sMAPE dinyatakan dalam persen sehingga memudahkan interpretasi kesalahan secara relatif. Sebagai konvensi implementasi metrik sMAPE, apabila penyebut bernilai nol (nilai aktual dan prediksi sama-sama nol), penyebut diganti dengan nilai 1 agar tidak terjadi galat pembagian dengan nol (\textit{division by zero}). Konvensi inilah yang diverifikasi pada pengujian \textit{white box}.
+Nilai MAE dan RMSE dinyatakan dalam satuan Rupiah dan menunjukkan besaran kesalahan absolut prediksi, dengan RMSE memberikan penalti lebih besar terhadap kesalahan berskala ekstrem. Nilai sMAPE dinyatakan dalam persen sehingga memudahkan interpretasi kesalahan secara relatif. Sebagai konvensi implementasi metrik sMAPE sebagaimana disebutkan pada Subbab~2.8, apabila penyebut bernilai nol (nilai aktual dan prediksi sama-sama nol), penyebut diganti dengan nilai 1 agar tidak terjadi galat pembagian dengan nol (\textit{division by zero}). Konvensi inilah yang diverifikasi pada pengujian \textit{white box}.
 
 Nilai sMAPE digunakan sebagai metrik utama penentuan kelayakan model karena bersifat bebas skala dan dapat dibandingkan secara langsung terhadap ambang kelayakan praktis. Model dinyatakan layak apabila nilai sMAPE pada data uji berada di bawah ambang 20\%, yang merepresentasikan toleransi galat prediksi yang masih dapat diterima untuk mendukung keputusan operasional harian pada usaha berskala kecil.
 
@@ -1934,18 +1917,18 @@ Nilai sMAPE digunakan sebagai metrik utama penentuan kelayakan model karena bers
 
 Penelitian ini melakukan pengujian terhadap model \textit{Long Short-Term Memory} untuk mengevaluasi akurasi prediksi penjualan harian yang dihasilkan. Pengujian menggunakan data historis transaksi mitra EatsTEDI sebanyak 313 hari kerja aktif, dengan hasil prediksi dibandingkan terhadap nilai aktual menggunakan metrik MAE, RMSE, dan sMAPE. Skenario pengujian dirancang untuk menganalisis kinerja model terhadap ambang kelayakan praktis, serta mengamati stabilitasnya terhadap inisialisasi bobot acak.
 
-\subsection{Skenario 1: Pengujian Akurasi Model LSTM terhadap Ambang Kelayakan}
+\subsection{Pengujian Akurasi Model LSTM terhadap Ambang Kelayakan}
 
-Skenario pertama bertujuan mengetahui akurasi model LSTM pada skema prediksi satu langkah ke depan (\textit{one-step-ahead}), yaitu skema yang sama dengan yang digunakan pada Subbab~4.4. Pengujian dilakukan pada data uji dengan hasil prediksi model dibandingkan terhadap nilai aktual menggunakan metrik MAE, RMSE, dan sMAPE, kemudian nilai sMAPE yang diperoleh diperiksa terhadap ambang kelayakan praktis sMAPE~$<$~20\% sebagaimana dijabarkan pada Subbab~3.5.3.
+Skenario pertama ini bertujuan mengetahui akurasi model LSTM pada skema prediksi satu langkah ke depan (\textit{one-step-ahead}), yaitu skema yang sama dengan yang digunakan pada Subbab~4.4. Pengujian dilakukan pada data uji dengan hasil prediksi model dibandingkan terhadap nilai aktual menggunakan metrik MAE, RMSE, dan sMAPE, kemudian nilai sMAPE yang diperoleh diperiksa terhadap ambang kelayakan praktis sMAPE~$<$~20\% sebagaimana dijabarkan pada Subbab~3.5.3.
 
-\subsection{Skenario 2: Pengujian Stabilitas \textit{Multi-Seed}}
+\subsection{Pengujian Stabilitas \textit{Multi-Seed}}
 
-Skenario kedua bertujuan mengukur stabilitas kinerja model, mengingat inisialisasi bobot awal jaringan saraf bersifat acak dan berpengaruh besar pada \textit{dataset} berukuran kecil. Model dilatih sebanyak 10 kali menggunakan \textit{seed} acak yang berbeda, kemudian hasil evaluasi dilaporkan sebagai rata-rata beserta standar deviasinya. Adapun skenario pengujian tersebut dapat dilihat pada Tabel~\ref{tab:skenario2}.
+Skenario kedua ini bertujuan mengukur stabilitas kinerja model, mengingat inisialisasi bobot awal jaringan saraf bersifat acak dan berpengaruh besar pada \textit{dataset} berukuran kecil. Model dilatih sebanyak 10 kali menggunakan \textit{seed} acak yang berbeda, kemudian hasil evaluasi dilaporkan sebagai rata-rata beserta standar deviasinya. Adapun rancangan pengujian tersebut dapat dilihat pada Tabel~\ref{tab:skenario2}.
 
 \begin{table}[H]
 \setstretch{1.2}
 \centering
-\caption{Skenario 2: Pengujian Stabilitas \textit{Multi-Seed}}
+\caption{Rancangan Pengujian Stabilitas \textit{Multi-Seed}}
 \label{tab:skenario2}
 \begin{tabularx}{\textwidth}{|c|l|l|X|}
 \hline
@@ -2538,9 +2521,9 @@ def report(y, yhat, label):
 
 \section{Hasil Pengujian Model terhadap Skenario Pengujian}
 Subbab ini melaporkan hasil pengujian model prediksi terhadap kedua skenario pengujian yang telah dirancang pada Subbab~3.6. Seluruh pengukuran menggunakan metrik MAE, RMSE, dan sMAPE sebagaimana diimplementasikan pada Subbab~4.3.4.
-\subsection{Skenario 1: Pengujian Akurasi Model LSTM terhadap Ambang Kelayakan}
+\subsection{Pengujian Akurasi Model LSTM terhadap Ambang Kelayakan}
 
-Setelah pelatihan diselesaikan, dilakukan evaluasi performa model prediksi pada dataset uji (\textit{testing data}). Hasil evaluasi performa model LSTM Hybrid pada skema satu langkah ke depan (\textit{one-step-ahead}) disajikan pada Tabel \ref{tab:eval_lstm}. Nilai performa yang disajikan pada tabel merupakan nilai rata-rata dari sepuluh kali percobaan dengan inisialisasi bobot acak yang berbeda (\textit{multi-seed}).
+Setelah pelatihan diselesaikan, dilakukan evaluasi performa model prediksi pada dataset uji (\textit{testing data}) sesuai rancangan skenario pertama pada Subbab~3.6.1. Hasil evaluasi performa model LSTM Hybrid pada skema satu langkah ke depan (\textit{one-step-ahead}) disajikan pada Tabel \ref{tab:eval_lstm}. Nilai performa yang disajikan pada tabel merupakan nilai rata-rata dari sepuluh kali percobaan dengan inisialisasi bobot acak yang berbeda (\textit{multi-seed}).
 
 \begin{table}[H]
 \setstretch{1.2}
@@ -2565,9 +2548,9 @@ Berdasarkan Tabel~\ref{tab:eval_lstm}, model LSTM Hybrid mencatat MAE Rp667.718,
 
 Dari hasil tersebut dapat disimpulkan bahwa pada \textit{dataset} 313 hari aktif ini, akurasi model LSTM (termasuk varian \textit{hybrid residual} yang merupakan konfigurasi terbaik) belum memenuhi ambang kelayakan praktis yang ditetapkan. Hasil ini bukan kegagalan atau anomali sistem, melainkan sejalan dengan temuan luas dalam literatur prediksi deret waktu ritel, yang menunjukkan bahwa model \textit{deep learning} umumnya memerlukan volume data historis yang jauh lebih besar untuk mencapai akurasi optimal. Model LSTM Hybrid yang memiliki kapasitas parameter lebih besar juga cenderung melakukan penghalusan nilai prediksi secara berlebihan (\textit{over-smoothing}) pada data latih yang pendek, sehingga tidak mampu menangkap lonjakan-lonjakan ekstrem omzet harian yang dipicu oleh dinamika aktivitas mahasiswa di lapangan.
 
-\subsection{Skenario 2: Pengujian Stabilitas Model melalui Multi-Seed}
+\subsection{Pengujian Stabilitas Model melalui \textit{Multi-Seed}}
 
-Meningkatnya sensitivitas performa model LSTM terhadap inisialisasi bobot acak awal pada data kecil mengharuskan pengujian dilakukan menggunakan pendekatan \textit{multi-seed evaluation} dengan melatih model sebanyak sepuluh kali menggunakan nilai \textit{seed} acak yang berbeda. Prosedur pengujian diimplementasikan sebagai perulangan pelatihan dengan pengaturan \textit{seed} eksplisit pada seluruh sumber keacakan (Python, NumPy, dan TensorFlow) sebagaimana disajikan pada Gambar~\ref{fig:multiseed}. Ringkasan statistik hasil pengujian sepuluh \textit{seeds} tersebut disajikan pada Tabel \ref{tab:statistik_multiseed}.
+Sesuai rancangan skenario kedua pada Subbab~3.6.2, meningkatnya sensitivitas performa model LSTM terhadap inisialisasi bobot acak awal pada data kecil mengharuskan pengujian dilakukan menggunakan pendekatan \textit{multi-seed evaluation} dengan melatih model sebanyak sepuluh kali menggunakan nilai \textit{seed} acak yang berbeda. Prosedur pengujian diimplementasikan sebagai perulangan pelatihan dengan pengaturan \textit{seed} eksplisit pada seluruh sumber keacakan (Python, NumPy, dan TensorFlow) sebagaimana disajikan pada Gambar~\ref{fig:multiseed}. Ringkasan statistik hasil pengujian sepuluh \textit{seeds} tersebut disajikan pada Tabel \ref{tab:statistik_multiseed}.
 
 \begin{figure}[H]
 \begin{lstlisting}

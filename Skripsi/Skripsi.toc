@@ -43,41 +43,41 @@
 \contentsline {subsection}{\numberline {3.5.2}\textit {Flowchart} Perhitungan Sel \textit {Long Short-Term Memory}}{78}{subsection.3.5.2}%
 \contentsline {subsection}{\numberline {3.5.3}Perhitungan Metrik Evaluasi Pengujian}{80}{subsection.3.5.3}%
 \contentsline {section}{\numberline {3.6}Skenario Pengujian Model}{81}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}Skenario 1: Pengujian Akurasi Model LSTM terhadap Ambang Kelayakan}{82}{subsection.3.6.1}%
-\contentsline {subsection}{\numberline {3.6.2}Skenario 2: Pengujian Stabilitas \textit {Multi-Seed}}{82}{subsection.3.6.2}%
-\contentsline {section}{\numberline {3.7}Perancangan Pengujian Sistem}{83}{section.3.7}%
+\contentsline {subsection}{\numberline {3.6.1}Pengujian Akurasi Model LSTM terhadap Ambang Kelayakan}{81}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Pengujian Stabilitas \textit {Multi-Seed}}{82}{subsection.3.6.2}%
+\contentsline {section}{\numberline {3.7}Perancangan Pengujian Sistem}{82}{section.3.7}%
 \contentsline {subsection}{\numberline {3.7.1}Perancangan Pengujian \textit {Black Box}}{83}{subsection.3.7.1}%
 \contentsline {subsection}{\numberline {3.7.2}Perancangan Pengujian \textit {White Box}}{85}{subsection.3.7.2}%
-\contentsline {chapter}{\numberline {IV}HASIL DAN PEMBAHASAN}{87}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Hasil Implementasi Sistem}{87}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Implementasi Antarmuka Aplikasi Mobile}{87}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Implementasi Backend dan Basis Data Cloud}{104}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}Implementasi Layanan Prediksi (API)}{105}{subsection.4.1.3}%
-\contentsline {section}{\numberline {4.2}Hasil Implementasi Praproses Data}{108}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Deskripsi dan Eksplorasi Awal Dataset EatsTEDI}{109}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Penyaringan Hari Aktif dan Transformasi Target Log-Return}{110}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Pembentukan Sequence dan Pembagian Dataset}{111}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}Hasil Implementasi Mekanisme Prediksi}{112}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Implementasi Arsitektur Model LSTM}{112}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Hasil Pelatihan Model}{113}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Implementasi Prediksi Rekursif Multi-Langkah}{114}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Implementasi Fungsi Metrik Evaluasi}{116}{subsection.4.3.4}%
-\contentsline {section}{\numberline {4.4}Hasil Pengujian Model terhadap Skenario Pengujian}{117}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Skenario 1: Pengujian Akurasi Model LSTM terhadap Ambang Kelayakan}{117}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Skenario 2: Pengujian Stabilitas Model melalui Multi-Seed}{118}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Rekapitulasi Hasil Kedua Skenario}{121}{subsection.4.4.3}%
-\contentsline {section}{\numberline {4.5}Hasil Pengujian Sistem}{122}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Hasil Pengujian Black Box}{122}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Hasil Pengujian Mekanisme Sinkronisasi Offline-First}{124}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}Hasil Pengujian White Box}{125}{subsection.4.5.3}%
-\contentsline {section}{\numberline {4.6}Pembahasan Umum dan Posisi Temuan}{128}{section.4.6}%
-\contentsline {subsection}{\numberline {4.6.1}Rekomendasi Praktis}{128}{subsection.4.6.1}%
-\contentsline {subsection}{\numberline {4.6.2}Posisi Temuan terhadap Penelitian Terdahulu}{128}{subsection.4.6.2}%
-\contentsline {section}{\numberline {4.7}Keterbatasan Sistem dan Penelitian}{130}{section.4.7}%
-\contentsline {subsection}{\numberline {4.7.1}Keterbatasan Sistem POS}{130}{subsection.4.7.1}%
-\contentsline {subsection}{\numberline {4.7.2}Keterbatasan Penelitian Model Prediksi}{131}{subsection.4.7.2}%
-\contentsline {chapter}{\numberline {V}PENUTUP}{133}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Kesimpulan}{133}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Saran}{134}{section.5.2}%
-\contentsline {chapter}{DAFTAR PUSTAKA}{136}{section*.89}%
-\contentsline {chapter}{LAMPIRAN}{138}{section*.90}%
+\contentsline {chapter}{\numberline {IV}HASIL DAN PEMBAHASAN}{86}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Hasil Implementasi Sistem}{86}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Implementasi Antarmuka Aplikasi Mobile}{86}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Implementasi Backend dan Basis Data Cloud}{103}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Implementasi Layanan Prediksi (API)}{104}{subsection.4.1.3}%
+\contentsline {section}{\numberline {4.2}Hasil Implementasi Praproses Data}{107}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Deskripsi dan Eksplorasi Awal Dataset EatsTEDI}{108}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Penyaringan Hari Aktif dan Transformasi Target Log-Return}{109}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Pembentukan Sequence dan Pembagian Dataset}{110}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Hasil Implementasi Mekanisme Prediksi}{111}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Implementasi Arsitektur Model LSTM}{111}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Hasil Pelatihan Model}{112}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Implementasi Prediksi Rekursif Multi-Langkah}{113}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Implementasi Fungsi Metrik Evaluasi}{115}{subsection.4.3.4}%
+\contentsline {section}{\numberline {4.4}Hasil Pengujian Model terhadap Skenario Pengujian}{116}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Pengujian Akurasi Model LSTM terhadap Ambang Kelayakan}{116}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Pengujian Stabilitas Model melalui \textit {Multi-Seed}}{117}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Rekapitulasi Hasil Kedua Skenario}{120}{subsection.4.4.3}%
+\contentsline {section}{\numberline {4.5}Hasil Pengujian Sistem}{121}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Hasil Pengujian Black Box}{121}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Hasil Pengujian Mekanisme Sinkronisasi Offline-First}{123}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Hasil Pengujian White Box}{124}{subsection.4.5.3}%
+\contentsline {section}{\numberline {4.6}Pembahasan Umum dan Posisi Temuan}{127}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Rekomendasi Praktis}{127}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Posisi Temuan terhadap Penelitian Terdahulu}{127}{subsection.4.6.2}%
+\contentsline {section}{\numberline {4.7}Keterbatasan Sistem dan Penelitian}{129}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Keterbatasan Sistem POS}{129}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Keterbatasan Penelitian Model Prediksi}{130}{subsection.4.7.2}%
+\contentsline {chapter}{\numberline {V}PENUTUP}{132}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Kesimpulan}{132}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Saran}{133}{section.5.2}%
+\contentsline {chapter}{DAFTAR PUSTAKA}{135}{section*.89}%
+\contentsline {chapter}{LAMPIRAN}{137}{section*.90}%
