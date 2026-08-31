@@ -2760,16 +2760,23 @@ Beberapa saran yang dapat diajukan untuk pengembangan penelitian selanjutnya ada
 %%=============================================================
 \newpage
 \phantomsection
-% Biodata sudah ditandatangani (tanda tangan basah/digital Ketua dan Anggota);
-% halaman diambil langsung dari PDF hasil pindaian, bukan diketik ulang.
+% Judul "LAMPIRAN 1. BIODATA TIM PELAKSANA" sudah tercetak di halaman
+% pertama berkas ini, sehingga tidak perlu judul LaTeX terpisah.
 \includepdf[pages=-, pagecommand={\thispagestyle{empty}},
-            width=\paperwidth, height=\paperheight]{Referensi/Lampiran_Biodata_Peneliti_tanpa_nomor_halaman.pdf}
+            width=\paperwidth, height=\paperheight]{Referensi/Lampiran Biodata.pdf}
 
-% TODO: Lampiran 1 pada PDF ini baru memuat biodata Ketua dan tiga Anggota
-% (Muhammad Kholis, Junialdy Praditya, Muhammad Fadhilla, Afifah Thahira).
-% Lengkapi/tambahkan biodata Dosen Pendamping (Zulfan Khairil Simbolon, S.T.,
-% M.Eng. dan Azhar, S.T., M.T.) sesuai format biodata dosen pada template P3M,
-% lalu satukan ke dalam PDF Lampiran 1 tersebut.
+% Alternatif lain (dinonaktifkan):
+% 1) Versi PDF hasil pindaian yang SUDAH ada tanda tangan basah/digital:
+% \includepdf[pages=-, pagecommand={\thispagestyle{empty}},
+%             width=\paperwidth, height=\paperheight]{Referensi/Lampiran_Biodata_Peneliti_tanpa_nomor_halaman.pdf}
+% 2) Versi diketik ulang sebagai tabel LaTeX (tanpa tanda tangan) -- lihat
+%    riwayat file/histori percakapan bila ingin mengembalikan versi ini.
+
+% TODO: berkas "Lampiran Biodata.pdf" ini baru memuat biodata Ketua dan
+% tiga Anggota (Muhammad Kholis, Junialdy Praditya, Muhammad Fadhilla,
+% Afifah Thahira). Lengkapi/tambahkan biodata Dosen Pendamping (Zulfan
+% Khairil Simbolon, S.T., M.Eng. dan Azhar, S.T., M.T.) sesuai format
+% biodata dosen pada template P3M, lalu satukan ke dalam PDF ini.
 
 %%=============================================================
 %% LAMPIRAN 2. LUARAN ARTIKEL ILMIAH/PUBLIKASI
