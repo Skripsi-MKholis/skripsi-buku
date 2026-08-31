@@ -171,124 +171,161 @@
 \pagestyle{fancy}
 
 %%-------------------------------------------------------------
-%% HALAMAN SAMPUL
+%% HALAMAN SAMPUL + HALAMAN PENGESAHAN
 %%-------------------------------------------------------------
-\begin{titlepage}
-\begin{spacing}{1.5}
-\begin{center}
-
-{\bfseries LAPORAN PENELITIAN SKRIPSI MAHASISWA}
-
-\vspace{2cm}
-
-{\fontsize{14}{16}\selectfont\bfseries
-RANCANG BANGUN APLIKASI \textit{POINT OF SALE}\\[4pt]
-DENGAN FITUR PREDIKSI PENJUALAN HARIAN\\[4pt]
-MENGGUNAKAN METODE \textit{LONG SHORT-TERM MEMORY} (LSTM)}
-
-\vspace{2cm}
-
-\includegraphics[width=3.5cm]{logo-pnl-skripsi}
-
-\vspace{2cm}
-
-Oleh:\\[0.3cm]
-Muhammad Kholis; 2022573010098\\
-Junialdy Praditya; 2022573010016\\
-Muhammad Fadhilla; 2022573010097\\
-Afifah Thahira; 2022573010001
-
-\vfill
-
-Dibiayai dengan dana DIPA Politeknik Negeri Lhokseumawe Tahun Anggaran 2026\\
-Sesuai dengan Perjanjian Kerja Penelitian Skripsi Mahasiswa D-IV\\
-% TODO: lengkapi nomor dan tanggal perjanjian kerja penelitian dari P3M.
-Nomor: [ISI NOMOR PERJANJIAN] tanggal [ISI TANGGAL] 2026
-
-\vspace{1.5cm}
-
-PROGRAM STUDI TEKNIK INFORMATIKA\\
-JURUSAN TEKNOLOGI INFORMASI DAN KOMPUTER\\
-POLITEKNIK NEGERI LHOKSEUMAWE\\
-JULI 2026
-
-\end{center}
-\end{spacing}
-\end{titlepage}
-\setcounter{page}{2}
-
-%%-------------------------------------------------------------
-%% HALAMAN PENGESAHAN
-%%-------------------------------------------------------------
-\newpage
+% Kedua halaman ini sekarang diambil langsung dari berkas final
+% Referensi/COVER - 2.pdf (halaman 1 = Halaman Sampul, halaman 2 = Halaman
+% Pengesahan), karena sudah final secara isi dan tata letak (dibuat di Word).
+\includepdf[pages=1, pagecommand={\thispagestyle{empty}},
+            width=\paperwidth, height=\paperheight]{Referensi/COVER - 2.pdf}
 \phantomsection
 \addcontentsline{toc}{chapter}{HALAMAN PENGESAHAN}
-\begin{center}
-{\fontsize{14pt}{16pt}\selectfont\bfseries HALAMAN PENGESAHAN}
-\end{center}
-\vspace{0.3cm}
+\includepdf[pages=2, pagecommand={},
+            width=\paperwidth, height=\paperheight]{Referensi/COVER - 2.pdf}
 
-\begin{center}
-RANCANG BANGUN APLIKASI \textit{POINT OF SALE} DENGAN FITUR PREDIKSI\\
-PENJUALAN HARIAN MENGGUNAKAN METODE \textit{LONG SHORT-TERM MEMORY} (LSTM)
-\end{center}
-
-\vspace{0.5cm}
-
-\begin{center}
-Dipersiapkan dan Disusun oleh
-
-\vspace{0.2cm}
-{\bfseries Muhammad Kholis \quad 2022573010098}\\
-{\bfseries Junialdy Praditya \quad 2022573010016}\\
-{\bfseries Muhammad Fadhilla \quad 2022573010097}\\
-{\bfseries Afifah Thahira \quad 2022573010001}
-\end{center}
-
-\vspace{0.7cm}
-
-\begin{center}
-Telah disetujui oleh Tim Dosen Pembimbing Penelitian Skripsi\\
-pada tanggal [ISI TANGGAL] 2026
-\end{center}
-
-\vspace{1cm}
-
-\noindent
-\begin{minipage}[t]{0.48\textwidth}
-Buketrata, [ISI TANGGAL] 2026\\
-Ketua Pelaksana,
-\end{minipage}%
-\begin{minipage}[t]{0.48\textwidth}
-Mengetahui:\\
-Kepala P3M,
-\end{minipage}
-
-\vspace{2cm}
-
-\noindent
-\begin{minipage}[t]{0.48\textwidth}
-{\bfseries Muhammad Kholis}\\
-NIM. 2022573010098
-\end{minipage}%
-\begin{minipage}[t]{0.48\textwidth}
-{\bfseries Amir Fauzi, S.T., M.Sc., Ph.D.}\\
-NIP. 19801213 200604 1 003
-\end{minipage}
-
-\vspace{1.5cm}
-
-\begin{center}
-Menyetujui:\\
-Direktur Politeknik Negeri Lhokseumawe,
-\end{center}
-
-\vspace{2cm}
-
-\begin{center}
-{\bfseries Dr. Ir. Rizal Syahyadi, S.T., M.Eng.Sc., IPM., ASEAN Eng., APEC Eng.}\\
-NIP. 19781216 200212 1 003
-\end{center}
+% Versi LaTeX (diketik manual) sebelumnya -- disimpan sebagai komentar,
+% aktifkan kembali (dan nonaktifkan blok includepdf di atas) bila perlu:
+%
+% \begin{titlepage}
+% \begin{spacing}{1.3}
+%
+% \noindent
+% \begin{tabular}{|p{3cm}p{0.4cm}>{\raggedleft\arraybackslash}p{6cm}|}
+% \hline
+% BIDANG ILMU & : & INFORMATIKA \\
+% \hline
+% \end{tabular}
+%
+% \begin{center}
+%
+% {\bfseries LAPORAN PENELITIAN SKRIPSI MAHASISWA}
+%
+% \vspace{1cm}
+%
+% \includegraphics[width=3cm]{Referensi/logo-pnl-kuning.png}
+%
+% \vspace{1cm}
+%
+% {\fontsize{14}{16}\selectfont\bfseries
+% RANCANG BANGUN APLIKASI \textit{POINT OF SALE}\\[4pt]
+% DENGAN FITUR PREDIKSI PENJUALAN HARIAN\\[4pt]
+% MENGGUNAKAN METODE \textit{LONG SHORT-TERM MEMORY} (LSTM)}
+%
+% \vspace{1cm}
+%
+% Oleh:\\[0.3cm]
+% Muhammad Kholis; 2022573010098\\
+% Junialdy Praditya; 2022573010016\\
+% Muhammad Fadhilla; 2022573010097\\
+% Afifah Thahira; 2022573010001
+%
+% \vfill
+%
+% \noindent\rule{\textwidth}{0.4pt}\\[4pt]
+% Dibiayai dengan dana DIPA Politeknik Negeri Lhokseumawe Tahun Anggaran 2026\\
+% Sesuai dengan Perjanjian Kerja Penelitian Skripsi Mahasiswa D-IV\\
+% Nomor: 609/DST/PL20.7.1/PT.06.01/2026 tanggal 31 Agustus 2026
+%
+% \vspace{1cm}
+%
+% PROGRAM STUDI TEKNIK INFORMATIKA\\
+% JURUSAN TEKNOLOGI INFORMASI DAN KOMPUTER\\
+% POLITEKNIK NEGERI LHOKSEUMAWE\\
+% JULI 2026
+%
+% \end{center}
+% \end{spacing}
+% \end{titlepage}
+% \setcounter{page}{2}
+%
+% \newpage
+% \phantomsection
+% \addcontentsline{toc}{chapter}{HALAMAN PENGESAHAN}
+% \begin{center}
+% {\fontsize{13pt}{15pt}\selectfont\bfseries HALAMAN PENGESAHAN}
+% \end{center}
+% \vspace{0.1cm}
+%
+% {\small
+% \begin{spacing}{1.0}
+% \noindent
+% \setlength{\tabcolsep}{3pt}
+% \begin{tabular}{@{}p{0.4cm}p{4.4cm}p{0.4cm}p{7.7cm}@{}}
+% \multicolumn{2}{@{}p{4.8cm}}{\bfseries Judul Penelitian Skripsi} & : & Rancang Bangun Aplikasi \textit{Point of Sale} dengan Fitur Prediksi Penjualan Harian Menggunakan Metode \textit{Long Short-Term Memory} (LSTM) \\[2pt]
+% \multicolumn{2}{@{}p{4.8cm}}{\bfseries Nama Mitra (jika ada)} & : & \\[2pt]
+% \multicolumn{4}{@{}l}{\bfseries Ketua Tim Pelaksana} \\
+% a. & Nama Lengkap & : & Muhammad Kholis \\
+% b. & NIM & : & 2022573010098 \\
+% c. & Jurusan & : & Teknologi Informasi dan Komputer \\
+% d. & Program Studi & : & Teknik Informatika \\
+% e. & Nomor HP & : & 085161787501 \\
+% f. & Alamat E-mail & : & parzivalxdd@gmail.com \\[2pt]
+% \multicolumn{4}{@{}l}{\bfseries Anggota Tim Pelaksana (1)} \\
+% a. & Nama Lengkap & : & Junialdy Praditya \\
+% b. & NIM & : & 2022573010016 \\
+% c. & Jurusan & : & Teknologi Informasi dan Komputer \\
+% d. & Program Studi & : & Teknik Informatika \\[2pt]
+% \multicolumn{4}{@{}l}{\bfseries Anggota Tim Pelaksana (2)} \\
+% a. & Nama Lengkap & : & Muhammad Fadhilla \\
+% b. & NIM & : & 2022573010097 \\
+% c. & Jurusan & : & Teknologi Informasi dan Komputer \\
+% d. & Program Studi & : & Teknik Informatika \\[2pt]
+% \multicolumn{4}{@{}l}{\bfseries Anggota Tim Pelaksana (3)} \\
+% a. & Nama Lengkap & : & Afifah Thahira \\
+% b. & NIM & : & 2022573010001 \\
+% c. & Jurusan & : & Teknologi Informasi dan Komputer \\
+% d. & Program Studi & : & Teknik Informatika \\[2pt]
+% \multicolumn{2}{@{}p{4.8cm}}{\bfseries Nama Dosen Pembimbing} & : & Zulfan Khairil Simbolon, S.T., M.Eng.; Azhar, S.T., M.T. \\[2pt]
+% \multicolumn{2}{@{}p{4.8cm}}{\bfseries Lama Kegiatan} & : & 2 (dua) bulan \\[2pt]
+% \multicolumn{2}{@{}p{4.8cm}}{\bfseries Output Luaran yang Dihasilkan} & : & Rancang Bangun Aplikasi \textit{Point of Sale} dengan Fitur Prediksi Penjualan Harian Menggunakan Metode \textit{Long Short-Term Memory} (LSTM) \\[2pt]
+% \multicolumn{2}{@{}p{4.8cm}}{\bfseries Biaya Kegiatan (Rp.)} & : & 1.000.000 \\[2pt]
+% \multicolumn{2}{@{}p{4.8cm}}{\bfseries Sumber Dana} & : & Dana DIPA PNL TA. 2026 \\
+% \end{tabular}
+% \end{spacing}
+% }
+%
+% \vspace{0.2cm}
+%
+% \begin{flushright}
+% Buketrata, 31 Agustus 2026
+% \end{flushright}
+%
+% \vspace{0.05cm}
+%
+% \noindent
+% \begin{minipage}[t]{0.48\textwidth}
+% Mengetahui:\\
+% Kepala P3M
+% \end{minipage}%
+% \begin{minipage}[t]{0.48\textwidth}
+% Ketua Pelaksana,
+% \end{minipage}
+%
+% \vspace{0.6cm}
+%
+% \noindent
+% \begin{minipage}[t]{0.48\textwidth}
+% {\bfseries Amir Fauzi, S.T., M.Sc., Ph.D.}\\
+% NIP. 19801213 200604 1 003
+% \end{minipage}%
+% \begin{minipage}[t]{0.48\textwidth}
+% {\bfseries Muhammad Kholis}\\
+% NIM. 2022573010098
+% \end{minipage}
+%
+% \vspace{0.05cm}
+%
+% \begin{center}
+% Menyetujui:\\
+% Direktur Politeknik Negeri Lhokseumawe,
+% \end{center}
+%
+% \vspace{0.05cm}
+%
+% \begin{center}
+% {\bfseries Dr. Ir. Rizal Syahyadi, S.T., M.Eng.Sc., IPM., ASEAN Eng., APEC Eng.}\\
+% NIP. 19781216 200212 1 003
+% \end{center}
 
 %%-------------------------------------------------------------
 %% RINGKASAN
