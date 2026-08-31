@@ -76,6 +76,3 @@
 \contentsline {section}{\numberline {5.1}Kesimpulan}{113}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Saran}{113}{section.5.2}%
 \contentsline {chapter}{DAFTAR PUSTAKA}{115}{section*.87}%
-\contentsline {chapter}{LAMPIRAN 1. BIODATA TIM PELAKSANA}{117}{section*.88}%
-\contentsline {chapter}{LAMPIRAN 2. LUARAN ARTIKEL ILMIAH/PUBLIKASI}{121}{section*.89}%
-\contentsline {chapter}{LAMPIRAN 3. SURAT KEPUTUSAN DIREKTUR POLITEKNIK NEGERI LHOKSEUMAWE}{126}{section*.90}%
