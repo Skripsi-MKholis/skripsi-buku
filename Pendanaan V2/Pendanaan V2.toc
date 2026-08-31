@@ -2,10 +2,10 @@
 \contentsline {chapter}{HALAMAN PENGESAHAN}{ii}{section*.1}%
 \contentsline {chapter}{RINGKASAN}{iii}{section*.2}%
 \contentsline {chapter}{PRAKATA}{iv}{section*.3}%
-\contentsline {chapter}{DAFTAR ISI}{vi}{section*.4}%
-\contentsline {chapter}{DAFTAR TABEL}{ix}{section*.5}%
-\contentsline {chapter}{DAFTAR GAMBAR}{x}{section*.6}%
-\contentsline {chapter}{DAFTAR LAMPIRAN}{xii}{section*.7}%
+\contentsline {chapter}{DAFTAR ISI}{v}{section*.4}%
+\contentsline {chapter}{DAFTAR TABEL}{viii}{section*.5}%
+\contentsline {chapter}{DAFTAR GAMBAR}{ix}{section*.6}%
+\contentsline {chapter}{DAFTAR LAMPIRAN}{xi}{section*.7}%
 \contentsline {chapter}{\numberline {I}PENDAHULUAN}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Latar Belakang Masalah}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Rumusan Masalah}{2}{section.1.2}%
