@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1788144806.04676 "Skripsi.tex" "Skripsi.pdf" "Skripsi" 1788144818.14331 0
+["pdflatex"] 1788145461.2024 "Skripsi.tex" "Skripsi.pdf" "Skripsi" 1788145475.77254 0
   "../Lampiran/Form Revisi Sempro.pdf" 1785388136.77672 392871 4920a456e7c1132bdb2c3a21de0bee1a ""
   "../Project/gambar/activity_ai.png" 1785367278.69344 178301 cea92eb9682f1375cdcba52c90301cd3 ""
   "../Project/gambar/activity_broadcast.png" 1785367279.13099 108547 686093281ac7d38aeb33411a70d968c9 ""
@@ -265,12 +265,12 @@
   "Gambar/evaluasi_multiseed_standalone_plot_1.png" 1782246205.04871 23361 fe11d99c8410d26100cb586020cfbaef ""
   "Gambar/lstm_harian_disederhanakan_plot_kurva_training.png" 1782246205.04871 38045 7e560e2550692921ec8a9871503c8d86 ""
   "Gambar/lstm_harian_hybrid_residual_plot_1.png" 1782246205.06325 86673 875613923fe384231baa61ebb71549a6 ""
-  "Skripsi.aux" 1788144817.62556 37674 429049813adbd8f932b9023efe252c22 "pdflatex"
-  "Skripsi.lof" 1788144817.63607 7290 524370618ebe2cd2317a4532df93bde0 "pdflatex"
-  "Skripsi.lot" 1788144817.63607 3460 69cdffcb9845869063fa7043a95bb8a0 "pdflatex"
-  "Skripsi.out" 1788144817.63607 15856 368ba097b27a9e72a048870eb1c1cebe "pdflatex"
-  "Skripsi.tex" 1788144779.73592 200110 17e1ec226772decbe3f361e95e5e4354 ""
-  "Skripsi.toc" 1788144817.63607 7442 3374be15611cad9e8ba49d1c086f7198 "pdflatex"
+  "Skripsi.aux" 1788145475.18674 37672 a5dae7a2ce033d5ab763a09605cf00e7 "pdflatex"
+  "Skripsi.lof" 1788145475.19442 7289 cf27113e735163abb3f920f5e12ed600 "pdflatex"
+  "Skripsi.lot" 1788145475.19442 3460 69cdffcb9845869063fa7043a95bb8a0 "pdflatex"
+  "Skripsi.out" 1788145475.19442 15856 368ba097b27a9e72a048870eb1c1cebe "pdflatex"
+  "Skripsi.tex" 1788145432.38818 200108 7ad67a42bdbad4bd1d1da5a760070e80 ""
+  "Skripsi.toc" 1788145475.19442 7442 3374be15611cad9e8ba49d1c086f7198 "pdflatex"
   "gambar/arsitektur_sistem.png" 1782205488.72676 1008008 895537e3c54bdb6d1084f2ac60170523 ""
   "gambar/ui_01_register.png" 1784152291.03097 137359 40952f177b25342acb8dced0115157be ""
   "gambar/ui_02_login.png" 1784152291.06595 140499 51673c786911954e8aa1c7f0b7eb7edc ""
