@@ -1,0 +1,81 @@
+\babel@toc {indonesian}{}\relax 
+\contentsline {chapter}{HALAMAN PENGESAHAN}{ii}{section*.1}%
+\contentsline {chapter}{RINGKASAN}{iii}{section*.2}%
+\contentsline {chapter}{PRAKATA}{iv}{section*.3}%
+\contentsline {chapter}{DAFTAR ISI}{vi}{section*.4}%
+\contentsline {chapter}{DAFTAR TABEL}{ix}{section*.5}%
+\contentsline {chapter}{DAFTAR GAMBAR}{x}{section*.6}%
+\contentsline {chapter}{DAFTAR LAMPIRAN}{xii}{section*.7}%
+\contentsline {chapter}{\numberline {I}PENDAHULUAN}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Latar Belakang Masalah}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Rumusan Masalah}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Tujuan Penelitian}{3}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Batasan Masalah}{3}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Manfaat Penelitian}{4}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Sistematika Penulisan}{4}{section.1.6}%
+\contentsline {chapter}{\numberline {II}TINJAUAN PUSTAKA}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}\textit {State of the Art}}{7}{section.2.1}%
+\contentsline {section}{\numberline {2.2}\textit {Point of Sale} (POS)}{12}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Peramalan Deret Waktu (\textit {Time Series Forecasting})}{13}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Metode \textit {Seasonal-Naive}}{14}{section.2.4}%
+\contentsline {section}{\numberline {2.5}\textit {Recurrent Neural Network} (RNN)}{14}{section.2.5}%
+\contentsline {section}{\numberline {2.6}\textit {Long Short-Term Memory} (LSTM)}{15}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Praproses Data}{16}{section.2.7}%
+\contentsline {section}{\numberline {2.8}Metrik Evaluasi}{17}{section.2.8}%
+\contentsline {section}{\numberline {2.9}Flutter}{18}{section.2.9}%
+\contentsline {section}{\numberline {2.10}Pengujian \textit {Black Box}}{18}{section.2.10}%
+\contentsline {chapter}{\numberline {III}METODE PENYELESAIAN PENELITIAN}{20}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Alur Penelitian}{20}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Analisis Kebutuhan Sistem}{21}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Analisis Kebutuhan Fungsional}{21}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Analisis Kebutuhan Non-Fungsional}{22}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Perancangan Sistem}{23}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Arsitektur Sistem}{24}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Pemodelan Sistem \textit {Unified Modeling Language} (UML)}{25}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Perancangan Antarmuka Pengguna (\textit {User Interface})}{47}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.4}Data dan Pengumpulan Data}{59}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Perancangan Metode Penelitian}{62}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}\textit {Flowchart} Penerapan Metode \textit {Long Short-Term Memory}}{63}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}\textit {Flowchart} Perhitungan Sel \textit {Long Short-Term Memory}}{65}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Perhitungan Metrik Evaluasi Pengujian}{67}{subsection.3.5.3}%
+\contentsline {section}{\numberline {3.6}Skenario Pengujian Model}{68}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Pengujian Akurasi Model LSTM terhadap Ambang Kelayakan}{68}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Pengujian Stabilitas \textit {Multi-Seed}}{68}{subsection.3.6.2}%
+\contentsline {section}{\numberline {3.7}Perancangan Pengujian Sistem}{69}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Perancangan Pengujian \textit {Black Box}}{69}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}Perancangan Pengujian \textit {White Box}}{71}{subsection.3.7.2}%
+\contentsline {chapter}{\numberline {IV}HASIL, PEMBAHASAN DAN LUARAN}{73}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Hasil Implementasi Sistem}{73}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Implementasi Antarmuka Aplikasi Mobile}{73}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Implementasi Backend dan Basis Data Cloud}{89}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Implementasi Layanan Prediksi (API)}{90}{subsection.4.1.3}%
+\contentsline {section}{\numberline {4.2}Hasil Implementasi Praproses Data}{92}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Deskripsi dan Eksplorasi Awal Dataset EatsTEDI}{92}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Penyaringan Hari Aktif dan Transformasi Target Log-Return}{93}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Pembentukan Sequence dan Pembagian Dataset}{94}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Hasil Implementasi Mekanisme Prediksi}{95}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Implementasi Arsitektur Model LSTM}{95}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Hasil Pelatihan Model}{96}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Implementasi Prediksi Rekursif Multi-Langkah}{97}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Implementasi Fungsi Metrik Evaluasi}{99}{subsection.4.3.4}%
+\contentsline {section}{\numberline {4.4}Hasil Pengujian Model terhadap Skenario Pengujian}{99}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Pengujian Akurasi Model LSTM terhadap Ambang Kelayakan}{99}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Pengujian Stabilitas Model melalui \textit {Multi-Seed}}{100}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Rekapitulasi Hasil Kedua Skenario}{103}{subsection.4.4.3}%
+\contentsline {section}{\numberline {4.5}Hasil Pengujian Sistem}{103}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Hasil Pengujian Black Box}{104}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Hasil Pengujian Mekanisme Sinkronisasi Offline-First}{105}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Hasil Pengujian White Box}{106}{subsection.4.5.3}%
+\contentsline {section}{\numberline {4.6}Pembahasan Umum dan Posisi Temuan}{108}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Rekomendasi Praktis}{108}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Posisi Temuan terhadap Penelitian Terdahulu}{109}{subsection.4.6.2}%
+\contentsline {section}{\numberline {4.7}Keterbatasan Sistem dan Penelitian}{110}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Keterbatasan Sistem POS}{110}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Keterbatasan Penelitian Model Prediksi}{111}{subsection.4.7.2}%
+\contentsline {chapter}{\numberline {V}KESIMPULAN DAN SARAN}{113}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Kesimpulan}{113}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Saran}{113}{section.5.2}%
+\contentsline {chapter}{DAFTAR PUSTAKA}{115}{section*.87}%
+\contentsline {chapter}{LAMPIRAN 1. BIODATA TIM PELAKSANA}{117}{section*.88}%
+\contentsline {chapter}{LAMPIRAN 2. LUARAN ARTIKEL ILMIAH/PUBLIKASI}{121}{section*.89}%
+\contentsline {chapter}{LAMPIRAN 3. SURAT KEPUTUSAN DIREKTUR POLITEKNIK NEGERI LHOKSEUMAWE}{122}{section*.90}%
