@@ -2797,14 +2797,12 @@ Beberapa saran yang dapat diajukan untuk pengembangan penelitian selanjutnya ada
 \newpage
 \phantomsection
 \addcontentsline{toc}{chapter}{LAMPIRAN 2. LUARAN ARTIKEL ILMIAH/PUBLIKASI}
-\noindent{\fontsize{14pt}{16pt}\selectfont\bfseries LAMPIRAN 2. LUARAN ARTIKEL ILMIAH/PUBLIKASI}\par
-\vspace{0.5cm}
-
-\begin{spacing}{1.5}
-\noindent Luaran berupa artikel ilmiah/publikasi jurnal.
-
-% TODO: lampirkan bukti submisi/publikasi artikel ilmiah, jika ada.
-\end{spacing}
+% Halaman pertama jurnal diperkecil (scale=0.8) agar muat di bawah judul
+% Lampiran tanpa tumpang tindih, karena halaman aslinya padat sampai ke tepi.
+\newcommand{\lampirantwotitle}{\thispagestyle{empty}\noindent\raggedright{\fontsize{12pt}{14pt}\selectfont\bfseries LAMPIRAN 2. LUARAN ARTIKEL ILMIAH/PUBLIKASI}\par\vspace{0.5cm}}
+\includepdf[pages=1, scale=0.8, pagecommand=\lampirantwotitle]{../Jurnal/Jurnal.pdf}
+\includepdf[pages=2-, pagecommand={\thispagestyle{empty}},
+            width=\paperwidth, height=\paperheight]{../Jurnal/Jurnal.pdf}
 
 %%=============================================================
 %% LAMPIRAN 3. SURAT KEPUTUSAN DIREKTUR
@@ -2812,13 +2810,13 @@ Beberapa saran yang dapat diajukan untuk pengembangan penelitian selanjutnya ada
 \newpage
 \phantomsection
 \addcontentsline{toc}{chapter}{LAMPIRAN 3. SURAT KEPUTUSAN DIREKTUR POLITEKNIK NEGERI LHOKSEUMAWE}
-\noindent{\fontsize{14pt}{16pt}\selectfont\bfseries LAMPIRAN 3. SURAT KEPUTUSAN DIREKTUR POLITEKNIK NEGERI LHOKSEUMAWE}\par
+\thispagestyle{empty}
+\noindent\raggedright{\fontsize{12pt}{14pt}\selectfont\bfseries LAMPIRAN 3. SURAT KEPUTUSAN DIREKTUR POLITEKNIK NEGERI LHOKSEUMAWE}\par
 \vspace{0.5cm}
-
-\noindent Surat keputusan direktur diminta ke P3M Politeknik Negeri Lhokseumawe.
-
-\newpage
-\includepdf[pages=-, pagecommand={\thispagestyle{empty}},
-            width=\paperwidth, height=\paperheight]{../Lampiran/Form Revisi Sempro.pdf}
+\begin{center}
+\includegraphics[height=0.85\textheight,page=1]{Referensi/LAMPIRAN 3 SK No 928 Penelitian Skripsi Mahasiswa D-IV Tahun 2026.pdf}
+\end{center}
+\includepdf[pages=2-, pagecommand={\thispagestyle{empty}},
+            width=\paperwidth, height=\paperheight]{Referensi/LAMPIRAN 3 SK No 928 Penelitian Skripsi Mahasiswa D-IV Tahun 2026.pdf}
 
 \end{document}
