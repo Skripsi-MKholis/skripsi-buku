@@ -1839,42 +1839,69 @@ Proses tersebut diulang hingga model memenuhi kriteria kelayakan. \textit{Flowch
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth,height=0.6\textheight,keepaspectratio]{flowchart_sel_lstm.png}
+    \resizebox{0.58\textwidth}{!}{%
+    \begin{tikzpicture}[
+        node distance=0.35cm,
+        every node/.style={align=center},
+        startstop/.style={
+            rectangle, rounded corners=8pt,
+            minimum width=8.5cm, minimum height=1cm,
+            text centered, draw=black, fill=gray!20, font=\small
+        },
+        process/.style={
+            rectangle,
+            minimum width=8.5cm, minimum height=1.05cm,
+            text centered, draw=black, fill=white, font=\small
+        },
+        decision/.style={
+            diamond, aspect=3.4,
+            text centered, draw=black, fill=white, font=\small,
+            inner sep=2pt
+        },
+        arr/.style={->, >=Stealth, thick},
+    ]
+
+    \node (start)  [startstop] {Terima $x_t$, $h_{t-1}$, $C_{t-1}$\\(langkah pertama: $h_0=C_0=\vec{0}$)};
+    \node (concat) [process, below=of start]  {Gabungkan Vektor Masukan $[h_{t-1}, x_t]$};
+    \node (forget) [process, below=of concat] {a. Gerbang Lupa: Hitung $f_t$ (Pers.~\ref{eq:gerbang-lupa})};
+    \node (input)  [process, below=of forget] {b. Gerbang Masukan: Hitung $i_t$, $\tilde{C}_t$\\(Pers.~\ref{eq:gerbang-masukan}, \ref{eq:kandidat-sel})};
+    \node (update) [process, below=of input]  {c. Pembaruan Sel Memori: Hitung $C_t$ (Pers.~\ref{eq:pembaruan-sel})};
+    \node (output) [process, below=of update] {d. Gerbang Keluaran: Hitung $o_t$, $h_t$\\(Pers.~\ref{eq:gerbang-keluaran}, \ref{eq:keadaan-tersembunyi})};
+    \node (dec)    [decision, below=0.6cm of output] {Langkah\\Waktu\\Tersisa?};
+    \node (final)  [process, below=0.6cm of dec]  {Ambil \textit{Hidden State} Akhir $h_T$};
+    \node (dense)  [process, below=of final]  {\textit{Dropout} 0,1 $\to$ \textit{Dense} 16 ReLU $\to$ \textit{Output} Linear};
+    \node (end)    [startstop, below=of dense] {Prediksi \textit{Log-Return} $\hat{r}_t$};
+
+    \draw [arr] (start)  -- (concat);
+    \draw [arr] (concat) -- (forget);
+    \draw [arr] (forget) -- (input);
+    \draw [arr] (input)  -- (update);
+    \draw [arr] (update) -- (output);
+    \draw [arr] (output) -- (dec);
+    \draw [arr] (dec) -- node[right, font=\small] {Tidak} (final);
+    \draw [arr] (dec.west) -- ++(-2.3cm,0) node[midway, above, font=\small] {Ya} |- (concat.west);
+    \draw [arr] (final) -- (dense);
+    \draw [arr] (dense) -- (end);
+
+    \end{tikzpicture}%
+    }
     \caption{\textit{Flowchart} Perhitungan Sel \textit{Long Short-Term Memory}}
     \label{fig:sel_lstm}
 \end{figure}
 
-Gambar~\ref{fig:sel_lstm} menunjukkan proses pembaruan \textit{cell state} dan \textit{hidden state} yang diulang sebanyak panjang \textit{sequence} masukan, yaitu 7 langkah waktu. Adapun tahapan proses tersebut dijelaskan sebagai berikut.
+Gambar~\ref{fig:sel_lstm} menunjukkan proses komputasi satu sel LSTM pada setiap langkah waktu $t$, yang diulang sebanyak panjang \textit{sequence} masukan (7 langkah waktu). Pada langkah waktu pertama, \textit{hidden state} $h_0$ dan \textit{cell state} $C_0$ diinisialisasi sebagai vektor nol berdimensi 24 sesuai jumlah \textit{hidden units}. Setiap langkah waktu menerima $x_t$, $h_{t-1}$, dan $C_{t-1}$, menggabungkannya menjadi satu vektor, lalu memprosesnya melalui empat tahap berikut, sejalan dengan uraian pada Subbab~2.6.
 
-\noindent a.~~Input Vektor Fitur dan \textit{State} Sebelumnya: Sel menerima vektor fitur $x_t$, \textit{hidden state} $h_{t-1}$, dan \textit{cell state} $C_{t-1}$.
+\noindent a.~~Gerbang Lupa (\textit{Forget Gate}): Nilai $f_t$ dihitung dengan Persamaan~\ref{eq:gerbang-lupa} untuk menentukan proporsi informasi \textit{cell state} sebelumnya yang dipertahankan.
 
-\noindent b.~~Inisialisasi \textit{State} Awal: Pada langkah waktu pertama, $h_0$ dan $C_0$ diinisialisasi sebagai vektor nol berdimensi 24 sesuai jumlah \textit{hidden units}.
+\noindent b.~~Gerbang Masukan (\textit{Input Gate}): Nilai $i_t$ dan kandidat $\tilde{C}_t$ dihitung dengan Persamaan~\ref{eq:gerbang-masukan} dan~\ref{eq:kandidat-sel} untuk menentukan besar dan bentuk informasi baru yang akan disimpan.
 
-\noindent c.~~Penggabungan Vektor Masukan: Vektor $h_{t-1}$ dan $x_t$ digabungkan menjadi satu vektor yang digunakan bersama oleh seluruh gerbang.
+\noindent c.~~Pembaruan Sel Memori (\textit{Cell State Update}): \textit{Cell state} $C_t$ diperbarui dengan Persamaan~\ref{eq:pembaruan-sel}, yaitu penjumlahan $f_t \odot C_{t-1}$ dan $i_t \odot \tilde{C}_t$.
 
-\noindent d.~~Perhitungan \textit{Forget Gate}: Nilai $f_t$ dihitung dengan Persamaan~\ref{eq:gerbang-lupa} untuk menentukan proporsi informasi \textit{cell state} sebelumnya yang dipertahankan.
+\noindent d.~~Gerbang Keluaran (\textit{Output Gate}): Nilai $o_t$ dan \textit{hidden state} $h_t$ dihitung dengan Persamaan~\ref{eq:gerbang-keluaran} dan~\ref{eq:keadaan-tersembunyi}.
 
-\noindent e.~~Perhitungan \textit{Input Gate}: Nilai $i_t$ dihitung dengan Persamaan~\ref{eq:gerbang-masukan} untuk menentukan besar informasi baru yang masuk ke \textit{cell state}.
+Keempat tahap tersebut diulang untuk setiap langkah waktu, dengan $h_t$ dan $C_t$ diteruskan sebagai masukan langkah berikutnya. Setelah seluruh langkah waktu selesai, \textit{hidden state} akhir $h_T$ diambil sebagai representasi ringkas \textit{sequence} masukan, lalu dilewatkan melalui \textit{dropout layer} berlaju 0,1, \textit{dense layer} 16 neuron ReLU, dan \textit{output layer} satu neuron linear yang menghasilkan prediksi $\hat{r}_t$, yang selanjutnya direkonstruksi ke skala nominal Rupiah.
 
-\noindent f.~~Perhitungan Kandidat \textit{Cell State}: Kandidat $\tilde{C}_t$ dihitung dengan Persamaan~\ref{eq:kandidat-sel} menggunakan fungsi aktivasi tanh.
-
-\noindent g.~~Pembaruan \textit{Cell State}: \textit{Cell state} diperbarui dengan Persamaan~\ref{eq:pembaruan-sel}, yaitu penjumlahan $f_t \odot C_{t-1}$ dan $i_t \odot \tilde{C}_t$.
-
-\noindent h.~~Perhitungan \textit{Output Gate}: Nilai $o_t$ dihitung dengan Persamaan~\ref{eq:gerbang-keluaran} untuk menentukan bagian \textit{cell state} yang dikeluarkan.
-
-\noindent i.~~Perhitungan \textit{Hidden State}: \textit{Hidden state} $h_t$ dihitung dengan Persamaan~\ref{eq:keadaan-tersembunyi} melalui perkalian elemen $o_t$ dan $\tanh(C_t)$.
-
-\noindent j.~~Pemeriksaan Langkah Waktu: Apabila masih terdapat langkah waktu tersisa, nilai $h_t$ dan $C_t$ diteruskan ke langkah berikutnya dan proses kembali ke tahap penggabungan.
-
-\noindent k.~~Pengambilan \textit{Hidden State} Akhir: Setelah seluruh langkah waktu selesai, \textit{hidden state} terakhir $h_T$ diambil sebagai representasi ringkas \textit{sequence} masukan.
-
-\noindent l.~~Regularisasi \textit{Dropout}: Nilai $h_T$ dilewatkan melalui \textit{dropout layer} berlaju 0,1 untuk mencegah ketergantungan berlebih antar-node.
-
-\noindent m.~~Pemrosesan \textit{Dense Layer}: Hasil \textit{dropout} diproses \textit{dense layer} 16 neuron beraktivasi ReLU untuk mempelajari kombinasi non-linear representasi \textit{sequence}.
-
-\noindent n.~~Penghasilan Prediksi \textit{Log-Return}: \textit{Output layer} satu neuron beraktivasi linear menghasilkan prediksi $\hat{r}_t$, yang selanjutnya direkonstruksi ke skala nominal Rupiah.
-
-\textit{Flowchart} ini menunjukkan bahwa sel LSTM bekerja melalui tiga gerbang dalam mengatur aliran informasi antar-langkah waktu, sehingga model mampu mempelajari pola autokorelasi jangka pendek pada deret waktu penjualan harian.
+\textit{Flowchart} ini menunjukkan bahwa sel LSTM bekerja melalui empat tahap gerbang -- identik dengan uraian teori pada Subbab~2.6 -- dalam mengatur aliran informasi antar-langkah waktu, sehingga model mampu mempelajari pola autokorelasi jangka pendek pada deret waktu penjualan harian.
 \subsection{Perhitungan Metrik Evaluasi Pengujian}
 
 Proses evaluasi menghasilkan nilai kesalahan prediksi untuk setiap data uji berdasarkan perbandingan antara nilai aktual $Y_t$ dan nilai prediksi $\hat{Y}_t$ pada skala nominal Rupiah. Penelitian ini menggunakan tiga metrik evaluasi, yaitu \textit{Mean Absolute Error} (MAE), \textit{Root Mean Squared Error} (RMSE), dan \textit{symmetric Mean Absolute Percentage Error} (sMAPE), yang landasan teorinya telah dijabarkan pada Subbab~2.8. Perhitungan ketiga metrik tersebut dirumuskan sebagai berikut.

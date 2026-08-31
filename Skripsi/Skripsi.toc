@@ -42,7 +42,7 @@
 \contentsline {subsection}{\numberline {3.5.1}\textit {Flowchart} Penerapan Metode \textit {Long Short-Term Memory}}{74}{subsection.3.5.1}%
 \contentsline {subsection}{\numberline {3.5.2}\textit {Flowchart} Perhitungan Sel \textit {Long Short-Term Memory}}{78}{subsection.3.5.2}%
 \contentsline {subsection}{\numberline {3.5.3}Perhitungan Metrik Evaluasi Pengujian}{80}{subsection.3.5.3}%
-\contentsline {section}{\numberline {3.6}Skenario Pengujian Model}{82}{section.3.6}%
+\contentsline {section}{\numberline {3.6}Skenario Pengujian Model}{81}{section.3.6}%
 \contentsline {subsection}{\numberline {3.6.1}Skenario 1: Pengujian Akurasi Model LSTM terhadap Ambang Kelayakan}{82}{subsection.3.6.1}%
 \contentsline {subsection}{\numberline {3.6.2}Skenario 2: Pengujian Stabilitas \textit {Multi-Seed}}{82}{subsection.3.6.2}%
 \contentsline {section}{\numberline {3.7}Perancangan Pengujian Sistem}{83}{section.3.7}%
