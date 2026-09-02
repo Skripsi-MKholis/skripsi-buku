@@ -75,6 +75,23 @@
 \hyphenpenalty=10000
 \hbadness=10000
 
+%% Cegah baris/paragraf terpenggal tanggung di pergantian halaman
+%% (baris pertama sendirian di akhir halaman, baris terakhir sendirian
+%% di awal halaman berikutnya, kata terpotong tepat di batas halaman).
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+\brokenpenalty=10000
+
+%% Cegah judul bab/subbab tertinggal sendirian di dasar halaman
+%% (memaksa pindah halaman jika ruang tersisa tidak cukup untuk
+%% menampung judul beserta baris pertama isinya).
+\usepackage{needspace}
+\usepackage{etoolbox}
+\pretocmd{\section}{\Needspace{4\baselineskip}}{}{}
+\pretocmd{\subsection}{\Needspace{4\baselineskip}}{}{}
+\pretocmd{\subsubsection}{\Needspace{4\baselineskip}}{}{}
+
 %%=============================================================
 %% TOC FORMAT
 %%=============================================================
@@ -1599,7 +1616,8 @@ Bagian ini menjelaskan tahapan perancangan metode prediksi yang digunakan dalam 
         arr/.style={->, >=Stealth, thick},
     ]
 
-    \node (data)   [startstop] {Data Transaksi Harian (Supabase)};
+    \node (start)  [startstop] {Start};
+    \node (data)   [process, below=of start]  {Data Transaksi Harian (Supabase)};
     \node (pre)    [process, below=of data]   {Pra-pemrosesan: Filtering Hari Non-Aktif, \\ \textit{Log-Return Target}, \& Normalisasi \textit{Scaling}};
     \node (window) [process, below=of pre]    {Pembentukan \textit{Time Series} ($LOOK\_BACK=7$ hari aktif)};
     \node (split)  [process, below=of window] {Pembagian Dataset Kronologis (70\% \textit{Train}, 15\% \textit{Val}, 15\% \textit{Test})};
@@ -1610,8 +1628,10 @@ Bagian ini menjelaskan tahapan perancangan metode prediksi yang digunakan dalam 
     \node (tune)   [process, minimum width=3.8cm, right=2.8cm of dec]
                    {\textit{Hyperparameter Tuning}\\(\textit{epoch}, \textit{batch size},\\neuron, \textit{learning rate})};
     \node (api)    [process, below=0.8cm of dec]  {Integrasi Model ke Sistem POS via \textit{REST API}};
-    \node (end)    [startstop, below=of api]  {Prediksi Harian \& Prakiraan Rekursif 7 Hari\\Ditampilkan kepada Pengguna};
+    \node (result) [process, below=of api]    {Prediksi Harian \& Prakiraan Rekursif 7 Hari\\Ditampilkan kepada Pengguna};
+    \node (end)    [startstop, below=of result] {End};
 
+    \draw [arr] (start)  -- (data);
     \draw [arr] (data)   -- (pre);
     \draw [arr] (pre)    -- (window);
     \draw [arr] (window) -- (split);
@@ -1622,7 +1642,8 @@ Bagian ini menjelaskan tahapan perancangan metode prediksi yang digunakan dalam 
     \draw [arr] (dec)    -- node[left,  font=\small] {Ya}    (api);
     \draw [arr] (dec)    -- node[above, font=\small] {Tidak} (tune);
     \draw [arr] (tune.north) |- (train.east);
-    \draw [arr] (api)    -- (end);
+    \draw [arr] (api)    -- (result);
+    \draw [arr] (result) -- (end);
 
     \end{tikzpicture}%
     }
@@ -1700,18 +1721,21 @@ Proses tersebut diulang hingga model memenuhi kriteria kelayakan. \textit{Flowch
         arr/.style={->, >=Stealth, thick},
     ]
 
-    \node (start)  [startstop] {Terima $x_t$, $h_{t-1}$, $C_{t-1}$\\(langkah pertama: $h_0=C_0=\vec{0}$)};
-    \node (concat) [process, below=of start]  {Gabungkan Vektor Masukan $[h_{t-1}, x_t]$};
-    \node (forget) [process, below=of concat] {a. Gerbang Lupa: Hitung $f_t$ (Pers.~\ref{eq:gerbang-lupa})};
-    \node (input)  [process, below=of forget] {b. Gerbang Masukan: Hitung $i_t$, $\tilde{C}_t$\\(Pers.~\ref{eq:gerbang-masukan}, \ref{eq:kandidat-sel})};
-    \node (update) [process, below=of input]  {c. Pembaruan Sel Memori: Hitung $C_t$ (Pers.~\ref{eq:pembaruan-sel})};
-    \node (output) [process, below=of update] {d. Gerbang Keluaran: Hitung $o_t$, $h_t$\\(Pers.~\ref{eq:gerbang-keluaran}, \ref{eq:keadaan-tersembunyi})};
-    \node (dec)    [decision, below=0.6cm of output] {Langkah\\Waktu\\Tersisa?};
+    \node (start)  [startstop] {Start};
+    \node (init)   [process, below=of start]  {Terima $x_t$, $h_{t-1}$, $C_{t-1}$\\(langkah pertama: $h_0=C_0=\vec{0}$)};
+    \node (concat) [process, below=of init]   {Gabungkan Vektor Masukan $[h_{t-1}, x_t]$};
+    \node (forget) [process, below=of concat] {a. \textit{Forget Gate}: Hitung $f_t$ (Pers.~\ref{eq:gerbang-lupa})};
+    \node (input)  [process, below=of forget] {b. \textit{Input Gate}: Hitung $i_t$, $\tilde{C}_t$\\(Pers.~\ref{eq:gerbang-masukan}, \ref{eq:kandidat-sel})};
+    \node (update) [process, below=of input]  {c. \textit{Cell State Update}: Hitung $C_t$ (Pers.~\ref{eq:pembaruan-sel})};
+    \node (output) [process, below=of update] {d. \textit{Output Gate}: Hitung $o_t$, $h_t$\\(Pers.~\ref{eq:gerbang-keluaran}, \ref{eq:keadaan-tersembunyi})};
+    \node (dec)    [decision, below=0.6cm of output] {\textit{Time Step}\\Tersisa?};
     \node (final)  [process, below=0.6cm of dec]  {Ambil \textit{Hidden State} Akhir $h_T$};
     \node (dense)  [process, below=of final]  {\textit{Dropout} 0,1 $\to$ \textit{Dense} 16 ReLU $\to$ \textit{Output} Linear};
-    \node (end)    [startstop, below=of dense] {Prediksi \textit{Log-Return} $\hat{r}_t$};
+    \node (result) [process, below=of dense]  {Prediksi \textit{Log-Return} $\hat{r}_t$};
+    \node (end)    [startstop, below=of result] {End};
 
-    \draw [arr] (start)  -- (concat);
+    \draw [arr] (start)  -- (init);
+    \draw [arr] (init)   -- (concat);
     \draw [arr] (concat) -- (forget);
     \draw [arr] (forget) -- (input);
     \draw [arr] (input)  -- (update);
@@ -1720,7 +1744,8 @@ Proses tersebut diulang hingga model memenuhi kriteria kelayakan. \textit{Flowch
     \draw [arr] (dec) -- node[right, font=\small] {Tidak} (final);
     \draw [arr] (dec.west) -- ++(-2.3cm,0) node[midway, above, font=\small] {Ya} |- (concat.west);
     \draw [arr] (final) -- (dense);
-    \draw [arr] (dense) -- (end);
+    \draw [arr] (dense) -- (result);
+    \draw [arr] (result) -- (end);
 
     \end{tikzpicture}%
     }

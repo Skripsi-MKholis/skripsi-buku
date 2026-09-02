@@ -1,0 +1,717 @@
+latexmk: security risk: running with elevated privileges
+Rc files read (in order):
+  NONE
+Latexmk: This is Latexmk, John Collins, 9 March 2026. Version 4.88.
+Latexmk: applying rule 'pdflatex'...
+Rule 'pdflatex':  Reasons for rerun
+Changed files or newly in use/created:
+  Skripsi.tex
+Category 'changed_user':
+  Skripsi.tex
+
+------------
+Run number 1 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex  -interaction=nonstopmode -halt-on-error -recorder  "Skripsi.tex"'
+------------
+pdflatex: security risk: running with elevated privileges
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(Skripsi.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-12-24>
+(C:\Program Files\MiKTeX\tex/latex/base\report.cls
+Document Class: report 2025/01/22 v1.4n Standard LaTeX document class
+(C:\Program Files\MiKTeX\tex/latex/base\size12.clo))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/cmap\cmap.sty)
+(C:\Program Files\MiKTeX\tex/generic/babel\babel.sty
+(C:\Program Files\MiKTeX\tex/generic/babel\txtbabel.def)
+*************************************
+* Local config file bblopts.cfg used
+*
+(C:\Program Files\MiKTeX\tex/latex/arabi\bblopts.cfg)
+(C:\Program Files\MiKTeX\tex/generic/babel/locale/id\babel-indonesian.tex)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/babel-indonesian\indonesian.ld
+f)) (C:\Program Files\MiKTeX\tex/latex/base\inputenc.sty)
+(C:\Program Files\MiKTeX\tex/latex/base\fontenc.sty<<t1.cmap>>)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/setspace\setspace.sty)
+(C:\Program Files\MiKTeX\tex/latex/ragged2e\ragged2e.sty)
+(C:\Program Files\MiKTeX\tex/latex/graphics\graphicx.sty
+(C:\Program Files\MiKTeX\tex/latex/graphics\keyval.sty)
+(C:\Program Files\MiKTeX\tex/latex/graphics\graphics.sty
+(C:\Program Files\MiKTeX\tex/latex/graphics\trig.sty)
+(C:\Program Files\MiKTeX\tex/latex/graphics-cfg\graphics.cfg)
+(C:\Program Files\MiKTeX\tex/latex/graphics-def\pdftex.def)))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/float\float.sty)
+(C:\Program Files\MiKTeX\tex/latex/tools\indentfirst.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/pslatex\pslatex.sty)
+(C:\Program Files\MiKTeX\tex/latex/tools\tabularx.sty
+(C:\Program Files\MiKTeX\tex/latex/tools\array.sty))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/multirow\multirow.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/pdfpages\pdfpages.sty
+(C:\Program Files\MiKTeX\tex/latex/base\ifthen.sty)
+(C:\Program Files\MiKTeX\tex/latex/tools\calc.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/eso-pic\eso-pic.sty
+(C:\Program Files\MiKTeX\tex/latex/xcolor\xcolor.sty
+(C:\Program Files\MiKTeX\tex/latex/graphics-cfg\color.cfg)
+(C:\Program Files\MiKTeX\tex/latex/graphics\mathcolor.ltx)))
+(C:\Program Files\MiKTeX\tex/latex/etoolbox\etoolbox.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/pdfpages\pppdftex.def))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/colortbl\colortbl.sty)
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsmath.sty
+For additional information on amsmath, use the `?' option.
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amstext.sty
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsgen.sty))
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsbsy.sty)
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsopn.sty))
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\amssymb.sty
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\amsfonts.sty))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/enumitem\enumitem.sty)
+(C:\Program Files\MiKTeX\tex/latex/tools\longtable.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/xltabular\xltabular.sty
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/ltablex\ltablex.sty))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/booktabs\booktabs.sty)
+(C:\Program Files\MiKTeX\tex/latex/listings\listings.sty
+(C:\Program Files\MiKTeX\tex/latex/listings\lstpatch.sty)
+(C:\Program Files\MiKTeX\tex/latex/listings\lstmisc.sty)
+(C:\Program Files\MiKTeX\tex/latex/listings\listings.cfg))
+==> First Aid for listings.sty no longer applied!
+    Expected:
+        2024/09/23 1.10c (Carsten Heinz)
+    but found:
+        2025/11/14 1.11b (Carsten Heinz)
+    so I'm assuming it got fixed.
+(C:\Program Files\MiKTeX\tex/latex/listings\lstlang1.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/caption\caption.sty
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/caption\caption3.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/caption\ltcaption.sty))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/caption\subcaption.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/geometry\geometry.sty
+(C:\Program Files\MiKTeX\tex/generic/iftex\ifvtex.sty
+(C:\Program Files\MiKTeX\tex/generic/iftex\iftex.sty))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/geometry\geometry.cfg))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/titlesec\titlesec.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/tocloft\tocloft.sty)
+(C:\Program Files\MiKTeX\tex/latex/hyperref\hyperref.sty
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.st
+y) (C:\Users\acern\AppData\Roaming\MiKTeX\tex/generic/pdfescape\pdfescape.sty
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty)
+(C:\Program Files\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.sty
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/generic/infwarerr\infwarerr.sty)))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/hycolor\hycolor.sty)
+(C:\Program Files\MiKTeX\tex/latex/hyperref\nameref.sty
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/refcount\refcount.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/generic/gettitlestring\gettitlestrin
+g.sty (C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/kvoptions\kvoptions.sty)
+)) (C:\Users\acern\AppData\Roaming\MiKTeX\tex/generic/stringenc\stringenc.sty)
+(C:\Program Files\MiKTeX\tex/latex/hyperref\pd1enc.def)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/generic/intcalc\intcalc.sty)
+(C:\Program Files\MiKTeX\tex/latex/hyperref\puenc.def)
+(C:\Program Files\MiKTeX\tex/latex/url\url.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/generic/bitset\bitset.sty
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty)))
+(C:\Program Files\MiKTeX\tex/latex/hyperref\hpdftex.def
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.
+sty
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/generic/uniquecounter\uniquecounter.
+sty))) (C:\Program Files\MiKTeX\tex/latex/pgf/frontendlayer\tikz.sty
+(C:\Program Files\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty
+(C:\Program Files\MiKTeX\tex/latex/pgf/utilities\pgfrcs.sty
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfutil-common.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfutil-latex.def)
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfrcs.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf\pgf.revision.tex)))
+(C:\Program Files\MiKTeX\tex/latex/pgf/basiclayer\pgfcore.sty
+(C:\Program Files\MiKTeX\tex/latex/pgf/systemlayer\pgfsys.sty
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsys.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfkeys.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfkeyslibraryfiltered.code.
+tex)) (C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgf.cfg)
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-pdftex.def
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-common-pdf.def)))
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsyssoftpath.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsysprotocol.code.tex))
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcore.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathutil.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathparser.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.basic.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.trigonometric.co
+de.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.random.code.tex)
+
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.comparison.code.
+tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.base.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.round.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.misc.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.integerarithmeti
+cs.code.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathcalc.code.tex
+) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfloat.code.tex))
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfint.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepoints.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathconstruct.code.t
+ex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathusage.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorescopes.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoregraphicstate.code.te
+x)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransformations.code
+.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorequick.code.tex
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreobjects.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathprocessing.code.
+tex) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorearrows.code.tex
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreshade.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreimage.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreexternal.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorelayers.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransparency.code.te
+x) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepatterns.code.tex
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorerdf.code.tex)))
+(C:\Program Files\MiKTeX\tex/generic/pgf/modules\pgfmoduleshapes.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/modules\pgfmoduleplot.code.tex)
+(C:\Program Files\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-0-65.sty)
+(C:\Program Files\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-1-18.sty))
+ (C:\Program Files\MiKTeX\tex/latex/pgf/utilities\pgffor.sty
+(C:\Program Files\MiKTeX\tex/latex/pgf/utilities\pgfkeys.sty
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfkeys.code.tex))
+(C:\Program Files\MiKTeX\tex/latex/pgf/math\pgfmath.sty
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex))
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgffor.code.tex))
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz\tikz.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/libraries\pgflibraryplothandlers.code.
+tex) (C:\Program Files\MiKTeX\tex/generic/pgf/modules\pgfmodulematrix.code.tex)
+
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+rytopaths.code.tex)))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/pdflscape\pdflscape.sty
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/pdflscape\pdflscape-nometadata
+.sty (C:\Program Files\MiKTeX\tex/latex/graphics\lscape.sty)))
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+ryshapes.geometric.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/libraries/shapes\pgflibraryshapes.geom
+etric.code.tex))
+(C:\Program Files\MiKTeX\tex/generic/pgf/libraries\pgflibraryarrows.meta.code.t
+ex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+rypositioning.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+ryshapes.multipart.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/libraries/shapes\pgflibraryshapes.mult
+ipart.code.tex))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/needspace\needspace.sty)
+(C:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def) (Skripsi.aux
+ (C:\Program Files\MiKTeX\tex/generic/babel/locale/en\babel-english.tex))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/psnfss\omspzccm.fd)
+(C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (C:\Program Files\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
+(C:\Program Files\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(Skripsi.out) (Skripsi.out)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/psnfss\ot1ptmcm.fd)<<ot1.cmap>
+> (C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/psnfss\omlptmcm.fd)<<oml.cma
+p>><<oms.cmap>>
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/psnfss\omxpsycm.fd)<<omx.cmap>
+> (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd)
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd) [1{C:/Users/acern/AppData/
+Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Program Files/MiKTeX/fonts/enc/dvi
+ps/base/8r.enc} <../Project/gambar/logo-pnl-skripsi.png>]
+
+pdfTeX warning: pdflatex.exe (file ./Lainnya/Pengesahan.pdf): PDF inclusion: fo
+und PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex.exe (file ./Lainnya/Pengesahan.pdf): PDF inclusion: fo
+und PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex.exe (file ./Lainnya/Pengesahan.pdf): PDF inclusion: fo
+und PDF version <1.7>, but at most version <1.5> allowed
+[2 <./Lainnya/Pengesahan.pdf>]
+
+pdfTeX warning: pdflatex.exe (file ./Lainnya/Pengesahan.pdf): PDF inclusion: fo
+und PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex.exe (file ./Lainnya/Pengesahan.pdf): PDF inclusion: fo
+und PDF version <1.7>, but at most version <1.5> allowed
+[3 <./Lainnya/Pengesahan.pdf>] [4] [5] [6] [7] [8] (Skripsi.toc [9] [10])
+[11] (Skripsi.lof [12]) [13] (Skripsi.lot) [14]
+Bab I.
+[1] [2] [3] [4] [5] [6] [7] [8]
+Bab II.
+[9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23]
+Bab III.
+[24 <../Project/gambar/alur_penelitian.png>] [25] [26]
+ignored error: Infinite glue shrinkage found in box being split [27] [28]
+[29 <./gambar/arsitektur_sistem.png>] [30] [31] [32 <./gambar/use_case_drawio.p
+ng>] [33] [34] [35] [36] [37] [38] [39] [40] [41] [42 <../Project/gambar/activi
+ty_registrasi.png (PNG copy)>] [43 <../Project/gambar/activity_login.png (PNG c
+opy)>] [44 <../Project/gambar/activity_produk.png (PNG copy)>] [45 <../Project/
+gambar/activity_kategori.png (PNG copy)>] [46] [47 <../Project/gambar/activity_
+checkout.png (PNG copy)>] [48 <../Project/gambar/activity_stok.png (PNG copy)>]
+[49 <../Project/gambar/activity_dashboard.png (PNG copy)>] [50 <../Project/gamb
+ar/activity_ai.png (PNG copy)>] [51 <../Project/gambar/activity_riwayat.png (PN
+G copy)>] [52 <../Project/gambar/activity_sync.png (PNG copy)>] [53] [54 <../Pr
+oject/gambar/activity_broadcast.png (PNG copy)>] [55 <../Project/gambar/activit
+y_karyawan.png (PNG copy)>] [56 <../Project/gambar/activity_profil.png (PNG cop
+y)>] [57] [58 <../Rancangan/Wireframe/wireframe_register.png>] [59 <../Rancanga
+n/Wireframe/wireframe_login.png>] [60 <../Rancangan/Wireframe/wireframe_store_l
+ist.png>] [61 <../Rancangan/Wireframe/wireframe_add_product.png>] [62 <../Ranca
+ngan/Wireframe/wireframe_manage_categories.png>] [63 <../Rancangan/Wireframe/wi
+reframe_product_catalog.png>] [64 <../Rancangan/Wireframe/wireframe_payment.png
+>] [65 <../Rancangan/Wireframe/wireframe_dashboard_owner.png>] [66 <../Rancanga
+n/Wireframe/wireframe_reports.png>] [67 <../Project/gambar/wireframe_smart_anal
+ytics.png (PNG copy)>] [68 <../Project/gambar/wireframe_analytics_history.png (
+PNG copy)>] [69 <../Rancangan/Wireframe/wireframe_store_info.png>] [70 <../Ranc
+angan/Wireframe/wireframe_settings.png>] [71] [72] [73] [74] [75] [76] [77]
+[78] [79] [80] [81] [82] [83]
+Overfull \hbox (0.59213pt too wide) in paragraph at lines 1814--1814
+ []|\T1/ptm/b/n/12 No.| 
+
+Overfull \hbox (21.54718pt too wide) in alignment at lines 1811--1816
+ [] [] [] [] 
+
+Overfull \hbox (0.59213pt too wide) in paragraph at lines 1819--1819
+ []|\T1/ptm/b/n/12 No.| 
+
+Overfull \hbox (21.54718pt too wide) in alignment at lines 1816--1821
+ [] [] [] [] 
+
+Overfull \hbox (21.54718pt too wide) in alignment at lines 1821--1824
+ [] [] [] [] 
+
+Overfull \hbox (21.54718pt too wide) in alignment at lines 1824--1826
+ [] [] [] [] 
+
+Overfull \hbox (21.54718pt too wide) in alignment at lines 1826--1852
+ [] [] [] [] 
+ignored error: Infinite glue shrinkage found in box being split [84] [85]
+[86]
+Bab IV.
+[87] [88] [89 <./gambar/ui_01_register.png>] [90 <./gambar/ui_02_login.png>]
+[91 <./gambar/ui_03_daftar_toko.png>] [92 <./gambar/ui_04_pilih_toko.png>]
+[93 <./gambar/ui_05_dashboard_owner.png>] [94 <./gambar/ui_06a_kelola_produk.pn
+g> <./gambar/ui_06b_tambah_produk.png>] [95 <./gambar/ui_07_kelola_kategori.png
+>] [96 <./gambar/ui_08_kelola_stok.png> <./gambar/ui_09_modal_edit_stok.png>]
+[97 <./gambar/ui_10_riwayat_stok.png>] [98 <./gambar/ui_11_kasir_pos.png> <./ga
+mbar/ui_12_detail_pesanan.png>] [99 <./gambar/ui_13_pembayaran.png>] [100 <./ga
+mbar/ui_14_riwayat_transaksi.png>] [101 <./gambar/ui_15_struk_digital.png>]
+[102 <./gambar/ui_16a_laporan_penjualan.png> <./gambar/ui_16b_laporan_penjualan
+.png>] [103 <./gambar/ui_17a_smart_analitik.png> <./gambar/ui_17b_smart_analiti
+k.png>] [104 <./gambar/ui_18_riwayat_analisis.png>] [105] [106] [107] [108]
+[109] [110] [111] [112] [113] [114 <./Gambar/lstm_harian_disederhanakan_plot_ku
+rva_training.png>] [115] [116] [117] [118] [119 <./Gambar/lstm_harian_hybrid_re
+sidual_plot_1.png>] [120] [121 <./Gambar/evaluasi_multiseed_standalone_plot_1.p
+ng>] [122]
+Overfull \hbox (0.59213pt too wide) in paragraph at lines 2507--2507
+ []|\T1/ptm/b/n/12 No.| 
+
+Overfull \hbox (0.59213pt too wide) in paragraph at lines 2511--2511
+ []|\T1/ptm/b/n/12 No.| 
+ignored error: Infinite glue shrinkage found in box being split [123] [124]
+[125] [126] [127] [128] [129] [130] [131] [132] [133]
+Bab V.
+[134] [135] [136] [137] [138] [139]
+
+pdfTeX warning: pdflatex.exe (file ../Lampiran/Form Revisi Sempro.pdf): PDF inc
+lusion: found PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex.exe (file ../Lampiran/Form Revisi Sempro.pdf): PDF inc
+lusion: found PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex.exe (file ../Lampiran/Form Revisi Sempro.pdf): PDF inc
+lusion: found PDF version <1.7>, but at most version <1.5> allowed
+[140 <../Lampiran/Form Revisi Sempro.pdf>]
+
+pdfTeX warning: pdflatex.exe (file ../Lampiran/Form Revisi Sempro.pdf): PDF inc
+lusion: found PDF version <1.7>, but at most version <1.5> allowed
+[141 <../Lampiran/Form Revisi Sempro.pdf>] (Skripsi.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ )
+(see the transcript file for additional information)<C:/Program Files/MiKTeX/fo
+nts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfont
+s/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.p
+fb><C:/Program Files/MiKTeX/fonts/type1/urw/courier/ucrb8a.pfb><C:/Program File
+s/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files/MiKTeX/fonts/type
+1/urw/courier/ucrro8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/symbol/usyr.
+pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files
+/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Files/MiKTeX/fonts/type1/
+urw/times/utmr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmri8a.pfb
+>
+Output written on Skripsi.pdf (155 pages, 11528014 bytes).
+Transcript written on Skripsi.log.
+pdflatex: major issue: So far, you have not checked for updates as a MiKTeX user.
+Latexmk: Getting log file 'Skripsi.log'
+Latexmk: Examining 'Skripsi.fls'
+Latexmk: Examining 'Skripsi.log'
+Latexmk: References changed.
+Latexmk: Log file says output to 'Skripsi.pdf'
+Latexmk: applying rule 'pdflatex'...
+Rule 'pdflatex':  Reasons for rerun
+Changed files or newly in use/created:
+  Skripsi.aux
+  Skripsi.lof
+  Skripsi.lot
+  Skripsi.toc
+
+------------
+Run number 2 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex  -interaction=nonstopmode -halt-on-error -recorder  "Skripsi.tex"'
+------------
+pdflatex: security risk: running with elevated privileges
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(Skripsi.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-12-24>
+(C:\Program Files\MiKTeX\tex/latex/base\report.cls
+Document Class: report 2025/01/22 v1.4n Standard LaTeX document class
+(C:\Program Files\MiKTeX\tex/latex/base\size12.clo))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/cmap\cmap.sty)
+(C:\Program Files\MiKTeX\tex/generic/babel\babel.sty
+(C:\Program Files\MiKTeX\tex/generic/babel\txtbabel.def)
+*************************************
+* Local config file bblopts.cfg used
+*
+(C:\Program Files\MiKTeX\tex/latex/arabi\bblopts.cfg)
+(C:\Program Files\MiKTeX\tex/generic/babel/locale/id\babel-indonesian.tex)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/babel-indonesian\indonesian.ld
+f)) (C:\Program Files\MiKTeX\tex/latex/base\inputenc.sty)
+(C:\Program Files\MiKTeX\tex/latex/base\fontenc.sty<<t1.cmap>>)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/setspace\setspace.sty)
+(C:\Program Files\MiKTeX\tex/latex/ragged2e\ragged2e.sty)
+(C:\Program Files\MiKTeX\tex/latex/graphics\graphicx.sty
+(C:\Program Files\MiKTeX\tex/latex/graphics\keyval.sty)
+(C:\Program Files\MiKTeX\tex/latex/graphics\graphics.sty
+(C:\Program Files\MiKTeX\tex/latex/graphics\trig.sty)
+(C:\Program Files\MiKTeX\tex/latex/graphics-cfg\graphics.cfg)
+(C:\Program Files\MiKTeX\tex/latex/graphics-def\pdftex.def)))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/float\float.sty)
+(C:\Program Files\MiKTeX\tex/latex/tools\indentfirst.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/pslatex\pslatex.sty)
+(C:\Program Files\MiKTeX\tex/latex/tools\tabularx.sty
+(C:\Program Files\MiKTeX\tex/latex/tools\array.sty))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/multirow\multirow.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/pdfpages\pdfpages.sty
+(C:\Program Files\MiKTeX\tex/latex/base\ifthen.sty)
+(C:\Program Files\MiKTeX\tex/latex/tools\calc.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/eso-pic\eso-pic.sty
+(C:\Program Files\MiKTeX\tex/latex/xcolor\xcolor.sty
+(C:\Program Files\MiKTeX\tex/latex/graphics-cfg\color.cfg)
+(C:\Program Files\MiKTeX\tex/latex/graphics\mathcolor.ltx)))
+(C:\Program Files\MiKTeX\tex/latex/etoolbox\etoolbox.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/pdfpages\pppdftex.def))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/colortbl\colortbl.sty)
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsmath.sty
+For additional information on amsmath, use the `?' option.
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amstext.sty
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsgen.sty))
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsbsy.sty)
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsopn.sty))
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\amssymb.sty
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\amsfonts.sty))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/enumitem\enumitem.sty)
+(C:\Program Files\MiKTeX\tex/latex/tools\longtable.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/xltabular\xltabular.sty
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/ltablex\ltablex.sty))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/booktabs\booktabs.sty)
+(C:\Program Files\MiKTeX\tex/latex/listings\listings.sty
+(C:\Program Files\MiKTeX\tex/latex/listings\lstpatch.sty)
+(C:\Program Files\MiKTeX\tex/latex/listings\lstmisc.sty)
+(C:\Program Files\MiKTeX\tex/latex/listings\listings.cfg))
+==> First Aid for listings.sty no longer applied!
+    Expected:
+        2024/09/23 1.10c (Carsten Heinz)
+    but found:
+        2025/11/14 1.11b (Carsten Heinz)
+    so I'm assuming it got fixed.
+(C:\Program Files\MiKTeX\tex/latex/listings\lstlang1.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/caption\caption.sty
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/caption\caption3.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/caption\ltcaption.sty))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/caption\subcaption.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/geometry\geometry.sty
+(C:\Program Files\MiKTeX\tex/generic/iftex\ifvtex.sty
+(C:\Program Files\MiKTeX\tex/generic/iftex\iftex.sty))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/geometry\geometry.cfg))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/titlesec\titlesec.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/tocloft\tocloft.sty)
+(C:\Program Files\MiKTeX\tex/latex/hyperref\hyperref.sty
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.st
+y) (C:\Users\acern\AppData\Roaming\MiKTeX\tex/generic/pdfescape\pdfescape.sty
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty)
+(C:\Program Files\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.sty
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/generic/infwarerr\infwarerr.sty)))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/hycolor\hycolor.sty)
+(C:\Program Files\MiKTeX\tex/latex/hyperref\nameref.sty
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/refcount\refcount.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/generic/gettitlestring\gettitlestrin
+g.sty (C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/kvoptions\kvoptions.sty)
+)) (C:\Users\acern\AppData\Roaming\MiKTeX\tex/generic/stringenc\stringenc.sty)
+(C:\Program Files\MiKTeX\tex/latex/hyperref\pd1enc.def)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/generic/intcalc\intcalc.sty)
+(C:\Program Files\MiKTeX\tex/latex/hyperref\puenc.def)
+(C:\Program Files\MiKTeX\tex/latex/url\url.sty)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/generic/bitset\bitset.sty
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty)))
+(C:\Program Files\MiKTeX\tex/latex/hyperref\hpdftex.def
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.
+sty
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/generic/uniquecounter\uniquecounter.
+sty))) (C:\Program Files\MiKTeX\tex/latex/pgf/frontendlayer\tikz.sty
+(C:\Program Files\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty
+(C:\Program Files\MiKTeX\tex/latex/pgf/utilities\pgfrcs.sty
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfutil-common.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfutil-latex.def)
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfrcs.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf\pgf.revision.tex)))
+(C:\Program Files\MiKTeX\tex/latex/pgf/basiclayer\pgfcore.sty
+(C:\Program Files\MiKTeX\tex/latex/pgf/systemlayer\pgfsys.sty
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsys.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfkeys.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfkeyslibraryfiltered.code.
+tex)) (C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgf.cfg)
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-pdftex.def
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-common-pdf.def)))
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsyssoftpath.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/systemlayer\pgfsysprotocol.code.tex))
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcore.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathutil.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathparser.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.basic.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.trigonometric.co
+de.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.random.code.tex)
+
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.comparison.code.
+tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.base.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.round.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.misc.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.integerarithmeti
+cs.code.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathcalc.code.tex
+) (C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmathfloat.code.tex))
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfint.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepoints.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathconstruct.code.t
+ex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathusage.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorescopes.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoregraphicstate.code.te
+x)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransformations.code
+.tex) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorequick.code.tex
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreobjects.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathprocessing.code.
+tex) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorearrows.code.tex
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreshade.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreimage.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreexternal.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorelayers.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransparency.code.te
+x) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepatterns.code.tex
+) (C:\Program Files\MiKTeX\tex/generic/pgf/basiclayer\pgfcorerdf.code.tex)))
+(C:\Program Files\MiKTeX\tex/generic/pgf/modules\pgfmoduleshapes.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/modules\pgfmoduleplot.code.tex)
+(C:\Program Files\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-0-65.sty)
+(C:\Program Files\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-1-18.sty))
+ (C:\Program Files\MiKTeX\tex/latex/pgf/utilities\pgffor.sty
+(C:\Program Files\MiKTeX\tex/latex/pgf/utilities\pgfkeys.sty
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgfkeys.code.tex))
+(C:\Program Files\MiKTeX\tex/latex/pgf/math\pgfmath.sty
+(C:\Program Files\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex))
+(C:\Program Files\MiKTeX\tex/generic/pgf/utilities\pgffor.code.tex))
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz\tikz.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/libraries\pgflibraryplothandlers.code.
+tex) (C:\Program Files\MiKTeX\tex/generic/pgf/modules\pgfmodulematrix.code.tex)
+
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+rytopaths.code.tex)))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/pdflscape\pdflscape.sty
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/pdflscape\pdflscape-nometadata
+.sty (C:\Program Files\MiKTeX\tex/latex/graphics\lscape.sty)))
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+ryshapes.geometric.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/libraries/shapes\pgflibraryshapes.geom
+etric.code.tex))
+(C:\Program Files\MiKTeX\tex/generic/pgf/libraries\pgflibraryarrows.meta.code.t
+ex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+rypositioning.code.tex)
+(C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
+ryshapes.multipart.code.tex
+(C:\Program Files\MiKTeX\tex/generic/pgf/libraries/shapes\pgflibraryshapes.mult
+ipart.code.tex))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/needspace\needspace.sty)
+(C:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def) (Skripsi.aux
+ (C:\Program Files\MiKTeX\tex/generic/babel/locale/en\babel-english.tex))
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/psnfss\omspzccm.fd)
+(C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (C:\Program Files\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
+(C:\Program Files\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(Skripsi.out) (Skripsi.out)
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/psnfss\ot1ptmcm.fd)<<ot1.cmap>
+> (C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/psnfss\omlptmcm.fd)<<oml.cma
+p>><<oms.cmap>>
+(C:\Users\acern\AppData\Roaming\MiKTeX\tex/latex/psnfss\omxpsycm.fd)<<omx.cmap>
+> (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd)
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd) [1{C:/Users/acern/AppData/
+Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Program Files/MiKTeX/fonts/enc/dvi
+ps/base/8r.enc} <../Project/gambar/logo-pnl-skripsi.png>]
+
+pdfTeX warning: pdflatex.exe (file ./Lainnya/Pengesahan.pdf): PDF inclusion: fo
+und PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex.exe (file ./Lainnya/Pengesahan.pdf): PDF inclusion: fo
+und PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex.exe (file ./Lainnya/Pengesahan.pdf): PDF inclusion: fo
+und PDF version <1.7>, but at most version <1.5> allowed
+[2 <./Lainnya/Pengesahan.pdf>]
+
+pdfTeX warning: pdflatex.exe (file ./Lainnya/Pengesahan.pdf): PDF inclusion: fo
+und PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex.exe (file ./Lainnya/Pengesahan.pdf): PDF inclusion: fo
+und PDF version <1.7>, but at most version <1.5> allowed
+[3 <./Lainnya/Pengesahan.pdf>] [4] [5] [6] [7] [8] (Skripsi.toc [9] [10])
+[11] (Skripsi.lof [12]) [13] (Skripsi.lot) [14]
+Bab I.
+[1] [2] [3] [4] [5] [6] [7] [8]
+Bab II.
+[9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23]
+Bab III.
+[24 <../Project/gambar/alur_penelitian.png>] [25] [26]
+ignored error: Infinite glue shrinkage found in box being split [27] [28]
+[29 <./gambar/arsitektur_sistem.png>] [30] [31] [32 <./gambar/use_case_drawio.p
+ng>] [33] [34] [35] [36] [37] [38] [39] [40] [41] [42 <../Project/gambar/activi
+ty_registrasi.png (PNG copy)>] [43 <../Project/gambar/activity_login.png (PNG c
+opy)>] [44 <../Project/gambar/activity_produk.png (PNG copy)>] [45 <../Project/
+gambar/activity_kategori.png (PNG copy)>] [46] [47 <../Project/gambar/activity_
+checkout.png (PNG copy)>] [48 <../Project/gambar/activity_stok.png (PNG copy)>]
+[49 <../Project/gambar/activity_dashboard.png (PNG copy)>] [50 <../Project/gamb
+ar/activity_ai.png (PNG copy)>] [51 <../Project/gambar/activity_riwayat.png (PN
+G copy)>] [52 <../Project/gambar/activity_sync.png (PNG copy)>] [53] [54 <../Pr
+oject/gambar/activity_broadcast.png (PNG copy)>] [55 <../Project/gambar/activit
+y_karyawan.png (PNG copy)>] [56 <../Project/gambar/activity_profil.png (PNG cop
+y)>] [57] [58 <../Rancangan/Wireframe/wireframe_register.png>] [59 <../Rancanga
+n/Wireframe/wireframe_login.png>] [60 <../Rancangan/Wireframe/wireframe_store_l
+ist.png>] [61 <../Rancangan/Wireframe/wireframe_add_product.png>] [62 <../Ranca
+ngan/Wireframe/wireframe_manage_categories.png>] [63 <../Rancangan/Wireframe/wi
+reframe_product_catalog.png>] [64 <../Rancangan/Wireframe/wireframe_payment.png
+>] [65 <../Rancangan/Wireframe/wireframe_dashboard_owner.png>] [66 <../Rancanga
+n/Wireframe/wireframe_reports.png>] [67 <../Project/gambar/wireframe_smart_anal
+ytics.png (PNG copy)>] [68 <../Project/gambar/wireframe_analytics_history.png (
+PNG copy)>] [69 <../Rancangan/Wireframe/wireframe_store_info.png>] [70 <../Ranc
+angan/Wireframe/wireframe_settings.png>] [71] [72] [73] [74] [75] [76] [77]
+[78] [79] [80] [81] [82] [83]
+Overfull \hbox (0.59213pt too wide) in paragraph at lines 1814--1814
+ []|\T1/ptm/b/n/12 No.| 
+
+Overfull \hbox (21.54718pt too wide) in alignment at lines 1811--1816
+ [] [] [] [] 
+
+Overfull \hbox (0.59213pt too wide) in paragraph at lines 1819--1819
+ []|\T1/ptm/b/n/12 No.| 
+
+Overfull \hbox (21.54718pt too wide) in alignment at lines 1816--1821
+ [] [] [] [] 
+
+Overfull \hbox (21.54718pt too wide) in alignment at lines 1821--1824
+ [] [] [] [] 
+
+Overfull \hbox (21.54718pt too wide) in alignment at lines 1824--1826
+ [] [] [] [] 
+
+Overfull \hbox (21.54718pt too wide) in alignment at lines 1826--1852
+ [] [] [] [] 
+ignored error: Infinite glue shrinkage found in box being split [84] [85]
+[86]
+Bab IV.
+[87] [88] [89 <./gambar/ui_01_register.png>] [90 <./gambar/ui_02_login.png>]
+[91 <./gambar/ui_03_daftar_toko.png>] [92 <./gambar/ui_04_pilih_toko.png>]
+[93 <./gambar/ui_05_dashboard_owner.png>] [94 <./gambar/ui_06a_kelola_produk.pn
+g> <./gambar/ui_06b_tambah_produk.png>] [95 <./gambar/ui_07_kelola_kategori.png
+>] [96 <./gambar/ui_08_kelola_stok.png> <./gambar/ui_09_modal_edit_stok.png>]
+[97 <./gambar/ui_10_riwayat_stok.png>] [98 <./gambar/ui_11_kasir_pos.png> <./ga
+mbar/ui_12_detail_pesanan.png>] [99 <./gambar/ui_13_pembayaran.png>] [100 <./ga
+mbar/ui_14_riwayat_transaksi.png>] [101 <./gambar/ui_15_struk_digital.png>]
+[102 <./gambar/ui_16a_laporan_penjualan.png> <./gambar/ui_16b_laporan_penjualan
+.png>] [103 <./gambar/ui_17a_smart_analitik.png> <./gambar/ui_17b_smart_analiti
+k.png>] [104 <./gambar/ui_18_riwayat_analisis.png>] [105] [106] [107] [108]
+[109] [110] [111] [112] [113] [114 <./Gambar/lstm_harian_disederhanakan_plot_ku
+rva_training.png>] [115] [116] [117] [118] [119 <./Gambar/lstm_harian_hybrid_re
+sidual_plot_1.png>] [120] [121 <./Gambar/evaluasi_multiseed_standalone_plot_1.p
+ng>] [122]
+Overfull \hbox (0.59213pt too wide) in paragraph at lines 2507--2507
+ []|\T1/ptm/b/n/12 No.| 
+
+Overfull \hbox (0.59213pt too wide) in paragraph at lines 2511--2511
+ []|\T1/ptm/b/n/12 No.| 
+ignored error: Infinite glue shrinkage found in box being split [123] [124]
+[125] [126] [127] [128] [129] [130] [131] [132] [133]
+Bab V.
+[134] [135] [136] [137] [138] [139]
+
+pdfTeX warning: pdflatex.exe (file ../Lampiran/Form Revisi Sempro.pdf): PDF inc
+lusion: found PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex.exe (file ../Lampiran/Form Revisi Sempro.pdf): PDF inc
+lusion: found PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex.exe (file ../Lampiran/Form Revisi Sempro.pdf): PDF inc
+lusion: found PDF version <1.7>, but at most version <1.5> allowed
+[140 <../Lampiran/Form Revisi Sempro.pdf>]
+
+pdfTeX warning: pdflatex.exe (file ../Lampiran/Form Revisi Sempro.pdf): PDF inc
+lusion: found PDF version <1.7>, but at most version <1.5> allowed
+[141 <../Lampiran/Form Revisi Sempro.pdf>] (Skripsi.aux) )
+(see the transcript file for additional information)<C:/Program Files/MiKTeX/fo
+nts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfont
+s/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.p
+fb><C:/Program Files/MiKTeX/fonts/type1/urw/courier/ucrb8a.pfb><C:/Program File
+s/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files/MiKTeX/fonts/type
+1/urw/courier/ucrro8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/symbol/usyr.
+pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files
+/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Files/MiKTeX/fonts/type1/
+urw/times/utmr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmri8a.pfb
+>
+Output written on Skripsi.pdf (155 pages, 11528015 bytes).
+Transcript written on Skripsi.log.
+pdflatex: major issue: So far, you have not checked for updates as a MiKTeX user.
+Latexmk: Getting log file 'Skripsi.log'
+Latexmk: Examining 'Skripsi.fls'
+Latexmk: Examining 'Skripsi.log'
+Latexmk: Log file says output to 'Skripsi.pdf'
+Latexmk: All targets (Skripsi.pdf) are up-to-date
+
+latexmk: major issue: So far, you have not checked for updates as a MiKTeX user.
